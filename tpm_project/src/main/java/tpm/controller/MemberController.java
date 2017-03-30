@@ -72,4 +72,39 @@ public class MemberController {
 		mav.setViewName("member/memberEmail");
 		return mav;
 	}
+	
+	// 탈퇴
+	/** 탈퇴 - 회원탈퇴 */
+	@RequestMapping(value="memberDel.do", method=RequestMethod.GET)
+	public ModelAndView memberDel(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/memberDel_ok");
+		return mav;
+	}
+	
+	// 개인정보
+	/** 개인정보 - 개인정보 페이지 이동 */
+	@RequestMapping(value="memberInfo.do", method=RequestMethod.GET)
+	public String memberInfoForm(){
+		return "member/memberInfoForm";
+	}
+	
+	/** 개인정보 - 개인 정보 수정 */
+	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
+	public ModelAndView memberUpdate(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/memberInfoForm");
+		return mav;
+	}
+	
+	/** 개인정보 - 개인 성향 수정 ( 평가 ) */
+	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
+	public ModelAndView memberUpdate_ajax(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memeber/memberResult_d");
+		return mav;
+	}
+	
 }
