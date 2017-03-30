@@ -1,6 +1,6 @@
 package tpm.member.model;
 
-public class MemberDAO {
+public interface MemberDAO {
 	
 	public int login();
 	public String idCheck();

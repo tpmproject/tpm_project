@@ -1,8 +1,12 @@
 package tpm.file.model;
 
+import java.util.ArrayList;
+
+import tpm.project.model.ProjectDTO;
+
 public interface FileDAO {
 	
-	public projectAllList();
+	public ArrayList<FileDTO>projectAllList();
 	public getFileList();
 	public getFileContent();
 	public int addFile();

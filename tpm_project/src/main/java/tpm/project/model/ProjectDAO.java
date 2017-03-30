@@ -10,11 +10,12 @@ public interface ProjectDAO {
 	
 	public ArrayList<WorkDTO> projectSearch();
 	
-	public int projectInsert(WorkDTO dto);
+	public int projectInsert(ProjectDTO dto);
 	
-	public int projectUpdate(WorkDTO dto);
+	public int projectUpdate(ProjectDTO dto);
 	
-	public int projectDelete(int work_idx);
+	public int projectDelete(int project_idx);
 	
 	public ProjectDTO findProject(String project_name);
+	
 }
