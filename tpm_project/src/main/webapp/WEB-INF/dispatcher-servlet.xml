@@ -54,7 +54,7 @@
 	</bean>
 	
 	<!-- DownloadView -->
-	<bean id="yongDown" class="tpm.view.DownloadView"/>
+	<bean id="tpmDown" class="tpm.view.DownloadView"/>
 	<!-- 뷰에 대한 이름을 정해줬을때 jsp 가 아니라  -->
 	<!-- 우선 순위를 지정하여 우선  viewResolver 검색하고 해당 jsp가 없으면 BeanNameViewResolver 검사 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
