@@ -8,24 +8,24 @@ public class WorkDTO {
 	private int work_idx;
 	private int category_idx;
 	private String work_title;
-	//¾÷¹« ±âÇÑ
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private Date work_start;
 	private Date work_end;
 	private Date work_complete;
 	
-	private int work_confirm; //¾÷¹«Å¸ÀÔ
-	private int work_state; //¾÷¹« »óÅÂ
+	private int work_confirm; //ê²°ì¬ ìš”ì²­ì—¬ë¶€
+	private int work_state; //ê²°ì¬ ìƒíƒœ
 	
 	private String project_name;
 	private String category_name;
 	private ArrayList<WorkDTO> work_dtos;
 	
-	final public static int WORK_NEED_CONFIRM=10; //°áÀçÇÊ¿ä ¾÷¹«
-	final public static int WORK_NO_CONFIRM=20; //°áÀç ºÒÇÊ¿ä ¾÷¹«
+	final public static int WORK_NEED_CONFIRM=10; //ê²°ì¬ í•„ìš” ì—…ë¬´
+	final public static int WORK_NO_CONFIRM=20; //ê²°ì¬ ë¶ˆí•„ìš” ì—…ë¬´
 	
-	final public static int WORK_ING=1; //°áÀç ¿äÃ»Àü »óÅÂ, ÁøÇàÁß
-	final public static int WORK_CONFIRM_WAIT=2; //°áÀç ´ë±â
-	final public static int WORK_CONFIRM_FIN=3; //°áÀç ¾È·á
+	final public static int WORK_ING=1; //ì—…ë¬´ ì§„í–‰ì¤‘, ì—…ë¬´ ê²°ì¬ ìš”ì²­ ì „
+	final public static int WORK_CONFIRM_WAIT=2; //ì—…ë¬´ ê²°ì¬ ìš”ì²­ í›„
+	final public static int WORK_CONFIRM_FIN=3; //ì—…ë¬´ ì™„ë£Œ, ê²°ì¬ ìŠ¹ì¸
 	
 		
 	
