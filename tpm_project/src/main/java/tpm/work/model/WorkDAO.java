@@ -1,5 +1,12 @@
 package tpm.work.model;
 
-public interface WorkDAO {
+import java.util.ArrayList;
 
+public interface WorkDAO {
+	
+	public ArrayList<WorkDTO> listWork();
+	public int addWork();
+	public int updateWork();
+	public int delWork();
+	
 }
