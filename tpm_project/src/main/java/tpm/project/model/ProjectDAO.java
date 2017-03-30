@@ -15,4 +15,6 @@ public interface ProjectDAO {
 	public int projectUpdate(WorkDTO dto);
 	
 	public int projectDelete(int work_idx);
+	
+	public ProjectDTO findProject(String project_name);
 }
