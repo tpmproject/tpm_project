@@ -1,4 +1,4 @@
-package han.project.model;
+package tpm.project.model;
 
 public interface ProjectDAO {
 
