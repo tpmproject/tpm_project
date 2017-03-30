@@ -1,0 +1,26 @@
+DROP TABLE tpm_member;
+DROP TABLE tpm_chat;
+DROP TABLE tpm_channel;
+DROP TABLE tpm_project;
+DROP TABLE tpm_project_member;
+DROP TABLE tpm_channel_member;
+DROP TABLE tpm_myfriend;
+DROP TABLE tpm_file;
+DROP TABLE tpm_category;
+DROP TABLE tpm_work;
+DROP TABLE tpm_work_member;
+DROP TABLE tpm_checklist;
+DROP TABLE tpm_comment;
+DROP TABLE tpm_notice;
+DROP TABLE tpm_tendency;
+
+DROP SEQUENCE member_idx;
+DROP SEQUENCE chat_idx;
+DROP SEQUENCE channel_idx;
+DROP SEQUENCE project_idx;
+DROP SEQUENCE file_idx;
+DROP SEQUENCE category_idx;
+DROP SEQUENCE work_idx;
+DROP SEQUENCE checklist_idx;
+DROP SEQUENCE comment_idx;
+DROP SEQUENCE notice_idx;
