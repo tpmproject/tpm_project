@@ -69,8 +69,58 @@ public class WorkController {
 	//// 스케쥴러 ////
 	
 	// 캘린더
-	/** 캘린더 - 캘린더 페이지로 이동 업무 데이터 반환 */
-	/** 캘린더 - 캘린더 페이지로 이동 업무 데이터 반환 */
-	/** 캘린더 - 캘린더 페이지로 이동 업무 데이터 반환 */
+	/** 캘린더 - 캘린더 페이지로 이동 */
+	@RequestMapping(value="calendarList.do",  method=RequestMethod.GET)
+	public ModelAndView calendarListForm(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("calendar/calendarListForm");
+		return mav;
+	}
+	
+	/** 캘린더 - 필터  업무 데이터 */
+	@RequestMapping(value="calendarFilterList.do",  method=RequestMethod.POST)
+	public ModelAndView calendarFilterList(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("calendar/calendarFilterList_d");
+		return mav;
+	}
+	
+	/** 캘린더 - 업무 상세보기 이동 (나의 업무 페이지로) */
+	@RequestMapping(value="calendarMyWork.do",  method=RequestMethod.POST)
+	public ModelAndView calendarMyWork(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("work/myWork");
+		return mav;
+	}
+	
 	// 타임라인
+	/** 타임라인 - 타임라인 페이지로 이동 */
+	@RequestMapping(value="timeLineList.do",  method=RequestMethod.GET)
+	public ModelAndView timeLineListForm(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("timeLine/timeLineForm");
+		return mav;
+	}
+	
+	/** 타임라인 - 타임라인 프로젝트별 필터 체크 시 표시할 업무 목록들 */
+	@RequestMapping(value="timeLineFilterList.do",  method=RequestMethod.POST)
+	public ModelAndView timeLineFilterList(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("timeLine/timeLineFilterList_d");
+		return mav;
+	}
+	
+	/** 타임라인 - 타임라인 페이지로 이동 */
+	@RequestMapping(value="timeLineMyWork.do",  method=RequestMethod.POST)
+	public ModelAndView timeLineMyWork(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("work/myWork");
+		return mav;
+	}
 }
