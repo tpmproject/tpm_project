@@ -10,7 +10,6 @@ public class IndexController {
 	@RequestMapping("/index.do")
 	public ModelAndView indexForm(){
 		ModelAndView mav = new ModelAndView();
-		System.out.println("1");
 		mav.setViewName("index");
 		return mav;
 	}
