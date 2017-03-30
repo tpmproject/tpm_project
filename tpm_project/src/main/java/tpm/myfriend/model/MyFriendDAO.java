@@ -1,4 +1,4 @@
-package tpm.myFriend.model;
+package tpm.myfriend.model;
 
 public interface MyFriendDAO {
 
