@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+인덱스입.
 </body>
 </html>
