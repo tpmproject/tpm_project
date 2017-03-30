@@ -8,7 +8,8 @@ public class WorkDTO {
 	private int work_idx;
 	private int category_idx;
 	private String work_title;
-	//���� ����
+	
+	//업무 기한
 	private Date work_start;
 	private Date work_end;
 	private Date work_complete;
@@ -54,11 +55,6 @@ public class WorkDTO {
 		this.category_name = category_name;
 		this.work_dtos = work_dtos;
 	}
-
-
-
-
-
 
 
 	public int getWork_idx() {
