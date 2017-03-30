@@ -1,4 +1,4 @@
-package tpm.myFriend;
+package tpm.myFriend.model;
 
 import java.util.ArrayList;
 
