@@ -72,11 +72,11 @@ public class MemberController {
 		return mav;
 	}
 	
-	/** 회원 가입 - 이메일 인증 */
-	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.POST)
-	public ModelAndView memberEmailCheck(@RequestParam("to") String to){
+	/** 회원 가입 - 이메일 보내기 */
+	@RequestMapping(value="memberSendEmail.do", method=RequestMethod.GET)
+	public ModelAndView memberSendEmail(@RequestParam("email") String to){
 		
-		String from = "tpmproject@naver.com";
+		String from = "tpmproject";
 		String subject = "tpm project에 오신 것을 환영합니다";
 		int random = (int)(Math.random()*1000000)+100000;
 		String content = "인증번호: "+random;
@@ -122,7 +122,31 @@ public class MemberController {
 		result = "인증번호가 발송되었습니다";
 		
 		mav.addObject("result", result);
+		mav.addObject("content", content);
 		mav.setViewName("member/memberEmail");
+		return mav;
+	}
+	
+	/** 회원가입 - 이메일 인증 */
+	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.POST)
+	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String result = "";
+		
+		if(random==user){
+			result = "인증에 성공하였습니다";
+			
+			mav.addObject("result", result);
+			mav.setViewName("email");
+			
+		} else{
+			result = "인증번호를 확인해주세요";
+			
+			mav.addObject("result", result);			
+		}
+		
 		return mav;
 	}
 	
