@@ -3,5 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.project">
-
+	<insert id="projectInsert" parameterType="tpm.project.model.ProjectDTO">
+		insert into tpm_project
+		values(
+			project_idx.nextval,
+			#{project_name},
+			#{project_content},
+			1
+		)
+		
+				
+	</insert>
 </mapper>
