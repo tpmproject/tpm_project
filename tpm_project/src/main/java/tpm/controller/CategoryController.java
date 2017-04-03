@@ -21,8 +21,8 @@ public class CategoryController {
 	public ModelAndView categoryAdd(CategoryDTO dto){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
-		
-		int result=categoryDAO.categoryInsert(dto);
+		mav.addObject("categoryDTO", dto);
+//		int result=categoryDAO.categoryInsert(dto);
 		
 		return mav;
 	}
