@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import tpm.member.model.MemberDTO;
+
 public class MyFriendDAOImple implements MyFriendDAO {
 	
 	private SqlSessionTemplate sqlMap;
@@ -23,6 +25,12 @@ public class MyFriendDAOImple implements MyFriendDAO {
 		ArrayList<MyFriendDTO> array_dto = (ArrayList) sqlMap.selectList("myfriendList", dto);
 		return array_dto;
 	}
+	
+	public ArrayList<MemberDTO> getFriendMemberInfoList(MyFriendDTO dto) {
+		// TODO Auto-generated method stub
+		ArrayList<MemberDTO> array_dto = (ArrayList) sqlMap.selectList("myfriend_memberInfoList", dto);
+		return array_dto;
+	}
 
 	public int addFriend() {
 		// TODO Auto-generated method stub
@@ -38,6 +46,8 @@ public class MyFriendDAOImple implements MyFriendDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 	
 	

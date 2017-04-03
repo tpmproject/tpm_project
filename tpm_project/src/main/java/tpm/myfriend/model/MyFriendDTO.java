@@ -24,4 +24,9 @@ public class MyFriendDTO {
 	public void setMyfriend_idx(int myfriend_idx) {
 		this.myfriend_idx = myfriend_idx;
 	}
+	@Override
+	public String toString() {
+		return "MyFriendDTO [member_idx=" + member_idx + ", myfriend_idx=" + myfriend_idx + "]";
+	}
+	
 }

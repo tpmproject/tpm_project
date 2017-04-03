@@ -4,11 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.myfriend">
 	<select id="myfriendAllList" resultType="tpm.myfriend.model.MyFriendDTO">
-		SELECT * FROM tpm_myfriend
+		SELECT * 
+		FROM tpm_myfriend
 	</select>
 	
 	<select id="myfriendList" parameterType="tpm.myfriend.model.MyFriendDTO" resultType="tpm.myfriend.model.MyFriendDTO">
-		SELECT * FROM tpm_myfriend WHERE member_idx = #{member_idx}
+		SELECT * 
+		FROM tpm_myfriend 
+		WHERE member_idx = #{member_idx}
 	</select>
 	
 	<insert id="myfriendInsert" parameterType="tpm.myfriend.model.MyFriendDTO">
@@ -19,10 +22,19 @@
 	</insert>
 	
 	<delete id="myfriendDelete" parameterType="tpm.myfriend.model.MyFriendDTO">
-		DELETE FROM tpm_myfriend WHERE member_idx = #{member_idx}
+		DELETE FROM tpm_myfriend 
+		WHERE member_idx = #{member_idx}
 	</delete>
 	
 	<update id="myfriendUpdate" parameterType="tpm.myfriend.model.MyFriendDTO">
 		
 	</update>
+	
+	<select id="myfriend_memberInfoList" parameterType="tpm.myfriend.model.MyFriendDTO" resultType="tpm.member.model.MemberDTO">
+		SELECT * 
+		FROM tpm_member 
+		WHERE member_idx IN (SELECT myfriend_idx 
+							 FROM tpm_myfriend 
+							 WHERE member_idx = #{member_idx})
+	</select>
 </mapper>

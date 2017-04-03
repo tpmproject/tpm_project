@@ -91,5 +91,13 @@ public class MemberDTO {
 	public void setMember_thema(int member_thema) {
 		this.member_thema = member_thema;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberDTO [member_idx=" + member_idx + ", member_id=" + member_id + ", member_pwd=" + member_pwd
+				+ ", member_name=" + member_name + ", member_gender=" + member_gender + ", member_tel=" + member_tel
+				+ ", member_img=" + member_img + ", member_thema=" + member_thema + "]";
+	}
+	
 	
 }

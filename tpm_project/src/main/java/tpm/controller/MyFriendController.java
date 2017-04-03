@@ -1,12 +1,16 @@
 package tpm.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.member.model.MemberDTO;
 import tpm.myfriend.model.MyFriendDAO;
+import tpm.myfriend.model.MyFriendDTO;
 
 @Controller
 public class MyFriendController {
@@ -21,6 +25,11 @@ public class MyFriendController {
 	public ModelAndView myFriendListForm(){
 		
 		
+		MyFriendDTO dto = new MyFriendDTO();
+		dto.setMember_idx(6);
+		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
+		ArrayList<MemberDTO> arry_dto = myFriendDAO.getFriendMemberInfoList(dto);
+		System.out.println(arry_dto.toString());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myfriend/myFriendListForm");
