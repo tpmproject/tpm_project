@@ -32,6 +32,6 @@
 			<!-- /.users-list -->
 		</div>
 	</div>
-	<%@ include file="/sample/cho/main/myfriend_modal.jsp" %>
+	<%@ include file="myFriendListForm_modalAdd.jsp" %>
 </body>
 </html>
