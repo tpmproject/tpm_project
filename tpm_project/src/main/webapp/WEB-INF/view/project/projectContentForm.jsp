@@ -5,11 +5,17 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<script>
+function show(){
+	window.alert('wow');
+	
+}
+</script>
 </head>
 <body>
-<form name="newCategory">
+<form name="newCategory" action="javascript:show()">
 <div>
-
+<input type="text" name="category_name">
 </div>
 </form>
 </body>
