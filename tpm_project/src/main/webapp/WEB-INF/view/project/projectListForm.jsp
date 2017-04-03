@@ -13,7 +13,7 @@
 <script type="text/javascript">
 $(function(){
     $("#popbutton").click(function(){
-        $('div.modal').modal({remote : 'projectAdd.do'});
+        $('div.modal').modal({remote : 'khj_projectAdd.do'});
     })
 })
 </script>
