@@ -14,7 +14,7 @@ public class ProjectController {
 
 	
 	@Autowired
-	private ProjectDAO projectDao;
+	private ProjectDAO projectDAO;
 	//// 프로젝트 ////
 	
 	// 프로젝트
@@ -47,7 +47,9 @@ public class ProjectController {
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectInsert(ProjectDTO dto){
-		int result= projectDao.projectInsert(dto);
+		System.out.println(dto.getProject_name());
+		System.out.println(dto.getProject());
+		int result= projectDAO.projectInsert(dto);
 		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectListForm");
