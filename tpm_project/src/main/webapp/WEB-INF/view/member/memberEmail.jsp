@@ -12,10 +12,10 @@
 	</script>
 
 	<form name="EmailCheck" action="memberEmailCheck.do" method="post">
-	<input type="text" name="random_number" value="${content}">
+	<input type="text" name="random_number" value="${random}">
 		<fieldset>
 			<legend>인증번호 입력</legend>
-			<input type="text" name="user_number">
+			<input type="text" name="user_number" maxlength="6">
 			<input type="submit" value="인증하기">
 		</fieldset>
 	</form>
