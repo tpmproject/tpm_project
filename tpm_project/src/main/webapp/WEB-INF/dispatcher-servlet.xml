@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-
 <!-- <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -83,7 +82,11 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="workDAO" class="tpm.work.model.WorkDAOImple"/>
+	<bean id="workDAO" class="tpm.work.model.WorkDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 	
 	<!-- view -->
 	<!-- 스프링에서 기본적으로 제공해주는 클래스 -->
