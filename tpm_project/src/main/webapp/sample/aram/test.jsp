@@ -5,17 +5,7 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-<script type="text/javascript" src="/js/httpRequest.js"></script>
-<script>
-function show(){
-	var category_name=document.newCategory.category_name.value;
-	sendRequest('categoryAdd.do',category_name,showResult,'POST');
-}
-function showResult(){
-	
-	
-}
-</script>
+
 </head>
 <body>
 <form name="newCategory" action="javascript:show()">
