@@ -30,11 +30,11 @@ public class ProjectController {
 	}
 	
 	/** 프로젝트 - 프로젝트 생성 (권한 부여 포함) */
-	@RequestMapping(value="projectAdd.do",  method=RequestMethod.POST)
+	@RequestMapping(value="projectAdd.do", method=RequestMethod.GET)
 	public ModelAndView projectAdd(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectAdd");
 		return mav;
 	}
 	
