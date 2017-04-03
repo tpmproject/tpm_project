@@ -13,8 +13,7 @@
 </script>
 </head>
 <body>
-<!-- 인증번호 값 비교 판단 Controller부터 다시 -->
-<!-- 인증 결과 값 판단으로 인증하기 / 인증완료 버튼 표시해주기 -->
+<!-- 인증 결과 값 판단으로 인증하기/인증완료 버튼 표시하기 -->
 	<form name="email" method="post">
 		<table>
 			<tr> 
@@ -22,10 +21,10 @@
 			</tr>
 			<tr>
 				<td> 이메일 주소: </td>
-				<td> <input type="text" name="to"></td>
+				<td> <input type="text" name="to" required="required"></td>
 			</tr>
 			<tr>
-				<td colspan="2" style="text-align:right;"> <input type="button" value="인증하기" onclick="check()"> </td>
+				<td colspan="2" style="text-align:right;"> <input type="button" value="인증하기" onclick="check()"></td>
 			</tr>
 		</table>
 	</form>

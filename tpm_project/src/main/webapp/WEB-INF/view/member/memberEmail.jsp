@@ -11,7 +11,7 @@
 		window.alert('${result}');
 	</script>
 
-	<form name="check" action="emailCheck.do" method="post">
+	<form name="EmailCheck" action="memberEmailCheck.do" method="post">
 	<input type="text" name="random_number" value="${content}">
 		<fieldset>
 			<legend>인증번호 입력</legend>
