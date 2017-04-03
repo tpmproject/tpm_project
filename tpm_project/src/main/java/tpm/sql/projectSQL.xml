@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.project">
+	
+	<select id="projectAllList" resultType="tpm.project.model.ProjectDTO">
+		select a.* from
+		(tpm_project)a,(select * from tpm_project_member where member_idx=#{member_idx})b
+		where a.project_idx=b.project_idx
+	</select>
+
 	<insert id="projectInsert" parameterType="tpm.project.model.ProjectDTO">
 		insert into tpm_project
 		values(
