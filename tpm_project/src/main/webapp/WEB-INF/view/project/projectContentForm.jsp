@@ -18,10 +18,12 @@ function categoryAddResult(){
 </script>
 </head>
 <body>
-<form name="newCategory" action="javascript:categoryAdd()">
+
 <div>
-<input type="text" name="category_name" placeholder="새로운 카테고리">
+	<form name="newCategory" action="javascript:categoryAdd()">
+		<input type="text" name="category_name" placeholder="새로운 카테고리">
+	</form>
 </div>
-</form>
+
 </body>
 </html>
