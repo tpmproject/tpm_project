@@ -2,8 +2,16 @@ package tpm.myfriend.model;
 
 import java.util.ArrayList;
 
-public class MyFriendDAOImple implements MyFriendDAO {
+import org.mybatis.spring.SqlSessionTemplate;
 
+public class MyFriendDAOImple implements MyFriendDAO {
+	
+	private SqlSessionTemplate sqlMap;
+	public MyFriendDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public ArrayList<MyFriendDTO> getFriendList() {
 		// TODO Auto-generated method stub
 		return null;

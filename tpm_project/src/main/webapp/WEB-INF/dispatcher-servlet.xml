@@ -27,17 +27,56 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"> -->
 	
-	<bean id="categoryDAO" class="tpm.category.model.CategoryDAOImple"/>
-	<bean id="channelDAO" class="tpm.channel.model.ChannelDAOImple"/>
-	<bean id="channelMemberDAO" class="tpm.channelmember.model.ChannelMemberDAOImple"/>
-	<bean id="chatDAO" class="tpm.chat.model.ChatDAOImple"/>
-	<bean id="checklistDAO" class="tpm.checklist.model.ChecklistDAOImple"/>
-	<bean id="commentDAO" class="tpm.comment.model.CommentDAOImple"/>
-	<bean id="fileDAO" class="tpm.file.model.FileDAOImple"/>
-	<bean id="memberDAO" class="tpm.member.model.MemberDAOImple"/>
-	<bean id="myFriendDAO" class="tpm.myfriend.model.MyFriendDAOImple"/>
-	<bean id="noticeDAO" class="tpm.notice.model.NoticeDAOImple"/>
-	
+	<bean id="categoryDAO" class="tpm.category.model.CategoryDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="channelDAO" class="tpm.channel.model.ChannelDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="channelMemberDAO" class="tpm.channelmember.model.ChannelMemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="chatDAO" class="tpm.chat.model.ChatDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="checklistDAO" class="tpm.checklist.model.ChecklistDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="commentDAO" class="tpm.comment.model.CommentDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="fileDAO" class="tpm.file.model.FileDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="memberDAO" class="tpm.member.model.MemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="myFriendDAO" class="tpm.myfriend.model.MyFriendDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<bean id="noticeDAO" class="tpm.notice.model.NoticeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
 	<bean id="projectDAO" class="tpm.project.model.ProjectDAOImple">
 	<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>

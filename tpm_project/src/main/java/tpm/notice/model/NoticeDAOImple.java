@@ -1,5 +1,13 @@
 package tpm.notice.model;
 
-public class NoticeDAOImple implements NoticeDAO {
+import org.mybatis.spring.SqlSessionTemplate;
 
+public class NoticeDAOImple implements NoticeDAO {
+	
+	private SqlSessionTemplate sqlMap;
+	
+	public NoticeDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
 }

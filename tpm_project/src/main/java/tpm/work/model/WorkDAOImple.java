@@ -2,8 +2,17 @@ package tpm.work.model;
 
 import java.util.ArrayList;
 
-public class WorkDAOImple implements WorkDAO {
+import org.mybatis.spring.SqlSessionTemplate;
 
+public class WorkDAOImple implements WorkDAO {
+	
+	private SqlSessionTemplate sqlMap;
+	
+	public WorkDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public ArrayList<WorkDTO> listWork() {
 		// TODO Auto-generated method stub
 		return null;

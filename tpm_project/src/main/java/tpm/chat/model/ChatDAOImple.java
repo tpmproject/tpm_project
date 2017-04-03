@@ -2,8 +2,17 @@ package tpm.chat.model;
 
 import java.util.ArrayList;
 
-public class ChatDAOImple implements ChatDAO {
+import org.mybatis.spring.SqlSessionTemplate;
 
+public class ChatDAOImple implements ChatDAO {
+	
+	private SqlSessionTemplate sqlMap;
+	
+	public ChatDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public ArrayList<ChatDTO> getChatList() {
 		// TODO Auto-generated method stub
 		return null;

@@ -2,8 +2,17 @@ package tpm.file.model;
 
 import java.util.ArrayList;
 
-public class FileDAOImple implements FileDAO {
+import org.mybatis.spring.SqlSessionTemplate;
 
+public class FileDAOImple implements FileDAO {
+	
+	private SqlSessionTemplate sqlMap;
+	
+	public FileDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public ArrayList<FileDTO> projectAllList() {
 		// TODO Auto-generated method stub
 		return null;

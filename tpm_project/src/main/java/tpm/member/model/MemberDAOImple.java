@@ -1,7 +1,16 @@
 package tpm.member.model;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
 public class MemberDAOImple implements MemberDAO {
 
+	private SqlSessionTemplate sqlMap;
+	
+	public MemberDAOImple(SqlSessionTemplate sqlMap) {
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public int login() {
 		// TODO Auto-generated method stub
 		return 0;
