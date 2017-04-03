@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${result}');
-	location.href='email.jsp';
+	window.self.close();
 </script>
