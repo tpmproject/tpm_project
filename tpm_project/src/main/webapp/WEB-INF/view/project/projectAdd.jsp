@@ -29,7 +29,7 @@ function before(){
 </div>
 
 <!-- body -->
-<form name="newProject" action="newProject.do" method="post">
+<form name="newProject" action="projectAdd.do" method="post">
 <div class="modal-body">
 	<div id="btntest">
 	 	<div>프로젝트명:  <input type="text" name="pname"></div>

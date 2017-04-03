@@ -39,7 +39,7 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView newProject(){
+	public ModelAndView projectInsert(){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectAdd");

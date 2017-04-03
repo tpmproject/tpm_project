@@ -1,11 +1,14 @@
 package tpm.project.model;
 
 import java.util.ArrayList;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.work.model.WorkDTO;
 
 public class ProjectDAOImple implements ProjectDAO {
 
+	private SqlSessionTemplate sqlMap;
+	
 	public ArrayList<ProjectDTO> projectAllList() {
 		// TODO Auto-generated method stub
 		return null;
@@ -17,8 +20,9 @@ public class ProjectDAOImple implements ProjectDAO {
 	}
 
 	public int projectInsert(ProjectDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int count=sqlMap.insert("projectInsert", dto);
+		return count;
 	}
 
 	public int projectUpdate(ProjectDTO dto) {
