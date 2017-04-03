@@ -48,8 +48,9 @@ public class ProjectController {
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectInsert(ProjectDTO dto){
 		System.out.println(dto.getProject_name());
-		System.out.println(dto.getProject());
+		System.out.println(dto.getProject_content());
 		int result= projectDAO.projectInsert(dto);
+		
 		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectListForm");
