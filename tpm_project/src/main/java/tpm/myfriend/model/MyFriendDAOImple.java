@@ -32,9 +32,10 @@ public class MyFriendDAOImple implements MyFriendDAO {
 		return array_dto;
 	}
 
-	public int addFriend() {
+	public int addFriend(MyFriendDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlMap.insert("myfriendInsert", dto);
+		return count;
 	}
 
 	public int searchFriend() {
@@ -42,9 +43,10 @@ public class MyFriendDAOImple implements MyFriendDAO {
 		return 0;
 	}
 
-	public int delFriend() {
+	public int delFriend(MyFriendDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlMap.delete("myfriendDelete", dto);
+		return count;
 	}
 
 	

@@ -24,6 +24,7 @@
 	<delete id="myfriendDelete" parameterType="tpm.myfriend.model.MyFriendDTO">
 		DELETE FROM tpm_myfriend 
 		WHERE member_idx = #{member_idx}
+		AND myfriend_idx = #{myfriend_idx}
 	</delete>
 	
 	<update id="myfriendUpdate" parameterType="tpm.myfriend.model.MyFriendDTO">

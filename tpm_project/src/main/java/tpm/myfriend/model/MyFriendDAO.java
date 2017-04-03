@@ -9,8 +9,8 @@ public interface MyFriendDAO {
 	public ArrayList<MyFriendDTO> getFriendAllList();
 	public ArrayList<MyFriendDTO> getFriendList(MyFriendDTO dto);
 	public ArrayList<MemberDTO> getFriendMemberInfoList(MyFriendDTO dto);
-	public int addFriend();
+	public int addFriend(MyFriendDTO dto);
 	public int searchFriend();
-	public int delFriend();
+	public int delFriend(MyFriendDTO dto);
 
 }
