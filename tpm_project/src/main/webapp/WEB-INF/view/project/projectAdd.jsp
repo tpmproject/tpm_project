@@ -6,12 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+var p1=document.getElementById('btntest');
+var p2=document.getElementById('btntest2');
 function show(){
-	var p1=document.getElementById('btntest');
 	p1.style.display='none';
-	var p2=document.getElementById('btntest2');
 	p2.style.display='block';
+}
+function before(){
+	p1.style.display='block';
+	p2.style.display='none';
 }
 
 </script>
@@ -23,23 +26,25 @@ function show(){
   <button type="button" class="close" data-dismiss="modal">×</button>
   <!-- header title -->
   <h4 class="modal-title">프로젝트 생성</h4>
-
 </div>
+
 <!-- body -->
+<form name="newProject" action="newProject.do" method="post">
 <div class="modal-body">
 	<div id="btntest">
-	
-     <div>프로젝트명:  <input type="text" name="pname"></div>
- 	 <div>프로젝트 설명:<textarea cols="30" rows="20"></textarea></div>
+	 	<div>프로젝트명:  <input type="text" name="pname"></div>
+ 		 <div>프로젝트 설명:<textarea cols="30" rows="20" name="pcontent"></textarea></div>
+ 		 <button type="button" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
+ 		 
  	 </div>
  	 <div id="btntest2" style="display: none;">
-     	명:<input type="text" name="pname"><br><textarea cols="30" rows="20"></textarea>
+     	친구 추가하기
+     	
+     	<div><button type="button" class="btn btn-next" onclick="before()">이전</button>
+     	<input type="submit" value="완료"></div>
  	 </div>
 </div>
-<!-- Footer -->
-<div class="modal-footer">
-   	<button type="button" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
-  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-</div>
+
+</form>
 </body>
 </html>

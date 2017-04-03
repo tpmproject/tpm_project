@@ -13,7 +13,7 @@
 <script type="text/javascript">
 $(function(){
     $("#popbutton").click(function(){
-        $('div.modal').modal({remote : 'khj_projectAdd.do'});
+        $('div.modal').modal({remote : 'projectAdd.do'});
     })
 })
 </script>
@@ -24,6 +24,7 @@ $(function(){
 <div class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
+    	
         <!-- remote ajax call이 되는영역 -->
     </div>
   </div>
