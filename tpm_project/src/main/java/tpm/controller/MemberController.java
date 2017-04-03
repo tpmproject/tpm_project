@@ -78,7 +78,7 @@ public class MemberController {
 		
 		String from = "tpmproject";
 		String subject = "tpm project에 오신 것을 환영합니다";
-		int random = (int)(Math.random()*1000000)+100000;
+		int random = (int)(Math.random()*999999)+100000;
 		String content = "인증번호: "+random;
 		
 		Properties p = new Properties();
@@ -124,6 +124,7 @@ public class MemberController {
 		mav.addObject("result", result);
 		mav.addObject("content", content);
 		mav.setViewName("member/memberEmail");
+		
 		return mav;
 	}
 	
@@ -139,12 +140,12 @@ public class MemberController {
 			result = "인증에 성공하였습니다";
 			
 			mav.addObject("result", result);
-			mav.setViewName("email");
-			
+			mav.setViewName("member/memberEmailSuccess");
 		} else{
 			result = "인증번호를 확인해주세요";
 			
-			mav.addObject("result", result);			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberEamilFailed");
 		}
 		
 		return mav;
