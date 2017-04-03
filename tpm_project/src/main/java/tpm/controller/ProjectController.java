@@ -1,13 +1,20 @@
 package tpm.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.project.model.ProjectDAO;
+import tpm.project.model.ProjectDTO;
+
 @Controller
 public class ProjectController {
 
+	
+	@Autowired
+	private ProjectDAO projectDao;
 	//// 프로젝트 ////
 	
 	// 프로젝트
@@ -39,10 +46,11 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView projectInsert(){
-		
+	public ModelAndView projectInsert(ProjectDTO dto){
+		int result= projectDao.projectInsert(dto);
+		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectAdd");
+		mav.setViewName("project/projectListForm");
 		return mav;
 	}
 	

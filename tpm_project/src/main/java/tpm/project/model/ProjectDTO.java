@@ -7,6 +7,7 @@ public class ProjectDTO {
 	private int project_idx;
 	private String project_name;
 	private int project_state;
+	private String project_content;
 	
 	private ArrayList<ProjectDTO> project_dtos;
 	

@@ -9,6 +9,14 @@ public class ProjectDAOImple implements ProjectDAO {
 
 	private SqlSessionTemplate sqlMap;
 	
+	
+	
+	public ProjectDAOImple(SqlSessionTemplate sqlMap){
+		super();
+		this.sqlMap=sqlMap;
+		
+	}
+	
 	public ArrayList<ProjectDTO> projectAllList() {
 		// TODO Auto-generated method stub
 		return null;

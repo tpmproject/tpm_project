@@ -29,20 +29,24 @@ function before(){
 </div>
 
 <!-- body -->
-<form name="newProject" action="projectAdd.do" method="post">
+
 <div class="modal-body">
+<form name="newProject" action="projectAdd.do" method="post">
 	<div id="btntest">
 	 	<div>프로젝트명:  <input type="text" name="project_name"></div>
  		 <div>프로젝트 설명:<textarea cols="30" rows="20" name="project_content"></textarea></div>
- 		 <button type="button" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
+ 		 <button type="submit" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
  		 
  	 </div>
+ 	 </form>
+ 	 <form name="newfriend" action="projectAdd.do" method="post">
  	 <div id="btntest2" style="display: none;">
      	친구 추가하기
      	
      	<div><button type="button" class="btn btn-next" onclick="before()">이전</button>
      	<input type="submit" value="완료"></div>
  	 </div>
+ 	 </form>
 </div>
 
 </form>
