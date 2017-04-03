@@ -65,9 +65,9 @@
 	<!-- 1. DataSource-->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> <!-- BasicDataSource 는 정보 클래스 -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/> <!-- 드라이버 경로 -->
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> <!-- url -->
-		<property name="username" value="scott"/>
-		<property name="password" value="1234"/>
+		<property name="url" value="jdbc:oracle:thin:@yongstudy.iptime.org:9000:orcl"/> <!-- url -->
+		<property name="username" value="project01_02"/>
+		<property name="password" value="project01_02"/>
 	</bean>
 	<!-- 2. 트랜잭션 관리자 등록 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
