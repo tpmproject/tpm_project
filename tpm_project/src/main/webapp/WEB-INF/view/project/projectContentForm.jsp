@@ -15,7 +15,7 @@ function show(){
 <body>
 <form name="newCategory" action="javascript:show()">
 <div>
-<input type="text" name="category_name">
+<input type="text" name="category_name" placeholder="새로운 카테고리">
 </div>
 </form>
 </body>
