@@ -5,6 +5,21 @@
   
 <configuration>
 	<mappers>
+		<mapper resource="tpm.sql/categorySQL.xml"/>
+		<mapper resource="tpm.sql/channel_memberSQL.xml"/>
+		<mapper resource="tpm.sql/channelSQL.xml"/>
+		<mapper resource="tpm.sql/chatSQL.xml"/>
+		<mapper resource="tpm.sql/checklistSQL.xml"/>
+		<mapper resource="tpm.sql/commentSQL.xml"/>
+		<mapper resource="tpm.sql/fileSQL.xml"/>
+		<mapper resource="tpm.sql/memberSQL.xml"/>
+		<mapper resource="tpm.sql/myFriendSQL.xml"/>
+		<mapper resource="tpm.sql/noticeSQL.xml"/>
+		<mapper resource="tpm.sql/project_memberSQL.xml"/>
+		<mapper resource="tpm.sql/projectSQL.xml"/>
+		<mapper resource="tpm.sql/tendencySQL.xml"/>
+		<mapper resource="tpm.sql/work_memberSQL.xml"/>
+		<mapper resource="tpm.sql/workSQL.xml"/>
 <!-- 		<mapper resource="whwns/sql/memberSQL.xml"/> -->
 	</mappers>
 </configuration>

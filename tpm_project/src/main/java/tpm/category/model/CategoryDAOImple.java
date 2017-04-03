@@ -1,7 +1,11 @@
 package tpm.category.model;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
 public class CategoryDAOImple implements CategoryDAO {
 
+	private SqlSessionTemplate sqlMap;
+	
 	public int categoryInsert(CategoryDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
