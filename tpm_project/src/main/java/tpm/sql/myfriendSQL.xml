@@ -3,5 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.myfriend">
-
+	<select id="myfriendAllList" resultType="tpm.myfriend.model.MyFriendDTO">
+		SELECT * FROM tpm_myfriend
+	</select>
+	
+	<select id="myfriendList" parameterType="tpm.myfriend.model.MyFriendDTO" resultType="tpm.myfriend.model.MyFriendDTO">
+		SELECT * FROM tpm_myfriend WHERE member_idx = #{member_idx}
+	</select>
+	
+	<insert id="myfriendInsert" parameterType="tpm.myfriend.model.MyFriendDTO">
+		INSERT INTO tpm_myfriend VALUES (
+			#{member_idx},
+			#{myfriend_idx}
+		)
+	</insert>
+	
+	<delete id="myfriendDelete" parameterType="tpm.myfriend.model.MyFriendDTO">
+		DELETE FROM tpm_myfriend WHERE member_idx = #{member_idx}
+	</delete>
+	
+	<update id="myfriendUpdate" parameterType="tpm.myfriend.model.MyFriendDTO">
+		
+	</update>
 </mapper>

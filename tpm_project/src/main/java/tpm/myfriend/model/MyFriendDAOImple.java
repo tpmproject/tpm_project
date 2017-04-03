@@ -7,14 +7,21 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class MyFriendDAOImple implements MyFriendDAO {
 	
 	private SqlSessionTemplate sqlMap;
+	
 	public MyFriendDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<MyFriendDTO> getFriendList() {
+	public ArrayList<MyFriendDTO> getFriendAllList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ArrayList<MyFriendDTO> getFriendList(MyFriendDTO dto) {
+		// TODO Auto-generated method stub
+		ArrayList<MyFriendDTO> array_dto = (ArrayList) sqlMap.selectList("myfriendList", dto);
+		return array_dto;
 	}
 
 	public int addFriend() {
@@ -31,5 +38,9 @@ public class MyFriendDAOImple implements MyFriendDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+	
+	
 
 }
