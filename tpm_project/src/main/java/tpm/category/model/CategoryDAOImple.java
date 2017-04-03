@@ -6,6 +6,11 @@ public class CategoryDAOImple implements CategoryDAO {
 
 	private SqlSessionTemplate sqlMap;
 	
+	public CategoryDAOImple(SqlSessionTemplate sqlMap){
+		super();
+		this.sqlMap=sqlMap;
+	}
+	
 	public int categoryInsert(CategoryDTO dto) {
 		
 		int result=sqlMap.insert("categoryInsert", dto);
