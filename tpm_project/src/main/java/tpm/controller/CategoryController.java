@@ -13,7 +13,7 @@ import tpm.category.model.CategoryDTO;
 public class CategoryController {
 	
 	@Autowired
-	CategoryDAO dao;
+	CategoryDAO categoryDAO;
 	
 	//// 카테고리 ////
 	/** 카테고리 - 카테고리 추가 */
