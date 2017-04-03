@@ -5,17 +5,22 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.member.model.MemberDAO;
+import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
 
 @Controller
 public class MemberController {
 
+	@Autowired 
+	private MemberDAO mdao;
 	//// 회원 ////
 	// 로그인 및 로그아웃
 	
@@ -27,10 +32,16 @@ public class MemberController {
 	
 	/** 로그인 처리 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(){
+	public ModelAndView memberLogin(@RequestParam("member_id")String userid, @RequestParam("member_pwd")String userpwd){
+		int result=mdao.login(userid, userpwd);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		if(result==1){
 		mav.setViewName("member/memberLogin_ok");
+		}else{
+		mav.setViewName("member/memberMsg");
+		}
 		return mav;
 	}
 	
@@ -65,9 +76,11 @@ public class MemberController {
 	
 	/** 회원 가입 - 회원 등록 */
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.POST)
-	public ModelAndView memberAdd(){
+	public ModelAndView memberAdd(MemberDTO mdto){
 		
+		int result=mdao.addMember(mdto);
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("member/memberAdd_ok");
 		return mav;
 	}

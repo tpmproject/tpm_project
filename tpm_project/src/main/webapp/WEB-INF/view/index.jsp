@@ -7,5 +7,6 @@
 </head>
 <body>
 인덱스입.
+<a href="memberLogin.do">로그인</a>
 </body>
 </html>
