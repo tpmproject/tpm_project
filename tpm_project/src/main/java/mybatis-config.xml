@@ -13,7 +13,7 @@
 		<mapper resource="tpm/sql/commentSQL.xml"/>
 		<mapper resource="tpm/sql/fileSQL.xml"/>
 		<mapper resource="tpm/sql/memberSQL.xml"/>
-		<mapper resource="tpm/sql/myFriendSQL.xml"/>
+		<mapper resource="tpm/sql/myfriendSQL.xml"/>
 		<mapper resource="tpm/sql/noticeSQL.xml"/>
 		<mapper resource="tpm/sql/project_memberSQL.xml"/>
 		<mapper resource="tpm/sql/projectSQL.xml"/>
