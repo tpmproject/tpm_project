@@ -7,8 +7,10 @@ public class CategoryDAOImple implements CategoryDAO {
 	private SqlSessionTemplate sqlMap;
 	
 	public int categoryInsert(CategoryDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result=sqlMap.insert("categoryInsert", dto);
+		
+		return result;
 	}
 
 	public int categoryUpdate(CategoryDTO dto) {

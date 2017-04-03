@@ -14,4 +14,9 @@
 		
 				
 	</insert>
+	
+	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.category.model.CategoryDTO">
+	select * from tpm_category
+	where project_idx=#{project_idx}
+	</select>
 </mapper>
