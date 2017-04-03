@@ -27,6 +27,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"> -->
 	
+	<bean id="categoryDAO" class="tpm.category.model.CategoryDAOImple"></bean>
 	
 	<!-- view -->
 	<!-- 스프링에서 기본적으로 제공해주는 클래스 -->
