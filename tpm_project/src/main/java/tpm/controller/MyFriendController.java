@@ -28,11 +28,11 @@ public class MyFriendController {
 		MyFriendDTO dto = new MyFriendDTO();
 		dto.setMember_idx(6);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
-		ArrayList<MemberDTO> arry_dto = myFriendDAO.getFriendMemberInfoList(dto);
-		System.out.println(arry_dto.toString());
+		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myfriend/myFriendListForm");
+		mav.addObject("arry_mdto", arry_mdto);
 		return mav;
 	}
 	
