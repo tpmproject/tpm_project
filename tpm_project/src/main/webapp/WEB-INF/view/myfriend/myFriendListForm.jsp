@@ -22,12 +22,13 @@
 	
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
+		window.alert(responseText);
 		var json = JSON.parse(responseText);
 		//var json = eval('('+responseText+')'); // 객체화
 		//var json = responseText;
 		
 		var msg = '';
-		var members = json.members; // 맵 객체로부터 students 값인 배열을 가져온다.
+		var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 		for(var i = 0 ; i < members.length; i++){
 			var member = members[i];
 			
@@ -42,13 +43,14 @@
 
 			msg += 			'</a> ';
 			msg += 			'<div class="pull-right btn-group-sm"> ';
-			msg += 				'<a href="javascript:goAdd_member()" class="btn btn-success tooltips" ';
+			msg += 				'<a href="javascript:goInsert_member(' + i + ')" class="btn btn-success tooltips" ';
 			msg += 					'data-placement="top" data-toggle="tooltip" ';
 			msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
 
 			msg += 				'</a> ';
 			msg += 			'</div> ';
 			msg += 			'<div class="info"> ';
+			msg +=				'<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
 			msg += 				'<h4>' + member.member_name + '</h4> ';
 			msg += 				'<p class="text-muted">' + member.member_id + '</p> ';
 			msg += 			'</div> ';
@@ -68,6 +70,12 @@
 		
 	}
 	
+	function myfriendList_setting(responseText) {
+		if(responseText.trim() == 'true'){
+			
+		}
+	}
+	
 	function result_process(responseText, ctype) {
 		//var json = JSON.parse(responseText);
 		//var qdto = json.QnaDTO;
@@ -79,6 +87,8 @@
 			search_modal_setting(responseText);
 		} else if(ctype == 'FRIEND_DELETE'){
 			
+		} else if(ctype == 'FRIEND_INSERT'){
+			myfriendList_setting(responseText);
 		} else {
 			window.alert('잘못된 경로');
 		}
@@ -109,7 +119,7 @@
 	}
 	
 	function goDelete_member(i){
-		var member_idx = document.getElementById('del_member_idx').value;
+		var member_idx = document.getElementById('my_member_idx').value;
 		var myfriend_idx = document.getElementById('del_myfriend_idx_' + i).value;
 		
 		var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
@@ -117,12 +127,17 @@
 		//location.href = 'myFriendDel.do?' + param;	
 	}
 	
-	function goAdd_member(){
-		window.alert('1');
+	function goInsert_member(i){
+		var member_idx = document.getElementById('my_member_idx').value;
+		var myfriend_idx = document.getElementById('add_member_idx_' + i).value;
+		
+		var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
+		action_ajax('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
 	}
 </script>
 </head>
 <body>
+	<input type="hidden" id="my_member_idx" value="6">
 	<div class="box box-danger">
 		<div class="box-header with-border">
 			<h3 class="box-title">My Friend</h3>
@@ -135,8 +150,7 @@
 		</div>
 		<!-- /.box-header -->
 		<div class="box-body no-padding">
-			<!-- <i class="fa fa-fw fa-lg fa-trash-o text-danger fdel"></i> -->
-			<input type="hidden" id="del_member_idx" value="6">
+			<!-- <i class="fa fa-fw fa-lg fa-trash-o text-danger fdel"></i> -->	
 			<ul class="users-list clearfix">
 				<c:forEach var="i" begin="0" end="${arry_mdto.size() - 1}" step="1">
 					<li>

@@ -1,31 +1,49 @@
+<%@page import="tpm.member.model.MemberDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="col-sm-12">
-	<div class="panel">
-		<div class="panel-body p-t-10">
-			<div class="media-main">
-				<a class="pull-left" href="#"> <img
-					class="thumb-lg img-circle bx-s"
-					src="http://bootdey.com/img/Content/user_3.jpg" alt="">
+<%
+	ArrayList<MemberDTO> arry_mdto = (ArrayList) request.getAttribute("arry_mdto");
+	
+	JSONObject object = new JSONObject();
 
-				</a>
-				<div class="pull-right btn-group-sm">
-					<a href="#" class="btn btn-success tooltips" data-placement="top"
-						data-toggle="tooltip" data-original-title="Edit"> <i
-						class="fa fa-pencil"></i>
+	JSONArray arry_members = new JSONArray();
+	for(int i = 0 ; i < arry_mdto.size() ; i++){
+		JSONObject obj = new JSONObject();
+		obj.put("member_idx", arry_mdto.get(i).getMember_idx());
+		obj.put("member_id", arry_mdto.get(i).getMember_id());
+		obj.put("member_name", arry_mdto.get(i).getMember_name());
+		obj.put("member_gender", arry_mdto.get(i).getMember_gender());
+		obj.put("member_tel", arry_mdto.get(i).getMember_tel());
+		obj.put("member_img", arry_mdto.get(i).getMember_img());
+		arry_members.add(obj);
+	}
+	
+	object.put("members", arry_members);
+	
+	out.clear();
+	out.println(object);
+	out.flush();
+	
+%>
 
-					</a> <a href="#" class="btn btn-danger tooltips" data-placement="top"
-						data-toggle="tooltip" data-original-title="Delete"> <i
-						class="fa fa-close"></i>
 
-					</a>
-				</div>
-				<div class="info">
-					<h4>Jonathan Smith</h4>
-					<p class="text-muted">Graphics Designer</p>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<hr>
-		</div>
-	</div>
-</div>
+
+<%-- <%@ page contentType="text/plain; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="listSize" value="${fn:length(resultLarry_members
+	"total":${listSize},
+	"rows":[
+objectchoose>
+			<c:when test="${listSize==0}">
+			{"userNm":"null", "userTel":"null", "userEmail":"null"}
+			</c:when>
+			<c:otherwise>
+			<c:forEach var="result" items="${resultList}" varStatus="status">
+			{"userNm":"<c:out value="${result.userNm}"/>", "userTel":"<c:out value="${result.areaNo}-${result.houseMiddleTelno}-${result.houseEndTelno}" />", "userEmail":"<c:out value="${result.emailAdres}"/>"}<c:if test="${status.count != listSize}">,</c:if>
+			</c:forEach>
+			</c:otherwise>
+			</c:choose>
+]} --%>
