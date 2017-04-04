@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/import.jsp" %>
+<script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="box box-danger">

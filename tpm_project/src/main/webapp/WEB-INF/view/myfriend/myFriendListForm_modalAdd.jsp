@@ -12,6 +12,10 @@
 
 		});
 	})(jQuery);
+	
+	function goSearch(){
+		
+	}
 </script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -36,7 +40,7 @@
 												name="example-input1-group2" class="form-control"
 												placeholder="Search"> <span class="input-group-btn">
 												<button type="button"
-													class="btn btn-effect-ripple btn-primary">
+													class="btn btn-effect-ripple btn-primary" onclick="goSearch()">
 													<i class="fa fa-search"></i>
 												</button>
 											</span>

@@ -34,11 +34,11 @@ public class MemberDAOImple implements MemberDAO {
 		return result;
 	}
 
-	public String idCheck() {
-		// TODO Auto-generated method stub
-		return null;
+	public String idCheck(String email) {
+		String db_id = sqlMap.selectOne("memberIdcheck",email);
+		return db_id;
 	}
-
+	
 	public int addTendency() {
 		// TODO Auto-generated method stub
 		return 0;
