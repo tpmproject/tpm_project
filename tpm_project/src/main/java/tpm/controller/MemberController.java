@@ -28,7 +28,10 @@ public class MemberController {
 	@RequestMapping(value="memberIdAndNameSearch.do", method=RequestMethod.POST)
 	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey){
 		
-		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(fkey);
+		MemberDTO mdto = new MemberDTO();
+		mdto.setMember_id(fkey);
+		
+		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(mdto);
 		System.out.println(arry_mdto.toString());
 		
 		ModelAndView mav = new ModelAndView();

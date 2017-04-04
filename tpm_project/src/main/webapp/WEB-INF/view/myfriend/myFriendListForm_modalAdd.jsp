@@ -13,8 +13,43 @@
 		});
 	})(jQuery);
 	
-	function goSearch(){
+	function result_process(responseText, ctype) {
+		//var json = JSON.parse(responseText);
+		//var qdto = json.QnaDTO;
+		//var docStr = '';
+
+		//dotStr +=  qdto[0].qna_idx;
 		
+		if(ctype == 'MEMBER_SEARCH'){
+			//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
+			window.alert(responseText);
+		} else {
+			window.alert('잘못된 경로');
+		}
+	}
+
+	function ajax_result(httpRequest, ctype) {
+		return function() {
+			if(httpRequest.readyState == 4){
+				if(httpRequest.status == 200){
+					if(!httpRequest.responseText.match(null)){
+						var responseText = httpRequest.responseText;
+						result_process(responseText, ctype);
+					}
+				}
+			}
+		}
+	}
+	
+	function action_ajax(url, param, method, ctype) {
+		sendRequest_extension(url, param, ajax_result, method, ctype);
+		return false;
+	}
+	
+	function goSearch(){
+		var fkey = document.getElementById('fkey_text').value;
+		var param = 'fkey=' + fkey;
+		action_ajax('memberIdAndNameSearch.do', param, 'POST', 'MEMBER_SEARCH'); // 해당 페이지로 ajax통신 시작
 	}
 </script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -36,7 +71,7 @@
 								<div class="panel panel-default">
 									<div class="panel-body p-t-0">
 										<div class="input-group">
-											<input type="text" id="example-input1-group2"
+											<input type="text" id="fkey_text"
 												name="example-input1-group2" class="form-control"
 												placeholder="Search"> <span class="input-group-btn">
 												<button type="button"

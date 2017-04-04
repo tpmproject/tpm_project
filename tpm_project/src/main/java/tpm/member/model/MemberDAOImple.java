@@ -74,10 +74,11 @@ public class MemberDAOImple implements MemberDAO {
 		return 0;
 	}
 
-	public ArrayList<MemberDTO> getMemberIdAndNameSearch(String fkey) {
-		// TODO Auto-generated method stub
-		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", fkey);
+	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto) {
+		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", mdto);
 		return array_dto;
 	}
+
+	
 
 }

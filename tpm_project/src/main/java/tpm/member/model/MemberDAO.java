@@ -14,6 +14,6 @@ public interface MemberDAO {
 	public String emailCheck();
 	public MemberDTO getMemberInfo();
 	public int updateMember();
-	public ArrayList<MemberDTO> getMemberIdAndNameSearch(String fkey);
+	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto);
 
 }
