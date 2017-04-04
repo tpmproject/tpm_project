@@ -38,7 +38,7 @@
 				msg += 		'<div class="media-main">';
 				msg += 			'<a class="pull-left" href="#"> <img';
 				msg += 				'class="thumb-lg img-circle bx-s"';
-				msg += 				'src="http://bootdey.com/img/Content/user_1.jpg" alt="">';
+				msg += 				'src="/tpm_project/img/member/profile/' + + '" alt="">';
 
 				msg += 			'</a>';
 				msg += 			'<div class="pull-right btn-group-sm">';
