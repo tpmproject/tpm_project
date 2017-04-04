@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.work.model.WorkDTO;
 import tpm.category.model.CategoryDTO;
+import tpm.checklist.model.ChecklistDTO;
 import tpm.member.model.*;
 
 @Controller
@@ -42,6 +44,18 @@ public class ProjectController {
 		ArrayList<CategoryDTO> arr=projectDAO.projectSearch(dto);
 		mav.addObject("arr", arr);
 		mav.setViewName("project/projectContentForm");
+		for(int i=0;i<arr.size();i++){
+			CategoryDTO cdto=arr.get(i);
+			ArrayList<WorkDTO> wdtos=cdto.getWork_dtos();
+			for(int j=0;j<wdtos.size();j++){
+				WorkDTO wdto=wdtos.get(j);
+				ArrayList<ChecklistDTO> chdtos=wdto.getChecklist_dtos();
+				for(int k=0;k<chdtos.size();k++){
+					System.out.println(i+"/"+j+"/"+k);
+					
+				}
+			}
+		}
 		return mav;
 	}
 	
@@ -70,7 +84,7 @@ public class ProjectController {
 	@RequestMapping(value="projectMemberAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectMemberAdd(MemberDTO dto){
 		
-		ArrayList<MemberDTO> arr=memberDAO.getMemberIdAndNameSearch(dto.getMember_id());
+		ArrayList<MemberDTO> arr=memberDAO.getMemberIdAndNameSearch(dto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("arr", arr);
