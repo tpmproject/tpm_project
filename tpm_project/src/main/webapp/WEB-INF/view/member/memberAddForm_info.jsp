@@ -19,6 +19,15 @@
 function cancle(){
 	location.href='memberLogin.do';
 }
+	function check(){
+		var email = document.memberAddForm.inputEmail.value;
+		
+		if(!email){
+			window.alert('이메일을 입력해주세요');
+		} else{
+			window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=250');	
+		}
+	}
 </script>
 </head>
 <body>
@@ -59,7 +68,7 @@ function cancle(){
                         <div class="col-sm-6">
                             <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
                         </div>
-                        <button class="btn btn-success" type="submit">이메일 인증
+                        <button class="btn btn-success" type="button" onclick="check()">이메일 인증
                             <i class="fa fa-times spaceLeft"></i>
                         </button>
                     </div>
