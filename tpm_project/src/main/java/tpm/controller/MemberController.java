@@ -130,6 +130,8 @@ public class MemberController {
 			
 		} else{
 			result = "이미 가입된 이메일입니다";
+			
+			mav.addObject("result", result);
 			mav.setViewName("member/memberIdCheckResult");
 		}
 		
