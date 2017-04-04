@@ -27,7 +27,6 @@ public class ProjectDAOImple implements ProjectDAO {
 
 	public ProjectDTO projectSearch(ProjectDTO dto) {
 		
-		sqlMap.selectMap("projectSearchCount",dto,"");
 		ArrayList<TotalDTO> temp=(ArrayList)sqlMap.selectList("projectSearch",dto);
 		ProjectDTO pdto=new ProjectDTO();
 		ArrayList<CategoryDTO> cate_arr=new ArrayList<CategoryDTO>();
@@ -35,8 +34,11 @@ public class ProjectDAOImple implements ProjectDAO {
 		ArrayList<ChecklistDTO> check_arr=new ArrayList<ChecklistDTO>();
 		
 		
+		if(temp.size()==0||temp==null){
+		return null;	
+		}
 		
-		for(int i=0;i<temp.size();i++){
+		for(int i=0;i<temp.size();i++){ 
 			TotalDTO tdto=temp.get(i);
 			
 			//프로젝트 정보 입력
@@ -45,6 +47,9 @@ public class ProjectDAOImple implements ProjectDAO {
 				pdto.setProject_name(tdto.getProject_name());
 				pdto.setProject_content(tdto.getProject_content());
 				pdto.setProject_state(tdto.getProject_state());
+				pdto.setChecklist_num(tdto.getChecklist_num()-1);
+				pdto.setWork_num(tdto.getWork_num()-1);
+				pdto.setCategory_num(tdto.getCategory_num()-1);
 			}
 			
 			//checklist 정보 입력
@@ -55,7 +60,7 @@ public class ProjectDAOImple implements ProjectDAO {
 			ChecklistDTO chdto=new ChecklistDTO(checklist_idx, work_idx, checklist_content, checklist_state);
 			check_arr.add(chdto);
 			
-			if(tdto.getWork_idx()!=temp.get(i+1).getWork_idx()){
+			if(i==temp.size()-1||tdto.getWork_idx()!=temp.get(i+1).getWork_idx()){
 				
 				int category_idx=tdto.getCategory_idx();
 				String work_title=tdto.getWork_title();
@@ -68,7 +73,7 @@ public class ProjectDAOImple implements ProjectDAO {
 				work_arr.add(wdto);
 				check_arr=new ArrayList<ChecklistDTO>();
 				
-				if(tdto.getCategory_idx()!=temp.get(i+1).getCategory_idx()){
+				if(i==temp.size()-1||tdto.getCategory_idx()!=temp.get(i+1).getCategory_idx()){
 					int project_idx=tdto.getProject_idx();
 					String category_name=tdto.getCategory_name();
 					CategoryDTO cdto=new CategoryDTO(category_idx, project_idx, category_name, work_arr);
