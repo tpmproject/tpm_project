@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.category.model.CategoryDTO;
 import tpm.member.model.*;
 
 @Controller
@@ -35,9 +36,11 @@ public class ProjectController {
 	
 	/** 프로젝트 - 해당 프로젝트 내용 페이지 이동 ( 업무들이 보여지는 페이지 ) */
 	@RequestMapping(value="projectContent.do",  method=RequestMethod.GET)
-	public ModelAndView projectContentForm(){
+	public ModelAndView projectContentForm(ProjectDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
+		ArrayList<CategoryDTO> arr=projectDAO.projectSearch(dto);
+		mav.addObject("arr", arr);
 		mav.setViewName("project/projectContentForm");
 		return mav;
 	}

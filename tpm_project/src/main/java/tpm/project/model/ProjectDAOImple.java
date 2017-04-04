@@ -24,9 +24,9 @@ public class ProjectDAOImple implements ProjectDAO {
 
 	public ArrayList<CategoryDTO> projectSearch(ProjectDTO dto) {
 		
-		sqlMap.selectList("projectSearch",dto);
+		ArrayList<CategoryDTO> arr=(ArrayList)sqlMap.selectList("projectSearch",dto);
 		
-		return null;
+		return arr;
 	}
 
 	public int projectInsert(ProjectDTO dto) {
