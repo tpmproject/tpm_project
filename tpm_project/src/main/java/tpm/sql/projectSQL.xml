@@ -22,11 +22,11 @@
 				
 	</insert>
 	
-	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.category.model.CategoryDTO">
-	select *
-	from (tpm_category)c,(tpm_work)w,(tpm_checklist)ch
-	where project_idx=#{project_idx} and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
-	order by c.category_idx,w.work_idx,ch.checklist_idx
+	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.project.model.TotalDTO">
+		select *
+		from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch
+		where p.project_idx=#{project_idx} and p.project_idx=c.project_idx and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
+		order by c.category_idx,w.work_idx,ch.checklist_idx
 	</select>
 	
 </mapper>
