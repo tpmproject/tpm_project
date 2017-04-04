@@ -62,6 +62,8 @@
 			
 			}
 			
+			var modal_content = document.getElementById('modal_content');
+			modal_content.innerHTML = msg;
 			
 			
 		} else {
