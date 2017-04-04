@@ -36,7 +36,7 @@
 
 						<div class="row" id="content_row" style="height: 609px; overflow-y:scroll;">
 							<div class="col-sm-12" id="modal_content">
-								<div class="col-sm-12">
+								<!-- <div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
 											<div class="media-main">
@@ -63,7 +63,7 @@
 
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- <div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">

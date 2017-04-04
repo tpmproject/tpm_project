@@ -103,6 +103,7 @@ public class MyFriendController {
 		return mav;
 	}
 	
+	/** 친구 - 친구 삭제 */
 	@RequestMapping(value="myFriendDel.do", method=RequestMethod.POST)
 	public ModelAndView myFriendDel_ajax(MyFriendDTO dto){
 		

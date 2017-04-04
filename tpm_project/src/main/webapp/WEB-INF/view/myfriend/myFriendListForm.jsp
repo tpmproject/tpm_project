@@ -22,7 +22,7 @@
 	
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
-		window.alert(responseText);
+		//window.alert(responseText);
 		var json = JSON.parse(responseText);
 		//var json = eval('('+responseText+')'); // 객체화
 		//var json = responseText;
@@ -71,9 +71,26 @@
 	}
 	
 	function myfriendList_setting(responseText) {
-		if(responseText.trim() == 'true'){
+		var json = JSON.parse(responseText);
+		var msg = '';
+		var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+		for(var i = 0 ; i < members.length; i++){
+			var member = members[i];
 			
+			msg += '<li>'
+				msg += '<input type="hidden" id="del_myfriend_idx_' + i + '" value="' + member.member_idx + '">'
+				msg += '<img src="/tpm_project/img/member/profile/' + member.member_img + '" alt="User Image">'
+				msg += '<span class="users-list-name">' + member.member_name
+					msg += '<a href="javascript:goDelete_member(' + i + ')"><i class="fa fa-fw fa-lg fa-trash-o text-danger"></i></a>'
+				msg += '</span>'
+				msg += '<span class="users-list-date">' + member.member_id + '</span>'
+			msg += '</li>'
 		}
+		
+		var myfriend_content_list = document.getElementById('myfriend_content_list');
+		myfriend_content_list.innerHTML = '';
+		myfriend_content_list.innerHTML = msg;
+		
 	}
 	
 	function result_process(responseText, ctype) {
@@ -85,10 +102,17 @@
 		
 		if(ctype == 'MEMBER_SEARCH'){
 			search_modal_setting(responseText);
-		} else if(ctype == 'FRIEND_DELETE'){
-			
-		} else if(ctype == 'FRIEND_INSERT'){
+		} else if(ctype == 'FRIEND_LIST'){
 			myfriendList_setting(responseText);
+		} else if(ctype == 'FRIEND_DELETE'){
+			if(responseText.trim() == 'true'){
+				action_ajax('myFriendList.do', null, 'POST', 'FRIEND_LIST');
+			}
+		} else if(ctype == 'FRIEND_INSERT'){
+			if(responseText.trim() == 'true'){
+				action_ajax('myFriendList.do', null, 'POST', 'FRIEND_LIST');
+				goSearch_member();
+			}
 		} else {
 			window.alert('잘못된 경로');
 		}
@@ -151,7 +175,7 @@
 		<!-- /.box-header -->
 		<div class="box-body no-padding">
 			<!-- <i class="fa fa-fw fa-lg fa-trash-o text-danger fdel"></i> -->	
-			<ul class="users-list clearfix">
+			<ul class="users-list clearfix" id="myfriend_content_list">
 				<c:forEach var="i" begin="0" end="${arry_mdto.size() - 1}" step="1">
 					<li>
 						<input type="hidden" id="del_myfriend_idx_${i}" value="${arry_mdto.get(i).member_idx}">
