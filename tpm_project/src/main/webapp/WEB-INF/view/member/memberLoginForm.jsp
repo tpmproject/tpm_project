@@ -69,7 +69,7 @@
                     <input type="checkbox" name="cb_saveid" value="on" ${empty cookie.ck_saveid.value?'':'checked'}>Remember me</label>
                   <div style="margin:auto 140px; font-size:18px; float:left;"><a href="memberAdd.do">Sign Up</a></div>
                 </div>
-              </div>
+              </div> 
             </form>
             <br>
             <br>
