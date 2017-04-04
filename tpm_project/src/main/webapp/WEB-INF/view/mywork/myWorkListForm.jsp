@@ -55,7 +55,7 @@
                   <td>
                     <select>
                       <option>30일</option>
-                      <option>150일</option>
+                      <option>15일</option>
                       <option>7일</option>
                       <option>1일</option>
                     </select>
