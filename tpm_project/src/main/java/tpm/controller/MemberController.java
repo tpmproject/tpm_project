@@ -155,6 +155,7 @@ public class MemberController {
 		 
 		result = "인증번호가 발송되었습니다";
 		
+		mav.addObject("random", random);
 		mav.addObject("result", result);
 		mav.setViewName("member/memberEmail");
 		
@@ -176,12 +177,12 @@ public class MemberController {
 		if(random==user){
 			result = "인증에 성공하였습니다";
 			
-			mav.addObject("result", result);
+			mav.addObject("success", result);
 			mav.setViewName("member/memberEmailSuccess");
 		} else{
 			result = "인증번호를 확인해주세요";
 			
-			mav.addObject("result", result);
+			mav.addObject("failed", result);
 			mav.setViewName("member/memberEmailFailed");
 		}
 		
