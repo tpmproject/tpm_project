@@ -76,15 +76,16 @@ public class MyFriendController {
 	
 	/** 친구 - 친구 삭제 */
 	@RequestMapping(value="myFriendDel.do", method=RequestMethod.GET)
-	public ModelAndView myFriendDel(){
+	public ModelAndView myFriendDel(MyFriendDTO dto){
 		
-		MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//System.out.println(dto.toString());
 		int count = myFriendDAO.delFriend(dto);
-		String result = count > 0 ? "true" : "false";
+		//String result = count > 0 ? "true" : "false";
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myfriend/myFriendResult_d");
-		mav.addObject("result", result);
+		mav.setViewName("redirect:/myFriendList.do");
+		//mav.addObject("result", result);
 		return mav;
 	}
 }

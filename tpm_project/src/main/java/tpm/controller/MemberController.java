@@ -29,6 +29,7 @@ public class MemberController {
 	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey){
 		
 		MemberDTO mdto = new MemberDTO();
+		mdto.setMember_idx(6);
 		mdto.setMember_id(fkey);
 		
 		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(mdto);

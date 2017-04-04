@@ -110,6 +110,8 @@
 		var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
 		location.href = 'myFriendDel.do?' + param;
 		
+		
+		
 	}
 </script>
 </head>
