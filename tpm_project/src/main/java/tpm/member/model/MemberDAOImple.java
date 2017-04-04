@@ -35,7 +35,7 @@ public class MemberDAOImple implements MemberDAO {
 	}
 
 	public String idCheck(String email) {
-		String db_id = sqlMap.selectOne("memberIdcheck",email);
+		String db_id = sqlMap.selectOne("memberIdCheck",email);
 		return db_id;
 	}
 	
