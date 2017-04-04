@@ -2,13 +2,11 @@ package tpm.project.model;
 
 import java.util.ArrayList;
 
-import tpm.category.model.CategoryDTO;
-
 public interface ProjectDAO {
 
 	public ArrayList<ProjectDTO> projectAllList();
 	
-	public ArrayList<CategoryDTO> projectSearch(ProjectDTO dto);
+	public ArrayList<ProjectDTO> projectSearch(ProjectDTO dto);
 	
 	public int projectInsert(ProjectDTO dto);
 	

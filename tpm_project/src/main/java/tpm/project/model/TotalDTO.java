@@ -23,7 +23,7 @@ public class TotalDTO {
 	private int work_state; //결재 상태
 	
 	private int checklist_idx;
-	private String checklit_content;
+	private String checklist_content;
 	private int checklist_state;
 	
 	public TotalDTO() {
@@ -32,7 +32,7 @@ public class TotalDTO {
 
 	public TotalDTO(int project_idx, String project_name, int project_state, String project_content, int category_idx,
 			String category_name, int work_idx, String work_title, Date work_start, Date work_end, Date work_complete,
-			int work_confirm, int work_state, int checklist_idx, String checklit_content, int checklist_state) {
+			int work_confirm, int work_state, int checklist_idx, String checklist_content, int checklist_state) {
 		super();
 		this.project_idx = project_idx;
 		this.project_name = project_name;
@@ -48,7 +48,7 @@ public class TotalDTO {
 		this.work_confirm = work_confirm;
 		this.work_state = work_state;
 		this.checklist_idx = checklist_idx;
-		this.checklit_content = checklit_content;
+		this.checklist_content = checklist_content;
 		this.checklist_state = checklist_state;
 	}
 
@@ -164,12 +164,12 @@ public class TotalDTO {
 		this.checklist_idx = checklist_idx;
 	}
 
-	public String getChecklit_content() {
-		return checklit_content;
+	public String getChecklist_content() {
+		return checklist_content;
 	}
 
-	public void setChecklit_content(String checklit_content) {
-		this.checklit_content = checklit_content;
+	public void setChecklist_content(String checklist_content) {
+		this.checklist_content = checklist_content;
 	}
 
 	public int getChecklist_state() {

@@ -4,7 +4,7 @@ public class ChecklistDTO {
 	
 	private int checklist_idx;
 	private int work_idx;
-	private String checklit_content;
+	private String checklist_content;
 	private int checklist_state;
 	
 	final public static int CHECKLIST_WAIT=1;
@@ -14,11 +14,11 @@ public class ChecklistDTO {
 		super();
 	}
 
-	public ChecklistDTO(int checklist_idx, int work_idx, String checklit_content, int checklist_state) {
+	public ChecklistDTO(int checklist_idx, int work_idx, String checklist_content, int checklist_state) {
 		super();
 		this.checklist_idx = checklist_idx;
 		this.work_idx = work_idx;
-		this.checklit_content = checklit_content;
+		this.checklist_content = checklist_content;
 		this.checklist_state = checklist_state;
 	}
 
@@ -38,12 +38,12 @@ public class ChecklistDTO {
 		this.work_idx = work_idx;
 	}
 
-	public String getChecklit_content() {
-		return checklit_content;
+	public String getChecklist_content() {
+		return checklist_content;
 	}
 
-	public void setChecklit_content(String checklit_content) {
-		this.checklit_content = checklit_content;
+	public void setChecklist_content(String checklist_content) {
+		this.checklist_content = checklist_content;
 	}
 
 	public int getChecklist_state() {

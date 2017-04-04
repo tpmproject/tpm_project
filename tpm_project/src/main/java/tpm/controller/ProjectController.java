@@ -41,21 +41,7 @@ public class ProjectController {
 	public ModelAndView projectContentForm(ProjectDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
-		ArrayList<CategoryDTO> arr=projectDAO.projectSearch(dto);
-		mav.addObject("arr", arr);
-		mav.setViewName("project/projectContentForm");
-		for(int i=0;i<arr.size();i++){
-			CategoryDTO cdto=arr.get(i);
-			ArrayList<WorkDTO> wdtos=cdto.getWork_dtos();
-			for(int j=0;j<wdtos.size();j++){
-				WorkDTO wdto=wdtos.get(j);
-				ArrayList<ChecklistDTO> chdtos=wdto.getChecklist_dtos();
-				for(int k=0;k<chdtos.size();k++){
-					System.out.println(i+"/"+j+"/"+k);
-					
-				}
-			}
-		}
+		
 		return mav;
 	}
 	

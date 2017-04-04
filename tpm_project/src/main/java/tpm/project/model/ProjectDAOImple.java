@@ -22,9 +22,16 @@ public class ProjectDAOImple implements ProjectDAO {
 		return null;
 	}
 
-	public ArrayList<CategoryDTO> projectSearch(ProjectDTO dto) {
+	public ArrayList<ProjectDTO> projectSearch(ProjectDTO dto) {
 		
-		ArrayList<CategoryDTO> arr=(ArrayList)sqlMap.selectList("projectSearch",dto);
+		ArrayList<TotalDTO> temp=(ArrayList)sqlMap.selectList("projectSearch",dto);
+		ArrayList<ProjectDTO> arr=new ArrayList<ProjectDTO>();
+		
+		for(int i=0;i<temp.size();i++){
+			TotalDTO tdto=temp.get(i);
+			System.out.println(tdto.getChecklist_content());
+			
+		}
 		
 		return arr;
 	}
