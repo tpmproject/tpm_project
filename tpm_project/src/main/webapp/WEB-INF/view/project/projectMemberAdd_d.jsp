@@ -5,8 +5,5 @@
     
 <%
 	ArrayList<MemberDTO> arr=(ArrayList<MemberDTO>)request.getAttribute("arr");
-	
-	
-
 
 %>

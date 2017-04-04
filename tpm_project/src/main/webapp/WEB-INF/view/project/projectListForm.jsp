@@ -24,11 +24,9 @@ $(function(){
 <div class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-    	
-        <!-- remote ajax call이 되는영역 -->
+    	<!-- remote ajax call이 되는영역 -->
     </div>
   </div>
 </div>
 <hr>
-</body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,14 +13,11 @@ function show(){
 	p1.style.display='none';
 	p2.style.display='block';
 	
-
-	
 }
 function before(){
 	p1.style.display='block';
 	p2.style.display='none';
-	
-	
+
 }
 
 function projectMemberAdd(){
@@ -68,7 +66,14 @@ function projectMemberAddResult(){
      	<h2>그룹원 추가 하기</h2>
      	<div><input type="text" name="member_id"><button type="button"  class="btn" onclick="projectMemberAdd()">검색</button> </div>
      	<hr>
-     	그룹원 리스트
+     	
+     	<c:forEach var="dto" items="${arry_mdto}">
+					<li>
+						<img src="/tpm_project/img/member/temp_member.jpg" alt="User Image">
+						<a class="users-list-name" href="#">${dto.member_name}</a> 
+						<span class="users-list-date">${dto.member_id}</span>
+					</li>
+				</c:forEach>
      	
      	<div><button type="button" class="btn btn-next" onclick="before()">이전</button>
      	<input type="submit" class="btn" value="완료"></div>
