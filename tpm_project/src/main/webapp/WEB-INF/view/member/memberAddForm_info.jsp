@@ -27,8 +27,6 @@
 			} else{
 				var email = 'email='+user_email;
 				
-				window.alert(email);
-				
 				sendRequest('memberIdCheck.do', email, emailCheckResult, 'POST');
 			}
 		}
@@ -36,12 +34,12 @@
 		function emailCheckResult(){
 			if(XHR.readyState==4){
 				if(XHR.status==200){
-					var result = XHR.responseText;
-					
-					var resultId = document.get.ElementById('idCheckResult');
+					var result = XHR.responseText.trim();
 					var email = document.memberAddForm.inputEmail.value;
 					
-					if(result=='true'){
+					var resultId = document.getElementById('idCheckResult');
+					
+					if(result==email){
 						resultId.style.color = 'red';
 						resultId.innerHTML = '이미 사용중인 이메일입니다';
 					} else{
@@ -92,21 +90,20 @@ function cancle(){
                     </h1>
                 </div>
                 <form class="form-horizontal" name="memberAddForm" action="memberAdd.do" method="post">
+                
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
                         <div class="col-sm-6">
-                        <c:set var="result" value="${success}"/>
-                        ${result}
-                        <c:if test="${empty result}">
                             <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
                         </div>
 	                        <button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
 	                            <i class="fa fa-check spaceLeft"></i>
 	                        </button>
-                        </c:if>
-                        	<button class="btn btn-block btn-success disabled"> 테스트 </button>
-                        	<span id="idCheckResult"></span>
+                        <div>
+	                        <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
+                        </div>
                     </div>
+                    <!-- <button class="btn btn-block btn-success disabled"> 테스트 </button> -->
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                         <div class="col-sm-6">
@@ -167,6 +164,8 @@ function cancle(){
                 <hr>
             </div>
         </article>
+        
+        
         <footer class="section" style="background-color:black; margin-top:170px">
       <div class="container">
         <div class="row">
