@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/import.jsp" %>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
+<script>
+function btFriendOver(i){
+	window.alert(i);
+}
+function goDelete(){
+	window.alert('삭제');
+}
+</script>
 </head>
 <body>
 	<div class="box box-danger">
@@ -25,7 +33,9 @@
 				<c:forEach var="dto" items="${arry_mdto}">
 					<li>
 						<img src="/tpm_project/img/member/profile/${dto.member_img}" alt="User Image">
-						<a class="users-list-name" href="#">${dto.member_name}</a> 
+						<span class="users-list-name">${dto.member_name}
+									<i class="fa fa-fw fa-lg fa-trash-o text-danger fdel" onmouseover="btFriendOver(this)"></i>
+						</span>
 						<span class="users-list-date">${dto.member_id}</span>
 					</li>
 				</c:forEach>
