@@ -17,6 +17,6 @@
 	</c:if>
 	
 <a href="main.do">메인화면</a>
-<a href="calender.do">켈린더</a>
+<a href="calendarList.do">켈린더</a>
 </body>
 </html>
