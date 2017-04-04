@@ -25,7 +25,7 @@ function cancle(){
 		if(!email){
 			window.alert('이메일을 입력해주세요');
 		} else{
-			window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=250');	
+			window.open('memberIdCheck.do?email='+email, 'emailcheck','width=350, height=250');	
 		}
 	}
 </script>

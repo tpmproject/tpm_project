@@ -76,10 +76,63 @@ public class MemberController {
 	@RequestMapping(value="memberIdCheck.do", method=RequestMethod.GET)
 	public ModelAndView memberIdCheck(@RequestParam("email") String to){
 		
-		
+		String db_id = mdao.idCheck(to);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/memberAdd_info_idCheck_d");
+		String result = "";
+		
+		if(db_id==null || db_id==""){
+			String from = "tpmproject";
+			String subject = "tpm project에 오신 것을 환영합니다";
+			int random = (int)(Math.random()*899999)+100000;
+			String content = "인증번호: "+random;
+			
+			Properties p = new Properties();
+			 
+			p.put("mail.smtp.host","smtp.naver.com");
+			 
+			p.put("mail.smtp.port", "465");
+			p.put("mail.smtp.starttls.enable", "true");
+			p.put("mail.smtp.auth", "true");
+			p.put("mail.smtp.debug", "true");
+			p.put("mail.smtp.socketFactory.port", "465");
+			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			p.put("mail.smtp.socketFactory.fallback", "false");
+			
+			try{
+			    Authenticator auth = new SMTPAuthenticatior();
+			    Session ses = Session.getInstance(p, auth);
+			     
+			    ses.setDebug(true);
+			     
+			    MimeMessage msg = new MimeMessage(ses);
+			    msg.setSubject(subject);
+			     
+			    Address fromAddr = new InternetAddress(from);
+			    msg.setFrom(fromAddr);
+			     
+			    Address toAddr = new InternetAddress(to);
+			    msg.addRecipient(Message.RecipientType.TO, toAddr);
+			     
+			    msg.setContent(content, "text/html;charset=UTF-8");
+			     
+			    Transport.send(msg);
+			} catch(Exception e){
+			    e.printStackTrace();
+			    result = "Send Mail Failed..";
+			}
+			 
+			result = "인증번호가 발송되었습니다";
+			
+			mav.addObject("result", result);
+			mav.addObject("random", random);
+			mav.setViewName("member/memberEmail");
+			
+		} else{
+			result = "이미 가입된 이메일입니다";
+			mav.setViewName("member/memberIdCheckResult");
+		}
+		
 		return mav;
 	}
 	
