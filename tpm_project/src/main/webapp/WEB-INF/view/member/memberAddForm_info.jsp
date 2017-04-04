@@ -98,7 +98,7 @@ function cancle(){
 	                        	<div class="form-group">
 	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 	                        		<div class="col-sm-6">
-		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
+		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" required="required">
 		                        		</div>
 		                        		<button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
 				                            <i class="fa fa-check spaceLeft"></i>
@@ -112,7 +112,7 @@ function cancle(){
                         		<div class="form-group">
 	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 	                        		<div class="col-sm-6">
-		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" value="${email}">
+		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" value="${email}" required="required">
 		                        		</div>
 		                        		<button class="btn btn-success disabled" type="button"> 인증 완료
 				                            <i class="fa fa-check spaceLeft"></i>
