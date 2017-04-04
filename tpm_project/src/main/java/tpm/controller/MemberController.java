@@ -5,6 +5,10 @@ import java.util.Properties;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.member.model.MemberDAO;
+import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
+
 
 @Controller
 public class MemberController {
@@ -49,23 +55,66 @@ public class MemberController {
 	
 	/** 로그인 처리 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(@RequestParam("member_id")String userid, @RequestParam("member_pwd")String userpwd){
+	public ModelAndView memberLogin(@RequestParam("member_id")String userid, @RequestParam("member_pwd")String userpwd,MemberDTO mdto
+			,HttpServletRequest req,HttpServletResponse resp){
+		
+		MemberDAOImple mdao_num= new MemberDAOImple();
+		
 		int result=mdao.login(userid, userpwd);
+		ModelAndView mav=new ModelAndView();
+		String msg="";
 		
-		ModelAndView mav = new ModelAndView();
+		HttpSession session=req.getSession();
 		
-		if(result==1){
-		mav.setViewName("member/memberLogin_ok");
-		}else{
-		mav.setViewName("member/memberMsg");
+		
+		if(result==mdao_num.LOGIN_OK){
+			msg="로그인 성공";
+			
+			if(userid==null||userid.equals("")){
+				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
+			}else{
+				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
+				ck.setMaxAge(60*60*24*30);
+				resp.addCookie(ck);
+			}
+			
+			session.setAttribute("sid", mdto.getMember_id());
+			mav.addObject("msg", msg);
+			mav.setViewName("member/memberLogin_ok");
+		}
+		else if(result==mdao_num.ID_NO){
+			msg="없는 아이디 입니다.";
+			mav.addObject("msg",msg);
+			mav.setViewName("member/memberMsg");
+		}
+		else if(result==mdao_num.PASSWORD_NO){
+			msg="비밀번호가 다릅니다.";
+			mav.addObject("msg",msg);
+			mav.setViewName("member/memberMsg");
+		}
+		else{
+			msg="고객샌터 연락바람니다.";
+			mav.addObject("msg",msg);
 		}
 		return mav;
+	
+		
 	}
 	
 	/** 로그아웃 */
 	@RequestMapping(value="memberLogOut.do", method=RequestMethod.GET)
-	public String memberLogOut(){
-		return "member/memberLogOut_ok";
+	public ModelAndView memberLogOut(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		
+		session.invalidate();
+		String msg="로그아웃 완료";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("member/memberLogOut_ok");
+		return mav;
 	}
 	
 	// 회원가입
