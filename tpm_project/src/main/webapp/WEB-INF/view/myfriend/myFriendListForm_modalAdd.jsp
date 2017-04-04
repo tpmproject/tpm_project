@@ -34,9 +34,9 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row" id="content_row" style="height: 609px; overflow-y:scroll;">
 							<div class="col-sm-12" id="modal_content">
-								<!-- <div class="col-sm-12">
+								<div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
 											<div class="media-main">
@@ -46,7 +46,7 @@
 
 												</a>
 												<div class="pull-right btn-group-sm">
-													<a href="#" class="btn btn-success tooltips"
+													<a href="javascript:goAdd_member()" class="btn btn-success tooltips"
 														data-placement="top" data-toggle="tooltip"
 														data-original-title="Add"> <i class="fa fa-user-plus"></i>
 
@@ -62,7 +62,7 @@
 
 										</div>
 									</div>
-								</div> -->
+								</div>
 								<!-- <div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
@@ -93,8 +93,8 @@
 
 										</div>
 									</div>
-								</div> -->
-								<!-- <div class="col-sm-12">
+								</div>
+								<div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
 											<div class="media-main">
@@ -124,8 +124,8 @@
 
 										</div>
 									</div>
-								</div> -->
-								<!-- <div class="col-sm-12">
+								</div>
+								<div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
 											<div class="media-main">

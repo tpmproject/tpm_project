@@ -88,4 +88,18 @@ public class MyFriendController {
 		//mav.addObject("result", result);
 		return mav;
 	}
+	
+	@RequestMapping(value="myFriendDel.do", method=RequestMethod.POST)
+	public ModelAndView myFriendDel_ajax(MyFriendDTO dto){
+		
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//System.out.println(dto.toString());
+		int count = myFriendDAO.delFriend(dto);
+		String result = count > 0 ? "true" : "false";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myfriend/myFriendResult_d");
+		mav.addObject("result", result);
+		return mav;
+	}
 }

@@ -8,7 +8,7 @@
 <%@ include file="/sample/cho/main/import.jsp" %>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script>
-	(function($) {
+	/* (function($) {
 		$(window).on("load", function() {
 
 			$("#myModal #modal_content").mCustomScrollbar({
@@ -17,7 +17,56 @@
 			});
 
 		});
-	})(jQuery);
+	})(jQuery); */
+	
+	
+	function search_modal_setting(responseText){
+		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
+		var json = JSON.parse(responseText);
+		//var json = eval('('+responseText+')'); // 객체화
+		//var json = responseText;
+		
+		var msg = '';
+		var members = json.members; // 맵 객체로부터 students 값인 배열을 가져온다.
+		for(var i = 0 ; i < members.length; i++){
+			var member = members[i];
+			
+			msg += '<div class="col-sm-12" id="modal_content">';
+			msg += '<div class="col-sm-12"> ';
+			msg += '<div class="panel"> ';
+			msg += 	'<div class="panel-body p-t-10"> ';
+			msg += 		'<div class="media-main"> ';
+			msg += 			'<a class="pull-left" href="#"> <img ';
+			msg += 				'class="thumb-lg img-circle bx-s" ';
+			msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+
+			msg += 			'</a> ';
+			msg += 			'<div class="pull-right btn-group-sm"> ';
+			msg += 				'<a href="javascript:goAdd_member()" class="btn btn-success tooltips" ';
+			msg += 					'data-placement="top" data-toggle="tooltip" ';
+			msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
+
+			msg += 				'</a> ';
+			msg += 			'</div> ';
+			msg += 			'<div class="info"> ';
+			msg += 				'<h4>' + member.member_name + '</h4> ';
+			msg += 				'<p class="text-muted">' + member.member_id + '</p> ';
+			msg += 			'</div> ';
+			msg += 		'</div> ';
+			msg += 		'<div class="clearfix"></div> ';
+			msg += 		'<hr> ';
+
+			msg += 	'</div> ';
+			msg += '</div> ';
+			msg += '</div> ';
+			msg += '</div> ';
+		}
+		
+		var content_row = document.getElementById('content_row');
+		content_row.innerHTML = msg;
+		
+		
+	}
 	
 	function result_process(responseText, ctype) {
 		//var json = JSON.parse(responseText);
@@ -27,52 +76,8 @@
 		//dotStr +=  qdto[0].qna_idx;
 		
 		if(ctype == 'MEMBER_SEARCH'){
-			//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
-			window.alert(responseText);
-			var json = JSON.parse(responseText);
-			//var json = eval('('+responseText+')'); // 객체화
-			//var json = responseText;
-			
-			var msg = '';
-			var members = json.members; // 맵 객체로부터 students 값인 배열을 가져온다.
-			for(var i = 0 ; i < members.length; i++){
-				var member = members[i];
-				
-				msg += '<div class="col-sm-12"> ';
-				msg += '<div class="panel"> ';
-				msg += 	'<div class="panel-body p-t-10"> ';
-				msg += 		'<div class="media-main"> ';
-				msg += 			'<a class="pull-left" href="#"> <img ';
-				msg += 				'class="thumb-lg img-circle bx-s" ';
-				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-
-				msg += 			'</a> ';
-				msg += 			'<div class="pull-right btn-group-sm"> ';
-				msg += 				'<a href="#" class="btn btn-success tooltips" ';
-				msg += 					'data-placement="top" data-toggle="tooltip" ';
-				msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
-
-				msg += 				'</a> ';
-				msg += 			'</div> ';
-				msg += 			'<div class="info"> ';
-				msg += 				'<h4>' + member.member_name + '</h4> ';
-				msg += 				'<p class="text-muted">' + member.member_id + '</p> ';
-				msg += 			'</div> ';
-				msg += 		'</div> ';
-				msg += 		'<div class="clearfix"></div> ';
-				msg += 		'<hr> ';
-
-				msg += 	'</div> ';
-				msg += '</div> ';
-				msg += '</div> ';
-				
-		
-			
-			}
-			
-			var modal_content = document.getElementById('modal_content');
-			modal_content.innerHTML = msg;
-			
+			search_modal_setting(responseText);
+		} else if(ctype == 'FRIEND_DELETE'){
 			
 		} else {
 			window.alert('잘못된 경로');
@@ -108,10 +113,12 @@
 		var myfriend_idx = document.getElementById('del_myfriend_idx_' + i).value;
 		
 		var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
-		location.href = 'myFriendDel.do?' + param;
-		
-		
-		
+		action_ajax('myFriendDel.do', param, 'POST', 'FRIEND_DELETE'); // 해당 페이지로 ajax통신 시작
+		//location.href = 'myFriendDel.do?' + param;	
+	}
+	
+	function goAdd_member(){
+		window.alert('1');
 	}
 </script>
 </head>
