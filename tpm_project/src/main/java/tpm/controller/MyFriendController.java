@@ -24,7 +24,6 @@ public class MyFriendController {
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.GET)
 	public ModelAndView myFriendListForm(){
 		
-		
 		MyFriendDTO dto = new MyFriendDTO();
 		dto.setMember_idx(6);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
@@ -64,6 +63,21 @@ public class MyFriendController {
 		mav.addObject("result", result);
 		return mav;
 	}
+	
+	/** 친구 - 친구 등록 */
+	@RequestMapping(value="myFriendAdd.do", method=RequestMethod.POST)
+	public ModelAndView myFriendAdd_ajax(MyFriendDTO dto){
+		
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		int count = myFriendDAO.addFriend(dto);
+		String result = count > 0 ? "true" : "false";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myfriend/myFriendResult_d");
+		mav.addObject("result", result);
+		return mav;
+	}
+	
 	
 	/** 친구 - 친구 검색 */
 	@RequestMapping(value="myFriendSearch.do", method=RequestMethod.GET)

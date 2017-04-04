@@ -53,6 +53,7 @@
 													</a>
 												</div>
 												<div class="info">
+													<input type="hidden" id="add_member_idx" value="1">
 													<h4>Jonathan Smith</h4>
 													<p class="text-muted">Graphics Designer</p>
 												</div>
