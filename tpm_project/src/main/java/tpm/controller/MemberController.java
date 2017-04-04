@@ -55,8 +55,11 @@ public class MemberController {
 	
 	/** 로그인 처리 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(@RequestParam("member_id")String userid, @RequestParam("member_pwd")String userpwd,MemberDTO mdto
-			,HttpServletRequest req,HttpServletResponse resp){
+	public ModelAndView memberLogin(@RequestParam(value="cb_saveid",defaultValue="1")String cb_saveid,
+									@RequestParam("member_id")String userid,
+									@RequestParam("member_pwd")String userpwd,
+									MemberDTO mdto,
+									HttpServletRequest req,HttpServletResponse resp){
 		
 		MemberDAOImple mdao_num= new MemberDAOImple();
 		
@@ -69,8 +72,8 @@ public class MemberController {
 		
 		if(result==mdao_num.LOGIN_OK){
 			msg="로그인 성공";
-			
-			if(userid==null||userid.equals("")){
+			System.out.println(cb_saveid);
+			if(cb_saveid==null||cb_saveid.equals("1")){
 				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
 				ck.setMaxAge(0);
 				resp.addCookie(ck);
