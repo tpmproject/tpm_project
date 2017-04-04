@@ -22,8 +22,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		return null;
 	}
 
-	public ArrayList<WorkDTO> projectSearch() {
-		// TODO Auto-generated method stub
+	public ArrayList<WorkDTO> projectSearch(ProjectDTO dto) {
+		
+		sqlMap.selectList("projectSearch",dto);
+		
 		return null;
 	}
 
