@@ -24,7 +24,7 @@
 			<ul class="users-list clearfix">
 				<c:forEach var="dto" items="${arry_mdto}">
 					<li>
-						<img src="/tpm_project/img/member/temp_member.jpg" alt="User Image">
+						<img src="/tpm_project/img/member/profile/${dto.member_img}" alt="User Image">
 						<a class="users-list-name" href="#">${dto.member_name}</a> 
 						<span class="users-list-date">${dto.member_id}</span>
 					</li>

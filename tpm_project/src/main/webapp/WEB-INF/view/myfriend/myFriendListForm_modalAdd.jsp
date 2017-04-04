@@ -32,33 +32,35 @@
 			for(var i = 0 ; i < members.length; i++){
 				var member = members[i];
 				
-				msg += '<div class="col-sm-12">';
-				msg += '<div class="panel">';
-				msg += 	'<div class="panel-body p-t-10">';
-				msg += 		'<div class="media-main">';
-				msg += 			'<a class="pull-left" href="#"> <img';
-				msg += 				'class="thumb-lg img-circle bx-s"';
-				msg += 				'src="/tpm_project/img/member/profile/' + + '" alt="">';
+				msg += '<div class="col-sm-12"> ';
+				msg += '<div class="panel"> ';
+				msg += 	'<div class="panel-body p-t-10"> ';
+				msg += 		'<div class="media-main"> ';
+				msg += 			'<a class="pull-left" href="#"> <img ';
+				msg += 				'class="thumb-lg img-circle bx-s" ';
+				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
-				msg += 			'</a>';
-				msg += 			'<div class="pull-right btn-group-sm">';
-				msg += 				'<a href="#" class="btn btn-success tooltips"';
-				msg += 					'data-placement="top" data-toggle="tooltip"';
-				msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i>';
+				msg += 			'</a> ';
+				msg += 			'<div class="pull-right btn-group-sm"> ';
+				msg += 				'<a href="#" class="btn btn-success tooltips" ';
+				msg += 					'data-placement="top" data-toggle="tooltip" ';
+				msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
 
-				msg += 				'</a>';
-				msg += 			'</div>';
-				msg += 			'<div class="info">';
-				msg += 				'<h4>' + member.member_name + '</h4>';
-				msg += 				'<p class="text-muted">' + member.member_id + '</p>';
-				msg += 			'</div>';
-				msg += 		'</div>';
-				msg += 		'<div class="clearfix"></div>';
-				msg += 		'<hr>';
+				msg += 				'</a> ';
+				msg += 			'</div> ';
+				msg += 			'<div class="info"> ';
+				msg += 				'<h4>' + member.member_name + '</h4> ';
+				msg += 				'<p class="text-muted">' + member.member_id + '</p> ';
+				msg += 			'</div> ';
+				msg += 		'</div> ';
+				msg += 		'<div class="clearfix"></div> ';
+				msg += 		'<hr> ';
 
-				msg += 	'</div>';
-				msg += '</div>';
-				msg += '</div>';
+				msg += 	'</div> ';
+				msg += '</div> ';
+				msg += '</div> ';
+				
+		
 			
 			}
 			
@@ -136,7 +138,7 @@
 											<div class="media-main">
 												<a class="pull-left" href="#"> <img
 													class="thumb-lg img-circle bx-s"
-													src="http://bootdey.com/img/Content/user_1.jpg" alt="">
+													src="/tpm_project/img/member/profile/whwns5@naver.com.jpg" alt="">
 
 												</a>
 												<div class="pull-right btn-group-sm">
