@@ -42,7 +42,8 @@ public class ProjectController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectContentForm");
-		projectDAO.projectSearch(dto);
+		ProjectDTO pdto=projectDAO.projectSearch(dto);
+		mav.addObject("pdto", pdto);
 		return mav;
 	}
 	

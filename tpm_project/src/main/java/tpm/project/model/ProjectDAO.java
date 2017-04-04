@@ -6,7 +6,7 @@ public interface ProjectDAO {
 
 	public ArrayList<ProjectDTO> projectAllList();
 	
-	public ArrayList<ProjectDTO> projectSearch(ProjectDTO dto);
+	public ProjectDTO projectSearch(ProjectDTO dto);
 	
 	public int projectInsert(ProjectDTO dto);
 	
