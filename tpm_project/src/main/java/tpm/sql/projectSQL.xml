@@ -24,9 +24,13 @@
 	
 	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.project.model.TotalDTO">
 		select *
-		from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch
+		from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch,
+			(select count(distinct c.category_idx)as category_num,count(distinct w.work_idx)as work_num,count(distinct ch.checklist_idx)as checklist_num
+				from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch
+				where p.project_idx=#{project_idx} and p.project_idx=c.project_idx and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
+				order by c.category_idx,w.work_idx,ch.checklist_idx
+			)
 		where p.project_idx=#{project_idx} and p.project_idx=c.project_idx and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
 		order by c.category_idx,w.work_idx,ch.checklist_idx
 	</select>
-	
 </mapper>

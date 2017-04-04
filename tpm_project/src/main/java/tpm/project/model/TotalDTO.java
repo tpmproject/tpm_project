@@ -26,13 +26,18 @@ public class TotalDTO {
 	private String checklist_content;
 	private int checklist_state;
 	
+	private int category_num;
+	private int work_num;
+	private int checklist_num;
+	
 	public TotalDTO() {
 		super();
 	}
 
 	public TotalDTO(int project_idx, String project_name, int project_state, String project_content, int category_idx,
 			String category_name, int work_idx, String work_title, Date work_start, Date work_end, Date work_complete,
-			int work_confirm, int work_state, int checklist_idx, String checklist_content, int checklist_state) {
+			int work_confirm, int work_state, int checklist_idx, String checklist_content, int checklist_state,
+			int category_num, int work_num, int checklist_num) {
 		super();
 		this.project_idx = project_idx;
 		this.project_name = project_name;
@@ -50,7 +55,12 @@ public class TotalDTO {
 		this.checklist_idx = checklist_idx;
 		this.checklist_content = checklist_content;
 		this.checklist_state = checklist_state;
+		this.category_num = category_num;
+		this.work_num = work_num;
+		this.checklist_num = checklist_num;
 	}
+
+
 
 	public int getProject_idx() {
 		return project_idx;
@@ -178,6 +188,30 @@ public class TotalDTO {
 
 	public void setChecklist_state(int checklist_state) {
 		this.checklist_state = checklist_state;
+	}
+
+	public int getCategory_num() {
+		return category_num;
+	}
+
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+
+	public int getWork_num() {
+		return work_num;
+	}
+
+	public void setWork_num(int work_num) {
+		this.work_num = work_num;
+	}
+
+	public int getChecklist_num() {
+		return checklist_num;
+	}
+
+	public void setChecklist_num(int checklist_num) {
+		this.checklist_num = checklist_num;
 	}
 	
 	
