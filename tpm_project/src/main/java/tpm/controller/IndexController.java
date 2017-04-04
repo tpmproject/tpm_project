@@ -13,5 +13,12 @@ public class IndexController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	@RequestMapping("/main.do")
+	public ModelAndView mainForm(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		return mav;
+	}
 }
 	

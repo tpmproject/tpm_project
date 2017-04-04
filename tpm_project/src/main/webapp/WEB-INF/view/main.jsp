@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/sample/cho/main/import.jsp" %>
 </head>
-<body>
-인덱스입.
-<a href="memberLogin.do">로그인</a><br>
-<a href="main.do">메인화면</a>
+<body class="skin-blue">
+<div class="wrapper">
+<%@ include file="/WEB-INF/view/header.jsp" %>
+</div>
 </body>
 </html>
