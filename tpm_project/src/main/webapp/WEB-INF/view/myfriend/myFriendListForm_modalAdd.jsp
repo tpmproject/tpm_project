@@ -62,7 +62,7 @@
 			
 			}
 			
-			var modal_content;
+			
 			
 		} else {
 			window.alert('잘못된 경로');
