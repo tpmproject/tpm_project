@@ -5,6 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+function dateTest(){
+	var date = new Date();
+	var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
+	
+	window.alert(new Date(y, m, d - 5));
+	window.alert(new Date("2017-04-03"));
+}
+
+
+</script>
 </head>
 <body>
 인덱스입.
@@ -18,5 +29,6 @@
 	
 <a href="main.do">메인화면</a>
 <a href="calendarList.do">켈린더</a>
+<a href="javascript:dateTest()">날짜테스트</a>
 </body>
 </html>

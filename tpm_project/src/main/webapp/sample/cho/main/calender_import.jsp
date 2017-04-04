@@ -94,6 +94,9 @@
 		//Date for the calendar events (dummy data)
 		var date = new Date();
 		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
+		//var date2 = new Date(y, m, d - 5);
+		//var date2 = new Date(2017, 03, 05);
+		var date2 = new Date("2017-04-05");
 		$('#calendar').fullCalendar(
 				{
 					header : {
@@ -110,7 +113,8 @@
 					//Random default events
 					events : [ {
 						title : 'All Day Event',
-						start : new Date("2017/03/02"),
+						//start : new Date("2017-03-04"),
+						start : date2,
 						backgroundColor : "#f56954", //red
 						borderColor : "#f56954" //red
 					}, {
