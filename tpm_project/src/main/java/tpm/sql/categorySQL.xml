@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.category">
 	<insert id="categoryInsert" parameterType="tpm.category.model.CategoryDTO">
-	insert into	category
+	insert into tpm_category
 	values(
 	category_idx.nextval,
 	#{project_idx},

@@ -12,7 +12,7 @@ public class CategoryDAOImple implements CategoryDAO {
 	}
 	
 	public int categoryInsert(CategoryDTO dto) {
-		
+	
 		int result=sqlMap.insert("categoryInsert", dto);
 		
 		return result;

@@ -5,13 +5,15 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-
 </head>
 <body>
-<form name="newCategory" action="javascript:show()">
-<div>
-<input type="text" name="category_name" placeholder="새로운 카테고리">
-</div>
+
+<form action="/tpm_project/projectContent.do">
+프로젝트 idx:<input type="text" name="project_idx">
 </form>
+
+
+
+
 </body>
 </html>

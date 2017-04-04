@@ -19,11 +19,17 @@ public class CategoryController {
 	/** 카테고리 - 카테고리 추가 */
 	@RequestMapping(value="categoryAdd.do",  method=RequestMethod.POST)
 	public ModelAndView categoryAdd(CategoryDTO dto){
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
 		mav.addObject("categoryDTO", dto);
-//		int result=categoryDAO.categoryInsert(dto);
+		int result=categoryDAO.categoryInsert(dto);
 		
+		String msg=dto.getCategory_name();
+		if(result<=0){
+			msg="error";
+		}
+		mav.addObject("msg", msg);
 		return mav;
 	}
 	/** 카테고리 - 카테고리 수정 */
