@@ -13,7 +13,7 @@
 		<a href="memberLogin.do">로그인</a>
 	</c:if>
 	<c:if test="${!empty sessionScope.sid}">
-		${sessionScope.sid }님 로그인중...|<a href='logOut.do'>로그아웃</a>
+		${sessionScope.sid }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
 	</c:if>
 	
 <a href="main.do">메인화면</a>

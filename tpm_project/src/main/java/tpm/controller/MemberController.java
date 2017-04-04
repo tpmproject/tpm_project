@@ -105,8 +105,16 @@ public class MemberController {
 	
 	/** 로그아웃 */
 	@RequestMapping(value="memberLogOut.do", method=RequestMethod.GET)
-	public String memberLogOut(){
-		return "member/memberLogOut_ok";
+	public ModelAndView memberLogOut(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		
+		session.invalidate();
+		String msg="로그아웃 완료";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("member/memberLogOut_ok");
+		return mav;
 	}
 	
 	// 회원가입
