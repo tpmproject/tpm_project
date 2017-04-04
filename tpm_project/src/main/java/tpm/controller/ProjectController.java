@@ -1,6 +1,8 @@
 package tpm.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.member.model.*;
 
 @Controller
 public class ProjectController {
@@ -15,6 +18,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectDAO projectDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
 	//// 프로젝트 ////
 	
 	// 프로젝트
@@ -57,6 +63,17 @@ public class ProjectController {
 		return mav;
 	}
 	
+	/**프로젝트-프로젝트 생성-멤버추가*/
+	@RequestMapping(value="projectMemberAdd.do", method=RequestMethod.POST)
+	public ModelAndView projectMemberAdd(MemberDTO dto){
+		
+		ArrayList<MemberDTO> arr=memberDAO.getMemberIdAndNameSearch(dto.getMember_id());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("arr", arr);
+		mav.setViewName("project/projectMemberAdd_d");
+		return mav;
+	}
 	/** 프로젝트 - 프로젝트 수정 */
 	@RequestMapping(value="projectUpdate.do",  method=RequestMethod.POST)
 	public ModelAndView projectUpdate(){

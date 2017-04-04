@@ -11,15 +11,41 @@ var p2=document.getElementById('btntest2');
 function show(){
 	p1.style.display='none';
 	p2.style.display='block';
+	
+
+	
 }
 function before(){
 	p1.style.display='block';
 	p2.style.display='none';
+	
+	
+}
+
+function projectMemberAdd(){
+	var param='member_id='+document.newProject.member_id.value;
+	sendRequest('projectMemberAdd.do',param,projectMemberAddResult,'POST');
+	
+}
+
+function projectMemberAddResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var result=XHR.responseText;
+			if(result!=null){
+				var bodyNode=document.getElementById('body');
+				var divNode=document.createElement('div');
+				divNode.innerHTML=result;
+				bodyNode.appendChild(divNode);
+			}
+		}
+	}
+	
 }
 
 </script>
 </head>
-<body>
+<body id="body">
 <!-- header -->
 <div class="modal-header">
     <!-- 닫기(x) 버튼 -->
@@ -35,14 +61,18 @@ function before(){
 	<div id="btntest">
 	 	<div>프로젝트명:  <input type="text" name="project_name"></div>
  		 <div>프로젝트 설명:<textarea cols="30" rows="20" name="project_content"></textarea></div>
- 		 <button type="submit" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
+ 		 <button type="button" class="btn btn-next"  id="btn-next"  onclick="show()">다음</button>
  	 </div>
  	
  	 <div id="btntest2" style="display: none;">
-     	친구 추가하기
-     	<input type="text" name="friend">
+     	<h2>그룹원 추가 하기</h2>
+     	<div><input type="text" name="member_id"><button type="button"  class="btn" onclick="projectMemberAdd()">검색</button> </div>
+     	<hr>
+     	그룹원 리스트
+     	
      	<div><button type="button" class="btn btn-next" onclick="before()">이전</button>
-     	<input type="submit" value="완료"></div>
+     	<input type="submit" class="btn" value="완료"></div>
+     	
  	 </div>
 </form> 	 
 </div>
