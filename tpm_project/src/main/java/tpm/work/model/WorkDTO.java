@@ -3,6 +3,8 @@ package tpm.work.model;
 import java.sql.*;
 import java.util.ArrayList;
 
+import tpm.checklist.model.ChecklistDTO;
+
 public class WorkDTO {
 	
 	private int work_idx;
@@ -19,7 +21,7 @@ public class WorkDTO {
 	
 	private String project_name;
 	private String category_name;
-	private ArrayList<WorkDTO> work_dtos;
+	private ArrayList<ChecklistDTO> checklist_dtos;
 	
 	final public static int WORK_NEED_CONFIRM=10; //결재 필요 업무
 	final public static int WORK_NO_CONFIRM=20; //결재 불필요 업무
@@ -38,7 +40,7 @@ public class WorkDTO {
 
 	public WorkDTO(int work_idx, int category_idx, String work_title, Date work_start, Date work_end,
 			Date work_complete, int work_confirm, int work_state, String project_name, String category_name,
-			ArrayList<WorkDTO> work_dtos) {
+			ArrayList<ChecklistDTO> checklist_dtos) {
 		super();
 		this.work_idx = work_idx;
 		this.category_idx = category_idx;
@@ -53,7 +55,7 @@ public class WorkDTO {
 		
 		this.project_name = project_name;
 		this.category_name = category_name;
-		this.work_dtos = work_dtos;
+		this.checklist_dtos = checklist_dtos;
 	}
 
 
@@ -147,17 +149,14 @@ public class WorkDTO {
 
 
 
-	public ArrayList<WorkDTO> getWork_dtos() {
-		return work_dtos;
+	public ArrayList<ChecklistDTO> getChecklist_dtos() {
+		return checklist_dtos;
 	}
 
 
 
-	public void setWork_dtos(ArrayList<WorkDTO> work_dtos) {
-		this.work_dtos = work_dtos;
+	public void setChecklist_dtos(ArrayList<ChecklistDTO> checklist_dtos) {
+		this.checklist_dtos = checklist_dtos;
 	}
-	
-	
-	
 	
 }
