@@ -6,8 +6,16 @@
 	<insert id="memberInsert" parameterType="tpm.member.model.MemberDTO">
 		insert into tpm_member values (member_idx.nextval,#{member_id},#{member_pwd},#{member_name},#{member_gender},#{member_tel},'0',0)
 	</insert>
+	
 	<select id="login" parameterType="String" resultType="String">
 		select member_pwd from tpm_member 
 		where member_id = #{member_id}
 	</select>
+	
+	<select id="memberIdAndNameSearch" parameterType="String" resultType="tpm.member.model.MemberDTO">
+		SELECT * 
+		FROM tpm_member 
+		WHERE member_name LIKE '%#{fkey}%' OR member_id LIKE '%#{fkey}%'
+	</select>
+	
 </mapper>

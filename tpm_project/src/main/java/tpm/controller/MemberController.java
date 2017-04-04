@@ -1,5 +1,6 @@
 package tpm.controller;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -23,6 +24,18 @@ public class MemberController {
 	private MemberDAO mdao;
 	//// 회원 ////
 	// 로그인 및 로그아웃
+	/** 회원 아이디, 이름 검색 */
+	@RequestMapping(value="memberIdAndNameSearch.do", method=RequestMethod.POST)
+	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey){
+		
+		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(fkey);
+		System.out.println(arry_mdto.toString());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/memberIdAndNameSearchList_d");
+		mav.addObject("arry_mdto", arry_mdto);
+		return mav;
+	}
 	
 	/** 로그인 페이지 이동 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.GET)

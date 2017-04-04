@@ -1,5 +1,7 @@
 package tpm.member.model;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberDAOImple implements MemberDAO {
@@ -70,6 +72,12 @@ public class MemberDAOImple implements MemberDAO {
 	public int addMember() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public ArrayList<MemberDTO> getMemberIdAndNameSearch(String fkey) {
+		// TODO Auto-generated method stub
+		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", fkey);
+		return array_dto;
 	}
 
 }
