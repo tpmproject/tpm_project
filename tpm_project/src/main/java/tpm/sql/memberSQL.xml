@@ -17,7 +17,7 @@
 		FROM tpm_member 
 		WHERE member_name LIKE '%#{fkey}%' OR member_id LIKE '%#{fkey}%'
 	</select>
-	<select id="memberIdCheck" parameterType="Stirng" resultType="String">
+	<select id="memberIdCheck" parameterType="String" resultType="String">
 		select member_id from tmp_member
 		where member_id = #{member_id}
 	</select>
