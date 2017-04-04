@@ -74,7 +74,9 @@ public class MemberController {
 	
 	/** 회원 가입 - 정보입력 - 아이디 중복 체크 처리 */
 	@RequestMapping(value="memberIdCheck.do", method=RequestMethod.GET)
-	public ModelAndView memberIdCheck(){
+	public ModelAndView memberIdCheck(@RequestParam("email") String to){
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/memberAdd_info_idCheck_d");
