@@ -15,20 +15,48 @@
     rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/httpRequest.js"></script>
+	<script>
+		function emailCheck(){
+			var user_email = document.memberAddForm.inputEmail.value;
+				
+			
+			if(!user_email){
+				window.alert('이메일을 입력해주세요');
+				
+			} else{
+				var email = 'email='+user_email;
+				
+				window.alert(email);
+				
+				sendRequest('memberIdCheck.do', email, emailCheckResult, 'POST');
+			}
+		}
+		
+		function emailCheckResult(){
+			if(XHR.readyState==4){
+				if(XHR.status==200){
+					var result = XHR.responseText;
+					
+					var resultId = document.get.ElementById('idCheckResult');
+					var email = document.memberAddForm.inputEmail.value;
+					
+					if(result=='true'){
+						resultId.style.color = 'red';
+						resultId.innerHTML = '이미 사용중인 이메일입니다';
+					} else{
+						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=250');
+					}
+				}
+			}
+		}
+	</script>    
   </head>
+
 <script>
 function cancle(){
 	location.href='memberLogin.do';
 }
-	function check(){
-		var email = document.memberAddForm.inputEmail.value;
-		
-		if(!email){
-			window.alert('이메일을 입력해주세요');
-		} else{
-			window.open('memberIdCheck.do?email='+email, 'emailcheck','width=350, height=250');	
-		}
-	}
 </script>
 </head>
 <body>
@@ -72,11 +100,12 @@ function cancle(){
                         <c:if test="${empty result}">
                             <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
                         </div>
-	                        <button class="btn btn-success" type="button" onclick="check()">이메일 인증
+	                        <button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
 	                            <i class="fa fa-check spaceLeft"></i>
 	                        </button>
                         </c:if>
                         	<button class="btn btn-block btn-success disabled"> 테스트 </button>
+                        	<span id="idCheckResult"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
