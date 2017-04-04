@@ -2,18 +2,33 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
+<head>
+<meta charset="UTF-8">
+ <title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="ttttt2222.css"
+    <link href="css/ttttt2222.css"
     rel="stylesheet" type="text/css">
-    <link href="ttttt2222.css"
+    <link href="css/ttttt2222.css"
     rel="stylesheet" type="text/css">
-  </head>
-  
-  <body>
+<script type="text/javascript">
+function workAdd(){
+    $("#popbutton").click(function(){
+        $('div.modal').modal({remote : 'workAdd.do'});
+    })
+}
+</script>
+<style>
+#category td{
+color:black;
+height:35px;
+font:bold 15px "맑은 고딕";
+border-top:1px solid;
+}
+</style>
+</head>
+<body>
     <div class="section">
       <div class="container">
         <div class="row">
@@ -27,7 +42,7 @@
                 <tr>
                   <td>업무명</td>
                   <td align="right">
-                    <a onclick="test22()">설정</a>
+                    <a onclick="workAdd()">설정</a>
                   </td>
                 </tr>
                 <tr>
@@ -64,5 +79,4 @@
       </div>
     </div>
   </body>
-
 </html>

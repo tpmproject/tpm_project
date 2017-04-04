@@ -40,7 +40,7 @@ public class WorkController {
 	}
 	
 	/** 업무 - 업무 추가 */
-	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
+	@RequestMapping(value="workAdd.do",  method=RequestMethod.GET)
 	public ModelAndView workAdd(){
 		
 		ModelAndView mav = new ModelAndView();
