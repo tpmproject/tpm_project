@@ -3,7 +3,7 @@ package tpm.project.model;
 import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 
-import tpm.work.model.WorkDTO;
+import tpm.category.model.CategoryDTO;
 
 public class ProjectDAOImple implements ProjectDAO {
 
@@ -22,7 +22,7 @@ public class ProjectDAOImple implements ProjectDAO {
 		return null;
 	}
 
-	public ArrayList<WorkDTO> projectSearch(ProjectDTO dto) {
+	public ArrayList<CategoryDTO> projectSearch(ProjectDTO dto) {
 		
 		sqlMap.selectList("projectSearch",dto);
 		
