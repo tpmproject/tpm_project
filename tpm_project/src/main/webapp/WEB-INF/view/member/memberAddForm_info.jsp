@@ -91,19 +91,39 @@ function cancle(){
                 </div>
                 <form class="form-horizontal" name="memberAddForm" action="memberAdd.do" method="post">
                 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
-                        </div>
-	                        <button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
-	                            <i class="fa fa-check spaceLeft"></i>
-	                        </button>
-                        <div>
-	                        <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
-                        </div>
-                    </div>
-                    <!-- <button class="btn btn-block btn-success disabled"> 테스트 </button> -->
+                        <c:set var="email" value="${sessionScope.email}"/>
+                        
+                        <c:choose>
+                        	<c:when test="${empty sessionScope.email}">
+	                        	<div class="form-group">
+	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+	                        		<div class="col-sm-6">
+		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
+		                        		</div>
+		                        		<button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
+				                            <i class="fa fa-check spaceLeft"></i>
+				                        </button>
+			                         <div>
+		                       		 <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
+	                       		 </div>
+	                    		</div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div class="form-group">
+	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+	                        		<div class="col-sm-6">
+		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" value="${email}">
+		                        		</div>
+		                        		<button class="btn btn-success disabled" type="button"> 인증 완료
+				                            <i class="fa fa-check spaceLeft"></i>
+				                        </button>
+			                         <div>
+		                       		 <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
+	                       		 </div>
+	                    		</div>
+                        	</c:otherwise>
+                        </c:choose>
+                    
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                         <div class="col-sm-6">

@@ -208,6 +208,7 @@ public class MemberController {
 		 
 		result = "인증번호가 발송되었습니다";
 		
+		mav.addObject("email", to);
 		mav.addObject("random", random);
 		mav.addObject("result", result);
 		mav.setViewName("member/memberEmail");
@@ -218,18 +219,17 @@ public class MemberController {
 	
 	/** 회원가입 - 이메일 인증 */
 	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.POST)
-	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user){
+	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user,
+										@RequestParam("email") String email, HttpSession Session){
 		
 		ModelAndView mav = new ModelAndView();
 
-		//System.out.println(random);
-		//System.out.println(user);
-		
 		String result = "";
 		
 		if(random==user){
 			result = "인증에 성공하였습니다";
 			
+			Session.setAttribute("email", email);
 			mav.addObject("success", result);
 			mav.setViewName("member/memberEmailSuccess");
 		} else{
