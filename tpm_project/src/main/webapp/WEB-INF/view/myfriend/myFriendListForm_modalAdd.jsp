@@ -1,102 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Modal -->
-<script>
-	(function($) {
-		$(window).on("load", function() {
-
-			$("#myModal #modal_content").mCustomScrollbar({
-				setHeight : 609,
-				theme : "minimal-dark"
-			});
-
-		});
-	})(jQuery);
-	
-	function result_process(responseText, ctype) {
-		//var json = JSON.parse(responseText);
-		//var qdto = json.QnaDTO;
-		//var docStr = '';
-
-		//dotStr +=  qdto[0].qna_idx;
-		
-		if(ctype == 'MEMBER_SEARCH'){
-			//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
-			window.alert(responseText);
-			var json = JSON.parse(responseText);
-			//var json = eval('('+responseText+')'); // 객체화
-			//var json = responseText;
-			
-			var msg = '';
-			var members = json.members; // 맵 객체로부터 students 값인 배열을 가져온다.
-			for(var i = 0 ; i < members.length; i++){
-				var member = members[i];
-				
-				msg += '<div class="col-sm-12"> ';
-				msg += '<div class="panel"> ';
-				msg += 	'<div class="panel-body p-t-10"> ';
-				msg += 		'<div class="media-main"> ';
-				msg += 			'<a class="pull-left" href="#"> <img ';
-				msg += 				'class="thumb-lg img-circle bx-s" ';
-				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-
-				msg += 			'</a> ';
-				msg += 			'<div class="pull-right btn-group-sm"> ';
-				msg += 				'<a href="#" class="btn btn-success tooltips" ';
-				msg += 					'data-placement="top" data-toggle="tooltip" ';
-				msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
-
-				msg += 				'</a> ';
-				msg += 			'</div> ';
-				msg += 			'<div class="info"> ';
-				msg += 				'<h4>' + member.member_name + '</h4> ';
-				msg += 				'<p class="text-muted">' + member.member_id + '</p> ';
-				msg += 			'</div> ';
-				msg += 		'</div> ';
-				msg += 		'<div class="clearfix"></div> ';
-				msg += 		'<hr> ';
-
-				msg += 	'</div> ';
-				msg += '</div> ';
-				msg += '</div> ';
-				
-		
-			
-			}
-			
-			var modal_content = document.getElementById('modal_content');
-			modal_content.innerHTML = msg;
-			
-			
-		} else {
-			window.alert('잘못된 경로');
-		}
-	}
-
-	function ajax_result(httpRequest, ctype) {
-		return function() {
-			if(httpRequest.readyState == 4){
-				if(httpRequest.status == 200){
-					if(!httpRequest.responseText.match(null)){
-						var responseText = httpRequest.responseText;
-						result_process(responseText, ctype);
-					}
-				}
-			}
-		}
-	}
-	
-	function action_ajax(url, param, method, ctype) {
-		sendRequest_extension(url, param, ajax_result, method, ctype);
-		return false;
-	}
-	
-	function goSearch(){
-		var fkey = document.getElementById('fkey_text').value;
-		var param = 'fkey=' + fkey;
-		action_ajax('memberIdAndNameSearch.do', param, 'POST', 'MEMBER_SEARCH'); // 해당 페이지로 ajax통신 시작
-	}
-</script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -120,7 +24,7 @@
 												name="example-input1-group2" class="form-control"
 												placeholder="Search"> <span class="input-group-btn">
 												<button type="button"
-													class="btn btn-effect-ripple btn-primary" onclick="goSearch()">
+													class="btn btn-effect-ripple btn-primary" onclick="goSearch_member()">
 													<i class="fa fa-search"></i>
 												</button>
 											</span>
