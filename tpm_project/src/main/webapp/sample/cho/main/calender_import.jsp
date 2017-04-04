@@ -110,7 +110,7 @@
 					//Random default events
 					events : [ {
 						title : 'All Day Event',
-						start : new Date(y, m, 1),
+						start : new Date("2017/03/02"),
 						backgroundColor : "#f56954", //red
 						borderColor : "#f56954" //red
 					}, {
