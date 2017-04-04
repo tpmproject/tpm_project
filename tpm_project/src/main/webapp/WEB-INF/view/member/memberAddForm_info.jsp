@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,11 +67,16 @@ function cancle(){
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
                         <div class="col-sm-6">
+                        <c:set var="result" value="${success}"/>
+                        ${result}
+                        <c:if test="${empty result}">
                             <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일">
                         </div>
-                        <button class="btn btn-success" type="button" onclick="check()">이메일 인증
-                            <i class="fa fa-times spaceLeft"></i>
-                        </button>
+	                        <button class="btn btn-success" type="button" onclick="check()">이메일 인증
+	                            <i class="fa fa-check spaceLeft"></i>
+	                        </button>
+                        </c:if>
+                        	<button class="btn btn-block btn-success disabled"> 테스트 </button>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
