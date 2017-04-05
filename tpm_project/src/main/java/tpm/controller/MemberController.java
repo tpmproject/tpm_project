@@ -69,10 +69,14 @@ public class MemberController {
 		
 		HttpSession session=req.getSession();
 		
+		//member_name   member_img    member_idx
+		
+		System.out.println(mdto.getMember_idx());
+		System.out.println(mdto.getMember_name());
 		
 		if(result==((MemberDAOImple)mdao).LOGIN_OK){
 			msg="로그인 성공";
-			System.out.println(cb_saveid);
+		
 			if(cb_saveid==null||cb_saveid.equals("1")){
 				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
 				ck.setMaxAge(0);

@@ -7,8 +7,8 @@
 		insert into tpm_member values (member_idx.nextval,#{member_id},#{member_pwd},#{member_name},#{member_gender},#{member_tel},'0',0)
 	</insert>
 	
-	<select id="login" parameterType="String" resultType="String">
-		select member_pwd from tpm_member 
+	<select id="login" parameterType="String" resultType="tpm.member.model.MemberDTO">
+		select * from tpm_member 
 		where member_id = #{member_id}
 	</select>
 	
