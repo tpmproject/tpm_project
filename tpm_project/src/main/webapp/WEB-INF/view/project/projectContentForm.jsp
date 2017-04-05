@@ -6,6 +6,9 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script>
 	function categoryAdd() {
@@ -50,6 +53,7 @@
 				<div class="category">
 					<p>${cdto.category_name }<a><span class="glyphicon glyphicon-cog"></span></a>
 					</p>
+					
 					<c:forEach var="wdto" items="${cdto.work_dtos }">
 						<table>
 							<tbody>
