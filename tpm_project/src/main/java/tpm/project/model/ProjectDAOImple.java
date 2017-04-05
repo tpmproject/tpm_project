@@ -102,7 +102,7 @@ public class ProjectDAOImple implements ProjectDAO {
 
 	public ArrayList<MemberDTO> projectWorkMember(ProjectDTO dto) {
 		//업무 배정자
-		ArrayList<MemberDTO> marr=(ArrayList)sqlMap.selectList("workMember", dto);
+		ArrayList<MemberDTO> marr=(ArrayList)sqlMap.selectList("projectWorkMember", dto);
 		return marr;
 	}
 	

@@ -66,9 +66,15 @@
 								</tr>
 								<tr>
 									<td colspan="2">${wdto.work_start}~${wdto.work_end}</td>
-								</tr>
+								</tr>						
 								<tr>
-									<td colspan="2">멤버1, 멤버2</td>
+									<td colspan="2">
+									
+									<c:forEach var="mdto" items="${marr}">
+										<c:if test="${mdto.work_idx eq wdto.work_idx}">${mdto.member_name}</c:if>
+									</c:forEach>
+									
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2">체크리스트+</td>
