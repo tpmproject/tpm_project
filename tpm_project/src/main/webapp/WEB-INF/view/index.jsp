@@ -27,8 +27,9 @@ function dateTest(){
 		${sessionScope.sid }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
 	</c:if>
 	
-<a href="main.do">메인화면</a>
-<a href="calendarList.do">켈린더</a>
-<a href="javascript:dateTest()">날짜테스트</a>
+<a href="main.do">메인화면</a><br>
+<a href="myFriendList.do">친구</a><br>
+<a href="calendarList.do">켈린더</a><br>
+<a href="javascript:dateTest()">날짜테스트</a><br>
 </body>
 </html>
