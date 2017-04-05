@@ -115,7 +115,7 @@
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
-              <div class="col-sm-offset-7 col-sm-5">
+              <div class="col-sm-offset-7">
                 <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
                 <select>
                   <option>색상1</option>
