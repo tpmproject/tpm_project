@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
+import tpm.member.model.MemberDTO;
 import tpm.work.model.WorkDTO;
 
 public class ProjectDAOImple implements ProjectDAO {
@@ -40,6 +41,7 @@ public class ProjectDAOImple implements ProjectDAO {
 		return null;	
 		}
 		
+		//카테고리,업무,체크리스트
 		for(int i=0;i<temp.size();i++){ 
 			TotalDTO tdto=temp.get(i);
 			
@@ -94,9 +96,16 @@ public class ProjectDAOImple implements ProjectDAO {
 			}
 			
 		}
+		
 		return pdto;
 	}
 
+	public ArrayList<MemberDTO> projectWorkMember(ProjectDTO dto) {
+		//업무 배정자
+		ArrayList<MemberDTO> marr=(ArrayList)sqlMap.selectList("workMember", dto);
+		return marr;
+	}
+	
 	public int projectInsert(ProjectDTO dto) {
 		
 		int count=sqlMap.insert("projectInsert", dto);
