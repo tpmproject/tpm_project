@@ -58,7 +58,10 @@ public class ProjectDAOImple implements ProjectDAO {
 			String checklist_content=tdto.getChecklist_content();
 			int checklist_state=tdto.getChecklist_state();
 			ChecklistDTO chdto=new ChecklistDTO(checklist_idx, work_idx, checklist_content, checklist_state);
-			check_arr.add(chdto);
+			
+			if(checklist_idx!=0){
+				check_arr.add(chdto);
+			}
 			
 			if(i==temp.size()-1||tdto.getWork_idx()!=temp.get(i+1).getWork_idx()||checklist_idx==0){
 				
@@ -70,7 +73,9 @@ public class ProjectDAOImple implements ProjectDAO {
 				int work_confirm=tdto.getWork_confirm();
 				int work_state=tdto.getWork_state();
 				WorkDTO wdto=new WorkDTO(work_idx, category_idx, work_title, work_start, work_end, work_complete, work_confirm, work_state, tdto.getProject_name(), tdto.getCategory_name(), check_arr);
-				work_arr.add(wdto);
+				if(work_idx!=0){
+					work_arr.add(wdto);
+				}
 				check_arr=new ArrayList<ChecklistDTO>();
 
 				if(i==temp.size()-1||tdto.getCategory_idx()!=temp.get(i+1).getCategory_idx()||work_idx==0){

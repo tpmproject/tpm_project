@@ -26,7 +26,8 @@
 					var divNode = document.createElement('div');
 					divNode.innerHTML = result;
 					cbodyNode.insertBefore(divNode, cateNode);
-
+					 var cbody_width=document.getElementById("cbody");
+					 cbody_width.style.width = parseInt(cbody_width.style.width)+200+"px";
 				}
 			}
 		}
@@ -37,14 +38,16 @@
 .category {
 	display: inline-block;
 	width: 200px;
-	height: 1000px;
 	float: left;
+}
+.cate_table{
+	border:solid 1px black;
 }
 </style>
 </head>
 <%-- <%@include file="/WEB-INF/view/header.jsp" %> --%>
 <body >
-<div id="cbody" style="width:${(pdto.category_num +1)*600}px">
+<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
 	<c:set var="pdto" value="${pdto}"></c:set>
 	<c:choose>
 		<c:when test="${empty pdto}"></c:when>
@@ -53,9 +56,9 @@
 				<div class="category">
 					<p>${cdto.category_name }<a><span class="glyphicon glyphicon-cog"></span></a>
 					</p>
-					
+					<c:if test="${not empty cdto.work_dtos}">
 					<c:forEach var="wdto" items="${cdto.work_dtos }">
-						<table>
+						<table class="cate_table">
 							<tbody>
 								<tr>
 									<td>${wdto.work_title }</td>
@@ -91,6 +94,7 @@
 							</tbody>
 						</table>
 					</c:forEach>
+					</c:if>
 				</div>
 			</c:forEach>
 		</c:otherwise>
