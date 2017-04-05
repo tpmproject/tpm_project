@@ -11,7 +11,7 @@
 <%@ include file="/sample/cho/main/calender_import.jsp"%>
 <% 
 	
-	/* JSONObject object = new JSONObject();
+	//JSONObject object = new JSONObject();
 
 	JSONArray arry_calender_work = new JSONArray();
 
@@ -23,7 +23,7 @@
 	
 	arry_calender_work.add(obj);
 
-	object.put("events", arry_calender_work); */
+	//object.put("events", arry_calender_work);
 	
 %>
 <script type="text/javascript">
@@ -79,16 +79,17 @@
 						day : 'day'
 					},
 					//Random default events
-					events : [ 
+					events : <%=arry_calender_work%>
+					/* events :  [ 
 					{
-						title : 'All Day Event',
+						"title" : 'All Day Event',
 						//start : new Date("2017-04-07"),
 						//start : date2,
 						//start : date2,
 						//start : 'Thu Apr 07 2017 09:00:00 GMT+0900 (대한민국 표준시)',
-						start : '2017-04-08 14:00:00',
-						backgroundColor : "#f56954", //red
-						borderColor : "#f56954" //red
+						"start" : '2017-04-08 14:00:00',
+						"backgroundColor" : "#f56954", //red
+						"borderColor" : "#f56954" //red
 					}, {
 						title : 'Long Event',
 						start : new Date(y, m, d - 5),
@@ -122,7 +123,7 @@
 						url : 'http://google.com/',
 						backgroundColor : "#3c8dbc", //Primary (light-blue)
 						borderColor : "#3c8dbc" //Primary (light-blue)
-					} ],
+					} ] */,
 					editable : true,
 					droppable : true, // this allows things to be dropped onto the calendar !!!
 					drop : function(date, allDay) { // this function is called when something is dropped
