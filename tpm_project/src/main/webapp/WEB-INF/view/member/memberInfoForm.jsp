@@ -104,9 +104,10 @@
             <small>???</small>
           </h1>
         </div>
+        
         <div class="row">
           <div class="col-md-6">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
               <div class="col-sm-offset-7 col-sm-5">
                 <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
                 <select>
@@ -127,42 +128,37 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputEmail" placeholder="이메일"
-                  name="member_id" readonly>
+                  <input type="text" class="form-control" id="inputEmail" placeholder="이메일" name="member_id" readonly>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호"
-                  name="member_pwd">
+                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd">
                   <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인"
-                  name="member_pwd_ch">
+                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch">
                   <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputName">이름</label>
                 <div class="col-sm-8">
-                  <input class="form-control" id="inputName" type="text" name="member_name"
-                  placeholder="이름">
+                  <input class="form-control" id="inputName" type="text" name="member_name" placeholder="이름">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputName">연락처</label>
+                <label class="col-sm-3 control-label" for="inputTel">연락처</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputName" placeholder="전화번호"
-                  name="member_tel">
+                  <input type="text" class="form-control" id="inputTel" placeholder="전화번호" name="member_tel">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputName">성별</label>
+                <label class="col-sm-3 control-label" for="inputGender">성별</label>
                 <div class="col-sm-8">
                   <select class="form-control" style="width:79px; float:left;" name="member_gender">
                     <option value="남">남자</option>
@@ -171,7 +167,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-4 col-sm-10">
                   <button type="submit" class="btn btn-default">수정</button>
                   <button type="submit" class="btn btn-default">회원 탈퇴</button>
                 </div>
