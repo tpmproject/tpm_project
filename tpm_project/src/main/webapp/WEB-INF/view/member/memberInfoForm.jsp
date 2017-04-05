@@ -67,11 +67,11 @@
         	  { "tendency": "E", "self": 3, "team": 4 },
         	  { "tendency": "I", "self": 1, "team": 3 },
         	  { "tendency": "S", "self": 2, "team": 2 },
-        	  { "tendency": "N", "self": 2, "team": 2 },
+        	  { "tendency": "N", "self": 2, "team": 4 },
         	  { "tendency": "T", "self": 1, "team": 2 },
-        	  { "tendency": "F", "self": 2, "team": 4 },
+        	  { "tendency": "F", "self": 5, "team": 4 },
         	  { "tendency": "J", "self": 2, "team": 4 },
-        	  { "tendency": "P", "self": 2, "team": 4 } ],
+        	  { "tendency": "P", "self": 3, "team": 1 } ],
           "valueAxes": [
         	  { "position": "left",
               	"title": "tendency" }],
@@ -107,6 +107,16 @@
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" role="form">
+              <div class="col-sm-offset-7 col-sm-5">
+                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
+                <select>
+                  <option>색상1</option>
+                  <option>색상2</option>
+                </select>
+              </div>
+              <br>
+              <br>
+              <br>
               <div class="form-group">
                 <div class="col-md-4">
                   <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
@@ -168,16 +178,43 @@
               </div>
             </form>
           </div>
-          <div class="col-md-6">
-            <div>업무 평가 들어갈 곳</div>
+         <div class="col-md-6">
             <div>
-          	  <div class="col-md-offset-6" id="chartdiv"></div>
+              <div>
+                <a class="btn btn-default disabled">총 업무 달성률1111111111111111111111111111111111111111</a>
+              </div>
+              <br>
+              <div>
+                <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
+                <select>
+                  <option>프로젝트1</option>
+                  <option>프로젝트2</option>
+                </select>
+                <br>
+                <br>
+                <div>
+                  <a class="btn btn-default disabled">진행중인 업무1111111111111111111111111111111111111111111111</a>
+                </div>
+                <br>
+                <div>
+                  <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
+                </div>
+              </div>
             </div>
+            <hr>
             <div>
-              <div id="chartdiv2"></div>
+              <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
+              <div id="chartdiv" class="col-md-offset-4"></div>
             </div>
-        </div>
+            <hr>
+            <div>
+              <div>
+                <a class="col-sm-3 btn btn-default disabled">업무 성향</a>
+                <div id="chartdiv2"></div>
+              </div>
+            </div>
       </div>
+    </div>
     </div>
     </div>
 </body>

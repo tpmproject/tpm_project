@@ -122,33 +122,16 @@
 						<div class="row">
 							<div class="col-md-3">
 								<h4>친구목록</h4>
-								<ul class="media-list">
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a></li>
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a></li>
+								친구 리스트
 								</ul>
 								<h4>검색 멤버</h4>
 								<div>
 									<input type="text" name="member_id" placeholder="Search">
 									<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
 								</div>
-								<div id="member_search_content"
-									style="height: 300px; overflow-y: scroll"></div>
-								<ul class="media-list">
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a></li>
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a></li>
-								</ul>
+								<div id="member_search_content"	style="height: 300px; overflow-y: scroll">
+								
+								</div>
 							</div>
 							<div class="col-md-3">
 								<h4>초대 멤버</h4>
