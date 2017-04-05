@@ -7,11 +7,6 @@
 <title>TPM</title>
 <script type="text/javascript" src="/tpm_project/js/jquery-3.2.0.js"></script>
 <script>
-function show(){
-	$(mback).show('150');
-	$(testm).show('150');
-	
-}
 
 function closem(){
 	$(mback).hide('100');
@@ -47,7 +42,6 @@ function closem(){
 프로젝트 idx:<input type="text" name="project_idx">
 </form>
 <input type="button" value="modal" onclick="show()">
-
 <div id="mback" onclick="closem()"></div>
 	<div id="testm">
 		<input type="text">
