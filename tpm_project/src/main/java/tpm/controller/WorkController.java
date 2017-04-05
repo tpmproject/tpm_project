@@ -31,7 +31,7 @@ public class WorkController {
 	}
 	
 	/** 업무 - 업무 조회 */
-	@RequestMapping(value="workList.do",  method=RequestMethod.POST)
+	@RequestMapping(value="workList.do",  method=RequestMethod.GET)
 	public ModelAndView workList(){
 		
 		ModelAndView mav = new ModelAndView();

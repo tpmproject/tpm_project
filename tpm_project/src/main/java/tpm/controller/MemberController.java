@@ -1,6 +1,7 @@
 package tpm.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -61,18 +62,21 @@ public class MemberController {
 									MemberDTO mdto,
 									HttpServletRequest req,HttpServletResponse resp){
 		
-		MemberDAOImple mdao_num= new MemberDAOImple();
+		
 		
 		int result=mdao.login(userid, userpwd);
+		List<MemberDTO> list=mdao.userInfo(userid);
+		
 		ModelAndView mav=new ModelAndView();
 		String msg="";
 		
 		HttpSession session=req.getSession();
 		
-		
-		if(result==mdao_num.LOGIN_OK){
+		//member_name   member_img    member_idx
+	
+		if(result==((MemberDAOImple)mdao).LOGIN_OK){
 			msg="로그인 성공";
-			System.out.println(cb_saveid);
+		
 			if(cb_saveid==null||cb_saveid.equals("1")){
 				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
 				ck.setMaxAge(0);
@@ -83,16 +87,19 @@ public class MemberController {
 				resp.addCookie(ck);
 			}
 			
-			session.setAttribute("sid", mdto.getMember_id());
+			session.setAttribute("s_member_id", mdto.getMember_id());
+			session.setAttribute("s_member_idx", list.get(0).getMember_idx());
+			session.setAttribute("s_member_name", list.get(0).getMember_name());
+			session.setAttribute("s_member_img", list.get(0).getMember_img());
 			mav.addObject("msg", msg);
 			mav.setViewName("member/memberLogin_ok");
 		}
-		else if(result==mdao_num.ID_NO){
+		else if(result==((MemberDAOImple)mdao).ID_NO){
 			msg="없는 아이디 입니다.";
 			mav.addObject("msg",msg);
 			mav.setViewName("member/memberMsg");
 		}
-		else if(result==mdao_num.PASSWORD_NO){
+		else if(result==((MemberDAOImple)mdao).PASSWORD_NO){
 			msg="비밀번호가 다릅니다.";
 			mav.addObject("msg",msg);
 			mav.setViewName("member/memberMsg");

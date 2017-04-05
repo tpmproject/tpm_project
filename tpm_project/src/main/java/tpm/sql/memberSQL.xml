@@ -24,4 +24,9 @@
 		where member_id = #{member_id}
 	</select>
 	
+	<select id="userInfo" parameterType="String" resultType="tpm.member.model.MemberDTO">
+		select * from tpm_member
+		where member_id = #{member_id}
+	</select>
+	
 </mapper>

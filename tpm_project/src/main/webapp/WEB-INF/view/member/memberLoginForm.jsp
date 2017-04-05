@@ -17,33 +17,11 @@
 <body>
   
     <div class="cover hidden-xs">
-      <div class="navbar">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" style="color:white;">TPM</a>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active">
-                <a href="#" style="color:white;">Home</a>
-              </li>
-              <li>
-                <a href="#" style="color:white;">Contacts</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="background-image-fixed cover-image" style="background-image : url('https://unsplash.imgix.net/photo-1423347834838-5162bb452ca7?w=1024&amp;q=50&amp;fm=jpg&amp;s=c255e589621f06513c1d123c7323fe9c')"></div>
+      
+      <div class="background-image-fixed cover-image" style="background-image : url('/tpm_project/img/member/login_background.jpg')"></div>
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center" style="margin-top:20px">
+          <div class="col-md-12 text-center">
             <form class="form-horizontal text-center" name="loginForm" action="memberLogin.do" method="post"
              role="form" style="width: 450px; height: 310px; margin: auto; background-color: white;">
              
