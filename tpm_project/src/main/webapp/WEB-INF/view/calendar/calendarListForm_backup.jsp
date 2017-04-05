@@ -1,11 +1,34 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/calender_import.jsp"%>
+<% 
+	
+	JSONObject object = new JSONObject();
+
+	JSONArray arry_calender_work = new JSONArray();
+
+	JSONObject obj = new JSONObject();
+	obj.put("title", "All Day Event");
+	obj.put("start", "2017-04-08 13:00:00");
+	obj.put("backgroundColor", "#f56954");
+	obj.put("borderColor", "#f56954");
+	
+	arry_calender_work.add(obj);
+
+	object.put("events", arry_calender_work);
+	
+	System.out.println(object);
+	
+	
+%>
 <script type="text/javascript">
 	$(function() {
 
@@ -44,6 +67,7 @@
 		//var date2 = new Date(y, m, d - 5);
 		//var date2 = new Date(2017, 03, 05);
 		var date2 = new Date("2017-04-06");
+		console.log(date2);
 		$('#calendar').fullCalendar(
 				{
 					header : {
@@ -58,10 +82,14 @@
 						day : 'day'
 					},
 					//Random default events
-					events : [ {
+					events : [ 
+					{
 						title : 'All Day Event',
-						//start : new Date("2017-03-04"),
-						start : date2,
+						//start : new Date("2017-04-07"),
+						//start : date2,
+						//start : date2,
+						//start : 'Thu Apr 07 2017 09:00:00 GMT+0900 (대한민국 표준시)',
+						start : '2017-04-08 14:00:00',
 						backgroundColor : "#f56954", //red
 						borderColor : "#f56954" //red
 					}, {
@@ -184,6 +212,7 @@
 				<h1>
 					Calendar <small>Control panel</small>
 				</h1>
+				
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Calendar</li>
