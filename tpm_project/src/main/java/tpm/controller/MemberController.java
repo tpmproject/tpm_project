@@ -65,8 +65,6 @@ public class MemberController {
 									MemberDTO mdto,
 									HttpServletRequest req,HttpServletResponse resp){
 		
-		
-		
 		int result=mdao.login(userid, userpwd);
 		List<MemberDTO> list=mdao.userInfo(userid);
 		
@@ -112,7 +110,6 @@ public class MemberController {
 			mav.addObject("msg",msg);
 		}
 		return mav;
-	
 		
 	}
 	
@@ -131,7 +128,6 @@ public class MemberController {
 	}
 	
 	// 회원가입
-	
 	/** 회원 가입 - 정보입력 페이지 이동 */
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.GET)
 	public String memberAddForm(){
@@ -255,18 +251,41 @@ public class MemberController {
 	// 탈퇴
 	/** 탈퇴 - 회원탈퇴 */
 	@RequestMapping(value="memberDel.do", method=RequestMethod.GET)
-	public ModelAndView memberDel(){
+	public ModelAndView memberDel(@RequestParam("email") String user_id){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/memberDel_ok");
+		
+		int count = mdao.delMember(user_id);
+		
+		String result = "";
+		
+		if(count>0){
+			result = "탈퇴되었습니다";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberDel_ok");
+		} else{
+			result = "탈퇴 실패. 관리자에게 문의해주세요";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberDel_ok");
+		}
 		return mav;
 	}
 	
 	// 개인정보
 	/** 개인정보 - 개인정보 페이지 이동 */
 	@RequestMapping(value="memberInfo.do", method=RequestMethod.GET)
-	public String memberInfoForm(){
-		return "member/memberInfoForm";
+	public ModelAndView memberInfoForm(@RequestParam("id") String userid){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<MemberDTO> list=mdao.userInfo(userid);
+		
+		mav.addObject("list", list);
+		mav.setViewName("member/memberInfoFrom");
+		
+		return mav;
 	}
 	
 	/** 개인정보 - 개인 정보 수정 */

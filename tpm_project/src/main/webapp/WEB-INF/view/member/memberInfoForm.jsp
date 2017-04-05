@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,8 +21,6 @@
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-    rel="stylesheet" type="text/css">
 	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -93,6 +93,13 @@
           "categoryField": "tendency",
           "categoryAxis": { "gridPosition": "start" }
       });
+      
+      function deletedo(){
+    	  var email = document.memberInfoForm.member_id.value;
+    	  
+    	  location.href='memberDel.do?email='+email;
+      }
+      
       </script>
 </head>
 <body>
@@ -104,6 +111,8 @@
             <small>???</small>
           </h1>
         </div>
+        
+        <c:set var="memberDTO" value="${list}"/>
         
         <div class="row">
           <div class="col-md-6">
@@ -169,7 +178,7 @@
               <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-10">
                   <button type="submit" class="btn btn-default">수정</button>
-                  <button type="submit" class="btn btn-default">회원 탈퇴</button>
+                  <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
                 </div>
               </div>
             </form>

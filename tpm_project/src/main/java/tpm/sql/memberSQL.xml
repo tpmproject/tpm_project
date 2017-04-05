@@ -19,6 +19,7 @@
 		AND member_idx != #{member_idx} 
 		AND (member_id LIKE '%${member_id}%' OR member_name LIKE '%${member_id}%')
 	</select>
+	
 	<select id="memberAddSearch" parameterType="tpm.member.model.MemberDTO" resultType="tpm.member.model.MemberDTO">
 		SELECT * 
 		FROM tpm_member 
@@ -35,5 +36,10 @@
 		select * from tpm_member
 		where member_id = #{member_id}
 	</select>
+	
+	<delete id="memberDelete" parameterType="String">
+		delete from tpm_member
+		where member_id = #{member_id}
+	</delete>
 	
 </mapper>

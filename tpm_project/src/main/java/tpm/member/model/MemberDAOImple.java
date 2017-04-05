@@ -11,11 +11,12 @@ public class MemberDAOImple implements MemberDAO {
 	public static final int LOGIN_OK=1;
 	public static final int PASSWORD_NO=2;
 
-	
 	private SqlSessionTemplate sqlMap;
+	
 	public MemberDAOImple(){
 		
 	}
+	
 	public MemberDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap=sqlMap;
@@ -35,14 +36,15 @@ public class MemberDAOImple implements MemberDAO {
 			result=ID_NO;
 		}
 		
-		
 		return result;
 	}
+	
 	public List<MemberDTO> userInfo(String userid){
 		List<MemberDTO> list=sqlMap.selectList("userInfo",userid);
 		
 		return list;
 	}
+	
 	public String idCheck(String email) {
 		String db_id = sqlMap.selectOne("memberIdCheck",email);
 		return db_id;
@@ -58,14 +60,9 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 
-	public int delMember() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public String emailCheck() {
-		// TODO Auto-generated method stub
-		return null;
+	public int delMember(String user_id) {
+		int count = sqlMap.delete(user_id);
+		return count;
 	}
 
 	public MemberDTO getMemberInfo() {
@@ -74,11 +71,6 @@ public class MemberDAOImple implements MemberDAO {
 	}
 
 	public int updateMember() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int addMember() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

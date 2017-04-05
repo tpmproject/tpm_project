@@ -12,8 +12,7 @@ public interface MemberDAO {
 	public String idCheck(String email);
 	public int addTendency();
 	public int addMember(MemberDTO mdto);
-	public int delMember();
-	public String emailCheck();
+	public int delMember(String userid);
 	public MemberDTO getMemberInfo();
 	public int updateMember();
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto);

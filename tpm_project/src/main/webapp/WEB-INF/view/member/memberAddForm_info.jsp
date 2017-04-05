@@ -43,7 +43,7 @@
 						resultId.style.color = 'red';
 						resultId.innerHTML = '이미 사용중인 이메일입니다';
 					} else{
-						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=250');
+						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=120');
 					}
 				}
 			}
