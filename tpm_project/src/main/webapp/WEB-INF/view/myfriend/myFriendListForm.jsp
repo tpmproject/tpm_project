@@ -161,7 +161,7 @@
 </script>
 </head>
 <body class="skin-blue">
-	<input type="hidden" id="my_member_idx" value="6">
+	<input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/header.jsp"%>
 		<%@ include file="/WEB-INF/view/aside.jsp"%>

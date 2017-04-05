@@ -15,7 +15,8 @@
 	<select id="memberIdAndNameSearch" parameterType="tpm.member.model.MemberDTO" resultType="tpm.member.model.MemberDTO">
 		SELECT * 
 		FROM tpm_member 
-		WHERE member_idx NOT IN ( SELECT myfriend_idx FROM tpm_myfriend WHERE member_idx = 6 )
+		WHERE member_idx NOT IN ( SELECT myfriend_idx FROM tpm_myfriend WHERE member_idx = #{member_idx} )
+		AND member_idx != #{member_idx} 
 		AND (member_id LIKE '%${member_id}%' OR member_name LIKE '%${member_id}%')
 	</select>
 	
