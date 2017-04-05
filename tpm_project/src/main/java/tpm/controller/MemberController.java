@@ -1,6 +1,7 @@
 package tpm.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -64,16 +65,15 @@ public class MemberController {
 		
 		
 		int result=mdao.login(userid, userpwd);
+		List<MemberDTO> list=mdao.userInfo(userid);
+		
 		ModelAndView mav=new ModelAndView();
 		String msg="";
 		
 		HttpSession session=req.getSession();
 		
 		//member_name   member_img    member_idx
-		
-		System.out.println(mdto.getMember_idx());
-		System.out.println(mdto.getMember_name());
-		
+	
 		if(result==((MemberDAOImple)mdao).LOGIN_OK){
 			msg="로그인 성공";
 		
@@ -88,6 +88,9 @@ public class MemberController {
 			}
 			
 			session.setAttribute("s_member_id", mdto.getMember_id());
+			session.setAttribute("s_member_idx", list.get(0).getMember_idx());
+			session.setAttribute("s_member_name", list.get(0).getMember_name());
+			session.setAttribute("s_member_img", list.get(0).getMember_img());
 			mav.addObject("msg", msg);
 			mav.setViewName("member/memberLogin_ok");
 		}
