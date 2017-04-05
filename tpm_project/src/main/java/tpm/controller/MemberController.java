@@ -61,15 +61,18 @@ public class MemberController {
 									MemberDTO mdto,
 									HttpServletRequest req,HttpServletResponse resp){
 		
+		
+		
 		int result=mdao.login(userid, userpwd);
 		ModelAndView mav=new ModelAndView();
 		String msg="";
 		
 		HttpSession session=req.getSession();
 		
-		if(result == ((MemberDAOImple) mdao).LOGIN_OK){
+		
+		if(result==((MemberDAOImple)mdao).LOGIN_OK){
 			msg="로그인 성공";
-			//System.out.println(cb_saveid);
+			System.out.println(cb_saveid);
 			if(cb_saveid==null||cb_saveid.equals("1")){
 				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
 				ck.setMaxAge(0);
@@ -80,16 +83,16 @@ public class MemberController {
 				resp.addCookie(ck);
 			}
 			
-			session.setAttribute("sid", mdto.getMember_id());
+			session.setAttribute("s_member_id", mdto.getMember_id());
 			mav.addObject("msg", msg);
 			mav.setViewName("member/memberLogin_ok");
 		}
-		else if(result == ((MemberDAOImple) mdao).ID_NO){
+		else if(result==((MemberDAOImple)mdao).ID_NO){
 			msg="없는 아이디 입니다.";
 			mav.addObject("msg",msg);
 			mav.setViewName("member/memberMsg");
 		}
-		else if(result == ((MemberDAOImple) mdao).PASSWORD_NO){
+		else if(result==((MemberDAOImple)mdao).PASSWORD_NO){
 			msg="비밀번호가 다릅니다.";
 			mav.addObject("msg",msg);
 			mav.setViewName("member/memberMsg");
