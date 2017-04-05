@@ -34,7 +34,7 @@ function before(){
 	<div id="btnwork">
 	<table>
 		<tr>
-			<td>업무명</td>
+			<td>업무명+</td>
 			<td><input type="text" name="work_title"></td>
 		</tr>
 		<tr>
