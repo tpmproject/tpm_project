@@ -31,5 +31,6 @@ function dateTest(){
 <a href="myFriendList.do">친구</a><br>
 <a href="calendarList.do">켈린더</a><br>
 <a href="javascript:dateTest()">날짜테스트</a><br>
+<a href="fileList.do">파일 리스트</a>
 </body>
 </html>

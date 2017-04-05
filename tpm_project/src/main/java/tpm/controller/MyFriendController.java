@@ -2,6 +2,9 @@ package tpm.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +25,13 @@ public class MyFriendController {
 
 	/** 친구 - 친구 리스트 페이지 이동 */
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.GET)
-	public ModelAndView myFriendListForm(){
+	public ModelAndView myFriendListForm(HttpServletRequest req){
+		
+		HttpSession session = req.getSession();
+		int member_idx = (Integer) session.getAttribute("s_member_idx");
 		
 		MyFriendDTO dto = new MyFriendDTO();
-		dto.setMember_idx(6);
+		dto.setMember_idx(member_idx);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
 		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
 		
@@ -37,10 +43,13 @@ public class MyFriendController {
 	
 	/** 친구 - 친구 리스트 데이터 반환 */
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.POST)
-	public ModelAndView myFriendList(){
+	public ModelAndView myFriendList(HttpServletRequest req){
+		
+		HttpSession session = req.getSession();
+		int member_idx = (Integer) session.getAttribute("s_member_idx");
 		
 		MyFriendDTO dto = new MyFriendDTO();
-		dto.setMember_idx(6);
+		dto.setMember_idx(member_idx);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
 		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
 				

@@ -33,10 +33,13 @@ public class MemberController {
 	// 로그인 및 로그아웃
 	/** 회원 아이디, 이름 검색 */
 	@RequestMapping(value="memberIdAndNameSearch.do", method=RequestMethod.POST)
-	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey){
+	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey, 
+			HttpServletRequest req){
+		
+		HttpSession session = req.getSession();
 		
 		MemberDTO mdto = new MemberDTO();
-		mdto.setMember_idx(6);
+		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
 		mdto.setMember_id(fkey);
 		
 		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(mdto);
