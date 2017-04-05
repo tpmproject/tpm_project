@@ -32,5 +32,12 @@ function dateTest(){
 <a href="calendarList.do">켈린더</a><br>
 <a href="javascript:dateTest()">날짜테스트</a><br>
 <a href="fileList.do">파일 리스트</a>
+
+
+<form action="/tpm_project/projectContent.do">
+개별 프로젝트 들어가기!!<br> 
+프로젝트 idx:<input type="text" name="project_idx">
+</form>
+
 </body>
 </html>
