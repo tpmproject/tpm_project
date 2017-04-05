@@ -16,6 +16,7 @@ function show(){
 function closem(){
 	$(mback).hide('100');
 	$(testm).hide('100');
+	document.ff.t.value='';
 }
 </script>
 <style>
@@ -49,7 +50,7 @@ function closem(){
 <input type="button" value="modal" onclick="show()">
 <div id="mback" onclick="closem()"></div>
 	<div id="testm">
-		<input type="text">
+		<form name="ff"><input name="t" type="text"></form>
 		<input type="button" value="닫기" onclick="closem()">
 		<br><br><br><br><br>
 	</div>

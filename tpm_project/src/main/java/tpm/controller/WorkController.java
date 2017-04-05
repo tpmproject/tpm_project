@@ -2,20 +2,28 @@ package tpm.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.category.model.CategoryDTO;
+import tpm.project.model.ProjectMemberDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
 
 @Controller
 public class WorkController {
+	
+	@Autowired
+	WorkDAO workDAO;
 
 	//// 업무 ////
-	
+
 	// 나의 업무
 	/** 나의 업무 - 나의 업무 페이지 이동 */
 	@RequestMapping(value="myWorkList.do",  method=RequestMethod.GET)
@@ -45,8 +53,15 @@ public class WorkController {
 		return mav;
 	}
 	
+	@RequestMapping(value="workAdd.do", method=RequestMethod.GET)
+	public ModelAndView workAddForm(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("work/workResult_form");
+		return mav;
+	}
+	
 	/** 업무 - 업무 추가 */
-	@RequestMapping(value="workAdd.do",  method=RequestMethod.GET)
+	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
 	public ModelAndView workAdd(){
 		
 		ModelAndView mav = new ModelAndView();

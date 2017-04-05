@@ -14,4 +14,10 @@
 		where member_idx in 
 		(select member_idx from tpm_work_member where work_idx=#{work_idx})
 	</select>
+	<select id="projectMember" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.member.model.MemberDTO">
+		select * from tpm_member where member_idx in
+		(select member_idx from tpm_project_member where project_idx in
+		(select project_idx from tpm_category 
+		where category_idx=#{category_idx}) and member_idx!=#{member_idx})
+	</select>
 </mapper>

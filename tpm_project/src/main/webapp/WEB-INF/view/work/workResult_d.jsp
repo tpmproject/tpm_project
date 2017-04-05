@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
