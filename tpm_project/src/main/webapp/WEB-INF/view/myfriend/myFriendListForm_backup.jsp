@@ -160,41 +160,9 @@
 	}
 </script>
 </head>
-<body class="skin-blue">
+<body>
 	<input type="hidden" id="my_member_idx" value="6">
-	<div class="wrapper">
-		<%@ include file="/WEB-INF/view/header.jsp"%>
-		<%@ include file="/WEB-INF/view/aside.jsp"%>
-		
-		<!-- Right side column. Contains the navbar and content of the page -->
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					Calendar <small>Control panel</small>
-				</h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Calendar</li>
-				</ol>
-			</section>
-			
-			<!-- Main content -->
-			<section class="content">
-				<div class="row">
-					<div class="col-md-12">
-						<!-- 컨텐트 삽입 -->
-						<%@ include file="/WEB-INF/view/footer.jsp"%>
-					</div>
-				</div>
-			</section>
-		</div>
-		
-		<%@ include file="myFriendListFormContent.jsp"%>
-	</div>
-
-	
-	<%-- <div class="box box-danger">
+	<div class="box box-danger">
 		<div class="box-header with-border">
 			<h3 class="box-title">My Friend</h3>
 			<div class="box-tools pull-right">
@@ -222,6 +190,6 @@
 			<!-- /.users-list -->
 		</div>
 	</div>
-	<%@ include file="myFriendListForm_modalAdd.jsp" %> --%>
+	<%@ include file="myFriendListForm_modalAdd.jsp" %>
 </body>
 </html>
