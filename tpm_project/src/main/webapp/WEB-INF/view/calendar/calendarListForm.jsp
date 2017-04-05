@@ -23,7 +23,7 @@
 
 				// store the Event Object in the DOM element so we can get to it later
 				$(this).data('eventObject', eventObject);
-				window.alert('1');
+			
 				// make the event draggable using jQuery UI
 				$(this).draggable({
 					zIndex : 1070,
