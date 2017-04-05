@@ -59,7 +59,7 @@
 	type="text/javascript"></script>
 
 <!-- Page specific script -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function() {
 
 		/* initialize the external events
@@ -96,7 +96,7 @@
 		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 		//var date2 = new Date(y, m, d - 5);
 		//var date2 = new Date(2017, 03, 05);
-		var date2 = new Date("2017-04-05");
+		var date2 = new Date("2017-04-06");
 		$('#calendar').fullCalendar(
 				{
 					header : {
@@ -223,4 +223,4 @@
 			$("#new-event").val("");
 		});
 	});
-</script>
+</script> -->
