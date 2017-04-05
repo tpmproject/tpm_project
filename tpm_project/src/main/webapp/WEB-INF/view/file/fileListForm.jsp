@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
     <!-- Bootstrap Core CSS -->
+    
     <link href="/tpm_project/css/file/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="/tpm_project/css/file/metisMenu.min.css" rel="stylesheet">
@@ -32,49 +33,131 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
- <body>
-    <div class="col-lg-12">
+  
+  <body>
+    <div id="wrapper">
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top" role="navigation"
+      style="margin-bottom: 0">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">파일 리스트</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right"></ul>
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+          <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+              <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+                <!-- /input-group -->
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                  <li>
+                    <a href="flot.html">myweb 프로젝트</a>
+                  </li>
+                  <li>
+                    <a href="morris.html">final 프로젝트</a>
+                  </li>
+                  <li>
+                    <a href="morris.html">semi 프로젝트</a>
+                  </li>
+                </ul>
+                <!-- /.nav-second-level -->
+              </li>
+            </ul>
+          </div>
+          <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+      </nav>
+      <div id="page-wrapper">
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-lg-12">
             <div class="panel panel-default">
-              <div class="panel-heading">파일 리스트</div>
+              <div class="panel-heading">DataTables Advanced Tables</div>
               <!-- /.panel-heading -->
               <div class="panel-body">
                 <table width="100%" class="table table-striped table-bordered table-hover"
                 id="dataTables-example">
                   <thead>
                     <tr>
-                      <th>파일번호</th>
-                      <th>이름</th>
+                      <th>파일 번호</th>
+                      <th>파일 이름</th>
+                      <th>파일 크기</th>
                       <th>공유한 날짜</th>
-                      <th>크기</th>
                       <th>공유한 사람</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="odd gradeX">
                       <td>1</td>
-                      <td>데이터베이스</td>
-                      <td>2017-04-05</td>
-                      <td class="center">3</td>
+                      <td>미디어.jsp</td>
+                      <td>33</td>
+                      <td class="center">2017-08-22</td>
                       <td class="center">안병민</td>
                     </tr>
-                     
-                   
-                   
+                     <tr class="odd gradeX">
+                      <td>1</td>
+                      <td>미디어.jsp</td>
+                      <td>35</td>
+                      <td class="center">2017-08-02</td>
+                      <td class="center">안병민</td>
+                    </tr>
+                     <tr class="odd gradeX">
+                      <td>1</td>
+                      <td>미디어.jsp</td>
+                      <td>12</td>
+                      <td class="center">2017-08-03</td>
+                      <td class="center">안병민</td>
+                    </tr>
+                     <tr class="odd gradeX">
+                      <td>1</td>
+                      <td>미디어.jsp</td>
+                      <td>5</td>
+                      <td class="center">2017-08-02</td>
+                      <td class="center">안병민</td>
+                    </tr>
                    
                   </tbody>
                 </table>
-                
+                <!-- /.table-responsive -->
               </div>
               <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
           </div>
           <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        <!-- /.row -->
+        <!-- /.row -->
+      </div>
+      <!-- /#page-wrapper -->
+    </div>
+    
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="/tpm_project/js/file/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="./tpm_project/js/file/bootstrap.min.js"></script>
+    <script src="/tpm_project/js/file/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/tpm_project/js/file/metisMenu.min.js"></script>
     <!-- DataTables JavaScript -->
