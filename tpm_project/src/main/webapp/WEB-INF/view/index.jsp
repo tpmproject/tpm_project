@@ -32,6 +32,7 @@ function dateTest(){
 <a href="calendarList.do">켈린더</a><br>
 <a href="javascript:dateTest()">날짜테스트</a><br>
 <a href="fileList.do">파일 리스트</a>
+<a href="memberInfo.do">개인 정보</a>
 
 
 <form action="/tpm_project/projectContent.do">
