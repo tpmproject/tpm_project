@@ -11,6 +11,9 @@ public class MemberDTO {
 	private String member_img;
 	private int member_thema;
 	
+	//projectContent 에서  업무 배정자 불러올 때 사용함
+	private int work_idx;
+	
 	public MemberDTO() {
 		super();
 	}
@@ -91,6 +94,14 @@ public class MemberDTO {
 	public void setMember_thema(int member_thema) {
 		this.member_thema = member_thema;
 	}
+	
+	public int getWork_idx() {
+		return work_idx;
+	}
+
+	public void setWork_idx(int work_idx) {
+		this.work_idx = work_idx;
+	}
 
 	@Override
 	public String toString() {
@@ -98,6 +109,9 @@ public class MemberDTO {
 				+ ", member_name=" + member_name + ", member_gender=" + member_gender + ", member_tel=" + member_tel
 				+ ", member_img=" + member_img + ", member_thema=" + member_thema + "]";
 	}
+
+	
+	
 	
 	
 }

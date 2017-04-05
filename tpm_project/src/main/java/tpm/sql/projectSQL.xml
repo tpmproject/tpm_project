@@ -57,4 +57,13 @@
 		where p.project_idx=#{project_idx}
 		order by c.category_idx,c.work_idx,c.checklist_idx
 	</select>
+	<select id="workMember" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.member.model.MemberDTO">
+	select m.* from
+		(	select w.work_idx from (tpm_category)c,(tpm_work)w
+			where c.category_idx=w.category_idx and c.project_idx=#{project_idx})w,
+		(	select wm.work_idx,m.* from (tpm_work_member)wm,(tpm_member	)m
+		where wm.member_idx=m.member_idx
+		order by work_idx)m
+		where w.work_idx=m.work_idx
+	</select>
 </mapper>

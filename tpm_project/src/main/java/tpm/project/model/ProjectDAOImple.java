@@ -2,6 +2,8 @@ package tpm.project.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.category.model.CategoryDTO;
@@ -32,7 +34,7 @@ public class ProjectDAOImple implements ProjectDAO {
 		ArrayList<CategoryDTO> cate_arr=new ArrayList<CategoryDTO>();
 		ArrayList<WorkDTO> work_arr=new ArrayList<WorkDTO>();
 		ArrayList<ChecklistDTO> check_arr=new ArrayList<ChecklistDTO>();
-		
+		HashMap<Integer	, Integer> work_member=new HashMap<Integer, Integer>();
 		
 		if(temp.size()==0||temp==null){
 		return null;	
