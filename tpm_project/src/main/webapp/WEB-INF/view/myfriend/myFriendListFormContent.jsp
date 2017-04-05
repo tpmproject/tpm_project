@@ -7,7 +7,7 @@
 		<div class="box-tools pull-right">
 			<span class="label label-danger">Members</span>
 			<button class="btn btn-box-tool">
-				<i class="fa fa-lg fa-plus" data-toggle="modal"
+				<i class="fa fa-lg fa-plus" data-toggle="modal" onclick="modalInit()"
 					data-target="#myModal"></i>
 			</button>
 		</div>

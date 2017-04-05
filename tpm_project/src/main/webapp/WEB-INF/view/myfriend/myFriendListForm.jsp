@@ -19,7 +19,11 @@
 		});
 	})(jQuery); */
 	
-	
+	function modalInit(){
+		document.getElementById('fkey_text').value = '';
+		document.getElementById('content_row').innerHTML = '';
+	}
+  	
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
 		//window.alert(responseText);

@@ -7,11 +7,6 @@
 <title>TPM</title>
 <script type="text/javascript" src="/tpm_project/js/jquery-3.2.0.js"></script>
 <script>
-function show(){
-	$(mback).show('150');
-	$(testm).show('150');
-	
-}
 
 function closem(){
 	$(mback).hide('100');

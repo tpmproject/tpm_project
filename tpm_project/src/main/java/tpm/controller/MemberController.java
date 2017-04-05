@@ -270,7 +270,7 @@ public class MemberController {
 	}
 	
 	/** 개인정보 - 개인 정보 수정 */
-	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
+	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(){
 		
 		ModelAndView mav = new ModelAndView();
@@ -278,7 +278,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	/** 개인정보 - 개인 성향 수정 ( 평가 ) */
+	/** 개인정보 - 개인 성향 수정 (평가 ) */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate_ajax(){
 		ModelAndView mav = new ModelAndView();

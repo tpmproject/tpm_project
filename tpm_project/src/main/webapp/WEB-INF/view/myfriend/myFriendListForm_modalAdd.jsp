@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -35,7 +36,7 @@
 						</div>
 
 						<div class="row" id="content_row" style="height: 609px; overflow-y:scroll;">
-							<div class="col-sm-12" id="modal_content">
+							<!-- <div class="col-sm-12" id="modal_content">
 								<!-- <div class="col-sm-12">
 									<div class="panel">
 										<div class="panel-body p-t-10">
@@ -218,14 +219,14 @@
 
 										</div>
 									</div>
-								</div> -->
-							</div>
+								</div> 
+							</div>-->
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="modalClose()">Close</button>
 				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 			</div>
 		</div>

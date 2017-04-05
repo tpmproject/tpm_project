@@ -14,6 +14,7 @@ import tpm.work.model.WorkDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
 import tpm.member.model.*;
+import tpm.myfriend.model.*;
 
 @Controller
 public class ProjectController {
@@ -24,6 +25,9 @@ public class ProjectController {
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private MyFriendDAO myFriendDAO;
 	//// 프로젝트 ////
 	
 	// 프로젝트
@@ -60,8 +64,7 @@ public class ProjectController {
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectInsert(ProjectDTO dto){
-		System.out.println(dto.getProject_name());
-		System.out.println(dto.getProject_content());
+		
 		int result= projectDAO.projectInsert(dto);
 		
 		System.out.println(result);
@@ -70,13 +73,19 @@ public class ProjectController {
 		return mav;
 	}
 	
-	/**프로젝트-프로젝트 생성-멤버추가*/
+	/**등록된친구 리스트*/
+	
+	
+	/**프로젝트-프로젝트 생성-멤버검색*/
 	@RequestMapping(value="projectMemberAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectMemberAdd(MemberDTO dto){
 		
-		ArrayList<MemberDTO> arr=memberDAO.memberAddSearch(dto);
+		MyFriendDTO mdto=new MyFriendDTO();
+		mdto.setMember_idx(dto.getMember_idx());
+		ArrayList<MemberDTO> arry_mdto = (ArrayList)myFriendDAO.getFriendList(mdto);
 		
-		ModelAndView mav = new ModelAndView();
+		ArrayList<MemberDTO> arr=memberDAO.memberAddSearch(dto);
+	    ModelAndView mav = new ModelAndView();
 		mav.addObject("arr", arr);
 		mav.setViewName("project/projectMemberAdd_d");
 		return mav;

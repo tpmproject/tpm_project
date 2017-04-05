@@ -67,11 +67,11 @@
         	  { "tendency": "E", "self": 3, "team": 4 },
         	  { "tendency": "I", "self": 1, "team": 3 },
         	  { "tendency": "S", "self": 2, "team": 2 },
-        	  { "tendency": "N", "self": 2, "team": 2 },
+        	  { "tendency": "N", "self": 2, "team": 4 },
         	  { "tendency": "T", "self": 1, "team": 2 },
-        	  { "tendency": "F", "self": 2, "team": 4 },
+        	  { "tendency": "F", "self": 5, "team": 4 },
         	  { "tendency": "J", "self": 2, "team": 4 },
-        	  { "tendency": "P", "self": 2, "team": 4 } ],
+        	  { "tendency": "P", "self": 3, "team": 1 } ],
           "valueAxes": [
         	  { "position": "left",
               	"title": "tendency" }],
@@ -104,9 +104,20 @@
             <small>???</small>
           </h1>
         </div>
+        
         <div class="row">
           <div class="col-md-6">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
+              <div class="col-sm-offset-7 col-sm-5">
+                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
+                <select>
+                  <option>색상1</option>
+                  <option>색상2</option>
+                </select>
+              </div>
+              <br>
+              <br>
+              <br>
               <div class="form-group">
                 <div class="col-md-4">
                   <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
@@ -117,42 +128,37 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputEmail" placeholder="이메일"
-                  name="member_id" readonly>
+                  <input type="text" class="form-control" id="inputEmail" placeholder="이메일" name="member_id" readonly>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호"
-                  name="member_pwd">
+                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd">
                   <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인"
-                  name="member_pwd_ch">
+                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch">
                   <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputName">이름</label>
                 <div class="col-sm-8">
-                  <input class="form-control" id="inputName" type="text" name="member_name"
-                  placeholder="이름">
+                  <input class="form-control" id="inputName" type="text" name="member_name" placeholder="이름">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputName">연락처</label>
+                <label class="col-sm-3 control-label" for="inputTel">연락처</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputName" placeholder="전화번호"
-                  name="member_tel">
+                  <input type="text" class="form-control" id="inputTel" placeholder="전화번호" name="member_tel">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputName">성별</label>
+                <label class="col-sm-3 control-label" for="inputGender">성별</label>
                 <div class="col-sm-8">
                   <select class="form-control" style="width:79px; float:left;" name="member_gender">
                     <option value="남">남자</option>
@@ -161,23 +167,50 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-4 col-sm-10">
                   <button type="submit" class="btn btn-default">수정</button>
                   <button type="submit" class="btn btn-default">회원 탈퇴</button>
                 </div>
               </div>
             </form>
           </div>
-          <div class="col-md-6">
-            <div>업무 평가 들어갈 곳</div>
+         <div class="col-md-6">
             <div>
-          	  <div class="col-md-offset-6" id="chartdiv"></div>
+              <div>
+                <a class="btn btn-default disabled">총 업무 달성률1111111111111111111111111111111111111111</a>
+              </div>
+              <br>
+              <div>
+                <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
+                <select>
+                  <option>프로젝트1</option>
+                  <option>프로젝트2</option>
+                </select>
+                <br>
+                <br>
+                <div>
+                  <a class="btn btn-default disabled">진행중인 업무1111111111111111111111111111111111111111111111</a>
+                </div>
+                <br>
+                <div>
+                  <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
+                </div>
+              </div>
             </div>
+            <hr>
             <div>
-              <div id="chartdiv2"></div>
+              <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
+              <div id="chartdiv" class="col-md-offset-4"></div>
             </div>
-        </div>
+            <hr>
+            <div>
+              <div>
+                <a class="col-sm-3 btn btn-default disabled">업무 성향</a>
+                <div id="chartdiv2"></div>
+              </div>
+            </div>
       </div>
+    </div>
     </div>
     </div>
 </body>
