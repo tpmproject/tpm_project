@@ -12,6 +12,7 @@
 <body>
 	<form name="EmailCheck" action="memberEmailCheck.do" method="post">
 		<input type="text" name="random_number" value="${random}">
+		<input type="text" name="email" value="${email}">
 		<fieldset>
 			<legend>인증번호 입력</legend>
 			<input type="text" name="user_number" maxlength="6">

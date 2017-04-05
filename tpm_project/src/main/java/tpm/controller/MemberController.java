@@ -5,6 +5,10 @@ import java.util.Properties;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.member.model.MemberDAO;
+import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
+
 
 @Controller
 public class MemberController {
@@ -29,6 +35,7 @@ public class MemberController {
 	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey){
 		
 		MemberDTO mdto = new MemberDTO();
+		mdto.setMember_idx(6);
 		mdto.setMember_id(fkey);
 		
 		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(mdto);
@@ -48,23 +55,69 @@ public class MemberController {
 	
 	/** 로그인 처리 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(@RequestParam("member_id")String userid, @RequestParam("member_pwd")String userpwd){
+	public ModelAndView memberLogin(@RequestParam(value="cb_saveid",defaultValue="1")String cb_saveid,
+									@RequestParam("member_id")String userid,
+									@RequestParam("member_pwd")String userpwd,
+									MemberDTO mdto,
+									HttpServletRequest req,HttpServletResponse resp){
+		
+		MemberDAOImple mdao_num= new MemberDAOImple();
+		
 		int result=mdao.login(userid, userpwd);
+		ModelAndView mav=new ModelAndView();
+		String msg="";
 		
-		ModelAndView mav = new ModelAndView();
+		HttpSession session=req.getSession();
 		
-		if(result==1){
-		mav.setViewName("member/memberLogin_ok");
-		}else{
-		mav.setViewName("member/memberMsg");
+		
+		if(result==mdao_num.LOGIN_OK){
+			msg="로그인 성공";
+			System.out.println(cb_saveid);
+			if(cb_saveid==null||cb_saveid.equals("1")){
+				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
+			}else{
+				Cookie ck=new Cookie("ck_saveid", mdto.getMember_id());
+				ck.setMaxAge(60*60*24*30);
+				resp.addCookie(ck);
+			}
+			
+			session.setAttribute("sid", mdto.getMember_id());
+			mav.addObject("msg", msg);
+			mav.setViewName("member/memberLogin_ok");
+		}
+		else if(result==mdao_num.ID_NO){
+			msg="없는 아이디 입니다.";
+			mav.addObject("msg",msg);
+			mav.setViewName("member/memberMsg");
+		}
+		else if(result==mdao_num.PASSWORD_NO){
+			msg="비밀번호가 다릅니다.";
+			mav.addObject("msg",msg);
+			mav.setViewName("member/memberMsg");
+		}
+		else{
+			msg="고객샌터 연락바람니다.";
+			mav.addObject("msg",msg);
 		}
 		return mav;
+	
+		
 	}
 	
 	/** 로그아웃 */
 	@RequestMapping(value="memberLogOut.do", method=RequestMethod.GET)
-	public String memberLogOut(){
-		return "member/memberLogOut_ok";
+	public ModelAndView memberLogOut(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		
+		session.invalidate();
+		String msg="로그아웃 완료";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("member/memberLogOut_ok");
+		return mav;
 	}
 	
 	// 회원가입
@@ -155,6 +208,7 @@ public class MemberController {
 		 
 		result = "인증번호가 발송되었습니다";
 		
+		mav.addObject("email", to);
 		mav.addObject("random", random);
 		mav.addObject("result", result);
 		mav.setViewName("member/memberEmail");
@@ -165,18 +219,17 @@ public class MemberController {
 	
 	/** 회원가입 - 이메일 인증 */
 	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.POST)
-	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user){
+	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user,
+										@RequestParam("email") String email, HttpSession Session){
 		
 		ModelAndView mav = new ModelAndView();
 
-		//System.out.println(random);
-		//System.out.println(user);
-		
 		String result = "";
 		
 		if(random==user){
 			result = "인증에 성공하였습니다";
 			
+			Session.setAttribute("email", email);
 			mav.addObject("success", result);
 			mav.setViewName("member/memberEmailSuccess");
 		} else{

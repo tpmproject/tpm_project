@@ -51,7 +51,7 @@
               <div class="form-group" style="margin:20px 35px">
                 <div class="col-sm-10">
                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="member_id"
-                  style="width:350px">
+                  style="width:350px" value="${cookie.ck_saveid.value}">
                 </div>
               </div>
               <div class="form-group" style="margin:20px 35px">
@@ -66,10 +66,10 @@
               <div class="col-sm-10 col-sm-offset-2 text-left" style="margin:30px 30px; width:620px; font-size:18px;">
                 <div class="checkbox">
                   <label style="margin:auto 5px; float:left;">
-                    <input type="checkbox">Remember me</label>
+                    <input type="checkbox" name="cb_saveid" value="on" ${empty cookie.ck_saveid.value?'':'checked'}>Remember me</label>
                   <div style="margin:auto 140px; font-size:18px; float:left;"><a href="memberAdd.do">Sign Up</a></div>
                 </div>
-              </div>
+              </div> 
             </form>
             <br>
             <br>

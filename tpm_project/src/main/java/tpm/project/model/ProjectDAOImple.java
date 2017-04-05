@@ -78,6 +78,7 @@ public class ProjectDAOImple implements ProjectDAO {
 					String category_name=tdto.getCategory_name();
 					CategoryDTO cdto=new CategoryDTO(category_idx, project_idx, category_name, work_arr);
 					work_arr=new ArrayList<WorkDTO>();
+					cate_arr.add(cdto);
 					
 					if(i==temp.size()-1){
 						pdto.setCategory_dtos(cate_arr);
@@ -86,7 +87,6 @@ public class ProjectDAOImple implements ProjectDAO {
 			}
 			
 		}
-		
 		return pdto;
 	}
 

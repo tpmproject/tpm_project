@@ -24,7 +24,6 @@ public class MyFriendController {
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.GET)
 	public ModelAndView myFriendListForm(){
 		
-		
 		MyFriendDTO dto = new MyFriendDTO();
 		dto.setMember_idx(6);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
@@ -65,6 +64,21 @@ public class MyFriendController {
 		return mav;
 	}
 	
+	/** 친구 - 친구 등록 */
+	@RequestMapping(value="myFriendAdd.do", method=RequestMethod.POST)
+	public ModelAndView myFriendAdd_ajax(MyFriendDTO dto){
+		
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		int count = myFriendDAO.addFriend(dto);
+		String result = count > 0 ? "true" : "false";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myfriend/myFriendResult_d");
+		mav.addObject("result", result);
+		return mav;
+	}
+	
+	
 	/** 친구 - 친구 검색 */
 	@RequestMapping(value="myFriendSearch.do", method=RequestMethod.GET)
 	public ModelAndView myFriendSearch(){
@@ -76,9 +90,25 @@ public class MyFriendController {
 	
 	/** 친구 - 친구 삭제 */
 	@RequestMapping(value="myFriendDel.do", method=RequestMethod.GET)
-	public ModelAndView myFriendDel(){
+	public ModelAndView myFriendDel(MyFriendDTO dto){
 		
-		MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//System.out.println(dto.toString());
+		int count = myFriendDAO.delFriend(dto);
+		//String result = count > 0 ? "true" : "false";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/myFriendList.do");
+		//mav.addObject("result", result);
+		return mav;
+	}
+	
+	/** 친구 - 친구 삭제 */
+	@RequestMapping(value="myFriendDel.do", method=RequestMethod.POST)
+	public ModelAndView myFriendDel_ajax(MyFriendDTO dto){
+		
+		//MyFriendDTO dto = new MyFriendDTO(7, 3);
+		//System.out.println(dto.toString());
 		int count = myFriendDAO.delFriend(dto);
 		String result = count > 0 ? "true" : "false";
 		

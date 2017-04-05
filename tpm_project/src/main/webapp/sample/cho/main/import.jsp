@@ -30,10 +30,7 @@
 	
 <!-- custom scrollbar stylesheet -->
 <link rel="stylesheet" href="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.css">	
-	
 
-
-	
 <!-- jQuery 2.1.3 -->
 <script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
@@ -69,6 +66,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/tpm_project/sample/cho/main/dist/js/demo.js" type="text/javascript"></script>
 
-
 <!-- custom scrollbar plugin -->
 <script src="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.js" type="text/javascript"></script>	
+
