@@ -5,36 +5,39 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<script type="text/javascript" src="/tpm_project/js/jquery-3.2.0.js"></script>
 <script>
-
-var b=document.getElementById('mback');
-var m=document.getElementById('testm');
-
 function show(){
-	b.style.display="block";
-	m.style.display="inline-block";
+	$(mback).show('150');
+	$(testm).show('150');
 	
 }
-function close(){
-	
-	b.style.display='none';
-	m.style.display='none';
-	
+
+function closem(){
+	$(mback).hide('100');
+	$(testm).hide('100');
 }
 </script>
 <style>
 #mback{
-	width:1000px;
-	height:1000px;
+	position:absolute;
+	top:-10%;
+	left:-10%;
+	width:110%;
+	height:110%;
 	background: gray;
 	opacity: 0.3;
+	display: none;
 }
 #testm{
-	
-	background: green;
+	display: none;
+	background: white;
 	position: fixed;
 	top:30%;
 	left:30%;
+	border: solid 10px white;
+	border-radius: 15px;
+	
 }
 </style>
 </head>
@@ -44,10 +47,10 @@ function close(){
 프로젝트 idx:<input type="text" name="project_idx">
 </form>
 <input type="button" value="modal" onclick="show()">
-<div id="mback" onclick="close()" style="display: none;"></div>
-	<div id="testm" style="display: none;">
+<div id="mback" onclick="closem()"></div>
+	<div id="testm">
 		<input type="text">
-		<input type="button" value="닫기" onclick="close()">
+		<input type="button" value="닫기" onclick="closem()">
 		<br><br><br><br><br>
 	</div>
 
