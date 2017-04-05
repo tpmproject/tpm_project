@@ -20,7 +20,7 @@
 								<div class="panel panel-default">
 									<div class="panel-body p-t-0">
 										<div class="input-group">
-											<input type="text" id="fkey_text"
+											<input type="text" id="fkey_text" onkeydown="startSuggest()" 
 												name="example-input1-group2" class="form-control"
 												placeholder="Search"> <span class="input-group-btn">
 												<button type="button"

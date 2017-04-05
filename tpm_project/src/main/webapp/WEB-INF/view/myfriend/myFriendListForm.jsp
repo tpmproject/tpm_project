@@ -102,6 +102,7 @@
 		
 		if(ctype == 'MEMBER_SEARCH'){
 			search_modal_setting(responseText);
+			checkFirst = false;
 		} else if(ctype == 'FRIEND_LIST'){
 			myfriendList_setting(responseText);
 		} else if(ctype == 'FRIEND_DELETE'){
@@ -158,6 +159,16 @@
 		var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
 		action_ajax('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
 	}
+	
+	var checkFirst = false;
+	
+	function startSuggest(){
+		if(checkFirst == false){
+			setTimeout('goSearch_member()', 100);
+		}
+		checkFirst = true;
+	}
+	
 </script>
 </head>
 <body class="skin-blue">
