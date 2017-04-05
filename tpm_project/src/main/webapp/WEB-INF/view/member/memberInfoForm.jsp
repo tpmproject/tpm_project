@@ -112,8 +112,6 @@
           </h1>
         </div>
         
-        <c:set var="memberDTO" value="${list}"/>
-        
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
@@ -134,10 +132,14 @@
                 </div>
                 <div class="col-md-8">파일 선택 들어갈 곳</div>
               </div>&nbsp;
+              
+                 <c:set var="list" value="${userInfo}"/>
+                 <c:forEach var="dto" items="${list}">
+                 
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputEmail" placeholder="이메일" name="member_id" readonly>
+                  <input type="text" class="form-control" id="inputEmail" name="member_id" value="${dto.member_id}" readonly>
                 </div>
               </div>
               <div class="form-group">
@@ -157,13 +159,13 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputName">이름</label>
                 <div class="col-sm-8">
-                  <input class="form-control" id="inputName" type="text" name="member_name" placeholder="이름">
+                  <input class="form-control" id="inputName" type="text" name="member_name" value="${dto.member_name}">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputTel">연락처</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputTel" placeholder="전화번호" name="member_tel">
+                  <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
                 </div>
               </div>
               <div class="form-group">
@@ -175,6 +177,7 @@
                   </select>
                 </div>
               </div>
+              </c:forEach>
               <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-10">
                   <button type="submit" class="btn btn-default">수정</button>

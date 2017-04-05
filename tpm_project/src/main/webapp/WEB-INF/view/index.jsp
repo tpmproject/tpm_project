@@ -34,7 +34,7 @@ function dateTest(){
 <a href="fileList.do">파일 리스트</a><br>
 <a href="popover.do">팝오버 테스트</a><br>
 
-<a href="memberInfo.do?id=+${sessionScope.s_member_id}">개인 정보</a>
+<a href="memberInfo.do">개인 정보</a>
 
 <form action="/tpm_project/projectContent.do">
 개별 프로젝트 들어가기!!<br> 

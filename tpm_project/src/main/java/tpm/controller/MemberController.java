@@ -276,14 +276,20 @@ public class MemberController {
 	// 개인정보
 	/** 개인정보 - 개인정보 페이지 이동 */
 	@RequestMapping(value="memberInfo.do", method=RequestMethod.GET)
-	public ModelAndView memberInfoForm(@RequestParam("id") String userid){
+	public ModelAndView memberInfoForm(HttpServletRequest req){
+		
+		HttpSession session = req.getSession();
+		
+		String userid = (String)session.getAttribute("s_member_id");
+		
+		System.out.println(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<MemberDTO> list=mdao.userInfo(userid);
+		List<MemberDTO> list = mdao.userInfo(userid);
 		
-		mav.addObject("list", list);
-		mav.setViewName("member/memberInfoFrom");
+		mav.addObject("userInfo", list);
+		mav.setViewName("member/memberInfoForm");
 		
 		return mav;
 	}
