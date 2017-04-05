@@ -12,15 +12,18 @@
 	var p1 = document.getElementById('btntest');
 	var p2 = document.getElementById('btntest2');
 	var p3 = document.getElementById('btntest3');
+	var p4 = document.getElementById('btntest4');
 	function show() {
 		p1.style.display = 'none';
 		p2.style.display = 'block';
-		p3.style.display = 'block';
+		p3.style.dispaly = 'block';
+		p4.style.display = 'block';
 	}
 	function before() {
 		p1.style.display = 'block';
 		p2.style.display = 'none';
-		p3.style.display = 'none';
+		p3.style.dispaly = 'none';
+		p4.style.display = 'none';
 	}
 
 	function projectMemberAdd() {
@@ -122,12 +125,14 @@
 					<input type="text" name="member_id" placeholder="Search">
 					<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
 				</div>
-				<div id="member_search_content" style="height: 400px; overflow-y: scroll">
+				<div id="member_search_content" style="height: 300px; overflow-y: scroll">
 				</div>
-				<hr>
 			
-			</div>
 			<div id="btntest3" style="display:none;">
+				<h2>친구 목록</h2>
+			</div>
+			</div>
+			<div id="btntest4" style="display:none;">
 					<div>
 					<button type="button" class="btn btn-next" onclick="before()">이전</button>
 					<input type="submit" class="btn" value="완료">

@@ -72,7 +72,7 @@ public class ProjectController {
 	@RequestMapping(value="projectMemberAdd.do", method=RequestMethod.POST)
 	public ModelAndView projectMemberAdd(MemberDTO dto){
 		
-		ArrayList<MemberDTO> arr=memberDAO.getMemberIdAndNameSearch(dto);
+		ArrayList<MemberDTO> arr=memberDAO.memberAddSearch(dto);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("arr", arr);

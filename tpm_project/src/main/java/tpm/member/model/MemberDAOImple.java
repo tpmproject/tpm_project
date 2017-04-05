@@ -87,7 +87,11 @@ public class MemberDAOImple implements MemberDAO {
 		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", mdto);
 		return array_dto;
 	}
-
+	
+	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto) {
+		ArrayList<MemberDTO> arr=(ArrayList) sqlMap.selectList("memberAddSearch", dto);
+		return arr;
+	}
 	
 
 }
