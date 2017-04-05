@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="background-image-fixed cover-image" style="background-image : url('https://unsplash.imgix.net/photo-1423347834838-5162bb452ca7?w=1024&amp;q=50&amp;fm=jpg&amp;s=c255e589621f06513c1d123c7323fe9c')"></div>
+      <div class="background-image-fixed cover-image" style="background-image : url('/tpm_project/img/member/login_background.jpg')"></div>
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center" style="margin-top:20px">
