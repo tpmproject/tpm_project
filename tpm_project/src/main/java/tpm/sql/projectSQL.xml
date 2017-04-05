@@ -23,14 +23,38 @@
 	</insert>
 	
 	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.project.model.TotalDTO">
-		select *
-		from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch,
-			(select count(distinct c.category_idx)as category_num,count(distinct w.work_idx)as work_num,count(distinct ch.checklist_idx)as checklist_num
-				from (tpm_project)p,(tpm_category)c,(tpm_work)w,(tpm_checklist)ch
-				where p.project_idx=#{project_idx} and p.project_idx=c.project_idx and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
-				order by c.category_idx,w.work_idx,ch.checklist_idx
-			)
-		where p.project_idx=#{project_idx} and p.project_idx=c.project_idx and w.category_idx=c.category_idx and w.work_idx=ch.work_idx
-		order by c.category_idx,w.work_idx,ch.checklist_idx
+		select p.project_name,p.project_content,p.project_state,c.*,co.* from
+		(tpm_project)p
+		left outer join
+		(   select
+		    c.*,w.work_idx,w.work_title,w.work_start,w.work_end,w.work_complete,
+		    w.work_confirm,w.work_state,w.checklist_idx,w.checklist_content,w.checklist_state
+		    from
+		    (tpm_category)c
+		    left outer join
+		    (   select w.*,ch.checklist_idx,ch.checklist_content,ch.checklist_state from
+		        (tpm_work)w
+		        left outer join
+		        (tpm_checklist)ch on w.work_idx=ch.work_idx)w
+		    on c.category_idx=w.category_idx)c
+		on p.project_idx=c.project_idx,
+		
+		(select
+		    count(distinct c.category_idx)as category_num,
+		    count(distinct w.work_idx)as work_num,
+		    count(distinct w.checklist_idx)as checklist_num
+		from
+		    (tpm_category)c
+		    left outer join
+		    (   select w.*,ch.checklist_idx,ch.checklist_content,ch.checklist_state from
+		        (tpm_work)w
+		        left outer join
+		        (tpm_checklist)ch on w.work_idx=ch.work_idx)w
+		on c.category_idx=w.category_idx
+		where c.project_idx=#{project_idx}
+		)co
+		
+		where p.project_idx=#{project_idx}
+		order by c.category_idx,c.work_idx,c.checklist_idx
 	</select>
 </mapper>
