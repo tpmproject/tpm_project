@@ -1,6 +1,7 @@
 package tpm.member.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -37,7 +38,11 @@ public class MemberDAOImple implements MemberDAO {
 		
 		return result;
 	}
-
+	public List<MemberDTO> userInfo(String userid){
+		List<MemberDTO> list=sqlMap.selectList("userInfo",userid);
+		
+		return list;
+	}
 	public String idCheck(String email) {
 		String db_id = sqlMap.selectOne("memberIdCheck",email);
 		return db_id;

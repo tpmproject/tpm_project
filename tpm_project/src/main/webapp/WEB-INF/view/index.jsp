@@ -24,7 +24,7 @@ function dateTest(){
 		<a href="memberLogin.do">로그인</a>
 	</c:if>
 	<c:if test="${!empty sessionScope.s_member_id}">
-		${sessionScope.sid }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
+		${sessionScope.s_member_name }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
 	</c:if>
 	
 <a href="main.do">메인화면</a><br>
