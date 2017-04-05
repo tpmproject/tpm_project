@@ -26,7 +26,7 @@ function before(){
 
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">x</button>
-	<h4 class="modal-title">업무 추가</h4>
+	<h4 class="modal-title">업무자 추가</h4>
 </div>
 
 <div class="modal-body">
@@ -51,6 +51,50 @@ function before(){
 	</table>
 	</div>
 	<div id="btnwork2" style="display:none;">
+	    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="text-center">프로젝트 멤버 목록</h4>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h5 class="media-heading">Media heading</h5>
+                </div>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h6 class="media-heading">Media heading</h6>
+                </div>
+              </li>
+            </ul>
+            <p></p>
+            <p></p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="text-center">업무 담당자</h4>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h6 class="media-heading">Media heading</h6>
+                </div>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h6 class="media-heading">Media heading</h6>
+                </div>
+              </li>
+            </ul>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
 		<button type="button" class="btn btn-next" id="btn-workbefore" onclick="before()">이전</button>
 		<input type="submit" class="btn" value="완료">
 	</div>

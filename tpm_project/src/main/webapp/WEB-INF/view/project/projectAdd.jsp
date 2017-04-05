@@ -118,26 +118,58 @@
 				<button type="button" class="btn btn-next" id="btn-next"
 					onclick="show()">다음</button>
 			</div>
+				<div id="btntest2" style="display:none;">
+				
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h4>친구목록</h4>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
 
-			<div id="btntest2" style="display: none;">
-				<h2>그룹원 추가 하기</h2>
-				<div>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+              </li>
+            </ul>
+            <h4>검색 멤버</h4>
+                        				<div>
 					<input type="text" name="member_id" placeholder="Search">
 					<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
 				</div>
 				<div id="member_search_content" style="height: 300px; overflow-y: scroll">
 				</div>
-			
-			<div id="btntest3" style="display:none;">
-				<h2>친구 목록</h2>
-			</div>
-			</div>
-			<div id="btntest4" style="display:none;">
-					<div>
-					<button type="button" class="btn btn-next" onclick="before()">이전</button>
-					<input type="submit" class="btn" value="완료">
-				</div>
-			</div>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h4>초대 멤버</h4>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                <div class="media-body">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+		<button type="button" class="btn btn-next" id="btn-workbefore" onclick="before()">이전</button>
+		<input type="submit" class="btn" value="완료">
+	</div>
+
 		</form>
 	</div>
 </body>

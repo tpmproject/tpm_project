@@ -21,50 +21,24 @@ $(function(){
 <body>
 <%@ include file="/WEB-INF/view/sidebar.jsp"%>
 <div class="category">
-	<table>
-		<tbody>
-			<tr>
-				<td>카테고리 이름</td>
-				<td align="right"><a id="workAdd">추가</button><br/>
-				<div class="modal fade">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
+	<ul>
+		<li>카테고리 이름<a id="workAdd">추가</a></li>
+			<div class="modal fade">
+				<div class="modal-dialog">
+				   <div class="modal-content">
 				    	<!-- remote ajax call이 되는영역 -->
 				    </div>
-				  </div>
 				</div>
-				</td>
-			</tr>
-			<tr>
-				<td>업무명</td>
-				<td align="right"><a>설정</a>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">기간</td>
-			</tr>
-			<tr>
-				<td colspan="2">멤버1, 멤버2</td>
-			</tr>
-			<tr>
-				<td colspan="2">체크리스트+</td>
-			</tr>
-			<tr>
-				<td colspan="2"><textarea rows="7">업무2</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left">표시하기</td>
-			</tr>
-			<tr>
-				<td>진행률</td>
-				<td>막대그래프</td>
-			</tr>
-			<tr>
-				<td><input type="button" value="결재요청"></td>
-				<td align="right">코멘트|첨부파일</td>
-			</tr>
-		</tbody>
-	</table>
+			</div>
+		<li>업무명<a>설정</a></li>
+		<li>기간</li>
+		<li>멤버</li>
+		<li>체크리스트 +</li>
+		<li><textarea rows="7"></textarea></li>
+		<li><a>표시하기</a></li>
+		<li>진행률 | 막대그래프</li>
+		<li><input type="button" value="결재요청">코멘트|첨부파일</li>
+	</ul>
 </div>
 <%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
