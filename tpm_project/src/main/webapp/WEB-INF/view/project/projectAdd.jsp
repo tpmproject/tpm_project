@@ -16,13 +16,13 @@
 	function show() {
 		p1.style.display = 'none';
 		p2.style.display = 'block';
-		p3.style.dispaly = 'block';
+		p3.style.display = 'block';
 		p4.style.display = 'block';
 	}
 	function before() {
 		p1.style.display = 'block';
 		p2.style.display = 'none';
-		p3.style.dispaly = 'none';
+		p3.style.display = 'none';
 		p4.style.display = 'none';
 	}
 
