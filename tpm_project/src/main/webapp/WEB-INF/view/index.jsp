@@ -35,8 +35,6 @@ function dateTest(){
 <a href="popover.do">팝오버 테스트</a>
 <a href="memberInfo.do">개인 정보</a>
 
-
-
 <form action="/tpm_project/projectContent.do">
 개별 프로젝트 들어가기!!<br> 
 프로젝트 idx:<input type="text" name="project_idx">
