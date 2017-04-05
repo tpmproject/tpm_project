@@ -19,6 +19,31 @@
 		});
 	})(jQuery); */
 	
+	/* $(function () {
+	    //clear modal cache, so that new content can be loaded
+	    $('body').on('hidden.bs.modal', '.modal', function () {
+	        $(this).removeData('bs.modal');
+
+	    });
+	}); */
+	/* $('#myModal').on('hidden.bs.modal', function () {
+	    $(this).find("input,textarea,select").val('').end();
+
+	}); */
+	
+ 	/* var myBackup = $('#myModal').clone();
+    
+    // Delegated events because we make a copy, and the copied button does not exist onDomReady
+    $('body').on('click','#myReset',function() {
+        $('#myModal').modal('hide').remove();
+        var myClone = myBackup.clone();
+        $('body').append(myClone);
+    }); */
+    
+    $('.modal').on('hidden.bs.modal', function (e) {
+        //console.log('modal close');
+      $(this).find('form')[0].reset()
+    });
 	
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기

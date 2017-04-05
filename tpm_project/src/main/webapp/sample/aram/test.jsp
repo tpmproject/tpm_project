@@ -47,6 +47,7 @@ function closem(){
 프로젝트 idx:<input type="text" name="project_idx">
 </form>
 <input type="button" value="modal" onclick="show()">
+
 <div id="mback" onclick="closem()"></div>
 	<div id="testm">
 		<input type="text">
