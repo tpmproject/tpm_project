@@ -18,13 +18,24 @@
     type="text/css" media="all">
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     
 <title>Insert title here</title>
 	<style>
       #chartdiv {
                 width: 50%;
                 height: 250px;
-              }
+      }
+      #chartdiv2 {
+				width		: 100%;
+				height		: 200px;
+				font-size	: 11px;
+	  }	
     </style>
     <script>
       var chart = AmCharts.makeChart( "chartdiv", {
@@ -48,6 +59,40 @@
                   	  "lineThickness": 2,
                   	  "valueField": "litres" } ] ,
                 "categoryField": "tendency" } );
+      
+      var chart = AmCharts.makeChart("chartdiv2", {
+    	  "theme": "light",
+          "type": "serial",
+          "dataProvider": [
+        	  { "tendency": "E", "self": 3, "team": 4 },
+        	  { "tendency": "I", "self": 1, "team": 3 },
+        	  { "tendency": "S", "self": 2, "team": 2 },
+        	  { "tendency": "N", "self": 2, "team": 2 },
+        	  { "tendency": "T", "self": 1, "team": 2 },
+        	  { "tendency": "F", "self": 2, "team": 4 },
+        	  { "tendency": "J", "self": 2, "team": 4 },
+        	  { "tendency": "P", "self": 2, "team": 4 } ],
+          "valueAxes": [
+        	  { "position": "left",
+              	"title": "tendency" }],
+          "startDuration": 2,
+          "graphs": [
+        	  { "balloonText": "check tendency <b>[[category]] (team)</b> : <b>[[value]]</b>",
+              	"fillAlphas": 0.9,
+              	"title": "team",
+              	"type": "column",
+              	"valueField": "team" },
+              { "balloonText": "check tendency <b>[[category]] (self)</b> : <b>[[value]]</b>",
+              	"fillAlphas": 0.9,
+              	"title": "self",
+              	"type": "column",
+              	"clustered":false,
+              	"columnWidth":0.5,
+              	"valueField": "self" }],
+          "plotAreaFillAlphas": 0.1,
+          "categoryField": "tendency",
+          "categoryAxis": { "gridPosition": "start" }
+      });
       </script>
 </head>
 <body>
@@ -125,17 +170,15 @@
           </div>
           <div class="col-md-6">
             <div>업무 평가 들어갈 곳</div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row">
-                  <div id="chartdiv"></div>
-                </div>
-              </div>
-              <div class="col-md-6">막대 그래프 들어갈 곳</div>
+            <div>
+          	  <div class="col-md-offset-6" id="chartdiv"></div>
             </div>
-          </div>
+            <div>
+              <div id="chartdiv2"></div>
+            </div>
         </div>
       </div>
+    </div>
     </div>
 </body>
 </html>
