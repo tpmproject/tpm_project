@@ -59,18 +59,14 @@ function before(){
           <div class="col-md-3">
             <h4 class="text-center">프로젝트 멤버 목록</h4>
             <ul class="media-list">
+            	<c:forEach var="arr" items="${arr}">	
               <li class="media">
-                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <a class="pull-left" href="#"><img class="media-object" src="/tpm_project/img/member/profile/${arr.member_img}" height="30" width="30"></a>
                 <div class="media-body">
-                  <h5 class="media-heading">Media heading</h5>
+                  <h5 class="media-heading">${arr.member_name}</h5>
                 </div>
               </li>
-              <li class="media">
-                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
-                <div class="media-body">
-                  <h6 class="media-heading">Media heading</h6>
-                </div>
-              </li>
+              	</c:forEach>
             </ul>
             <p></p>
             <p></p>

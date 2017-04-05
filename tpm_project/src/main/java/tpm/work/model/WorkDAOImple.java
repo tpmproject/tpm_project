@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import tpm.category.model.CategoryDTO;
 import tpm.member.model.MemberDTO;
 
 public class WorkDAOImple implements WorkDAO {
@@ -20,9 +21,9 @@ public class WorkDAOImple implements WorkDAO {
 		return null;
 	}
 
-	public ArrayList<MemberDTO> projectMember(MemberDTO dto) {
+	public ArrayList<MemberDTO> projectMember(CategoryDTO dto) {
 		// TODO Auto-generated method stub
-		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projecttMember",dto);
+		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projectMember",dto);
 		return arr;
 	}
 

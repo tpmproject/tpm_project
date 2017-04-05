@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.category.model.CategoryDTO;
+import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
@@ -54,9 +55,15 @@ public class WorkController {
 	}
 	
 	@RequestMapping(value="workAdd.do", method=RequestMethod.GET)
-	public ModelAndView workAddForm(HttpServletRequest req) {
+	public ModelAndView workAddForm() {
+		int category_idx=2;
+		CategoryDTO dto=new CategoryDTO();
+		dto.setCategory_idx(category_idx);
+		ArrayList<MemberDTO> arr=workDAO.projectMember(dto);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workResult_form");
+		mav.setViewName("work/workResult_d");
+		mav.addObject("arr",arr);
 		return mav;
 	}
 	
