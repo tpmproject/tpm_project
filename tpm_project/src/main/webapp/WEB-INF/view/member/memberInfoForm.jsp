@@ -28,7 +28,7 @@
 <title>Insert title here</title>
 	<style>
       #chartdiv {
-                width: 50%;
+                width: 70%;
                 height: 250px;
       }
       #chartdiv2 {
@@ -235,7 +235,7 @@
             <hr>
             <div>
               <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
-              <div id="chartdiv" class="col-md-offset-4"></div>
+              <div id="chartdiv" class="col-md-offset-3"></div>
             </div>
             <hr>
             <div>
