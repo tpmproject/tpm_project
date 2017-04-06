@@ -8,10 +8,6 @@ public class TendencyDAOImple implements TendencyDAO {
 	
 	private SqlSessionTemplate sqlMap;
 
-	public TendencyDAOImple() {
-
-	}
-
 	public TendencyDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap = sqlMap;
@@ -19,7 +15,7 @@ public class TendencyDAOImple implements TendencyDAO {
 
 	public List<TendencyDTO> getTendency(int member_idx) {
 		
-		List<TendencyDTO> dto = sqlMap.selectList("memberSelfTendency", member_idx);
+		List<TendencyDTO> dto = sqlMap.selectList("SelfTendency", member_idx);
 		
 		return dto;
 	}

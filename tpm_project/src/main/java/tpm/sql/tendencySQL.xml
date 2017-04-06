@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="tpm.tendency">
 
-	<select id="memberSelfTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
+	<select id="SelfTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
 		select * from tpm_tendency
 		where member_idx = #{member_idx} and project_idx = 0
 	</select>
