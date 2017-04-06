@@ -22,7 +22,6 @@ public class MyFriendController {
 	MyFriendDAO myFriendDAO;
 	
 	//// 친구 ////
-
 	/** 친구 - 친구 리스트 페이지 이동 */
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.GET)
 	public ModelAndView myFriendListForm(HttpServletRequest req){
