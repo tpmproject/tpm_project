@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -31,9 +32,7 @@ function showf(){
 function shows(){
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
-	
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
-	
 	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
 	
 }
@@ -44,11 +43,9 @@ function closem() {
 }
 
 function projectMemberAdd() {
-	var param = 'member_idx=' + ${sessionScope.s_member_idx};
-	
-	param += '&member_id=' + document.newProject.member_id.value;
+	var param = 'member_id=' + document.newProject.member_id.value;
 	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-	window.alert(param);
+
 }
 
 function projectMemberAddResult() {
@@ -70,7 +67,7 @@ function projectMemberAddResult() {
 				msg += '<div class="panel"> ';
 				msg += '<div class="panel-body p-t-10"> ';
 				msg += '<div class="media-main"> ';
-				msg += '<a class="pull-left" href="#"> <img  ';
+				msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
 				msg += 				'class="thumb-lg img-circle bx-s" ';
 				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
@@ -132,12 +129,12 @@ function projectMemberAddResult() {
 					msg2 += '<div class="panel"> ';
 					msg2 += '<div class="panel-body p-t-10"> ';
 					msg2 += '<div class="media-main"> ';
-					msg2 += '<a class="pull-left" href="#"> <img   ';
+					msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
 					msg2 += 				'class="thumb-lg img-circle bx-s" ';
 					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
 					msg2 += '</a> ';
-					msg2 += '<div class="pull-right btn-group-sm" > ';
+					msg2 += '<div class="pull-right btn-group-sm"> ';
 					msg2 += '<a href="javascript:goInsert_member(' + i
 							+ ')" class="btn btn-success tooltips" ';
 					msg2 += 'data-placement="top" data-toggle="tooltip" ';
@@ -190,20 +187,15 @@ function projectMemberAddResult() {
 }
 
 #main_modal{
-	display: none;
+	display: inline-block;
 	background: white;
 	position: fixed;
 	top: 20%;
 	left: 20%;
 	border: solid 10px white;
 	border-radius: 10px;
-	width:600px;
+	width:640px;
 	height:700px;
-}
-.media-main {
-	width: 100px;
-	height: 100px;
-
 }
 
 </style>
@@ -233,37 +225,36 @@ function projectMemberAddResult() {
 			</div>
 			
 			<div id="smodal">
-				<div class="section">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3">
-								<h4>친구목록</h4>
-								<div id="myFriend_List" style="width:550px; height: 300px; overflow-y: scroll">
-								
-								</div>
-								</ul>
-								<h4>검색 멤버</h4>
-								<div>
-									
-									<input type="text" name="member_id" placeholder="Search">
-									<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
-								</div>
-								<div id="member_search_content"
-									style="width:550px; height: 300px; "></div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				
-				<button type="button" class="btn btn-next" id="btn-workbefore"
-					onclick="showf()">이전</button>
-				<input type="submit" class="btn" value="완료">
-			</div>
-
-
-
-		</div>
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h4>친구목록</h4>
+              <div id="myFriend_List" style="width:300px; height: 300px; overflow-y: scroll"></div>
+              <h4>검색 멤버</h4>
+              <div>
+                <input type="text" name="member_id" placeholder="Search">
+                <button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+              </div>
+              <div id="member_search_content" style="width:300px; height: 300px; overflow-y: scroll"></div>
+            </div>
+            <div class="col-md-4">
+              <h4>초대 멤버</h4>
+              <ul class="media-list">
+                <li class="media">
+                  <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                </li>
+                <li class="media">
+                  <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+      <input type="submit" class="btn" value="완료">
+    </div>
 	</form>
 	<hr>
 </html>
