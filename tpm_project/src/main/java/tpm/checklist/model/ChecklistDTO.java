@@ -7,8 +7,8 @@ public class ChecklistDTO {
 	private String checklist_content;
 	private int checklist_state;
 	
-	final public static int CHECKLIST_WAIT=1;
-	final public static int CHECKLIST_FIN=2;
+	final public static int CHECKLIST_WAIT=0;
+	final public static int CHECKLIST_FIN=1;
 	
 	public ChecklistDTO() {
 		super();

@@ -33,8 +33,21 @@ function categoryAddResult() {
 	}
 
 }
+
 function check(ch){
-	window.alert(ch);
+	var param='checklist_idx='+ch;
+	sendRequest('checkUpdate.do', param, checkResult, 'POST');
+}
+function checkResult() {
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+							
+			/* 	glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked */
+				
+			}
+		}
+	}
 }
 </script>
 <style>
@@ -120,7 +133,7 @@ function check(ch){
 										<c:forEach var="chdto"
 											items="${wdto.checklist_dtos}">
 											<a onclick="javascript:check(${chdto.checklist_idx })">
-											<i class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
+											<i id="ch${chdto.checklist_idx }" class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
 											</i>
 											${chdto.checklist_content}
 											</a><br>
