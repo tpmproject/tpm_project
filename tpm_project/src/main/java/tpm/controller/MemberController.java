@@ -31,6 +31,7 @@ public class MemberController {
 
 	@Autowired 
 	private MemberDAO mdao;
+	
 	@Autowired
 	private TendencyDAO tdao;
 	
@@ -286,18 +287,18 @@ public class MemberController {
 		HttpSession session = req.getSession();
 		
 		String userid = (String)session.getAttribute("s_member_id");
+		int member_idx = (Integer)session.getAttribute("s_member_idx");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<MemberDTO> list = mdao.userInfo(userid);
 		
-		int member_idx = list.get(0).getMember_idx();
+		List<TendencyDTO> self_tendencyList = tdao.getSelfTendency(member_idx);
 		
-		System.out.println(member_idx);
+		List<TendencyDTO> team_tendencyList = tdao.getTeamTendency(member_idx);
 		
-		List<TendencyDTO> tendencyList = tdao.getTendency(member_idx);
-		
-		mav.addObject("tendency", tendencyList);
+		mav.addObject("team_tendency", team_tendencyList);
+		mav.addObject("self_tendency", self_tendencyList);
 		mav.addObject("userInfo", list);
 		mav.setViewName("member/memberInfoForm");
 		

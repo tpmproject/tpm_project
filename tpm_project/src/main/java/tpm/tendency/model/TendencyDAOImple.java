@@ -18,9 +18,16 @@ public class TendencyDAOImple implements TendencyDAO {
 		this.sqlMap = sqlMap;
 	}
 
-	public List<TendencyDTO> getTendency(int member_idx) {
+	public List<TendencyDTO> getSelfTendency(int member_idx) {
 		
 		List<TendencyDTO> dto = sqlMap.selectList("SelfTendency", member_idx);
+		
+		return dto;
+	}
+	
+	public List<TendencyDTO> getTeamTendency(int member_idx) {
+		
+		List<TendencyDTO> dto = sqlMap.selectList("TeamTendency", member_idx);
 		
 		return dto;
 	}

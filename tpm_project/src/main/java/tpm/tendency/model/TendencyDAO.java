@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface TendencyDAO {
 
-	public List<TendencyDTO> getTendency(int member_idx);
+	public List<TendencyDTO> getSelfTendency(int member_idx);
+	
+	public List<TendencyDTO> getTeamTendency(int member_idx);
 }
