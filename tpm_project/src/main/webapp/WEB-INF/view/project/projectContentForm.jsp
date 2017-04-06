@@ -10,6 +10,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
+<script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <script>
 function categoryAdd() {
 	var param = 'project_idx=' + ${param.project_idx}
@@ -33,7 +37,28 @@ function categoryAddResult() {
 	}
 
 }
+window.onload=function(){
+	$(work_modal).hide();
+	$(btnwork2).hide();
+}
 
+function showf(){
+	$(workback).fadeIn('150');
+	$(work_modal).fadeIn('150');
+	$(w_modal).show();
+	$(btnwork2).hide();
+}
+
+function shows(){
+	$(w_modal).fadeOut();
+	$(btnwork2).fadeIn();
+
+}
+
+function closem() {
+	$(workback).fadeOut('100');
+	$(work_modal).fadeOut('100');
+}
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -47,10 +72,31 @@ function checkResult() {
 				
 			}
 		}
-	}
 }
 </script>
 <style>
+#workback {
+	position: absolute;
+	top: -10%;
+	left: -10%;
+	width: 110%;
+	height: 110%;
+	background: gray;
+	opacity: 0.7;
+	display: none;
+}
+
+#work_modal{
+	display: inline-block;
+	background: white;
+	position: fixed;
+	top: 20%;
+	left: 20%;
+	border: solid 10px white;
+	border-radius: 10px;
+	width:600px;
+	height:700px;
+}
 .category {
 	display: inline-block;
 	width: 200px;
@@ -106,10 +152,85 @@ function checkResult() {
 							<thead>
 								<tr>
 									<td>${wdto.work_title }</td>
-									<td align="right"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;&nbsp;</td>
+									<td align="right"><i class="glyphicon glyphicon-cog" onclick="showf()"></i>&nbsp;&nbsp;&nbsp;</td>
 								</tr>
 							</thead>
-							
+	<form name="newWork" action="workAdd.do" method="post">
+		<div id="workback" onclick="closem()"></div>
+		<div id="work_modal">
+			<button type="button" class="close" onclick="closem()">×</button>
+			<h4 class="modal-title">업무 추가</h4>
+			
+			<div id="w_modal">
+				<div id="btnwork">
+					<div>
+						업무명 : <input type="text" name="work_title">
+					</div>
+					<div>
+						기한
+					</div>
+					<div>
+						<input type="text" id="calendar" name="work_start" rel="stylesheet"/>
+			~<input type="text" id="calendar2" name="work_end" rel="stylesheet"/>
+					</div>
+					<div>
+					<input type="checkbox" name="work_confirm" value="on">결재여부
+								<button type="button" class="btn btn-next" id="btn-worknext"
+						onclick="shows()">다음</button>
+		
+					</div>
+
+				</div>
+			</div>
+			
+				<div id="btnwork2">
+	    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="text-center">프로젝트 멤버 목록</h4>
+            <ul class="media-list">
+            	<c:forEach var="arr" items="${arr}">	
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="/tpm_project/img/member/profile/${arr.member_img}" height="30" width="30"></a>
+                <div class="media-body">
+                  <h5 class="media-heading">${arr.member_name}</h5>
+                </div>
+              </li>
+              	</c:forEach>
+            </ul>
+            <p></p>
+            <p></p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="text-center">업무 담당자</h4>
+            <ul class="media-list">
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h6 class="media-heading">Media heading</h6>
+                </div>
+              </li>
+              <li class="media">
+                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="30" width="30"></a>
+                <div class="media-body">
+                  <h6 class="media-heading">Media heading</h6>
+                </div>
+              </li>
+            </ul>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+		<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+		<input type="submit" class="btn" value="완료">
+	</div>
+
+
+		</div>
+	</form>
 							<tbody>	
 								<tr>
 									<td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;${wdto.work_start}~${wdto.work_end}</td>
@@ -169,4 +290,18 @@ function checkResult() {
 	</div>
 </div>
 </body>
+<script>
+$("#calendar").datepicker({
+	changeMonth:true,
+	changeYear:true,
+	showButtonPanel:true,
+	dateFormat:"yy-mm-dd"
+});
+$("#calendar2").datepicker({
+	changeMonth:true,
+	changeYear:true,
+	showButtonPanel:true,
+	dateFormat:"yy-mm-dd"
+});
+</script>
 </html>
