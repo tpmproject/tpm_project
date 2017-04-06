@@ -83,6 +83,11 @@
 						month : 'month',
 						week : 'week',
 						day : 'day'
+					}, 
+					titleFormat: {
+					      month: 'yyyy년 MMMM',
+					      week: "yyyy년 MMMM d[ yyyy]{'일 ~'[ MMM] dd일 }",
+					       day: 'yyyy년 MMM d dddd'
 					},
 					//Random default events
 					events : <%=arry_calender_work%>
