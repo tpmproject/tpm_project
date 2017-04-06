@@ -4,4 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.file">
 
+	<select id="fileList" parameterType="int" resultType="tpm.file.model.FileDTO">
+		select * from tpm_file
+		where project_idx=#{project_idx}
+	</select>
 </mapper>

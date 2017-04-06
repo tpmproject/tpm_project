@@ -32,6 +32,28 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
+    <script>
+    function show() {
+    sendRequest_extension('fileList.do', null, ajax_result, 'POST', 'FILE_LIST');
+	}
+    function ajax_result(httpRequest, ctype) {
+    	return function() {
+    		if(httpRequest.readyState == 4){
+    			if(httpRequest.status == 200){
+    				if(!httpRequest.responseText.match(null)){
+    					var responseText = httpRequest.responseText;
+    					var divNotice = document.getElementById('fileList');
+    					divNotice.innerHTML = responseText;
+    					
+    				}
+    			}
+    		} else {
+
+    		}
+    	}
+    }
+    </script>
   </head>
   
   <body>
@@ -69,13 +91,13 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                    <a href="flot.html">myweb 프로젝트</a>
+                    <a href="#" onclick="show();">myweb 프로젝트</a>
                   </li>
                   <li>
-                    <a href="morris.html">final 프로젝트</a>
+                    <a href="">final 프로젝트</a>
                   </li>
                   <li>
-                    <a href="morris.html">semi 프로젝트</a>
+                    <a href="">semi 프로젝트</a>
                   </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -105,35 +127,16 @@
                       <th>공유한 사람</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="fileList">
+                  
                     <tr class="odd gradeX">
-                      <td>1</td>
-                      <td>미디어.jsp</td>
-                      <td>33</td>
-                      <td class="center">2017-08-22</td>
-                      <td class="center">안병민</td>
-                    </tr>
-                     <tr class="odd gradeX">
-                      <td>1</td>
-                      <td>미디어.jsp</td>
-                      <td>35</td>
-                      <td class="center">2017-08-02</td>
-                      <td class="center">안병민</td>
-                    </tr>
-                     <tr class="odd gradeX">
-                      <td>1</td>
-                      <td>미디어.jsp</td>
-                      <td>12</td>
-                      <td class="center">2017-08-03</td>
-                      <td class="center">안병민</td>
-                    </tr>
-                     <tr class="odd gradeX">
-                      <td>1</td>
-                      <td>미디어.jsp</td>
-                      <td>5</td>
-                      <td class="center">2017-08-02</td>
-                      <td class="center">안병민</td>
-                    </tr>
+						<td>1</td>
+						<td>미디어.jsp</td>
+						<td>33</td>
+						<td class="center">2017-08-22</td>
+						<td class="center">안병민</td>
+					</tr>
+                  
                    
                   </tbody>
                 </table>

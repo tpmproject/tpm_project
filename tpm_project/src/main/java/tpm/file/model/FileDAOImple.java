@@ -18,9 +18,9 @@ public class FileDAOImple implements FileDAO {
 		return null;
 	}
 
-	public ArrayList<FileDTO> getFileList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<FileDTO> getFileList(int project_idx) {
+		ArrayList<FileDTO> arr=(ArrayList)sqlMap.selectList("fileList",project_idx);
+		return arr;
 	}
 
 	public int searchFile() {
