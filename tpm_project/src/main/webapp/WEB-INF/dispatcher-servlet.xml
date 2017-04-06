@@ -151,6 +151,12 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="tendencyDAO" class="tpm.tendency.model.TendencyDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<bean id="workDAO" class="tpm.work.model.WorkDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>

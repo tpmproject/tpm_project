@@ -171,16 +171,21 @@ insert into tpm_notice values(notice_idx.nextval,2,2,to_date('2017-03-26','yyyy-
 insert into tpm_notice values(notice_idx.nextval,2,2,to_date('2017-03-26','yyyy-mm-dd'),2,1);
 
 --성향 테이블(회원idx, 프로젝트idx, 평가자idx, 외향성, 내향성, 감각형, 직감형, 사고형, 감정형, 판단형, 인식형)
-insert into tpm_tendency values(2,2,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(3,2,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(4,2,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(6,2,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(7,2,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(2,3,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(3,3,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(4,3,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(6,3,5,50,59,59,49,39,69,48,80);
-insert into tpm_tendency values(7,3,5,50,59,59,49,39,69,48,80);
+insert into tpm_tendency values(2,0,0,5,3,3,1,3,2,3,1);
+insert into tpm_tendency values(2,2,5,2,3,1,4,3,5,1,2);
+insert into tpm_tendency values(3,0,0,5,3,2,4,3,1,2,5);
+insert into tpm_tendency values(3,2,5,5,5,5,4,3,1,4,3);
+insert into tpm_tendency values(4,0,0,1,2,3,4,5,1,2,3);
+insert into tpm_tendency values(4,2,5,3,1,3,4,2,5,5,1);
+insert into tpm_tendency values(5,0,0,2,3,5,3,2,1,3,5);
+insert into tpm_tendency values(6,0,0,3,1,5,3,4,2,1,2);
+insert into tpm_tendency values(6,2,5,3,2,5,4,3,4,2,1);
+insert into tpm_tendency values(7,0,0,1,3,5,4,2,5,4,1);
+insert into tpm_tendency values(7,2,5,5,5,5,4,3,3,4,5);
+insert into tpm_tendency values(2,2,5,2,3,1,4,3,3,4,5);
+insert into tpm_tendency values(3,2,5,3,5,1,4,3,3,4,5);
+insert into tpm_tendency values(4,2,5,4,5,3,4,3,3,4,5);
+insert into tpm_tendency values(6,2,2,5,2,1,4,3,3,4,5);
 
 
 

@@ -22,6 +22,8 @@ import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
+import tpm.tendency.model.TendencyDAO;
+import tpm.tendency.model.TendencyDTO;
 
 
 @Controller
@@ -29,6 +31,8 @@ public class MemberController {
 
 	@Autowired 
 	private MemberDAO mdao;
+	private TendencyDAO tdao;
+	
 	//// 회원 ////
 	// 로그인 및 로그아웃
 	/** 회원 아이디, 이름 검색 */
@@ -286,6 +290,13 @@ public class MemberController {
 		
 		List<MemberDTO> list = mdao.userInfo(userid);
 		
+		int member_idx = list.get(0).getMember_idx();
+		
+		System.out.println(member_idx);
+		
+		List<TendencyDTO> tendencyList = tdao.getTendency(member_idx);
+		
+		mav.addObject("tendency", tendencyList);
 		mav.addObject("userInfo", list);
 		mav.setViewName("member/memberInfoForm");
 		

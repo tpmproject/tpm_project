@@ -42,4 +42,9 @@
 		where member_id = #{member_id}
 	</delete>
 	
+	<select id="memberSelfTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
+		select * from tpm_tendency
+		where member_idx = #{member_idx} and project_idx = 0
+	</select>
+	
 </mapper>
