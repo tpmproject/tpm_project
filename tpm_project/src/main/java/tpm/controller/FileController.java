@@ -25,8 +25,7 @@ public class FileController {
 	public ModelAndView fileListForm(HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
-		int idx=(Integer) session.getAttribute("s_member_idx");
-		System.out.println(idx);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("file/fileListForm");
 		return mav;
