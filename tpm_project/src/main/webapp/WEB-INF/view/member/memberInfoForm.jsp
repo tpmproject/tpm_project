@@ -101,7 +101,7 @@
               	"title": "self",
               	"type": "column",
               	"clustered":false,
-              	"columnWidth":0.5,
+              	"columnWidth":0.4,
               	"valueField": "self" }],
           "plotAreaFillAlphas": 0.1,
           "categoryField": "tendency",
