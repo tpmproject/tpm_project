@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.category.model.CategoryDTO;
 import tpm.member.model.MemberDTO;
+import tpm.project.model.TotalDTO;
 
 public class WorkDAOImple implements WorkDAO {
 	
@@ -40,6 +41,12 @@ public class WorkDAOImple implements WorkDAO {
 	public int delWork() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public ArrayList<WorkDTO> myWorkAllList(MemberDTO mdto) {
+		ArrayList<TotalDTO> arry_tdto = (ArrayList) sqlMap.selectList("myWorkAllList", mdto);
+		
+		return null;
 	}
 
 }

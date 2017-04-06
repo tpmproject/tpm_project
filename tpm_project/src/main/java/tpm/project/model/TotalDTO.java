@@ -213,6 +213,18 @@ public class TotalDTO {
 	public void setChecklist_num(int checklist_num) {
 		this.checklist_num = checklist_num;
 	}
+
+	@Override
+	public String toString() {
+		return "TotalDTO [project_idx=" + project_idx + ", project_name=" + project_name + ", project_state="
+				+ project_state + ", project_content=" + project_content + ", category_idx=" + category_idx
+				+ ", category_name=" + category_name + ", work_idx=" + work_idx + ", work_title=" + work_title
+				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_complete=" + work_complete
+				+ ", work_confirm=" + work_confirm + ", work_state=" + work_state + ", checklist_idx=" + checklist_idx
+				+ ", checklist_content=" + checklist_content + ", checklist_state=" + checklist_state
+				+ ", category_num=" + category_num + ", work_num=" + work_num + ", checklist_num=" + checklist_num
+				+ "]";
+	}
 	
 	
 }
