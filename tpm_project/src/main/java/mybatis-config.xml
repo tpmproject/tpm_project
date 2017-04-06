@@ -20,6 +20,7 @@
 		<mapper resource="tpm/sql/tendencySQL.xml"/>
 		<mapper resource="tpm/sql/work_memberSQL.xml"/>
 		<mapper resource="tpm/sql/workSQL.xml"/>
+		<mapper resource="tpm/sql/sampleSQL.xml"/>
 <!-- 		<mapper resource="whwns/sql/memberSQL.xml"/> -->
 	</mappers>
 </configuration>
