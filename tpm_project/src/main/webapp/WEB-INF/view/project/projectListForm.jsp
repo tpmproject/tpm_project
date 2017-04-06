@@ -77,7 +77,7 @@ function projectMemberAddResult() {
 
 				msg += '</a> ';
 				msg += '<div class="pull-right btn-group-sm"> ';
-				msg += '<a href="javascript:goInsert_member(' + i
+				msg += '<a href="javascript:goInsert_member(' + member.member_idx
 						+ ')" class="btn btn-success tooltips" ';
 				msg += 'data-placement="top" data-toggle="tooltip" ';
 				msg += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
@@ -118,7 +118,7 @@ function projectMemberAddResult() {
 
 function goInsert_member(i){
 	var member_idx = ${sessionScope.s_member_idx};
-	var myfriend_idx = document.getElementById('add_member_idx_' + i).value;
+	var myfriend_idx = i;
 	
 	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
 	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
@@ -133,9 +133,8 @@ function friendAddResult() {
 			if(result.trim() == 'true'){
 				var param = 'member_idx=' + ${sessionScope.s_member_idx};
 				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
-				
+				//sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 			} 
-			
 		}
 	}
 }
@@ -252,7 +251,6 @@ function friendAddResult() {
 						onclick="shows()">다음</button>
 				</div>
 			</div>
-		</div>
 			
 			<div id="smodal">
       <div class="section">
