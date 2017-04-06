@@ -21,7 +21,7 @@ import tpm.work.model.WorkDTO;
 public class WorkController {
 	
 	@Autowired
-	WorkDAO workDAO;
+	private WorkDAO workDAO;
 
 	//// 업무 ////
 

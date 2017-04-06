@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
@@ -137,7 +138,7 @@ public class ProjectController {
 	/** 멤버 -  프로젝트 멤버 리스트 데이터 반환 */
 	@RequestMapping(value="projectMemberList.do",  method=RequestMethod.GET)
 	public ModelAndView projectMemberList(){
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectMemberList_d");
 		return mav;
