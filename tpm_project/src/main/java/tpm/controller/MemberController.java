@@ -282,8 +282,6 @@ public class MemberController {
 		
 		String userid = (String)session.getAttribute("s_member_id");
 		
-		System.out.println(userid);
-		
 		ModelAndView mav = new ModelAndView();
 		
 		List<MemberDTO> list = mdao.userInfo(userid);
