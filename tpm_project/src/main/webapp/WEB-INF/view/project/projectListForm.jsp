@@ -33,6 +33,7 @@ function shows(){
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
+	
 	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
 	
 }
@@ -43,9 +44,11 @@ function closem() {
 }
 
 function projectMemberAdd() {
-	var param = 'member_id=' + document.newProject.member_id.value;
+	var param = 'member_idx=' + ${sessionScope.s_member_idx};
+	param += '&member_id=' + document.newProject.member_id.value;
+	
 	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-
+	window.alert(param);
 }
 
 function projectMemberAddResult() {
@@ -187,7 +190,7 @@ function projectMemberAddResult() {
 }
 
 #main_modal{
-	display: inline-block;
+	display: none;
 	background: white;
 	position: fixed;
 	top: 20%;
