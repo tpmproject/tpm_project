@@ -134,6 +134,7 @@
               </div>&nbsp;
               
                  <c:set var="list" value="${userInfo}"/>
+                 
                  <c:forEach var="dto" items="${list}">
                  
               <div class="form-group">
@@ -168,15 +169,30 @@
                   <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputGender">성별</label>
-                <div class="col-sm-8">
-                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
-                    <option value="남">남자</option>
-                    <option value="여">여자</option>
-                  </select>
-                </div>
-              </div>
+              	<c:choose>
+	                <c:when test="${dto.member_gender}=='남자'">
+	                <div class="form-group">
+		                <label class="col-sm-3 control-label" for="inputGender">성별</label>
+		                <div class="col-sm-8">
+		                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+		                    <option value="남" selected="selected">남자</option>
+		                    <option value="여">여자</option>
+		                  </select>
+		                </div>
+	                </div>
+	                </c:when>
+	                <c:otherwise>
+	                <div class="form-group">
+		                <label class="col-sm-3 control-label" for="inputGender">성별</label>
+		                <div class="col-sm-8">
+		                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+		                    <option value="남">남자</option>
+		                    <option value="여" selected="selected">여자</option>
+		                  </select>
+		                </div>
+	                </div>
+	                </c:otherwise>
+             	</c:choose>
               </c:forEach>
               <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-10">
