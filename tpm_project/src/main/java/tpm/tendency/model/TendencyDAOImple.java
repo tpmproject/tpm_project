@@ -7,6 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class TendencyDAOImple implements TendencyDAO {
 	
 	private SqlSessionTemplate sqlMap;
+	
+	public TendencyDAOImple() {
+		
+	}
 
 	public TendencyDAOImple(SqlSessionTemplate sqlMap) {
 		super();
