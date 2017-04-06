@@ -21,10 +21,14 @@ public class CheckListController {
 	
 	/** 체크리스트 - 체크리스트 수정 ( 완료 포함 ) */
 	@RequestMapping(value="checkUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView checkUpdate(){
+	public ModelAndView checkUpdate(int checklist_idx){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("checklist/checkUpdate_d");
+		
+		
+		
+		
 		return mav;
 	}
 	
