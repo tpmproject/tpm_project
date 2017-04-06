@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import tpm.category.model.CategoryDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
+import tpm.work.model.MyWorkDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
 
@@ -97,9 +98,10 @@ public class WorkController {
 	// 캘린더
 	/** 캘린더 - 캘린더 페이지로 이동 */
 	@RequestMapping(value="calendarList.do",  method=RequestMethod.GET)
-	public ModelAndView calendarListForm(){
+	public ModelAndView calendarListForm(MemberDTO mdto){
 		
 		ModelAndView mav = new ModelAndView();
+		ArrayList<MyWorkDTO> arry_wdto = workDAO.myWorkAllList(mdto);
 		mav.setViewName("calendar/calendarListForm");
 		return mav;
 	}

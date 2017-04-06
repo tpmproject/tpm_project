@@ -61,6 +61,12 @@ public class ChecklistDTO {
 	public static int getChecklistFin() {
 		return CHECKLIST_FIN;
 	}
+
+	@Override
+	public String toString() {
+		return "ChecklistDTO [checklist_idx=" + checklist_idx + ", work_idx=" + work_idx + ", checklist_content="
+				+ checklist_content + ", checklist_state=" + checklist_state + "]";
+	}
 	
 	
 	
