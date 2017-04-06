@@ -46,21 +46,21 @@
     </script>
 </head>
 <body>
-	<c:set var="tendencylist" value="${tendency}"/>
-	<c:forEach var="tendency" items="${tendencylist}">
+	<c:set var="tendencylist" value="${self_tendency}"/>
+	<c:forEach var="self_tendency" items="${tendencylist}">
 	<script>
       var chart = AmCharts.makeChart( "chartdiv", {
                 "type": "radar",
                 "theme": "light",
                 "dataProvider": [ 
-	             	{ "tendency": "E", "litres": ${tendency.tendency_e} },
-	             	{ "tendency": "I", "litres": ${tendency.tendency_i} },
-	                { "tendency": "S", "litres": ${tendency.tendency_s} },
-	                { "tendency": "N", "litres": ${tendency.tendency_n} },
-	                { "tendency": "T", "litres": ${tendency.tendency_t} },
-	                { "tendency": "F", "litres": ${tendency.tendency_f} },
-	                { "tendency": "J", "litres": ${tendency.tendency_j} },
-	                { "tendency": "P", "litres": ${tendency.tendency_p} } ],
+	             	{ "tendency": "E", "litres": ${self_tendency.tendency_e} },
+	             	{ "tendency": "I", "litres": ${self_tendency.tendency_i} },
+	                { "tendency": "S", "litres": ${self_tendency.tendency_s} },
+	                { "tendency": "N", "litres": ${self_tendency.tendency_n} },
+	                { "tendency": "T", "litres": ${self_tendency.tendency_t} },
+	                { "tendency": "F", "litres": ${self_tendency.tendency_f} },
+	                { "tendency": "J", "litres": ${self_tendency.tendency_j} },
+	                { "tendency": "P", "litres": ${self_tendency.tendency_p} } ],
                 "valueAxes": [
                 	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
                 "startDuration": 2,
@@ -75,14 +75,14 @@
     	  "theme": "light",
           "type": "serial",
           "dataProvider": [
-        	  { "tendency": "E", "self": ${tendency.tendency_e}, "team": 4 },
-        	  { "tendency": "I", "self": ${tendency.tendency_i}, "team": 3 },
-        	  { "tendency": "S", "self": ${tendency.tendency_s}, "team": 2 },
-        	  { "tendency": "N", "self": ${tendency.tendency_n}, "team": 4 },
-        	  { "tendency": "T", "self": ${tendency.tendency_t}, "team": 2 },
-        	  { "tendency": "F", "self": ${tendency.tendency_f}, "team": 4 },
-        	  { "tendency": "J", "self": ${tendency.tendency_j}, "team": 4 },
-        	  { "tendency": "P", "self": ${tendency.tendency_p}, "team": 1 } ],
+        	  { "tendency": "E", "self": ${self_tendency.tendency_e}, "team": 4 },
+        	  { "tendency": "I", "self": ${self_tendency.tendency_i}, "team": 3 },
+        	  { "tendency": "S", "self": ${self_tendency.tendency_s}, "team": 2 },
+        	  { "tendency": "N", "self": ${self_tendency.tendency_n}, "team": 4 },
+        	  { "tendency": "T", "self": ${self_tendency.tendency_t}, "team": 2 },
+        	  { "tendency": "F", "self": ${self_tendency.tendency_f}, "team": 4 },
+        	  { "tendency": "J", "self": ${self_tendency.tendency_j}, "team": 4 },
+        	  { "tendency": "P", "self": ${self_tendency.tendency_p}, "team": 1 } ],
           "valueAxes": [
         	  { "position": "left",
               	"title": "tendency" }],

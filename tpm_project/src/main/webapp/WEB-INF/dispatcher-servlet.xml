@@ -163,6 +163,12 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="sampleWorkDAO" class="tpm.sample.model.SampleWorkDAO">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<!-- <websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo-ws" />
 		<websocket:mapping handler="chatHandler" path="/chat-ws" />

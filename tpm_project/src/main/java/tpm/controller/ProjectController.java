@@ -92,7 +92,7 @@ public class ProjectController {
 		return mav;
 	}
 	
-	/**프로젝트-프로젝트 생성-멤버검색*/
+	/**프로젝트-프로젝트 생성-친구리스트*/
 	@RequestMapping(value="projectFriendList.do", method=RequestMethod.POST)
 	public ModelAndView projectFriendList(MemberDTO dto){
 		

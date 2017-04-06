@@ -18,15 +18,15 @@ rel="stylesheet" type="text/css">
 	</script>
 <body>
 	<div class="container">
-       	<form role="form" name="EmailCheck" action="memberEmailCheck.do" method="post">
-            <input type="hidden" name="random_number" value="${random}">
+       	<form role="form" name="emailCheck" action="memberEmailCheck.do" method="post">
+            <input type="text" name="random_number" value="${random}">
 			<input type="hidden" name="email" value="${email}">
            <br>
            	<div class="form-group">
                <div class="input-group">
-               	<input type="text" class="form-control" maxlength="6" placeholder="인증번호를 입력해주세요">
+               	<input type="text" class="form-control" name="user_number" maxlength="6" placeholder="인증번호를 입력해주세요">
                  	<span class="input-group-btn">
-                   	<a class="btn btn-success" type="submit"> 인증하기 </a>
+                   	<button class="btn btn-success" type="submit"> 인증하기 </button>
                  	</span>
                </div>
          	</div>

@@ -31,7 +31,9 @@ function showf(){
 function shows(){
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
+	
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
+	
 	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
 	
 }
@@ -42,9 +44,11 @@ function closem() {
 }
 
 function projectMemberAdd() {
-	var param = 'member_id=' + document.newProject.member_id.value;
+	var param = 'member_idx=' + ${sessionScope.s_member_idx};
+	
+	param += '&member_id=' + document.newProject.member_id.value;
 	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-
+	window.alert(param);
 }
 
 function projectMemberAddResult() {
@@ -66,7 +70,7 @@ function projectMemberAddResult() {
 				msg += '<div class="panel"> ';
 				msg += '<div class="panel-body p-t-10"> ';
 				msg += '<div class="media-main"> ';
-				msg += '<a class="pull-left" href="#"> <img ';
+				msg += '<a class="pull-left" href="#"> <img  ';
 				msg += 				'class="thumb-lg img-circle bx-s" ';
 				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
@@ -128,12 +132,12 @@ function projectMemberAddResult() {
 					msg2 += '<div class="panel"> ';
 					msg2 += '<div class="panel-body p-t-10"> ';
 					msg2 += '<div class="media-main"> ';
-					msg2 += '<a class="pull-left" href="#"> <img ';
+					msg2 += '<a class="pull-left" href="#"> <img   ';
 					msg2 += 				'class="thumb-lg img-circle bx-s" ';
 					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
 					msg2 += '</a> ';
-					msg2 += '<div class="pull-right btn-group-sm"> ';
+					msg2 += '<div class="pull-right btn-group-sm" > ';
 					msg2 += '<a href="javascript:goInsert_member(' + i
 							+ ')" class="btn btn-success tooltips" ';
 					msg2 += 'data-placement="top" data-toggle="tooltip" ';
@@ -186,7 +190,7 @@ function projectMemberAddResult() {
 }
 
 #main_modal{
-	display: inline-block;
+	display: none;
 	background: white;
 	position: fixed;
 	top: 20%;
@@ -195,6 +199,11 @@ function projectMemberAddResult() {
 	border-radius: 10px;
 	width:600px;
 	height:700px;
+}
+.media-main {
+	width: 100px;
+	height: 100px;
+
 }
 
 </style>
@@ -235,29 +244,18 @@ function projectMemberAddResult() {
 								</ul>
 								<h4>검색 멤버</h4>
 								<div>
+									
 									<input type="text" name="member_id" placeholder="Search">
 									<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
 								</div>
 								<div id="member_search_content"
-									style="width:550px; height: 300px; overflow-y: scroll"></div>
+									style="width:550px; height: 300px; "></div>
 							</div>
-							<div class="col-md-3">
-								<h4>초대 멤버</h4>
-								<ul class="media-list">
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a></li>
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="64" width="64"></a>
-										<div class="media-body"></div></li>
-								</ul>
-							</div>
+							
 						</div>
 					</div>
 				</div>
+				
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
 				<input type="submit" class="btn" value="완료">
