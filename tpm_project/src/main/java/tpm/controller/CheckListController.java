@@ -1,12 +1,18 @@
 package tpm.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.checklist.model.ChecklistDAO;
+
 @Controller
 public class CheckListController {
+	
+	@Autowired
+	ChecklistDAO checklistDAO;
 	
 	//// 체크리스트 ////
 	
@@ -27,8 +33,10 @@ public class CheckListController {
 		mav.setViewName("checklist/checkUpdate_d");
 		
 		
-		
-		
+		int result=checklistDAO.updateChecklist(checklist_idx);
+		if(result>0){
+			mav.addObject("checklist_idx", checklist_idx);
+		}
 		return mav;
 	}
 	

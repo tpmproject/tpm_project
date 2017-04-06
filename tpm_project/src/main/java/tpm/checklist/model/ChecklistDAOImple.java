@@ -11,17 +11,17 @@ public class ChecklistDAOImple implements ChecklistDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public int addChecklist() {
+	public int addChecklist(ChecklistDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int updateChecklist() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateChecklist(int checklist_idx) {
+		int result=sqlMap.update("updateChecklist", checklist_idx);
+		return result;
 	}
 
-	public int delChecklist() {
+	public int delChecklist(int checklist_idx) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
