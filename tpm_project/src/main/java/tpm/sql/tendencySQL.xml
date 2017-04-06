@@ -11,11 +11,11 @@
 	</select>
 
 	<select id="TeamTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
-		select mytendency.* 
-		from (select project_idx, count(*), sum(tendency_e) as Team_e, sum(tendency_i)/count(*) as team_i, sum(tendency_s)/count(*) as team_s, sum(tendency_n)/count(*) as team_n, sum(tendency_t)/count(*) as team_t, sum(tendency_f)/count(*) as team_f, sum(tendency_j)/count(*) as team_j, sum(tendency_p)/count(*) as team_p
+		select a.*
+		from (select project_idx, count(*), avg(tendency_e) as tendency_e, avg(tendency_i) as tendency_i, avg(tendency_s) as tendency_s, avg(tendency_n) as tendency_n, avg(tendency_t) as tendency_t, avg(tendency_f) as tendency_f, avg(tendency_j) as tendency_j, avg(tendency_p) as tendency_p
 			  from tpm_tendency
-			  where member_idx = #{member_idx} and project_idx <![CDATA[>]]> 0
-			  group by project_idx) mytendency
+			  where member_idx = 3 and project_idx <![CDATA[>]]> 0
+			  group by project_idx) a
 		where project_idx = 2
 	</select>
 </mapper>

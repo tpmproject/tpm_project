@@ -46,8 +46,11 @@
     </script>
 </head>
 <body>
-	<c:set var="tendencylist" value="${self_tendency}"/>
-	<c:forEach var="self_tendency" items="${tendencylist}">
+	<c:set var="self_tendencylist" value="${self_tendency}"/>
+	<c:set var="team_tendencylist" value="${team_tendency}"/>
+	
+	<c:forEach var="self_tendency" items="${self_tendencylist}">
+	<c:forEach var="team_tendency" items="${team_tendencylist}">
 	<script>
       var chart = AmCharts.makeChart( "chartdiv", {
                 "type": "radar",
@@ -75,14 +78,14 @@
     	  "theme": "light",
           "type": "serial",
           "dataProvider": [
-        	  { "tendency": "E", "self": ${self_tendency.tendency_e}, "team": 4 },
-        	  { "tendency": "I", "self": ${self_tendency.tendency_i}, "team": 3 },
-        	  { "tendency": "S", "self": ${self_tendency.tendency_s}, "team": 2 },
-        	  { "tendency": "N", "self": ${self_tendency.tendency_n}, "team": 4 },
-        	  { "tendency": "T", "self": ${self_tendency.tendency_t}, "team": 2 },
-        	  { "tendency": "F", "self": ${self_tendency.tendency_f}, "team": 4 },
-        	  { "tendency": "J", "self": ${self_tendency.tendency_j}, "team": 4 },
-        	  { "tendency": "P", "self": ${self_tendency.tendency_p}, "team": 1 } ],
+        	  { "tendency": "E", "self": ${self_tendency.tendency_e}, "team": ${team_tendency.tendency_e} },
+        	  { "tendency": "I", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
+        	  { "tendency": "S", "self": ${self_tendency.tendency_s}, "team": ${team_tendency.tendency_s} },
+        	  { "tendency": "N", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
+        	  { "tendency": "T", "self": ${self_tendency.tendency_t}, "team": ${team_tendency.tendency_t} },
+        	  { "tendency": "F", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
+        	  { "tendency": "J", "self": ${self_tendency.tendency_j}, "team": ${team_tendency.tendency_j} },
+        	  { "tendency": "P", "self": ${self_tendency.tendency_p}, "team": ${team_tendency.tendency_p} } ],
           "valueAxes": [
         	  { "position": "left",
               	"title": "tendency" }],
@@ -105,6 +108,7 @@
           "categoryAxis": { "gridPosition": "start" }
       });
      </script>
+     </c:forEach>
      </c:forEach>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
