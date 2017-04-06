@@ -98,11 +98,18 @@ public class WorkController {
 	// 캘린더
 	/** 캘린더 - 캘린더 페이지로 이동 */
 	@RequestMapping(value="calendarList.do",  method=RequestMethod.GET)
-	public ModelAndView calendarListForm(MemberDTO mdto){
+	public ModelAndView calendarListForm(HttpServletRequest req){
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
-		ArrayList<MyWorkDTO> arry_wdto = workDAO.myWorkAllList(mdto);
+		
+		MemberDTO mdto = new MemberDTO();
+		HttpSession session = req.getSession();
+		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
+		ArrayList<MyWorkDTO> arry_mwdto = workDAO.myWorkAllList(mdto);
 		mav.setViewName("calendar/calendarListForm");
+		mav.addObject("arry_mwdto", arry_mwdto);
 		return mav;
 	}
 	

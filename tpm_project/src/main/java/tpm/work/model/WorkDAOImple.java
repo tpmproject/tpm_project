@@ -78,9 +78,9 @@ public class WorkDAOImple implements WorkDAO {
 			}
 		}
 		
-		for (MyWorkDTO myworkDTO : arry_mwdto) {
+		/*for (MyWorkDTO myworkDTO : arry_mwdto) {
 			System.out.println(myworkDTO.toString());
-		}
+		}*/
 		
 		return arry_mwdto;
 	}

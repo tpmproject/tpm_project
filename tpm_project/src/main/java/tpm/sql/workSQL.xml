@@ -32,7 +32,7 @@
 		                                           FROM  tpm_work w LEFT OUTER JOIN tpm_checklist ck ON w.work_idx = ck.work_idx
 		                                           WHERE w.work_idx IN (SELECT work_idx 
 		                                                                FROM tpm_work_member 
-		                                                                WHERE member_idx = 2)) wck
+		                                                                WHERE member_idx = #{member_idx})) wck
 		                     WHERE c.category_idx = wck.category_idx) cwck
 		WHERE p.project_idx = cwck.project_idx
 		ORDER BY cwck.work_idx DESC, cwck.checklist_idx ASC
