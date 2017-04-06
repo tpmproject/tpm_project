@@ -12,13 +12,15 @@ public class TendencyDTO {
 	private int tendency_p;
 	
 	private int member_idx;
+	private int project_idx;
+	private int appraiser_idx;
 
 	public TendencyDTO() {
 		super();
 	}
 
 	public TendencyDTO(int tendency_e, int tendency_i, int tendency_s, int tendency_n, int tendency_t, int tendency_f,
-			int tendency_j, int tendency_p, int member_idx) {
+			int tendency_j, int tendency_p, int member_idx, int project_idx, int appraiser_idx) {
 		super();
 		this.tendency_e = tendency_e;
 		this.tendency_i = tendency_i;
@@ -29,6 +31,8 @@ public class TendencyDTO {
 		this.tendency_j = tendency_j;
 		this.tendency_p = tendency_p;
 		this.member_idx = member_idx;
+		this.project_idx = project_idx;
+		this.appraiser_idx = appraiser_idx;
 	}
 
 	public int getTendency_e() {
@@ -101,6 +105,22 @@ public class TendencyDTO {
 
 	public void setMember_idx(int member_idx) {
 		this.member_idx = member_idx;
+	}
+
+	public int getProject_idx() {
+		return project_idx;
+	}
+
+	public void setProject_idx(int project_idx) {
+		this.project_idx = project_idx;
+	}
+
+	public int getAppraiser_idx() {
+		return appraiser_idx;
+	}
+
+	public void setAppraiser_idx(int appraiser_idx) {
+		this.appraiser_idx = appraiser_idx;
 	}
 
 }

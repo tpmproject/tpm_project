@@ -3,6 +3,7 @@ package tpm.tendency.model;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TendencyDAOImple implements TendencyDAO {
 	

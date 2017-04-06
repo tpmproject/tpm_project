@@ -38,18 +38,29 @@
 	  }	
     </style>
     <script>
+	    function deletedo(){
+	  	  var email = document.memberInfoForm.member_id.value;
+	  	  
+	  	  location.href='memberDel.do?email='+email;
+	    }
+    </script>
+</head>
+<body>
+	<c:set var="tendencylist" value="${tendency}"/>
+	<c:forEach var="tendency" items="${tendencylist}">
+	<script>
       var chart = AmCharts.makeChart( "chartdiv", {
                 "type": "radar",
                 "theme": "light",
                 "dataProvider": [ 
-	             	{ "tendency": "E", "litres": 5 },
-	             	{ "tendency": "I", "litres": 2 },
-	                { "tendency": "S", "litres": 3 },
-	                { "tendency": "N", "litres": 5 },
-	                { "tendency": "T", "litres": 1 },
-	                { "tendency": "F", "litres": 4 },
-	                { "tendency": "J", "litres": 2 },
-	                { "tendency": "P", "litres": 5 } ],
+	             	{ "tendency": "E", "litres": ${tendency.tendency_e} },
+	             	{ "tendency": "I", "litres": ${tendency.tendency_i} },
+	                { "tendency": "S", "litres": ${tendency.tendency_s} },
+	                { "tendency": "N", "litres": ${tendency.tendency_n} },
+	                { "tendency": "T", "litres": ${tendency.tendency_t} },
+	                { "tendency": "F", "litres": ${tendency.tendency_f} },
+	                { "tendency": "J", "litres": ${tendency.tendency_j} },
+	                { "tendency": "P", "litres": ${tendency.tendency_p} } ],
                 "valueAxes": [
                 	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
                 "startDuration": 2,
@@ -93,16 +104,8 @@
           "categoryField": "tendency",
           "categoryAxis": { "gridPosition": "start" }
       });
-      
-      function deletedo(){
-    	  var email = document.memberInfoForm.member_id.value;
-    	  
-    	  location.href='memberDel.do?email='+email;
-      }
-      
-      </script>
-</head>
-<body>
+     </script>
+     </c:forEach>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
       <div class="col-md-12">

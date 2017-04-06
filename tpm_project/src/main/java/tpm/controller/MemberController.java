@@ -31,6 +31,7 @@ public class MemberController {
 
 	@Autowired 
 	private MemberDAO mdao;
+	@Autowired
 	private TendencyDAO tdao;
 	
 	//// 회원 ////
