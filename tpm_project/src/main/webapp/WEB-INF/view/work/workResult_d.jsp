@@ -1,3 +1,4 @@
+<%@page import="tpm.work.model.WorkDTO"%>
 <%@page import="tpm.member.model.MemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.json.simple.JSONObject" %>
@@ -7,6 +8,8 @@
 <%
 
 ArrayList<MemberDTO> arr=(ArrayList)request.getAttribute("arr");
+ArrayList<WorkDTO> arr_w=(ArrayList)request.getAttribute("arr_w");
+ArrayList<MemberDTO> arr_m=(ArrayList)request.getAttribute("arr_m");
 
 JSONObject object=new JSONObject();
 JSONArray arry_members=new JSONArray();

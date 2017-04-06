@@ -22,9 +22,18 @@ public class WorkDAOImple implements WorkDAO {
 	}
 
 	public ArrayList<MemberDTO> projectMember(int project_idx) {
-		
 		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projectMember",project_idx);
 		return arr;
+	}
+	
+	public ArrayList<WorkDTO> workList(int work_idx){
+		ArrayList<WorkDTO> arr_w=(ArrayList)sqlMap.selectList("workList",work_idx);
+		return arr_w;
+	}
+	
+	public ArrayList<MemberDTO> workMember(int work_idx){
+		ArrayList<MemberDTO> arr_m=(ArrayList)sqlMap.selectList("workMember",work_idx);
+		return arr_m;
 	}
 
 	public int addWork() {

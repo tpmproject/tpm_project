@@ -3,17 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.work">
-	<select id="categoryList" parameterType="tpm.category.model.CategoryDTO" resultType="tpm.category.model.CategoryDTO">
-		select * from tpm_category where project_idx=#{project_idx}
-	</select>
-	<select id="workList" parameterType="tpm.work.model.WorkDTO" resultType="tpm.work.model.WorkDTO">
-		select * from tpm_work where category_idx=#{category_idx}
-	</select>
-	<select id="workMember" parameterType="tpm.member.model.MemberDTO" resultType="tpm.member.model.MemberDTO">
-		select member_name from tpm_member
-		where member_idx in 
-		(select member_idx from tpm_work_member where work_idx=#{work_idx})
-	</select>
 	<select id="projectMember"  resultType="tpm.member.model.MemberDTO">
 	select m.*
 	from
@@ -21,7 +10,12 @@
     (select member_idx from tpm_project_member where project_idx=#{project_idx})pm
 	where m.member_idx =pm.member_idx
 	</select>
-	<select id="proejctMember_t" resultType="tpm.tendency.model.TendencyDTO">
-	select 
+	<select id="workList" parameterType="tpm.work.model.WorkDTO" resultType="tpm.work.model.WorkDTO">
+	select * from tpm_work where work_idx=#{work_idx}
+	</select>
+	<select id="workMember" parameterType="tpm.work.model.WorkDTO" resultType="tpm.work.model.WorkDTO">
+	select * from tpm_member 
+	where member_idx in(select member_idx from tpm_work_member 
+	where work_idx=#{work_idx})
 	</select>
 </mapper>

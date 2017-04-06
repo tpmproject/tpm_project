@@ -54,6 +54,7 @@ public class WorkController {
 		return mav;
 	}
 	
+	/** 업무 - 업무 추가 폼*/
 	@RequestMapping(value="workAdd.do", method=RequestMethod.GET)
 	public ModelAndView workAddForm(int project_idx) {
 		
@@ -71,6 +72,20 @@ public class WorkController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
+		return mav;
+	}
+	
+	/** 업무 - 업무 수정 폼*/
+	@RequestMapping(value="workUpdate.do", method=RequestMethod.GET)
+	public ModelAndView workUpdateForm(int work_idx) {
+		
+		ArrayList<WorkDTO> arr_w=workDAO.workList(work_idx);
+		ArrayList<MemberDTO> arr_m=workDAO.workMember(work_idx);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("work/workResult_d");
+		mav.addObject("arr_w",arr_w);
+		mav.addObject("arr_m",arr_m);
 		return mav;
 	}
 	
