@@ -30,6 +30,10 @@ public class SampleController {
 		
 		List<Object> arry_dto = sampleWorkDAO.getSampleWorkList();
 		System.out.println(arry_dto);
+		System.out.println("11");
+		for (Object object : arry_dto) {
+			System.out.println(object.toString());
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("dto");

@@ -15,13 +15,15 @@ public class SampleWorkDTO {
 
 	private int work_confirm; // 결재 요청여부
 	private int work_state; // 결재 상태
+	
+	private SampleCheckListDTO sampleCheckList;
 
 	public SampleWorkDTO() {
 		super();
 	}
 
 	public SampleWorkDTO(int work_idx, int category_idx, String work_title, Date work_start, Date work_end,
-			Date work_complete, int work_confirm, int work_state) {
+			Date work_complete, int work_confirm, int work_state, SampleCheckListDTO sampleCheckList) {
 		super();
 		this.work_idx = work_idx;
 		this.category_idx = category_idx;
@@ -31,6 +33,7 @@ public class SampleWorkDTO {
 		this.work_complete = work_complete;
 		this.work_confirm = work_confirm;
 		this.work_state = work_state;
+		this.sampleCheckList = sampleCheckList;
 	}
 
 	public int getWork_idx() {
@@ -97,11 +100,21 @@ public class SampleWorkDTO {
 		this.work_state = work_state;
 	}
 
+	public SampleCheckListDTO getSampleCheckList() {
+		return sampleCheckList;
+	}
+
+	public void setSampleCheckList(SampleCheckListDTO sampleCheckList) {
+		this.sampleCheckList = sampleCheckList;
+	}
+
 	@Override
 	public String toString() {
 		return "SampleWorkDTO [work_idx=" + work_idx + ", category_idx=" + category_idx + ", work_title=" + work_title
 				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_complete=" + work_complete
-				+ ", work_confirm=" + work_confirm + ", work_state=" + work_state + "]";
+				+ ", work_confirm=" + work_confirm + ", work_state=" + work_state + ", sampleCheckList="
+				+ sampleCheckList + "]";
 	}
-
+	
+	
 }
