@@ -31,8 +31,7 @@ function categoryAddResult() {
 				var divNode = document.createElement('div');
 				divNode.innerHTML = result;
 				cbodyNode.insertBefore(divNode, cateNode);
-				 var cbody_width=document.getElementById("cbody");
-				 cbody_width.style.width = parseInt(cbody_width.style.width)+200+"px";
+				cbodyNode.style.width = parseInt(cbodyNode.style.width)+200+"px";
 			}
 		}
 	}
@@ -85,6 +84,32 @@ function checkResult() {
 			}
 		}
 }
+
+
+function addCheck(work_idx){
+	
+	var cont=$('input[name=content'+work_idx+']').val();
+	var param='work_idx='+work_idx+'&checklist_content='+cont;
+	if(cont==null ||cont==''){
+		window.alert('체크리스트를 작성해주세요.');
+	}else{
+		sendRequest('checkAdd.do', param, addCheckResult, 'POST');
+	}
+}
+function addCheckResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			
+			var chData=XHR.responseText;
+			var wi=chData.work_idx;
+			var chc=chData.checklist_content;
+			var check_div=${'check_div'+wi};
+			
+			
+		}
+	}
+}
+
 </script>
 <style>
 #workback {
@@ -99,7 +124,7 @@ function checkResult() {
 }
 
 #work_modal {
-	display: inline-block;
+	display: none;
 	background: white;
 	position: fixed;
 	top: 20%;
@@ -145,11 +170,13 @@ function checkResult() {
 .check_div {
 	padding-left: 19px;
 	height: 100px;
+	overflow-y:scroll;
 }
 </style>
 </head>
 <%-- <%@include file="/WEB-INF/view/header.jsp" %> --%>
 <body>
+
 	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
@@ -193,12 +220,17 @@ function checkResult() {
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2"><div
-													class="table_i glyphicon glyphicon-check"></div>&nbsp;체크리스트+</td>
+											<td colspan="2">
+												<form action="javascript:addCheck(${wdto.work_idx})">
+												<div class="table_i glyphicon glyphicon-check"></div>
+												&nbsp;<input type="text" name="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
+												&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
+												</form>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<div class="check_div">
+												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
 														<a onclick="javascript:check(${chdto.checklist_idx })">
 															<i id="ch${chdto.checklist_idx }"
