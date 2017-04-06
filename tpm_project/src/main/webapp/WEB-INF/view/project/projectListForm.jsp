@@ -28,12 +28,11 @@ function showf(){
 	$(f_modal).show();
 	$(smodal).hide();
 }
-
+//친구리스트
 function shows(){
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
-	
 	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
 	
 }
@@ -42,7 +41,7 @@ function closem() {
 	$(mback).fadeOut('100');
 	$(main_modal).fadeOut('100');
 }
-
+//검색멤버
 function projectMemberAdd() {
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
 	param += '&member_id=' + document.newProject.member_id.value;
@@ -51,6 +50,8 @@ function projectMemberAdd() {
 	window.alert(param);
 }
 
+
+/**검색 멤버*/
 function projectMemberAddResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -114,14 +115,39 @@ function projectMemberAddResult() {
 		}
 	}
 }
+
+function goInsert_member(i){
+	var member_idx = ${sessionScope.s_member_idx};
+	var myfriend_idx = document.getElementById('add_member_idx_' + i).value;
 	
+	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
+	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
+	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
+	
+}
+function friendAddResult() {
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			if(result.trim() == 'true'){
+				var param = 'member_idx=' + ${sessionScope.s_member_idx};
+				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
+				
+			} 
+			
+		}
+	}
+}
+
+	/**친구리스트*/
 	function projectMemberAddResult2() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
 				window.alert(result);
 				var json = JSON.parse(result);
-
+				
 				 var msg2 = '';
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
@@ -137,16 +163,16 @@ function projectMemberAddResult() {
 					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
 					msg2 += '</a> ';
-					msg2 += '<div class="pull-right btn-group-sm"> ';
+					/* msg2 += '<div class="pull-right btn-group-sm"> ';
 					msg2 += '<a href="javascript:goInsert_member(' + i
 							+ ')" class="btn btn-success tooltips" ';
 					msg2 += 'data-placement="top" data-toggle="tooltip" ';
-					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
+					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> '; */
 
 					msg2 += '</a> ';
 					msg2 += '</div> ';
 					msg2 += '<div class="info"> ';
-					msg2 += '<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
+					msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
 					msg2 += '<h4>' + member.member_name + '</h4> ';
 					msg2 += '<p class="text-muted">' + member.member_id
 							+ '</p> ';
@@ -226,6 +252,7 @@ function projectMemberAddResult() {
 						onclick="shows()">다음</button>
 				</div>
 			</div>
+		</div>
 			
 			<div id="smodal">
       <div class="section">
