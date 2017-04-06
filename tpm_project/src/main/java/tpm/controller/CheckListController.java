@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.checklist.model.ChecklistDAO;
+import tpm.checklist.model.ChecklistDTO;
 
 @Controller
 public class CheckListController {
@@ -18,10 +19,15 @@ public class CheckListController {
 	
 	/** 체크리스트 - 체크리스트 추가 */
 	@RequestMapping(value="checkAdd.do",  method=RequestMethod.POST)
-	public ModelAndView checkAdd(){
+	public ModelAndView checkAdd(ChecklistDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("checklist/checkAdd_d");
+		int result=checklistDAO.addChecklist(dto);
+		if(result>0){
+			mav.addObject("checklist", dto);
+		}
+		
 		return mav;
 	}
 	
@@ -42,10 +48,15 @@ public class CheckListController {
 	
 	/** 체크리스트 - 체크리스트 삭제 */
 	@RequestMapping(value="checkDelete.do",  method=RequestMethod.POST)
-	public ModelAndView checkDelete(){
+	public ModelAndView checkDelete(int checklist_idx){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("checklist/checkDelete_d");
+		mav.setViewName("checklist/checkUpdate_d");
+		
+		int result=checklistDAO.delChecklist(checklist_idx);
+		if(result>0){
+			mav.addObject("checklist_idx", checklist_idx);
+		}
 		return mav;
 	}
 }

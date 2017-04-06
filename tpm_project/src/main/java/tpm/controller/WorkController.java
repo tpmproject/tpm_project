@@ -55,11 +55,9 @@ public class WorkController {
 	}
 	
 	@RequestMapping(value="workAdd.do", method=RequestMethod.GET)
-	public ModelAndView workAddForm() {
-		int category_idx=2;
-		CategoryDTO dto=new CategoryDTO();
-		dto.setCategory_idx(category_idx);
-		ArrayList<MemberDTO> arr=workDAO.projectMember(dto);
+	public ModelAndView workAddForm(int project_idx) {
+		
+		ArrayList<MemberDTO> arr=workDAO.projectMember(project_idx);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");

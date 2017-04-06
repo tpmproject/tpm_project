@@ -12,8 +12,9 @@ public class ChecklistDAOImple implements ChecklistDAO {
 	}
 	
 	public int addChecklist(ChecklistDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result= sqlMap.insert("addChecklist", dto);
+		
+		return result;
 	}
 
 	public int updateChecklist(int checklist_idx) {
@@ -22,8 +23,8 @@ public class ChecklistDAOImple implements ChecklistDAO {
 	}
 
 	public int delChecklist(int checklist_idx) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlMap.delete("delChecklist", checklist_idx);
+		return result;
 	}
 
 }

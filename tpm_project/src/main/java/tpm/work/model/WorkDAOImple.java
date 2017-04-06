@@ -21,9 +21,9 @@ public class WorkDAOImple implements WorkDAO {
 		return null;
 	}
 
-	public ArrayList<MemberDTO> projectMember(CategoryDTO dto) {
-		// TODO Auto-generated method stub
-		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projectMember",dto);
+	public ArrayList<MemberDTO> projectMember(int project_idx) {
+		
+		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projectMember",project_idx);
 		return arr;
 	}
 

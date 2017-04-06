@@ -3,6 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.checklist">
+	
+	<insert id="addChecklist" parameterType="tpm.checklist.model.ChecklistDTO">
+		insert into tpm_checklist
+		values(
+			checklist_idx.nextval,
+			#{work_idx},
+			#{checklist_content},
+			0
+		)
+	
+	</insert>
+	
 	<update id="updateChecklist">
 		update tpm_checklist
 		set checklist_state=
@@ -10,4 +22,9 @@
 		where checklist_idx=#{checklist_idx})
 		where checklist_idx=#{checklist_idx}
 	</update>
+	
+	<delete id="delChecklist">
+		delete from tpm_checklist
+		where checklist_idx=#{checklist_idx}
+	</delete>
 </mapper>
