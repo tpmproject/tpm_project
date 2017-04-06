@@ -3,5 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.checklist">
-
+	<update id="updateChecklist">
+		update tpm_checklist
+		set checklist_state=
+		(select mod(checklist_state+1,2) from tpm_checklist
+		where checklist_idx=#{checklist_idx})
+		where checklist_idx=#{checklist_idx}
+	</update>
 </mapper>

@@ -21,11 +21,5 @@
 		where category_idx=#{category_idx}))
 	</select>
 	
-	<update id="updateChecklist">
-	update tpm_checklist
-	set checklist_state=
-    	(select mod(checklist_state+1,2) from tpm_checklist
-    	where checklist_idx=#{checklist_idx})
-	where checklist_idx=#{checklist_idx}
-	</update>
+	
 </mapper>
