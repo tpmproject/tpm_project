@@ -21,5 +21,7 @@
     (select member_idx from tpm_project_member where project_idx=#{project_idx})pm
 	where m.member_idx =pm.member_idx
 	</select>
-	
+	<select id="proejctMember_t" resultType="tpm.tendency.model.TendencyDTO">
+	select 
+	</select>
 </mapper>

@@ -35,41 +35,71 @@ function categoryAddResult() {
 			}
 		}
 	}
-
 }
+
+//업무추가
 window.onload=function(){
 	$(work_modal).hide();
 	$(btnwork2).hide();
 }
-
 function showf(){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
 	$(w_modal).show();
 	$(btnwork2).hide();
 }
-
 function shows(){
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
 	var p=${pdto.project_idx};
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
-
 }
 function showsResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			window.alert(result);
+			
+			var json = JSON.parse(result);		
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				msg2 += '<div class="col-sm-12" id="modal_content">';
+				msg2 += '<div class="col-sm-12"> ';
+				msg2 += '<div class="panel"> ';
+				msg2 += '<div class="panel-body p-t-10"> ';
+				msg2 += '<div class="media-main"> ';
+				msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
+				msg2 += 				'class="thumb-lg img-circle bx-s" ';
+				msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+				msg2 += '</a> ';
+				msg2 += '</a> ';
+				msg2 += '</div> ';
+				msg2 += '<div class="info"> ';
+				msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
+				msg2 += '<h4>' + member.member_name + '</h4> ';
+				msg2 += '<p class="text-muted">' + member.member_id
+						+ '</p> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '<div class="clearfix"></div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+			}
+			var project_m = document.getElementById('project_m');
+			project_m.innerHTML = msg2;		
 		}
 	}
 }
-
 function closem() {
 	$(workback).fadeOut('100');
 	$(work_modal).fadeOut('100');
 	document.newWork.reset();
 }
+
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -201,7 +231,7 @@ function addCheckResult(){
 					<div class="category">
 						<div class="category_head">
 							${cdto.category_name }&nbsp;&nbsp;<i
-								class="glyphicon glyphicon-plus"></i> &nbsp;&nbsp;<i
+								class="glyphicon glyphicon-plus" onclick="showf()"></i> &nbsp;&nbsp;<i
 								class="glyphicon glyphicon-cog"></i>
 						</div>
 
@@ -211,8 +241,7 @@ function addCheckResult(){
 									<thead>
 										<tr>
 											<td>${wdto.work_title }</td>
-											<td align="right"><i class="glyphicon glyphicon-cog"
-												onclick="showf()"></i>&nbsp;&nbsp;&nbsp;</td>
+											<td align="right"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;&nbsp;</td>
 										</tr>
 									</thead>
 
@@ -319,6 +348,7 @@ function addCheckResult(){
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
 								<ul class="media-list">
+								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
 									<c:forEach var="arr" items="${arr}">
 										<li class="media"><a class="pull-left" href="#"><img
 												class="media-object"
