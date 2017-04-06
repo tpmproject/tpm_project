@@ -33,6 +33,7 @@ function dateTest(){
 <a href="javascript:dateTest()">날짜테스트</a><br>
 <a href="fileList.do">파일 리스트</a><br>
 <a href="popover.do">팝오버 테스트</a><br>
+<a href="dtotest.do">DTO안 DTO 테스트</a>
 
 <a href="memberInfo.do">개인 정보</a>
 
