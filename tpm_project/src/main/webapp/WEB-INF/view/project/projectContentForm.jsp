@@ -88,7 +88,7 @@ function checkResult() {
 
 function addCheck(work_idx){
 	
-	var cont=$('input[name=content'+work_idx+']').val();
+	var cont=$('#content'+work_idx).val();
 	var param='work_idx='+work_idx+'&checklist_content='+cont;
 	if(cont==null ||cont==''){
 		window.alert('체크리스트를 작성해주세요.');
@@ -100,10 +100,22 @@ function addCheckResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			
-			var chData=XHR.responseText;
-			var wi=chData.work_idx;
-			var chc=chData.checklist_content;
-			var check_div=${'check_div'+wi};
+			var strData=XHR.responseText;
+			var chData=eval('('+strData+')');
+	
+			var wi=chData.checklist.work_idx;
+			var chc=chData.checklist.checklist_content;
+			var chi=chData.checklist.checklist_idx;
+			
+			var chAdd="<a onclick='javascript:check("+chi+")'>"
+					+"<i id='ch"+chi+"' class='glyphicon glyphicon-unchecked'>"
+					+"</i>"+chc+"</a><br>";
+			
+			var spanNode = document.createElement('span');
+			spanNode.innerHTML = chAdd;
+			
+			document.getElementById('content'+wi).value='';
+			document.getElementById('check_div'+wi).appendChild(spanNode);
 			
 			
 		}
@@ -223,7 +235,7 @@ function addCheckResult(){
 											<td colspan="2">
 												<form action="javascript:addCheck(${wdto.work_idx})">
 												<div class="table_i glyphicon glyphicon-check"></div>
-												&nbsp;<input type="text" name="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
+												&nbsp;<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
 												&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
 												</form>
 											</td>
