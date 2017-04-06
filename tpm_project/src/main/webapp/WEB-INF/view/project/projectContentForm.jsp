@@ -99,7 +99,7 @@ function closem() {
 	$(work_modal).fadeOut('100');
 	document.newWork.reset();
 }
-
+ 
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -241,7 +241,7 @@ function addCheckResult(){
 									<thead>
 										<tr>
 											<td>${wdto.work_title }</td>
-											<td align="right"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;&nbsp;</td>
+											<td align="right"><i class="glyphicon glyphicon-cog" onclick="showu()"></i>&nbsp;&nbsp;&nbsp;</td>
 										</tr>
 									</thead>
 
@@ -347,18 +347,7 @@ function addCheckResult(){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<ul class="media-list">
 								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
-									<c:forEach var="arr" items="${arr}">
-										<li class="media"><a class="pull-left" href="#"><img
-												class="media-object"
-												src="/tpm_project/img/member/profile/${arr.member_img}"
-												height="30" width="30"></a>
-											<div class="media-body">
-												<h5 class="media-heading">${arr.member_name}</h5>
-											</div></li>
-									</c:forEach>
-								</ul>
 								<p></p>
 								<p></p>
 							</div>
@@ -380,18 +369,15 @@ function addCheckResult(){
 											<h6 class="media-heading">Media heading</h6>
 										</div></li>
 								</ul>
-								<p></p>
-								<p></p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
+				<c:if test=""></c:if>
 				<input type="submit" class="btn" value="완료">
 			</div>
-
-
 		</div>
 	</form>
 
