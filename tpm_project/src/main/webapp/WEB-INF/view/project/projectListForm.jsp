@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +31,9 @@ function showf(){
 function shows(){
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
-
+	var param = 'member_idx=' + ${sessionScope.s_member_idx};
+	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
+	
 }
 
 function closem() {
@@ -40,14 +43,15 @@ function closem() {
 
 function projectMemberAdd() {
 	var param = 'member_id=' + document.newProject.member_id.value;
-	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,
-			'POST');
+	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 
 }
 
 function projectMemberAddResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
+			
+			
 			var result = XHR.responseText;
 
 			var json = JSON.parse(result);
@@ -101,10 +105,68 @@ function projectMemberAddResult() {
 				divNode.innerHTML = result;
 				bodyNode.appendChild(divNode); */
 			}
+			
+			
 		}
 	}
-
 }
+	
+	function projectMemberAddResult2() {
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
+				var result = XHR.responseText;
+				window.alert(result);
+				var json = JSON.parse(result);
+
+				 var msg2 = '';
+				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+				for (var i = 0; i < members.length; i++) {
+					var member = members[i];
+
+					msg2 += '<div class="col-sm-12" id="modal_content">';
+					msg2 += '<div class="col-sm-12"> ';
+					msg2 += '<div class="panel"> ';
+					msg2 += '<div class="panel-body p-t-10"> ';
+					msg2 += '<div class="media-main"> ';
+					msg2 += '<a class="pull-left" href="#"> <img ';
+					msg2 += 				'class="thumb-lg img-circle bx-s" ';
+					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+
+					msg2 += '</a> ';
+					msg2 += '<div class="pull-right btn-group-sm"> ';
+					msg2 += '<a href="javascript:goInsert_member(' + i
+							+ ')" class="btn btn-success tooltips" ';
+					msg2 += 'data-placement="top" data-toggle="tooltip" ';
+					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
+
+					msg2 += '</a> ';
+					msg2 += '</div> ';
+					msg2 += '<div class="info"> ';
+					msg2 += '<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
+					msg2 += '<h4>' + member.member_name + '</h4> ';
+					msg2 += '<p class="text-muted">' + member.member_id
+							+ '</p> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '<div class="clearfix"></div> ';
+					msg2 += '<hr> ';
+
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+				}
+
+				var myFriend_List = document.getElementById('myFriend_List');
+				myFriend_List.innerHTML = msg2;
+				
+			 
+			}
+		}
+	}
+	
+
+
 
 
 
@@ -167,7 +229,9 @@ function projectMemberAddResult() {
 						<div class="row">
 							<div class="col-md-3">
 								<h4>친구목록</h4>
-								친구 리스트
+								<div id="myFriend_List" style="width:550px; height: 300px; overflow-y: scroll">
+								
+								</div>
 								</ul>
 								<h4>검색 멤버</h4>
 								<div>

@@ -4,8 +4,8 @@
 <%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	ArrayList<MemberDTO> arry_mdto = (ArrayList) request.getAttribute("arr");
-	
+	ArrayList<MemberDTO> arry_mdto = (ArrayList) request.getAttribute("arry_mdto");
+
 	JSONObject object = new JSONObject();
 
 	JSONArray arry_members = new JSONArray();

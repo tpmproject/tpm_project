@@ -82,14 +82,30 @@ public class ProjectController {
 		
 		MyFriendDTO mdto=new MyFriendDTO();
 		mdto.setMember_idx(dto.getMember_idx());
-		ArrayList<MemberDTO> arry_mdto = (ArrayList)myFriendDAO.getFriendList(mdto);
 		
-		ArrayList<MemberDTO> arr=memberDAO.memberAddSearch(dto);
+		ArrayList<MemberDTO> arry_mdto=memberDAO.memberAddSearch(dto);
 	    ModelAndView mav = new ModelAndView();
-		mav.addObject("arr", arr);
+		mav.addObject("arry_mdto", arry_mdto);
+
 		mav.setViewName("project/projectMemberAdd_d");
 		return mav;
 	}
+	
+	/**프로젝트-프로젝트 생성-멤버검색*/
+	@RequestMapping(value="projectFriendList.do", method=RequestMethod.POST)
+	public ModelAndView projectFriendList(MemberDTO dto){
+		
+		MyFriendDTO mdto=new MyFriendDTO();
+		mdto.setMember_idx(dto.getMember_idx());
+		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(mdto);
+		
+	    ModelAndView mav = new ModelAndView();
+
+		mav.addObject("arry_mdto",arry_mdto);
+		mav.setViewName("project/projectMemberAdd_d");
+		return mav;
+	}
+	
 	/** 프로젝트 - 프로젝트 수정 */
 	@RequestMapping(value="projectUpdate.do",  method=RequestMethod.POST)
 	public ModelAndView projectUpdate(){
