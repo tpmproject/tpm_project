@@ -231,7 +231,6 @@
                   <option>${project.project_name}</option>
                 </c:forEach>
                 </select>
-                
                 <br>
                 <br>
                 <div>
