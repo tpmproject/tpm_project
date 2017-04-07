@@ -5,10 +5,13 @@ package tpm.sample.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -117,6 +120,22 @@ public class SampleController {
 		mav.addObject("members_test2", arry_mdto);
 		mav.setViewName("jsonView");
 		return mav;
+	}
+	
+	/** ajaxTestList 페이지 이동 */
+	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
+	public String ajaxtest(){
+		return "sample/ajax/ajaxTestList";
+	}
+	
+	@RequestMapping(value="ajaxtest1.do", method=RequestMethod.GET)
+	public String ajaxtest1Form(){
+		return "sample/ajax/ajaxTest1";
+	}
+	
+	@RequestMapping(value="ajaxtest1.do", method=RequestMethod.POST)
+	public @ResponseBody ArrayList<MemberDTO> jsonTest5(MemberDTO mdto){
+		return mdao.getMemberIdAndNameSearch(mdto);
 	}
 	
 	

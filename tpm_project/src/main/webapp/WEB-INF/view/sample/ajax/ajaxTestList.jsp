@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="ajaxtest1.do">Javascript Ajax</a>
+<a href="ajaxtest1.do">Javascript Ajax</a><br>
 <a href="ajaxtest2.do">Jquery Ajax</a>
 </body>
 </html>
