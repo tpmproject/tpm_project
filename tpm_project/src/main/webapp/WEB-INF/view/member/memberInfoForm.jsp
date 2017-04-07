@@ -125,97 +125,96 @@
             <small>???</small>
           </h1>
         </div>
-        
+        <c:set var="list" value="${userInfo}"/>
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
-              <div class="col-sm-offset-7">
-                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
-                <select>
-                  <option>색상1</option>
-                  <option>색상2</option>
-                </select>
-              </div>
-              <br>
-              <br>
-              <br>
-              <div class="form-group">
-                <div class="col-md-4">
-                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
-                  class="img-circle img-responsive">
-                </div>
-                <div class="col-md-8">파일 선택 들어갈 곳</div>
-              </div>&nbsp;
-              
-                 <c:set var="list" value="${userInfo}"/>
-                 
-                 <c:forEach var="dto" items="${list}">
-                 
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputEmail" name="member_id" value="${dto.member_id}" readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
-                <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd">
-                  <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
-                <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch">
-                  <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputName">이름</label>
-                <div class="col-sm-8">
-                  <input class="form-control" id="inputName" type="text" name="member_name" value="${dto.member_name}">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputTel">연락처</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
-                </div>
-              </div>
-              	<c:choose>
-	                <c:when test="${dto.member_gender}=='남자'">
-	                <div class="form-group">
-		                <label class="col-sm-3 control-label" for="inputGender">성별</label>
-		                <div class="col-sm-8">
-		                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
-		                    <option value="남" selected="selected">남자</option>
-		                    <option value="여">여자</option>
-		                  </select>
-		                </div>
+             
+	              <div class="col-sm-offset-7">
+	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
+	                <select>
+	                  <option>색상1</option>
+	                  <option>색상2</option>
+	                </select>
+	              </div>
+	              <br>
+	              <br>
+	              <br>
+	              <div class="form-group">
+	                <div class="col-md-4">
+	                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
+	                  class="img-circle img-responsive">
 	                </div>
-	                </c:when>
-	                <c:otherwise>
-	                <div class="form-group">
-		                <label class="col-sm-3 control-label" for="inputGender">성별</label>
-		                <div class="col-sm-8">
-		                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
-		                    <option value="남">남자</option>
-		                    <option value="여" selected="selected">여자</option>
-		                  </select>
-		                </div>
+	                <div class="col-md-8">파일 선택 들어갈 곳</div>
+	              </div>&nbsp;
+	              
+	              <c:forEach var="dto" items="${list}">
+	              <div class="form-group">
+	                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+	                <div class="col-sm-8">
+	                  <input type="text" class="form-control" id="inputEmail" name="member_id" value="${dto.member_id}" readonly>
 	                </div>
-	                </c:otherwise>
-             	</c:choose>
-              </c:forEach>
-              <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-10">
-                  <button type="submit" class="btn btn-default">수정</button>
-                  <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
-                </div>
-              </div>
+	              </div>
+	              <div class="form-group">
+	                <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
+	                <div class="col-sm-8">
+	                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd" required>
+	                  <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
+	                </div>
+	              </div>
+	              <div class="form-group">
+	                <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
+	                <div class="col-sm-8">
+	                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" required>
+	                  <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+	                </div>
+	              </div>
+	              <div class="form-group">
+	                <label class="col-sm-3 control-label" for="inputName">이름</label>
+	                <div class="col-sm-8">
+	                  <input class="form-control" id="inputName" type="text" name="member_name" value="${dto.member_name}">
+	                </div>
+	              </div>
+	              <div class="form-group">
+	                <label class="col-sm-3 control-label" for="inputTel">연락처</label>
+	                <div class="col-sm-8">
+	                  <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
+	                </div>
+	              </div>
+	              	<c:choose>
+		                <c:when test="${dto.member_gender=='남자'}">
+		                <div class="form-group">
+			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
+			                <div class="col-sm-8">
+			                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+			                    <option value="남자" selected="selected">남자</option>
+			                    <option value="여자">여자</option>
+			                  </select>
+			                </div>
+		                </div>
+		                </c:when>
+		                <c:otherwise>
+		                <div class="form-group">
+			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
+			                <div class="col-sm-8">
+			                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+			                    <option value="남자">남자</option>
+			                    <option value="여자" selected="selected">여자</option>
+			                  </select>
+			                </div>
+		                </div>
+		                </c:otherwise>
+	             	</c:choose>
+	              </c:forEach>
+	              <div class="form-group">
+	                <div class="col-sm-offset-4 col-sm-10">
+	                  <button type="submit" class="btn btn-default">수정</button>
+	                  <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
+	                </div>
+	              </div>
             </form>
           </div>
+          
          <div class="col-md-6">
             <div>
               <div>

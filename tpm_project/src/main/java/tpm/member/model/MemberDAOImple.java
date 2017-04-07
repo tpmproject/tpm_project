@@ -63,19 +63,14 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 	
-	public String emailCheck() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public MemberDTO getMemberInfo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int updateMember() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateMember(MemberDTO mdto) {
+		int count = sqlMap.update("memberUpdate", mdto);
+		return count;
 	}
 
 	public int addMember() {

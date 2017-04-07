@@ -291,6 +291,7 @@ public class MemberController {
 		HttpSession session = req.getSession();
 		
 		String userid = (String)session.getAttribute("s_member_id");
+		
 		int member_idx = (Integer)session.getAttribute("s_member_idx");
 		
 		ModelAndView mav = new ModelAndView();
@@ -311,15 +312,32 @@ public class MemberController {
 	
 	/** 개인정보 - 개인 정보 수정 */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
-	public ModelAndView memberUpdate(){
+	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/memberInfoForm");
+		
+		String s_member_id = (String)session.getAttribute("s_member_id");
+		
+		int count = mdao.updateMember(mdto);
+		
+		String result = "";
+		if(count>0){
+			result = "수정 완료";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberUpdate_ok");			
+		} else{
+			result = "수정 실패. 관리자에게 문의바랍니다";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberUpdate_ok");
+		}
+		
 		return mav;
 	}
 	
 	/** 개인정보 - 개인 성향 수정 (평가 ) */
-	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
+	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
 	public ModelAndView memberUpdate_ajax(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("memeber/memberResult_d");
