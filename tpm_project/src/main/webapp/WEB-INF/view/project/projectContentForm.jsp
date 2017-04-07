@@ -120,6 +120,7 @@ function checkResult() {
 			}else if(ch_sv=='0'){
 				ch.className='glyphicon glyphicon-ok';
 				ch_s.value='1';
+				$('#div_ch'+result).hide('100');
 			}
 			
 		}
@@ -150,18 +151,36 @@ function addCheckResult(){
 			
 			var chAdd="<a onclick='javascript:check("+chi+")'>"
 					+"<i id='ch"+chi+"' class='glyphicon glyphicon-unchecked'>"
-					+"</i>"+chc+"</a><br>";
-			
-			var spanNode = document.createElement('span');
-			spanNode.innerHTML = chAdd;
+					+"</i>&nbsp;"+chc+"</a>"
+					+"<input type='hidden' id='ch_state"+chi+"' value='0'>";
+					
+			var dNode = document.createElement('div');
+			dNode.setAttribute('id','div_ch'+chi);
+			dNode.innerHTML = chAdd;
 			
 			document.getElementById('content'+wi).value='';
-			document.getElementById('check_div'+wi).appendChild(spanNode);
+			document.getElementById('check_div'+wi).appendChild(dNode);
 			
 			
 		}
 	}
 }
+
+/*완료한 체크리스트 목록 보기 */
+function showCheck(work_idx){
+	var div=document.getElementById('check_div'+work_idx);
+
+	var fc=div.firstChild.nextSibling;
+	var lc=div.lastChild;
+	while(fc!=lc){
+		fc.style.display='block';
+		fc=fc.nextSibling;
+		if(fc==lc)break;
+		fc=fc.nextSibling;
+	}
+	
+}
+
 
 </script>
 <style>
@@ -284,19 +303,20 @@ function addCheckResult(){
 											<td colspan="2">
 												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
-														<a onclick="javascript:check(${chdto.checklist_idx })">
+														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }">
+															<a onclick="javascript:check(${chdto.checklist_idx })">
 															<i id="ch${chdto.checklist_idx }"
 															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
-														</i> ${chdto.checklist_content}
-														<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
-														</a>
-														<br>
+															</i> ${chdto.checklist_content}
+															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
+															</a>
+														</div>
 													</c:forEach>
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2" align="left">표시하기</td>
+											<td colspan="2" align="left"><a href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a></td>
 										</tr>
 										<tr>
 											<td>진행률</td>
