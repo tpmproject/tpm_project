@@ -11,10 +11,18 @@ public class ChecklistDAOImple implements ChecklistDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public int addChecklist(ChecklistDTO dto) {
+	public ChecklistDTO addChecklist(ChecklistDTO dto) {
+		
+		int checklist_idx=sqlMap.selectOne("checklist_seq");
+		dto.setChecklist_idx(checklist_idx);
 		int result= sqlMap.insert("addChecklist", dto);
 		
-		return result;
+		if(result>0){
+			return dto;
+		}else{
+			return null;	
+		}
+		
 	}
 
 	public int updateChecklist(int checklist_idx) {

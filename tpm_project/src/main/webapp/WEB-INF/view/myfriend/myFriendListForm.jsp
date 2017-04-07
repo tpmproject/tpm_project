@@ -27,6 +27,7 @@
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
 		//window.alert(responseText);
+
 		var json = JSON.parse(responseText);
 		//var json = eval('('+responseText+')'); // 객체화
 		//var json = responseText;

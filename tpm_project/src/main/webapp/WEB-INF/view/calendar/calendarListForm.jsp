@@ -1,3 +1,5 @@
+<%@page import="tpm.work.model.MyWorkDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,17 +14,20 @@
 <% 
 	
 	//JSONObject object = new JSONObject();
-
+	ArrayList<MyWorkDTO> mwdto = (ArrayList) request.getAttribute("arry_mwdto");
+	
 	JSONArray arry_calender_work = new JSONArray();
 
-	JSONObject obj = new JSONObject();
-	obj.put("title", "All Day Event");
-	obj.put("start", "2017-04-08 13:00:00");
-	obj.put("backgroundColor", "#f56954");
-	obj.put("borderColor", "#f56954");
-	
-	arry_calender_work.add(obj);
-
+	for(int i = 0 ; i < mwdto.size() ; i++){
+		JSONObject obj = new JSONObject();
+		obj.put("title", mwdto.get(i).getWork_title());
+		obj.put("start", mwdto.get(i).getWork_start().toString());
+		obj.put("end", mwdto.get(i).getWork_end().toString());
+		obj.put("backgroundColor", "#f56954");
+		obj.put("borderColor", "#f56954");
+		
+		arry_calender_work.add(obj);
+	}
 	//object.put("events", arry_calender_work);
 	
 %>
@@ -65,6 +70,7 @@
 		//var date2 = new Date(2017, 03, 05);
 		var date2 = new Date("2017-04-06");
 		console.log(date2);
+		
 		$('#calendar').fullCalendar(
 				{
 					header : {
@@ -77,6 +83,11 @@
 						month : 'month',
 						week : 'week',
 						day : 'day'
+					}, 
+					titleFormat: {
+					      month: 'yyyy년 MMMM',
+					      week: "yyyy년 MMMM d[ yyyy]{'일 ~'[ MMM] dd일 }",
+					       day: 'yyyy년 MMM d dddd'
 					},
 					//Random default events
 					events : <%=arry_calender_work%>

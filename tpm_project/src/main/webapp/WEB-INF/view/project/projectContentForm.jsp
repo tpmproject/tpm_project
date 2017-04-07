@@ -35,41 +35,71 @@ function categoryAddResult() {
 			}
 		}
 	}
-
 }
+
+//업무추가
 window.onload=function(){
 	$(work_modal).hide();
 	$(btnwork2).hide();
 }
-
 function showf(){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
 	$(w_modal).show();
 	$(btnwork2).hide();
 }
-
 function shows(){
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
 	var p=${pdto.project_idx};
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
-
 }
 function showsResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			window.alert(result);
+			
+			var json = JSON.parse(result);		
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				msg2 += '<div class="col-sm-12" id="modal_content">';
+				msg2 += '<div class="col-sm-12"> ';
+				msg2 += '<div class="panel"> ';
+				msg2 += '<div class="panel-body p-t-10"> ';
+				msg2 += '<div class="media-main"> ';
+				msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
+				msg2 += 				'class="thumb-lg img-circle bx-s" ';
+				msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+				msg2 += '</a> ';
+				msg2 += '</a> ';
+				msg2 += '</div> ';
+				msg2 += '<div class="info"> ';
+				msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
+				msg2 += '<h4>' + member.member_name + '</h4> ';
+				msg2 += '<p class="text-muted">' + member.member_id
+						+ '</p> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '<div class="clearfix"></div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+				msg2 += '</div> ';
+			}
+			var project_m = document.getElementById('project_m');
+			project_m.innerHTML = msg2;		
 		}
 	}
 }
-
 function closem() {
 	$(workback).fadeOut('100');
 	$(work_modal).fadeOut('100');
 	document.newWork.reset();
 }
+ 
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -88,7 +118,7 @@ function checkResult() {
 
 function addCheck(work_idx){
 	
-	var cont=$('input[name=content'+work_idx+']').val();
+	var cont=$('#content'+work_idx).val();
 	var param='work_idx='+work_idx+'&checklist_content='+cont;
 	if(cont==null ||cont==''){
 		window.alert('체크리스트를 작성해주세요.');
@@ -100,10 +130,22 @@ function addCheckResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			
-			var chData=XHR.responseText;
-			var wi=chData.work_idx;
-			var chc=chData.checklist_content;
-			var check_div=${'check_div'+wi};
+			var strData=XHR.responseText;
+			var chData=eval('('+strData+')');
+	
+			var wi=chData.checklist.work_idx;
+			var chc=chData.checklist.checklist_content;
+			var chi=chData.checklist.checklist_idx;
+			
+			var chAdd="<a onclick='javascript:check("+chi+")'>"
+					+"<i id='ch"+chi+"' class='glyphicon glyphicon-unchecked'>"
+					+"</i>"+chc+"</a><br>";
+			
+			var spanNode = document.createElement('span');
+			spanNode.innerHTML = chAdd;
+			
+			document.getElementById('content'+wi).value='';
+			document.getElementById('check_div'+wi).appendChild(spanNode);
 			
 			
 		}
@@ -189,7 +231,7 @@ function addCheckResult(){
 					<div class="category">
 						<div class="category_head">
 							${cdto.category_name }&nbsp;&nbsp;<i
-								class="glyphicon glyphicon-plus"></i> &nbsp;&nbsp;<i
+								class="glyphicon glyphicon-plus" onclick="showf()"></i> &nbsp;&nbsp;<i
 								class="glyphicon glyphicon-cog"></i>
 						</div>
 
@@ -199,8 +241,7 @@ function addCheckResult(){
 									<thead>
 										<tr>
 											<td>${wdto.work_title }</td>
-											<td align="right"><i class="glyphicon glyphicon-cog"
-												onclick="showf()"></i>&nbsp;&nbsp;&nbsp;</td>
+											<td align="right"><i class="glyphicon glyphicon-cog" onclick="showu()"></i>&nbsp;&nbsp;&nbsp;</td>
 										</tr>
 									</thead>
 
@@ -223,7 +264,7 @@ function addCheckResult(){
 											<td colspan="2">
 												<form action="javascript:addCheck(${wdto.work_idx})">
 												<div class="table_i glyphicon glyphicon-check"></div>
-												&nbsp;<input type="text" name="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
+												&nbsp;<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
 												&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
 												</form>
 											</td>
@@ -306,17 +347,7 @@ function addCheckResult(){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<ul class="media-list">
-									<c:forEach var="arr" items="${arr}">
-										<li class="media"><a class="pull-left" href="#"><img
-												class="media-object"
-												src="/tpm_project/img/member/profile/${arr.member_img}"
-												height="30" width="30"></a>
-											<div class="media-body">
-												<h5 class="media-heading">${arr.member_name}</h5>
-											</div></li>
-									</c:forEach>
-								</ul>
+								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
 								<p></p>
 								<p></p>
 							</div>
@@ -338,18 +369,15 @@ function addCheckResult(){
 											<h6 class="media-heading">Media heading</h6>
 										</div></li>
 								</ul>
-								<p></p>
-								<p></p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
+				<c:if test=""></c:if>
 				<input type="submit" class="btn" value="완료">
 			</div>
-
-
 		</div>
 	</form>
 

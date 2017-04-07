@@ -11,10 +11,12 @@
 
 	
 {
-checklist_idx:<%=chdto.getChecklist_idx()%>,
-work_idx:<%=chdto.getWork_idx()%>,
-checklist_content:'<%=chdto.getChecklist_content()%>',
-checklist_state:<%=chdto.getChecklist_state()%>
+	checklist:{
+	checklist_idx:<%=chdto.getChecklist_idx()%>,
+	work_idx:<%=chdto.getWork_idx()%>,
+	checklist_content:'<%=chdto.getChecklist_content()%>',
+	checklist_state:<%=chdto.getChecklist_state()%>
+	}
 }
 
 	

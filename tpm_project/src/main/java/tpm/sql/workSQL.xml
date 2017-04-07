@@ -21,5 +21,20 @@
     (select member_idx from tpm_project_member where project_idx=#{project_idx})pm
 	where m.member_idx =pm.member_idx
 	</select>
+	<select id="proejctMember_t" resultType="tpm.tendency.model.TendencyDTO">
+	select 
+	</select>
 	
+	<select id="myWorkAllList" parameterType="tpm.member.model.MemberDTO" resultType="tpm.project.model.TotalDTO">
+		SELECT p.*, cwck.category_idx, cwck.category_name, cwck.work_idx, cwck.work_title, cwck.work_start, cwck.work_end, cwck.work_complete, cwck.work_confirm, cwck.work_state, cwck.checklist_idx, cwck.checklist_content, cwck.checklist_state
+		FROM tpm_project p, (SELECT c.project_idx, c.category_idx, c.category_name, wck.work_idx, wck.work_title, wck.work_start, wck.work_end, wck.work_complete, wck.work_confirm, wck.work_state, wck.checklist_idx, wck.checklist_content, wck.checklist_state
+		                     FROM tpm_category c, (SELECT w.category_idx, w.work_idx, w.work_title, w.work_start, w.work_end, w.work_complete, w.work_confirm, w.work_state, ck.checklist_idx, ck.checklist_content, ck.checklist_state
+		                                           FROM  tpm_work w LEFT OUTER JOIN tpm_checklist ck ON w.work_idx = ck.work_idx
+		                                           WHERE w.work_idx IN (SELECT work_idx 
+		                                                                FROM tpm_work_member 
+		                                                                WHERE member_idx = #{member_idx})) wck
+		                     WHERE c.category_idx = wck.category_idx) cwck
+		WHERE p.project_idx = cwck.project_idx
+		ORDER BY cwck.work_idx DESC, cwck.checklist_idx ASC
+	</select>
 </mapper>

@@ -4,10 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.checklist">
 	
+	<select id="checklist_seq" resultType="Integer">
+		select (checklist_idx.nextval)checklist_idx from dual
+	</select>
+	
 	<insert id="addChecklist" parameterType="tpm.checklist.model.ChecklistDTO">
 		insert into tpm_checklist
 		values(
-			checklist_idx.nextval,
+			#{checklist_idx},
 			#{work_idx},
 			#{checklist_content},
 			0

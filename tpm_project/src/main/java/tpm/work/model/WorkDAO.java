@@ -9,6 +9,7 @@ public interface WorkDAO {
 	
 	public ArrayList<WorkDTO> listWork();
 	public ArrayList<MemberDTO> projectMember(int project_idx);
+	public ArrayList<MyWorkDTO> myWorkAllList(MemberDTO mdto);
 	public int addWork();
 	public int updateWork();
 	public int delWork();

@@ -23,8 +23,8 @@ public class CheckListController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("checklist/checkAdd_d");
-		int result=checklistDAO.addChecklist(dto);
-		if(result>0){
+		dto=checklistDAO.addChecklist(dto);
+		if(dto!=null){
 			mav.addObject("checklist", dto);
 		}
 		
