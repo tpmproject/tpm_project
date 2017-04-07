@@ -223,12 +223,15 @@
               </div>
               <br>
               <br>
+              <c:set var="myproject" value="${myprojectlist}"/>
               <div>
                 <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
                 <select>
-                  <option>프로젝트1</option>
-                  <option>프로젝트2</option>
+                <c:forEach var="project" items="${myproject}">
+                  <option>${project.project_name}</option>
+                </c:forEach>
                 </select>
+                
                 <br>
                 <br>
                 <div>
@@ -239,6 +242,7 @@
                   <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
                 </div>
               </div>
+              
             </div>
             <hr>
             <div>

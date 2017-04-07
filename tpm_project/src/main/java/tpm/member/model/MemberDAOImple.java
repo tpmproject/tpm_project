@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import tpm.project.model.ProjectDTO;
+
 public class MemberDAOImple implements MemberDAO {
 
 	public static final int ID_NO=0;
@@ -81,6 +83,11 @@ public class MemberDAOImple implements MemberDAO {
 	public String myWorkComplete(int member_idx) {
 		String count = sqlMap.selectOne("myWorkComplete", member_idx);
 		return count;
+	}
+	
+	public List<ProjectDTO> myproject(int member_idx) {
+		List<ProjectDTO> list = sqlMap.selectList("myProject", member_idx);
+		return list;
 	}
 	
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto) {

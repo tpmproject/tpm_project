@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tpm.myfriend.model.MyFriendDTO;
+import tpm.project.model.ProjectDTO;
 
 public interface MemberDAO {
 	
@@ -17,6 +18,7 @@ public interface MemberDAO {
 	public int updateMember(MemberDTO mdto);
 	public String myWorkCount(int member_idx);
 	public String myWorkComplete(int member_idx);
+	public List<ProjectDTO> myproject(int member_idx);
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto);
 	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto);
 	public ArrayList<MemberDTO> getMemberAllList();

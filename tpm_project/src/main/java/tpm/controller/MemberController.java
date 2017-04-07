@@ -22,6 +22,7 @@ import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
+import tpm.project.model.ProjectDTO;
 import tpm.tendency.model.TendencyDAO;
 import tpm.tendency.model.TendencyDTO;
 
@@ -306,6 +307,9 @@ public class MemberController {
 		
 		String myworkcomplete = mdao.myWorkComplete(member_idx);
 		
+		List<ProjectDTO> myproject = mdao.myproject(member_idx);
+		
+		mav.addObject("myprojectlist", myproject);
 		mav.addObject("myworkcount", myworkcount);
 		mav.addObject("myworkcomplete", myworkcomplete);
 		mav.addObject("team_tendency", team_tendencyList);

@@ -43,6 +43,9 @@
 		where a.work_idx = b.work_idx and a.member_idx = #{member_idx}) c
 	</select>
 	
-	<select id="myProject" parameterType="int" resultType="String">
+	<select id="myProject" parameterType="int" resultType="tpm.project.model.ProjectDTO">
+		select *
+		from tpm_project a, (select project_idx from tpm_project_member where member_idx = #{member_idx}) b
+		where a.project_idx = b.project_idx
 	</select>	
 </mapper>

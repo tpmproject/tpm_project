@@ -26,6 +26,14 @@ public class ProjectDTO {
 		super();
 	}
 
+	public ProjectDTO(int project_idx, String project_name, int project_state, String project_content) {
+		super();
+		this.project_idx = project_idx;
+		this.project_name = project_name;
+		this.project_state = project_state;
+		this.project_content = project_content;
+	}
+
 	public ProjectDTO(int project_idx, String project_name, int project_state, String project_content,
 			ArrayList<CategoryDTO> category_dtos, int category_num, int work_num, int checklist_num) {
 		super();
@@ -38,8 +46,6 @@ public class ProjectDTO {
 		this.work_num = work_num;
 		this.checklist_num = checklist_num;
 	}
-
-
 
 	public int getProject_idx() {
 		return project_idx;
@@ -56,19 +62,14 @@ public class ProjectDTO {
 	public void setProject_name(String project_name) {
 		this.project_name = project_name;
 	}
-
 	
 	public String getProject_content() {
 		return project_content;
 	}
 
-
-
 	public void setProject_content(String project_content) {
 		this.project_content = project_content;
 	}
-
-
 
 	public int getProject_state() {
 		return project_state;
