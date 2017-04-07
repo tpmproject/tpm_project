@@ -32,6 +32,10 @@
 		ORDER BY cwck.work_idx DESC, cwck.checklist_idx ASC
 	</select>
 	
+	<select id="myWorkCount" parameterType="int" resultType="int">
+		select count(*) from tpm_work_member where member_idx = #{member_idx}
+	</select>
+	
 	<select id="myWorkComplete" parameterType="int" resultType="int">
 		select count(*)
 		from (select b.work_idx, a.member_idx from tpm_work_member a,
