@@ -18,6 +18,8 @@ public class SampleController {
 	@Autowired
 	SampleWorkDAO sampleWorkDAO;
 	
+	
+	
 	/** 팝오버테스트 이동 */
 	@RequestMapping(value="popover.do", method=RequestMethod.GET)
 	public String popover(){
@@ -40,4 +42,12 @@ public class SampleController {
 		
 		return mav;
 	}
+	
+	//// 제이슨 ////
+	/** 결과 페이지에서 수작업을 통하여 JSON 형식의 데이터를 구축하기 */
+	@RequestMapping(value="jsontest1.do", method=RequestMethod.GET)
+	public ModelAndView jsonTest1(){
+		
+	}
+	
 }

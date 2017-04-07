@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import tpm.member.model.MemberDTO;
 import tpm.myfriend.model.MyFriendDAO;
 import tpm.myfriend.model.MyFriendDTO;
@@ -52,9 +54,19 @@ public class MyFriendController {
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
 		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
 				
-		ModelAndView mav = new ModelAndView();
+		/*ModelAndView mav = new ModelAndView();
 		mav.setViewName("myfriend/myFriendList_d");
 		mav.addObject("arry_mdto", arry_mdto);
+		return mav;*/
+		
+		ModelAndView mav = new ModelAndView();
+		JSONArray jsonArray = new JSONArray();
+		JSONObject json = new JSONObject();
+
+		json.put("members", jsonArray.fromObject(arry_mdto));
+		
+		mav.setViewName("myfriend/myFriendList_d");
+		mav.addObject("jsonArray", json);
 		return mav;
 	}
 	
