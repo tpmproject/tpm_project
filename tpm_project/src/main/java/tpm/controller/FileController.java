@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.file.model.FileDAO;
@@ -33,9 +34,9 @@ public class FileController {
 	
 	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(){
+	public ModelAndView fileList(@RequestParam("project_idx")int project_idx){
 		
-		ArrayList<FileDTO> fileList=fdao.getFileList(2);
+		ArrayList<FileDTO> fileList=fdao.getFileList(project_idx);
 		String name=fileList.get(0).getFile_name();
 		System.out.println("파일이름:"+name);
 		

@@ -34,17 +34,24 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
-    function show() {
-    sendRequest_extension('fileList.do', null, ajax_result, 'POST', 'FILE_LIST');
+    function project_fileList(i){
+		var param = 'project_idx=' + i;
+		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+	
 	}
+	function action_ajax(url, param, method, ctype) {
+		sendRequest_extension(url, param, ajax_result, method, ctype);
+		return false;
+	}
+	
     function ajax_result(httpRequest, ctype) {
     	return function() {
     		if(httpRequest.readyState == 4){
     			if(httpRequest.status == 200){
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
-    					var divNotice = document.getElementById('fileList');
-    					divNotice.innerHTML = responseText;
+    					result_process(responseText, ctype);
+    					
     					
     				}
     			}
@@ -53,6 +60,44 @@
     		}
     	}
     }
+    function result_process(responseText, ctype) {
+
+		if(ctype == 'FILE_LIST'){
+			fileList_setting(responseText);
+		} else if(ctype == ''){
+			search_modal_setting(responseText);
+		} else {
+			window.alert('잘못된 경로');
+		}
+	}
+	function fileList_setting(responseText) {
+		window.alert(responseText);
+		var json = JSON.parse(responseText);
+		
+		var msg = '';
+		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
+		for(var i = 0 ; i < files.length; i++){
+			var file = files[i];
+			
+		
+			
+			msg +='<tr class="odd gradeX">'
+					msg +='<td>'+file.file_idx+'</td>'
+					msg +='<td>'+file.file_name+'</td>'
+					msg +='<td>'+file.file_size+'</td>'
+					msg +='<td class="center">'+file.file_date+'</td>'
+					msg +='<td class="center">안병민</td>'
+			msg += '</tr>'
+		
+		}
+		
+		var file_content_list = document.getElementById('file_content_list');
+		file_content_list.innerHTML = '';
+		file_content_list.innerHTML = msg;
+		
+	}
+	
+	
     </script>
   </head>
   
@@ -91,7 +136,7 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                   <li>
-                    <a href="#" onclick="show();">myweb 프로젝트</a>
+                    <a href="#" onclick="project_fileList(${idx 써라 });">myweb 프로젝트</a>
                   </li>
                   <li>
                     <a href="">final 프로젝트</a>
@@ -127,15 +172,9 @@
                       <th>공유한 사람</th>
                     </tr>
                   </thead>
-                  <tbody id="fileList">
+                  <tbody id="file_content_list">
                   
-                    <tr class="odd gradeX">
-						<td>1</td>
-						<td>미디어.jsp</td>
-						<td>33</td>
-						<td class="center">2017-08-22</td>
-						<td class="center">안병민</td>
-					</tr>
+                   
                   
                   </tbody>
                 </table>
