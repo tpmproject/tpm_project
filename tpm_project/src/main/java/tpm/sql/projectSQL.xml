@@ -10,6 +10,10 @@
 		where a.project_idx=b.project_idx
 	</select>
 
+	<select id="projectList" resultType="tpm.project.model.ProjectDTO">
+		select * from tpm_project
+	</select>
+	
 	<insert id="projectInsert" parameterType="tpm.project.model.ProjectDTO">
 		insert into tpm_project
 		values(

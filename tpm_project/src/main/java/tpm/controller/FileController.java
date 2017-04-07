@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.file.model.FileDAO;
 import tpm.file.model.FileDTO;
+import tpm.project.model.ProjectDTO;
 
 @Controller
 public class FileController {
@@ -26,8 +27,10 @@ public class FileController {
 	public ModelAndView fileListForm(HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
-		
+		ArrayList<ProjectDTO> pdto=fdao.projectAllList();
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pdto",pdto);
 		mav.setViewName("file/fileListForm");
 		return mav;
 	}
@@ -37,8 +40,6 @@ public class FileController {
 	public ModelAndView fileList(@RequestParam("project_idx")int project_idx){
 		
 		ArrayList<FileDTO> fileList=fdao.getFileList(project_idx);
-		String name=fileList.get(0).getFile_name();
-		System.out.println("파일이름:"+name);
 		
 		ModelAndView mav = new ModelAndView();
 		

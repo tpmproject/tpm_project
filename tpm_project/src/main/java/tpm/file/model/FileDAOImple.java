@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import tpm.project.model.ProjectDTO;
+
 public class FileDAOImple implements FileDAO {
 	
 	private SqlSessionTemplate sqlMap;
@@ -13,9 +15,9 @@ public class FileDAOImple implements FileDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<FileDTO> projectAllList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ProjectDTO> projectAllList() {
+		ArrayList<ProjectDTO> project_list=(ArrayList)sqlMap.selectList("projectList");
+		return project_list;
 	}
 
 	public ArrayList<FileDTO> getFileList(int project_idx) {
