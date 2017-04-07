@@ -114,13 +114,25 @@ function checkResult() {
 			var ch_s=document.getElementById('ch_state'+result);
 			var ch_sv=document.getElementById('ch_state'+result).value;
 			
+			var div_ch=document.getElementById('div_ch'+result);
+			div_ch=div_ch.parentNode.nextSibling.nextSibling;
+			
 			if(ch_sv=='1'){
+				$(ch).hide();
 				ch.className='glyphicon glyphicon-unchecked';
+				$(ch).fadeIn('50');
 				ch_s.value='0';
 			}else if(ch_sv=='0'){
-				ch.className='glyphicon glyphicon-ok';
+				
+				if(div_ch.value=='0'){
+					ch.className='glyphicon glyphicon-ok';
+					$('#div_ch'+result).hide('100');
+				}else{
+					$(ch).hide();
+					ch.className='glyphicon glyphicon-ok';
+					$(ch).fadeIn('50');
+				}
 				ch_s.value='1';
-				$('#div_ch'+result).hide('100');
 			}
 			
 		}
@@ -168,24 +180,52 @@ function addCheckResult(){
 
 /*완료한 체크리스트 목록 보기 */
 function showCheck(work_idx){
+	
 	var div=document.getElementById('check_div'+work_idx);
-
+	
+	var in_ch=div.nextSibling.nextSibling;
+	
 	var fc=div.firstChild.nextSibling;
 	var lc=div.lastChild;
-	while(fc!=lc){
-		fc.style.display='block';
-		fc=fc.nextSibling;
-		if(fc==lc)break;
-		fc=fc.nextSibling;
-	}
 	
+	if(in_ch.value=='1'){
+		in_ch.value='0';
+		
+		while(fc!=lc){
+		
+			var ch_state=fc.firstChild.nextSibling.lastChild.previousSibling.value;
+			if(ch_state=='1'){
+				$(fc).hide('100');
+			}
+			fc=fc.nextSibling;
+			if(fc==lc)break;
+			fc=fc.nextSibling;
+			if(fc==lc)break;
+		}
+		
+		document.getElementById('aCheck'+work_idx).innerHTML='완료한 체크리스트 보기';
+		
+	}else if(in_ch.value=='0'){
+		in_ch.value='1';
+		
+		while(fc!=lc){
+			$(fc).show('100');
+			fc=fc.nextSibling;
+			if(fc==lc)break;
+			fc=fc.nextSibling;
+			if(fc==lc)break;
+		}
+		
+		document.getElementById('aCheck'+work_idx).innerHTML='완료한 체크리스트 숨기기';
+	}
 }
 
 
 </script>
 <style>
 #workback {
-	position: absolute;
+	position: fixed;
+	z-index:0;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -199,6 +239,7 @@ function showCheck(work_idx){
 	display: none;
 	background: white;
 	position: fixed;
+	z-index:5;
 	top: 20%;
 	left: 20%;
 	border: solid 10px white;
@@ -313,10 +354,11 @@ function showCheck(work_idx){
 														</div>
 													</c:forEach>
 												</div>
+												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2" align="left"><a href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a></td>
+											<td colspan="2" align="right"><a id="aCheck${wdto.work_idx}" href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a>&nbsp;</td>
 										</tr>
 										<tr>
 											<td>진행률</td>
