@@ -61,7 +61,7 @@ public class ProjectController {
 	public ModelAndView projectAdd(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectAdd");
+		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
@@ -72,7 +72,7 @@ public class ProjectController {
 		
 		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}
 	
@@ -114,7 +114,7 @@ public class ProjectController {
 	public ModelAndView projectUpdate(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}
 	
@@ -123,7 +123,7 @@ public class ProjectController {
 	public ModelAndView projectDel(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}
 	

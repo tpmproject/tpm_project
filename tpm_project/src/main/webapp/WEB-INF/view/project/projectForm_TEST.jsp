@@ -143,20 +143,69 @@ function friendAddResult() {
 			window.alert(result);
 			if(result.trim() == 'true'){
 				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			} 
-			if(result.trim() == 'true'){
-				var param = 'member_idx=' + ${sessionScope.s_member_idx};
+				sendRequest('projectFriendList.do',param,projectMemberAddResult3,'POST');
 				
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			}
+			} 
+			
 		}
 	}
 }
 
 	/**친구리스트*/
 	function projectMemberAddResult2() {
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
+				var result = XHR.responseText;
+				window.alert(result);
+				var json = JSON.parse(result);
+				
+				 var msg2 = '';
+				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+				for (var i = 0; i < members.length; i++) {
+					var member = members[i];
+
+					msg2 += '<div class="col-sm-12" id="modal_content">';
+					msg2 += '<div class="col-sm-12"> ';
+					msg2 += '<div class="panel"> ';
+					msg2 += '<div class="panel-body p-t-10"> ';
+					msg2 += '<div class="media-main"> ';
+					msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
+					msg2 += 				'class="thumb-lg img-circle bx-s" ';
+					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+
+					msg2 += '</a> ';
+					/* msg2 += '<div class="pull-right btn-group-sm"> ';
+					msg2 += '<a href="javascript:goInsert_member(' + i
+							+ ')" class="btn btn-success tooltips" ';
+					msg2 += 'data-placement="top" data-toggle="tooltip" ';
+					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> '; */
+
+					msg2 += '</a> ';
+					msg2 += '</div> ';
+					msg2 += '<div class="info"> ';
+					msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
+					msg2 += '<h4>' + member.member_name + '</h4> ';
+					msg2 += '<p class="text-muted">' + member.member_id
+							+ '</p> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '<div class="clearfix"></div> ';
+					msg2 += '<hr> ';
+
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+					msg2 += '</div> ';
+				}
+
+				var myFriend_List = document.getElementById('myFriend_List');
+				myFriend_List.innerHTML = msg2;
+				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
+			 
+			}
+		}
+	}
+	function projectMemberAddResult3() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
@@ -212,6 +261,7 @@ function friendAddResult() {
 </script>
 
 <style>
+
 #mback {
 	position: absolute;
 	top: -10%;
@@ -499,39 +549,39 @@ function friendAddResult() {
 		<div id="main_modal">
 			<button type="button" class="close" onclick="closem()">×</button>
 			<h4 class="modal-title">프로젝트 생성</h4>
-
+			
 			<div id="f_modal">
-				<div id="btntest">
-					<div>
-						프로젝트명: <input type="text" name="project_name">
-					</div>
-					<div>
-						프로젝트 설명:
-						<textarea cols="30" rows="20" name="project_content"></textarea>
-					</div>
-					<button type="button" class="btn btn-next" id="btn-next"
-						onclick="shows()">다음</button>
-				</div>
+				<div class="box-gray aligncenter">
+                    <h4>프로젝트1</h4>
+                    <div id="btntest" class="icon">
+                      	<div>프로젝트명: <input type="text" name="project_name"></div>
+                      	<p><textarea cols="30" rows="20" name="project_content"></textarea></p>
+                    <button type="button" class="btn btn-next" id="btn-next" onclick="shows()">다음</button>
+                    </div>
+                    
+                  </div>	
 			</div>
 
 			<div id="smodal">
-				<div class="section">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4">
-								<h4>친구목록</h4>
-								<div id="myFriend_List"
-									style="width: 300px; height: 300px; overflow-y: scroll"></div>
-								<h4>검색 멤버</h4>
-								<div>
-									<input type="text" name="member_id" placeholder="Search">
-									<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+				 <div class="section">
+				      <div class="container">
+				        <div class="row">
+				          <div class="col-md-3">
+					          <div class="box-gray aligncenter">
+									<h4>친구목록</h4>
+									<div id="myFriend_List"	style="width: 250px; height: 200px; overflow-y: scroll"></div>
+									<h4>검색 멤버</h4>
+									<div>
+										<input type="text" name="member_id" placeholder="Search" size="15">
+										<button type="button" class="btn" onclick="projectMemberAdd()">검색</button> 
+									</div>
+										<div id="member_search_content"	style="width: 250px; height: 200px; overflow-y: scroll"></div>
+									
 								</div>
-								<div id="member_search_content"
-									style="width: 300px; height: 300px; overflow-y: scroll"></div>
-							</div>
-							<div class="col-md-4">
-								<h4>초대 멤버</h4>
+				          </div>
+				          <div class="col-md-3">
+				          	<div class="box-gray aligncenter" style="height:500px;">
+				         	 <h4>초대 멤버</h4>
 								<ul class="media-list">
 									<li class="media"><a class="pull-left" href="#"><img
 											class="media-object"
@@ -542,14 +592,14 @@ function friendAddResult() {
 											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
 											height="64" width="64"></a></li>
 								</ul>
+								<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+								<input type="submit" class="btn" value="완료">
 							</div>
-						</div>
-					</div>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
 				</div>
-				<button type="button" class="btn btn-next" id="btn-workbefore"
-					onclick="showf()">이전</button>
-				<input type="submit" class="btn" value="완료">
-			</div>
 		</div>
 	</form>
 </body>
