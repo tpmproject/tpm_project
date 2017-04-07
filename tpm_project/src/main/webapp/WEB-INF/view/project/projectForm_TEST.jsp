@@ -85,7 +85,7 @@
                 <h2>
                   <span>TPM</span>.PROJECT</h2>
                 <h5>
-                  <a>프로젝트추가</a>
+                  <a src="projectAdd.do">프로젝트추가</a>
                 </h5>
               </div>
             </div>
