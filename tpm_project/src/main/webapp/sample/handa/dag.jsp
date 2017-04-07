@@ -1,78 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type = "text/javascript" src = "/tpm_project/js/drag/ajax.js"></script>
-<script type = "text/javascript" src = "/tpm_project/js/drag/dnd.js"></script>
-<style type = "text/css">
-      #inventory 
-      {
-            position: absolute;
-            border: 1px solid blue;
-            left: 30px; top: 30px;
-            width: 250px; height: 330px;
-      }
+<title>Drag Test</title>
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+function init() {
+ //canvas를 통해 2d 컨텍스트 생성
+ var canvas = document.getElementById('imgBox');
+ context = canvas.getContext('2d');
  
-      #cart
-      {
-            position: absolute;
-            border: 1px solid red;.
-            left: 500px; top: 30px;
-            width: 250px; height: 330px;
-      }
+ //이미지 객체 생성
+ var myImg = new Image();
+ myImg.src = 'image/1.png';
  
-      div.dragsource 
-      {
-            background-color: #ddd;
-            padding-top: 5px; padding-bottom: 5px;
-            margin-top: 1px; margin-bottom: 1px;
-            width: 250px;
-            font-size: 12px;
-      }
+ //컨텍스트에 이미지를 그린다. (x:0,y:0)위치에 가로150 세로150 크기로
+ context.drawImage(myImg, 0,0,150,150);
+}
+ 
+//드래그 시작시
+function drag(event) {
+ //드래그중인 요소의 아이디를 저장.
+ event.dataTransfer.setData("Text", event.target.id);
+ //드래그 하는 동안 copy 효과 지정
+ event.dataTransfer.effectAllowed="move";
+}
+ 
+//드래그 드롭시
+function drop(event) {
+ //드롭된 요소의 아이디를 가져온다.
+ var data = event.dataTransfer.getData("Text");
  
-      div.title 
-      {
-            font-weight: bold;
-            border-bottom: 1px solid #333;
-      }
-</style>
-<script type = "text/javascript">
-      var dndMgr = new ajax.dnd.DNDManager();
+ //드래그오버시 설정된 css 제거
+ $(event.target).css('box-shadow','');
  
-      window.onload = function() 
-      {
-            var product1 = new ajax.dnd.DragSource("product1");
-            var product2 = new ajax.dnd.DragSource("product2");
-            var product3 = new ajax.dnd.DragSource("product3");
-  
-            var inventory = new ajax.dnd.DropTarget("inventory");
-            var cart = new ajax.dnd.DropTarget("cart");
-  
-            dndMgr.addDropTarget(inventory);
-            dndMgr.addDropTarget(cart);
-  
-            dndMgr.addDragSource(product1);
-            dndMgr.addDragSource(product2);
-            dndMgr.addDragSource(product3);
+ //타겟의 자식으로 요소를 추가한다.
+ event.target.appendChild(document.getElementById(data));
+ //모든 요소는 드롭을 허용하지 않기 때문에 기본값을 취소하는 오퍼레이션.
+ event.preventDefault();
+}
+ 
+//드래그 오버시
+function dropSet(event) {
+ //모든 요소는 드롭을 허용하지 않기 때문에 기본값을 취소하는 오퍼레이션.
+ event.preventDefault();
+ 
+ //box-shadow 옵션
+ switch (event.target.id) {
+ case 'div1':
+//   $('#div1').css('box-shadow','fromLeft fromTop density color');
+  $('#div1').css('box-shadow','5px 5px 5px #ccccff');
+  $('#div2').css('box-shadow', '');
+  break;
+ case 'div2':
+  $('#div2').css('box-shadow','5px 5px 5px #ccccff');
+  $('#div1').css('box-shadow', '');
+  break;
+ 
+ default:
+  break;
  }
+ //드롭이 끝날 때 보여질 효과
+ event.dataTransfer.dropEffect="move";
+}
 </script>
+<style type="text/css">
+div.box {
+ width: 200px;
+ height: 200px;
+ border: 1px solid red;
+}
+#imgBox {
+ border: 1px solid #00ff00;
+}
+</style>
 </head>
-<body>
-<div id = "inventory">
-      <div class = "title">상품목록</div>
-      <div id = "product1" class = "dragsource">
-            <img src = "#" />삼성 센스 Q35</div>
-      <div id = "product2" class = "dragsource">
-            <img src = "#" />LG XNOTE S1-J214</div>
-      <div id = "product3" class = "dragsource">
-            <img src = "#" />SONY 바이오 VGN-FE15LP</div>
-     </div>
-<div id = "cart">
-      <div class = "title">장바구니</div>
+<body onload="init();">
+<div id="div1" class="box" ondrop="drop(event);" ondragover="dropSet(event);">
+ <canvas id="imgBox" width="150px" height="150px" draggable="true" ondragstart="drag(event);"></canvas>
 </div>
+<div id="div2" class="box" ondrop="drop(event);" ondragover="dropSet(event);"></div>
 </body>
+ 
 </html>

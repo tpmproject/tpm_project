@@ -30,6 +30,8 @@ public class ProjectController {
 	@Autowired
 	private MyFriendDAO myFriendDAO;
 	//// 프로젝트 ////
+	@Autowired
+	private WorkDAO workDAO;
 	
 	// 프로젝트
 	/** 프로젝트 - 프로젝트 리스트 페이지 이동 */
@@ -127,10 +129,14 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 평가 페이지 이동 */
 	@RequestMapping(value="projectEvaluation.do",  method=RequestMethod.GET)
-	public ModelAndView projectEvaluationForm(){
+	public ModelAndView projectEvaluationForm(ProjectDTO dto, int project_idx){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectEvaluationForm");
+		ProjectDTO pdto=projectDAO.projectSearch(dto);
+		ArrayList<MemberDTO> arr=workDAO.projectMember(project_idx);
+		mav.addObject("pdto",pdto);
+		mav.addObject("arr",arr);
 		return mav;
 	}
 	

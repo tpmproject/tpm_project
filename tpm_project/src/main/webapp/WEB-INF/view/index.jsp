@@ -41,6 +41,10 @@ function dateTest(){
 개별 프로젝트 들어가기!!<br> 
 프로젝트 idx:<input type="text" name="project_idx">
 </form>
+<form action="/tpm_project/projectEvaluation.do">
+test!!<br> 
+test idx:<input type="text" name="project_idx">
+</form>
 
 </body>
 </html>
