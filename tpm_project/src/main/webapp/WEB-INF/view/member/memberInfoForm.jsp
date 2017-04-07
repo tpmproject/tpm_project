@@ -213,10 +213,13 @@
             </form>
           </div>
           
+          <c:set var="workcount" value="${myworkcount}"/>
+          <c:set var="workcomplete" value="${myworkcomplete}"/>
+          
          <div class="col-md-6">
             <div>
               <div>
-                <a class="btn btn-default disabled">총 업무 달성률1111111111111111111111111111111111111111</a>
+                <a class="btn btn-default disabled">총 업무 달성률 : ${workcomplete/workcount*100}%</a>
               </div>
               <br>
               <div>
