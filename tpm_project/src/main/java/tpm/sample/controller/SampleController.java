@@ -49,7 +49,7 @@ public class SampleController {
 	
 	//// 제이슨 ////
 	/** 제이슨 테스트 페이지 이동 */
-	@RequestMapping(value="jsontest1.do", method=RequestMethod.GET)
+	@RequestMapping(value="jsontest.do", method=RequestMethod.GET)
 	public String jsonTest(){
 		return "sample/json/jsonTest";
 	}
@@ -60,9 +60,9 @@ public class SampleController {
 		ModelAndView mav = new ModelAndView();
 		
 		ArrayList<MemberDTO> arry_mdto = mdao.getMemberAllList();
-		mav.setViewName("sample/json/jsonResult1");
 		mav.addObject("arry_mdto", arry_mdto);
 		
+		mav.setViewName("sample/json/jsonResult1");
 		return mav;
 	}
 	

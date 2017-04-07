@@ -12,7 +12,7 @@
 		where member_id = #{member_id}
 	</select>
 	
-	<select id="memberAllList" parameterType="tpm.member.model.MemberDTO">
+	<select id="memberAllList" resultType="tpm.member.model.MemberDTO">
 		SELECT * FROM tpm_member
 	</select>
 	
