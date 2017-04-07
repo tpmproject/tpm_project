@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html">
 <html>
  <head>
@@ -71,7 +72,6 @@
 		}
 	}
 	function fileList_setting(responseText) {
-		window.alert(responseText);
 		var json = JSON.parse(responseText);
 		
 		var msg = '';
@@ -101,7 +101,7 @@
     </script>
   </head>
   
-  <body>
+  <body onload="javascript:location.hash();">
     <div id="wrapper">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -135,15 +135,16 @@
               <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                <c:set var="p_list" value="${pdto}"></c:set>
+                <c:forEach var="p_idxs" items="${p_list}">
+                
                   <li>
-                    <a href="#" onclick="project_fileList(${idx 써라 });">myweb 프로젝트</a>
+                    <a href="#" onclick="project_fileList(${p_idxs.project_idx});">${p_idxs.project_name }</a>
+                    
                   </li>
-                  <li>
-                    <a href="">final 프로젝트</a>
-                  </li>
-                  <li>
-                    <a href="">semi 프로젝트</a>
-                  </li>
+                  
+                </c:forEach>
+                 
                 </ul>
                 <!-- /.nav-second-level -->
               </li>
