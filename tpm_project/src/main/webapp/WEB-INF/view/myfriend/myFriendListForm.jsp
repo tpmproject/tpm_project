@@ -26,8 +26,9 @@
   	
 	function search_modal_setting(responseText){
 		//document.getElementById("ajax_qna_div").innerHTML = responseText;//보여주기
-		//window.alert(responseText);
+		
 
+		
 		var json = JSON.parse(responseText);
 		//var json = eval('('+responseText+')'); // 객체화
 		//var json = responseText;
@@ -73,9 +74,11 @@
 		content_row.innerHTML = msg;
 		
 		
+		
 	}
 	
 	function myfriendList_setting(responseText) {
+		window.alert(responseText);
 		var json = JSON.parse(responseText);
 		var msg = '';
 		var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.

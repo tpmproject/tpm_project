@@ -64,12 +64,12 @@
 		/* initialize the calendar
 		 -----------------------------------------------------------------*/
 		//Date for the calendar events (dummy data)
-		var date = new Date();
-		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
+		//var date = new Date();
+		//var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
 		//var date2 = new Date(y, m, d - 5);
 		//var date2 = new Date(2017, 03, 05);
-		var date2 = new Date("2017-04-06");
-		console.log(date2);
+		//var date2 = new Date("2017-04-06");
+		//console.log(date2);
 		
 		$('#calendar').fullCalendar(
 				{
@@ -148,6 +148,7 @@
 
 						// assign it the date that was reported
 						copiedEventObject.start = date;
+						window.alert(date);
 						copiedEventObject.allDay = allDay;
 						copiedEventObject.backgroundColor = $(this).css(
 								"background-color");

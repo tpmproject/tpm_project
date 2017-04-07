@@ -4,7 +4,7 @@
 <%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	ArrayList<MemberDTO> arry_mdto = (ArrayList) request.getAttribute("arry_mdto");
+	/* ArrayList<MemberDTO> arry_mdto = (ArrayList) request.getAttribute("arry_mdto");
 	
 	JSONObject object = new JSONObject();
 
@@ -24,9 +24,10 @@
 	
 	out.clear();
 	out.println(object);
-	out.flush();
+	out.flush();  */
 	
 %>
+${jsonArray}
 
 
 
