@@ -16,7 +16,15 @@
     <link href="css/flexslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!-- Theme skin -->
-    <link href="skins/default.css" rel="stylesheet">
+    <link href="skins/default.css" rel="stylesheet"><link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script type="text/javascript" src="js/ajax_extension.js" ></script>
 </head>
 
 

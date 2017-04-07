@@ -39,7 +39,7 @@ public class ProjectController {
 	public ModelAndView projectListForm(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}
 	
