@@ -18,8 +18,10 @@
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:forEach var="arr" items="${arr}">
-			<form class="form-horizontal">
-				<h4>${arr.member_name}</h4>
+			<form class="form-horizontal" action="memberUpdate.do">
+			<div>
+			<img src="/tpm_project/img/member/profile/${arr.member_img}">
+				<h4>${arr.member_name}(${arr.member_id})</h4></div>
 				<div class="col-sm-offset-7">
 					<a class="btn btn-default disabled">외향성</a>&nbsp;&nbsp;&nbsp; <select>
 						<option>5</option>
@@ -80,6 +82,7 @@
 				</div>
 				<br>
 				<div>
+					<input type="reset" value="초기화">
 					<input type="submit" value="평가완료">
 					<hr>
 				</div>
@@ -87,6 +90,5 @@
 
 		</c:forEach>
 	</div>
-<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
