@@ -101,14 +101,13 @@ public class SampleController {
 		return mav;
 	}
 	
+	
 	/** SPRING 어노테이션을 이용하여 컨트롤러에서 LIST를 자동으로 JSON으로 변환하여 결과 페이지로 보내기 */
 	@RequestMapping(value="jsontest4.do", method=RequestMethod.GET)
 	public @ResponseBody ArrayList<MemberDTO> jsonTest4(){
-
-		ArrayList<MemberDTO> arry_mdto = mdao.getMemberAllList();
-
-		return arry_mdto;
+		return mdao.getMemberAllList();
 	}
+	
 	
 	/** jsonView를 이용하여 자동으로 임의의 결과 페이지로 List를 json 데이터 변환하여 보내기 */
 	@RequestMapping(value="jsontest5.do", method=RequestMethod.GET)

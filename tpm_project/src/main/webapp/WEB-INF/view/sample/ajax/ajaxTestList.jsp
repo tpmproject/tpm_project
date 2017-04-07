@@ -7,6 +7,7 @@
 </head>
 <body>
 <a href="ajaxtest1.do">Javascript Ajax</a><br>
+<a href="ajaxtest1file.do">Javascript Ajax(File)</a><br>
 <a href="ajaxtest2.do">Jquery Ajax</a>
 <a href="ajaxtest2file.do">Jquery Ajax(File)</a>
 </body>

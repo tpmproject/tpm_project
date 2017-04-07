@@ -9,23 +9,23 @@
 <script>
 function goAjax() {
 	
-	var params = 'member_idx=' + ${sessionScope.s_member_idx} + '&member_id=' + $('#fkey').val();
+	//var params = 'member_idx=' + ${sessionScope.s_member_idx} + '&member_id=' + $('#fkey').val();
 
 	$.ajax({
 		url : 'ajaxtest2.do',
 		type : 'post',
-		/*data : { memeber_idx : ${sessionScope.s_member_idx},
-				 member_id : $('#fkey').val() },*/
+		/* data : { memeber_idx : ${sessionScope.s_member_idx},
+				 member_id : $('#fkey').val() }, */
 		//data : params ,
 		//dataType : 'text', // 텍스트 형식으로 넘어온다.
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
-		beforeSend : function(data, form, option) {
+		/* beforeSend : function(data, form, option) {
 			window.alert($('#fkey').val());
 			if($('#fkey').val() == ''){
 				window.alert('키를 입력해');
 				return false;
 			}
-		},
+		}, */
 		success : function(json) {
 			window.alert(json);
 			var msg = '';
