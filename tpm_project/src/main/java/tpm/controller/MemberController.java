@@ -37,7 +37,7 @@ public class MemberController {
 	
 	//// 회원 ////
 	// 로그인 및 로그아웃
-	/** 회원 아이디, 이름 검색 */
+	/** 친구 상태가아닌 회원 아이디, 이름 검색 */
 	@RequestMapping(value="memberIdAndNameSearch.do", method=RequestMethod.POST)
 	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey, 
 			HttpServletRequest req){
