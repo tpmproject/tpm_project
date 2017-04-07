@@ -108,11 +108,22 @@ function checkResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-							
-			/* 	glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked */
-				
+			result=parseInt(result);
+			
+			var ch=document.getElementById('ch'+result);
+			var ch_s=document.getElementById('ch_state'+result);
+			var ch_sv=document.getElementById('ch_state'+result).value;
+			
+			if(ch_sv=='1'){
+				ch.className='glyphicon glyphicon-unchecked';
+				ch_s.value='0';
+			}else if(ch_sv=='0'){
+				ch.className='glyphicon glyphicon-ok';
+				ch_s.value='1';
 			}
+			
 		}
+	}
 }
 
 
@@ -277,6 +288,7 @@ function addCheckResult(){
 															<i id="ch${chdto.checklist_idx }"
 															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
 														</i> ${chdto.checklist_content}
+														<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 														</a>
 														<br>
 													</c:forEach>

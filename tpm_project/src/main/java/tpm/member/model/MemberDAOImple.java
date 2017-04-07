@@ -72,10 +72,15 @@ public class MemberDAOImple implements MemberDAO {
 		int count = sqlMap.update("memberUpdate", mdto);
 		return count;
 	}
-
-	public int addMember() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public String myWorkCount(int member_idx) {
+		String count = sqlMap.selectOne("myWorkCount", member_idx);
+		return count;
+	}
+	
+	public String myWorkComplete(int member_idx) {
+		String count = sqlMap.selectOne("myWorkComplete", member_idx);
+		return count;
 	}
 
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto) {

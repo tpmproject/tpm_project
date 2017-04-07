@@ -129,7 +129,7 @@
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
-             
+             <c:forEach var="dto" items="${list}">
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	                <select>
@@ -147,8 +147,6 @@
 	                </div>
 	                <div class="col-md-8">파일 선택 들어갈 곳</div>
 	              </div>&nbsp;
-	              
-	              <c:forEach var="dto" items="${list}">
 	              <div class="form-group">
 	                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 	                <div class="col-sm-8">

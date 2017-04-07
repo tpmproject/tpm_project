@@ -212,23 +212,23 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		   <classifier>jdk15</classifier>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
    			<groupId>org.codehaus.jackson</groupId>
     		<artifactId>jackson-core-asl</artifactId>
     		<version>1.9.13</version>
 		</dependency>
-
-		<dependency>
+ -->
+		<!-- <dependency>
 		    <groupId>org.codehaus.jackson</groupId>
 		    <artifactId>jackson-mapper-asl</artifactId>
 		    <version>1.9.13</version>
-		</dependency>
-
-		<dependency>
+		</dependency> -->
+		
+		<!-- <dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.4.1</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -237,9 +237,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		</dependency>
 
 
+
 		
 		
 		
+
 </dependencies>
 	
 </project>
