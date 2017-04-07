@@ -134,9 +134,23 @@ public class SampleController {
 	}
 	
 	@RequestMapping(value="ajaxtest1.do", method=RequestMethod.POST)
-	public @ResponseBody ArrayList<MemberDTO> jsonTest5(MemberDTO mdto){
+	public @ResponseBody ArrayList<MemberDTO> ajaxtest1(MemberDTO mdto){
 		return mdao.getMemberIdAndNameSearch(mdto);
 	}
 	
+	@RequestMapping(value="ajaxtest2.do", method=RequestMethod.GET)
+	public String ajaxtest2Form(){
+		return "sample/ajax/ajaxTest2";
+	}
+	
+	@RequestMapping(value="ajaxtest2.do", method=RequestMethod.POST)
+	public @ResponseBody ArrayList<MemberDTO> ajaxtest2(MemberDTO mdto){
+		return mdao.getMemberIdAndNameSearch(mdto);
+	}
+	
+	@RequestMapping(value="ajaxtest2file.do", method=RequestMethod.GET)
+	public String ajaxtest2fileForm(MemberDTO mdto){
+		return "sample/ajax/ajaxTest2File";
+	}
 	
 }

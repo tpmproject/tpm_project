@@ -12,8 +12,16 @@ function ajax_result(httpRequest, ctype) {
 			if(httpRequest.status == 200){
 				if(!httpRequest.responseText.match(null)){
 					var responseText = httpRequest.responseText;
+					window.alert(responseText);
 					
-					//result_process(responseText, ctype);
+					var msg = '';
+					var json = JSON.parse(responseText);
+					for(var i = 0 ; i < json.length ; i++){
+						msg += '<span>' + json[i].member_idx + ', ' + json[i].member_id + '</span><br>';
+					}
+					
+					var div = document.getElementById('ajax_result_content');
+					div.innerHTML = msg;
 				}
 			}
 		}
@@ -21,7 +29,7 @@ function ajax_result(httpRequest, ctype) {
 }
 
 function goAjax() {
-	var param = 'member_id=' + document.getElementById('fkey') + '&member_idx=' + ${sessionScope.s_member_idx};
+	var param = 'member_id=' + document.getElementById('fkey').value + '&member_idx=' + ${sessionScope.s_member_idx};
 	sendRequest_extension('ajaxtest1.do', param, ajax_result, 'POST', 'JAVASCRIPT_AJAX');
 }
 </script>
@@ -30,5 +38,8 @@ function goAjax() {
 <span>a를 입력해 보세요</span><br>
 <input type="text" id="fkey"><br>
 <input type="button" value="JavaScript Ajax" onclick="goAjax()">
+<div id="ajax_result_content">
+
+</div>
 </body>
 </html>
