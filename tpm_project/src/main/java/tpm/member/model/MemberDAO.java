@@ -17,5 +17,6 @@ public interface MemberDAO {
 	public int updateMember(MemberDTO mdto);
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto);
 	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto);
+	public ArrayList<MemberDTO> getMemberAllList();
 
 }

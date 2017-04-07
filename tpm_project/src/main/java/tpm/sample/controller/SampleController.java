@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.member.model.MemberDAO;
 import tpm.sample.model.SampleWorkDAO;
 
 @Controller
@@ -18,7 +19,8 @@ public class SampleController {
 	@Autowired
 	SampleWorkDAO sampleWorkDAO;
 	
-	
+	@Autowired 
+	private MemberDAO mdao;
 	
 	/** 팝오버테스트 이동 */
 	@RequestMapping(value="popover.do", method=RequestMethod.GET)
@@ -47,7 +49,7 @@ public class SampleController {
 	/** 결과 페이지에서 수작업을 통하여 JSON 형식의 데이터를 구축하기 */
 	@RequestMapping(value="jsontest1.do", method=RequestMethod.GET)
 	public ModelAndView jsonTest1(){
-		
+		mdao.
 	}
 	
 }

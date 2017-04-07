@@ -12,6 +12,10 @@
 		where member_id = #{member_id}
 	</select>
 	
+	<select id="memberAllList" parameterType="tpm.member.model.MemberDTO">
+		SELECT * FROM tpm_member
+	</select>
+	
 	<select id="memberIdAndNameSearch" parameterType="tpm.member.model.MemberDTO" resultType="tpm.member.model.MemberDTO">
 		SELECT * 
 		FROM tpm_member 
