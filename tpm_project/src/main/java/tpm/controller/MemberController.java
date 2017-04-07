@@ -302,6 +302,14 @@ public class MemberController {
 		
 		List<TendencyDTO> team_tendencyList = tdao.getTeamTendency(member_idx);
 		
+		String myworkcount = mdao.myWorkCount(member_idx);
+		System.out.println(myworkcount);
+		
+		String myworkcomplete = mdao.myWorkComplete(member_idx);
+		System.out.println(myworkcomplete);
+		
+		mav.addObject("workcount", myworkcount);
+		mav.addObject("workcomplete", myworkcomplete);
 		mav.addObject("team_tendency", team_tendencyList);
 		mav.addObject("self_tendency", self_tendencyList);
 		mav.addObject("userInfo", list);
