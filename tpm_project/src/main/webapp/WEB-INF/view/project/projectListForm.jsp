@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -14,131 +14,166 @@
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
-<script type="text/javascript" src="js/ajax_extension.js" ></script>
+<script type="text/javascript" src="js/ajax_extension.js"></script>
 <script type="text/javascript">
+	window.onload = function() {
+		$(main_modal).hide();
+		$(smodal).hide();
+	}
 
-window.onload=function(){
-	$(main_modal).hide();
-	$(smodal).hide();
-}
+	function showf() {
+		$(mback).fadeIn('150');
+		$(main_modal).fadeIn('150');
+		$(f_modal).show();
+		$(smodal).hide();
+	}
+	//친구리스트
+	function shows() {
+		$(f_modal).fadeOut();
+		$(smodal).fadeIn();
+		var param = 'member_idx=' + ${sessionScope.s_member_idx};
+		window.alert(param);
+		action_ajax('projectFriendList.do', param, projectMemberAddResult2,'POST','FRIEND_LIST');
 
-function showf(){
-	$(mback).fadeIn('150');
-	$(main_modal).fadeIn('150');
-	$(f_modal).show();
-	$(smodal).hide();
-}
-//친구리스트
-function shows(){
-	$(f_modal).fadeOut();
-	$(smodal).fadeIn();
-	var param = 'member_idx=' + ${sessionScope.s_member_idx};
-	sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
+	}
+
+	function closem() {
+		$(mback).fadeOut('100');
+		$(main_modal).fadeOut('100');
+	}
 	
-}
+	//검색멤버
+	function projectMemberAdd() {
+		var param = 'member_idx=' + $
+		{sessionScope.s_member_idx};
+		param += '&member_id=' + document.newProject.member_id.value;
 
-function closem() {
-	$(mback).fadeOut('100');
-	$(main_modal).fadeOut('100');
-}
-//검색멤버
-function projectMemberAdd() {
-	var param = 'member_idx=' + ${sessionScope.s_member_idx};
-	param += '&member_id=' + document.newProject.member_id.value;
-	
-	sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-	window.alert(param);
-}
+		action_ajax('projectMemberAdd.do', param, projectMemberAddResult,'POST', 'PROJECT_MEMBER_ADD');
+		window.alert(param);
+	}
 
+	function action_ajax(url, param, method, ctype) {
+		sendRequest_extension(url, param, friendAddResult, method, ctype);
+		return false;
+	}
 
-/**검색 멤버*/
-function projectMemberAddResult() {
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			
-			
-			var result = XHR.responseText;
+	/**검색 멤버*/
+	function projectMemberAddResult() {
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
 
-			var json = JSON.parse(result);
+				var result = XHR.responseText;
 
-			var msg = '';
-			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-			for (var i = 0; i < members.length; i++) {
-				var member = members[i];
+				var json = JSON.parse(result);
 
-				msg += '<div class="col-sm-12" id="modal_content">';
-				msg += '<div class="col-sm-12"> ';
-				msg += '<div class="panel"> ';
-				msg += '<div class="panel-body p-t-10"> ';
-				msg += '<div class="media-main"> ';
-				msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
+				var msg = '';
+				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+				for (var i = 0; i < members.length; i++) {
+					var member = members[i];
+
+					msg += '<div class="col-sm-12" id="modal_content">';
+					msg += '<div class="col-sm-12"> ';
+					msg += '<div class="panel"> ';
+					msg += '<div class="panel-body p-t-10"> ';
+					msg += '<div class="media-main"> ';
+					msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
 				msg += 				'class="thumb-lg img-circle bx-s" ';
 				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
-				msg += '</a> ';
-				msg += '<div class="pull-right btn-group-sm"> ';
-				msg += '<a href="javascript:goInsert_member(' + member.member_idx
-						+ ')" class="btn btn-success tooltips" ';
-				msg += 'data-placement="top" data-toggle="tooltip" ';
-				msg += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
+					msg += '</a> ';
+					msg += '<div class="pull-right btn-group-sm"> ';
+					msg += '<a href="javascript:goInsert_member('
+							+ member.member_idx
+							+ ')" class="btn btn-success tooltips" ';
+					msg += 'data-placement="top" data-toggle="tooltip" ';
+					msg += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
 
-				msg += '</a> ';
-				msg += '</div> ';
-				msg += '<div class="info"> ';
-				msg += '<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
-				msg += '<h4>' + member.member_name + '</h4> ';
-				msg += '<p class="text-muted">' + member.member_id
-						+ '</p> ';
-				msg += '</div> ';
-				msg += '</div> ';
-				msg += '<div class="clearfix"></div> ';
-				msg += '<hr> ';
+					msg += '</a> ';
+					msg += '</div> ';
+					msg += '<div class="info"> ';
+					msg += '<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
+					msg += '<h4>' + member.member_name + '</h4> ';
+					msg += '<p class="text-muted">' + member.member_id
+							+ '</p> ';
+					msg += '</div> ';
+					msg += '</div> ';
+					msg += '<div class="clearfix"></div> ';
+					msg += '<hr> ';
 
-				msg += '</div> ';
-				msg += '</div> ';
-				msg += '</div> ';
-				msg += '</div> ';
+					msg += '</div> ';
+					msg += '</div> ';
+					msg += '</div> ';
+					msg += '</div> ';
+				}
+
+				var member_search_content = document
+						.getElementById('member_search_content');
+				member_search_content.innerHTML = msg;
+
+				if (result != null) {
+					/* var bodyNode = document.getElementById('btntest2');
+					var divNode = document.createElement('div');
+					divNode.innerHTML = result;
+					bodyNode.appendChild(divNode); */
+				}
+
 			}
+		}
+	}
 
-			var member_search_content = document
-					.getElementById('member_search_content');
-			member_search_content.innerHTML = msg;
+	function goInsert_member(i) {
+		var member_idx = ${sessionScope.s_member_idx};
+		var myfriend_idx = i;
 
-			if (result != null) {
-				/* var bodyNode = document.getElementById('btntest2');
-				var divNode = document.createElement('div');
-				divNode.innerHTML = result;
-				bodyNode.appendChild(divNode); */
+		var param = 'member_idx=' + member_idx + '&myfriend_idx='+ myfriend_idx;
+		//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
+		action_ajax('myFriendAdd.do', param, friendAddResult, 'POST','FRIEND_ADD');
+
+	}
+	function result_process(responseText, ctype) {
+		//var json = JSON.parse(responseText);
+		//var qdto = json.QnaDTO;
+		//var docStr = '';
+
+		//dotStr +=  qdto[0].qna_idx;
+
+		if (ctype == 'PROJECT_MEMBER_ADD') {
+			if (responseText.trim() == 'true') {
+				action_ajax('myFriendList.do', param, 'POST', 'FRIEND_LIST');
 			}
+		} else if (ctype == 'FRIEND_ADD') {
+			if (responseText.trim() == 'true') {
+				action_ajax('myFriendList.do', param, 'POST', 'FRIEND_LIST');
+				goSearch_member();
+			}
+		}else if(ctype=='FRIEND_LIST'){
+			projectMemberAddResult2(responseText);
 			
 			
 		}
-	}
-}
-
-function goInsert_member(i){
-	var member_idx = ${sessionScope.s_member_idx};
-	var myfriend_idx = i;
-	
-	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
-	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
-	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
-	
-}
-function friendAddResult() {
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result = XHR.responseText;
-			window.alert(result);
-			if(result.trim() == 'true'){
-				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
-				//sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			} 
+		else {
+			window.alert('잘못된 경로');
 		}
 	}
-}
+	
+	
 
+ function friendAddResult(httpRequest, ctype) {
+ 	return function() {
+ 		if(httpRequest.readyState == 4){
+ 			if(httpRequest.status == 200){
+ 				if(!httpRequest.responseText.match(null)){
+ 					var responseText = httpRequest.responseText;
+ 					result_process(responseText, ctype);
+ 					
+ 					
+ 				}
+ 			}
+ 		} else {
+
+ 		}
+ 	}
+ }
 	/**친구리스트*/
 	function projectMemberAddResult2() {
 		if (XHR.readyState == 4) {
@@ -146,8 +181,8 @@ function friendAddResult() {
 				var result = XHR.responseText;
 				window.alert(result);
 				var json = JSON.parse(result);
-				
-				 var msg2 = '';
+
+				var msg2 = '';
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
@@ -188,18 +223,10 @@ function friendAddResult() {
 
 				var myFriend_List = document.getElementById('myFriend_List');
 				myFriend_List.innerHTML = msg2;
-				
-			 
+
 			}
 		}
 	}
-	
-
-
-
-
-
-
 </script>
 
 <style>
@@ -214,7 +241,7 @@ function friendAddResult() {
 	display: none;
 }
 
-#main_modal{
+#main_modal {
 	display: none;
 	background: white;
 	position: fixed;
@@ -222,22 +249,21 @@ function friendAddResult() {
 	left: 20%;
 	border: solid 10px white;
 	border-radius: 10px;
-	width:640px;
-	height:700px;
+	width: 640px;
+	height: 700px;
 }
-
 </style>
 </head>
 <body>
 	<h2>프로젝트 리스트 폼</h2>
 	<button class="btn btn-default" onclick="showf()">모달출력버튼</button>
-	<br />
+	<br/>
 	<form name="newProject" action="projectAdd.do" method="post">
 		<div id="mback" onclick="closem()"></div>
 		<div id="main_modal">
 			<button type="button" class="close" onclick="closem()">×</button>
 			<h4 class="modal-title">프로젝트 생성</h4>
-			
+
 			<div id="f_modal">
 				<div id="btntest">
 					<div>
@@ -247,42 +273,47 @@ function friendAddResult() {
 						프로젝트 설명:
 						<textarea cols="30" rows="20" name="project_content"></textarea>
 					</div>
-					<button type="button" class="btn btn-next" id="btn-next"
-						onclick="shows()">다음</button>
+					<button type="button" class="btn btn-next" id="btn-next" onclick="shows()">다음</button>
 				</div>
 			</div>
 			
 			<div id="smodal">
-      <div class="section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <h4>친구목록</h4>
-              <div id="myFriend_List" style="width:300px; height: 300px; overflow-y: scroll"></div>
-              <h4>검색 멤버</h4>
-              <div>
-                <input type="text" name="member_id" placeholder="Search">
-                <button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
-              </div>
-              <div id="member_search_content" style="width:300px; height: 300px; overflow-y: scroll"></div>
-            </div>
-            <div class="col-md-4">
-              <h4>초대 멤버</h4>
-              <ul class="media-list">
-                <li class="media">
-                  <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
-                </li>
-                <li class="media">
-                  <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
-      <input type="submit" class="btn" value="완료">
-    </div>
+				<div class="section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<h4>친구목록</h4>
+								<div id="myFriend_List"
+									style="width: 300px; height: 300px; overflow-y: scroll"></div>
+								<h4>검색 멤버</h4>
+								<div>
+									<input type="text" name="member_id" placeholder="Search">
+									<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+								</div>
+								<div id="member_search_content"
+									style="width: 300px; height: 300px; overflow-y: scroll"></div>
+							</div>
+							
+							<div class="col-md-4">
+								<h4>초대 멤버</h4>
+								<ul class="media-list">
+									<li class="media"><a class="pull-left" href="#"><img
+											class="media-object"
+											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+											height="64" width="64"></a></li>
+									<li class="media"><a class="pull-left" href="#"><img
+											class="media-object"
+											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+											height="64" width="64"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+				<input type="submit" class="btn" value="완료">
+			</div>
+		</div>
 	</form>
-	<hr>
+</body>
 </html>
