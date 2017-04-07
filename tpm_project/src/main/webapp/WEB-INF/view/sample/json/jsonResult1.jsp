@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="jsontest1.do">결과 페이지에서 수작업을 통하여 JSON 형식의 데이터를 구축하기</a><br>
+
 </body>
 </html>

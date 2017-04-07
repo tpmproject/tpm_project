@@ -2,6 +2,7 @@ package tpm.sample.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.member.model.MemberDAO;
+import tpm.member.model.MemberDTO;
 import tpm.sample.model.SampleWorkDAO;
 
 @Controller
@@ -46,10 +48,22 @@ public class SampleController {
 	}
 	
 	//// 제이슨 ////
+	/** 제이슨 테스트 페이지 이동 */
+	@RequestMapping(value="jsontest1.do", method=RequestMethod.GET)
+	public String jsonTest(){
+		return "sample/json/jsonTest";
+	}
+	
 	/** 결과 페이지에서 수작업을 통하여 JSON 형식의 데이터를 구축하기 */
 	@RequestMapping(value="jsontest1.do", method=RequestMethod.GET)
 	public ModelAndView jsonTest1(){
-		mdao.
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<MemberDTO> arry_mdto = mdao.getMemberAllList();
+		mav.setViewName("sample/json/jsonResult1");
+		mav.addObject("arry_mdto", arry_mdto);
+		
+		return mav;
 	}
 	
 }

@@ -36,6 +36,7 @@ function dateTest(){
 <a href="dtotest.do">DTO안 DTO 테스트</a><br>
 
 <a href="memberInfo.do">개인 정보</a>
+<a href="jsontest.do">제이슨에 대하여..</a>
 
 <form action="/tpm_project/projectContent.do">
 개별 프로젝트 들어가기!!<br> 
