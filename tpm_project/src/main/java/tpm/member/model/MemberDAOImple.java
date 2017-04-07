@@ -58,11 +58,11 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 
-	public int delMember() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delMember(String userid){
+		int count = sqlMap.delete("memberDelete", userid);
+		return count;
 	}
-
+	
 	public String emailCheck() {
 		// TODO Auto-generated method stub
 		return null;
@@ -91,10 +91,6 @@ public class MemberDAOImple implements MemberDAO {
 	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto) {
 		ArrayList<MemberDTO> arr=(ArrayList) sqlMap.selectList("memberAddSearch", dto);
 		return arr;
-	}
-	public int delMember(String userid) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 

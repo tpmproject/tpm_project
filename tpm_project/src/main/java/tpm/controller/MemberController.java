@@ -257,9 +257,11 @@ public class MemberController {
 	// 탈퇴
 	/** 탈퇴 - 회원탈퇴 */
 	@RequestMapping(value="memberDel.do", method=RequestMethod.GET)
-	public ModelAndView memberDel(@RequestParam("email") String user_id){
+	public ModelAndView memberDel(@RequestParam("id") String user_id, HttpSession session){
 		
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(user_id);
 		
 		int count = mdao.delMember(user_id);
 		
@@ -267,6 +269,8 @@ public class MemberController {
 		
 		if(count>0){
 			result = "탈퇴되었습니다";
+			
+			session.invalidate();
 			
 			mav.addObject("result", result);
 			mav.setViewName("member/memberDel_ok");

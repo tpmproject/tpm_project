@@ -39,13 +39,20 @@
     </style>
     <script>
 	    function deletedo(){
-	  	  var email = document.memberInfoForm.member_id.value;
+	  	  var id = document.memberInfoForm.member_id.value;
 	  	  
-	  	  location.href='memberDel.do?email='+email;
+	  	  location.href='memberDel.do?id='+id;
 	    }
     </script>
 </head>
 <body>
+	<!-- 
+	<c:set var="s_member_id" value="${s_member_id}"/>
+	<c:if test="${empty s_member_id}">
+		로그인 후 이용해주세요
+	</c:if>
+	 -->
+	 
 	<c:set var="self_tendencylist" value="${self_tendency}"/>
 	<c:set var="team_tendencylist" value="${team_tendency}"/>
 	
