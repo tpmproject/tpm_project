@@ -82,7 +82,7 @@ public class MemberDAOImple implements MemberDAO {
 		String count = sqlMap.selectOne("myWorkComplete", member_idx);
 		return count;
 	}
-
+	
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto) {
 		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", mdto);
 		return array_dto;

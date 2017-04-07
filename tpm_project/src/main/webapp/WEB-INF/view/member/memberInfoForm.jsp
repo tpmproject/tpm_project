@@ -219,8 +219,9 @@
          <div class="col-md-6">
             <div>
               <div>
-                <a class="btn btn-default disabled">총 업무 달성률 : ${workcomplete/workcount*100}%</a>
+                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${workcomplete/workcount*100}%</a>
               </div>
+              <br>
               <br>
               <div>
                 <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
