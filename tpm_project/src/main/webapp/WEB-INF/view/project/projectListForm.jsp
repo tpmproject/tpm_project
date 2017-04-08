@@ -128,7 +128,7 @@ function projectMemberAddResult() {
 			var member_search_content = document
 					.getElementById('member_search_content');
 			member_search_content.innerHTML = msg;
-			sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
+			
 			if (result != null) {
 				/* var bodyNode = document.getElementById('btntest2');
 				var divNode = document.createElement('div');
@@ -193,7 +193,7 @@ function projectMemberAddResult() {
 
 				var myFriend_List = document.getElementById('myFriend_List');
 				myFriend_List.innerHTML = msg2;
-				
+				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 			 
 			}
 		}
