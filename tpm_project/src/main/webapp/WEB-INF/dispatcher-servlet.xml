@@ -3,13 +3,23 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+		
+<!-- <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xmlns="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"> -->
 		
 <!-- <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -175,37 +185,6 @@
 	</bean>
 	
 	<mvc:annotation-driven />
-	
-	<!-- <websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo-ws" />
-		<websocket:mapping handler="chatHandler" path="/chat-ws" />
-	</websocket:handlers>
 
-	<bean id="echoHandler" class="tpm.sample.chat.EchoHandler" />
-	<bean id="chatHandler" class="tpm.sample.chat.ChatWebSocketHandler" />
-
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo.sockjs" />
-		<websocket:mapping handler="chatHandler" path="/chat.sockjs" />
-		<websocket:sockjs />
-	</websocket:handlers>
-	
-	<mvc:default-servlet-handler /> -->
-	
-	<!-- <websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo-ws" />
-		<websocket:mapping handler="chatHandler" path="/chat-ws" />
-	</websocket:handlers>
-
-	<bean id="echoHandler" class="net.madvirus.spring4.chap09.ws.EchoHandler" />
-	<bean id="chatHandler" class="net.madvirus.spring4.chap09.ws.ChatWebSocketHandler" />
-
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo.sockjs" />
-		<websocket:mapping handler="chatHandler" path="/chat.sockjs" />
-		<websocket:sockjs />
-	</websocket:handlers> -->
-	
-	<!-- <mvc:default-servlet-handler />  -->
 	
 </beans>

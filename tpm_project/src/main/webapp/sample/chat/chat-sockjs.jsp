@@ -11,7 +11,7 @@
 	
 	function connect() {
 		wsocket = new SockJS(
-				"http://192.168.20.46:9090/tpm_project/chat.sockjs");
+				"http://localhost:9090/tpm_project/chat.sockjs");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

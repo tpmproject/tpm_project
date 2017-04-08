@@ -30,6 +30,13 @@ public class SampleController {
 	@Autowired 
 	private MemberDAO mdao;
 	
+	@RequestMapping(value="mappingtest.c", method=RequestMethod.GET)
+	public String mappingTest(){
+		System.out.println("성공");
+		return "index";
+	}
+	
+	
 	/** 팝오버테스트 이동 */
 	@RequestMapping(value="popover.do", method=RequestMethod.GET)
 	public String popover(){
@@ -121,35 +128,64 @@ public class SampleController {
 		return mav;
 	}
 	
+	//// ajax ////
 	/** ajaxTestList 페이지 이동 */
 	@RequestMapping(value="ajaxtest.do", method=RequestMethod.GET)
 	public String ajaxtest(){
 		return "sample/ajax/ajaxTestList";
 	}
 	
+	/** Javascript Ajax 페이지 이동 */
 	@RequestMapping(value="ajaxtest1.do", method=RequestMethod.GET)
 	public String ajaxtest1Form(){
 		return "sample/ajax/ajaxTest1";
 	}
-	
+	/** Javascript Ajax 처리 */
 	@RequestMapping(value="ajaxtest1.do", method=RequestMethod.POST)
 	public @ResponseBody ArrayList<MemberDTO> ajaxtest1(MemberDTO mdto){
 		return mdao.getMemberIdAndNameSearch(mdto);
 	}
-	
+	/** Jquery Ajax 페이지 이동 */
 	@RequestMapping(value="ajaxtest2.do", method=RequestMethod.GET)
 	public String ajaxtest2Form(){
 		return "sample/ajax/ajaxTest2";
 	}
-	
+	/** Jquery Ajax 처리 */
 	@RequestMapping(value="ajaxtest2.do", method=RequestMethod.POST)
 	public @ResponseBody ArrayList<MemberDTO> ajaxtest2(MemberDTO mdto){
 		return mdao.getMemberIdAndNameSearch(mdto);
 	}
-	
+	/** Jquery Ajax(File) 페이지 이동 */
 	@RequestMapping(value="ajaxtest2file.do", method=RequestMethod.GET)
 	public String ajaxtest2fileForm(MemberDTO mdto){
 		return "sample/ajax/ajaxTest2File";
+	}
+	
+	//// socket ////
+	/** socketlist 페이지 이동 */
+	@RequestMapping(value="sockettest.do", method=RequestMethod.GET)
+	public String socketListForm(){
+		return "sample/socket/socketList";
+	}
+	/** echo_wsTest 페이지 이동 */
+	@RequestMapping(value="echo_wsTest.do", method=RequestMethod.GET)
+	public String echo_wsTestForm(){
+		return "sample/socket/echo_wsTest";
+	}
+	/** chat_wsTest 페이지 이동 */
+	@RequestMapping(value="chat_wsTest.do", method=RequestMethod.GET)
+	public String chat_wsTestForm(){
+		return "sample/socket/chat_wsTest";
+	}
+	/** echo_sockjsTest 페이지 이동 */
+	@RequestMapping(value="echo_sockjsTest.do", method=RequestMethod.GET)
+	public String echo_sockjsTestForm(){
+		return "sample/socket/echo_sockjsTest";
+	}
+	/** chat_sockjsTest 페이지 이동 */
+	@RequestMapping(value="chat_sockjsTest.do", method=RequestMethod.GET)
+	public String chat_sockjsTestForm(){
+		return "sample/socket/chat_sockjsTest";
 	}
 	
 }
