@@ -6,11 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/sample/cho/main/import.jsp" %>
 </head>
 <body>
-<%@ include file="/WEB-INF/view/header.jsp"%>
-<%@ include file="/WEB-INF/view/aside.jsp"%>
 	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
