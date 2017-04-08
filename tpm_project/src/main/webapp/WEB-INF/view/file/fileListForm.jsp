@@ -12,9 +12,9 @@
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
     <!-- Bootstrap Core CSS -->
     
-    <link href="/tpm_project/css/file/bootstrap.min.css" rel="stylesheet">
+    <link href="/tpm_project/css/file/bootstrap.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
-    <link href="/tpm_project/css/file/metisMenu.min.css" rel="stylesheet">
+    <link href="/tpm_project/css/file/metisMenu.css" rel="stylesheet">
     <!-- DataTables CSS -->
     <link href="/tpm_project/css/file/dataTables.bootstrap.css" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
@@ -23,7 +23,7 @@
     <!-- Custom CSS -->
     <link href="/tpm_project/css/file/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="/tpm_project/css/file/font-awesome.min.css" rel="stylesheet"
+    <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
     type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
     queries -->
@@ -79,7 +79,7 @@
 		for(var i = 0 ; i < files.length; i++){
 			var file = files[i];
 			
-		
+		    msg+= ''
 			
 			msg +='<tr class="odd gradeX">'
 					msg +='<td>'+file.file_idx+'</td>'
@@ -101,7 +101,7 @@
     </script>
   </head>
   
-  <body onload="javascript:location.hash();">
+  <body>
     <div id="wrapper">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -139,7 +139,7 @@
                 <c:forEach var="p_idxs" items="${p_list}">
                 
                   <li>
-                    <a href="#" onclick="project_fileList(${p_idxs.project_idx});">${p_idxs.project_name }</a>
+                    <a onclick="project_fileList(${p_idxs.project_idx});">${p_idxs.project_name }</a>
                     
                   </li>
                   
@@ -197,14 +197,14 @@
     
     <!-- /#wrapper -->
     <!-- jQuery -->
-    <script src="/tpm_project/js/file/jquery.min.js"></script>
+    <script src="/tpm_project/js/file/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="/tpm_project/js/file/bootstrap.min.js"></script>
+    <script src="/tpm_project/js/file/bootstrap.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/tpm_project/js/file/metisMenu.min.js"></script>
+    <script src="/tpm_project/js/file/metisMenu.js"></script>
     <!-- DataTables JavaScript -->
-    <script src="/tpm_project/js/file/jquery.dataTables.min.js"></script>
-    <script src="/tpm_project/js/file/dataTables.bootstrap.min.js"></script>
+    <script src="/tpm_project/js/file/jquery.dataTables.js"></script>
+    <script src="/tpm_project/js/file/dataTables.bootstrap.js"></script>
     <script src="/tpm_project/js/file/dataTables.responsive.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="/tpm_project/js/file/sb-admin-2.js"></script>
