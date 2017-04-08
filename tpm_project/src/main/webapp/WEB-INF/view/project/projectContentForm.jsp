@@ -42,7 +42,7 @@ window.onload=function(){
 	$(work_modal).hide();
 	$(btnwork2).hide();
 }
-function showf(){
+function showf(category_idx){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
 	$(w_modal).show();
@@ -98,6 +98,27 @@ function closem() {
 	$(workback).fadeOut('100');
 	$(work_modal).fadeOut('100');
 	document.newWork.reset();
+}
+function addWork(category_idx){
+	var param = 'category_idx=' + category_idx
+	+'&work_title=' + document.newWork.work_title.value
+	+'&work_start=' + document.newWork.work_start.value
+	+'&work_end=' + document.newWork.work_end.value
+	+'&work_complete=' + document.newWork.work_end.value
+	+'&work_confirm=' + document.newWork.work_confirm.value;
+	sendRequest('workAdd.do', param, workAddResult, 'POST');
+}
+function workAddResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;	
+			if (result>0) {
+				var msg= '성공';
+			}
+			var work_c = document.getElementById('work_c');
+			work_c.innerHTML = msg;	
+		}
+	}
 }
  
 function check(ch){
@@ -302,7 +323,7 @@ function showCheck(work_idx){
 					<div class="category">
 						<div class="category_head">
 							${cdto.category_name }&nbsp;&nbsp;<i
-								class="glyphicon glyphicon-plus" onclick="showf()"></i> &nbsp;&nbsp;<i
+								class="glyphicon glyphicon-plus" onclick="showf(${cdto.category_idx})"></i> &nbsp;&nbsp;<i
 								class="glyphicon glyphicon-cog"></i>
 						</div>
 
@@ -443,7 +464,7 @@ function showCheck(work_idx){
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
 				<c:if test=""></c:if>
-				<input type="submit" class="btn" value="완료">
+				<input type="submit" value="완료">
 			</div>
 		</div>
 	</form>

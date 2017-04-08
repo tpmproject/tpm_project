@@ -22,11 +22,11 @@
 	insert into tpm_work
 	values(
 	work_idx.nextval,
-	5,
+	#{category_idx},
 	#{work_title},
 	#{work_start},
 	#{work_end},
-	#{work_end},
+	#{work_complete},
 	#{work_confirm},
 	1
 	)
