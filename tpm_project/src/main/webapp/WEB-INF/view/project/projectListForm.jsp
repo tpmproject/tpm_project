@@ -50,6 +50,31 @@ function projectMemberAdd() {
 	window.alert(param);
 }
 
+/**친구리스트  친구추가*/
+function goInsert_member(i){
+	var member_idx = ${sessionScope.s_member_idx};
+	var myfriend_idx = i;
+	
+	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
+	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
+	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
+	
+}
+
+function friendAddResult() {
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			if(result.trim() == 'true'){
+				var param = 'member_idx=' + ${sessionScope.s_member_idx};
+				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
+				
+			} 
+		
+		}
+	}
+}
 
 /**검색 멤버*/
 function projectMemberAddResult() {
@@ -103,7 +128,7 @@ function projectMemberAddResult() {
 			var member_search_content = document
 					.getElementById('member_search_content');
 			member_search_content.innerHTML = msg;
-
+			sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 			if (result != null) {
 				/* var bodyNode = document.getElementById('btntest2');
 				var divNode = document.createElement('div');
@@ -116,33 +141,8 @@ function projectMemberAddResult() {
 	}
 }
 
-function goInsert_member(i){
-	var member_idx = ${sessionScope.s_member_idx};
-	var myfriend_idx = i;
-	
-	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
-	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
-	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
-	
-}
-function friendAddResult() {
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result = XHR.responseText;
-			window.alert(result);
-			if(result.trim() == 'true'){
-				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			} 
-			if(result.trim() == 'true'){
-				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			}
-		}
-	}
-}
+
+
 
 	/**친구리스트*/
 	function projectMemberAddResult2() {
