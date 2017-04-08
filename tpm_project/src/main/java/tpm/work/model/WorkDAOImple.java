@@ -38,9 +38,11 @@ public class WorkDAOImple implements WorkDAO {
 		return arr_m;
 	}
 
-	public int addWork() {
+	public int addWork(WorkDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlMap.insert("addWork",dto);
+		
+		return result;
 	}
 
 	public int updateWork() {

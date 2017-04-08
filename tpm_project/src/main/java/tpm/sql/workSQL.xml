@@ -18,6 +18,19 @@
 	where member_idx in(select member_idx from tpm_work_member 
 	where work_idx=#{work_idx})
 	</select>
+	<insert id="addWork" parameterType="tpm.work.model.WorkDTO">
+	insert into tpm_work
+	values(
+	work_idx.nextval,
+	5,
+	#{work_title},
+	#{work_start},
+	#{work_end},
+	#{work_end},
+	#{work_confirm},
+	1
+	)
+	</insert>
 	
 	<select id="myWorkAllList" parameterType="tpm.member.model.MemberDTO" resultType="tpm.project.model.TotalDTO">
 		SELECT p.*, cwck.category_idx, cwck.category_name, cwck.work_idx, cwck.work_title, cwck.work_start, cwck.work_end, cwck.work_complete, cwck.work_confirm, cwck.work_state, cwck.checklist_idx, cwck.checklist_content, cwck.checklist_state

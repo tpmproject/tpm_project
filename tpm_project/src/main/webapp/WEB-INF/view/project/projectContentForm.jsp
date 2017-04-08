@@ -435,13 +435,6 @@ function showCheck(work_idx){
 										<div class="media-body">
 											<h6 class="media-heading">Media heading</h6>
 										</div></li>
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="30" width="30"></a>
-										<div class="media-body">
-											<h6 class="media-heading">Media heading</h6>
-										</div></li>
 								</ul>
 							</div>
 						</div>

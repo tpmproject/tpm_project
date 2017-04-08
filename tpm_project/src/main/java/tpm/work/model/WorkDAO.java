@@ -12,7 +12,7 @@ public interface WorkDAO {
 	public ArrayList<WorkDTO> workList(int work_idx);
 	public ArrayList<MemberDTO> workMember(int work_idx);
 	public ArrayList<MyWorkDTO> myWorkAllList(MemberDTO mdto);
-	public int addWork();
+	public int addWork(WorkDTO dto);
 	public int updateWork();
 	public int delWork();
 	

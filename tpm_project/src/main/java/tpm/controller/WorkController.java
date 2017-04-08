@@ -69,10 +69,13 @@ public class WorkController {
 	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
-	public ModelAndView workAdd(){
+	public ModelAndView workAdd(WorkDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
+		mav.addObject("workDTO", dto);
+		int result=workDAO.addWork(dto);
+		
 		return mav;
 	}
 	
