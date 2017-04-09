@@ -87,6 +87,7 @@
 					msg +='<td>'+file.file_size+'</td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
 					msg +='<td class="center">안병민</td>'
+					msg +='<td><input type="button" value="삭제" onclick="fileDel('+file.file_idx+');">'
 			msg += '</tr>'
 		
 		}
@@ -96,12 +97,15 @@
 		file_content_list.innerHTML = msg;
 		
 	}
-	
+	/* 파일 삭제  */
+	function fileDel(i){
+		location.href="fileDel.do?file_idx="+i;  //post방식으로 보내는 방법
+	}
 	
     </script>
   </head>
   
-  <body>
+  <body onload="project_fileList('+${project_idx}+')">
     <div id="wrapper">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -113,7 +117,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">파일 리스트</a>
+          <a class="navbar-brand" href="index.do">파일 리스트</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right"></ul>
@@ -132,7 +136,7 @@
                 </div>
                 <!-- /input-group -->
               </li>
-              <li>
+              <li class="active">
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                 <c:set var="p_list" value="${pdto}"></c:set>

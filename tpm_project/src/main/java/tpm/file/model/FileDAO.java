@@ -11,6 +11,6 @@ public interface FileDAO {
 	public int searchFile();
 	public int addFile(FileDTO fdto);
 	public int updateFile();
-	public int delFile();
+	public int delFile(int file_idx);
 
 }

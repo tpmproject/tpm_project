@@ -19,5 +19,8 @@
 									sysdate,
 									#{file_path})
 	</insert>
-	
+	<delete id="delFile" parameterType="int">
+		delete tpm_file 
+		where file_idx=#{file_idx}
+	</delete>
 </mapper>

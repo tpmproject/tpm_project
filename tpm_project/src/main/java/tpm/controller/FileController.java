@@ -36,6 +36,8 @@ public class FileController {
 	public ModelAndView fileListForm(HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
+		int project_idx=(Integer) session.getAttribute("project_idx");
+		
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList();
 		ModelAndView mav = new ModelAndView();
 		
@@ -46,8 +48,9 @@ public class FileController {
 	
 	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(@RequestParam("project_idx")int project_idx){
-		
+	public ModelAndView fileList(@RequestParam("project_idx")int project_idx, HttpServletRequest req){
+		HttpSession session=req.getSession();
+		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
 		ArrayList<FileDTO> fileList=fdao.getFileList(project_idx);
 		
 		ModelAndView mav = new ModelAndView();
@@ -133,11 +136,24 @@ public class FileController {
 	}
 	
 	/** 파일 - 파일 삭제 */
-	@RequestMapping(value="fileDel.do",  method=RequestMethod.POST)
-	public ModelAndView fileDel(){
+	@RequestMapping(value="fileDel.do",  method=RequestMethod.GET)
+	public ModelAndView fileDel(@RequestParam("file_idx")int file_idx){
 		
+		System.out.println("컨트롤러 쪽"+file_idx);
+		int result=fdao.delFile(file_idx);
+		String msg="";
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("file/fileResult_d");
+		if(result==1){
+			msg="파일 삭제완료";
+			mav.addObject("msg",msg);
+			mav.setViewName("file/fileResult_d");
+		}else{
+			msg="파일 삭제 실패";
+			mav.addObject("msg",msg);
+			mav.setViewName("file/fileListForm");
+		}
+		
+		
 		return mav;
 	}
 	

@@ -32,7 +32,8 @@ public class FileDAOImple implements FileDAO {
 
 	public int addFile(FileDTO fdto) {
 		int result=sqlMap.insert("addFile",fdto);
-		return 0;
+		
+		return result;
 	}
 
 	public int updateFile() {
@@ -40,9 +41,11 @@ public class FileDAOImple implements FileDAO {
 		return 0;
 	}
 
-	public int delFile() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delFile(int file_idx) {
+		
+		int result=sqlMap.delete("delFile",file_idx);
+		System.out.println(result);
+		return result;
 	}
 
 }
