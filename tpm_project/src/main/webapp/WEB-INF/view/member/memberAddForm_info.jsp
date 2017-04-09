@@ -89,7 +89,7 @@ function cancle(){
                         <small>horizontal</small>
                     </h1>
                 </div>
-                <form class="form-horizontal" name="memberAddForm" action="memberAdd.do" method="post">
+                <form class="form-horizontal" name="memberAddForm" action="memberAddTendency.do" method="get">
                 
                         <c:set var="email" value="${sessionScope.email}"/>
                         
@@ -172,7 +172,7 @@ function cancle(){
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
-                            <button class="btn btn-primary" type="submit">회원가입
+                            <button class="btn btn-primary" type="submit">다음
                                 <i class="fa fa-check spaceLeft"></i>
                             </button>
                             <button class="btn btn-danger" type="button" onclick="cancle();">가입취소
