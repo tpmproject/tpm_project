@@ -16,6 +16,17 @@ public class FileDTO {
 	public FileDTO() {
 		super();
 	}
+	 
+	public FileDTO(int project_idx, int work_idx, int member_idx, String file_name, String file_size,
+			String file_path) {
+		super();
+		this.project_idx = project_idx;
+		this.work_idx = work_idx;
+		this.member_idx = member_idx;
+		this.file_name = file_name;
+		this.file_size = file_size;
+		this.file_path = file_path;
+	}
 
 	public FileDTO(int file_idx, int project_idx, int work_idx, int member_idx, String file_name, String file_size,
 			Date file_date, String file_path) {

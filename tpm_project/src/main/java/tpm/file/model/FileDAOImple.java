@@ -30,8 +30,8 @@ public class FileDAOImple implements FileDAO {
 		return 0;
 	}
 
-	public int addFile() {
-		// TODO Auto-generated method stub
+	public int addFile(FileDTO fdto) {
+		int result=sqlMap.insert("addFile",fdto);
 		return 0;
 	}
 
