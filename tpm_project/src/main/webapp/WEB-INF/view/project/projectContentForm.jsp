@@ -47,6 +47,7 @@ function showf(category_idx){
 	$(work_modal).fadeIn('150');
 	$(w_modal).show();
 	$(btnwork2).hide();
+	document.newWork.category_idx.value=category_idx;
 }
 function shows(){
 	$(w_modal).fadeOut();
@@ -108,7 +109,7 @@ function addWork(category_idx){
 	+'&work_confirm=' + document.newWork.work_confirm.value;
 	sendRequest('workAdd.do', param, workAddResult, 'POST');
 }
-function workAddResult(){
+function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
@@ -155,7 +156,6 @@ function checkResult() {
 				}
 				ch_s.value='1';
 			}
-			
 		}
 	}
 }
@@ -409,7 +409,7 @@ function showCheck(work_idx){
 
 
 	<!-- 업무 설정 modal -->
-	<form name="newWork" action="workAdd.do" method="post">
+	<form name="newWork" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -418,6 +418,8 @@ function showCheck(work_idx){
 			<div id="w_modal">
 				<div id="btnwork">
 					<div>
+						<h2></h2>
+						<input type="hidden" name="category_idx" value="">
 						업무명 : <input type="text" name="work_title">
 					</div>
 					<div>기한</div>
@@ -464,7 +466,8 @@ function showCheck(work_idx){
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
 				<c:if test=""></c:if>
-				<input type="submit" value="완료">
+				<button type="button" class="btn btn-next" id="btn-workok"
+					onclick="addWork()">완료</button>
 			</div>
 		</div>
 	</form>
