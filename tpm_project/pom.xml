@@ -8,8 +8,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   <packaging>war</packaging>
   <name>tpm_project</name>
   <description>tpm_project</description>
-  
-  <properties>
+   <properties>
   	<spring.version>4.1.6.RELEASE</spring.version>
   </properties>
 <dependencies>	 
@@ -242,6 +241,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		
 		
 
-</dependencies>
+</dependencies> 
+
 	
 </project>

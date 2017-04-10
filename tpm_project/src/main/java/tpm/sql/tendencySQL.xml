@@ -25,7 +25,7 @@
 			from tpm_tendency where #{tendency}=(select max(#{tendency}) 
 				from tpm_tendency where #{project_idx}) and #{project_idx})
 	</select>
-	<select id="addTendency" parameterType="tpm.tendency.model.TendencydDTO">
+	<select id="addTendency" parameterType="tpm.tendency.model.TendencyDTO">
 		insert into tpm_tendency 
 		values(
 		#{member_idx},
