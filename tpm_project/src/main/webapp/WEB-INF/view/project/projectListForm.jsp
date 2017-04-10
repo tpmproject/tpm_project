@@ -58,7 +58,7 @@ function goInsert_member(i){
 	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
 	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
 	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
-	
+	$('#member_idx'+i).remove();
 }
 
 function friendAddResult() {
@@ -94,7 +94,7 @@ function projectMemberAddResult() {
 				msg += '<div class="col-sm-12" id="modal_content">';
 				msg += '<div class="col-sm-12"> ';
 				msg += '<div class="panel"> ';
-				msg += '<div class="panel-body p-t-10"> ';
+				msg += '<div class="panel-body p-t-10" id="member_idx'+member.member_idx+'"> ';
 				msg += '<div class="media-main"> ';
 				msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
 				msg += 				'class="thumb-lg img-circle bx-s" ';
@@ -125,8 +125,7 @@ function projectMemberAddResult() {
 				msg += '</div> ';
 			}
 
-			var member_search_content = document
-					.getElementById('member_search_content');
+			var member_search_content = document.getElementById('member_search_content');
 			member_search_content.innerHTML = msg;
 			
 			if (result != null) {
@@ -193,14 +192,13 @@ function projectMemberAddResult() {
 
 				var myFriend_List = document.getElementById('myFriend_List');
 				myFriend_List.innerHTML = msg2;
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
+			
 			 
 			}
 		}
 	}
 	
-
-
+	
 
 
 

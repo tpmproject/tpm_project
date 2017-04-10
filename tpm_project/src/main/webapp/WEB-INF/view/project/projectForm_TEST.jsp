@@ -80,7 +80,7 @@ function projectMemberAddResult() {
 				msg += '<div class="col-sm-12" id="modal_content">';
 				msg += '<div class="col-sm-12"> ';
 				msg += '<div class="panel"> ';
-				msg += '<div class="panel-body p-t-10"> ';
+				msg += '<div class="panel-body p-t-10" id="member_idx'+member.member_idx+'"> ';
 				msg += '<div class="media-main"> ';
 				msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
 				msg += 				'class="thumb-lg img-circle bx-s" ';
@@ -134,8 +134,9 @@ function goInsert_member(i){
 	var param = 'member_idx=' + member_idx + '&myfriend_idx=' + myfriend_idx;
 	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
 	sendRequest('myFriendAdd.do', param, friendAddResult,'POST');
-	
+	$('#member_idx'+i).remove();
 }
+
 function friendAddResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -143,7 +144,7 @@ function friendAddResult() {
 			window.alert(result);
 			if(result.trim() == 'true'){
 				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				sendRequest('projectFriendList.do',param,projectMemberAddResult3,'POST');
+				sendRequest('projectFriendList.do',param,projectMemberAddResult,'POST');
 				
 			} 
 			
@@ -200,64 +201,12 @@ function friendAddResult() {
 
 				var myFriend_List = document.getElementById('myFriend_List');
 				myFriend_List.innerHTML = msg2;
-				sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-			 
-			}
-		}
-	}
-	function projectMemberAddResult3() {
-		if (XHR.readyState == 4) {
-			if (XHR.status == 200) {
-				var result = XHR.responseText;
-				window.alert(result);
-				var json = JSON.parse(result);
-				
-				 var msg2 = '';
-				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-				for (var i = 0; i < members.length; i++) {
-					var member = members[i];
-
-					msg2 += '<div class="col-sm-12" id="modal_content">';
-					msg2 += '<div class="col-sm-12"> ';
-					msg2 += '<div class="panel"> ';
-					msg2 += '<div class="panel-body p-t-10"> ';
-					msg2 += '<div class="media-main"> ';
-					msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
-					msg2 += 				'class="thumb-lg img-circle bx-s" ';
-					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-
-					msg2 += '</a> ';
-					/* msg2 += '<div class="pull-right btn-group-sm"> ';
-					msg2 += '<a href="javascript:goInsert_member(' + i
-							+ ')" class="btn btn-success tooltips" ';
-					msg2 += 'data-placement="top" data-toggle="tooltip" ';
-					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> '; */
-
-					msg2 += '</a> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="info"> ';
-					msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
-					msg2 += '<h4>' + member.member_name + '</h4> ';
-					msg2 += '<p class="text-muted">' + member.member_id
-							+ '</p> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="clearfix"></div> ';
-					msg2 += '<hr> ';
-
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-				}
-
-				var myFriend_List = document.getElementById('myFriend_List');
-				myFriend_List.innerHTML = msg2;
 				
 			 
 			}
 		}
 	}
+	
 </script>
 
 <style>
