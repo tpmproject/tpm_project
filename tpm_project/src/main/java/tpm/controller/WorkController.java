@@ -71,14 +71,16 @@ public class WorkController {
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
 	public ModelAndView workAdd(WorkDTO dto){
 		
-		int result=workDAO.addWork(dto);
-		String count=result>0?"true":"false";
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
-		mav.addObject("count",count);
+		mav.addObject("workDTO",dto);
+		int result=workDAO.addWork(dto);
 		
-		
+		String msg=dto.getWork_title();
+		if(result<=0){
+			msg="error";
+		}
+		mav.addObject("msg",msg);
 		return mav;
 	}
 	
