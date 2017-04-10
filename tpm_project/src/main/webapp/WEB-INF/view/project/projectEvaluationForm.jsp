@@ -20,61 +20,62 @@
 			<img src="/tpm_project/img/member/profile/${arr.member_img}">
 				<h4>${arr.member_name}(${arr.member_id})</h4></div>
 				<div class="col-sm-offset-7">
-					<a class="btn btn-default disabled">외향성</a>&nbsp;&nbsp;&nbsp; <select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<a class="btn btn-default disabled">외향성</a>&nbsp;&nbsp;&nbsp; 
+					<select id="tendency_e">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-default disabled">사고형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_i">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> <br> <a class="btn btn-default disabled">내향성</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_s">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-default disabled">감정형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_n">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> <br> <a class="btn btn-default disabled">감각형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_t">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-default disabled">판단형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_f">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> <br> <a class="btn btn-default disabled">직감형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_j">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select> &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-default disabled">인식형</a>&nbsp;&nbsp;&nbsp;
-					<select>
-						<option>5</option>
-						<option>4</option>
-						<option>3</option>
-						<option>2</option>
-						<option>1</option>
+					<select id="tendency_p">
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
 					</select>
 				</div>
 				<br>

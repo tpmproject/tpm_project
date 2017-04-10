@@ -18,4 +18,15 @@
 			  group by project_idx) a
 		where project_idx = 2
 	</select>
+	
+	<select id="recommendTendency">
+		select * from tpm_member 
+		where member_idx in (select distinct member_idx 
+			from tpm_tendency where #{tendency}=(select max(#{tendency}) 
+				from tpm_tendency where #{project_idx}) and #{project_idx})
+	</select>
+	<select id="addTendency">
+		insert into tpm_tendency values
+		(#{member_idx},#{project_idx},#{appraiser_idx},#{tendency_e},#{tendency_i},#{tendency_s},#{tendency_n},#{tendency_t},#{tendency_f},#{tendency_j},#{tendency_p});
+	</select>
 </mapper>

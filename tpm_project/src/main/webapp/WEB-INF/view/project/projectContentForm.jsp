@@ -463,6 +463,12 @@ function showCheck(work_idx){
 										</div></li>
 								</ul>
 							</div>
+							<div class="col-md-3">
+								<h4 class="text-center">추천 목록</h4>
+								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
+								<p></p>
+								<p></p>
+							</div>
 						</div>
 					</div>
 				</div>
