@@ -1,8 +1,9 @@
 package tpm.project.model;
 
-import java.util.ArrayList;
+import java.util.ArrayList	;
 
 import tpm.member.model.MemberDTO;
+import tpm.project.model.ProjectMemberDTO;
 
 public interface ProjectDAO {
 
@@ -19,5 +20,7 @@ public interface ProjectDAO {
 	public int projectDelete(int project_idx);
 	
 	public ProjectDTO findProject(String project_name);
+	
+	public int projectMemberInsert(ProjectMemberDTO dto);
 	
 }

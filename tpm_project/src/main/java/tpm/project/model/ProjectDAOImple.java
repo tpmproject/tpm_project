@@ -126,5 +126,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public int projectMemberInsert(ProjectMemberDTO dto) {
+		
+		int count=sqlMap.insert("projectMemberInsert",dto);
+		return count;
+	}
 }

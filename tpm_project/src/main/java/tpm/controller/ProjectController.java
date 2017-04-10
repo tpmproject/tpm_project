@@ -16,6 +16,7 @@ import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
 import tpm.member.model.*;
 import tpm.myfriend.model.*;
+import tpm.project.model.*;
 
 @Controller
 public class ProjectController {
@@ -32,6 +33,8 @@ public class ProjectController {
 	//// 프로젝트 ////
 	@Autowired
 	private WorkDAO workDAO;
+	
+	
 	
 	// 프로젝트
 	/** 프로젝트 - 프로젝트 리스트 페이지 이동 */
@@ -104,6 +107,20 @@ public class ProjectController {
 
 		mav.addObject("arry_mdto",arry_mdto);
 		mav.setViewName("project/projectMemberAdd_d");
+		return mav;
+	}
+	
+	/** 프로젝트 - 프로젝트멤버 추가 */
+	@RequestMapping(value="projectMemberInsert.do", method=RequestMethod.POST)
+	public ModelAndView ProjectMemberInsert(ProjectMemberDTO dto){
+		
+		
+		int count = projectDAO.projectMemberInsert(dto);
+		String result = count > 0 ? "true" : "false";
+		System.out.println(result);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myfriend/projectMemberInsert_d");
+		mav.addObject("result", result);
 		return mav;
 	}
 	
