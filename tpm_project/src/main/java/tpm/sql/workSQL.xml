@@ -60,5 +60,16 @@
 		select *
 		from tpm_project a, (select project_idx from tpm_project_member where member_idx = #{member_idx}) b
 		where a.project_idx = b.project_idx
-	</select>	
+	</select>
+	
+	<select id="myWorkIng" parameterType="tpm.project.model.ProjectMemberDTO" resultType="String">
+		select count(work_idx)
+		from tpm_work
+		where category_idx in(select category_idx
+							  from tpm_category
+							  where project_idx = (select a.project_idx
+							  					   from tpm_project a, (select project_idx from tpm_project_member where member_idx = #{member_idx}) b
+							  					   where a.project_idx = b.project_idx and a.project_idx = #{project_idx})) and work_state=0
+	</select>
+	
 </mapper>
