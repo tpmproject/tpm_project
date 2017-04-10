@@ -60,6 +60,7 @@
 		select *
 		from tpm_project a, (select project_idx from tpm_project_member where member_idx = #{member_idx}) b
 		where a.project_idx = b.project_idx
+		order by a.project_idx
 	</select>
 	
 	<select id="myWorkIng" parameterType="tpm.project.model.ProjectMemberDTO" resultType="String">
