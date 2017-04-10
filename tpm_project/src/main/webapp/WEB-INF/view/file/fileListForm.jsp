@@ -35,6 +35,10 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
+    function show(i){
+    	var param='type='+ i;
+    	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+    }
     function project_fileList(i){
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
@@ -170,16 +174,15 @@
                 id="dataTables-example">
                   <thead>
                     <tr>
-                      <th>파일 번호</th>
-                      <th>파일 이름</th>
-                      <th>파일 크기</th>
-                      <th>공유한 날짜</th>
-                      <th>공유한 사람</th>
+                      <th onclick="show('file_idx')">파일 번호</th>
+                      <th onclick="show('file_name')">파일 이름</th>
+                      <th onclick="show('file_size')">파일 크기</th>
+                      <th onclick="show('file_date')">공유한 날짜</th>
+                      <th onclick="show('file_idx')">공유한 사람</th>
                     </tr>
                   </thead>
                   <tbody id="file_content_list">
                   
-                   
                   
                   </tbody>
                 </table>

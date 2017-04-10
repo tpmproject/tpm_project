@@ -33,11 +33,9 @@ public class FileController {
 	//// 파일 ////
 	/** 파일 - 파일 리스트 페이지 이동 (프로젝트 리스트 보여주기) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.GET)
-	public ModelAndView fileListForm(HttpServletRequest req){
+	public ModelAndView fileListForm(){
 		
-		HttpSession session=req.getSession();
-		int project_idx=(Integer) session.getAttribute("project_idx");
-		
+
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList();
 		ModelAndView mav = new ModelAndView();
 		
@@ -48,7 +46,7 @@ public class FileController {
 	
 	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(@RequestParam("project_idx")int project_idx, HttpServletRequest req){
+	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,@RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
 		HttpSession session=req.getSession();
 		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
 		ArrayList<FileDTO> fileList=fdao.getFileList(project_idx);
