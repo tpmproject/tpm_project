@@ -192,8 +192,7 @@
 	              <br>
 	              <div class="form-group">
 	                <div class="col-md-4">
-	                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
-	                  class="img-circle img-responsive">
+	                  <img class="img-circle bx-s" src="/tpm_project/img/member/profile/${dto.member_img}" >
 	                </div>
 	                <div class="col-md-8"> <input type="file" name="select_profile"> </div>
 	              </div>&nbsp;
