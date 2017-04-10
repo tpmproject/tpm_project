@@ -107,9 +107,15 @@ public class ProjectDAOImple implements ProjectDAO {
 	}
 	
 	public int projectInsert(ProjectDTO dto) {
-		
+		int project_idx=sqlMap.selectOne("project_idx");
+		dto.setProject_idx(project_idx);
 		int count=sqlMap.insert("projectInsert", dto);
-		return count;
+		if(count>0){
+			return project_idx;
+		}else{
+			return 0;
+		}
+		
 	}
 
 	public int projectUpdate(ProjectDTO dto) {

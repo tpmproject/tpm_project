@@ -142,8 +142,11 @@ function Insert_project_member(i){
 	
 	
 	var param = 'member_idx=' + member_idx;
-	//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
-	sendRequest('projectMemberInsert.do', param, friendAddResult,'POST');
+	
+	var div=$('#modal_content'+i);
+	
+	window.alert(div.nodeName);
+	
 	
 }
 
@@ -167,7 +170,6 @@ function friendAddResult() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
-				window.alert(result);
 				var json = JSON.parse(result);
 				
 				 var msg2 = '';
@@ -175,7 +177,7 @@ function friendAddResult() {
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					msg2 += '<div class="col-sm-12" id="modal_content">';
+					msg2 += '<div class="col-sm-12" id="modal_content'+member.member_idx+'">';
 					msg2 += '<div class="col-sm-12"> ';
 					msg2 += '<div class="panel"> ';
 					msg2 += '<div class="panel-body p-t-10"> ';

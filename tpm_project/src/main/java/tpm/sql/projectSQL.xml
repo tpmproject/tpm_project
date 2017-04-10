@@ -14,10 +14,15 @@
 		select * from tpm_project
 	</select>
 	
+	<select id="project_idx">
+	select project_idx.nextval
+	from tpm_project
+	</select>
+	
 	<insert id="projectInsert" parameterType="tpm.project.model.ProjectDTO">
 		insert into tpm_project
 		values(
-			project_idx.nextval,
+			#{project_idx},
 			#{project_name},
 			#{project_content},
 			1
