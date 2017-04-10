@@ -96,6 +96,11 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 	
+	public String myworkTotal(ProjectMemberDTO dto) {
+		String count = sqlMap.selectOne("myWorkTotal", dto);
+		return count;
+	}
+	
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto) {
 		ArrayList<MemberDTO> array_dto =(ArrayList) sqlMap.selectList("memberIdAndNameSearch", mdto);
 		return array_dto;

@@ -65,10 +65,29 @@
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
 	    			var result = XHR.responseText.trim();
+	    			var resultArray = result.split(',');
+	    			var intArray = new Array(resultArray.length);
 	    			
-	    			var resultId = document.getElementById('myworkIng');
+	    			var workING = 0;
+	    			var workTotal = 0;
+	    			var workState = 0;
 	    			
-	    			resultId.innerHTML = result;
+	    			for(var i=0;i<resultArray.length;i++){
+	    				workING = resultArray[0];
+	    				workTotal = resultArray[1];
+	    				
+	    				if(workING==0 || workTotal==0){
+	    					workState = 0;
+	    				} else{
+	    					workState = (workING/workTotal)*100;	
+	    				}
+	    			}
+	    			
+	    			var INGId = document.getElementById('myworkING');
+	    			INGId.innerHTML = workING;
+	    			var StateId = document.getElementById('myworkState');
+	    			StateId.innerHTML = workState;
+	    			
 	    		}
 	    	}
 	    }
@@ -269,12 +288,12 @@
               	<br>
                 <div>
 	                <div>
-	                	<a class="col-sm-12 btn btn-default disabled"> 진행중인 업무 : <span id="myworkIng"></span>건</a>
+	                	<a class="col-sm-12 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
 	              	<br>
               		<br>
 	              	<div>
-	                	<a class="col-sm-12 btn btn-default disabled"> 진행률 :  </a>
+	                	<a class="col-sm-12 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
 	              	</div>
                 </div>
               </div>

@@ -335,14 +335,19 @@ public class MemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String mywork = mdao.myWorkIng(dto);
-		System.out.println(mywork);
+		String myworkING = mdao.myWorkIng(dto);
+		System.out.println(myworkING);
 		
-		mav.addObject("mywork", mywork);
+		String myworkTotal = mdao.myworkTotal(dto);
+		System.out.println(myworkTotal);
+		
+		mav.addObject("myworkTotal", myworkTotal);
+		mav.addObject("myworkING", myworkING);
 		mav.setViewName("member/memberWork_d");
 		
 		return mav;
 	}
+	
 	/** 개인정보 - 개인 정보 수정 */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session){
