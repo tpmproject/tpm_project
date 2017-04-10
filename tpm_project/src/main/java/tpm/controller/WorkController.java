@@ -72,7 +72,7 @@ public class WorkController {
 	public ModelAndView workAdd(WorkDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workResult_d");
+		mav.setViewName("work/workAdd_d");
 		mav.addObject("workDTO",dto);
 		int result=workDAO.addWork(dto);
 		

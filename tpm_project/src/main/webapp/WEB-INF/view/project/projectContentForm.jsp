@@ -101,19 +101,25 @@ function closem() {
 	document.newWork.reset();
 }
 function addWork(){
-	$(w_modal).fadeOut();
-	$(btnwork2).fadeIn();
+	var param = 'category_idx=' + document.newWork.category_idx.value
+	+'&work_title=' + document.newWork.work_title.value
+	+'&work_start=' + document.newWork.work_start.value
+	+'&work_end=' + document.newWork.work_end.value
+	+'&work_confirm=' + document.newWork.work_confirm.value;
+	
+	window.alert(param);
+	sendRequest('workAdd.do', param, addWorkResult, 'POST');
+
 }
 function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
 			if (result>0) {
-				var msg= '성공';
+				$(workback).fadeOut('100');
+				$(work_modal).fadeOut('100');
+				document.newWork.reset();
 			}
-			var work_c = document.getElementById('work_c');
-			work_c.innerHTML = msg;
-			document.newWork.reset();
 		}
 	}
 }
@@ -405,7 +411,7 @@ function showCheck(work_idx){
 
 
 	<!-- 업무 설정 modal -->
-	<form name="newWork" action="javascript:addWork()" method="post">
+	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -420,8 +426,8 @@ function showCheck(work_idx){
 					</div>
 					<div>기한</div>
 					<div>
-						<input type="text" id="calendar" name="work_start"
-							rel="stylesheet" /> ~<input type="text" id="calendar2"
+						<input type="text" id="work_start" name="work_start"
+							rel="stylesheet" /> ~<input type="text" id="work_end"
 							name="work_end" rel="stylesheet" />
 					</div>
 					<div>
@@ -462,8 +468,7 @@ function showCheck(work_idx){
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
 				<c:if test=""></c:if>
-				<button type="button" class="btn btn-next" id="btn-workok"
-					onclick="addWork()">완료</button>
+				<button type="submit" class="btn btn-next" id="btn-workok">완료</button>
 			</div>
 		</div>
 	</form>
@@ -473,17 +478,45 @@ function showCheck(work_idx){
 
 </body>
 <script>
-$("#calendar").datepicker({
-	changeMonth:true,
-	changeYear:true,
-	showButtonPanel:true,
-	dateFormat:"yy-mm-dd"
-});
-$("#calendar2").datepicker({
-	changeMonth:true,
-	changeYear:true,
-	showButtonPanel:true,
-	dateFormat:"yy-mm-dd"
-});
+              //검색 날짜제한 
+             $(function() {              
+                 
+               //datepicker 한국어로 사용하기 위한 언어설정
+               $.datepicker.setDefaults($.datepicker.regional['ko']); 
+
+               //시작일.
+               $('#work_start').datepicker({
+                    //dateFormat: "yy-mm-dd",
+                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+                    //dayNamesMin:["일","월","화","수","목","금","토"],
+                   //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
+                   //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
+                   //buttonText: "날짜선택",             // 버튼의 대체 텍스트
+                   dateFormat: "yy-mm-dd",             // 날짜의 형식
+                   changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
+                   onClose: function( selectedDate ) {    
+                       // 시작일(fromDate) datepicker가 닫힐때
+                       // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                       $("#work_end").datepicker( "option", "minDate", selectedDate );
+                   }                
+               });
+ 
+               //종료일
+               $('#work_end').datepicker({
+                    //dateFormat: "yy-mm-dd",
+                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+                    //dayNamesMin:["일","월","화","수","목","금","토"], 
+                   dateFormat: "yy-mm-dd",
+                   changeMonth: true,
+                   onClose: function( selectedDate ) {
+                       // 종료일(toDate) datepicker가 닫힐때
+                       // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+                       $("#work_start").datepicker( "option", "maxDate", selectedDate );
+                   }                
+               });
+               
+               
+               
+           });
 </script>
 </html>
