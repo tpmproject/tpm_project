@@ -191,7 +191,7 @@
 	              <br>
 	              <br>
 	              <div class="form-group">
-	                <div class="col-md-4">
+	                <div class="col-md-3 col-md-offset-1">
 	                  <img class="img-circle bx-s" src="/tpm_project/img/member/profile/${dto.member_img}" >
 	                </div>
 	                <div class="col-md-8"> <input type="file" name="select_profile"> </div>
