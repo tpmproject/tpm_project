@@ -100,14 +100,9 @@ function closem() {
 	$(work_modal).fadeOut('100');
 	document.newWork.reset();
 }
-function addWork(category_idx){
-	var param = 'category_idx=' + category_idx
-	+'&work_title=' + document.newWork.work_title.value
-	+'&work_start=' + document.newWork.work_start.value
-	+'&work_end=' + document.newWork.work_end.value
-	+'&work_complete=' + document.newWork.work_end.value
-	+'&work_confirm=' + document.newWork.work_confirm.value;
-	sendRequest('workAdd.do', param, workAddResult, 'POST');
+function addWork(){
+	$(w_modal).fadeOut();
+	$(btnwork2).fadeIn();
 }
 function addWorkResult(){
 	if (XHR.readyState == 4) {
@@ -117,7 +112,8 @@ function addWorkResult(){
 				var msg= '성공';
 			}
 			var work_c = document.getElementById('work_c');
-			work_c.innerHTML = msg;	
+			work_c.innerHTML = msg;
+			document.newWork.reset();
 		}
 	}
 }
@@ -266,7 +262,7 @@ function showCheck(work_idx){
 	border: solid 10px white;
 	border-radius: 10px;
 	width: 600px;
-	height: 700px;
+	height: 500px;
 }
 
 .category {
@@ -409,7 +405,7 @@ function showCheck(work_idx){
 
 
 	<!-- 업무 설정 modal -->
-	<form name="newWork" method="post">
+	<form name="newWork" action="javascript:addWork()" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -429,7 +425,7 @@ function showCheck(work_idx){
 							name="work_end" rel="stylesheet" />
 					</div>
 					<div>
-						<input type="checkbox" name="work_confirm" value="on">결재여부
+						<input type="checkbox" name="work_confirm" value="10">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows()">다음</button>
 

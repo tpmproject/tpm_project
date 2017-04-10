@@ -43,6 +43,27 @@
 	  	  
 	  	  location.href='memberDel.do?id='+id;
 	    }
+	    
+	    function getProjectIdx(){
+	    	var projectidx = $(getProject).val();
+	    	//window.alert(temp);
+	    	var project_idx = 'project_idx='+projectidx;
+	    	window.alert(project_idx);
+	    	sendRequest('memberInfo.do', project_idx, setProjectidx, 'POST');
+	    }
+	    
+	    function setProjectidx(){
+	    	if(XHR.readyState==4){
+	    		if(XHR.status==200){
+	    			var result = XHR.responseText.trim();
+	    			
+	    			window.alert(result);
+	    			
+	    			var idxResult = $(myWorkState);
+	    			
+	    		}
+	    	}
+	    }
     </script>
 </head>
 <body>
@@ -226,19 +247,21 @@
               <c:set var="myproject" value="${myprojectlist}"/>
               <div>
                 <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
-                <select>
+                <select id="getProject" onchange="getProjectIdx()">
                 <c:forEach var="project" items="${myproject}">
-                  <option>${project.project_name}</option>
+                  <option value="${project.project_idx}">${project.project_name}</option>
                 </c:forEach>
                 </select>
                 <br>
                 <br>
-                <div>
-                  <a class="btn btn-default disabled">진행중인 업무1111111111111111111111111111111111111111111111</a>
-                </div>
-                <br>
-                <div>
-                  <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
+                <div id="myWorkState">
+	                <div>
+	                  <a class="btn btn-default disabled">진행중인 업무  건</a>
+	                </div>
+	                <br>
+	                <div>
+	                  <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
+	                </div>
                 </div>
               </div>
               

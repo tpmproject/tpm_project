@@ -23,6 +23,7 @@ import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
 import tpm.member.model.SMTPAuthenticatior;
 import tpm.project.model.ProjectDTO;
+import tpm.project.model.ProjectMemberDTO;
 import tpm.tendency.model.TendencyDAO;
 import tpm.tendency.model.TendencyDTO;
 
@@ -295,7 +296,7 @@ public class MemberController {
 	// 개인정보
 	/** 개인정보 - 개인정보 페이지 이동 */
 	@RequestMapping(value="memberInfo.do", method=RequestMethod.GET)
-	public ModelAndView memberInfoForm(HttpServletRequest req){
+	public ModelAndView memberInfoForm(HttpServletRequest req, ProjectMemberDTO pmdto){
 		
 		HttpSession session = req.getSession();
 		
@@ -317,6 +318,10 @@ public class MemberController {
 		
 		List<ProjectDTO> myproject = mdao.myproject(member_idx);
 		
+		String myworkIng = mdao.myWorkIng(pmdto);
+		System.out.println(myworkIng);
+		
+		mav.addObject("myworkIng", myworkIng);
 		mav.addObject("myprojectlist", myproject);
 		mav.addObject("myworkcount", myworkcount);
 		mav.addObject("myworkcomplete", myworkcomplete);
