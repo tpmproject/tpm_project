@@ -93,7 +93,9 @@
 					msg +='<td class="center">안병민</td>'
 					msg +='<td><input type="button" value="삭제" onclick="fileDel('+file.file_idx+');">'
 			msg += '</tr>'
+			
 		
+          
 		}
 		
 		var file_content_list = document.getElementById('file_content_list');
@@ -182,8 +184,21 @@
                     </tr>
                   </thead>
                   <tbody id="file_content_list">
-                  
-                  
+          <tr>
+            <td>Gecko</td>
+            <td>Firefox 2.0</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
+            <td class="center">A</td>
+          </tr> 
+          
+           <tr>
+            <td>Geckoㅁㄴ</td>
+            <td>Firefox ㅁㄴㅇㅁㄴ2.0</td>
+            <td>Win 98+ / OㅁㄴSX.2+</td>
+            <td class="center">1.8</td>
+            <td class="center">A</td>
+          </tr> <tr class="gradeA">
                   </tbody>
                 </table>
                 <!-- /.table-responsive -->
