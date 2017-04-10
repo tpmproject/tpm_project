@@ -296,7 +296,7 @@ public class MemberController {
 	// 개인정보
 	/** 개인정보 - 개인정보 페이지 이동 */
 	@RequestMapping(value="memberInfo.do", method=RequestMethod.GET)
-	public ModelAndView memberInfoForm(HttpServletRequest req, ProjectMemberDTO pmdto){
+	public ModelAndView memberInfoForm(HttpServletRequest req){
 		
 		HttpSession session = req.getSession();
 		
@@ -318,10 +318,6 @@ public class MemberController {
 		
 		List<ProjectDTO> myproject = mdao.myproject(member_idx);
 		
-		String myworkIng = mdao.myWorkIng(pmdto);
-		System.out.println(myworkIng);
-		
-		mav.addObject("myworkIng", myworkIng);
 		mav.addObject("myprojectlist", myproject);
 		mav.addObject("myworkcount", myworkcount);
 		mav.addObject("myworkcomplete", myworkcomplete);
@@ -333,6 +329,20 @@ public class MemberController {
 		return mav;
 	}
 	
+	/** 개인정보 - 업무 정보 */
+	@RequestMapping(value="getWork.do", method=RequestMethod.GET)
+	public ModelAndView getWorkState(ProjectMemberDTO dto){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String mywork = mdao.myWorkIng(dto);
+		System.out.println(mywork);
+		
+		mav.addObject("mywork", mywork);
+		mav.setViewName("member/memberWork_d");
+		
+		return mav;
+	}
 	/** 개인정보 - 개인 정보 수정 */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session){

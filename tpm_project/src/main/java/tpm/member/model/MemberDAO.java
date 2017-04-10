@@ -20,7 +20,7 @@ public interface MemberDAO {
 	public String myWorkCount(int member_idx);
 	public String myWorkComplete(int member_idx);
 	public List<ProjectDTO> myproject(int member_idx);
-	public String myWorkIng(ProjectMemberDTO pmdto);
+	public String myWorkIng(ProjectMemberDTO dto);
 	public ArrayList<MemberDTO> getMemberIdAndNameSearch(MemberDTO mdto);
 	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto);
 	public ArrayList<MemberDTO> getMemberAllList();

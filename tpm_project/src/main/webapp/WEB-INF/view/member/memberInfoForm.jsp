@@ -37,6 +37,7 @@
 				font-size	: 11px;
 	  }	
     </style>
+    <script type="text/javascript" src="js/httpRequest.js"></script>
     <script>
 	    function deletedo(){
 	  	  var id = document.memberInfoForm.member_id.value;
@@ -44,12 +45,20 @@
 	  	  location.href='memberDel.do?id='+id;
 	    }
 	    
+	    window.onload = function getProjectIdx(){
+	    	var projectidx = $(getProject).val();
+	    	
+	    	var param = 'project_idx='+projectidx+'&member_idx='+${sessionScope.s_member_idx};
+	    	
+	    	sendRequest('getWork.do?'+param, null, setProjectidx, 'GET');
+	    }
+	    
 	    function getProjectIdx(){
 	    	var projectidx = $(getProject).val();
-	    	//window.alert(temp);
-	    	var project_idx = 'project_idx='+projectidx;
-	    	window.alert(project_idx);
-	    	sendRequest('memberInfo.do', project_idx, setProjectidx, 'POST');
+	    	
+	    	var param = 'project_idx='+projectidx+'&member_idx='+${sessionScope.s_member_idx};
+	    	
+	    	sendRequest('getWork.do?'+param, null, setProjectidx, 'GET');
 	    }
 	    
 	    function setProjectidx(){
@@ -57,10 +66,9 @@
 	    		if(XHR.status==200){
 	    			var result = XHR.responseText.trim();
 	    			
-	    			window.alert(result);
+	    			var resultId = document.getElementById('myworkIng');
 	    			
-	    			var idxResult = $(myWorkState);
-	    			
+	    			resultId.innerHTML = result;
 	    		}
 	    	}
 	    }
@@ -79,6 +87,7 @@
 	
 	<c:forEach var="self_tendency" items="${self_tendencylist}">
 	<c:forEach var="team_tendency" items="${team_tendencylist}">
+	
 	<script>
       var chart = AmCharts.makeChart( "chartdiv", {
                 "type": "radar",
@@ -150,6 +159,7 @@
         <div class="row">
           <div class="col-md-6">
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
+            <input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
              <c:forEach var="dto" items="${list}">
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
@@ -237,11 +247,14 @@
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
           
+          <c:set var="my" value="${myworkIng}"/>
+          
          <div class="col-md-6">
             <div>
               <div>
                 <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${workcomplete/workcount*100}%</a>
               </div>
+              <br>
               <br>
               <br>
               <c:set var="myproject" value="${myprojectlist}"/>
@@ -252,16 +265,17 @@
                   <option value="${project.project_idx}">${project.project_name}</option>
                 </c:forEach>
                 </select>
-                <br>
-                <br>
-                <div id="myWorkState">
+              	<br>
+              	<br>
+                <div>
 	                <div>
-	                  <a class="btn btn-default disabled">진행중인 업무  건</a>
-	                </div>
-	                <br>
-	                <div>
-	                  <a class="btn btn-default disabled">진행률 11111111111111111111111111111111111111111111111111</a>
-	                </div>
+	                	<a class="col-sm-12 btn btn-default disabled"> 진행중인 업무 : <span id="myworkIng"></span>건</a>
+	              	</div>
+	              	<br>
+              		<br>
+	              	<div>
+	                	<a class="col-sm-12 btn btn-default disabled"> 진행률 :  </a>
+	              	</div>
                 </div>
               </div>
               

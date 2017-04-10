@@ -91,8 +91,8 @@ public class MemberDAOImple implements MemberDAO {
 		return list;
 	}
 	
-	public String myWorkIng(ProjectMemberDTO pmdto) {
-		String count = sqlMap.selectOne("myWorkIng", pmdto);
+	public String myWorkIng(ProjectMemberDTO dto) {
+		String count = sqlMap.selectOne("myWorkIng", dto);
 		return count;
 	}
 	
