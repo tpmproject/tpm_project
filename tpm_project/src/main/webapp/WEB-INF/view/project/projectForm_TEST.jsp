@@ -137,19 +137,6 @@ function goInsert_member(i){
 	$('#member_idx'+i).remove();
 }
 
-function Insert_project_member(i){
-	var member_idx = i;
-	
-	
-	var param = 'member_idx=' + member_idx;
-	
-	var div=$('#modal_content'+i);
-	
-	window.alert(div.nodeName);
-	
-	
-}
-
 function friendAddResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -177,37 +164,17 @@ function friendAddResult() {
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					msg2 += '<div class="col-sm-12" id="modal_content'+member.member_idx+'">';
-					msg2 += '<div class="col-sm-12"> ';
-					msg2 += '<div class="panel"> ';
-					msg2 += '<div class="panel-body p-t-10"> ';
-					msg2 += '<div class="media-main"> ';
-					msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
-					msg2 += 				'class="thumb-lg img-circle bx-s" ';
-					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+					msg2 += '<div id="modal_content'+member.member_idx+'">';
+					msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+					msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+					msg2 +=member.member_name;
+					msg2 += '<div style="display:inline-block;width:30px;height:30px;" onclick="insertPM(' +member.member_idx+ ')">';
+					msg2 += '<i class="glyphicon glyphicon-plus"></i></div>'; 
+					
+					msg2 += '<input type="hidden" id="member_img' +member.member_idx  + '" value="' + member.member_img + '">';
+					msg2 += '<input type="hidden" id="member_name' +member.member_idx+ '" value="' + member.member_name + '">';
+					msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
 
-					msg2 += '</a> ';
-					 msg2 += '<div class="pull-right btn-group-sm"> ';
-					msg2 += '<a href="javascript:Insert_project_member(' + i
-							+ ')" class="btn btn-success tooltips" ';
-					msg2 += 'data-placement="top" data-toggle="tooltip" ';
-					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> '; 
-
-					msg2 += '</a> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="info"> ';
-					msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
-					msg2 += '<h4>' + member.member_name + '</h4> ';
-					msg2 += '<p class="text-muted">' + member.member_id
-							+ '</p> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="clearfix"></div> ';
-					msg2 += '<hr> ';
-
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
 					msg2 += '</div> ';
 				}
 
@@ -218,6 +185,40 @@ function friendAddResult() {
 			}
 		}
 	}
+	
+	var count=0;
+	function insertPM(member_idx){
+		
+		var temp=$('#modal_content'+member_idx);
+		
+		var divNode=document.createElement('div');
+		divNode.setAttribute('id','pm'+member_idx);
+		
+		temp.fadeOut('100');
+			
+		var img=$('#member_img' + member_idx).val();
+		var name=$('#member_name' +member_idx).val();
+		
+		var msg='<img height="30" width="30" class="thumb-lg img-circle bx-s" src="/tpm_project/img/member/profile/'+img+'"> ';
+		msg+=name+'<a onclick="deletePM('+member_idx+')"><i class="glyphicon glyphicon-remove"></i></a>';
+		msg+='<input type="hidden" name="member_idx" value="'+member_idx+'">';
+		count++;
+		
+		divNode.innerHTML=msg;
+		
+		var param = 'member_idx=' + member_idx;
+		
+		var pmdiv=document.getElementById('project_Member');
+		pmdiv.appendChild(divNode);
+		
+	}
+	function deletePM(member_idx){
+		$('#pm'+member_idx).remove();
+		$('#modal_content'+member_idx).fadeIn('100');
+		count--;
+	}
+	
+	
 	
 	function projectMemberAddResult3() {
 		if (XHR.readyState == 4) {
@@ -279,7 +280,7 @@ function friendAddResult() {
 <style>
 
 #mback {
-	position: absolute;
+	position: fixed;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -293,14 +294,22 @@ function friendAddResult() {
 	display: none;
 	background: white;
 	position: fixed;
-	top: 20%;
-	left: 20%;
+	top: 10%;
+	left: 10%;
 	border: solid 10px white;
 	border-radius: 10px;
 	width:640px;
 	height:700px;
 }
-
+.sd{
+	display:inline-block;
+	background: #f8f8f8;
+	height:600px;
+	width:48%;
+	float: left;
+	text-align: center;
+	
+}
 </style>
 </head>
 
@@ -579,34 +588,31 @@ function friendAddResult() {
 			</div>
 
 			<div id="smodal">
-				 <div class="section">
-				      <div class="container">
-				        <div class="row">
-				          <div class="col-md-3">
-					          <div class="box-gray aligncenter">
+				
+				      
+				          
+					     <div class="sd">
 									<h4>친구목록</h4>
-									<div id="myFriend_List"	style="width: 250px; height: 200px; overflow-y: scroll"></div>
+									<div id="myFriend_List"	style="width: 300px; height: 200px; overflow-y: scroll"></div>
 									<h4>검색 멤버</h4>
 									<div>
 										<input type="text" name="member_id" placeholder="Search" size="15">
 										<button type="button" class="btn" onclick="projectMemberAdd()">검색</button> 
 									</div>
-										<div id="member_search_content"	style="width: 250px; height: 200px; overflow-y: scroll"></div>
+										<div id="member_search_content"	style="width: 300px; height: 200px; overflow-y: scroll"></div>
 									
-								</div>
-				          </div>
-				          <div class="col-md-3">
-				          	<div class="box-gray aligncenter" style="height:500px;">
-				         	 <h4>초대 멤버</h4>
-								<div id="project_Member"style="width: 250px; height: 200px; overflow-y: scroll"></div>
-								<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
-								<input type="submit" class="btn" value="완료">
+						</div>
+				         
+				          
+			          	<div class="sd">
+			         	 <h4>초대 멤버</h4>
+							<div id="project_Member" style="width: 95%; height: 480px; overflow-y: scroll">
+				
 							</div>
-				          </div>
-				        </div>
-				      </div>
-				    </div>
-				</div>
+							<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+							<input type="submit" class="btn" value="완료">
+						</div>
+			</div>
 		</div>
 	</form>
 </body>

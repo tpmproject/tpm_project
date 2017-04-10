@@ -14,9 +14,9 @@
 		select * from tpm_project
 	</select>
 	
-	<select id="project_idx">
+	<select id="project_idx" resultType="int">
 	select project_idx.nextval
-	from tpm_project
+	from dual
 	</select>
 	
 	<insert id="projectInsert" parameterType="tpm.project.model.ProjectDTO">

@@ -69,7 +69,10 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView projectInsert(ProjectDTO dto){
+	public ModelAndView projectInsert(ProjectDTO dto,MemberDTO mdto){
+		
+		System.out.println(mdto.getMember_id());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectForm_TEST");
 		
