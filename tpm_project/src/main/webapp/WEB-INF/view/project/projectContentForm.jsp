@@ -53,6 +53,13 @@ function shows(){
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
 	var p=${pdto.project_idx};
+	
+	if(document.newWork.work_confirm.checked){
+		document.newWork.work_confirm.value=10;
+	}else{
+		document.newWork.work_confirm.value=20;
+	}
+	
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
 }
 function showsResult(){
@@ -448,7 +455,21 @@ function delResult(){
 											<td>막대그래프</td>
 										</tr>
 										<tr>
-											<td><input type="button" value="결재요청"></td>
+											<c:choose>
+											<c:when test="${wdto.work_state == 3 }">
+												<td><input type="button" value="업무 완료됨"></td>
+											</c:when>
+											<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
+												<td><input type="button" value="결재 요청"></td>
+											</c:when>
+											<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
+												<td><input type="button" value="결재 대기 중"></td>
+											</c:when>
+											<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
+												<td><input type="button" value="업무 완료"></td>
+											</c:when>
+											</c:choose>
+											
 											<td align="right">코멘트|첨부파일</td>
 										</tr>
 									</tbody>
@@ -491,7 +512,7 @@ function delResult(){
 							name="work_end" rel="stylesheet" />
 					</div>
 					<div>
-						<input type="checkbox" name="work_confirm" value="10">결재여부
+						<input type="checkbox" name="work_confirm" value="20">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows()">다음</button>
 
