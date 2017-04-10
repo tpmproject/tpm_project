@@ -116,10 +116,11 @@ function addWorkResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
 			if (result>0) {
-				$(workback).fadeOut('100');
-				$(work_modal).fadeOut('100');
-				document.newWork.reset();
+
 			}
+			$(workback).fadeOut('100');
+			$(work_modal).fadeOut('100');
+			location.reload();
 		}
 	}
 }
@@ -468,7 +469,7 @@ function showCheck(work_idx){
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf()">이전</button>
 				<c:if test=""></c:if>
-				<button type="submit" class="btn btn-next" id="btn-workok">완료</button>
+				<button type="button" class="btn btn-next" id="btn-workok" onclick="addWork()">완료</button>
 			</div>
 		</div>
 	</form>
