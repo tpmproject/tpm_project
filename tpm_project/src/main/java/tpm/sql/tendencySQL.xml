@@ -25,8 +25,19 @@
 			from tpm_tendency where #{tendency}=(select max(#{tendency}) 
 				from tpm_tendency where #{project_idx}) and #{project_idx})
 	</select>
-	<select id="addTendency">
-		insert into tpm_tendency values
-		(#{member_idx},#{project_idx},#{appraiser_idx},#{tendency_e},#{tendency_i},#{tendency_s},#{tendency_n},#{tendency_t},#{tendency_f},#{tendency_j},#{tendency_p});
+	<select id="addTendency" parameterType="tpm.tendency.model.TendencydDTO">
+		insert into tpm_tendency 
+		values(
+		#{member_idx},
+		#{project_idx},
+		#{appraiser_idx},
+		#{tendency_e},
+		#{tendency_i},
+		#{tendency_s},
+		#{tendency_n},
+		#{tendency_t},
+		#{tendency_f},
+		#{tendency_j},
+		#{tendency_p});
 	</select>
 </mapper>

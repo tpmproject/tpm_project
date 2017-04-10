@@ -52,7 +52,7 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	public int addTendency() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
