@@ -30,6 +30,19 @@
 				sendRequest('memberIdCheck.do', email, emailCheckResult, 'POST');
 			}
 		}
+		function passwordCheck(){
+			var user_pwd1=document.memberAddForm.member_pwd.value;
+			var user_pwd2=document.memberAddForm.member_pwd2.value;
+			var pwdCheckMsg = document.getElementById('pwdCheckMsg');
+			if(user_pwd1!=user_pwd2){
+				pwdCheckMsg.style.color = 'red';
+				pwdCheckMsg.innerHTML = '비밀번호가 다릅니다.';
+			}else{
+				pwdCheckMsg.innerHTML = '';
+			}
+			
+			
+		}
 		
 		function emailCheckResult(){
 			if(XHR.readyState==4){
@@ -134,8 +147,8 @@ function cancle(){
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="inputPasswordCheck" type="password" name="member_pwd_ch"placeholder="비밀번호 확인">
-                            <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+                            <input class="form-control" id="inputPasswordCheck" type="password" name="member_pwd2" onblur="passwordCheck()"placeholder="비밀번호 확인">
+                            <p class="help-block" id="pwdCheckMsg">비밀번호를 한번 더 입력해주세요.</p>
                         </div>
                     </div>
                     <div class="form-group">
