@@ -192,6 +192,10 @@ function addCheckResult(){
 					
 			var dNode = document.createElement('div');
 			dNode.setAttribute('id','div_ch'+chi);
+			dNode.setAttribute('draggable','true');
+			dNode.setAttribute('ondragover','allowDrop(event)');
+			dNode.setAttribute('ondragstart','drag(event)');
+			
 			dNode.innerHTML = chAdd;
 			
 			document.getElementById('content'+wi).value='';
@@ -244,7 +248,50 @@ function showCheck(work_idx){
 	}
 }
 
+//ondragstart 드래그할 때 id값 가져오기!
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
 
+//ondragover
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+function trashColor(){
+	document.getElementById('trash_i').style.color='red';
+}
+function trashColorReturn(){
+	document.getElementById('trash_i').style.color='black';
+}
+
+//ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    document.getElementById('trash_i').style.color='black';
+    
+    //유효성 검사
+    if(data.startsWith('div_ch')){
+	    if(document.getElementById(data)!=null){
+	    	data=data.substring(6);
+	    	var param='checklist_idx='+data;
+	    	sendRequest('checkDelete.do', param, delResult, 'POST');
+	    }else{
+	    	window.alert('잘못된 접근입니다.');
+	    }
+    }else{
+    	window.alert('잘못된 접근입니다.');
+    }
+}
+function delResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result=XHR.responseText; //지운 idx
+			result=parseInt(result);
+			$('#div_ch'+result).remove();
+		}
+	}
+}
 </script>
 <style>
 #workback {
@@ -309,18 +356,30 @@ function showCheck(work_idx){
 	height: 100px;
 	overflow-y:scroll;
 }
+#trash{
+	width: 55px;
+	height: 45px;
+	display: inline-block;
+	position: fixed;
+	left: 50%;
+	top:10px;
+	border: 1px solid black;
+}
 </style>
 </head>
 <%-- <%@include file="/WEB-INF/view/header.jsp" %> --%>
 <body>
-
+	<div id="trash" ondrop="drop(event)" class="btn-lg" ondragenter="trashColor()" ondragleave="trashColorReturn()" ondragstart="drag(event)" ondragover="allowDrop(event)">
+		<span id="trash_i" class="glyphicon glyphicon-trash" aria-hidden="true" ondragover="trashColor()" ></span>
+	</div>
+	
 	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:choose>
-			<c:when test="${empty pdto}"></c:when>
+			<c:when test="${(empty pdto.category_dtos) or pdto.category_dtos[0].category_idx == 0}"></c:when>
 			<c:otherwise>
 				<c:forEach var="cdto" items="${pdto.category_dtos}">
 					<div class="category">
@@ -368,7 +427,7 @@ function showCheck(work_idx){
 											<td colspan="2">
 												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
-														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }">
+														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >
 															<a onclick="javascript:check(${chdto.checklist_idx })">
 															<i id="ch${chdto.checklist_idx }"
 															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
@@ -402,7 +461,7 @@ function showCheck(work_idx){
 		</c:choose>
 
 
-		<div class="category" id="addCate">
+		<div class="category" id="addCate" style="padding-left: 10px;">
 			<form name="newCategory" action="javascript:categoryAdd()">
 				<input type="text" class="form-control" name="category_name"
 					placeholder="새로운 카테고리">
