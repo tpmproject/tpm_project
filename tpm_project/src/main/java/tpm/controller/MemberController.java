@@ -336,10 +336,8 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		
 		String myworkING = mdao.myWorkIng(dto);
-		System.out.println(myworkING);
 		
 		String myworkTotal = mdao.myworkTotal(dto);
-		System.out.println(myworkTotal);
 		
 		mav.addObject("myworkTotal", myworkTotal);
 		mav.addObject("myworkING", myworkING);

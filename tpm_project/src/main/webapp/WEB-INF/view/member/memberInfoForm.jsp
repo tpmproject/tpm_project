@@ -177,7 +177,7 @@
         <c:set var="list" value="${userInfo}"/>
         <div class="row">
           <div class="col-md-6">
-            <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post">
+            <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post" enctype="multipart/form-data">
             <input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
              <c:forEach var="dto" items="${list}">
 	              <div class="col-sm-offset-7">
@@ -195,7 +195,7 @@
 	                  <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"
 	                  class="img-circle img-responsive">
 	                </div>
-	                <div class="col-md-8">파일 선택 들어갈 곳</div>
+	                <div class="col-md-8"> <input type="file" name="select_profile"> </div>
 	              </div>&nbsp;
 	              <div class="form-group">
 	                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
@@ -266,8 +266,6 @@
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
           
-          <c:set var="my" value="${myworkIng}"/>
-          
          <div class="col-md-6">
             <div>
               <div>
@@ -297,8 +295,10 @@
 	              	</div>
                 </div>
               </div>
-              
             </div>
+            <br>
+            <br>
+            <br>
             <hr>
             <div>
               <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
