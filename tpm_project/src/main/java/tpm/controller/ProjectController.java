@@ -96,11 +96,9 @@ public class ProjectController {
 	
 	/**프로젝트-프로젝트 생성-친구리스트*/
 	@RequestMapping(value="projectFriendList.do", method=RequestMethod.POST)
-	public ModelAndView projectFriendList(MemberDTO dto){
+	public ModelAndView projectFriendList(MyFriendDTO dto){
 		
-		MyFriendDTO mdto=new MyFriendDTO();
-		mdto.setMember_idx(dto.getMember_idx());
-		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(mdto);
+		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
 		
 	    ModelAndView mav = new ModelAndView();
 

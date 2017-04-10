@@ -72,9 +72,8 @@ public class MyFriendController {
 	
 	/** 친구 - 친구 등록 */
 	@RequestMapping(value="myFriendAdd.do", method=RequestMethod.GET)
-	public ModelAndView myFriendAdd(){
+	public ModelAndView myFriendAdd(MyFriendDTO dto){
 		
-		MyFriendDTO dto = new MyFriendDTO(7, 3);
 		int count = myFriendDAO.addFriend(dto);
 		String result = count > 0 ? "true" : "false";
 		

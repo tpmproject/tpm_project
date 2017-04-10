@@ -144,7 +144,7 @@ function friendAddResult() {
 			window.alert(result);
 			if(result.trim() == 'true'){
 				var param = 'member_idx=' + ${sessionScope.s_member_idx};
-				sendRequest('projectFriendList.do',param,projectMemberAddResult,'POST');
+				sendRequest('projectFriendList.do',param,projectMemberAddResult2,'POST');
 				
 			} 
 			
