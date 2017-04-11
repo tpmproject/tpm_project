@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
@@ -121,10 +127,10 @@ public class WorkController {
 	
 	// 캘린더
 	/** 캘린더 - 캘린더 페이지로 이동 */
+	
 	@RequestMapping(value="calendarList.do",  method=RequestMethod.GET)
-	public ModelAndView calendarListForm(HttpServletRequest req){
-		
-		
+	
+	public @ResponseBody @JsonInclude(value=Include.NON_NULL) ArrayList<CalendarDTO> calendarListForm(HttpServletRequest req){
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -132,9 +138,48 @@ public class WorkController {
 		HttpSession session = req.getSession();
 		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
 		ArrayList<MyWorkDTO> arry_mwdto = workDAO.myWorkAllList(mdto);
-		mav.setViewName("calendar/calendarListForm");
-		mav.addObject("arry_mwdto", arry_mwdto);
-		return mav;
+
+		ArrayList<CalendarDTO> arry_cldto = new ArrayList<CalendarDTO>();
+		for (MyWorkDTO myWorkDTO : arry_mwdto) {
+			CalendarDTO temp_cldto = new CalendarDTO();
+			temp_cldto.setTitle(myWorkDTO.getWork_title());
+			temp_cldto.setStart(myWorkDTO.getWork_start().toString());
+			temp_cldto.setEnd(myWorkDTO.getWork_end().toString());
+			temp_cldto.setUrl("index.do");
+			temp_cldto.setBackgroundColor("#f56954");
+			temp_cldto.setBorderColor("#f56954");
+			//temp_cldto.setClassName(null);
+			arry_cldto.add(temp_cldto);
+		}
+		
+		return arry_cldto;
+	}
+	
+	/** 캘린더 - 캘린더 데이터 반환 */
+	@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
+	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax(HttpServletRequest req){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		MemberDTO mdto = new MemberDTO();
+		HttpSession session = req.getSession();
+		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
+		ArrayList<MyWorkDTO> arry_mwdto = workDAO.myWorkAllList(mdto);
+
+		ArrayList<CalendarDTO> arry_cldto = new ArrayList<CalendarDTO>();
+		for (MyWorkDTO myWorkDTO : arry_mwdto) {
+			CalendarDTO temp_cldto = new CalendarDTO();
+			temp_cldto.setTitle(myWorkDTO.getWork_title());
+			temp_cldto.setStart(myWorkDTO.getWork_start().toString());
+			temp_cldto.setEnd(myWorkDTO.getWork_end().toString());
+			temp_cldto.setUrl("index.do");
+			temp_cldto.setBackgroundColor("#f56954");
+			temp_cldto.setBorderColor("#f56954");
+			//temp_cldto.setClassName(null);
+			arry_cldto.add(temp_cldto);
+		}
+		
+		return arry_cldto;
 	}
 	
 	/** 캘린더 - 필터  업무 데이터 */

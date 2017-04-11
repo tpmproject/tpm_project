@@ -11,23 +11,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/calender_import.jsp"%>
+<% 
+	
+	//JSONObject object = new JSONObject();
+	ArrayList<MyWorkDTO> mwdto = (ArrayList) request.getAttribute("arry_mwdto");
+	
+	JSONArray arry_calender_work = new JSONArray();
 
+	for(int i = 0 ; i < mwdto.size() ; i++){
+		JSONObject obj = new JSONObject();
+		obj.put("title", mwdto.get(i).getWork_title());
+		obj.put("start", mwdto.get(i).getWork_start().toString());
+		obj.put("end", mwdto.get(i).getWork_end().toString());
+		obj.put("backgroundColor", "#f56954");
+		obj.put("borderColor", "#f56954");
+		
+		arry_calender_work.add(obj);
+	}
+	//object.put("events", arry_calender_work);
+	
+%>
 <script type="text/javascript">
-function calendarReload(){
-	$.ajax({
-		url : 'calendarList.do',
-		type : 'post',
-		dataType : 'json', // 제이슨 형식으로 넘어온다.
-		success : function(calevents) {
-			$.each(calevents, function(i, calevent){
-				$('#calendar').fullCalendar('renderEvent',
-						calevent, true);
-			});
-		}
-	});
-}
+	$(function() {
 
-	$(document).ready(function() {
 		/* initialize the external events
 		 -----------------------------------------------------------------*/
 		function ini_events(ele) {
@@ -84,8 +90,8 @@ function calendarReload(){
 					       day: 'yyyy년 MMM d dddd'
 					}, */
 					//Random default events
-					
-					/* events :  [  
+					events : <%= arry_calender_work%>,
+					/* events :  [ 
 					{
 						"title" : 'All Day Event',
 						//start : new Date("2017-04-07"),
@@ -204,7 +210,7 @@ function calendarReload(){
 	});
 </script>
 </head>
-<body class="skin-blue" onload="calendarReload()">
+<body class="skin-blue">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/header.jsp"%>
 		<%@ include file="/WEB-INF/view/aside.jsp"%>
