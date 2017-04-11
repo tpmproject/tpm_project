@@ -7,7 +7,7 @@ import tpm.project.model.ProjectMemberDTO;
 
 public interface ProjectDAO {
 
-	public ArrayList<ProjectDTO> projectAllList();
+	public ArrayList<ProjectDTO> projectAllList(ProjectDTO dto);
 	
 	public ProjectDTO projectSearch(ProjectDTO dto);
 	
