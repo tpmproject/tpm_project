@@ -184,7 +184,7 @@ public class ProjectController {
 	
 	/**프로젝트 멤버 평가*/
 	@RequestMapping(value="projectEvaluation.do", method=RequestMethod.POST)
-	public ModelAndView projectEvaluationForm(TendencyDTO dto){
+	public ModelAndView addTendency(TendencyDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectEvaluation_d");
