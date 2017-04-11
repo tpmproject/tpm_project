@@ -392,14 +392,14 @@ function addPResult(){
               <div class="col-lg-3">
                 <div class="box">
                   <div class="box-gray aligncenter">
-                    <h4>프로젝트1</h4>
+                    <h4>프로젝트1 명</h4>
                     <div class="icon">
                       <i class="fa fa-desktop fa-3x"></i>
                     </div>
-                    <p>Voluptatem accusantium doloremque laudantium sprea totam rem aperiam.</p>
+                    <p>프로젝트 내용</p>
                   </div>
                   <div class="box-bottom">
-                    <a href="#">Learn more</a>
+                    <a href="#">프로젝트 보기버튼</a>
                   </div>
                 </div>
               </div>

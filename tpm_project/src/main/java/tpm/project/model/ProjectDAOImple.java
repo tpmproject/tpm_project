@@ -1,6 +1,6 @@
 package tpm.project.model;
 
-import java.sql.Date;
+import java.sql.Date;	
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,9 +23,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		
 	}
 	
-	public ArrayList<ProjectDTO> projectAllList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ProjectDTO> projectAllList(ProjectDTO dto) {
+		
+		ArrayList<ProjectDTO> projectAllList=(ArrayList)sqlMap.selectList("projectAllList", dto);
+		return projectAllList;
 	}
 
 	public ProjectDTO projectSearch(ProjectDTO dto) {
