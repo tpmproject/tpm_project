@@ -11,6 +11,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/calender_import.jsp"%>
+<link href='fullcalendar.min.css' rel='stylesheet' />
+<link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='moment.min.js'></script>
+<script src='jquery.min.js'></script>
+<script src='fullcalendar.min.js'></script>
 
 <script type="text/javascript">
 function calendarReload(){
@@ -65,71 +70,63 @@ function calendarReload(){
 		var date2 = new Date("2017-04-06");
 		console.log(date2); */
 		
-		$('#calendar').fullCalendar(
-				{
-					header : {
-						left : 'prev,next today',
-						center : 'title',
-						right : 'month,agendaWeek,agendaDay'
+		$('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,agendaWeek,agendaDay,listMonth'
 					},
 					buttonText : {
-						today : 'today',
-						month : 'month',
-						week : 'week',
-						day : 'day'
+					    today:    '오늘',
+					    month:    '월간',
+					    week:     '주간',
+					    day:      '일간',
+					    list:     '리스트'
 					}, 
-					/* titleFormat: {
-					      month: 'yyyy년 MMMM',
-					      week: "yyyy년 MMMM d[ yyyy]{'일 ~'[ MMM] dd일 }",
-					       day: 'yyyy년 MMM d dddd'
-					}, */
-					//Random default events
+					slotLabelFormat: 'tt hh',
+					navLinks: true, // can click day/week names to navigate views
+					businessHours: true, // display business hours
+					eventLimit: true, // allow "more" link when too many events
+					dragscroll: true,
+					editable: true, // 업무 수정 이동 여부
+					eventDrop: function(event, delta, revertFunc) {
+
+				        alert(event.title + " was dropped on " + event.start.format());
+
+				        if (!confirm("Are you sure about this change?")) {
+				            revertFunc();
+				        }
+
+				    },eventResize: function(event, delta, revertFunc) {
+
+				        alert(event.title + " end is now " + event.end.format());
+
+				        if (!confirm("is this okay?")) {
+				            revertFunc();
+				        }
+
+				    },
+				    
+				    weekNumbers: true, // 주간별 번호 표시 클릭시 해당 주간 이동
+					weekNumbersWithinDays: true,
+					weekNumberCalculation: 'local',
 					
-					/* events :  [  
-					{
-						"title" : 'All Day Event',
-						//start : new Date("2017-04-07"),
-						//start : date2,
-						//start : date2,
-						//start : 'Thu Apr 07 2017 09:00:00 GMT+0900 (대한민국 표준시)',
-						"start" : '2017-04-08 14:00:00',
-						"backgroundColor" : "#f56954", //red
-						"borderColor" : "#f56954" //red
-					}, {
-						title : 'Long Event',
-						start : new Date(y, m, d - 5),
-						end : new Date(y, m, d - 2),
-						backgroundColor : "#f39c12", //yellow
-						borderColor : "#f39c12" //yellow
-					}, {
-						title : 'Meeting',
-						start : new Date(y, m, d, 10, 30),
-						allDay : false,
-						backgroundColor : "#0073b7", //Blue
-						borderColor : "#0073b7" //Blue
-					}, {
-						title : 'Lunch',
-						start : new Date(y, m, d, 12, 0),
-						end : new Date(y, m, d, 14, 0),
-						allDay : false,
-						backgroundColor : "#00c0ef", //Info (aqua)
-						borderColor : "#00c0ef" //Info (aqua)
-					}, {
-						title : 'Birthday Party',
-						start : new Date(y, m, d + 1, 19, 0),
-						end : new Date(y, m, d + 1, 22, 30),
-						allDay : false,
-						backgroundColor : "#00a65a", //Success (green)
-						borderColor : "#00a65a" //Success (green)
-					}, {
-						title : 'Click for Google',
-						start : new Date(y, m, 28),
-						end : new Date(y, m, 29),
-						url : 'http://google.com/',
-						backgroundColor : "#3c8dbc", //Primary (light-blue)
-						borderColor : "#3c8dbc" //Primary (light-blue)
-					} ] , */
-					editable : true,
+					selectable: true, 
+					selectHelper: true,
+					select: function(start, end) { // 빈 날짜 선택시 이벤트
+						var title = prompt('Event Title:');
+						var eventData;
+						if (title) {
+							eventData = {
+								title: title,
+								start: start,
+								end: end
+							};
+							$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+						}
+						$('#calendar').fullCalendar('unselect');
+					},
+					
 					droppable : true, // this allows things to be dropped onto the calendar !!!
 					drop : function(date, allDay) { // this function is called when something is dropped
 
