@@ -10,14 +10,7 @@
 	</select>
 	<!-- 파일등록  -->
 	<insert id="addFile" parameterType="tpm.file.model.FileDTO">
-		insert into tpm_file values (file_idx.nextval,
-									#{project_idx},
-									#{work_idx},
-									#{member_idx},
-									#{file_name},
-									#{file_size},
-									sysdate,
-									#{file_path})
+		insert into tpm_file values (file_idx.nextval,#{project_idx},#{work_idx},#{member_idx},#{file_name},#{file_size},sysdate,#{file_path})
 	</insert>
 	<delete id="delFile" parameterType="int">
 		delete tpm_file 

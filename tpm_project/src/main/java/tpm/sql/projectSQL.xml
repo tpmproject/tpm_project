@@ -11,7 +11,7 @@
 	</select>
 
 	<select id="projectList" resultType="tpm.project.model.ProjectDTO">
-		select * from tpm_project
+		select * from tpm_project order by project_idx desc
 	</select>
 	
 	<select id="project_idx" resultType="int">
