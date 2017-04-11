@@ -97,6 +97,16 @@
 	    
 	    function selectimg(){
 	    	var fileNm = $(select_profile).val();
+	    	window.alert(fileNm);
+	    	
+	    	var real_fileNm = fileNm.split('/');
+	    	var intArray = new Array(real_fileNm.length);
+	    	
+	    	var filename = '';
+	    	for(var i=0;i<real_fileNm.length;i++){
+	    		filename = resultArray[max(i)];
+	    		
+	    	}
 	    	
 	    	if(fileNm != ""){
 	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
@@ -107,6 +117,19 @@
 	    		}
 	    	}
 	    	
+	    	var param = 'fileNm=' + fileNm;
+	    	window.alert(param);
+	    	
+	    	sendRequest('updateProfile.do?'+param, null, uploadimg, 'GET');	    	
+	    }
+	    
+	    function uploadimg(){
+	    	if(XHR.readyState==4){
+	    		if(XHR.status==200){
+	    			
+	    		}
+	    	}
+	    		
 	    	
 	    }
     </script>
@@ -213,7 +236,7 @@
 	              <!-- 프로필 사진 -->
 	              <div class="form-group">
 	                <div class="col-md-3 col-md-offset-1">
-	                  <img class="img-circle bx-s" src="/tpm_project/img/member/profile/${dto.member_img}" >
+	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" >
 	                </div>
 	                <div class="col-md-3"> <input class="btn btn-default" name="member_img" type="file" id="select_profile">
 	                <button type="button" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>
@@ -290,11 +313,15 @@
           
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
+          <c:set var="totalwork" value="${workcomplete/workcount*100}"/>
+          <c:if test="${workcount==0 || workcomplete==0}">
+          	<c:set var="totalwork" value="0"/>
+          </c:if>
           
          <div class="col-md-6">
             <div>
               <div>
-                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${workcomplete/workcount*100}%</a>
+                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${totalwork}%</a>
               </div>
               <br>
               <br>

@@ -1,8 +1,12 @@
 package tpm.controller;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -14,9 +18,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.member.model.MemberDAO;
@@ -339,8 +347,11 @@ public class MemberController {
 		String userid = (String)session.getAttribute("s_member_id");
 		
 		String filename = fileNm;
+		String savepath = req.getServletContext().getRealPath("img/member/profile/"+userid+"");
+		System.out.println("save: "+savepath);
 		
 		File uploadDirectory = new File(req.getServletContext().getRealPath("img/member/profile/"+userid+""));
+		System.out.println(uploadDirectory);
 		
 		if(!uploadDirectory.exists()){
 			uploadDirectory.mkdirs();
@@ -348,10 +359,6 @@ public class MemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		return mav;
-		
-		
-		
-		
 	}
 	
 	/** 개인정보 - 업무 정보 */
