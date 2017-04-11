@@ -1,5 +1,6 @@
 package tpm.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -327,6 +328,30 @@ public class MemberController {
 		mav.setViewName("member/memberInfoForm");
 		
 		return mav;
+	}
+	
+	/** 개인정보 - 프로필 사진 저장*/
+	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
+	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileNm") String fileNm){
+		
+		HttpSession session = req.getSession();
+		
+		String userid = (String)session.getAttribute("s_member_id");
+		
+		String filename = fileNm;
+		
+		File uploadDirectory = new File(req.getServletContext().getRealPath("img/member/profile/"+userid+""));
+		
+		if(!uploadDirectory.exists()){
+			uploadDirectory.mkdirs();
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		return mav;
+		
+		
+		
+		
 	}
 	
 	/** 개인정보 - 업무 정보 */

@@ -7,24 +7,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+ 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-    rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-    rel="stylesheet" type="text/css">
-    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script src="https://www.amcharts.com/lib/3/radar.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css"
-    type="text/css" media="all">
-    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- 개인성향 -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script src="https://www.amcharts.com/lib/3/radar.js"></script>
+	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<!-- 업무 성향 -->
+	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    
+	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	
+	<script type="text/javascript" src="js/httpRequest.js"></script>
+	
 <title>Insert title here</title>
 	<style>
       #chartdiv {
@@ -37,7 +40,7 @@
 				font-size	: 11px;
 	  }	
     </style>
-    <script type="text/javascript" src="js/httpRequest.js"></script>
+    
     <script>
 	    function deletedo(){
 	  	  var id = document.memberInfoForm.member_id.value;
@@ -90,6 +93,21 @@
 	    			
 	    		}
 	    	}
+	    }
+	    
+	    function selectimg(){
+	    	var fileNm = $(select_profile).val();
+	    	
+	    	if(fileNm != ""){
+	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
+	    		
+	    		if(!(ext == "jpg" || ext == "png")){
+	    			window.alert('이미지 파일(.jpg, .png)만 업로드 가능합니다');
+	    			location.reload();
+	    		}
+	    	}
+	    	
+	    	
 	    }
     </script>
 </head>
@@ -166,6 +184,7 @@
      </script>
      </c:forEach>
      </c:forEach>
+     
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
       <div class="col-md-12">
@@ -190,12 +209,19 @@
 	              <br>
 	              <br>
 	              <br>
+	              
+	              <!-- 프로필 사진 -->
 	              <div class="form-group">
 	                <div class="col-md-3 col-md-offset-1">
 	                  <img class="img-circle bx-s" src="/tpm_project/img/member/profile/${dto.member_img}" >
 	                </div>
-	                <div class="col-md-8"> <input type="file" name="select_profile"> </div>
+	                <div class="col-md-3"> <input class="btn btn-default" name="member_img" type="file" id="select_profile">
+	                <button type="button" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>
+	                </div>
+	                <!-- <button type="button" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button> -->
 	              </div>&nbsp;
+	              
+	              <!-- 정보 입력 -->
 	              <div class="form-group">
 	                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 	                <div class="col-sm-8">
