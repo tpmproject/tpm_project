@@ -11,11 +11,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/sample/cho/main/calender_import.jsp"%>
-<link href='fullcalendar.min.css' rel='stylesheet' />
-<link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='moment.min.js'></script>
-<script src='jquery.min.js'></script>
-<script src='fullcalendar.min.js'></script>
+<link href="/tpm_project/css/calendar/fullcalendar.min.css?ver=1" rel="stylesheet" />
+<link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
+<script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
+<script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
+
 
 <script type="text/javascript">
 function calendarReload(){
@@ -35,7 +35,7 @@ function calendarReload(){
 	$(document).ready(function() {
 		/* initialize the external events
 		 -----------------------------------------------------------------*/
-		function ini_events(ele) {
+		/* function ini_events(ele) {
 			ele.each(function() {
 
 				// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -58,18 +58,9 @@ function calendarReload(){
 
 			});
 		}
-		ini_events($('#external-events div.external-event'));
+		ini_events($('#external-events div.external-event')); */
 
-		/* initialize the calendar
-		 -----------------------------------------------------------------*/
-		//Date for the calendar events (dummy data)
-		/* var date = new Date();
-		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
-		var date2 = new Date(y, m, d - 5);
-		var date2 = new Date(2017, 03, 05);
-		var date2 = new Date("2017-04-06");
-		console.log(date2); */
-		
+
 		$('#calendar').fullCalendar({
 					header: {
 						left: 'prev,next today',
@@ -83,7 +74,7 @@ function calendarReload(){
 					    day:      '일간',
 					    list:     '리스트'
 					}, 
-					slotLabelFormat: 'tt hh',
+					//slotLabelFormat: 'tt hh',
 					navLinks: true, // can click day/week names to navigate views
 					businessHours: true, // display business hours
 					eventLimit: true, // allow "more" link when too many events
@@ -159,45 +150,6 @@ function calendarReload(){
 
 					}
 				});
-
-		/* ADDING EVENTS */
-		var currColor = "#3c8dbc"; //Red by default
-		//Color chooser button
-		var colorChooser = $("#color-chooser-btn");
-		$("#color-chooser > li > a").click(function(e) {
-			e.preventDefault();
-			//Save color
-			currColor = $(this).css("color");
-			//Add color effect to button
-			$('#add-new-event').css({
-				"background-color" : currColor,
-				"border-color" : currColor
-			});
-		});
-		$("#add-new-event").click(function(e) {
-			e.preventDefault();
-			//Get value and make sure it is not null
-			var val = $("#new-event").val();
-			if (val.length == 0) {
-				return;
-			}
-
-			//Create events
-			var event = $("<div />");
-			event.css({
-				"background-color" : currColor,
-				"border-color" : currColor,
-				"color" : "#fff"
-			}).addClass("external-event");
-			event.html(val);
-			$('#external-events').prepend(event);
-
-			//Add draggable funtionality
-			ini_events(event);
-
-			//Remove event from text input
-			$("#new-event").val("");
-		});
 	});
 </script>
 </head>

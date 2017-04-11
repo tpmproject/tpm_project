@@ -4,11 +4,11 @@
 <head>
 <meta charset='utf-8' />
 <!-- <link rel='stylesheet' href='../lib/cupertino/jquery-ui.min.css' /> -->
-<link href='../fullcalendar.min.css' rel='stylesheet' />
-<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='../lib/moment.min.js'></script>
-<script src='../lib/jquery.min.js'></script>
-<script src='../fullcalendar.min.js'></script>
+<link href="/tpm_project/css/calendar/fullcalendar.min.css?ver=1" rel="stylesheet" />
+<link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
+<script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
+<script src="/tpm_project/js/jquery.min.js?ver=1"></script>
+<script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
 
 
 
