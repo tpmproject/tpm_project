@@ -3,6 +3,9 @@ package tpm.controller;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +47,15 @@ public class ProjectController {
 	// 프로젝트
 	/** 프로젝트 - 프로젝트 리스트 페이지 이동 */
 	@RequestMapping(value="projectList.do",  method=RequestMethod.GET)
-	public ModelAndView projectListForm(){
+	public ModelAndView projectListForm(HttpServletRequest req){
 		
+		HttpSession session=req.getSession();
+		int member_idx=(Integer)session.getAttribute("s_member_idx");
+		
+		ArrayList<ProjectDTO> plist= projectDAO.projectAllList(member_idx);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("plist",plist);
+		
 		mav.setViewName("project/projectForm_TEST");
 		return mav;
 	}

@@ -1,13 +1,13 @@
 package tpm.project.model;
 
-import java.util.ArrayList	;
+import java.util.ArrayList		;
 
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
 
 public interface ProjectDAO {
 
-	public ArrayList<ProjectDTO> projectAllList(ProjectDTO dto);
+	public ArrayList<ProjectDTO> projectAllList(int member_idx);
 	
 	public ProjectDTO projectSearch(ProjectDTO dto);
 	

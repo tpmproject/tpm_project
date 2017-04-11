@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 window.alert('로그인 완료');
-location.href='index.do';
+location.href='projectList.do';
 </script>
