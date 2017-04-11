@@ -71,11 +71,13 @@ function addTendencyResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
+			result=parseInt(result);
 			window.alert(result);
 
 			if (result>0) {
-
+				$('#bt'+result).hide();
 			}
+			location.reload();
 		}
 	}
 }
@@ -90,8 +92,7 @@ function addTendencyResult(){
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:forEach var="arr" items="${arr}">
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
-
-			<div>
+			<div id="bt${arr.member_idx}">
 			<img src="/tpm_project/img/member/profile/${arr.member_img}">
 				<h4>${arr.member_name}(${arr.member_id})</h4>
 				</div>
@@ -163,12 +164,11 @@ function addTendencyResult(){
 				</div>
 				<br>
 				<div>
-					<button type="reset" class="btn btn-reset" id="btn-reset" name="btn_reset">초기화</button>
-					<button type="button" class="btn btn-next" id="btn-tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
+					<button type="reset" class="btn btn-reset" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="button" class="btn btn-next" id="btn_tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
 					<hr>
 				</div>
 			</form>
-
 		</c:forEach>
 	</div>
 </body>
