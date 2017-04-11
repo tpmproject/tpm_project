@@ -31,5 +31,10 @@ public class TendencyDAOImple implements TendencyDAO {
 		
 		return dto;
 	}
+	
+	public int addTendency(TendencyDTO dto){
+		int result=sqlMap.insert("addTendency",dto);
+		return result;
+	}
 
 }

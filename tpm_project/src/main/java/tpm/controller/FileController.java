@@ -32,6 +32,12 @@ public class FileController {
     private FileDAO fdao;
 	//// 파일 ////
 	/** 파일 - 파일 리스트 페이지 이동 (프로젝트 리스트 보여주기) */
+    @RequestMapping("scrollbar.do")
+	public String scroll(){
+
+		return "file/test1";
+	}
+    
 	@RequestMapping(value="fileList.do",  method=RequestMethod.GET)
 	public ModelAndView fileListForm(){
 		
@@ -40,7 +46,7 @@ public class FileController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("pdto",pdto);
-		mav.setViewName("file/fileListForm");
+		mav.setViewName("file/fileListForm_t");
 		return mav;
 	}
 	
@@ -85,7 +91,7 @@ public class FileController {
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		int project_idx=2;   //프로젝트 idx 가져오기, 임시
-		int work_idx=2;      //업무 idx 가져오기 , 임시
+		int work_idx=74;      //업무 idx 가져오기 , 임시
 		
 		
 		

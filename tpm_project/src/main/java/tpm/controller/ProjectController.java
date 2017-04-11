@@ -3,6 +3,9 @@ package tpm.controller;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.tendency.model.TendencyDAO;
+import tpm.tendency.model.TendencyDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
 import tpm.category.model.CategoryDTO;
@@ -35,15 +40,24 @@ public class ProjectController {
 	@Autowired
 	private WorkDAO workDAO;
 	
+	@Autowired
+	private TendencyDAO tendencyDAO;
+	
 	
 	
 	// 프로젝트
 	/** 프로젝트 - 프로젝트 리스트 페이지 이동 */
 	@RequestMapping(value="projectList.do",  method=RequestMethod.GET)
-	public ModelAndView projectListForm(){
+	public ModelAndView projectListForm(HttpServletRequest req){
 		
+		HttpSession session=req.getSession();
+		int member_idx=(Integer)session.getAttribute("s_member_idx");
+		
+		ArrayList<ProjectDTO> plist= projectDAO.projectAllList(member_idx);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectForm_TEST");
+		mav.addObject("plist",plist);
+		
+		mav.setViewName("project/projectListForm");
 		return mav;
 	}
 	
@@ -65,7 +79,7 @@ public class ProjectController {
 	public ModelAndView projectAdd(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectForm_TEST");
+		mav.setViewName("project/projectListForm");
 		return mav;
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
@@ -143,7 +157,7 @@ public class ProjectController {
 	public ModelAndView projectUpdate(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectForm_TEST");
+		mav.setViewName("project/projectListForm");
 		return mav;
 	}
 	
@@ -152,7 +166,7 @@ public class ProjectController {
 	public ModelAndView projectDel(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectForm_TEST");
+		mav.setViewName("project/projectListForm");
 		return mav;
 	}
 	
@@ -166,6 +180,24 @@ public class ProjectController {
 		ArrayList<MemberDTO> arr=workDAO.projectMember(project_idx);
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
+		return mav;
+	}
+	
+	/**프로젝트 멤버 평가*/
+	@RequestMapping(value="projectEvaluation.do", method=RequestMethod.POST)
+	public ModelAndView addTendency(TendencyDTO dto){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectEvaluation_d");
+		
+		mav.addObject("tendencyDTO",dto);
+		int result=tendencyDAO.addTendency(dto);
+		
+		int msg=dto.getMember_idx();
+		if(result<=0){
+			msg=0;
+		}
+		mav.addObject("msg",msg);
 		return mav;
 	}
 	

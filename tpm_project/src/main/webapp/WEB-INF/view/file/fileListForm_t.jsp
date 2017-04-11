@@ -29,9 +29,10 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-">
 						<!-- 컨텐트 삽입 -->
-						
+						<%@ include file="fileListForm.jsp"%>
+					    
 					</div>
 				</div>
 			</section>
@@ -41,3 +42,13 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

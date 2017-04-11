@@ -112,7 +112,7 @@ function showsResult(){
 				msg2 += '<div class="col-sm-12" id="modal_content">';
 				msg2 += '<div class="col-sm-12"> ';
 				msg2 += '<div class="panel"> ';
-				msg2 += '<div class="panel-body p-t-10"> ';
+				msg2 += '<div class="panel-body p-t-10" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"> ';
 				msg2 += '<div class="media-main"> ';
 				msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
 				msg2 += 				'class="thumb-lg img-circle bx-s" ';
@@ -310,6 +310,25 @@ function trashColorReturn(){
 
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    document.getElementById('trash_i').style.color='black';
+    
+    //유효성 검사
+    if(data.startsWith('div_ch')){
+	    if(document.getElementById(data)!=null){
+	    	data=data.substring(6);
+	    	var param='checklist_idx='+data;
+	    	sendRequest('checkDelete.do', param, delResult, 'POST');
+	    }else{
+	    	window.alert('잘못된 접근입니다.');
+	    }
+    }else{
+    	window.alert('잘못된 접근입니다.');
+    }
+}
+//ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
+function workDrop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     document.getElementById('trash_i').style.color='black';
@@ -599,7 +618,7 @@ function cateDelResult(){
 								<p></p>
 								<p></p>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-3" ondrop="workDrop(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<ul class="media-list">
 									<li class="media"><a class="pull-left" href="#"><img
