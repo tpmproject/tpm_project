@@ -53,13 +53,8 @@
 
 		$(f_modal).fadeOut();
 		$(smodal).fadeIn();
-		var param = 'member_idx=' + $
-		{
-			sessionScope.s_member_idx
-		}
-		;
-		sendRequest('projectFriendList.do', param, projectMemberAddResult2,
-				'POST');
+		var param = 'member_idx=' + ${s_member_idx};
+		sendRequest('projectFriendList.do', param, projectMemberAddResult2,	'POST');
 
 	}
 
@@ -69,11 +64,7 @@
 	}
 	//검색멤버
 	function projectMemberAdd() {
-		var param = 'member_idx=' + $
-		{
-			sessionScope.s_member_idx
-		}
-		;
+		var param = 'member_idx=' + ${s_member_idx};
 		param += '&member_id=' + document.newProject.member_id.value;
 
 		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,
@@ -95,14 +86,14 @@
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					msg += '<div class="col-sm-12" id="modal_content">';
+					/* msg += '<div class="col-sm-12" id="modal_content">';
 					msg += '<div class="col-sm-12"> ';
 					msg += '<div class="panel"> ';
 					msg += '<div class="panel-body p-t-10" id="member_idx'+member.member_idx+'"> ';
 					msg += '<div class="media-main"> ';
 					msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
-				msg += 				'class="thumb-lg img-circle bx-s" ';
-				msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
+					msg += 				'class="thumb-lg img-circle bx-s" ';
+					msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
 
 					msg += '</a> ';
 					msg += '<div class="pull-right btn-group-sm"> ';
@@ -127,6 +118,20 @@
 					msg += '</div> ';
 					msg += '</div> ';
 					msg += '</div> ';
+					msg += '</div> '; */
+					msg += '<div id="modal_content'+member.member_idx+'">';
+					msg += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+					msg += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+					msg += member.member_name;
+					msg += '<div style="display:inline-block;width:30px;height:30px;" onclick="goInsert_member('
+							+ member.member_idx + ')">';
+					msg += '<i class="glyphicon glyphicon-plus"></i></div>';
+
+					msg += '<input type="hidden" id="member_img' +member.member_idx  + '" value="' + member.member_img + '">';
+					msg += '<input type="hidden" id="member_name' +member.member_idx+ '" value="' + member.member_name + '">';
+					msg += '<p class="text-muted">' + member.member_id
+							+ '</p> ';
+
 					msg += '</div> ';
 				}
 
@@ -146,11 +151,7 @@
 	}
 
 	function goInsert_member(i) {
-		var member_idx = $
-		{
-			sessionScope.s_member_idx
-		}
-		;
+		var member_idx = ${s_member_idx};
 		var myfriend_idx = i;
 
 		var param = 'member_idx=' + member_idx + '&myfriend_idx='
@@ -166,11 +167,7 @@
 				var result = XHR.responseText;
 				window.alert(result);
 				if (result.trim() == 'true') {
-					var param = 'member_idx=' + $
-					{
-						sessionScope.s_member_idx
-					}
-					;
+					var param = 'member_idx=' + ${s_member_idx};
 					sendRequest('projectFriendList.do', param,
 							projectMemberAddResult2, 'POST');
 
@@ -261,7 +258,7 @@
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					msg2 += '<div class="col-sm-12" id="modal_content">';
+				 	msg2 += '<div class="col-sm-12" id="modal_content">';
 					msg2 += '<div class="col-sm-12"> ';
 					msg2 += '<div class="panel"> ';
 					msg2 += '<div class="panel-body p-t-10"> ';
@@ -294,7 +291,8 @@
 					msg2 += '</div> ';
 					msg2 += '</div> ';
 					msg2 += '</div> ';
-					msg2 += '</div> ';
+					msg2 += '</div> '; 
+					
 				}
 
 				var myFriend_List = document.getElementById('myFriend_List');
@@ -329,11 +327,7 @@
 			childD = childD.nextSibling;
 		}
 
-		var my_idx = $
-		{
-			sessionScope.s_member_idx
-		}
-		;
+		var my_idx = ${s_member_idx};
 		param += '&pm=' + my_idx + ',' + msg;
 		param += '&level=3000,' + msg2;
 		sendRequest('projectAdd.do', param, addPResult, 'POST');
@@ -407,16 +401,17 @@
 		</div>
 	</div>
 	</section>
-	
+
 	<section id="content">
-	 <c:set var="plist" value="${plist}"></c:set>
-	  <c:choose>
-		<c:when test="${empty plist}">
+
+	<div class="container">
+		<c:set var="plist" value="${plist}"></c:set>
+		<c:choose>
+			<c:when test="${empty plist}">
 			등록된 프로젝트가 없습니다.
 		</c:when>
-		<c:otherwise>
-			<c:forEach var="i" items="${plist }">
-				<div class="container">
+			<c:otherwise>
+				<c:forEach var="i" items="${plist}">
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="row">
@@ -424,11 +419,11 @@
 									<div class="box">
 										<div class="box-gray aligncenter">
 											<input type="hidden" value="plist.get(i).member_idx">
-											<h4>프로젝트1 명</h4>
+											<h4>${i.project_name }</h4>
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
-											<p>프로젝트 내용</p>
+											<p>${i.project_content } 내용</p>
 										</div>
 										<div class="box-bottom">
 											<a href="#">프로젝트 보기버튼</a>
@@ -441,11 +436,12 @@
 					<!-- divider -->
 					<!-- end divider -->
 					<!-- Portfolio Projects -->
-				</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
-			</c:forEach>
-		</c:otherwise>
-	</c:choose>
+
 	</section>
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
