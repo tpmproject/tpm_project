@@ -25,6 +25,7 @@
 			from tpm_tendency where #{tendency}=(select max(#{tendency}) 
 				from tpm_tendency where #{project_idx}) and #{project_idx})
 	</select>
+	
 	<select id="tendencyList">
 		select member_idx from tpm_member 
 		where member_idx!=${appraiser_idx} and member_idx in(
@@ -33,6 +34,7 @@
 		select member_idx from tpm_tendency 
 		where appraiser_idx!=${appraiser_idx}))
 	</select>
+	
 	<select id="addTendency" parameterType="tpm.tendency.model.TendencyDTO">
 		insert into tpm_tendency 
 		values(

@@ -344,26 +344,45 @@ public class MemberController {
 	
 	/** 개인정보 - 프로필 사진 올리기 */
 	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
-	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileName") String fileName){
+	public ModelAndView updateProfile(MultipartHttpServletRequest request, HttpServletRequest req)
+	throws IOException{
 		
 		HttpSession session = req.getSession();
 		
 		String userid = (String)session.getAttribute("s_member_id");
+		System.out.println(userid);
 		
-		File uploadDirectory = new File(req.getServletContext().getRealPath("img/member/profile/"+userid+""));
-		System.out.println(uploadDirectory);
+		String savepath = req.getServletContext().getRealPath("img/member/profile/");
+		System.out.println(savepath);
 		
-		if(!uploadDirectory.exists()){
-			uploadDirectory.mkdirs();
-		}
+		MultipartFile upload = request.getFile("fileName");
+
+		copyInto(upload, savepath);
+		
+		String msg = "업로드 성공";
 		
 		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("member/memberProfileSuccess");
 		return mav;
 	}
 	
-	public void copyInto(MultipartFile upload, HttpServletRequest req) throws IOException{
+	public void copyInto(MultipartFile upload, String savepath) throws IOException{
+		
 		System.out.println("파일명 : "+upload.getOriginalFilename());
-		System.out.println("경로: "+upload);
+		System.out.println("임시 경로: "+upload);
+		
+		byte bytes[] = upload.getBytes();
+				
+		File outFile = new File(savepath+upload.getOriginalFilename());
+		
+		FileOutputStream fos = new FileOutputStream(outFile);
+		
+		fos.write(bytes);
+		fos.close();
+		
+		/*System.out.println("파일명 : "+fileName.getOriginalFilename());
+		System.out.println("경로: "+fileName);
 		
 		HttpSession session = req.getSession();
 		
@@ -377,14 +396,14 @@ public class MemberController {
 			uploadDirectory.mkdirs();
 		}
 		
-		byte bytes[] = upload.getBytes();
+		byte bytes[] = fileName.getBytes();
 		
-		File outFile = new File(savepath+upload.getOriginalFilename());
+		File outFile = new File(savepath+fileName.getOriginalFilename());
 		
 		FileOutputStream fos = new FileOutputStream(outFile);
 		
 		fos.write(bytes);
-		fos.close();
+		fos.close();*/
 	}
 	
 	/** 개인정보 - 업무 정보 */

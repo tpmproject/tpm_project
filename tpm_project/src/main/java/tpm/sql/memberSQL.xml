@@ -49,7 +49,7 @@
 	
 	<update id="memberUpdate" parameterType="tpm.member.model.MemberDTO">
 		update tpm_member
-		set member_pwd=#{member_pwd}, member_name=#{member_name}, member_tel=#{member_tel}, member_gender=#{member_gender}, member_img=#{member_img}
+		set member_pwd=#{member_pwd}, member_name=#{member_name}, member_tel=#{member_tel}, member_gender=#{member_gender}
 		where member_id=#{member_id}
 	</update>
 	
