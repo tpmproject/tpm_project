@@ -323,6 +323,14 @@ function drop(ev) {
 	    }else{
 	    	window.alert('잘못된 접근입니다.');
 	    }
+    }else if(data.startsWith('c')){
+    	if(document.getElementById(data)!=null){
+    		data=data.substring(1);
+	    	var param='category_idx='+data;
+	    	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
+    	}else{
+	    	window.alert('잘못된 접근입니다.');
+	    }
     }else{
     	window.alert('잘못된 접근입니다.');
     }
@@ -340,14 +348,6 @@ function workDrop(ev) {
 	    	var param='checklist_idx='+data;
 	    	sendRequest('checkDelete.do', param, delResult, 'POST');
 	    }else{
-	    	window.alert('잘못된 접근입니다.');
-	    }
-    }else if(data.startsWith('c')){
-    	if(document.getElementById(data)!=null){
-    		data=data.substring(1);
-	    	var param='category_idx='+data;
-	    	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
-    	}else{
 	    	window.alert('잘못된 접근입니다.');
 	    }
     }else{

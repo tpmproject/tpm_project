@@ -48,7 +48,7 @@ public class CategoryController {
 	/** 카테고리 - 카테고리 삭제 */
 	@RequestMapping(value="categoryDel.do",  method=RequestMethod.POST)
 	public ModelAndView categoryDel(int category_idx){
-		System.out.println("삭제할 idxcate"+category_idx);
+		
 		int result=categoryDAO.categoryDelete(category_idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
