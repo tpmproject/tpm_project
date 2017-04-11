@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 
 import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
@@ -129,38 +131,17 @@ public class WorkController {
 	/** 캘린더 - 캘린더 페이지로 이동 */
 	
 	@RequestMapping(value="calendarList.do",  method=RequestMethod.GET)
-	
-	public @ResponseBody @JsonInclude(value=Include.NON_NULL) ArrayList<CalendarDTO> calendarListForm(HttpServletRequest req){
+	public ModelAndView calendarListForm(HttpServletRequest req){
 		
 		ModelAndView mav = new ModelAndView();
-		
-		MemberDTO mdto = new MemberDTO();
-		HttpSession session = req.getSession();
-		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
-		ArrayList<MyWorkDTO> arry_mwdto = workDAO.myWorkAllList(mdto);
-
-		ArrayList<CalendarDTO> arry_cldto = new ArrayList<CalendarDTO>();
-		for (MyWorkDTO myWorkDTO : arry_mwdto) {
-			CalendarDTO temp_cldto = new CalendarDTO();
-			temp_cldto.setTitle(myWorkDTO.getWork_title());
-			temp_cldto.setStart(myWorkDTO.getWork_start().toString());
-			temp_cldto.setEnd(myWorkDTO.getWork_end().toString());
-			temp_cldto.setUrl("index.do");
-			temp_cldto.setBackgroundColor("#f56954");
-			temp_cldto.setBorderColor("#f56954");
-			//temp_cldto.setClassName(null);
-			arry_cldto.add(temp_cldto);
-		}
-		
-		return arry_cldto;
+		mav.setViewName("calendar/calendarListForm");
+		return mav;
 	}
 	
 	/** 캘린더 - 캘린더 데이터 반환 */
 	@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax(HttpServletRequest req){
 		
-		ModelAndView mav = new ModelAndView();
-		
 		MemberDTO mdto = new MemberDTO();
 		HttpSession session = req.getSession();
 		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
@@ -169,13 +150,17 @@ public class WorkController {
 		ArrayList<CalendarDTO> arry_cldto = new ArrayList<CalendarDTO>();
 		for (MyWorkDTO myWorkDTO : arry_mwdto) {
 			CalendarDTO temp_cldto = new CalendarDTO();
+			temp_cldto.setId("work_" + myWorkDTO.getWork_idx());
 			temp_cldto.setTitle(myWorkDTO.getWork_title());
+			temp_cldto.setAllDay("false");
 			temp_cldto.setStart(myWorkDTO.getWork_start().toString());
 			temp_cldto.setEnd(myWorkDTO.getWork_end().toString());
 			temp_cldto.setUrl("index.do");
+			temp_cldto.setClassName("calendar_work_content");
+			temp_cldto.setEditable("true");
 			temp_cldto.setBackgroundColor("#f56954");
 			temp_cldto.setBorderColor("#f56954");
-			//temp_cldto.setClassName(null);
+
 			arry_cldto.add(temp_cldto);
 		}
 		

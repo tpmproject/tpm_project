@@ -9,10 +9,6 @@ public class CalendarDTO {
 	private String url;
 	private String className;
 	private String editable;
-	private String startEditable;
-	private String durationEditable;
-	private String resourceEditable;
-	private String constraint;
 	private String color;
 	private String backgroundColor;
 	private String borderColor;
@@ -23,8 +19,7 @@ public class CalendarDTO {
 	}
 
 	public CalendarDTO(String id, String title, String allDay, String start, String end, String url, String className,
-			String editable, String startEditable, String durationEditable, String resourceEditable, String constraint,
-			String color, String backgroundColor, String borderColor, String textColor) {
+			String editable, String color, String backgroundColor, String borderColor, String textColor) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -34,10 +29,6 @@ public class CalendarDTO {
 		this.url = url;
 		this.className = className;
 		this.editable = editable;
-		this.startEditable = startEditable;
-		this.durationEditable = durationEditable;
-		this.resourceEditable = resourceEditable;
-		this.constraint = constraint;
 		this.color = color;
 		this.backgroundColor = backgroundColor;
 		this.borderColor = borderColor;
@@ -108,38 +99,6 @@ public class CalendarDTO {
 		this.editable = editable;
 	}
 
-	public String getStartEditable() {
-		return startEditable;
-	}
-
-	public void setStartEditable(String startEditable) {
-		this.startEditable = startEditable;
-	}
-
-	public String getDurationEditable() {
-		return durationEditable;
-	}
-
-	public void setDurationEditable(String durationEditable) {
-		this.durationEditable = durationEditable;
-	}
-
-	public String getResourceEditable() {
-		return resourceEditable;
-	}
-
-	public void setResourceEditable(String resourceEditable) {
-		this.resourceEditable = resourceEditable;
-	}
-
-	public String getConstraint() {
-		return constraint;
-	}
-
-	public void setConstraint(String constraint) {
-		this.constraint = constraint;
-	}
-
 	public String getColor() {
 		return color;
 	}
@@ -175,10 +134,9 @@ public class CalendarDTO {
 	@Override
 	public String toString() {
 		return "CalendarDTO [id=" + id + ", title=" + title + ", allDay=" + allDay + ", start=" + start + ", end=" + end
-				+ ", url=" + url + ", className=" + className + ", editable=" + editable + ", startEditable="
-				+ startEditable + ", durationEditable=" + durationEditable + ", resourceEditable=" + resourceEditable
-				+ ", constraint=" + constraint + ", color=" + color + ", backgroundColor=" + backgroundColor
-				+ ", borderColor=" + borderColor + ", textColor=" + textColor + "]";
+				+ ", url=" + url + ", className=" + className + ", editable=" + editable + ", color=" + color
+				+ ", backgroundColor=" + backgroundColor + ", borderColor=" + borderColor + ", textColor=" + textColor
+				+ "]";
 	}
 
 }
