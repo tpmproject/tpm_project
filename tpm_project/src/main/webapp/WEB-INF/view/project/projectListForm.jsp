@@ -342,6 +342,14 @@
 			}
 		}
 	}
+	
+	function projectUpdate(){
+		$(mback).fadeIn('150');
+		$(main_modal).fadeIn('150');
+		$(f_modal).show();
+		$(smodal).hide();
+		
+	}
 </script>
 
 <style>
@@ -403,7 +411,6 @@
 	</section>
 
 	<section id="content">
-
 	<div class="container">
 		<c:set var="plist" value="${plist}"></c:set>
 		<c:choose>
@@ -412,18 +419,31 @@
 		</c:when>
 			<c:otherwise>
 				<c:forEach var="i" items="${plist}">
-					<div class="row">
+					<div class="row" >
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-lg-3">
 									<div class="box">
 										<div class="box-gray aligncenter">
 											<input type="hidden" value="plist.get(i).member_idx">
-											<h4>${i.project_name }</h4>
+											<h4>${i.project_name }<a href="javascript:projectUpdate()"><i class="glyphicon glyphicon-cog"></i></a></h4>
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
 											<p>${i.project_content } 내용</p>
+
+											<!-- 프로젝트 진행현황 -->
+											<c:choose>
+												<c:when test="${i.project_state == 3 }">
+													<td><input type="button" value="완료"></td>
+												</c:when>
+												<c:when test="${i.project_state == 2 }">
+													<td><input type="button" value="평가 대기"></td>
+												</c:when>
+												<c:when test="${i.project_state == 1 }">
+													<td><input type="button" value="진행중"></td>
+												</c:when>
+											</c:choose>
 										</div>
 										<div class="box-bottom">
 											<a href="#">프로젝트 보기버튼</a>
@@ -440,8 +460,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
-
 	</section>
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
