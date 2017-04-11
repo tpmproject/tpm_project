@@ -11,4 +11,15 @@
 	#{category_name}
 	)	
 	</insert>
+	
+	<update id="categoryUpdate" parameterType="tpm.category.model.CategoryDTO">
+	update tpm_category
+	set category_name=#{category_name}
+	where category_idx=#{category_idx}
+	</update>
+	
+	<delete id="categoryDelete" parameterType="int">
+	delete from tpm_category
+	where category_idx=#{category_idx}
+	</delete>
 </mapper>
