@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectDTO;
+import tpm.tendency.model.TendencyDAO;
+import tpm.tendency.model.TendencyDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
 import tpm.category.model.CategoryDTO;
@@ -34,6 +36,8 @@ public class ProjectController {
 	//// 프로젝트 ////
 	@Autowired
 	private WorkDAO workDAO;
+	
+	private TendencyDAO tendencyDAO;
 	
 	
 	
@@ -166,6 +170,24 @@ public class ProjectController {
 		ArrayList<MemberDTO> arr=workDAO.projectMember(project_idx);
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
+		return mav;
+	}
+	
+	/**프로젝트 멤버 평가*/
+	@RequestMapping(value="projectEvaluation.do", method=RequestMethod.POST)
+	public ModelAndView projectEvaluationForm(TendencyDTO dto){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectEvaluation_d");
+	
+		mav.addObject("tendencyDTO", dto);
+		int result=tendencyDAO.addTendency(dto);
+		
+		int msg=dto.getMember_idx();
+		if(result<=0){
+			msg=0;
+		}
+		mav.addObject("msg",msg);
 		return mav;
 	}
 	

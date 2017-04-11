@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.project.model.ProjectDTO;
 import tpm.project.model.ProjectMemberDTO;
+import tpm.tendency.model.TendencyDTO;
 
 public class MemberDAOImple implements MemberDAO {
 
@@ -52,7 +53,6 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	public int addTendency() {
-		
 		return 0;
 	}
 
