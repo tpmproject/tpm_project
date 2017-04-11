@@ -22,10 +22,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		this.sqlMap=sqlMap;
 		
 	}
-	
-	public ArrayList<ProjectDTO> projectAllList(ProjectDTO dto) {
+	/**프로젝트 리스트*/
+	public ArrayList<ProjectDTO> projectAllList(int member_idx) {
 		
-		ArrayList<ProjectDTO> projectAllList=(ArrayList)sqlMap.selectList("projectAllList", dto);
+		ArrayList<ProjectDTO> projectAllList=(ArrayList)sqlMap.selectList("projectAllList", member_idx);
 		return projectAllList;
 	}
 
