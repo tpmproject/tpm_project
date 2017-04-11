@@ -98,6 +98,14 @@
 	    function selectimg(){
 	    	var fileNm = $(select_profile).val();
 	    	window.alert(fileNm);
+	    	
+	    	var param = 'fileName='+fileNm;
+	    	window.alert(param);
+	    	
+	    	location.href = 'updateProfile.do?'+param;
+	    	
+	    	/* var fileNm = $(select_profile).val();
+	    	window.alert(fileNm);
 	    		    	
 	    	if(fileNm != ""){
 	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
@@ -108,24 +116,22 @@
 	    		}
 	    	}
 	    	
-	    	var file_name = fileNm.slice(fileNm.lastIndexOf("\\")+1).toLowerCase();
-	    	window.alert(file_name);
+	    	//var file_name = fileNm.slice(fileNm.lastIndexOf("\\")+1).toLowerCase();
+	    	//window.alert(file_name);
 	    	
-	    	var param = 'fileName='+file_name;
+	    	var param = 'fileName='+fileNm;
 	    	window.alert(param);
 	    	
-	    	sendRequest('updateProfile.do?'+param, null, uploadimg, 'GET');	    	
+	    	sendRequest('updateProfile.do?'+param, null, uploadimg, 'GET');	    	 */
 	    }
 	    
-	    function uploadimg(){
+	    /* function uploadimg(){
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
 	    			
 	    		}
 	    	}
-	    		
-	    	
-	    }
+	    } */
     </script>
 </head>
 <body>
