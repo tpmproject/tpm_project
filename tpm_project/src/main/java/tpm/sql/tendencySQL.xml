@@ -38,6 +38,6 @@
 		#{tendency_t},
 		#{tendency_f},
 		#{tendency_j},
-		#{tendency_p});
+		#{tendency_p})
 	</select>
 </mapper>

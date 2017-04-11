@@ -40,6 +40,7 @@ public class ProjectController {
 	@Autowired
 	private WorkDAO workDAO;
 	
+	@Autowired
 	private TendencyDAO tendencyDAO;
 	
 	
@@ -188,8 +189,8 @@ public class ProjectController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectEvaluation_d");
-	
-		mav.addObject("tendencyDTO", dto);
+		
+		mav.addObject("tendencyDTO",dto);
 		int result=tendencyDAO.addTendency(dto);
 		
 		int msg=dto.getMember_idx();
