@@ -35,7 +35,10 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
+    
     function project_fileList(i){
+    	
+    	
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 	
@@ -180,105 +183,15 @@
                   </thead>
                   <tbody id="file_content_list">
                   
-                         <tr class="gradeA">
+                     
+               <!--      <tr class="gradeA">
                       <td>Gecko</td>
                       <td>Firefox 2.0</td>
                       <td>Win 98+ / OSX.2+</td>
                       <td class="center">1.8</td>
                       <td class="center">A</td>
                     </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                        <tr class="gradeA">
-                      <td>Gecko</td>
-                      <td>Firefox 2.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td class="center">1.8</td>
-                      <td class="center">A</td>
-                    </tr>
-                    
+                     -->
                   </tbody>
                 </table>
                 <!-- /.table-responsive -->
