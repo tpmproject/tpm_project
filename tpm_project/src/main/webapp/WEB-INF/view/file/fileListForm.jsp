@@ -83,7 +83,7 @@
 			
 			msg +='<tr class="odd gradeX">'
 					msg +='<td>'+file.file_idx+'</td>'
-					msg +='<td>'+file.file_name+'</td>'
+					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
 					msg +='<td>'+file.file_size+'</td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
 					msg +='<td class="center">안병민</td>'

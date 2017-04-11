@@ -108,27 +108,7 @@ public class FileController {
 		}
 		
 		return new ModelAndView("file/fileResult_d");
-		
-	/*	HttpSession session=req.getSession();
-		int project_idx=2;   //프로젝트 idx 가져오기, 임시
-		int work_idx=2;      //업무 idx 가져오기 , 임시
-		System.out.println(session.getAttribute("s_member_idx"));
-		int member_idx=(Integer)session.getAttribute("s_member_idx"); //유저 idx
-		*/
-	  /*  String file_name=file_upload.getOriginalFilename(); //파일 이름
-		String file_size=Long.toString(file_upload.getSize()); //파일 사이즈
-		String file_path="C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename();
-		
-		FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
-		
-		copyInto(member_idx, file_upload);  //파일 복사
-		
-		int result=fdao.addFile(fdto); //파일등록 메서드 
-	*/
-		//ModelAndView mav = new ModelAndView();
-		
-		/*mav.setViewName("file/fileResult_d");
-		return mav;*/
+	
 	}
 	
 	/** 파일 - 파일 수정 */
@@ -161,6 +141,18 @@ public class FileController {
 		
 		return mav;
 	}
+	/** 파일리스트 폼 메서드 */
+	
+	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
+	public ModelAndView fileDown(@RequestParam("file_name") String filename){
+		System.out.println("filename == " + filename);
+		File f = new File("I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
+		
+		ModelAndView mav = new ModelAndView("file/fileListForm_t", "downloadFile", f);
+		
+		return mav;
+	}
+	
 	
 	/**복사관련 사용자정의 메서드*/
 	private void copyInto(int s_member_idx, MultipartFile file_upload){
