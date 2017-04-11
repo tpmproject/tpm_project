@@ -21,7 +21,7 @@
     <link href="/tpm_project/css/file/dataTables.responsive.css"
     rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/tpm_project/css/file/sb-admin-2.css" rel="stylesheet">
+    <link href="/tpm_project/css/file/sb-admin.css?ver=2" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
     type="text/css">
@@ -35,10 +35,6 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
-    function show(i){
-    	var param='type='+ i;
-    	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
-    }
     function project_fileList(i){
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
@@ -93,9 +89,7 @@
 					msg +='<td class="center">안병민</td>'
 					msg +='<td><input type="button" value="삭제" onclick="fileDel('+file.file_idx+');">'
 			msg += '</tr>'
-			
 		
-          
 		}
 		
 		var file_content_list = document.getElementById('file_content_list');
@@ -112,7 +106,7 @@
   </head>
   
   <body onload="project_fileList('+${project_idx}+')">
-    <div id="wrapper">
+    <div id="wrapper" class="file-list-form">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
       style="margin-bottom: 0">
@@ -176,29 +170,17 @@
                 id="dataTables-example">
                   <thead>
                     <tr>
-                      <th onclick="show('file_idx')">파일 번호</th>
-                      <th onclick="show('file_name')">파일 이름</th>
-                      <th onclick="show('file_size')">파일 크기</th>
-                      <th onclick="show('file_date')">공유한 날짜</th>
-                      <th onclick="show('file_idx')">공유한 사람</th>
+                      <th>파일 번호</th>
+                      <th>파일 이름</th>
+                      <th>파일 크기</th>
+                      <th>공유한 날짜</th>
+                      <th>공유한 사람</th>
                     </tr>
                   </thead>
                   <tbody id="file_content_list">
-          <tr>
-            <td>Gecko</td>
-            <td>Firefox 2.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr> 
-          
-           <tr>
-            <td>Geckoㅁㄴ</td>
-            <td>Firefox ㅁㄴㅇㅁㄴ2.0</td>
-            <td>Win 98+ / OㅁㄴSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr> <tr class="gradeA">
+                  
+                   
+                  
                   </tbody>
                 </table>
                 <!-- /.table-responsive -->
