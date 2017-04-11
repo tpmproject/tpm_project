@@ -61,6 +61,7 @@
 	function closem() {
 		$(mback).fadeOut('100');
 		$(main_modal).fadeOut('100');
+		document.newProject.reset();
 	}
 	//검색멤버
 	function projectMemberAdd() {
@@ -86,44 +87,12 @@
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					/* msg += '<div class="col-sm-12" id="modal_content">';
-					msg += '<div class="col-sm-12"> ';
-					msg += '<div class="panel"> ';
-					msg += '<div class="panel-body p-t-10" id="member_idx'+member.member_idx+'"> ';
-					msg += '<div class="media-main"> ';
-					msg += '<a class="pull-left" href="#"> <img height="30" width="30"';
-					msg += 				'class="thumb-lg img-circle bx-s" ';
-					msg += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-
-					msg += '</a> ';
-					msg += '<div class="pull-right btn-group-sm"> ';
-					msg += '<a href="javascript:goInsert_member('
-							+ member.member_idx
-							+ ')" class="btn btn-success tooltips" ';
-					msg += 'data-placement="top" data-toggle="tooltip" ';
-					msg += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
-
-					msg += '</a> ';
-					msg += '</div> ';
-					msg += '<div class="info"> ';
-					msg += '<input type="hidden" id="add_member_idx_' + i + '" value="' + member.member_idx + '">'
-					msg += '<h4>' + member.member_name + '</h4> ';
-					msg += '<p class="text-muted">' + member.member_id
-							+ '</p> ';
-					msg += '</div> ';
-					msg += '</div> ';
-					msg += '<div class="clearfix"></div> ';
-					msg += '<hr> ';
-
-					msg += '</div> ';
-					msg += '</div> ';
-					msg += '</div> ';
-					msg += '</div> '; */
-					msg += '<div id="modal_content'+member.member_idx+'">';
+					
+					msg += '<div id="modal_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >';
 					msg += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 					msg += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 					msg += member.member_name;
-					msg += '<div style="display:inline-block;width:30px;height:30px;" onclick="goInsert_member('
+					msg += '<div id="plus'+member.member_idx+'" style="display:inline-block;width:30px;height:30px;" onclick="goInsert_member('
 							+ member.member_idx + ')">';
 					msg += '<i class="glyphicon glyphicon-plus"></i></div>';
 
@@ -149,7 +118,8 @@
 			}
 		}
 	}
-
+	
+	var temp='';
 	function goInsert_member(i) {
 		var member_idx = ${s_member_idx};
 		var myfriend_idx = i;
@@ -158,18 +128,24 @@
 				+ myfriend_idx;
 		//sendRequest('myFriendAdd.do', param, 'POST', 'FRIEND_INSERT'); // 해당 페이지로 ajax통신 시작
 		sendRequest('myFriendAdd.do', param, friendAddResult, 'POST');
-		$('#member_idx' + i).remove();
+		temp=i;
 	}
 
+	
 	function friendAddResult() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
 				window.alert(result);
 				if (result.trim() == 'true') {
-					var param = 'member_idx=' + ${s_member_idx};
-					sendRequest('projectFriendList.do', param,
-							projectMemberAddResult2, 'POST');
+					var chil=document.getElementById('modal_content'+temp);
+					var pa=document.getElementById('myFriend_List');
+					if(chil.parentNode.getAttribute('id') == 'project_Member'){
+						
+					}else{
+						pa.appendChild(chil);
+					}
+					$('#plus'+temp).remove();
 
 				}
 
@@ -189,13 +165,10 @@
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
 
-					msg2 += '<div id="modal_content'+member.member_idx+'">';
+					msg2 += '<div id="modal_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 					msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 					msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 					msg2 += member.member_name;
-					msg2 += '<div style="display:inline-block;width:30px;height:30px;" onclick="insertPM('
-							+ member.member_idx + ')">';
-					msg2 += '<i class="glyphicon glyphicon-plus"></i></div>';
 
 					msg2 += '<input type="hidden" id="member_img' +member.member_idx  + '" value="' + member.member_img + '">';
 					msg2 += '<input type="hidden" id="member_name' +member.member_idx+ '" value="' + member.member_name + '">';
@@ -212,6 +185,7 @@
 		}
 	}
 
+	//프로젝트 멤버에 임시 추가
 	function insertPM(member_idx) {
 
 		var temp = $('#modal_content' + member_idx);
@@ -311,16 +285,21 @@
 		param += '&project_content=' + pcontent;
 		var parentD = document.getElementById('project_Member');
 
-		var childD = parentD.firstChild.nextSibling;
+		var childD = parentD.firstChild;
 		var lastC = parentD.lastChild;
 		var msg = '';
 		var msg2 = '';
 		while (true) {
-			if (childD.lastChild.previousSibling.value == lastC.lastChild.previousSibling.value) {
-				msg += childD.lastChild.previousSibling.value;
-				msg2 += childD.lastChild.previousSibling.previousSibling.value;
-				break;
+			if(childD.nodeName=='DIV'){
+				var idx=childD.getAttribute('id');
+				msg+=idx.substring(13);
+			}else{
+				childD=childD.nextSibling
 			}
+			if(childD==lastC)break;
+			
+			
+		
 			msg += childD.lastChild.previousSibling.value + ',';
 			msg2 += childD.lastChild.previousSibling.previousSibling.value
 					+ ',';
@@ -330,7 +309,9 @@
 		var my_idx = ${s_member_idx};
 		param += '&pm=' + my_idx + ',' + msg;
 		param += '&level=3000,' + msg2;
-		sendRequest('projectAdd.do', param, addPResult, 'POST');
+		
+		window.alert(param);
+		//sendRequest('projectAdd.do', param, addPResult, 'POST');
 
 	}
 	function addPResult() {
@@ -342,14 +323,61 @@
 			}
 		}
 	}
-	
-	function projectUpdate(){
-		$(mback).fadeIn('150');
-		$(main_modal).fadeIn('150');
-		$(f_modal).show();
-		$(smodal).hide();
+	/**프로젝트 수정*/
+	function projectUpdate(i){
+		
+		window.alert(i);
+		window.alert(i.project_name);
+		/* 
+			document.newProject.project_name.value='';
+			$(mback).fadeIn('150');
+			$(main_modal).fadeIn('150');
+			$(f_modal).show();
+			$(smodal).hide(); */
 		
 	}
+	
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('modal_content')){
+    	var comp=document.getElementById(data);
+    	var img=document.getElementById('member_img'+data.substring(13));
+    	
+    	var spanNode=document.createElement('span');
+    	
+   		var msg='<select><option value="1000">읽기만</option>';
+		msg += '<option value="2000">프로젝트 멤버</option>';
+		msg += '<option value="3000">프로젝트 책임자</option></select>';
+		msg += '<input type="hidden" name="addMember_idx" value="'+data.substring(13)+'">';
+		
+		spanNode.innerHTML=msg;
+    	comp.insertBefore(spanNode,img);
+    	document.getElementById('project_Member').appendChild(comp);
+    }
+}
+function drop2(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('modal_content')){
+    	var nofriend=document.getElementById('plus'+data.substring(13));
+    	var comp=document.getElementById(data);
+    	if(nofriend==null){
+	    	document.getElementById('myFriend_List').appendChild(comp);
+    	}else{
+    		document.getElementById('member_search_content').appendChild(comp);
+    	}
+    }
+}
+
 </script>
 
 <style>
@@ -426,7 +454,7 @@
 									<div class="box">
 										<div class="box-gray aligncenter">
 											<input type="hidden" value="plist.get(i).member_idx">
-											<h4>${i.project_name }<a href="javascript:projectUpdate()"><i class="glyphicon glyphicon-cog"></i></a></h4>
+											<h4>${i.project_name }<a href="javascript:projectUpdate(${i})"><i class="glyphicon glyphicon-cog"></i></a></h4>
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
@@ -505,13 +533,13 @@
 				<div class="sd">
 					<h4>친구목록</h4>
 					<div id="myFriend_List"
-						style="width: 300px; height: 200px; overflow-y: scroll"></div>
+						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 					<h4>검색 멤버</h4>
 					<div>
 						<input type="text" name="member_id" placeholder="Search" size="15">
 						<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
 					</div>
-					<div id="member_search_content"
+					<div id="member_search_content" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
 
 				</div>
@@ -519,8 +547,8 @@
 
 				<div class="sd">
 					<h4>초대 멤버</h4>
-					<div id="project_Member"
-						style="width: 95%; height: 480px; overflow-y: scroll"></div>
+					<div id="project_Member" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
+					</div>
 					<button type="button" class="btn btn-next" id="btn-workbefore"
 						onclick="showf()">이전</button>
 					<button type="button" class="btn btn-next" onclick="addP()">완료</button>
