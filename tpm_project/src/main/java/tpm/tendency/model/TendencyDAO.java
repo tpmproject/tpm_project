@@ -9,4 +9,5 @@ public interface TendencyDAO {
 	public List<TendencyDTO> getSelfTendency(int member_idx);
 	
 	public List<TendencyDTO> getTeamTendency(int member_idx);
+	
 }
