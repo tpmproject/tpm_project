@@ -38,7 +38,6 @@ public class CheckListController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("checklist/checkUpdate_d");
 		
-		
 		int result=checklistDAO.updateChecklist(checklist_idx);
 		if(result>0){
 			mav.addObject("checklist_idx", checklist_idx);

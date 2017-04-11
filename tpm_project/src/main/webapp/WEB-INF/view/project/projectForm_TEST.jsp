@@ -41,6 +41,15 @@ function showf(){
 }
 //친구리스트
 function shows(){
+		
+	var pname=document.newProject.project_name.value;	
+	var pcontent=document.newProject.project_content.value;
+	if(pname==null||pname==""||pcontent==null||pcontent==""){
+		window.alert('프로젝트 정보 입력 부탁 드립니다!!');
+		showf();
+		return;
+	}
+
 	$(f_modal).fadeOut();
 	$(smodal).fadeIn();
 	var param = 'member_idx=' + ${sessionScope.s_member_idx};
@@ -186,7 +195,6 @@ function friendAddResult() {
 		}
 	}
 	
-	var count=0;
 	function insertPM(member_idx){
 		
 		var temp=$('#modal_content'+member_idx);
@@ -194,15 +202,18 @@ function friendAddResult() {
 		var divNode=document.createElement('div');
 		divNode.setAttribute('id','pm'+member_idx);
 		
-		temp.fadeOut('100');
+		temp.hide();
 			
 		var img=$('#member_img' + member_idx).val();
 		var name=$('#member_name' +member_idx).val();
 		
 		var msg='<img height="30" width="30" class="thumb-lg img-circle bx-s" src="/tpm_project/img/member/profile/'+img+'"> ';
-		msg+=name+'<a onclick="deletePM('+member_idx+')"><i class="glyphicon glyphicon-remove"></i></a>';
-		msg+='<input type="hidden" name="member_idx" value="'+member_idx+'">';
-		count++;
+		msg+=name;
+		msg+='<select><option value="1000">읽기만</option>';
+		msg+='<option value="2000">프로젝트 멤버</option>';
+		msg+='<option value="3000">프로젝트 책임자</option></select>';
+		msg+='<input type="hidden" name="addMember_idx" value="'+member_idx+'">';
+		msg+='<a onclick="deletePM('+member_idx+')"><i class="glyphicon glyphicon-remove"></i></a>';
 		
 		divNode.innerHTML=msg;
 		
@@ -215,10 +226,7 @@ function friendAddResult() {
 	function deletePM(member_idx){
 		$('#pm'+member_idx).remove();
 		$('#modal_content'+member_idx).fadeIn('100');
-		count--;
 	}
-	
-	
 	
 	function projectMemberAddResult3() {
 		if (XHR.readyState == 4) {
@@ -274,6 +282,47 @@ function friendAddResult() {
 			}
 		}
 	}
+
+function addP(){
+	
+	var pname=document.newProject.project_name.value;	
+	var pcontent=document.newProject.project_content.value;
+	
+	var param='project_name='+pname;
+	param+='&project_content='+pcontent;
+	var parentD=document.getElementById('project_Member');
+	
+	var childD=parentD.firstChild.nextSibling;
+	var lastC=parentD.lastChild;	
+	var msg='';
+	var msg2='';
+	while(true){
+		if(childD.lastChild.previousSibling.value==lastC.lastChild.previousSibling.value){
+			msg+=childD.lastChild.previousSibling.value;
+			msg2+=childD.lastChild.previousSibling.previousSibling.value;
+			break;
+		}
+		msg+=childD.lastChild.previousSibling.value+',';
+		msg2+=childD.lastChild.previousSibling.previousSibling.value+',';
+		childD=childD.nextSibling;
+	}
+	
+	var my_idx = ${sessionScope.s_member_idx};
+	param+='&pm='+my_idx+','+msg;
+	param+='&level=3000,'+msg2;
+	sendRequest('projectAdd.do',param,addPResult,'POST');
+	
+}
+function addPResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			location.href='projectList.do';
+		}
+	}
+}
+
 	
 </script>
 
@@ -315,53 +364,8 @@ function friendAddResult() {
 
 
 <body>
-  <header>
-      <div class="navbar navbar-default navbar-static-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"><span>TEAM</span>.POJECT.MANAGER</a>
-          </div>
-          <div class="navbar-collapse collapse ">
-            <ul class="nav navbar-nav">
-              <li class="active">
-                <a href="index.html">Home</a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown"
-                data-delay="0" data-close-others="false">Features <b class=" icon-angle-down"></b></a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="typography.html">Typography</a>
-                  </li>
-                  <li>
-                    <a href="components.html">Components</a>
-                  </li>
-                  <li>
-                    <a href="pricingbox.html">Pricing box</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="portfolio.html">Portfolio</a>
-              </li>
-              <li>
-                <a href="blog.html">Blog</a>
-              </li>
-              <li>
-                <a href="contact.html">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- end header -->
-    <section id="featured"></section>
+
+    
     <section class="callaction">
       <div class="container">
         <div class="row">
@@ -379,6 +383,7 @@ function friendAddResult() {
         </div>
       </div>
     </section>
+    
     <section id="content">
       <div class="container">
         <div class="row">
@@ -448,112 +453,7 @@ function friendAddResult() {
         <!-- Portfolio Projects -->
       </div>
     </section>
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="widget">
-              <h5 class="widgetheading">Get in touch with us</h5>
-              <address>
-                <strong>Moderna company Inc</strong>
-                <br>Modernbuilding suite V124, AB 01
-                <br>Someplace 16425 Earth</address>
-              <p>
-                <i class="icon-phone"></i>(123) 456-7890 - (123) 555-7891
-                <br>
-                <i class="icon-envelope-alt"></i>email@domainname.com</p>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="widget">
-              <h5 class="widgetheading">Pages</h5>
-              <ul class="link-list">
-                <li>
-                  <a href="#">Press release</a>
-                </li>
-                <li>
-                  <a href="#">Terms and conditions</a>
-                </li>
-                <li>
-                  <a href="#">Privacy policy</a>
-                </li>
-                <li>
-                  <a href="#">Career center</a>
-                </li>
-                <li>
-                  <a href="#">Contact us</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="widget">
-              <h5 class="widgetheading">Latest posts</h5>
-              <ul class="link-list">
-                <li>
-                  <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                </li>
-                <li>
-                  <a href="#">Pellentesque et pulvinar enim. Quisque at tempor ligula</a>
-                </li>
-                <li>
-                  <a href="#">Natus error sit voluptatem accusantium doloremque</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="widget">
-              <h5 class="widgetheading">Flickr photostream</h5>
-              <div class="flickr_badge">
-                <script type="text/javascript" src="https://www.flickr.com/badge_code_v2.gne?count=8&amp;display=random&amp;size=s&amp;layout=x&amp;source=user&amp;user=34178660@N03"></script>
-              </div>
-              <div class="clear"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="sub-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© Moderna Theme. All right reserved.</p>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. You can delete
-                  the links only if you purchased the pro version. Licensing information:
-                  https://bootstrapmade.com/license/ Purchase the pro version with working
-                  PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Moderna -->
-                  <a href="https://bootstrapmade.com/">Free Bootstrap Themes</a>by
-                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="social-network">
-                <li>
-                  <a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                  <a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-                </li>
-                <li>
-                  <a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                </li>
-                <li>
-                  <a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-    <!-- javascript==================================================- ->
+    
 
 <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.js"></script>
@@ -610,7 +510,7 @@ function friendAddResult() {
 				
 							</div>
 							<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
-							<input type="submit" class="btn" value="완료">
+							<button type="button" class="btn btn-next" onclick="addP()">완료</button>
 						</div>
 			</div>
 		</div>

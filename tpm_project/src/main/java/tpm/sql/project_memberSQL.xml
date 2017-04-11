@@ -8,7 +8,7 @@
 		values(
 			#{project_idx},
 			#{member_idx},
-			1
+			#{project_level}
 			
 		)
 	</insert>

@@ -1,6 +1,7 @@
 package tpm.controller;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
@@ -69,16 +70,24 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView projectInsert(ProjectDTO dto,MemberDTO mdto){
-		
-		System.out.println(mdto.getMember_id());
-		
+	public ModelAndView projectInsert(ProjectDTO dto,String[] pm,String[] level){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectForm_TEST");
+		mav.setViewName("project/projectAdd_d");
 		
 		int project_idx= projectDAO.projectInsert(dto);
 		if(project_idx>0){
+			for(int i=0;i<pm.length;i++){
+				int pm_idx=Integer.parseInt(pm[i]);
+				int pm_level=Integer.parseInt(level[i]);
+				
+				ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, pm_idx, pm_level);
+				
+				projectDAO.projectMemberInsert(pmdto);
+			}
 			
+		}else{
+			String msg="프로젝트 생성 실패!";
+			mav.addObject("msg", msg);
 		}
 		
 		return mav;

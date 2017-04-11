@@ -6,49 +6,35 @@
 <meta charset=UTF-8>
 <title>TPM</title>
 <script type="text/javascript" src="/tpm_project/js/jquery-3.2.0.js"></script>
+
 <script>
 
-function closem(){
-	$(mback).hide('100');
-	$(testm).hide('100');
-	document.ff.t.value='';
+//ondragstart 드래그할 때 id값 가져오기!
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
 }
-</script>
-<style>
-#mback{
-	position:absolute;
-	top:-10%;
-	left:-10%;
-	width:110%;
-	height:110%;
-	background: gray;
-	opacity: 0.3;
-	display: none;
-}
-#testm{
-	display: none;
-	background: white;
-	position: fixed;
-	top:30%;
-	left:30%;
-	border: solid 10px white;
-	border-radius: 15px;
-	
-}
-</style>
-</head>
-<body>
 
-<form action="/tpm_project/projectContent.do">
-프로젝트 idx:<input type="text" name="project_idx">
-</form>
-<input type="button" value="modal" onclick="show()">
-<div id="mback" onclick="closem()"></div>
-	<div id="testm">
-		<form name="ff"><input name="t" type="text"></form>
-		<input type="button" value="닫기" onclick="closem()">
-		<br><br><br><br><br>
-	</div>
+//ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    window.alert(data);
+}
+
+//ondragover 드래그 완료시 해당 엘리먼트의 기본 동작 막아줌
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+</script>
+
+</head>
+
+<body>
+<div id="gree" style="width:50px;height:50px;background: green;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" ondrop="drop(event)"></div>
+<div id="yell" style="width:50px;height:50px;background: yellow;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+<div id="blu" style="width:50px;height:50px;background: blue;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+<div id="gra" style="width:50px;height:50px;background: gray;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 
 
 
