@@ -16,6 +16,42 @@
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <script>
+function cateName(idx){
+	$('#cate'+idx).show();
+	$('#a_cate'+idx).hide();
+}
+function cateNameRe(idx){
+	$('#cate'+idx).hide();
+	$('#a_cate'+idx).show();
+	var ac=document.getElementById('a_cate'+idx);
+	$('#cateIn'+idx).val(ac.firstChild.innerHTML);
+	
+}
+
+function categoryUpdate(idx){
+	
+	var param='project_idx='+${param.project_idx}+'&category_idx='+idx;
+	var di=$('#cateIn'+idx).val();
+	param+='&category_name='+di;
+	
+	sendRequest('categoryUpdate.do', param, categoryUpdateResult, 'POST');
+}
+function categoryUpdateResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			result=parseInt(result); //cate_idx
+			
+			var ac=document.getElementById('a_cate'+result);
+			ac.firstChild.innerHTML=$('#cateIn'+result).val();
+			
+			$('#cate'+result).hide();
+			$('#a_cate'+result).show();
+			
+		}
+	}
+}
+
 function categoryAdd() {
 	var param = 'project_idx=' + ${param.project_idx}
 	+'&category_name=' + document.newCategory.category_name.value;
@@ -140,14 +176,14 @@ function checkResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			result=parseInt(result);
+			result=parseInt(result); //checklist_idx
 			
 			var ch=document.getElementById('ch'+result);
 			var ch_s=document.getElementById('ch_state'+result);
 			var ch_sv=document.getElementById('ch_state'+result).value;
 			
 			var div_ch=document.getElementById('div_ch'+result);
-			div_ch=div_ch.parentNode.nextSibling.nextSibling;
+			div_ch=div_ch.parentNode.lastChild.previousSibling;
 			
 			if(ch_sv=='1'){
 				$(ch).hide();
@@ -206,7 +242,10 @@ function addCheckResult(){
 			dNode.innerHTML = chAdd;
 			
 			document.getElementById('content'+wi).value='';
-			document.getElementById('check_div'+wi).appendChild(dNode);
+			
+			var div=document.getElementById('check_div'+wi);
+			var in_ch=div.lastChild.previousSibling;
+			div.insertBefore(dNode,in_ch);
 			
 			
 		}
@@ -218,24 +257,23 @@ function showCheck(work_idx){
 	
 	var div=document.getElementById('check_div'+work_idx);
 	
-	var in_ch=div.nextSibling.nextSibling;
+	var in_ch=document.getElementById('checkHide'+work_idx);
 	
-	var fc=div.firstChild.nextSibling;
-	var lc=div.lastChild;
+	var fc=div.firstChild;
 	
 	if(in_ch.value=='1'){
 		in_ch.value='0';
 		
-		while(fc!=lc){
-		
-			var ch_state=fc.firstChild.nextSibling.lastChild.previousSibling.value;
-			if(ch_state=='1'){
-				$(fc).hide('100');
+		while(fc!=in_ch){
+			
+			if(fc.nodeName == 'DIV'){
+				var ch_state=fc.lastChild.previousSibling.value;
+				var nch_state=fc.lastChild.value;
+				if(ch_state=='1'||nch_state=='1'){
+					$(fc).hide('100');
+				}
 			}
 			fc=fc.nextSibling;
-			if(fc==lc)break;
-			fc=fc.nextSibling;
-			if(fc==lc)break;
 		}
 		
 		document.getElementById('aCheck'+work_idx).innerHTML='완료한 체크리스트 보기';
@@ -243,12 +281,11 @@ function showCheck(work_idx){
 	}else if(in_ch.value=='0'){
 		in_ch.value='1';
 		
-		while(fc!=lc){
-			$(fc).show('100');
-			fc=fc.nextSibling;
-			if(fc==lc)break;
-			fc=fc.nextSibling;
-			if(fc==lc)break;
+		while(fc!=in_ch){
+			if(fc.nodeName == 'DIV'){
+				$(fc).show('100');
+			}
+				fc=fc.nextSibling;
 		}
 		
 		document.getElementById('aCheck'+work_idx).innerHTML='완료한 체크리스트 숨기기';
@@ -286,6 +323,14 @@ function drop(ev) {
 	    }else{
 	    	window.alert('잘못된 접근입니다.');
 	    }
+    }else if(data.startsWith('c')){
+    	if(document.getElementById(data)!=null){
+    		data=data.substring(1);
+	    	var param='category_idx='+data;
+	    	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
+    	}else{
+	    	window.alert('잘못된 접근입니다.');
+	    }
     }else{
     	window.alert('잘못된 접근입니다.');
     }
@@ -299,6 +344,16 @@ function delResult(){
 		}
 	}
 }
+function cateDelResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result=XHR.responseText; //지운 idx
+			result=parseInt(result);
+			$('#cp'+result).remove();
+		}
+	}
+}
+
 </script>
 <style>
 #workback {
@@ -350,6 +405,7 @@ function delResult(){
 	padding-top: 7px;
 	padding-bottom: 7px;
 	text-align: center;
+	height: 34px;
 }
 
 .table_i {
@@ -362,6 +418,9 @@ function delResult(){
 	padding-left: 19px;
 	height: 100px;
 	overflow-y:scroll;
+}
+.cateName{
+	display: none;
 }
 #trash{
 	width: 55px;
@@ -389,11 +448,20 @@ function delResult(){
 			<c:when test="${(empty pdto.category_dtos) or pdto.category_dtos[0].category_idx == 0}"></c:when>
 			<c:otherwise>
 				<c:forEach var="cdto" items="${pdto.category_dtos}">
-					<div class="category">
-						<div class="category_head">
-							${cdto.category_name }&nbsp;&nbsp;<i
-								class="glyphicon glyphicon-plus" onclick="showf(${cdto.category_idx})"></i> &nbsp;&nbsp;<i
-								class="glyphicon glyphicon-cog"></i>
+					<div class="category" id="cp${cdto.category_idx}">
+						<div class="category_head" id ="c${cdto.category_idx}" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
+<!--카테고리 이름  -->						
+							<form action="javascript:categoryUpdate(${cdto.category_idx})">
+								<div id="cate${cdto.category_idx}" class="cateName">
+									<input id="cateIn${cdto.category_idx}" type="text" value="${cdto.category_name }" size="16px">
+									&nbsp;&nbsp;
+								<i class="glyphicon glyphicon-remove" onclick="cateNameRe(${cdto.category_idx})"></i>
+								</div>
+								<div id="a_cate${cdto.category_idx}"><a href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
+								&nbsp;&nbsp;
+								<i class="glyphicon glyphicon-plus" onclick="showf(${cdto.category_idx})"></i>
+								</div>
+							</form>
 						</div>
 
 						<c:if test="${not empty cdto.work_dtos}">
@@ -439,12 +507,12 @@ function delResult(){
 															<i id="ch${chdto.checklist_idx }"
 															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
 															</i> ${chdto.checklist_content}
-															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 															</a>
+															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 														</div>
 													</c:forEach>
-												</div>
 												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
+												</div>
 											</td>
 										</tr>
 										<tr>
