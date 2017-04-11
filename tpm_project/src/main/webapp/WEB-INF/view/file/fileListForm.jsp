@@ -104,7 +104,7 @@
 	
     </script>
   </head>
-  
+ 
   <body onload="project_fileList('+${project_idx}+')">
     <div id="wrapper" class="file-list-form">
       <!-- Navigation -->
@@ -139,6 +139,7 @@
               <li class="active">
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                <!--사이드에 프로젝트 리스트명 띄우기  -->
                 <c:set var="p_list" value="${pdto}"></c:set>
                 <c:forEach var="p_idxs" items="${p_list}">
                 
@@ -170,7 +171,7 @@
                 id="dataTables-example">
                   <thead>
                     <tr>
-                      <th>파일 번호</th>
+                      <th >파일 번호</th>
                       <th>파일 이름</th>
                       <th>파일 크기</th>
                       <th>공유한 날짜</th>
@@ -179,8 +180,105 @@
                   </thead>
                   <tbody id="file_content_list">
                   
-                   
-                  
+                         <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                        <tr class="gradeA">
+                      <td>Gecko</td>
+                      <td>Firefox 2.0</td>
+                      <td>Win 98+ / OSX.2+</td>
+                      <td class="center">1.8</td>
+                      <td class="center">A</td>
+                    </tr>
+                    
                   </tbody>
                 </table>
                 <!-- /.table-responsive -->
@@ -219,6 +317,7 @@
                     responsive: true
                 });
             });
+     
     </script>
   </body>
 </html>
