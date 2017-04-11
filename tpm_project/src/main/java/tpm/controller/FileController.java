@@ -46,7 +46,7 @@ public class FileController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("pdto",pdto);
-		mav.setViewName("file/fileListForm_t");
+		mav.setViewName("file/fileListForm");
 		return mav;
 	}
 	
@@ -141,14 +141,14 @@ public class FileController {
 		
 		return mav;
 	}
-	/** 파일리스트 폼 메서드 */
+	/** 파일리스트 다운로드*/
 	
 	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
 	public ModelAndView fileDown(@RequestParam("file_name") String filename){
 		System.out.println("filename == " + filename);
 		File f = new File("I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
 		
-		ModelAndView mav = new ModelAndView("file/fileListForm_t", "downloadFile", f);
+		ModelAndView mav = new ModelAndView("tpmDown","downloadFile", f);
 		
 		return mav;
 	}
