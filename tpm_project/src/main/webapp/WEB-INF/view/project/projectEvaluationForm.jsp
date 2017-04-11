@@ -74,6 +74,8 @@ function addTendencyResult(){
 			window.alert(result);
 
 			if (result>0) {
+				
+				var tb_ok=document.getElementById('tb+${result}')
 
 			}
 		}
@@ -164,7 +166,7 @@ function addTendencyResult(){
 				<br>
 				<div>
 					<button type="reset" class="btn btn-reset" id="btn-reset" name="btn_reset">초기화</button>
-					<button type="button" class="btn btn-next" id="btn-tendencyok" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
+					<button type="button" class="btn btn-next" id="tb+${arr.member_idx}" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
 					<hr>
 				</div>
 			</form>
