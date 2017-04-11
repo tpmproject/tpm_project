@@ -98,16 +98,7 @@
 	    function selectimg(){
 	    	var fileNm = $(select_profile).val();
 	    	window.alert(fileNm);
-	    	
-	    	var real_fileNm = fileNm.split('/');
-	    	var intArray = new Array(real_fileNm.length);
-	    	
-	    	var filename = '';
-	    	for(var i=0;i<real_fileNm.length;i++){
-	    		filename = resultArray[max(i)];
-	    		
-	    	}
-	    	
+	    		    	
 	    	if(fileNm != ""){
 	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
 	    		
@@ -117,7 +108,10 @@
 	    		}
 	    	}
 	    	
-	    	var param = 'fileNm=' + fileNm;
+	    	var file_name = fileNm.slice(fileNm.lastIndexOf("\\")+1).toLowerCase();
+	    	window.alert(file_name);
+	    	
+	    	var param = 'fileName='+file_name;
 	    	window.alert(param);
 	    	
 	    	sendRequest('updateProfile.do?'+param, null, uploadimg, 'GET');	    	

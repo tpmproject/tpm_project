@@ -3,6 +3,7 @@ package tpm.controller;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -341,18 +342,13 @@ public class MemberController {
 		return mav;
 	}
 	
-	/** 개인정보 - 프로필 사진 저장
-	 * @throws IOException */
+	/** 개인정보 - 프로필 사진 올리기 */
 	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
-	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileNm") String fileNm) throws IOException{
+	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileName") String fileName){
 		
 		HttpSession session = req.getSession();
 		
 		String userid = (String)session.getAttribute("s_member_id");
-		
-		String filename = fileNm;
-		String savepath = req.getServletContext().getRealPath("img/member/profile/"+userid+"");
-		System.out.println("save: "+savepath);
 		
 		File uploadDirectory = new File(req.getServletContext().getRealPath("img/member/profile/"+userid+""));
 		System.out.println(uploadDirectory);
@@ -361,10 +357,34 @@ public class MemberController {
 			uploadDirectory.mkdirs();
 		}
 		
-		com.oreilly.servlet.MultipartRequest mr = new com.oreilly.servlet.MultipartRequest(req, savepath);
-		
 		ModelAndView mav = new ModelAndView();
 		return mav;
+	}
+	
+	public void copyInto(MultipartFile upload, HttpServletRequest req) throws IOException{
+		System.out.println("파일명 : "+upload.getOriginalFilename());
+		System.out.println("경로: "+upload);
+		
+		HttpSession session = req.getSession();
+		
+		String userid = (String)session.getAttribute("s_member_id");		
+		String savepath = req.getServletContext().getRealPath("img/member/profile/")+userid;
+		
+		File uploadDirectory = new File(savepath);
+		System.out.println(uploadDirectory);
+		
+		if(!uploadDirectory.exists()){
+			uploadDirectory.mkdirs();
+		}
+		
+		byte bytes[] = upload.getBytes();
+		
+		File outFile = new File(savepath+upload.getOriginalFilename());
+		
+		FileOutputStream fos = new FileOutputStream(outFile);
+		
+		fos.write(bytes);
+		fos.close();
 	}
 	
 	/** 개인정보 - 업무 정보 */
