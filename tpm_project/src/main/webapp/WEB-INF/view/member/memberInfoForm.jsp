@@ -99,10 +99,7 @@
 	    	var fileNm = $(select_profile).val();
 	    	window.alert(fileNm);
 	    	
-	    	var param = 'fileName='+fileNm;
-	    	window.alert(param);
-	    	
-	    	location.href = 'updateProfile.do?'+param;
+	    	location.href = 'updateProfile.do?fileName='+fileNm;
 	    	
 	    	/* var fileNm = $(select_profile).val();
 	    	window.alert(fileNm);

@@ -344,7 +344,7 @@ public class MemberController {
 	
 	/** 개인정보 - 프로필 사진 올리기 */
 	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
-	public ModelAndView updateProfile(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req)
+	public ModelAndView updateProfile(MultipartHttpServletRequest request, HttpServletRequest req)
 	throws IOException{
 		
 		HttpSession session = req.getSession();
@@ -354,6 +354,8 @@ public class MemberController {
 		
 		String savepath = req.getServletContext().getRealPath("img/member/profile/");
 		System.out.println(savepath);
+		
+		MultipartFile upload = request.getFile("fileName");
 
 		copyInto(upload, savepath);
 		
