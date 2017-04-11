@@ -3,6 +3,7 @@ package tpm.controller;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.oreilly.servlet.MultipartResponse;
 
 import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
@@ -338,9 +341,10 @@ public class MemberController {
 		return mav;
 	}
 	
-	/** 개인정보 - 프로필 사진 저장*/
+	/** 개인정보 - 프로필 사진 저장
+	 * @throws IOException */
 	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
-	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileNm") String fileNm){
+	public ModelAndView updateProfile(MemberDTO dto,HttpServletRequest req, @RequestParam("fileNm") String fileNm) throws IOException{
 		
 		HttpSession session = req.getSession();
 		
@@ -356,6 +360,8 @@ public class MemberController {
 		if(!uploadDirectory.exists()){
 			uploadDirectory.mkdirs();
 		}
+		
+		com.oreilly.servlet.MultipartRequest mr = new com.oreilly.servlet.MultipartRequest(req, savepath);
 		
 		ModelAndView mav = new ModelAndView();
 		return mav;
