@@ -21,7 +21,7 @@
     <link href="/tpm_project/css/file/dataTables.responsive.css"
     rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/tpm_project/css/file/sb-admin.css?ver=2" rel="stylesheet">
+    <link href="/tpm_project/css/file/sb-admin.css?ver=1" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
     type="text/css">

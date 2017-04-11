@@ -234,13 +234,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
 		</dependency>
-
-
-
+		
+		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+		<dependency>
+		    <groupId>servlets.com</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>05Nov2002</version>
+		</dependency>
 				
-		
-		
-
 </dependencies> 
 
 	

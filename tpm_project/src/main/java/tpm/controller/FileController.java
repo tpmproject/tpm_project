@@ -91,7 +91,7 @@ public class FileController {
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		int project_idx=2;   //프로젝트 idx 가져오기, 임시
-		int work_idx=74;      //업무 idx 가져오기 , 임시
+		int work_idx=2;      //업무 idx 가져오기 , 임시
 		
 		
 		
@@ -101,9 +101,10 @@ public class FileController {
 		for(int i=0; i<files.size(); i++){
 			String file_name=files.get(i).getOriginalFilename();
 			String file_size=Long.toString(files.get(i).getSize());
-			String file_path="C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
+			String file_path="I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
 			FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
 			int result=fdao.addFile(fdto);
+			copyInto(member_idx, files.get(i));  //파일 복사
 		}
 		
 		return new ModelAndView("file/fileResult_d");
@@ -168,7 +169,7 @@ public class FileController {
 		try {
 			byte bytes[]=file_upload.getBytes();
 			
-			File outFile=new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
+			File outFile=new File("I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
 			fos.write(bytes);
