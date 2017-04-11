@@ -74,10 +74,8 @@ function addTendencyResult(){
 			window.alert(result);
 
 			if (result>0) {
-				document.memberTendency.btn_reset.value="";
-				document.memberTendency.btn_tendencyok.value="평가완료";
+
 			}
-			location.reload();
 		}
 	}
 }
@@ -92,9 +90,9 @@ function addTendencyResult(){
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:forEach var="arr" items="${arr}">
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
+
 			<div>
 			<img src="/tpm_project/img/member/profile/${arr.member_img}">
-			<input type="hidden" name="member_idx" value="">
 				<h4>${arr.member_name}(${arr.member_id})</h4>
 				</div>
 				<div class="col-sm-offset-7">

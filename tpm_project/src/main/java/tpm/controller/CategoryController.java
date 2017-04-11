@@ -34,18 +34,29 @@ public class CategoryController {
 	}
 	/** 카테고리 - 카테고리 수정 */
 	@RequestMapping(value="categoryUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView categoryUpdate(){
-		
+	public ModelAndView categoryUpdate(CategoryDTO dto){
+		int result=categoryDAO.categoryUpdate(dto);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
+		
+		if(result>0){
+			mav.addObject("upd", result);
+		}
+		
 		return mav;
 	}
 	/** 카테고리 - 카테고리 삭제 */
 	@RequestMapping(value="categoryDel.do",  method=RequestMethod.POST)
-	public ModelAndView categoryDel(){
-		
+	public ModelAndView categoryDel(int category_idx){
+		System.out.println("삭제할 idxcate"+category_idx);
+		int result=categoryDAO.categoryDelete(category_idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
+		
+		if(result>0){
+			mav.addObject("upd", result);
+		}
+		
 		return mav;
 	}
 }

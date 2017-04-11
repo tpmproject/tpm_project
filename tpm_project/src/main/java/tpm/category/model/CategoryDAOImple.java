@@ -19,13 +19,21 @@ public class CategoryDAOImple implements CategoryDAO {
 	}
 
 	public int categoryUpdate(CategoryDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlMap.update("categoryUpdate", dto);
+		if(result>0){
+			return dto.getCategory_idx();
+		}else{
+			return 0;
+		}
 	}
 
 	public int categoryDelete(int category_idx) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlMap.delete("categoryDelete", category_idx);
+		if(result>0){
+			return category_idx;
+		}else{
+			return 0;
+		}
 	}
 
 }

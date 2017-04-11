@@ -1,0 +1,107 @@
+@CHARSET "utf-8";
+
+body {
+  background-color: #f8f8f8;
+}
+#wrapper {
+  width: 100%;
+}
+.file-list-form #page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
+@media (min-width: 768px) {
+ .file-list-form  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+.file-list-form .navbar-top-links {
+  margin-right: 0;
+}
+.file-list-form .navbar-top-links li {
+  display: inline-block;
+}
+.file-list-form .navbar-top-links li:last-child {
+  margin-right: 15px;
+}
+.file-list-form .navbar-top-links li a {
+  padding: 15px;
+  min-height: 50px;
+}
+.file-list-form .navbar-top-links .dropdown-menu li {
+  display: block;
+}
+.file-list-form .navbar-top-links .dropdown-menu li:last-child {
+  margin-right: 0;
+}
+.file-list-form .navbar-top-links .dropdown-menu li a {
+  padding: 3px 20px;
+  min-height: 0;
+}
+.file-list-form .navbar-top-links .dropdown-menu li a div {
+  white-space: normal;
+}
+.file-list-form .navbar-top-links .dropdown-messages,
+.file-list-form .navbar-top-links .dropdown-tasks,
+.file-list-form .navbar-top-links .dropdown-alerts {
+  width: 310px;
+  min-width: 0;
+}
+.file-list-form .navbar-top-links .dropdown-messages {
+  margin-left: 5px;
+}
+.navbar-top-links .dropdown-tasks {
+  margin-left: -59px;
+}
+.file-list-form .navbar-top-links .dropdown-alerts {
+  margin-left: -123px;
+}
+.file-list-form .navbar-top-links .dropdown-user {
+  right: 0;
+  left: auto;
+}
+.file-list-form .sidebar .sidebar-nav.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+}
+.file-list-form .sidebar .sidebar-search {
+  padding: 15px;
+}
+.file-list-form.sidebar .arrow {
+  float: right;
+}
+.file-list-form .sidebar .fa.arrow:before {
+  content: "\f104";
+}
+
+.file-list-form .sidebar .active > a > .fa.arrow:before {
+  content: "\f107";
+}
+.file-list-form .sidebar .nav-second-level li,
+file-list-form .sidebar .nav-third-level li {
+  border-bottom: none !important;
+}
+.file-list-form .sidebar .nav-second-level li a {
+  padding-left: 37px;
+}
+.file-list-form .sidebar .nav-third-level li a {
+  padding-left: 52px;
+}
+@media (min-width: 768px) {
+ .file-list-form .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 250px;
+    margin-top: 51px;
+  }
+ .file-list-form .navbar-top-links .dropdown-messages,
+ .file-list-form .navbar-top-links .dropdown-tasks,
+ .file-list-form .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+}
+
