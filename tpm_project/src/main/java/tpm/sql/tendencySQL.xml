@@ -32,9 +32,6 @@
 		select member_idx from tpm_project_member 
 		where project_idx=#{project_idx} and member_idx!=#{member_idx})
 	</select>
-	<select id="tendencyOk"	parameterType="">
-		
-	</select>
 	
 	<select id="addTendency" parameterType="tpm.tendency.model.TendencyDTO">
 		insert into tpm_tendency 
