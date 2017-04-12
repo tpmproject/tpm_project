@@ -167,6 +167,7 @@ function addWork(){
 		if(fch==lch)break;
 		fch=fch.nextSibling;
 	}
+	var my_idx=${s_member_idx};
 	var param = 'category_idx=' + document.newWork.category_idx.value
 	+'&work_title=' + document.newWork.work_title.value
 	+'&work_start=' + document.newWork.work_start.value //+ document.newWork.work_time.value
@@ -419,6 +420,37 @@ function cateDelResult(){
 	}
 }
 
+//성향
+function getTendency(){
+	var param = 'tendency=' + $(getTendency).val();
+	sendRequest('recommend.do',getTendencyResult,null,'GET');
+}
+function getTendencyResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			
+			var json = JSON.parse(result);		
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				msg2 += '<div id="work_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+				msg2 += member.member_name;
+
+				msg2 += '<p class="text-muted">' + member.member_id
+						+ '</p> ';
+
+				msg2 += '</div> ';
+			}
+			var tendency_m = document.getElementById('tendency_m');
+			tendency_m.innerHTML = msg2;		
+		}
+	}
+}
 </script>
 <style>
 #workback {
@@ -665,7 +697,18 @@ function cateDelResult(){
 								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자</h4>
+								<h4 class="text-center">업무 담당자 
+								<select id="getTendency" onchange="getTendency()">
+									<option value="tendency_e">외향적</option>
+									<option value="tendency_i">내향적</option>
+									<option value="tendency_s">감각적</option>
+									<option value="tendency_n">직관적</option>
+									<option value="tendency_t">사고적</option>
+									<option value="tendency_f">감정적</option>
+									<option value="tendency_j">판단적</option>
+									<option value="tendency_p">인식적</option>
+								</select>
+								</h4>
 								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
 							<div class="col-md-3">

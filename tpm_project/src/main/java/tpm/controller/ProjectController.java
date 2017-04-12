@@ -221,6 +221,13 @@ public class ProjectController {
 		return mav;
 	}
 	
+	public ModelAndView recommandTendency(String tendency){
+		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(tendency);
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("project/projectresult_d");
+		mav.addObject("arr",arr);
+		return mav;
+	}
 	// 멤버
 	/** 멤버 -  프로젝트 멤버 리스트 데이터 반환 */
 	@RequestMapping(value="projectMemberList.do",  method=RequestMethod.GET)
