@@ -311,51 +311,42 @@ function trashColorReturn(){
 }
 
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
+//휴지통
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     document.getElementById('trash_i').style.color='black';
     
     //유효성 검사
-    if(data.startsWith('div_ch')){
-	    if(document.getElementById(data)!=null){
-	    	data=data.substring(6);
-	    	var param='checklist_idx='+data;
-	    	sendRequest('checkDelete.do', param, delResult, 'POST');
-	    }else{
-	    	window.alert('잘못된 접근입니다.');
-	    }
-    }else if(data.startsWith('c')){
-    	if(document.getElementById(data)!=null){
-    		data=data.substring(1);
-	    	var param='category_idx='+data;
-	    	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
-    	}else{
-	    	window.alert('잘못된 접근입니다.');
-	    }
-    }else{
+    if(document.getElementById(data)==null){
     	window.alert('잘못된 접근입니다.');
+    	return;
+    }
+    
+    if(data.startsWith('div_ch')){
+	    
+    	data=data.substring(6);
+    	var param='checklist_idx='+data;
+    	sendRequest('checkDelete.do', param, delResult, 'POST');    
+    }else if(data.startsWith('wdiv')){
+    	data=data.substring(4);
+    	var param='work_idx='+data;
+    	sendRequest('workDelete.do', param, workDelResult, 'POST');
+    }else if(data.startsWith('c')){
+		data=data.substring(1);
+    	var param='category_idx='+data;
+    	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
     }
 }
+
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 function workDrop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    document.getElementById('trash_i').style.color='black';
     
-    //유효성 검사
-    if(data.startsWith('div_ch')){
-	    if(document.getElementById(data)!=null){
-	    	data=data.substring(6);
-	    	var param='checklist_idx='+data;
-	    	sendRequest('checkDelete.do', param, delResult, 'POST');
-	    }else{
-	    	window.alert('잘못된 접근입니다.');
-	    }
-    }else{
-    	window.alert('잘못된 접근입니다.');
-    }
+    
 }
+//checklist 삭제 콜백 함수
 function delResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -365,6 +356,15 @@ function delResult(){
 		}
 	}
 }
+//work 삭제 콜백 함수
+function workDelResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			
+		}
+	}
+}
+//카테고리 삭제 콜백 함수
 function cateDelResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -407,7 +407,10 @@ function cateDelResult(){
 	width: 200px;
 	float: left;
 }
-
+.wdiv{
+	width: 200px;
+	padding-left: 10px;
+}
 .cate_table {
 	border: solid 1px black;
 	width: 200px;
@@ -487,14 +490,11 @@ function cateDelResult(){
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
+								<div id="wdiv_${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
+									<span>${wdto.work_title }</span>
+									<span><i class="glyphicon glyphicon-cog" onclick="showu()"></i></span>
+								</div>
 								<table class="cate_table">
-									<thead>
-										<tr>
-											<td>${wdto.work_title }</td>
-											<td align="right"><i class="glyphicon glyphicon-cog" onclick="showu()"></i>&nbsp;&nbsp;&nbsp;</td>
-										</tr>
-									</thead>
-
 									<tbody>
 										<tr>
 											<td colspan="2"><div
@@ -502,10 +502,11 @@ function cateDelResult(){
 										</tr>
 										<tr>
 											<td colspan="2">
-												<div class="table_i glyphicon glyphicon-user"></div> <c:forEach
-													var="mdto" items="${marr}">
-													<c:if test="${mdto.work_idx eq wdto.work_idx}">${mdto.member_name}
-									</c:if>
+												<div class="table_i glyphicon glyphicon-user"></div>
+												<c:forEach var="mdto" items="${marr}">
+													<c:if test="${mdto.work_idx eq wdto.work_idx}">
+														<span>${mdto.member_name}</span>
+													</c:if>
 												</c:forEach>
 
 											</td>
