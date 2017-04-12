@@ -234,12 +234,11 @@
 	              </div>
 	              <br>
 	              <br>
-	              <br>
 	              
 	              <!-- 프로필 사진 -->
 	              <div class="form-group">
 	                <div class="col-md-3 col-md-offset-1">
-	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" >
+	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" width="130" height="130">
 	                </div>
 	                <div class="col-md-3"> <input class="btn btn-default" name="member_img_file" type="file" id="select_profile">
 	                <button type="submit" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>

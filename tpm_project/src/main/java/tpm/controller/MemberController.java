@@ -369,6 +369,23 @@ public class MemberController {
 		return mav;
 	}
 	
+	/** 개인정보 - 업무 정보 */
+	@RequestMapping(value="getWork.do", method=RequestMethod.GET)
+	public ModelAndView getWorkState(ProjectMemberDTO dto){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String myworkING = mdao.myWorkIng(dto);
+		
+		String myworkTotal = mdao.myworkTotal(dto);
+		
+		mav.addObject("myworkTotal", myworkTotal);
+		mav.addObject("myworkING", myworkING);
+		mav.setViewName("member/memberWork_d");
+		
+		return mav;
+	}
+	
 	public void copyInto(MultipartFile upload, String savepath) throws IOException{
 		
 		System.out.println("파일명 : "+upload.getOriginalFilename());
@@ -409,23 +426,6 @@ public class MemberController {
 		fos.close();*/
 	}
 	
-	/** 개인정보 - 업무 정보 */
-	@RequestMapping(value="getWork.do", method=RequestMethod.GET)
-	public ModelAndView getWorkState(ProjectMemberDTO dto){
-		
-		ModelAndView mav = new ModelAndView();
-		
-		String myworkING = mdao.myWorkIng(dto);
-		
-		String myworkTotal = mdao.myworkTotal(dto);
-		
-		mav.addObject("myworkTotal", myworkTotal);
-		mav.addObject("myworkING", myworkING);
-		mav.setViewName("member/memberWork_d");
-		
-		return mav;
-	}
-	
 	/** 개인정보 - 개인 정보 수정 */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session, HttpServletRequest req){
@@ -441,24 +441,31 @@ public class MemberController {
 			result = "수정 완료";
 
 			String project_p = path.Project_path;
+			String savepath = req.getServletContext().getRealPath("img/member/profile");
+			
+			File project_path_file = new File(project_p + "/" + s_member_id + ".jpg");
+			if(project_path_file.exists()){
+				project_path_file.delete();
+			}
+			
+			File savepath_file = new File(savepath + "/" + s_member_id + ".jpg");
+			if(savepath_file.exists()){
+				savepath_file.delete();
+			}
 			
 			try {
-				String savepath = req.getServletContext().getRealPath("img/member/profile");
 				copyInto(mdto.getMember_img_file(), project_p + "/" + s_member_id + ".jpg");
 				copyInto(mdto.getMember_img_file(), savepath + "/" + s_member_id + ".jpg");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			mav.addObject("result", result);
-			mav.setViewName("member/memberUpdate_ok");			
 		} else{
 			result = "수정 실패. 관리자에게 문의바랍니다";
-			
-			mav.addObject("result", result);
-			mav.setViewName("member/memberUpdate_ok");
 		}
+		
+		mav.addObject("result", result);
+		mav.setViewName("member/memberUpdate_ok");
 		
 		return mav;
 	}
@@ -467,7 +474,7 @@ public class MemberController {
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
 	public ModelAndView memberUpdate_ajax(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("memeber/memberResult_d");
+		mav.setViewName("memeber/memberUpdate_ok");
 		return mav;
 	}
 	
