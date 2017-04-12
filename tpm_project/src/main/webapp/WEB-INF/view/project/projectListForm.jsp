@@ -40,6 +40,17 @@
 		$(f_modal).show();
 		$(smodal).hide();
 	}
+	
+	/**프로젝트 수정*/
+	function projectUpdate(idx,name,content){
+		$(mback).fadeIn('150');
+		$(main_modal2).fadeIn('150');
+		$(f_modal2).show();
+		$(smodal2).hide();
+		document.changeProject.project_idx.value=idx;
+		document.changeProject.project_name.value=name;
+		document.changeProject.project_content.value=content;
+	}
 	//친구리스트
 	function shows() {
 
@@ -57,10 +68,29 @@
 		sendRequest('projectFriendList.do', param, projectMemberAddResult2,	'POST');
 
 	}
+	function shows2() {
+
+		var pname = document.changeProject.project_name.value;
+		var pcontent = document.changeProject.project_content.value;
+		if (pname == null || pname == "" || pcontent == null || pcontent == "") {
+			window.alert('프로젝트 정보 입력 부탁 드립니다!!');
+			return;
+		}
+
+		$(f_modal2).fadeOut();
+		$(smodal2).fadeIn();
+		
+		var pidx=document.changeProject.project_idx.value;
+		var midx=${s_member_idx};
+		sendRequest('projectFriendList.do?member_idx='+midx+'&project_idx='+pidx, null, shows2Result,'GET');
+
+	}
+	
 
 	function closem() {
 		$(mback).fadeOut('100');
 		$(main_modal).fadeOut('100');
+		$(main_modal2).fadeOut('100');
 		document.newProject.reset();
 		document.getElementById('project_Member').innerHTML='';
 	}
@@ -69,8 +99,7 @@
 		var param = 'member_idx=' + ${s_member_idx};
 		param += '&member_id=' + document.newProject.member_id.value;
 
-		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,
-				'POST');
+		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 		window.alert(param);
 	}
 
@@ -183,6 +212,37 @@
 			}
 		}
 	}
+	//프로젝트 수정시 친구 목록
+	function shows2Result() {
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
+				window.alert('성공!!');
+				var result = XHR.responseText;
+				var json = JSON.parse(result);
+
+				var msg2 = '';
+				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+				for (var i = 0; i < members.length; i++) {
+					var member = members[i];
+
+					msg2 += '<div id="modal_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+					msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+					msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+					msg2 += member.member_name;
+
+					msg2 += '<p class="text-muted">' + member.member_id
+							+ '</p> ';
+
+					msg2 += '</div> ';
+				}
+
+				var myFriend_List = document.getElementById('myFriend_List2');
+				myFriend_List.innerHTML = msg2;
+
+			}
+		}
+	}
+	
 
 	//프로젝트 멤버에 임시 추가
 	function insertPM(member_idx) {
@@ -340,19 +400,6 @@
 			}
 		}
 	}
-	function test123(){
-		closem();
-		
-	}
-	/**프로젝트 수정*/
-	function projectUpdate(i){
-		//해당프로젝트 멤버 권한 3000일 경우 수정 가능
-		
-	
-		window.alert('프로젝트 idx='+i);
-		
-	
-	}
 	
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
@@ -418,7 +465,7 @@ function drop2(ev) {
 	display: none;
 }
 
-#main_modal {
+#main_modal,#main_modal2 {
 	display: none;
 	background: white;
 	position: fixed;
@@ -477,7 +524,12 @@ function drop2(ev) {
 									<div class="box">
 										<div class="box-gray aligncenter" style="height:210px;">
 											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
-											<h4>${i.project_name }<a href="javascript:projectUpdate(${i.project_idx})"><i class="glyphicon glyphicon-cog"></i></a></h4>
+											<h4>${i.project_name }
+												<c:if test="${i.project_level eq 3000 }">
+												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+												<i class="glyphicon glyphicon-cog"></i></span>
+												</c:if>
+											</h4>
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
@@ -569,10 +621,59 @@ function drop2(ev) {
 					<h4>초대 멤버</h4>
 					<div id="project_Member" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
 					</div>
-					<button type="button" class="btn btn-next" id="btn-workbefore"
-						onclick="showf()">이전</button>
-					<button type="button" class="btn btn-next" onclick="test123()">testset</button>
+					<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
 					<button type="button" class="btn btn-next" onclick="addP()">완료</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	
+	<form name="changeProject" action="projectUpdate.do" method="post">
+		<div id="main_modal2">
+			<button type="button" class="close" onclick="closem()">×</button>
+			<h4 class="modal-title">프로젝트 수정</h4>
+
+			<div id="f_modal2">
+				<div class="box-gray aligncenter">
+					<h4>프로젝트 수정</h4>
+					<div id="btntest" class="icon">
+						<div>
+							<input type="hidden" name="project_idx">
+							프로젝트명: <input type="text" name="project_name">
+						</div>
+						<p>
+							<textarea cols="30" rows="20" name="project_content"></textarea>
+						</p>
+						<button type="button" class="btn btn-next" id="btn-next"
+							onclick="shows2()">다음</button>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="smodal2">
+				<div class="sd">
+					<h4>친구목록</h4>
+					<div id="myFriend_List2"
+						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+					<h4>검색 멤버</h4>
+					<div>
+						<input type="text" name="member_id" placeholder="Search" size="15">
+						<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+					</div>
+					<div id="member_search_content2" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
+						style="width: 300px; height: 200px; overflow-y: scroll"></div>
+
+				</div>
+
+
+				<div class="sd">
+					<h4>프로젝트 멤버</h4>
+					<div id="project_Member2" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
+					</div>
+					<button type="button" class="btn btn-next" onclick="showf2()">이전</button>
+					<button type="button" class="btn btn-next" onclick="updateP()">완료</button>
 				</div>
 			</div>
 		</div>

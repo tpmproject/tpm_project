@@ -11,6 +11,21 @@
 			#{project_level}
 			)
 	</insert>
+	<select id="updateProjectFriend" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
+	
+		select m.* from
+		(
+			tpm_member
+		)m,
+		(
+			select pm.member_idx from
+			(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm,
+			(select * from tpm_myfriend where member_idx=#{member_idx})f
+			where f.myfriend_idx!=pm.member_idx
+		)aa
+		where m.member_idx=aa.member_idx
+	</select>
+	
 	<update id="projectMeberUpdate" parameterType="tpm.project.model.ProjectMemberDTO">
 		update tpm_project_member
 		set

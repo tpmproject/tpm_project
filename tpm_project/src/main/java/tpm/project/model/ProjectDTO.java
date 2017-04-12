@@ -11,6 +11,8 @@ public class ProjectDTO {
 	private int project_state;
 	private String project_content;
 	
+	private int project_level;
+	
 	private ArrayList<CategoryDTO> category_dtos;
 	
 	private int category_num;
@@ -110,6 +112,13 @@ public class ProjectDTO {
 	public void setChecklist_num(int checklist_num) {
 		this.checklist_num = checklist_num;
 	}
-	
+
+	public int getProject_level() {
+		return project_level;
+	}
+
+	public void setProject_level(int project_level) {
+		this.project_level = project_level;
+	}
 	
 }

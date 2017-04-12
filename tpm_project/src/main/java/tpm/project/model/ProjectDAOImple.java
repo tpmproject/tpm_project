@@ -119,6 +119,13 @@ public class ProjectDAOImple implements ProjectDAO {
 		
 	}
 	
+	public ArrayList<MemberDTO> projectUpdateFriend(ProjectMemberDTO dto) {
+		
+		ArrayList<MemberDTO> mdtos=(ArrayList)sqlMap.selectList("updateProjectFriend", dto);
+		
+		return mdtos;
+	}
+	
 	/**프로젝트 수정*/
 	public int projectUpdate(ProjectDTO dto) {
 		int count = sqlMap.update("projectUpdate",dto);

@@ -143,6 +143,21 @@ public class ProjectController {
 		return mav;
 	}
 	
+	/**프로젝트-프로젝트 수정-친구리스트*/
+	@RequestMapping(value="projectFriendList.do", method=RequestMethod.GET)
+	public ModelAndView projectUpdateFriendList(MyFriendDTO dto,int project_idx){
+
+	    ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectMemberAdd_d");
+		
+		ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, dto.getMember_idx(), 0);
+		ArrayList<MemberDTO> mdtos=projectDAO.projectUpdateFriend(pmdto);
+		
+		mav.addObject("mdtos", mdtos);
+		
+		return mav;
+	}
+	
 	/** 프로젝트 - 프로젝트멤버 추가 */
 	@RequestMapping(value="projectMemberInsert.do", method=RequestMethod.POST)
 	public ModelAndView ProjectMemberInsert(ProjectMemberDTO dto){

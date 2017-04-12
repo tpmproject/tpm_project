@@ -5,7 +5,7 @@
 <mapper namespace="tpm.project">
 	
 	<select id="projectAllList" resultType="tpm.project.model.ProjectDTO">
-		select a.* from
+		select a.*,b.project_level from
 		(tpm_project)a,(select * from tpm_project_member where member_idx=#{member_idx})b
 		where a.project_idx=b.project_idx
 	</select>
