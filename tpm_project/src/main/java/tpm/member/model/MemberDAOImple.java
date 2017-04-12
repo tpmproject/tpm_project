@@ -14,7 +14,6 @@ public class MemberDAOImple implements MemberDAO {
 	public static final int ID_NO=0;
 	public static final int LOGIN_OK=1;
 	public static final int PASSWORD_NO=2;
-
 	
 	private SqlSessionTemplate sqlMap;
 	public MemberDAOImple(){

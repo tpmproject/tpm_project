@@ -24,6 +24,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -34,6 +35,7 @@ import com.oreilly.servlet.MultipartResponse;
 import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
+import tpm.member.model.Path;
 import tpm.member.model.SMTPAuthenticatior;
 import tpm.project.model.ProjectDTO;
 import tpm.project.model.ProjectMemberDTO;
@@ -49,6 +51,9 @@ public class MemberController {
 	
 	@Autowired
 	private TendencyDAO tdao;
+	
+	@Autowired
+	private Path path;
 	
 	//// 회원 ////
 	// 로그인 및 로그아웃
@@ -343,20 +348,17 @@ public class MemberController {
 	}
 	
 	/** 개인정보 - 프로필 사진 올리기 */
-	@RequestMapping(value="updateProfile.do", method=RequestMethod.GET)
-	public ModelAndView updateProfile(MultipartHttpServletRequest request, HttpServletRequest req)
+	@RequestMapping(value="updateProfile.do",method=RequestMethod.POST)
+	public ModelAndView updateProfile(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req)
 	throws IOException{
+		
+		System.out.println(upload);
 		
 		HttpSession session = req.getSession();
 		
-		String userid = (String)session.getAttribute("s_member_id");
-		System.out.println(userid);
-		
-		String savepath = req.getServletContext().getRealPath("img/member/profile/");
+		String savepath = req.getServletContext().getRealPath("img/member/profile");
 		System.out.println(savepath);
 		
-		MultipartFile upload = request.getFile("fileName");
-
 		copyInto(upload, savepath);
 		
 		String msg = "업로드 성공";
@@ -374,7 +376,8 @@ public class MemberController {
 		
 		byte bytes[] = upload.getBytes();
 				
-		File outFile = new File(savepath+upload.getOriginalFilename());
+		//System.out.println(savepath + "/" + upload.getOriginalFilename());
+		File outFile = new File(savepath);
 		
 		FileOutputStream fos = new FileOutputStream(outFile);
 		
@@ -425,7 +428,7 @@ public class MemberController {
 	
 	/** 개인정보 - 개인 정보 수정 */
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
-	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session){
+	public ModelAndView memberUpdate(MemberDTO mdto, HttpSession session, HttpServletRequest req){
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -436,6 +439,17 @@ public class MemberController {
 		String result = "";
 		if(count>0){
 			result = "수정 완료";
+
+			String project_p = path.Project_path;
+			
+			try {
+				String savepath = req.getServletContext().getRealPath("img/member/profile");
+				copyInto(mdto.getMember_img_file(), project_p + "/" + s_member_id + ".jpg");
+				copyInto(mdto.getMember_img_file(), savepath + "/" + s_member_id + ".jpg");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			mav.addObject("result", result);
 			mav.setViewName("member/memberUpdate_ok");			
@@ -456,5 +470,7 @@ public class MemberController {
 		mav.setViewName("memeber/memberResult_d");
 		return mav;
 	}
+	
+	
 	
 }

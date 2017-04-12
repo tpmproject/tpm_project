@@ -96,39 +96,45 @@
 	    }
 	    
 	    function selectimg(){
-	    	var fileNm = $(select_profile).val();
-	    	window.alert(fileNm);
 	    	
-	    	location.href = 'updateProfile.do?fileName='+fileNm;
+	    	//$('#profile_img').attr('src', $('#select_profile').val());
 	    	
-	    	/* var fileNm = $(select_profile).val();
-	    	window.alert(fileNm);
-	    		    	
-	    	if(fileNm != ""){
+	    	/* $.ajax( {
+	    		  url: 'updateProfile.do',
+	    		  type: 'POST',
+	    		  data: new FormData( this ),
+	    		  processData: false,
+	    		  contentType: false
+	    		} ); */
+	    	
+	    	//var fileNm = $('#select_profile').val();
+	    	//window.alert(fileNm);
+	    	
+	    	/* if(fileNm != ""){
 	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
 	    		
 	    		if(!(ext == "jpg" || ext == "png")){
 	    			window.alert('이미지 파일(.jpg, .png)만 업로드 가능합니다');
 	    			location.reload();
 	    		}
-	    	}
+	    	} */
 	    	
 	    	//var file_name = fileNm.slice(fileNm.lastIndexOf("\\")+1).toLowerCase();
 	    	//window.alert(file_name);
 	    	
-	    	var param = 'fileName='+fileNm;
-	    	window.alert(param);
+	    	//var param = 'fileName='+fileNm;
+	    	//window.alert(param);
 	    	
-	    	sendRequest('updateProfile.do?'+param, null, uploadimg, 'GET');	    	 */
+	    	//sendRequest('updateProfile.do', param, uploadimg, 'POST');	
 	    }
 	    
-	    /* function uploadimg(){
+	    function uploadimg(){
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
-	    			
+	    			window.alert(1);
 	    		}
 	    	}
-	    } */
+	    }
     </script>
 </head>
 <body>
@@ -235,10 +241,9 @@
 	                <div class="col-md-3 col-md-offset-1">
 	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" >
 	                </div>
-	                <div class="col-md-3"> <input class="btn btn-default" name="member_img" type="file" id="select_profile">
-	                <button type="button" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>
+	                <div class="col-md-3"> <input class="btn btn-default" name="member_img_file" type="file" id="select_profile">
+	                <button type="submit" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>
 	                </div>
-	                <!-- <button type="button" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button> -->
 	              </div>&nbsp;
 	              
 	              <!-- 정보 입력 -->

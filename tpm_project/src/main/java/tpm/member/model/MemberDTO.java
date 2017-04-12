@@ -1,5 +1,7 @@
 package tpm.member.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDTO {
 
 	private int member_idx;
@@ -10,10 +12,11 @@ public class MemberDTO {
 	private String member_tel;
 	private String member_img;
 	private int member_thema;
-	
-	//projectContent 에서  업무 배정자 불러올 때 사용함
+	private MultipartFile member_img_file;
+
+	// projectContent 에서 업무 배정자 불러올 때 사용함
 	private int work_idx;
-	
+
 	public MemberDTO() {
 		super();
 	}
@@ -29,6 +32,21 @@ public class MemberDTO {
 		this.member_tel = member_tel;
 		this.member_img = member_img;
 		this.member_thema = member_thema;
+	}
+
+	public MemberDTO(int member_idx, String member_id, String member_pwd, String member_name, String member_gender,
+			String member_tel, String member_img, int member_thema, MultipartFile member_img_file, int work_idx) {
+		super();
+		this.member_idx = member_idx;
+		this.member_id = member_id;
+		this.member_pwd = member_pwd;
+		this.member_name = member_name;
+		this.member_gender = member_gender;
+		this.member_tel = member_tel;
+		this.member_img = member_img;
+		this.member_thema = member_thema;
+		this.member_img_file = member_img_file;
+		this.work_idx = work_idx;
 	}
 
 	public int getMember_idx() {
@@ -94,13 +112,21 @@ public class MemberDTO {
 	public void setMember_thema(int member_thema) {
 		this.member_thema = member_thema;
 	}
-	
+
 	public int getWork_idx() {
 		return work_idx;
 	}
 
 	public void setWork_idx(int work_idx) {
 		this.work_idx = work_idx;
+	}
+
+	public MultipartFile getMember_img_file() {
+		return member_img_file;
+	}
+
+	public void setMember_img_file(MultipartFile member_img_file) {
+		this.member_img_file = member_img_file;
 	}
 
 	@Override
@@ -110,8 +136,4 @@ public class MemberDTO {
 				+ ", member_img=" + member_img + ", member_thema=" + member_thema + "]";
 	}
 
-	
-	
-	
-	
 }
