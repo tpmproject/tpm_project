@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/WEB-INF/view/file/import.jsp"%>
+<%@ include file="/sample/cho/main/import.jsp"%>
 
 </head>
 <body class="skin-blue">
