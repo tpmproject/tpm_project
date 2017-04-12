@@ -13,21 +13,32 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 
+	 /**
+     * 클라이언트 연결 이후에 실행되는 메소드
+     */
 	@Override
 	public void afterConnectionEstablished(
 			WebSocketSession session) throws Exception {
 		log(session.getId() + " 연결 됨");
 		
 		users.put(session.getId(), session);
+		
 	}
 
+	/**
+     * 클라이언트가 연결을 끊었을 때 실행되는 메소드
+     */
 	@Override
 	public void afterConnectionClosed(
 			WebSocketSession session, CloseStatus status) throws Exception {
+		
 		log(session.getId() + " 연결 종료됨");
 		users.remove(session.getId());
 	}
 
+	/**
+     * 클라이언트가 웹소켓서버로 메시지를 전송했을 때 실행되는 메소드
+     */
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
