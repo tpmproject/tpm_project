@@ -17,6 +17,9 @@
 		obj.put("member_gender", arry_mdto.get(i).getMember_gender());
 		obj.put("member_tel", arry_mdto.get(i).getMember_tel());
 		obj.put("member_img", arry_mdto.get(i).getMember_img());
+		
+		//pm=10 mf=1;
+		obj.put("pm", arry_mdto.get(i).getPm()+arry_mdto.get(i).getMf() );
 		arry_members.add(obj);
 	}
 	

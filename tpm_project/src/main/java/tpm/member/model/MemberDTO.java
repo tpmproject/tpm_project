@@ -16,6 +16,11 @@ public class MemberDTO {
 
 	// projectContent 에서 업무 배정자 불러올 때 사용함
 	private int work_idx;
+	
+	//projectList수정 시 사용 [프로젝트멤버=1,마이프렌드=10]
+	private int pm;
+	private int mf;
+	
 
 	public MemberDTO() {
 		super();
@@ -129,6 +134,22 @@ public class MemberDTO {
 		this.member_img_file = member_img_file;
 	}
 
+	public int getPm() {
+		return pm;
+	}
+
+	public void setPm(int pm) {
+		this.pm = pm;
+	}
+
+	public int getMf() {
+		return mf;
+	}
+
+	public void setMf(int mf) {
+		this.mf = mf;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [member_idx=" + member_idx + ", member_id=" + member_id + ", member_pwd=" + member_pwd
@@ -136,4 +157,5 @@ public class MemberDTO {
 				+ ", member_img=" + member_img + ", member_thema=" + member_thema + "]";
 	}
 
+	
 }

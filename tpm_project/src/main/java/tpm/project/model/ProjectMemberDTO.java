@@ -43,5 +43,6 @@ public class ProjectMemberDTO {
 
 	public void setProject_level(int project_level) {
 		this.project_level = project_level;
-	}
+	}	
+	
 }

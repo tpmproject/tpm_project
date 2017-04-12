@@ -12,22 +12,30 @@
 			)
 	</insert>
 	<select id="updateProjectFriend" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
-	
-		select * from
-		(tpm_member)m,
-		(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm
-		where m.member_idx=pm.member_idx
-	</select>
-	<select id="updatenoProjectFriend" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
-		select m.* from
-		(tpm_member)m,
-		(select * from tpm_myfriend where member_idx=#{member_idx})mf
-		where m.member_idx=mf.myfriend_idx and m.member_idx not in (
-		select m.member_idx from
-		(tpm_member)m,
-		(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm
-		where m.member_idx=pm.member_idx
-		)
+	select m.*,mf.mf from
+		(	
+			select m.*,pm.pm from
+			(
+				select m.* from
+			    (tpm_member)m
+			    where m.member_idx in
+			        (select member_idx pm from tpm_project_member where project_idx=#{project_idx} and member_idx !=#{member_idx})
+			    or m.member_idx in
+			        (select myfriend_idx from tpm_myfriend where member_idx=#{member_idx}) 
+			)m
+			left outer join
+			(
+			    select member_idx,(1)as pm from tpm_member
+			    where member_idx
+			    in (select member_idx from tpm_project_member where project_idx=#{project_idx} and member_idx != #{member_idx})
+			)pm
+			on m.member_idx=pm.member_idx
+		)m
+		left outer join
+		(
+			select myfriend_idx,(10)mf from tpm_myfriend where member_idx=#{member_idx}
+		)mf
+		on m.member_idx=mf.myfriend_idx
 	</select>
 	
 	<update id="projectMeberUpdate" parameterType="tpm.project.model.ProjectMemberDTO">

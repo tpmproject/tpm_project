@@ -40,6 +40,10 @@
 		$(f_modal).show();
 		$(smodal).hide();
 	}
+	function showf2() {
+		$(f_modal2).show();
+		$(smodal2).hide();
+	}
 	
 	/**프로젝트 수정*/
 	function projectUpdate(idx,name,content){
@@ -77,8 +81,8 @@
 			return;
 		}
 
-		$(f_modal2).fadeOut();
-		$(smodal2).fadeIn();
+		$(f_modal2).hide();
+		$(smodal2).show();
 		
 		var pidx=document.changeProject.project_idx.value;
 		var midx=${s_member_idx};
@@ -95,7 +99,9 @@
 		document.getElementById('project_Member').innerHTML='';
 	}
 	//검색멤버
-	function projectMemberAdd() {
+	var addOrUpdate=0;
+	function projectMemberAdd(aou) {
+		addOrUpdate=aou;
 		var param = 'member_idx=' + ${s_member_idx};
 		param += '&member_id=' + document.newProject.member_id.value;
 
@@ -116,34 +122,31 @@
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
-
 					
-					msg += '<div id="modal_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >';
+					if(addOrUpdate==1){
+						msg += '<div id="modal_content';
+					}else if(addOrUpdate==2){
+						msg += '<div id="modal2_content';
+					}
+					msg+=member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >';
 					msg += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 					msg += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 					msg += member.member_name;
 					msg += '<div id="plus'+member.member_idx+'" style="display:inline-block;width:30px;height:30px;" onclick="goInsert_member('
 							+ member.member_idx + ')">';
 					msg += '<i class="glyphicon glyphicon-plus"></i></div>';
-
-					msg += '<input type="hidden" id="member_img' +member.member_idx  + '" value="' + member.member_img + '">';
-					msg += '<input type="hidden" id="member_name' +member.member_idx+ '" value="' + member.member_name + '">';
 					msg += '<p class="text-muted">' + member.member_id
 							+ '</p> ';
 
 					msg += '</div> ';
 				}
-
-				var member_search_content = document
-						.getElementById('member_search_content');
-				member_search_content.innerHTML = msg;
-
-				if (result != null) {
-					/* var bodyNode = document.getElementById('btntest2');
-					var divNode = document.createElement('div');
-					divNode.innerHTML = result;
-					bodyNode.appendChild(divNode); */
+				
+				var member_search_content=member_search_content = document.getElementById('member_search_content');
+				if(addOrUpdate==2){
+					member_search_content = document.getElementById('member_search_content2');
 				}
+				
+				member_search_content.innerHTML = msg;
 
 			}
 		}
@@ -168,15 +171,25 @@
 				var result = XHR.responseText;
 				window.alert(result);
 				if (result.trim() == 'true') {
-					var chil=document.getElementById('modal_content'+temp);
-					var pa=document.getElementById('myFriend_List');
-					if(chil.parentNode.getAttribute('id') == 'project_Member'){
-						
-					}else{
-						pa.appendChild(chil);
+					if(addOrUpdate==1){
+						var chil=document.getElementById('modal_content'+temp);
+						var pa=document.getElementById('myFriend_List');
+						if(chil.parentNode.getAttribute('id') == 'project_Member'){
+							
+						}else{
+							pa.appendChild(chil);
+						}
+						$('#plus'+temp).remove();
+					}else if(addOrUpdate==2){
+						var chil=document.getElementById('modal2_content'+temp);
+						var pa=document.getElementById('myFriend_List2');
+						if(chil.parentNode.getAttribute('id') == 'project_Member2'){
+							
+						}else{
+							pa.appendChild(chil);
+						}
+						$('#plus'+temp).remove();
 					}
-					$('#plus'+temp).remove();
-
 				}
 
 			}
@@ -219,24 +232,48 @@
 				var result = XHR.responseText;
 				var json = JSON.parse(result);
 
+				var f_List_msg='';
+				var pm_List_msg='';
 				var msg2 = '';
+				
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
-
-					msg2 += '<div id="modal_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+					
+					
+					msg2 += '<div id="modal2_content'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 					msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 					msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 					msg2 += member.member_name;
 
+					if(member.pm<10){
+						msg2 += '<div id="plus'+member.member_idx+'" style="display:inline-block;width:30px;height:30px;" onclick="goInsert_member2('+ member.member_idx + ')">';
+						msg2 += '<i class="glyphicon glyphicon-plus"></i></div>';
+					}
+					
 					msg2 += '<p class="text-muted">' + member.member_id
 							+ '</p> ';
-
+					if(member.pm%10==1){
+						msg2 +='<span><select id="select2'+member.member_idx+'"><option value="1000">읽기만</option>';
+						msg2 += '<option value="2000">프로젝트 멤버</option>';
+						msg2 += '<option value="3000">프로젝트 책임자</option></select></span>';
+					}
 					msg2 += '</div> ';
+					
+					if(member.pm%10==1){
+						pm_List_msg+=msg2;
+					}else{
+						f_List_msg+=msg2;	
+					}
+					msg2='';
 				}
 
-				var myFriend_List = document.getElementById('project_Member2');
-				myFriend_List.innerHTML = msg2;
+				var pm_List = document.getElementById('project_Member2');
+				pm_List.innerHTML = pm_List_msg;
+				var f_List = document.getElementById('myFriend_List2');
+				f_List.innerHTML=f_List_msg;
+				var ms_List = document.getElementById('member_search_content2');
+				ms_List.innerHTML='';
 
 			}
 		}
@@ -248,29 +285,19 @@
 
 		var temp = $('#modal_content' + member_idx);
 
-		var divNode = document.createElement('div');
-		divNode.setAttribute('id', 'pm' + member_idx);
-
-		temp.hide();
-
-		var img = $('#member_img' + member_idx).val();
-		var name = $('#member_name' + member_idx).val();
-
-		var msg = '<img height="30" width="30" class="thumb-lg img-circle bx-s" src="/tpm_project/img/member/profile/'+img+'"> ';
-		msg += name;
-		msg += '<select><option value="1000">읽기만</option>';
-		msg += '<option value="2000">프로젝트 멤버</option>';
-		msg += '<option value="3000">프로젝트 책임자</option></select>';
-		msg += '<input type="hidden" name="addMember_idx" value="'+member_idx+'">';
-		msg += '<a onclick="deletePM(' + member_idx
-				+ ')"><i class="glyphicon glyphicon-remove"></i></a>';
-
-		divNode.innerHTML = msg;
-
 		var param = 'member_idx=' + member_idx;
 
 		var pmdiv = document.getElementById('project_Member');
-		pmdiv.appendChild(divNode);
+		
+		var spanNode=document.createElement('span');
+   		var msg='<select id="select'+data.substring(13)+'"><option value="1000">읽기만</option>';
+		msg += '<option value="2000">프로젝트 멤버</option>';
+		msg += '<option value="3000">프로젝트 책임자</option></select>';
+		
+		spanNode.innerHTML=msg;
+    	temp.appendChild(spanNode);
+		
+		pmdiv.appendChild(temp);
 
 	}
 	function deletePM(member_idx) {
@@ -414,7 +441,6 @@ function drop(ev) {
     var data = ev.dataTransfer.getData("text");
     if(data.startsWith('modal_content')){
     	var comp=document.getElementById(data);
-    	var img=document.getElementById('member_img'+data.substring(13));
     	
     	var select=document.getElementById('select'+data.substring(13));
     	if(select==null){
@@ -424,7 +450,7 @@ function drop(ev) {
 			msg += '<option value="3000">프로젝트 책임자</option></select>';
 			
 			spanNode.innerHTML=msg;
-	    	comp.insertBefore(spanNode,img);
+	    	comp.appendChild(spanNode);
     	}
     	document.getElementById('project_Member').appendChild(comp);
     }
@@ -455,19 +481,18 @@ function drop2(ev) {
 function drop3(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    if(data.startsWith('modal_content')){
+    if(data.startsWith('modal2_content')){
     	var comp=document.getElementById(data);
-    	var img=document.getElementById('member_img'+data.substring(13));
     	
-    	var select=document.getElementById('select'+data.substring(13));
+    	var select=document.getElementById('select'+data.substring(14));
     	if(select==null){
     		var spanNode=document.createElement('span');
-	   		var msg='<select id="select'+data.substring(13)+'"><option value="1000">읽기만</option>';
+	   		var msg='<select id="select2'+data.substring(14)+'"><option value="1000">읽기만</option>';
 			msg += '<option value="2000">프로젝트 멤버</option>';
 			msg += '<option value="3000">프로젝트 책임자</option></select>';
 			
 			spanNode.innerHTML=msg;
-	    	comp.insertBefore(spanNode,img);
+	    	comp.appendChild(spanNode);
     	}
     	document.getElementById('project_Member2').appendChild(comp);
     }
@@ -476,10 +501,10 @@ function drop3(ev) {
 function drop4(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    if(data.startsWith('modal_content')){
-    	var nofriend=document.getElementById('plus'+data.substring(13));
+    if(data.startsWith('modal2_content')){
+    	var nofriend=document.getElementById('plus'+data.substring(14));
     	
-    	var select=document.getElementById('select'+data.substring(13));
+    	var select=document.getElementById('select2'+data.substring(14));
     	var comp=document.getElementById(data);
     	
     	if(select!=null){
@@ -653,7 +678,7 @@ function drop4(ev) {
 					<h4>검색 멤버</h4>
 					<div>
 						<input type="text" name="member_id" placeholder="Search" size="15">
-						<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+						<button type="button" class="btn" onclick="projectMemberAdd(1)">검색</button>
 					</div>
 					<div id="member_search_content" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
@@ -700,13 +725,13 @@ function drop4(ev) {
 				<div class="sd">
 					<h4>친구목록</h4>
 					<div id="myFriend_List2"
-						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 					<h4>검색 멤버</h4>
 					<div>
 						<input type="text" name="member_id" placeholder="Search" size="15">
-						<button type="button" class="btn" onclick="projectMemberAdd()">검색</button>
+						<button type="button" class="btn" onclick="projectMemberAdd(2)">검색</button>
 					</div>
-					<div id="member_search_content2" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
+					<div id="member_search_content2" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
 
 				</div>
@@ -714,7 +739,7 @@ function drop4(ev) {
 
 				<div class="sd">
 					<h4>프로젝트 멤버</h4>
-					<div id="project_Member2" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
+					<div id="project_Member2" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
 					</div>
 					<button type="button" class="btn btn-next" onclick="showf2()">이전</button>
 					<button type="button" class="btn btn-next" onclick="updateP()">완료</button>
