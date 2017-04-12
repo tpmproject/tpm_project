@@ -133,28 +133,14 @@ function showsResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div class="col-sm-12" id="modal_content">';
-				msg2 += '<div class="col-sm-12"> ';
-				msg2 += '<div class="panel"> ';
-				msg2 += '<div class="panel-body p-t-10" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"> ';
-				msg2 += '<div class="media-main"> ';
-				msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
-				msg2 += 				'class="thumb-lg img-circle bx-s" ';
-				msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-				msg2 += '</a> ';
-				msg2 += '</a> ';
-				msg2 += '</div> ';
-				msg2 += '<div class="info"> ';
-				msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
-				msg2 += '<h4>' + member.member_name + '</h4> ';
+				msg2 += '<div id="work_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+				msg2 += member.member_name;
+
 				msg2 += '<p class="text-muted">' + member.member_id
 						+ '</p> ';
-				msg2 += '</div> ';
-				msg2 += '</div> ';
-				msg2 += '<div class="clearfix"></div> ';
-				msg2 += '</div> ';
-				msg2 += '</div> ';
-				msg2 += '</div> ';
+
 				msg2 += '</div> ';
 			}
 			var project_m = document.getElementById('project_m');
@@ -168,11 +154,25 @@ function closem() {
 	document.newWork.reset();
 }
 function addWork(){
+
+ 	var work_member=document.getElementById('work_m');
+	var fch = work_member.firstChild;
+	var lch = work_member.lastChild;
+	var msg='0';
+	while(true){
+		if(fch.nodeName=='DIV'){
+			var idx=fch.getAttribute('id');
+			msg+=','+idx.substring(11);
+		}
+		if(fch==lch)break;
+		fch=fch.nextSibling;
+	}
 	var param = 'category_idx=' + document.newWork.category_idx.value
 	+'&work_title=' + document.newWork.work_title.value
-	+'&work_start=' + document.newWork.work_start.value
-	+'&work_end=' + document.newWork.work_end.value;// + document.newWork.work_time.value
-	+'&work_confirm=' + document.newWork.work_confirm.value;
+	+'&work_start=' + document.newWork.work_start.value //+ document.newWork.work_time.value
+	+'&work_end=' + document.newWork.work_end.value //+ document.newWork.work_time.value
+	+'&work_confirm=' + document.newWork.work_confirm.value 
+	+'&member_idx=' + msg;
 	window.alert(param);
 	sendRequest('workAdd.do', param, addWorkResult, 'POST');
 
@@ -360,6 +360,26 @@ function drop(ev) {
     }
 }
 
+//업무 생성 시 멤버 추가 드랍
+function drop2(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('work_member')){
+    	var comp=document.getElementById(data);
+    	document.getElementById('work_m').appendChild(comp);
+    }
+}
+
+//업무 생성 시 멤버 빼기 드랍
+function drop3(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('work_member')){
+    	var comp=document.getElementById(data);
+	  	document.getElementById('project_m').appendChild(comp);
+    }
+}
+
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 function workDrop(ev) {
     ev.preventDefault();
@@ -384,8 +404,8 @@ function workDelResult(){
 			var result=XHR.responseText;
 			result=parsInt(result);
 			$('#wdiv'+result).remove();
-			
 		}
+		location.reload();
 	}
 }
 //카테고리 삭제 콜백 함수
@@ -642,27 +662,16 @@ function cateDelResult(){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
-								<p></p>
-								<p></p>
+								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="workDrop(event)">
+							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
-								<ul class="media-list">
-									<li class="media"><a class="pull-left" href="#"><img
-											class="media-object"
-											src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-											height="30" width="30"></a>
-										<div class="media-body">
-											<h6 class="media-heading">Media heading</h6>
-										</div></li>
-								</ul>
+								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
 							<div class="col-md-3">
 								<h4 class="text-center">추천 목록</h4>
-								<div id="project_m" style="width:300px; height: 300px; overflow-y: scroll"></div>
-								<p></p>
-								<p></p>
+								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
+								</div>
 							</div>
 						</div>
 					</div>

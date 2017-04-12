@@ -25,6 +25,7 @@ import tpm.project.model.ProjectMemberDTO;
 import tpm.work.model.MyWorkDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
+import tpm.work.model.WorkMemberDTO;
 
 @Controller
 public class WorkController {
@@ -77,19 +78,27 @@ public class WorkController {
 	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
-	public ModelAndView workAdd(WorkDTO dto){
+	public ModelAndView workAdd(WorkDTO dto, String[] work_member){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
+	
+		int work_idx=workDAO.addWork(dto);
+		dto.setWork_idx(work_idx);
 		
-		mav.addObject("workDTO",dto);
-		int result=workDAO.addWork(dto);
+		System.out.println(work_idx);
 		
-		String msg=dto.getWork_title();
-		if(result<=0){
-			msg="error";
-		}
+		if(work_idx>0){
+			for(int i=0;i<work_member.length;i++){
+				int w_idx=Integer.parseInt(work_member[i]);
+				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
+				workDAO.workMemberInsert(mdto);
+			}
+			mav.addObject("dto",dto);
+		}else{
+		String msg="error";
 		mav.addObject("msg",msg);
+		}
 		return mav;
 	}
 	

@@ -3,5 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.work_member">
+	<insert id="workMemberInsert" parameterType="tpm.work.model.WorkMemberDTO">
+		insert into tpm_work_member
+		values(
+			#{work_idx}
+			#{member_idx}
+		)
+	</insert>
 
 </mapper>

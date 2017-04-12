@@ -7,6 +7,21 @@
 		SELECT w.*, c.checklist_idx, c.checklist_content, c.checklist_state
 		FROM tpm_work w LEFT OUTER JOIN tpm_checklist c on w.work_idx = c.work_idx
 	</select>
+	
+	<insert id="testAddWork" parameterType="tpm.sample.model.SampleWorkDTO">
+	insert into work_test
+	values(
+	work_idx.nextval,
+	#{category_idx},
+	#{work_title},
+	#{work_start},
+	#{work_end},
+	null,
+	#{work_confirm},
+	1
+	)
+	</insert>
+	
 </mapper>
   
   

@@ -8,6 +8,7 @@ import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.TotalDTO;
+import tpm.sample.model.SampleWorkDTO;
 
 public class WorkDAOImple implements WorkDAO {
 	
@@ -41,7 +42,11 @@ public class WorkDAOImple implements WorkDAO {
 	public int addWork(WorkDTO dto) {
 		// TODO Auto-generated method stub
 		int result=sqlMap.insert("addWork",dto);
-		
+		return result;
+	}
+	
+	public int workMemberInsert(WorkMemberDTO dto){
+		int result=sqlMap.insert("workMemberInsert",dto);
 		return result;
 	}
 
@@ -101,5 +106,11 @@ public class WorkDAOImple implements WorkDAO {
 		return arry_mwdto;
 	}
 
+	public int testAddWork(SampleWorkDTO dto) {
+		// TODO Auto-generated method stub
+		int result=sqlMap.insert("testAddWork",dto);
+		
+		return result;
+	}
 	
 }
