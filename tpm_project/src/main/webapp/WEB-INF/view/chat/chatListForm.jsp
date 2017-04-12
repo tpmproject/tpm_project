@@ -5,8 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/sample/cho/main/import.jsp"%>
+<!-- Bootstrap 3.3.2 -->
+<link href="/tpm_project/sample/cho/main/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<!-- Font Awesome Icons -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<!-- Ionicons -->
+<link
+	href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"
+	rel="stylesheet" type="text/css">
+	
+<!-- Theme style -->
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
+    downloading all of them to reduce the load. -->
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
+	type="text/css">
+	
 <link href="/tpm_project/css/chat/chatContact.css" rel="stylesheet" />
+
+<!-- jQuery 2.1.3 -->
+<script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+<script src="/tpm_project/js/jquery-3.2.0.js"></script>
+<!-- jQuery UI 1.11.1 -->
+
+<script src="/tpm_project/sample/cho/main/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="/tpm_project/sample/cho/main/dist/js/app.min.js" type="text/javascript"></script>
+
 <script type="text/javascript" src="/tpm_project/js/chat/chatContact.js"></script>
 <!-- JavaScrip Search Plugin -->
 <script
@@ -36,14 +64,19 @@
 				<div class="row">
 					<div class="col-md-12">
 						<!-- 컨텐트 삽입 -->
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="panel panel-default">
 								<div class="panel-heading c-list">
 									<span class="title">Contacts</span>
 									<ul class="pull-right c-controls">
-										<li><a href="#cant-do-all-the-work-for-you"
+									
+										<li><button class="btn btn-box-tool">
+												<i class="glyphicon glyphicon-plus" data-toggle="modal"
+													data-target="#myModal"></i>
+											</button>
+											<!-- <a href="#cant-do-all-the-work-for-you"
 											data-toggle="tooltip" data-placement="top"
-											title="Add Contact"><i class="glyphicon glyphicon-plus"></i></a></li>
+											title="Add Contact"><i class="glyphicon glyphicon-plus"></i></a> --></li>
 										<li><a href="#" class="hide-search"
 											data-command="toggle-search" data-toggle="tooltip"
 											data-placement="top" title="Toggle Search"><i
@@ -220,7 +253,8 @@
 				</div>
 			</section>
 		</div>
-
+		
+		<%@ include file="chatListForm_contact_modal.jsp"%>
 		<%@ include file="/WEB-INF/view/footer.jsp"%>
 	</div>
 </body>
