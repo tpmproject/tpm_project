@@ -14,6 +14,6 @@ public interface WorkDAO {
 	public ArrayList<MyWorkDTO> myWorkAllList(MemberDTO mdto);
 	public int addWork(WorkDTO dto);
 	public int updateWork();
-	public int delWork();
+	public int workDelete(int work_idx);
 	
 }

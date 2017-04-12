@@ -149,9 +149,8 @@ function addWork(){
 	var param = 'category_idx=' + document.newWork.category_idx.value
 	+'&work_title=' + document.newWork.work_title.value
 	+'&work_start=' + document.newWork.work_start.value
-	+'&work_end=' + document.newWork.work_end.value + document.newWork.work_time.value
+	+'&work_end=' + document.newWork.work_end.value;// + document.newWork.work_time.value
 	+'&work_confirm=' + document.newWork.work_confirm.value;
-	
 	window.alert(param);
 	sendRequest('workAdd.do', param, addWorkResult, 'POST');
 
@@ -360,6 +359,9 @@ function delResult(){
 function workDelResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
+			var result=XHR.responseText;
+			result=parsInt(result);
+			$('#wdiv'+result).remove();
 			
 		}
 	}
@@ -600,7 +602,7 @@ function cateDelResult(){
 						<input type="text" id="work_start" name="work_start"
 							rel="stylesheet" /> ~<input type="text" id="work_end"
 							name="work_end" rel="stylesheet" />
-							<input type="text" name="work_time" value="" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
+							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
 					</div>
 					<div>
 						<input type="checkbox" name="work_confirm" value="20">결재여부
@@ -698,7 +700,7 @@ function cateDelResult(){
            });
 
 $("#work_time").timepicker({
-	step: 30,            //시간간격 : 5분
+	step: 30,            //시간간격 
 	timeFormat: "A H:i"    //시간:분 으로표시
 });
 $(document).ready(function(){

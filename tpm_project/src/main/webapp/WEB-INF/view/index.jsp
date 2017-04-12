@@ -51,7 +51,7 @@ function dateTest(){
 </form>
 <form action="/tpm_project/projectEvaluation.do">
 test!!<br> 
-<input type="hidden" name="appraiser_idx" value="${sessionScope.s_member_idx}">
+<input type="hidden" name="member_idx" value="${sessionScope.s_member_idx}">
 test idx:<input type="text" name="project_idx">
 </form>
 

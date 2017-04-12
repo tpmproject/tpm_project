@@ -25,7 +25,7 @@
 	#{category_idx},
 	#{work_title},
 	#{work_start},
-	to_date('#{work_end}','yyyy-mm-dd am hh24:mi'),
+	#{work_end},
 	null,
 	#{work_confirm},
 	1
@@ -83,4 +83,7 @@
 							  					   where a.project_idx = b.project_idx and a.project_idx = #{project_idx}))
 	</select>
 	
+	<delete id="workDelete" parameterType="int">
+	delete from tpm_work where work_idx=#{work_idx}
+	</delete>
 </mapper>

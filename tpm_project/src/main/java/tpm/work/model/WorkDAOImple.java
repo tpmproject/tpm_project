@@ -50,9 +50,14 @@ public class WorkDAOImple implements WorkDAO {
 		return 0;
 	}
 
-	public int delWork() {
+	public int workDelete(int work_idx) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlMap.delete("workDelete", work_idx);
+		if(result>0){
+			return work_idx;
+		}else{
+			return 0;
+		}
 	}
 
 	public ArrayList<MyWorkDTO> myWorkAllList(MemberDTO mdto) {
