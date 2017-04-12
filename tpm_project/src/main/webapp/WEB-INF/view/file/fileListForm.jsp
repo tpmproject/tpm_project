@@ -219,7 +219,7 @@
                 id="dataTables-example" style="width:500px">
                   <thead>
                     <tr>
-                      <th style="width:-1100px">파일 타입</th>
+                      <th>파일 타입</th>
                       <th>파일 이름</th>
                       <th>파일 크기</th>
                       <th>공유한 날짜</th>
