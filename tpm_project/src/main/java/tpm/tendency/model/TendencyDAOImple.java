@@ -31,9 +31,7 @@ public class TendencyDAOImple implements TendencyDAO {
 	}
 	
 	public List<TendencyDTO> getTeamTendency(int member_idx) {
-		
-		List<TendencyDTO> dto = sqlMap.selectList("TeamTendency", member_idx);
-		
+		List<TendencyDTO> dto = sqlMap.selectList("TeamTendency", member_idx);	
 		return dto;
 	}
 	
@@ -46,5 +44,5 @@ public class TendencyDAOImple implements TendencyDAO {
 		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("tendencyList",dto);
 		return arr;
 	}
-
+	
 }
