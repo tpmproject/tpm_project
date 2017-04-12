@@ -86,8 +86,6 @@ public class WorkController {
 		int work_idx=workDAO.addWork(dto);
 		dto.setWork_idx(work_idx);
 		
-		System.out.println(work_idx);
-		
 		if(work_idx>0){
 			for(int i=0;i<work_member.length;i++){
 				int w_idx=Integer.parseInt(work_member[i]);

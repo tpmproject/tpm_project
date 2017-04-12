@@ -18,10 +18,14 @@
 	where member_idx in(select member_idx from tpm_work_member 
 	where work_idx=#{work_idx})
 	</select>
+	<select id="work_idx" resultType="int">
+	select work_idx.nextval
+	from dual
+	</select>
 	<insert id="addWork" parameterType="tpm.work.model.WorkDTO">
 	insert into tpm_work
 	values(
-	work_idx.nextval,
+	#{work_idx},
 	#{category_idx},
 	#{work_title},
 	#{work_start},

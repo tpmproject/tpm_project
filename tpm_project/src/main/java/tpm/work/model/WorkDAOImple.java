@@ -41,8 +41,14 @@ public class WorkDAOImple implements WorkDAO {
 
 	public int addWork(WorkDTO dto) {
 		// TODO Auto-generated method stub
+		int work_idx=sqlMap.selectOne("work_idx");
+		dto.setWork_idx(work_idx);
 		int result=sqlMap.insert("addWork",dto);
-		return result;
+		if(result>0){
+			return work_idx;
+		}else{
+		return 0;
+		}
 	}
 	
 	public int workMemberInsert(WorkMemberDTO dto){
