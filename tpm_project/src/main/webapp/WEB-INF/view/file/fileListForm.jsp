@@ -89,8 +89,25 @@
 					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
 					msg +='<td>'+file.file_size+'</td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
-					msg +='<td class="center">안병민</td>'
-					msg +='<td><input type="button" value="삭제" onclick="fileDel('+file.file_idx+');">'
+					msg +='<td class="center">안병민'
+					
+					msg +=' <ul style="width:5px;height:5px;margin:0px 35px; float:right; list-style:none;">'
+					msg += '<li class="dropdown">'
+					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'
+					msg +=                '<i class="fa fa-gear fa-fw"></i> '
+					msg +=    '</a>'
+			            
+					msg +=    '<ul class="dropdown-menu dropdown-user">'
+					msg +=     ' <li>'
+					msg +=       ' <a href="#"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
+					msg +=      '</li>'
+					msg +=      '<li>'
+					msg +=        '<a onclick="fileDel('+file.file_idx+');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
+					msg +=      '</li>'
+					msg +=    '</ul>'
+					msg +=   '</li>'
+					msg += '</ul></td>'
+			        
 			msg += '</tr>'
 		
 		}
@@ -171,7 +188,7 @@
               <!-- /.panel-heading -->
               <div class="panel-body">
                 <table width="100%" class="table table-striped table-bordered table-hover"
-                id="dataTables-example">
+                id="dataTables-example" style="width:500px">
                   <thead>
                     <tr>
                       <th >파일 번호</th>
@@ -181,6 +198,9 @@
                       <th>공유한 사람</th>
                     </tr>
                   </thead>
+                  
+          
+        
                   <tbody id="file_content_list">
                   
                      

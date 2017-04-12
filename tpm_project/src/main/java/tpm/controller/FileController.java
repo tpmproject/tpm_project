@@ -46,7 +46,7 @@ public class FileController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("pdto",pdto);
-		mav.setViewName("file/fileListForm");
+		mav.setViewName("file/fileListForm_t");
 		return mav;
 	}
 	

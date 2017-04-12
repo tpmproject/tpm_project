@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/sample/cho/main/import.jsp"%>
+<%@ include file="/WEB-INF/view/file/import.jsp"%>
 
 </head>
 <body class="skin-blue">
@@ -31,7 +31,8 @@
 				<div class="row">
 					<div class="col-md-">
 						<!-- 컨텐트 삽입 -->
-						<%@ include file="fileListForm.jsp"%>
+						
+						<jsp:include page="fileListForm.jsp"></jsp:include>
 					    
 					</div>
 				</div>
