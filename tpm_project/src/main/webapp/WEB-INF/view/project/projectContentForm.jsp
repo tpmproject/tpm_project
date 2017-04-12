@@ -699,7 +699,7 @@ function cateDelResult(){
 
 $("#work_time").timepicker({
 	step: 30,            //시간간격 : 5분
-	timeFormat: "H:i"    //시간:분 으로표시
+	timeFormat: "A H:i"    //시간:분 으로표시
 });
 $(document).ready(function(){
 	$("#work_time").timepicker('setTime', "17:30");
