@@ -91,7 +91,7 @@
 					msg +='<td class="center">'+file.file_date+'</td>'
 					msg +='<td class="center">안병민'
 					
-					msg +=' <ul style="width:5px;height:5px;margin:0px 35px; float:right; list-style:none;">'
+					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">'
 					msg += '<li class="dropdown">'
 					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'
 					msg +=                '<i class="fa fa-gear fa-fw"></i> '
