@@ -346,16 +346,12 @@
 	}
 	/**프로젝트 수정*/
 	function projectUpdate(i){
+		//해당프로젝트 멤버 권한 3000일 경우 수정 가능
 		
-		window.alert(i);
-		window.alert(i.project_name);
-		/* 
-			document.newProject.project_name.value='';
-			$(mback).fadeIn('150');
-			$(main_modal).fadeIn('150');
-			$(f_modal).show();
-			$(smodal).hide(); */
+	
+		window.alert('프로젝트 idx='+i);
 		
+	
 	}
 	
 function drag(ev) {
