@@ -25,7 +25,7 @@
 	#{category_idx},
 	#{work_title},
 	#{work_start},
-	#{work_end},
+	to_date('#{work_end}','yyyy-mm-dd hh24:mi'),
 	null,
 	#{work_confirm},
 	1
