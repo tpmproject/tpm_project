@@ -282,7 +282,7 @@
 		var pcontent = document.newProject.project_content.value;
 
 		var param = 'project_name=' + pname;
-		param += '&project_content=' + pcontent;
+			param += '&project_content=' + pcontent;
 		var parentD = document.getElementById('project_Member');
 
 		var childD = parentD.firstChild;
@@ -301,9 +301,9 @@
 			
 		
 			msg += childD.lastChild.previousSibling.value + ',';
-			msg2 += childD.lastChild.previousSibling.previousSibling.value
-					+ ',';
+			msg2 += childD.lastChild.previousSibling.previousSibling.value+ ',';
 			childD = childD.nextSibling;
+			
 		}
 
 		var my_idx = ${s_member_idx};
