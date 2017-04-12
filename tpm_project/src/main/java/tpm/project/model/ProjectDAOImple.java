@@ -118,11 +118,15 @@ public class ProjectDAOImple implements ProjectDAO {
 		}
 		
 	}
-
+	
+	/**프로젝트 수정*/
 	public int projectUpdate(ProjectDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlMap.update("projectUpdate",dto);
+		
+		return count;
+		
 	}
+	
 
 	public int projectDelete(int project_idx) {
 		// TODO Auto-generated method stub

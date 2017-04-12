@@ -28,7 +28,6 @@
 			1
 		)
 		
-				
 	</insert>
 	
 	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.project.model.TotalDTO">
@@ -76,6 +75,12 @@
 		order by work_idx)m
 		where w.work_idx=m.work_idx
 	</select>
-	
+	<update id="projectUpdate" parameterType="tpm.project.model.ProjectDTO">
+		update tpm_project
+		set
+		project_name=#{project_name},
+		project_content=#{project_content}
+		where project_idx=#{project_idx}
+	</update>
 	
 </mapper>

@@ -9,7 +9,13 @@
 			#{project_idx},
 			#{member_idx},
 			#{project_level}
-			
-		)
+			)
 	</insert>
+	<update id="projectUpdate" parameterType="tpm.project.model.ProjectDTO">
+		update tpm_project_member
+		set
+		project_name=#{project_name},
+		project_content=#{project_content}
+		where project_idx=#{project_idx}
+	</update>
 </mapper>
