@@ -146,7 +146,7 @@
 	}
 	/* 파일 삭제  */
 	function fileDel(i){
-		location.href="fileDel.do?file_idx="+i;  //post방식으로 보내는 방법
+		location.href="fileDel.do?file_idx="+i;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
 	
     </script>
