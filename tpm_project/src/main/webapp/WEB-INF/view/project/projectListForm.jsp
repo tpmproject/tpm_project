@@ -62,6 +62,7 @@
 		$(mback).fadeOut('100');
 		$(main_modal).fadeOut('100');
 		document.newProject.reset();
+		document.getElementById('project_Member').innerHTML='';
 	}
 	//검색멤버
 	function projectMemberAdd() {
@@ -170,8 +171,6 @@
 					msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 					msg2 += member.member_name;
 
-					msg2 += '<input type="hidden" id="member_img' +member.member_idx  + '" value="' + member.member_img + '">';
-					msg2 += '<input type="hidden" id="member_name' +member.member_idx+ '" value="' + member.member_name + '">';
 					msg2 += '<p class="text-muted">' + member.member_id
 							+ '</p> ';
 
@@ -290,38 +289,60 @@
 		var msg = '';
 		var msg2 = '';
 		while (true) {
+			
 			if(childD.nodeName=='DIV'){
 				var idx=childD.getAttribute('id');
-				msg+=idx.substring(13);
-			}else{
-				childD=childD.nextSibling
+				msg+=','+idx.substring(13);
+				msg2+=','+$('#select'+idx.substring(13)).val();
 			}
 			if(childD==lastC)break;
-			
-			
-		
-			msg += childD.lastChild.previousSibling.value + ',';
-			msg2 += childD.lastChild.previousSibling.previousSibling.value+ ',';
 			childD = childD.nextSibling;
-			
 		}
 
 		var my_idx = ${s_member_idx};
-		param += '&pm=' + my_idx + ',' + msg;
-		param += '&level=3000,' + msg2;
+		param += '&project_member=' + my_idx + msg;
+		param += '&level=3000' + msg2;
 		
 		window.alert(param);
-		//sendRequest('projectAdd.do', param, addPResult, 'POST');
+		sendRequest('projectAdd.do', param, addPResult, 'POST');
 
 	}
 	function addPResult() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
-				window.alert(result);
-				location.href = 'projectList.do';
+				var objData=eval('('+result+')');
+				var p=objData.p;
+				if(p.project_idx==0){
+					window.alert('오류 발생!');
+				}else{
+		
+					var divNode=document.createElement('DIV');
+					divNode.setAttribute('class','col-lg-3');
+					divNode.setAttribute('style','margin-top: 15px;');
+					
+					var msg='<div class="box">';
+					msg+='<div class="box-gray aligncenter" style="height:210px;">';
+					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
+					msg+='<h4>'+p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+')"><i class="glyphicon glyphicon-cog"></i></a></h4>';
+					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
+					msg+='<p>'+p.project_content+'</p>';
+					msg+='<td><input type="button" value="진행중"></td></div>';
+					msg+='<div class="box-bottom"><a href="#">프로젝트 보기버튼</a></div></div>';
+					
+					divNode.innerHTML=msg;
+					
+					document.getElementById('contain').appendChild(divNode);
+					
+					closem();
+					
+				}
 			}
 		}
+	}
+	function test123(){
+		closem();
+		
 	}
 	/**프로젝트 수정*/
 	function projectUpdate(i){
@@ -352,15 +373,16 @@ function drop(ev) {
     	var comp=document.getElementById(data);
     	var img=document.getElementById('member_img'+data.substring(13));
     	
-    	var spanNode=document.createElement('span');
-    	
-   		var msg='<select><option value="1000">읽기만</option>';
-		msg += '<option value="2000">프로젝트 멤버</option>';
-		msg += '<option value="3000">프로젝트 책임자</option></select>';
-		msg += '<input type="hidden" name="addMember_idx" value="'+data.substring(13)+'">';
-		
-		spanNode.innerHTML=msg;
-    	comp.insertBefore(spanNode,img);
+    	var select=document.getElementById('select'+data.substring(13));
+    	if(select==null){
+    		var spanNode=document.createElement('span');
+	   		var msg='<select id="select'+data.substring(13)+'"><option value="1000">읽기만</option>';
+			msg += '<option value="2000">프로젝트 멤버</option>';
+			msg += '<option value="3000">프로젝트 책임자</option></select>';
+			
+			spanNode.innerHTML=msg;
+	    	comp.insertBefore(spanNode,img);
+    	}
     	document.getElementById('project_Member').appendChild(comp);
     }
 }
@@ -369,7 +391,15 @@ function drop2(ev) {
     var data = ev.dataTransfer.getData("text");
     if(data.startsWith('modal_content')){
     	var nofriend=document.getElementById('plus'+data.substring(13));
+    	
+    	var select=document.getElementById('select'+data.substring(13));
     	var comp=document.getElementById(data);
+    	
+    	if(select!=null){
+    		var select=select.parentNode;	
+	    	comp.removeChild(select);
+    	}
+    	
     	if(nofriend==null){
 	    	document.getElementById('myFriend_List').appendChild(comp);
     	}else{
@@ -438,8 +468,8 @@ function drop2(ev) {
 	</div>
 	</section>
 
-	<section id="content">
-	<div class="container">
+	<section>
+	<div class="container" id="contain">
 		<c:set var="plist" value="${plist}"></c:set>
 		<c:choose>
 			<c:when test="${empty plist}">
@@ -447,14 +477,11 @@ function drop2(ev) {
 		</c:when>
 			<c:otherwise>
 				<c:forEach var="i" items="${plist}">
-					<div class="row" >
-						<div class="col-lg-12">
-							<div class="row">
-								<div class="col-lg-3">
+								<div class="col-lg-3" style="margin-top: 15px;" >
 									<div class="box">
-										<div class="box-gray aligncenter">
-											<input type="hidden" value="plist.get(i).member_idx">
-											<h4>${i.project_name }<a href="javascript:projectUpdate(${i})"><i class="glyphicon glyphicon-cog"></i></a></h4>
+										<div class="box-gray aligncenter" style="height:210px;">
+											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
+											<h4>${i.project_name }<a href="javascript:projectUpdate(${i.project_idx})"><i class="glyphicon glyphicon-cog"></i></a></h4>
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
@@ -478,9 +505,6 @@ function drop2(ev) {
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
 					<!-- divider -->
 					<!-- end divider -->
 					<!-- Portfolio Projects -->
@@ -551,6 +575,7 @@ function drop2(ev) {
 					</div>
 					<button type="button" class="btn btn-next" id="btn-workbefore"
 						onclick="showf()">이전</button>
+					<button type="button" class="btn btn-next" onclick="test123()">testset</button>
 					<button type="button" class="btn btn-next" onclick="addP()">완료</button>
 				</div>
 			</div>

@@ -84,14 +84,18 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView projectInsert(ProjectDTO dto,String[] pm,String[] level){
+	public ModelAndView projectInsert(ProjectDTO dto,String[] project_member,String[] level){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectAdd_d");
 		
+		//프로젝트 생성 후 project_idx를 반환
 		int project_idx= projectDAO.projectInsert(dto);
+		dto.setProject_idx(project_idx);
+		
+		//생성된 프로젝트에 멤버 추가
 		if(project_idx>0){
-			for(int i=0;i<pm.length;i++){
-				int pm_idx=Integer.parseInt(pm[i]);
+			for(int i=0;i<project_member.length;i++){
+				int pm_idx=Integer.parseInt(project_member[i]);
 				int pm_level=Integer.parseInt(level[i]);
 				
 				ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, pm_idx, pm_level);
@@ -99,8 +103,9 @@ public class ProjectController {
 				projectDAO.projectMemberInsert(pmdto);
 			}
 			
+			mav.addObject("pdto", dto);
 		}else{
-			String msg="프로젝트 생성 실패!";
+			String msg="error";
 			mav.addObject("msg", msg);
 		}
 		
