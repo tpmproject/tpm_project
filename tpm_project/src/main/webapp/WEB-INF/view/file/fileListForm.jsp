@@ -137,7 +137,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.do">파일 리스트</a>
+          <a class="navbar-brand" href="index.do" style="color:black;">파일 리스트</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right"></ul>
@@ -157,14 +157,14 @@
                 <!-- /input-group -->
               </li>
               <li class="active">
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
+                <a href="#" style="color:black;"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                 <!--사이드에 프로젝트 리스트명 띄우기  -->
                 <c:set var="p_list" value="${pdto}"></c:set>
                 <c:forEach var="p_idxs" items="${p_list}">
                 
-                  <li>
-                    <a onclick="project_fileList(${p_idxs.project_idx});">${p_idxs.project_name }</a>
+                  <li >
+                    <a onclick="project_fileList(${p_idxs.project_idx});" style="color:black;">${p_idxs.project_name }</a>
                     
                   </li>
                   
