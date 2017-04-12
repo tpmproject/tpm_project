@@ -99,7 +99,7 @@
 			            
 					msg +=    '<ul class="dropdown-menu dropdown-user">'
 					msg +=     ' <li>'
-					msg +=       ' <a href="#"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
+					msg +=       ' <a href=="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
 					msg +=      '</li>'
 					msg +=      '<li>'
 					msg +=        '<a onclick="fileDel('+file.file_idx+');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
@@ -187,6 +187,7 @@
               <div class="panel-heading">DataTables Advanced Tables</div>
               <!-- /.panel-heading -->
               <div class="panel-body">
+              
                 <table width="100%" class="table table-striped table-bordered table-hover"
                 id="dataTables-example" style="width:500px">
                   <thead>
@@ -199,6 +200,8 @@
                     </tr>
                   </thead>
                   
+			
+		
           
         
                   <tbody id="file_content_list">
@@ -232,6 +235,7 @@
     
     <!-- /#wrapper -->
     <!-- jQuery -->
+    
     <script src="/tpm_project/js/file/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/tpm_project/js/file/bootstrap.js"></script>

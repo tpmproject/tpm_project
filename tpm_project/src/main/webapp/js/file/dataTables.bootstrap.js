@@ -141,7 +141,7 @@ if ( DataTable.TableTools ) {
 			"disabled": "disabled"
 		},
 		"collection": {
-			"container": "DTTT_dropdown dropdown-menu",
+			"container": "DTTT_dropdown dropdown-menu2",
 			"buttons": {
 				"normal": "",
 				"disabled": "disabled"

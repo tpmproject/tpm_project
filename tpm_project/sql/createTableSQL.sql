@@ -101,31 +101,6 @@ CREATE TABLE tpm_myfriend (
 
 
 
--- 파일 테이블[0]-------------------------------------------------------
-
-CREATE TABLE tpm_file (
-	file_idx    NUMBER        primary key NOT NULL, -- 파일 IDX
-	project_idx NUMBER        ,     -- 프로젝트 IDX
-	work_idx    NUMBER        ,     -- 업무 IDX
-	member_idx  NUMBER        ,     -- 회원 IDX
-	file_name   VARCHAR2(40)  ,     -- 파일 이름
-	file_size   VARCHAR2(20)  ,     -- 파일 크기
-	file_date   DATE          ,     -- 파일 공유날짜
-	file_path   VARCHAR2(300) ,      -- 파일 경로
-	
-	FOREIGN KEY (project_idx)
-	REFERENCES tpm_project(project_idx)ON DELETE CASCADE,
-	
-	FOREIGN KEY (work_idx)
-	REFERENCES tpm_work(work_idx)ON DELETE CASCADE,
-	
-	FOREIGN KEY (member_idx)
-	REFERENCES tpm_member(member_idx)ON DELETE CASCADE
-);
-
-
-create sequence file_idx
-minvalue 0 start with 1;
 
 
 -- 카테고리 테이블[0]-------------------------------------------------------
@@ -257,6 +232,31 @@ CREATE TABLE tpm_tendency (
  	FOREIGN KEY (project_idx)
 	REFERENCES tpm_project(project_idx)ON DELETE CASCADE
 );
+-- 파일 테이블[0]-------------------------------------------------------
+
+CREATE TABLE tpm_file (
+	file_idx    NUMBER        primary key NOT NULL, -- 파일 IDX
+	project_idx NUMBER        ,     -- 프로젝트 IDX
+	work_idx    NUMBER        ,     -- 업무 IDX
+	member_idx  NUMBER        ,     -- 회원 IDX
+	file_name   VARCHAR2(40)  ,     -- 파일 이름
+	file_size   VARCHAR2(20)  ,     -- 파일 크기
+	file_date   DATE          ,     -- 파일 공유날짜
+	file_path   VARCHAR2(300) ,      -- 파일 경로
+	
+	FOREIGN KEY (project_idx)
+	REFERENCES tpm_project(project_idx)ON DELETE CASCADE,
+	
+	FOREIGN KEY (work_idx)
+	REFERENCES tpm_work(work_idx)ON DELETE CASCADE,
+	
+	FOREIGN KEY (member_idx)
+	REFERENCES tpm_member(member_idx)ON DELETE CASCADE
+);
+
+
+create sequence file_idx
+minvalue 0 start with 1;
 
 
 
