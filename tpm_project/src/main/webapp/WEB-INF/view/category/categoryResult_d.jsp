@@ -1,3 +1,4 @@
+<%@page import="tpm.category.model.CategoryDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -8,13 +9,12 @@
 		if (msg==null||msg.equals("error")||msg.equals("")) {
 			
 		} else {
-			%>
-			<div class="category">
-			여기에 추가되는 카테고리 쓰면 됨 ㅎ
-			</div>
-			<%
+			CategoryDTO dto=(CategoryDTO)request.getAttribute("categoryDTO");
+			int idx=dto.getCategory_idx();
+			String name=dto.getCategory_name();
+			
+			out.print("{category:{category_idx:"+idx+",category_name:'"+name+"'}}");
 		}
-	
 	}catch(Exception e2){}
 
 //update,delete category

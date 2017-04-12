@@ -45,6 +45,7 @@ function categoryUpdateResult(){
 			result=parseInt(result); //cate_idx
 			
 			var ac=document.getElementById('a_cate'+result);
+			
 			ac.firstChild.innerHTML=$('#cateIn'+result).val();
 			
 			$('#cate'+result).hide();
@@ -63,13 +64,34 @@ function categoryAddResult() {
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
+			
+			var chData=eval('('+result+')');
+			
 			if (result != null) {
+				var cate=chData.category;
+				
+			
 				var cbodyNode = document.getElementById('cbody');
 				var cateNode = document.getElementById('addCate');
-				var divNode = document.createElement('div');
-				divNode.innerHTML = result;
-				cbodyNode.insertBefore(divNode, cateNode);
+				var dNode = document.createElement('div');
+				
+				var idx=cate.category_idx;
+				var name=cate.category_name;
+				dNode.setAttribute('class','category');
+				dNode.setAttribute('id','cp'+idx);
+				
+				var innerH='<div class="category_head" id ="c'+idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';			
+				innerH+='<form action="javascript:categoryUpdate('+idx+')">';
+				innerH+='<div id="cate'+idx+'" class="cateName">';
+				innerH+='<input id="cateIn='+idx+'" type="text" value="'+name+'" size="16px">&nbsp;&nbsp;';
+				innerH+='<i class="glyphicon glyphicon-remove" onclick="cateNameRe('+idx+'+)"></i></div>';
+				innerH+='<div id="a_cate'+idx+'"><a href="javascript:cateName('+idx+')">'+name+'</a>&nbsp;&nbsp;';
+				innerH+='<i class="glyphicon glyphicon-plus" onclick="showf('+idx+')"></i></div></form></div>';
+				
+				dNode.innerHTML=innerH;
+				cbodyNode.insertBefore(dNode,cateNode);
 				cbodyNode.style.width = parseInt(cbodyNode.style.width)+200+"px";
+				document.newCategory.category_name.value='';
 			}
 		}
 	}

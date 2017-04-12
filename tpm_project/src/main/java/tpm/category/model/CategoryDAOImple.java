@@ -12,10 +12,14 @@ public class CategoryDAOImple implements CategoryDAO {
 	}
 	
 	public int categoryInsert(CategoryDTO dto) {
-	
+		int idx=sqlMap.selectOne("categoryIdx");
+		dto.setCategory_idx(idx);
 		int result=sqlMap.insert("categoryInsert", dto);
-		
-		return result;
+		if(result>0){
+			return idx;
+		}else{
+			return 0;
+		}
 	}
 
 	public int categoryUpdate(CategoryDTO dto) {

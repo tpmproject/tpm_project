@@ -22,13 +22,17 @@ public class CategoryController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("category/categoryResult_d");
-		mav.addObject("categoryDTO", dto);
+		
 		int result=categoryDAO.categoryInsert(dto);
 		
 		String msg=dto.getCategory_name();
 		if(result<=0){
 			msg="error";
+		}else{
+			dto.setCategory_idx(result);
 		}
+		
+		mav.addObject("categoryDTO", dto);
 		mav.addObject("msg", msg);
 		return mav;
 	}

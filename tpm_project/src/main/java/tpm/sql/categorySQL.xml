@@ -3,10 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.category">
+	<select id="categoryIdx" resultType="int">
+	select category_idx.nextval from dual
+	</select>
 	<insert id="categoryInsert" parameterType="tpm.category.model.CategoryDTO">
 	insert into tpm_category
 	values(
-	category_idx.nextval,
+	#{category_idx},
 	#{project_idx},
 	#{category_name}
 	)	
