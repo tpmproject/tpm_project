@@ -13,17 +13,21 @@
 	</insert>
 	<select id="updateProjectFriend" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
 	
+		select * from
+		(tpm_member)m,
+		(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm
+		where m.member_idx=pm.member_idx
+	</select>
+	<select id="updatenoProjectFriend" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
 		select m.* from
-		(
-			tpm_member
-		)m,
-		(
-			select pm.member_idx from
-			(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm,
-			(select * from tpm_myfriend where member_idx=#{member_idx})f
-			where f.myfriend_idx!=pm.member_idx
-		)aa
-		where m.member_idx=aa.member_idx
+		(tpm_member)m,
+		(select * from tpm_myfriend where member_idx=#{member_idx})mf
+		where m.member_idx=mf.myfriend_idx and m.member_idx not in (
+		select m.member_idx from
+		(tpm_member)m,
+		(select * from tpm_project_member where project_idx=#{project_idx} and member_idx!=#{member_idx})pm
+		where m.member_idx=pm.member_idx
+		)
 	</select>
 	
 	<update id="projectMeberUpdate" parameterType="tpm.project.model.ProjectMemberDTO">

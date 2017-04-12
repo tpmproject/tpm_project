@@ -212,11 +212,10 @@
 			}
 		}
 	}
-	//프로젝트 수정시 친구 목록
+	//프로젝트 수정시 프로젝트 멤버 목록
 	function shows2Result() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
-				window.alert('성공!!');
 				var result = XHR.responseText;
 				var json = JSON.parse(result);
 
@@ -236,7 +235,7 @@
 					msg2 += '</div> ';
 				}
 
-				var myFriend_List = document.getElementById('myFriend_List2');
+				var myFriend_List = document.getElementById('project_Member2');
 				myFriend_List.innerHTML = msg2;
 
 			}
@@ -409,6 +408,7 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+//프로젝트 생성 시 멤버 추가 드랍
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
@@ -429,6 +429,7 @@ function drop(ev) {
     	document.getElementById('project_Member').appendChild(comp);
     }
 }
+//프로젝트 생성 시 멤버 빼기 드랍
 function drop2(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
@@ -447,6 +448,49 @@ function drop2(ev) {
 	    	document.getElementById('myFriend_List').appendChild(comp);
     	}else{
     		document.getElementById('member_search_content').appendChild(comp);
+    	}
+    }
+}
+//프로젝트 수정 시 멤버 추가 드랍
+function drop3(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('modal_content')){
+    	var comp=document.getElementById(data);
+    	var img=document.getElementById('member_img'+data.substring(13));
+    	
+    	var select=document.getElementById('select'+data.substring(13));
+    	if(select==null){
+    		var spanNode=document.createElement('span');
+	   		var msg='<select id="select'+data.substring(13)+'"><option value="1000">읽기만</option>';
+			msg += '<option value="2000">프로젝트 멤버</option>';
+			msg += '<option value="3000">프로젝트 책임자</option></select>';
+			
+			spanNode.innerHTML=msg;
+	    	comp.insertBefore(spanNode,img);
+    	}
+    	document.getElementById('project_Member2').appendChild(comp);
+    }
+}
+//프로젝트 수정 시 멤버 빼기 드랍
+function drop4(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('modal_content')){
+    	var nofriend=document.getElementById('plus'+data.substring(13));
+    	
+    	var select=document.getElementById('select'+data.substring(13));
+    	var comp=document.getElementById(data);
+    	
+    	if(select!=null){
+    		var select=select.parentNode;	
+	    	comp.removeChild(select);
+    	}
+    	
+    	if(nofriend==null){
+	    	document.getElementById('myFriend_List2').appendChild(comp);
+    	}else{
+    		document.getElementById('member_search_content2').appendChild(comp);
     	}
     }
 }

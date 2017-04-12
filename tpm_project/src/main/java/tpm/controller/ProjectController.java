@@ -153,7 +153,7 @@ public class ProjectController {
 		ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, dto.getMember_idx(), 0);
 		ArrayList<MemberDTO> mdtos=projectDAO.projectUpdateFriend(pmdto);
 		
-		mav.addObject("mdtos", mdtos);
+		mav.addObject("arry_mdto", mdtos);
 		
 		return mav;
 	}
