@@ -81,13 +81,40 @@
 		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
 		for(var i = 0 ; i < files.length; i++){
 			var file = files[i];
+			var filename=file.file_name;
+			var filetype='';
+			if (filename.substring(filename.indexOf('.'))=='.txt') {
+				filetype='txt';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.doc') {
+				filetype='doc';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.jpg') {
+				filetype='jpg';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.pdf') {
+				filetype='pdf';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.png') {
+				filetype='png';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.xls') {
+				filetype='xls';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.rar') {
+				filetype='rar';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.html') {
+				filetype='html';
+			}
+			
 			
 		    msg+= ''
-			
-			msg +='<tr class="odd gradeX">'
-					msg +='<td>'+file.file_idx+'</td>'
+		    
+			msg +='<tr class="odd gradeX" style="margin:10px 30px;">'
+					msg +='<td style="width:-3000px"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></td>'
 					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
-					msg +='<td>'+file.file_size+'</td>'
+					msg +='<td>'+file.file_size+' byte </td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
 					msg +='<td class="center">안병민'
 					
@@ -192,7 +219,7 @@
                 id="dataTables-example" style="width:500px">
                   <thead>
                     <tr>
-                      <th >파일 번호</th>
+                      <th style="width:-1100px">파일 타입</th>
                       <th>파일 이름</th>
                       <th>파일 크기</th>
                       <th>공유한 날짜</th>

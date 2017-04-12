@@ -90,7 +90,7 @@ public class FileController {
 		
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
-		int project_idx=2;   //프로젝트 idx 가져오기, 임시
+		int project_idx=16;   //프로젝트 idx 가져오기, 임시
 		int work_idx=2;      //업무 idx 가져오기 , 임시
 		
 		
