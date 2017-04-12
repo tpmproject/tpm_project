@@ -27,12 +27,13 @@
 	</select>
 	
 	<select id="tendencyList" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
-		select member_idx from tpm_member 
-		where member_idx!=${member_idx} and member_idx in(
+		select * from tpm_member
+		where member_idx in(
 		select member_idx from tpm_project_member 
-		where project_idx=${project_idx} and member_idx in(
-		select member_idx from tpm_tendency 
-		where appraiser_idx!=${member_idx}))
+		where project_idx=#{project_idx} and member_idx!=#{member_idx})
+	</select>
+	<select id="tendencyOk"	parameterType="">
+		
 	</select>
 	
 	<select id="addTendency" parameterType="tpm.tendency.model.TendencyDTO">

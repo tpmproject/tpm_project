@@ -514,7 +514,7 @@ function cateDelResult(){
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
-								<div id="wdiv_${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
 									<span><i class="glyphicon glyphicon-cog" onclick="showu()"></i></span>
 								</div>

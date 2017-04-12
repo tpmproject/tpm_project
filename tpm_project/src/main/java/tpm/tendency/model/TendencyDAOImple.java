@@ -41,5 +41,10 @@ public class TendencyDAOImple implements TendencyDAO {
 		int result=sqlMap.insert("addTendency",dto);
 		return result;
 	}
+	
+	public ArrayList<MemberDTO> tendencyList(ProjectMemberDTO dto){
+		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("tendencyList",dto);
+		return arr;
+	}
 
 }

@@ -177,12 +177,12 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 평가 페이지 이동 */
 	@RequestMapping(value="projectEvaluation.do",  method=RequestMethod.GET)
-	public ModelAndView projectEvaluationForm(ProjectDTO dto, int project_idx){
+	public ModelAndView projectEvaluationForm(ProjectDTO dto, ProjectMemberDTO bdto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectEvaluationForm");
 		ProjectDTO pdto=projectDAO.projectSearch(dto);
-		ArrayList<MemberDTO> arr=workDAO.projectMember(project_idx);
+		ArrayList<MemberDTO> arr=tendencyDAO.tendencyList(bdto);
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
 		return mav;
