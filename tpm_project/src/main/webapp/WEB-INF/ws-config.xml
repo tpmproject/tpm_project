@@ -17,13 +17,15 @@
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo-sockjs.do" />
 		<websocket:mapping handler="chatHandler" path="/chat-sockjs.do" />
+		<websocket:mapping handler="tpmHandler" path="/tpm-sockjs.do" />
 		<websocket:sockjs />
 	</websocket:handlers>
 
 
 	<bean id="echoHandler" class="tpm.sample.chat.EchoHandler" />
 	<bean id="chatHandler" class="tpm.sample.chat.ChatWebSocketHandler" />
-
+	<bean id="tpmHandler" class="tpm.socket.TpmSocketHandler"/>
+	
 	<mvc:default-servlet-handler />
 
 </beans>
