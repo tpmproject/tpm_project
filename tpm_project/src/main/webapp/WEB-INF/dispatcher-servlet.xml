@@ -179,6 +179,12 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="studyDAO" class="tpm.study.model.StudyDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<bean id="pathDAO" class="tpm.member.model.Path"/>
 	
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">

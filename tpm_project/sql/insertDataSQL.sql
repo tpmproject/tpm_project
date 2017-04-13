@@ -9,16 +9,10 @@ insert into tpm_member values(member_idx.nextval,'hunjin@naver.com','1234','김�
 
 
 --채팅 테이블  (채팅idx, 회원idx, cp코드, cp값, 채팅내용, 채팅 작성일)
-insert into tpm_chat values(chat_idx.nextval,2,'myweb',2,'안녕하세요',sysdate);
-insert into tpm_chat values(chat_idx.nextval,3,'myweb',2,'안녕하세요!',sysdate);
-insert into tpm_chat values(chat_idx.nextval,4,'myweb',2,'반갑습니다.',sysdate);
-insert into tpm_chat values(chat_idx.nextval,5,'myweb',2,'ㅎㅇ',sysdate);
-insert into tpm_chat values(chat_idx.nextval,2,'final',3,'안녕하세요',sysdate);
-insert into tpm_chat values(chat_idx.nextval,3,'final',3,'ㅎㅇㅎㅇ',sysdate);
-insert into tpm_chat values(chat_idx.nextval,4,'final',3,'반가',sysdate);
-insert into tpm_chat values(chat_idx.nextval,2,'semi',4,'안녕하세요',sysdate);
-insert into tpm_chat values(chat_idx.nextval,3,'semi',4,'안녕하세요',sysdate);
-insert into tpm_chat values(chat_idx.nextval,5,'semi',4,'안녕하세요',sysdate);
+INSERT INTO tpm_chat VALUES(chat_idx.nextval, 3, 'P', 2, '안녕하신가', SYSDATE) 
+INSERT INTO tpm_chat VALUES(chat_idx.nextval, 2, 'P', 2, '그래 안녕', SYSDATE)
+INSERT INTO tpm_chat VALUES(chat_idx.nextval, 3, 'P', 2, 'ㅋㅋㅋㅋㅋ', SYSDATE)
+INSERT INTO tpm_chat VALUES(chat_idx.nextval, 2, 'P', 2, '헤헤', SYSDATE)
 
 --체널 테이블 (채널idx, 채널이름)
 insert into tpm_channel values(channel_idx.nextval,'myweb');

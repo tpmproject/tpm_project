@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.sample">
-	<select id="sampleWorkList" resultType="tpm.sample.model.SampleWorkDTO">
+	<select id="sampleWorkList" resultType="tpm.sample.model.SampleWork2DTO">
 		SELECT w.*, c.checklist_idx, c.checklist_content, c.checklist_state
 		FROM tpm_work w LEFT OUTER JOIN tpm_checklist c on w.work_idx = c.work_idx
 	</select>
