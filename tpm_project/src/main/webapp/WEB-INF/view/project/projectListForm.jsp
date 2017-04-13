@@ -703,8 +703,6 @@ function drop4(ev) {
 }
 </style>
 </head>
-
-
 <body class="skin-blue">
 <%@ include file="/WEB-INF/view/header.jsp"%>	
 	<section class="callaction">
