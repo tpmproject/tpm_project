@@ -468,7 +468,7 @@
 					var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
 					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
-					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></span></h4>';
+					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
 					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
 					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
@@ -562,7 +562,7 @@ function updatePResult(){
 				if(myLevel!='3000'){
 					p_name.innerHTML=p.project_name;	
 				}else{
-					p_name.innerHTML=p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></span>';
+					p_name.innerHTML=p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>';
 					
 				}
 				myLevel=0;
@@ -739,10 +739,10 @@ function drop4(ev) {
 									<div class="box" style="border: 0px;">
 										<div class="box-gray aligncenter" style="height:210px;">
 											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
-											<h4 id="pn${i.project_idx}">${i.project_name }
+											<h4 id="pn${i.project_idx}"><span>${i.project_name }</span>
 												<c:if test="${i.project_level eq 3000 }">
 												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-												<i class="glyphicon glyphicon-cog"></i></span>
+												<i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>
 												</c:if>
 											</h4>
 											<div class="icon">
