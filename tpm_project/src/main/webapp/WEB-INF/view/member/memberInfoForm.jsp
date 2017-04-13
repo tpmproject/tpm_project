@@ -138,82 +138,72 @@
     </script>
 </head>
 <body>
-	<!-- 
-	<c:set var="s_member_id" value="${s_member_id}"/>
-	<c:if test="${empty s_member_id}">
-		로그인 후 이용해주세요
-	</c:if>
-	 -->
-	 
-	 <c:set var="self_tendencylist" value="${self_tendency}"/>
-          <c:forEach var="self_tendency" items="${self_tendencylist}">
-          <script>
-		      var chart = AmCharts.makeChart( "chartdiv", {
-		                "type": "radar",
-		                "theme": "light",
-		                "dataProvider": [ 
-			             	{ "tendency": "외향적", "point": ${self_tendency.tendency_e} },
-			             	{ "tendency": "내향적", "point": ${self_tendency.tendency_i} },
-			                { "tendency": "감각적", "point": ${self_tendency.tendency_s} },
-			                { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
-			                { "tendency": "사고적", "point": ${self_tendency.tendency_t} },
-			                { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
-			                { "tendency": "판단적", "point": ${self_tendency.tendency_j} },
-			                { "tendency": "인식적", "point": ${self_tendency.tendency_p} } ],
-		                "valueAxes": [
-		                	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
-		                "startDuration": 2,
-		                "graphs": [
-		                	{ "balloonText": "[[value]]",
-		                  	  "bullet": "round",
-		                  	  "lineThickness": 2,
-		                  	  "valueField": "litres" } ] ,
-		                "categoryField": "tendency" }) ;
-      	  </script>
+	 	<c:set var="self_tendencylist" value="${self_tendency}"/>
+	          <c:forEach var="self_tendency" items="${self_tendencylist}">
+	          <script>
+			      var chart = AmCharts.makeChart( "chartdiv", {
+			                "type": "radar",
+			                "theme": "light",
+			                "dataProvider": [ 
+				             	{ "tendency": "외향적", "litres": ${self_tendency.tendency_e} },
+				             	{ "tendency": "내향적", "litres": ${self_tendency.tendency_i} },
+				                { "tendency": "감각적", "litres": ${self_tendency.tendency_s} },
+				                { "tendency": "직관적", "litres": ${self_tendency.tendency_n} },
+				                { "tendency": "사고적", "litres": ${self_tendency.tendency_t} },
+				                { "tendency": "감정적", "litres": ${self_tendency.tendency_f} },
+				                { "tendency": "판단적", "litres": ${self_tendency.tendency_j} },
+				                { "tendency": "인식적", "litres": ${self_tendency.tendency_p} } ],
+			                "valueAxes": [
+			                	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
+			                "startDuration": 2,
+			                "graphs": [
+			                	{ "balloonText": "[[value]]",
+			                  	  "bullet": "round",
+			                  	  "lineThickness": 2,
+			                  	  "valueField": "litres" } ] ,
+			                "categoryField": "tendency" }) ;
+	      	  </script>
           
-	<c:set var="team_tendencylist" value="${team_tendency}"/>
-	
-	<c:forEach var="team_tendency" items="${team_tendencylist}">
-	
-	<script>
-      
-      var chart = AmCharts.makeChart("chartdiv2", {
-    	  "theme": "light",
-          "type": "serial",
-          "dataProvider": [
-        	  { "tendency": "외향적", "self": ${self_tendency.tendency_e}, "team": ${team_tendency.tendency_e} },
-        	  { "tendency": "내향적", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
-        	  { "tendency": "감각적", "self": ${self_tendency.tendency_s}, "team": ${team_tendency.tendency_s} },
-        	  { "tendency": "직관적", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
-        	  { "tendency": "사고적", "self": ${self_tendency.tendency_t}, "team": ${team_tendency.tendency_t} },
-        	  { "tendency": "감정적", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
-        	  { "tendency": "판단적", "self": ${self_tendency.tendency_j}, "team": ${team_tendency.tendency_j} },
-        	  { "tendency": "인식적", "self": ${self_tendency.tendency_p}, "team": ${team_tendency.tendency_p} } ],
-          "valueAxes": [
-        	  { "position": "left",
-              	"title": "tendency" }],
-          "startDuration": 2,
-          "graphs": [
-        	  { "balloonText": "check tendency <b>[[category]] (team)</b> : <b>[[value]]</b>",
-              	"fillAlphas": 0.9,
-              	"title": "team",
-              	"type": "column",
-              	"valueField": "team" },
-              { "balloonText": "check tendency <b>[[category]] (self)</b> : <b>[[value]]</b>",
-              	"fillAlphas": 0.9,
-              	"title": "self",
-              	"type": "column",
-              	"clustered":false,
-              	"columnWidth":0.4,
-              	"valueField": "self" }],
-          "plotAreaFillAlphas": 0.1,
-          "categoryField": "tendency",
-          "categoryAxis": { "gridPosition": "start" }
-      });
-     </script>
-     </c:forEach>
-     </c:forEach>
-	 
+		<c:set var="team_tendencylist" value="${team_tendency}"/>
+			<c:forEach var="team_tendency" items="${team_tendencylist}">
+			<script>
+		      var chart = AmCharts.makeChart("chartdiv2", {
+		    	  "theme": "light",
+		          "type": "serial",
+		          "dataProvider": [
+		        	  { "tendency": "외향적", "self": ${self_tendency.tendency_e}, "team": ${team_tendency.tendency_e} },
+		        	  { "tendency": "내향적", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
+		        	  { "tendency": "감각적", "self": ${self_tendency.tendency_s}, "team": ${team_tendency.tendency_s} },
+		        	  { "tendency": "직관적", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
+		        	  { "tendency": "사고적", "self": ${self_tendency.tendency_t}, "team": ${team_tendency.tendency_t} },
+		        	  { "tendency": "감정적", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
+		        	  { "tendency": "판단적", "self": ${self_tendency.tendency_j}, "team": ${team_tendency.tendency_j} },
+		        	  { "tendency": "인식적", "self": ${self_tendency.tendency_p}, "team": ${team_tendency.tendency_p} } ],
+		          "valueAxes": [
+		        	  { "position": "left",
+		              	"title": "tendency" }],
+		          "startDuration": 2,
+		          "graphs": [
+		        	  { "balloonText": "check tendency <b>[[category]] (team)</b> : <b>[[value]]</b>",
+		              	"fillAlphas": 0.9,
+		              	"title": "team",
+		              	"type": "column",
+		              	"valueField": "team" },
+		              { "balloonText": "check tendency <b>[[category]] (self)</b> : <b>[[value]]</b>",
+		              	"fillAlphas": 0.9,
+		              	"title": "self",
+		              	"type": "column",
+		              	"clustered":false,
+		              	"columnWidth":0.4,
+		              	"valueField": "self" }],
+		          "plotAreaFillAlphas": 0.1,
+		          "categoryField": "tendency",
+		          "categoryAxis": { "gridPosition": "start" }
+		      });
+		     </script>
+		     </c:forEach>
+		     </c:forEach>
+		 
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
       <div class="col-md-12">
