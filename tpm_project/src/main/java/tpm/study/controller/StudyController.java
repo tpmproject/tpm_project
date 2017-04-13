@@ -122,7 +122,7 @@ public class StudyController {
 		
 		String str= temp[0].trim(); 
 		/*String str= "04/13/2017 9:00 AM"; */
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm aa", Locale.US); 
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
 		java.util.Date t = sdf.parse(str); 
 		System.out.println("t :" + t);
 		java.sql.Date st = new java.sql.Date(t.getTime());
