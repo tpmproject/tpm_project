@@ -158,11 +158,17 @@ function addWork(){
  	var work_member=document.getElementById('work_m');
 	var fch = work_member.firstChild;
 	var lch = work_member.lastChild;
-	var msg='0';
+	var msg='';
+	var count=0;
 	while(true){
 		if(fch.nodeName=='DIV'){
 			var idx=fch.getAttribute('id');
+			if(count==0){
+				msg+=idx.substring(11);
+				count++;
+			}else{
 			msg+=','+idx.substring(11);
+			}
 		}
 		if(fch==lch)break;
 		fch=fch.nextSibling;
