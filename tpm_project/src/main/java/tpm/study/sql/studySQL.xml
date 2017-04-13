@@ -30,22 +30,22 @@
 	<!-- -->
 	<!-- Mybatis DTO 안 DTO 1:N Select 하기 -->
     <resultMap id="memoResultMap" type="tpm.study.model.MemoDTO">
-        <id property="idx" column="idx"/>
-        <result property="subject" column="subject"/>
-        <result property="name" column="name"/>
-        <result property="email" column="email"/>
-        <result property="w_day" column="w_day"/>
-        <result property="memo" column="memo"/>
+        <id property="memo_idx" column="memo_idx"/>
+        <result property="memo_subject" column="memo_subject"/>
+        <result property="memo_name" column="memo_name"/>
+        <result property="memo_email" column="memo_email"/>
+        <result property="memo_day" column="memo_day"/>
+        <result property="memo_memo" column="memo_memo"/>
         <collection property="comments" javaType="java.util.List" resultMap="commentResultMap"/>
     </resultMap>
     
     <resultMap id="commentResultMap" type="tpm.study.model.CommentDTO">
-        <id property="idx" column="idx"/>
+        <id property="comment_idx" column="comment_idx"/>
         <result property="memo_idx" column="memo_idx"/>
-        <result property="c_name" column="name"/>
-        <result property="c_email" column="email"/>
-        <result property="c_w_day" column="w_day"/>
-        <result property="comm" column="comm"/>
+        <result property="comment_name" column="comment_name"/>
+        <result property="comment_email" column="comment_email"/>
+        <result property="comment_day" column="comment_day"/>
+        <result property="comment_comm" column="comment_comm"/>
     </resultMap>
     
     <!-- <resultMap id="getMemo_comm" type="tpm.study.model.MemoDTO" extends="getMemo">
@@ -54,7 +54,7 @@
 	
 	
 	<select id="dtoStudy2Select" resultMap="memoResultMap">
-        SELECT * FROM memo_T m LEFT OUTER JOIN comment_t c ON m.idx = c.memo_idx
+        SELECT * FROM memo_T m LEFT OUTER JOIN comment_t c ON m.memo_idx = c.memo_idx
     </select>
     
 		
