@@ -35,13 +35,22 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
-    
+   /*  
+    (function($) {
+		$(window).on("load", function() {
+			
+			window.alert('${project_idx}');
+			project_fileList('$project_idx}');
+
+		});
+	})(jQuery);
+     */
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(i){
     	
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
-	
+		
 	}
     
     /*선택한 제목행에따라 정렬하여 파일리스트 출력  */
@@ -161,7 +170,7 @@
     </script>
   </head>
  
-  <body onload="project_fileList('+${project_idx}+')">
+  <body onload="">
     <div id="wrapper" class="file-list-form">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"

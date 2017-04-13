@@ -41,10 +41,11 @@ public class FileController {
 	}
     
 	@RequestMapping(value="fileList.do",  method=RequestMethod.GET)
-	public ModelAndView fileListForm(){
+	public ModelAndView fileListForm( HttpServletRequest req){
 		
-
-		ArrayList<ProjectDTO> pdto=fdao.projectAllList();
+		HttpSession session=req.getSession();
+		session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
+		ArrayList<ProjectDTO> pdto=fdao.projectAllList(); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("pdto",pdto);
@@ -60,13 +61,11 @@ public class FileController {
 		
 		HttpSession session=req.getSession();
 		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
-		
 		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name);
 		
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto);
 		
-		System.out.println("1="+fsdto.getLine_name());
-		System.out.println("2="+fsdto.getProject_idx());
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("fileList", fileList);
@@ -101,7 +100,7 @@ public class FileController {
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		int project_idx=16;   //프로젝트 idx 가져오기, 임시
-		int work_idx=2;      //업무 idx 가져오기 , 임시
+		int work_idx=66;      //업무 idx 가져오기 , 임시
 		
 		
 		
