@@ -5,11 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="http://bootstraptaste.com">
+<meta charset=UTF-8>
+<title>TPM</title>
+
 <!-- css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
@@ -19,9 +17,7 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-
-<link rel="stylesheet"
-	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
@@ -691,7 +687,7 @@ function drop4(ev) {
 	background: white;
 	position: fixed;
 	top: 10%;
-	left: 10%;
+	left: 30%;
 	border: solid 10px white;
 	border-radius: 10px;
 	width: 640px;
