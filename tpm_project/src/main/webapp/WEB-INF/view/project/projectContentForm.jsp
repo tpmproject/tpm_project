@@ -101,6 +101,8 @@ function categoryAddResult() {
 window.onload=function(){
 	$(work_modal).hide();
 	$(btnwork2).hide();
+	$(work_modal2).hide();
+	$(btnwork3).hide();
 }
 function showf(category_idx){
 	$(workback).fadeIn('150');
@@ -108,6 +110,17 @@ function showf(category_idx){
 	$(w_modal).show();
 	$(btnwork2).hide();
 	document.newWork.category_idx.value=category_idx;
+}
+function showu(category_idx){
+	$(workback).fadeIn('150');
+	$(work_modal).fadeIn('150');
+	$(w_modal2).show();
+	$(btnwork3).hide();
+	document.updateWork.work_idx.value=work_idx;
+	document.updateWork.work_title.value=work_title;
+	document.updateWork.work_start.value=work_start;
+	document.updateWork.work_end.value=work_end;
+	document.updateWork.work_confirm.value=work_confirm;
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
@@ -122,6 +135,24 @@ function shows(){
 	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
+	var p=${pdto.project_idx};
+	
+	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
+	
+}
+function showu2(){
+	var wtit=document.newWork.work_title.value;
+	var wsta=document.newWork.work_start.value;
+	var wend=document.newWork.work_end.value;
+	
+	if (wtit == null || wtit == "" || !wsta || !wend ) {
+		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
+		showf();
+		return;
+	}
+	
+	$(w_modal2).fadeOut();
+	$(btnwork3).fadeIn();
 	var p=${pdto.project_idx};
 	
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
@@ -432,36 +463,23 @@ function cateDelResult(){
 }
 
 //성향
-/* function getTendency(){
-	var param = 'tendency=' + $(getTendency).val();
-	window.alert(param);
-	sendRequest('recommend.do',getTendencyResult,null,'GET');
+function getTendency(){
+	$.ajax({
+		url:'recommend.do',
+		type:'post',
+		dataType:'json',
+	
+	success : function(json){
+		window.alert(json);
+		var msg='';
+		for(var i=0;i<json.length;i++){
+			msg+='<span>'+json[i].member_idx+','+json[i].member_id+'</span><br>';
+		}
+		$(#ajax_result_content').html(msg);
+	}
+	});
 }
 
-function getTendencyResult(){
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result = XHR.responseText;
-			window.alert(result);
-			
-			var json = JSON.parse(result);		
-			var msg2 = '';
-			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-			for (var i = 0; i < members.length; i++) {
-				var member = members[i];
-				msg2 += '<div id="work_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
-				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
-				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
-				msg2 += member.member_name;
-				msg2 += '<p class="text-muted">' + member.member_id
-						+ '</p> ';
-				msg2 += '</div> ';
-			}
-			var tendency_m = document.getElementById('tendency_m');
-			tendency_m.innerHTML = msg2;		
-		}
-	}
-} */
 </script>
 <style>
 #workback {
@@ -579,7 +597,7 @@ function getTendencyResult(){
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
-									<span><i class="glyphicon glyphicon-cog" onclick="showu()"></i></span>
+									<span><i class="glyphicon glyphicon-cog" onclick="showu(${wdto.work_idx})"></i></span>
 								</div>
 								<table class="cate_table">
 									<tbody>
@@ -715,6 +733,7 @@ function getTendencyResult(){
 							<div class="col-md-3">
 								<a><h4 class="text-center">추천 목록</h4>
 								<select id="getTendency" onchange="getTendency()">
+									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
 									<option value="tendency_i">내향적</option>
 									<option value="tendency_s">감각적</option>
@@ -738,8 +757,6 @@ function getTendencyResult(){
 			</div>
 		</div>
 	</form>
-
-
 
 
 </body>

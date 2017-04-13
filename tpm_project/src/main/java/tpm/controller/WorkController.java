@@ -22,6 +22,7 @@ import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
+import tpm.tendency.model.TendencyDAO;
 import tpm.work.model.MyWorkDTO;
 import tpm.work.model.WorkDAO;
 import tpm.work.model.WorkDTO;
@@ -32,6 +33,9 @@ public class WorkController {
 	
 	@Autowired
 	private WorkDAO workDAO;
+	
+	@Autowired
+	private TendencyDAO tendencyDAO;
 
 	//// 업무 ////
 

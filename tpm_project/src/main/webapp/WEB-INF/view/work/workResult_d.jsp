@@ -13,6 +13,7 @@ ArrayList<MemberDTO> arr_m=(ArrayList)request.getAttribute("arr_m");
 
 JSONObject object=new JSONObject();
 JSONArray arry_members=new JSONArray();
+JSONArray arry_tendency=new JSONArray();
 for(int i=0;i<arr.size();i++){
 	JSONObject obj=new JSONObject();
 	obj.put("member_idx", arr.get(i).getMember_idx());
