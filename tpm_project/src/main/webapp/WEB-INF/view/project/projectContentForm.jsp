@@ -118,11 +118,16 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(){
+function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	$(workback).fadeIn('150');
-	$(work_modal).fadeIn('150');
-	$(w_modal).show();
-	$(btnwork2).hide();
+	$(work_modal2).fadeIn('150');
+	$(w_modal2).show();
+	$(btnwork4).hide();
+	document.changeWork.work_idx.value=work_idx;
+	document.changeWork.work_title.value=work_title;
+	document.changeWork.work_start.value=work_start;
+	document.changeWork.work_end.value=work_end;
+	document.changeWork.work_confirm.value=work_confirm;
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
@@ -143,20 +148,19 @@ function shows(){
 	
 }
 function shows2(){
-	var wtit=document.newWork.work_title.value;
-	var wsta=document.newWork.work_start.value;
-	var wend=document.newWork.work_end.value;
+	var wtit=document.changeWork.work_title.value;
+	var wsta=document.changeWork.work_start.value;
+	var wend=document.changeWork.work_end.value;
 	
 	if (wtit == null || wtit == "" || !wsta || !wend ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
-		showf();
 		return;
 	}
 	
-	$(w_modal).fadeOut();
-	$(btnwork2).fadeIn();
-	var p=${pdto.project_idx};
+	$(w_modal2).hide();
+	$(btnwork4).show();
 	
+	var p=${pdto.project_idx};
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
 	
 }
@@ -189,7 +193,9 @@ function showsResult(){
 function closem() {
 	$(workback).fadeOut('100');
 	$(work_modal).fadeOut('100');
+	$(work_modal2).fadeOut('100');
 	document.newWork.reset();
+	document.changeWork.reset();
 }
 function addWork(){
 
@@ -485,7 +491,7 @@ function fileUp(work_idx){
 	display: none;
 }
 
-#work_modal {
+#work_modal, #work_modal2 {
 	display: none;
 	background: white;
 	position: fixed;
@@ -588,7 +594,7 @@ function fileUp(work_idx){
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
-									<span onclick="workUpdate()"><i class="glyphicon glyphicon-cog"></i></span>
+									<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_title }','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i class="glyphicon glyphicon-cog"></i></span>
 								</div>
 								<table class="cate_table">
 									<tbody>
@@ -749,7 +755,7 @@ function fileUp(work_idx){
 	</form>
 
 	<!-- 업무 수정 modal -->
-	<form name="workUpdate" action="workUpdate.do" method="post">
+	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -759,7 +765,7 @@ function fileUp(work_idx){
 				<div id="btnwork3">
 					<div>
 						<h2></h2>
-						<input type="hidden" name="category_idx" value="">
+						<input type="hidden" name="work_idx">
 						업무명 : <input type="text" name="work_title">
 					</div>
 					<div>기한</div>
