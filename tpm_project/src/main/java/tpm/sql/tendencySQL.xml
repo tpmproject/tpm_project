@@ -18,11 +18,11 @@
 			  group by project_idx) a
 	</select>
 	
-	<select id="recommendTendency"  parameterType="String" resultType="tpm.member.model.MemberDTO">
+	<select id="recommendTendency"  parameterType="hashMap" resultType="tpm.member.model.MemberDTO">
 		select * from tpm_member 
 		where member_idx in (select distinct member_idx 
 			from tpm_tendency where ${tendency}=(select max(${tendency}) 
-				from tpm_tendency where project_idx=2) and project_idx=2)
+				from tpm_tendency where project_idx=#{project_idx}) and project_idx=#{project_idx})
 	</select>
 	
 	<select id="tendencyList" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">

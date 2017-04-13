@@ -105,7 +105,7 @@ window.onload=function(){
 	$(work_modal).hide();
 	$(btnwork2).hide();
 	$(work_modal2).hide();
-	$(btnwork3).hide();
+	$(btnwork4).hide();
 }
 function showf(category_idx){
 	$(workback).fadeIn('150');
@@ -114,16 +114,15 @@ function showf(category_idx){
 	$(btnwork2).hide();
 	document.newWork.category_idx.value=category_idx;
 }
-function showu(category_idx){
+function showf2() {
+	$(w_modal2).show();
+	$(btnwork4).hide();
+}
+function workUpdate(){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
-	$(w_modal2).show();
-	$(btnwork3).hide();
-	document.updateWork.work_idx.value=work_idx;
-	document.updateWork.work_title.value=work_title;
-	document.updateWork.work_start.value=work_start;
-	document.updateWork.work_end.value=work_end;
-	document.updateWork.work_confirm.value=work_confirm;
+	$(w_modal).show();
+	$(btnwork2).hide();
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
@@ -143,7 +142,7 @@ function shows(){
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
 	
 }
-function showu2(){
+function shows2(){
 	var wtit=document.newWork.work_title.value;
 	var wsta=document.newWork.work_start.value;
 	var wend=document.newWork.work_end.value;
@@ -154,8 +153,8 @@ function showu2(){
 		return;
 	}
 	
-	$(w_modal2).fadeOut();
-	$(btnwork3).fadeIn();
+	$(w_modal).fadeOut();
+	$(btnwork2).fadeIn();
 	var p=${pdto.project_idx};
 	
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
@@ -589,7 +588,7 @@ function fileUp(work_idx){
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
-									<span><i class="glyphicon glyphicon-cog" onclick="showu(${wdto.work_idx})"></i></span>
+									<span onclick="workUpdate()"><i class="glyphicon glyphicon-cog"></i></span>
 								</div>
 								<table class="cate_table">
 									<tbody>
@@ -718,13 +717,8 @@ function fileUp(work_idx){
 								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자 
-								</h4>
-								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
-							</div>
-							<div class="col-md-3">
-								<a><h4 class="text-center">추천 목록</h4>
-								<select id="getTendency" onchange="getTendency()">
+								<a><h4 class="text-center">업무 담당자 </h4>
+								<select id="getTendency" onchange="getTendencyList()">
 									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
 									<option value="tendency_i">내향적</option>
@@ -736,6 +730,10 @@ function fileUp(work_idx){
 									<option value="tendency_p">인식적</option>
 								</select>
 								</a>
+								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							</div>
+							<div class="col-md-3">
+								<h4 class="text-center">추천 목록</h4>
 								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
 								</div>
 							</div>
@@ -750,6 +748,76 @@ function fileUp(work_idx){
 		</div>
 	</form>
 
+	<!-- 업무 수정 modal -->
+	<form name="workUpdate" action="workUpdate.do" method="post">
+		<div id="workback2" onclick="closem()"></div>
+		<div id="work_modal2">
+			<button type="button" class="close" onclick="closem()">×</button>
+			<h4 class="modal-title">업무 수정</h4>
+
+			<div id="w_modal2">
+				<div id="btnwork3">
+					<div>
+						<h2></h2>
+						<input type="hidden" name="category_idx" value="">
+						업무명 : <input type="text" name="work_title">
+					</div>
+					<div>기한</div>
+					<div>
+						<input type="text" id="work_start" name="work_start"
+							rel="stylesheet" /> ~<input type="text" id="work_end"
+							name="work_end" rel="stylesheet" />
+							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
+					</div>
+					<div>
+						<input type="checkbox" name="work_confirm" value="20">결재여부
+						<button type="button" class="btn btn-next" id="btn-worknext"
+							onclick="shows2()">다음</button>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div id="btnwork4">
+				<div class="section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3">
+								<h4 class="text-center">프로젝트 멤버 목록</h4>
+								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+							</div>
+							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<a><h4 class="text-center">업무 담당자 </h4>
+								<select id="getTendency" onchange="getTendencyList()">
+									<option>--성향--</option>
+									<option value="tendency_e">외향적</option>
+									<option value="tendency_i">내향적</option>
+									<option value="tendency_s">감각적</option>
+									<option value="tendency_n">직관적</option>
+									<option value="tendency_t">사고적</option>
+									<option value="tendency_f">감정적</option>
+									<option value="tendency_j">판단적</option>
+									<option value="tendency_p">인식적</option>
+								</select>
+								</a>
+								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							</div>
+							<div class="col-md-3">
+								<h4 class="text-center">추천 목록</h4>
+								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-next" id="btn-workbefore"
+					onclick="showf2()">이전</button>
+				<c:if test=""></c:if>
+				<button type="button" class="btn btn-next" id="btn-workok" onclick="addWork()">완료</button>
+			</div>
+		</div>
+	</form>
 
 </body>
 <script>
@@ -796,7 +864,7 @@ function fileUp(work_idx){
 
 $("#work_time").timepicker({
 	step: 30,            //시간간격 
-	timeFormat: "A H:i"    //시간:분 으로표시
+	timeFormat: "H:i"    //시간:분 으로표시
 });
 $(document).ready(function(){
 	$("#work_time").timepicker('setTime', "17:30");
