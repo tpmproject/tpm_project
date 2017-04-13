@@ -30,8 +30,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.oreilly.servlet.MultipartResponse;
-
 import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
@@ -388,8 +386,8 @@ public class MemberController {
 	
 	public void copyInto(MultipartFile upload, String savepath) throws IOException{
 		
-		System.out.println("파일명 : "+upload.getOriginalFilename());
-		System.out.println("임시 경로: "+upload);
+		//System.out.println("파일명 : "+upload.getOriginalFilename());
+		//System.out.println("임시 경로: "+upload);
 		
 		byte bytes[] = upload.getBytes();
 				
@@ -401,9 +399,7 @@ public class MemberController {
 		fos.write(bytes);
 		fos.close();
 		
-		/*System.out.println("파일명 : "+fileName.getOriginalFilename());
-		System.out.println("경로: "+fileName);
-		
+		/*
 		HttpSession session = req.getSession();
 		
 		String userid = (String)session.getAttribute("s_member_id");		
@@ -414,16 +410,7 @@ public class MemberController {
 		
 		if(!uploadDirectory.exists()){
 			uploadDirectory.mkdirs();
-		}
-		
-		byte bytes[] = fileName.getBytes();
-		
-		File outFile = new File(savepath+fileName.getOriginalFilename());
-		
-		FileOutputStream fos = new FileOutputStream(outFile);
-		
-		fos.write(bytes);
-		fos.close();*/
+		}*/
 	}
 	
 	/** 개인정보 - 개인 정보 수정 */
@@ -464,19 +451,20 @@ public class MemberController {
 			result = "수정 실패. 관리자에게 문의바랍니다";
 		}
 		
-		mav.addObject("result", result);
-		mav.setViewName("member/memberUpdate_ok");
+		//mav.addObject("result", result);
+		//mav.setViewName("member/memberUpdate_ok");
+		mav.setViewName("redirect:/memberInfo.do");
 		
 		return mav;
 	}
 	
-	/** 개인정보 - 개인 성향 수정 (평가 ) */
+	/** 개인정보 - 개인 성향 수정 (평가 ) *//*
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
 	public ModelAndView memberUpdate_ajax(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("memeber/memberUpdate_ok");
+		mav.setViewName("member/memberUpdate_ok");
 		return mav;
-	}
+	}*/
 	
 	
 	
