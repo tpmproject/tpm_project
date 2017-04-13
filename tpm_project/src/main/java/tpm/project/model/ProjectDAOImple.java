@@ -145,6 +145,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		return null;
 	}
 	
+	public int projectMemberDelete(ProjectDTO dto) {
+		int result=sqlMap.delete("projectMemberDelete", dto.getProject_idx());
+		return result;
+	}
 	public int projectMemberInsert(ProjectMemberDTO dto) {
 		
 		int count=sqlMap.insert("projectMemberInsert",dto);

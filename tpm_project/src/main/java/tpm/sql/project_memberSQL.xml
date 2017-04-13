@@ -44,12 +44,8 @@
 		on m.member_idx=mf.myfriend_idx
 	</select>
 	
-	<update id="projectMeberUpdate" parameterType="tpm.project.model.ProjectMemberDTO">
-		update tpm_project_member
-		set
-		project_idx=#{project_idx},
-		project_member_idx=#{project_member_idx},
-		project_level=#{project_level}
-		
-	</update>
+	<delete id="projectMemberDelete">
+		delete from tpm_project_member
+		where project_idx=#{project_idx}
+	</delete>
 </mapper>

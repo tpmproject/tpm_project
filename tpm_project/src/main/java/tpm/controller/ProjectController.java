@@ -174,10 +174,28 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 수정 */
 	@RequestMapping(value="projectUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView projectUpdate(ProjectDTO dto,String[] project_member,String[] level){
-		
+	public ModelAndView projectUpdate(ProjectDTO dto,int[] project_member,int[] level){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectAdd_d");
+		
+		int result=projectDAO.projectUpdate(dto);
+		if(result>0){
+			result=0;
+			result+=projectDAO.projectMemberDelete(dto);
+			
+			for(int i=0;i<project_member.length;i++){
+				
+				ProjectMemberDTO pmdto=new ProjectMemberDTO(dto.getProject_idx(), project_member[i], level[i]);
+				
+				result+=projectDAO.projectMemberInsert(pmdto);
+				
+				mav.addObject("pdto", dto);
+			}
+			
+		}else{
+			mav.addObject("msg", "error");
+		}
+		
 		return mav;
 	}
 	

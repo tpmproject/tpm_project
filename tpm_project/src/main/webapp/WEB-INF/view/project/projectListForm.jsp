@@ -468,13 +468,14 @@
 					var divNode=document.createElement('DIV');
 					divNode.setAttribute('class','col-lg-3');
 					divNode.setAttribute('style','margin-top: 15px;');
+					divNode.setAttribute('id','project_div'+p.project_idx);
 					
 					var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
 					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
-					msg+='<h4>'+p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+')"><i class="glyphicon glyphicon-cog"></i></a></h4>';
+					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></a></h4>';
 					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
-					msg+='<p>'+p.project_content+'</p>';
+					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
 					msg+='<div class="box-bottom"><a href="#">프로젝트 보기버튼</a></div></div>';
 					
@@ -489,6 +490,7 @@
 		}
 	}
 //프로젝트 업데이트
+var updateProject_me=0;
 function updateP(){
 	var pname = document.changeProject.project_name.value;
 	var pcontent = document.changeProject.project_content.value;
@@ -505,6 +507,8 @@ function updateP(){
 	var msg2 = '';
 	
 	var count=0;
+	var pm_exist=0;
+	var myLevel=0;
 	while (true) {
 		
 		if(childD.nodeName=='DIV'){
@@ -517,6 +521,16 @@ function updateP(){
 			}else{
 				msg+=','+idx.substring(14);
 				msg2+=','+$('#select2'+idx.substring(14)).val();
+				
+				if(idx.substring(14)=='${s_member_idx}'){
+					updateProject_me++;
+					myLevel=$('#select2'+idx.substring(14)).val();
+				}
+				
+				if($('#select2'+idx.substring(14)).val()==3000){
+					pm_exist++;
+				}
+				
 			}
 		}
 		if(childD==lastC)break;
@@ -527,12 +541,41 @@ function updateP(){
 	param += '&project_member='+ msg;
 	param += '&level=' + msg2;
 	
-	
-	sendRequest('projectUpdate.do', param, updatePResult, 'POST');
-	
+	if(pm_exist==0){
+		window.alert('프로젝트 책임자가 없습니다.');
+	}else{
+		sendRequest('projectUpdate.do', param, updatePResult, 'POST');
+	}
 }
 function updatePResult(){
-	
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			var objData=eval('('+result+')');
+			var p=objData.p;
+			if(p.project_idx==0){
+				window.alert('오류 발생!');
+			}else{
+				if(updateProject_me==0){
+					$('#project_div'+p.project_idx).remove();
+					updateProject_me=0;
+					return;
+				}
+				updateProject_me=0;
+				var p_name=$('#pn'+p.project_idx);
+				$('#pc'+p.project_idx).innerHTML=p.project_content;
+				if(myLevel!='3000'){
+					p_name.innerHTML=p.project_name;	
+				}else{
+					p_name.innerHTML=p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></a>';
+					
+				}
+				myLevel=0;
+				
+				closem();
+			}
+		}
+	}
 	
 }
 
@@ -698,11 +741,11 @@ function drop4(ev) {
 		</c:when>
 			<c:otherwise>
 				<c:forEach var="i" items="${plist}">
-								<div class="col-lg-3" style="margin-top: 15px;" >
+								<div id="project_div${i.project_idx}" class="col-lg-3" style="margin-top: 15px;" >
 									<div class="box">
 										<div class="box-gray aligncenter" style="height:210px;">
 											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
-											<h4>${i.project_name }
+											<h4 id="pn${i.project_idx}">${i.project_name }
 												<c:if test="${i.project_level eq 3000 }">
 												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
 												<i class="glyphicon glyphicon-cog"></i></span>
@@ -711,7 +754,7 @@ function drop4(ev) {
 											<div class="icon">
 												<i class="fa fa-desktop fa-3x"></i>
 											</div>
-											<p>${i.project_content } 내용</p>
+											<p id="pc${i.project_idx}">${i.project_content }</p>
 
 											<!-- 프로젝트 진행현황 -->
 											<c:choose>

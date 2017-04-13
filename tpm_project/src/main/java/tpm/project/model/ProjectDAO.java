@@ -23,6 +23,8 @@ public interface ProjectDAO {
 	
 	public ProjectDTO findProject(String project_name);
 	
+	public int projectMemberDelete(ProjectDTO dto);
+	
 	public int projectMemberInsert(ProjectMemberDTO dto);
 	
 }
