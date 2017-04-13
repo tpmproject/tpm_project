@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import tpm.category.model.CategoryDTO;
 import tpm.checklist.model.ChecklistDTO;
+import tpm.file.model.FileDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.TotalDTO;
 import tpm.sample.model.SampleWorkDTO;
@@ -19,9 +20,10 @@ public class WorkDAOImple implements WorkDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<WorkDTO> listWork() {
+	public ArrayList<MemberDTO> workMemberList(FileDTO dto) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("workMemberList", dto);
+		return arr;
 	}
 
 	public ArrayList<MemberDTO> projectMember(int project_idx) {
@@ -56,9 +58,10 @@ public class WorkDAOImple implements WorkDAO {
 		return result;
 	}
 
-	public int updateWork() {
+	public int updateWork(WorkDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlMap.update("workUpdate",dto);
+		return result;
 	}
 
 	public int workDelete(int work_idx) {

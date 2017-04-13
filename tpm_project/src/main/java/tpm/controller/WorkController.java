@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 
 import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
+import tpm.file.model.FileDTO;
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
 import tpm.tendency.model.TendencyDAO;
@@ -80,6 +81,15 @@ public class WorkController {
 		return mav;
 	}
 	
+	@RequestMapping(value="tendencyList.do", method=RequestMethod.GET)
+	public ModelAndView tendencyList(String tendency){
+		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(tendency);
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("work/workResult_d");
+		mav.addObject("arr",arr);
+		return mav;
+	}
+	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
 	public ModelAndView workAdd(WorkDTO dto, String[] member_idx){
@@ -106,24 +116,25 @@ public class WorkController {
 	
 	/** 업무 - 업무 수정 폼*/
 	@RequestMapping(value="workUpdate.do", method=RequestMethod.GET)
-	public ModelAndView workUpdateForm(int work_idx) {
+	public ModelAndView workUpdateForm(FileDTO dto) {
 		
-		ArrayList<WorkDTO> arr_w=workDAO.workList(work_idx);
-		ArrayList<MemberDTO> arr_m=workDAO.workMember(work_idx);
 		
+		ArrayList<MemberDTO> arr=workDAO.workMemberList(dto);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workResult_d");
-		mav.addObject("arr_w",arr_w);
-		mav.addObject("arr_m",arr_m);
+		mav.setViewName("work/workUpdateResult_d");
+		mav.addObject("arr",arr);
+		
 		return mav;
 	}
 	
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView workUpdate(){
-		
+	public ModelAndView workUpdate(WorkDTO dto){
+		System.out.println(1);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
+		int result=workDAO.updateWork(dto);
+		System.out.println(5);
 		return mav;
 	}
 	

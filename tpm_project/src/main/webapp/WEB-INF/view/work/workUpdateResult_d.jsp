@@ -19,8 +19,8 @@ for(int i=0;i<arr.size();i++){
 	obj.put("member_name", arr.get(i).getMember_name());
 	obj.put("member_gender", arr.get(i).getMember_gender());
 	obj.put("member_tel", arr.get(i).getMember_tel());
-	obj.put("member_img", arr.get(i).getMember_img());
-	
+	obj.put("member_img", arr.get(i).getMember_img());	
+	obj.put("pm",arr.get(i).getPm()+arr.get(i).getMf());
 	arry_members.add(obj);
 }
 
@@ -30,17 +30,4 @@ out.clear();
 out.println(object);
 out.flush();
 
-%>
-
-<%
- try{
-	 int msg2=(Integer)request.getAttribute("widx");
-	 if(msg2==0){
-		 
-	 }else{
-		 out.print(msg2);
-	 }
- }catch(Exception e){
- 
- }
 %>

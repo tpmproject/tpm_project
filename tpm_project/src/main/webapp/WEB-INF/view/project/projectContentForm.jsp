@@ -104,7 +104,6 @@ window.onload=function(){
 	$(btnwork2).hide();
 	$(work_modal2).hide();
 	$(btnwork4).hide();
-	
 }
 function showf(category_idx){
 	$(workback).fadeIn('150');
@@ -122,11 +121,11 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
+
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
-	document.changeWork.work_start.value=work_start;
-	document.changeWork.work_end.value=work_end;
-	document.changeWork.work_confirm.value=work_confirm;
+	document.changeWork.work_upstart.value=work_start;
+	document.changeWork.work_upend.value=work_end;	
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
@@ -148,8 +147,8 @@ function shows(){
 }
 function shows2(){
 	var wtit=document.changeWork.work_title.value;
-	var wsta=document.changeWork.work_start.value;
-	var wend=document.changeWork.work_end.value;
+	var wsta=document.changeWork.work_upstart.value;
+	var wend=document.changeWork.work_upend.value;
 	
 	if (wtit == null || wtit == "" || !wsta || !wend ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
@@ -160,7 +159,9 @@ function shows2(){
 	$(btnwork4).show();
 	
 	var p=${pdto.project_idx};
-	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
+	var w=document.changeWork.work_idx.value;
+	var m= ${s_member_idx}
+	sendRequest('workAdd.do?project_idx='+p+'&work_idx='+w+'&member_idx='+m,null,showsResult,'GET');
 	
 }
 function showsResult(){
@@ -189,6 +190,41 @@ function showsResult(){
 		}
 	}
 }
+function shows2Result(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			var json = JSON.parse(result);	
+			window.alert(result);
+			var w_msg='';
+			var p_msg='';
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+
+				msg2 += '<div id="work_member2'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+				msg2 += member.member_name;
+				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
+				msg2 += '</div> ';
+				
+				if(member.pm%10==1){
+					w_msg+=msg2;
+				}else{
+					p_msg+=msg2;
+				}
+				msg2='';
+			}
+			
+			var w_List=document.getElementById('work_m2');
+			w_List.innerHTML = w_msg;
+			var p_List=document.getElementById('project_m2');
+			p_List.innerHTML=p_msg;	
+		}
+	}
+}
 function closem() {
 	$(workback).fadeOut('100');
 	$(work_modal).fadeOut('100');
@@ -201,6 +237,11 @@ function addWork(){
  	var work_member=document.getElementById('work_m');
 	var fch = work_member.firstChild;
 	var lch = work_member.lastChild;
+	if(document.newWork.work_confirm.checked==true){
+		document.newWork.work_confirm.value='10';
+	}else{
+		document.newWork.work_confirm.value='20';
+	}
 	var msg='';
 	var count=0;
 	while(true){
@@ -228,6 +269,48 @@ function addWork(){
 
 }
 function addWorkResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;	
+			if (result>0) {
+
+			}
+			$(workback).fadeOut('100');
+			$(work_modal).fadeOut('100');
+			location.reload();
+		}
+	}
+}
+function updateWork(){
+ 	var work_member=document.getElementById('work_m2');
+	var fch = work_member.firstChild;
+	var lch = work_member.lastChild;
+	var msg='';
+/* 	var count=0;
+	while(true){
+		if(fch.nodeName=='DIV'){
+			var idx=fch.getAttribute('id');
+			if(count==0){
+				msg+=idx.substring(11);
+				count++;
+			}else{
+			msg+=','+idx.substring(11);
+			}
+		}
+		if(fch==lch)break;
+		fch=fch.nextSibling;
+	} */
+	var my_idx=${s_member_idx};
+	var param = 'work_idx=' + document.changeWork.work_idx.value
+	+'&work_title=' + document.changeWork.work_title.value
+	+'&work_start=' + document.changeWork.work_upstart.value //+ document.newWork.work_time.value
+	+'&work_end=' + document.changeWork.work_upend.value //+ document.newWork.work_time.value
+	+'&work_confirm=' + document.changeWork.work_confirm.value 
+	+'&member_idx=' + msg;
+	window.alert(param);
+	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
+}
+function updateWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
@@ -469,6 +552,36 @@ function cateDelResult(){
 	}
 }
 
+//추천 목록
+function tendencyList(){
+	var param = 'tendency='+document.newWork.tendency.value;
+	window.alert(param);
+	sendRequest('tendencyList.do',param,tendencyListResult,'GET');
+}
+
+function tendencyListResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			
+			var json = JSON.parse(result);		
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				msg2 += '<div id="tendency_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
+				msg2 += member.member_name;
+				msg2 += '<p class="text-muted">' + member.member_id + '</p> ';
+				msg2 += '</div> ';
+			}
+			var tendency_m = document.getElementById('tendency_m');
+			tendency_m.innerHTML = msg2;		
+		}
+	}
+}
 
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
@@ -717,6 +830,8 @@ function fileUp(work_idx){
 		
 	</div>
 
+
+
 	<!-- 업무 설정 modal -->
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
@@ -739,7 +854,7 @@ function fileUp(work_idx){
 							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
 					</div>
 					<div>
-						<input type="checkbox" name="work_confirm" value="20">결재여부
+						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows()">다음</button>
 
@@ -758,7 +873,7 @@ function fileUp(work_idx){
 							</div>
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<a><h4 class="text-center">업무 담당자 </h4>
-								<select id="getTendency" onchange="getTendencyList()">
+								<select id="tendency" onchange="tendencyList()">
 									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
 									<option value="tendency_i">내향적</option>
@@ -804,13 +919,13 @@ function fileUp(work_idx){
 					</div>
 					<div>기한</div>
 					<div>
-						<input type="text" id="work_start" name="work_start"
-							rel="stylesheet" /> ~<input type="text" id="work_end"
-							name="work_end" rel="stylesheet" />
+						<input type="text" id="work_upstart" name="work_upstart"
+							rel="stylesheet" /> ~<input type="text" id="work_upend"
+							name="work_upend" rel="stylesheet" />
 							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
 					</div>
 					<div>
-						<input type="checkbox" name="work_confirm" value="20">결재여부
+						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows2()">다음</button>
 
@@ -825,7 +940,7 @@ function fileUp(work_idx){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+								<div id="project_m2" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<a><h4 class="text-center">업무 담당자 </h4>
@@ -841,11 +956,11 @@ function fileUp(work_idx){
 									<option value="tendency_p">인식적</option>
 								</select>
 								</a>
-								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
 							<div class="col-md-3">
 								<h4 class="text-center">추천 목록</h4>
-								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
+								<div id="tendency_m2" style="width:100%; height: 320px; overflow-y: scroll" >
 								</div>
 							</div>
 						</div>
@@ -854,7 +969,7 @@ function fileUp(work_idx){
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf2()">이전</button>
 				<c:if test=""></c:if>
-				<button type="button" class="btn btn-next" id="btn-workok" onclick="addWork()">완료</button>
+				<button type="button" class="btn btn-next" id="btn-workok" onclick="updateWork()">완료</button>
 			</div>
 		</div>
 	</form>
@@ -898,7 +1013,36 @@ function fileUp(work_idx){
                    }                
                });
                
-               
+               //시작일.
+               $('#work_upstart').datepicker({
+	                    //dateFormat: "yy-mm-dd",
+	                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	                    //dayNamesMin:["일","월","화","수","목","금","토"],
+	                   //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
+	                   //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
+	                   //buttonText: "날짜선택",             // 버튼의 대체 텍스트
+	                   dateFormat: "yy-mm-dd",             // 날짜의 형식
+	                   changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
+	                   onClose: function( selectedDate ) {    
+	                       // 시작일(fromDate) datepicker가 닫힐때
+	                       // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+	                       $("#work_upend").datepicker( "option", "minDate", selectedDate );
+	                   }                
+	               });
+	 
+	               //종료일
+	               $('#work_upend').datepicker({
+	                    //dateFormat: "yy-mm-dd",
+	                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	                    //dayNamesMin:["일","월","화","수","목","금","토"], 
+	                   dateFormat: "yy-mm-dd",
+	                   changeMonth: true,
+	                   onClose: function( selectedDate ) {
+	                       // 종료일(toDate) datepicker가 닫힐때
+	                       // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+	                       $("#work_upstart").datepicker( "option", "maxDate", selectedDate );
+	                   }                
+	               });
                
            });
 
