@@ -36,7 +36,7 @@
         <result property="memo_email" column="memo_email"/>
         <result property="memo_day" column="memo_day"/>
         <result property="memo_memo" column="memo_memo"/>
-        <collection property="comments" javaType="java.util.List" resultMap="commentResultMap"/>
+        <collection property="comments" notNullColumn="comment_idx" javaType="java.util.List" resultMap="commentResultMap"/>
     </resultMap>
     
     <resultMap id="commentResultMap" type="tpm.study.model.CommentDTO">
@@ -47,15 +47,10 @@
         <result property="comment_day" column="comment_day"/>
         <result property="comment_comm" column="comment_comm"/>
     </resultMap>
-    
-    <!-- <resultMap id="getMemo_comm" type="tpm.study.model.MemoDTO" extends="getMemo">
-        <result property="comments" select="getCommList"  column="{memo_idx=idx}"/>
-    </resultMap> -->
-	
-	
+   
 	<select id="dtoStudy2Select" resultMap="memoResultMap">
-        SELECT * FROM memo_T m LEFT OUTER JOIN comment_t c ON m.memo_idx = c.memo_idx
+        SELECT * FROM memo_T m LEFT JOIN comment_t c ON m.memo_idx = c.memo_idx
     </select>
-    
+    <!-- -->
 		
 </mapper>
