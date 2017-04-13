@@ -10,7 +10,7 @@
 		<b>Version</b> 2.0
 	</div>
 	<strong>Copyright © 2014-2015 <a
-		href="http://almsaeedstudio.com">Almsaeed Studio</a>.
+		href="#">Hanjo</a>.
 	</strong> All rights reserved.
 </footer>
 </div>

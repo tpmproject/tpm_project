@@ -7,6 +7,7 @@
 <meta charset=UTF-8>
 <title>TPM</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<%@ include file="/sample/cho/main/import.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
@@ -18,9 +19,6 @@
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script>
-
-
-
 function cateName(idx){
 	$('#cate'+idx).show();
 	$('#a_cate'+idx).hide();
@@ -106,6 +104,7 @@ window.onload=function(){
 	$(btnwork2).hide();
 	$(work_modal2).hide();
 	$(btnwork4).hide();
+	
 }
 function showf(category_idx){
 	$(workback).fadeIn('150');
@@ -559,11 +558,13 @@ function fileUp(work_idx){
 }
 </style>
 </head>
-<%-- <%@include file="/WEB-INF/view/header.jsp" %> --%>
-<body>
+<body class="skin-blue">
+<%@include file="/WEB-INF/view/header.jsp" %>
+	<c:if test="${param.project_level != 1000 }">
 	<div id="trash" ondrop="drop(event)" class="btn-lg" ondragenter="trashColor()" ondragleave="trashColorReturn()" ondragstart="drag(event)" ondragover="allowDrop(event)">
 		<span id="trash_i" class="glyphicon glyphicon-trash" aria-hidden="true" ondragover="trashColor()" ></span>
 	</div>
+	</c:if>
 	
 	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
 		<div>
@@ -575,8 +576,14 @@ function fileUp(work_idx){
 			<c:otherwise>
 				<c:forEach var="cdto" items="${pdto.category_dtos}">
 					<div class="category" id="cp${cdto.category_idx}">
+						
+						<!--카테고리 이름  -->
 						<div class="category_head" id ="c${cdto.category_idx}" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
-<!--카테고리 이름  -->						
+						<c:choose>
+						<c:when test="${param.project_level eq 1000 }">
+							<span>${cdto.category_name }</span>
+						</c:when>
+						<c:otherwise>
 							<form action="javascript:categoryUpdate(${cdto.category_idx})">
 								<div id="cate${cdto.category_idx}" class="cateName">
 									<input id="cateIn${cdto.category_idx}" type="text" value="${cdto.category_name }" size="16px">
@@ -585,16 +592,24 @@ function fileUp(work_idx){
 								</div>
 								<div id="a_cate${cdto.category_idx}"><a href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
 								&nbsp;&nbsp;
+								
 								<i class="glyphicon glyphicon-plus" onclick="showf(${cdto.category_idx})"></i>
+								
 								</div>
 							</form>
+						</c:otherwise>
+						</c:choose>
 						</div>
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
+							
+									<c:if test="${param.project_level != 1000 }">
 									<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_title }','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i class="glyphicon glyphicon-cog"></i></span>
+									</c:if>
+									
 								</div>
 								<table class="cate_table">
 									<tbody>
@@ -615,11 +630,19 @@ function fileUp(work_idx){
 										</tr>
 										<tr>
 											<td colspan="2">
+											<c:choose>
+											<c:when test="${param.project_level != 1000 }">
 												<form action="javascript:addCheck(${wdto.work_idx})">
 												<div class="table_i glyphicon glyphicon-check"></div>
-												&nbsp;<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
+												<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
 												&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
 												</form>
+											</c:when>
+											<c:otherwise>
+												<div class="table_i glyphicon glyphicon-check"></div>
+												<span>체크리스트</span>
+											</c:otherwise>
+											</c:choose>
 											</td>
 										</tr>
 										<tr>
@@ -627,13 +650,22 @@ function fileUp(work_idx){
 												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
 														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >
+													<c:choose>
+													<c:when test="${param.project_level != 1000 }">
 															<a onclick="javascript:check(${chdto.checklist_idx })">
+													</c:when>
+													<c:otherwise>
+															<a>
+													</c:otherwise>
+													</c:choose>
 															<i id="ch${chdto.checklist_idx }"
 															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
 															</i> ${chdto.checklist_content}
 															</a>
 															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 														</div>
+													
+													
 													</c:forEach>
 												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
 												</div>
@@ -673,15 +705,17 @@ function fileUp(work_idx){
 			</c:otherwise>
 		</c:choose>
 
-
+		<c:if test="${param.project_level !=1000 }">
+		<!-- category add -->
 		<div class="category" id="addCate" style="padding-left: 10px;">
 			<form name="newCategory" action="javascript:categoryAdd()">
 				<input type="text" class="form-control" name="category_name"
 					placeholder="새로운 카테고리">
 			</form>
 		</div>
+		</c:if>
+		
 	</div>
-
 
 	<!-- 업무 설정 modal -->
 	<form name="newWork" action="workAdd.do" method="post">
@@ -824,7 +858,7 @@ function fileUp(work_idx){
 			</div>
 		</div>
 	</form>
-
+<%@include file="/WEB-INF/view/footer.jsp" %>
 </body>
 <script>
               //검색 날짜제한 

@@ -69,12 +69,25 @@
 <!-- custom scrollbar plugin -->
 <script src="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.js" type="text/javascript"></script>	
 <script>
-function sideBar(){
-	var bNode=document.documentElement.lastChild;
-	if(bNode.getAttribute('class')=='skin-blue'){
+window.onload=function(){
+	var sb=localStorage.getItem("sideB");
+	if(sb=='hide'){
+		var bNode=document.documentElement.lastChild;
 		bNode.setAttribute('class','skin-blue sidebar-collapse sidebar-open');
+	}
+}
+function sideBar(){
+	var sb=localStorage.getItem("sideB");
+	if(sb==null){
+		localStorage.setItem("sideB","show");
+	}
+	var bNode=document.documentElement.lastChild;
+	if(bNode.getAttribute('class')=='skin-blue'||sb=='show'){
+		bNode.setAttribute('class','skin-blue sidebar-collapse sidebar-open');
+		localStorage.setItem("sideB","hide");
 	}else{
 		bNode.setAttribute('class','skin-blue');
+		localStorage.setItem("sideB","show");
 	}
 }
 </script>
