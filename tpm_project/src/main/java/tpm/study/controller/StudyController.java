@@ -1,5 +1,7 @@
 package tpm.study.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
+import tpm.study.model.DateTest3DTO;
 import tpm.study.model.StudyDAOImple;
 
 @Controller
@@ -23,6 +26,7 @@ public class StudyController {
 		return "study/studyListForm";
 	}
 	
+	//// DTO 관련 ////
 	/** Mybatis DTO 안 DTO 1:1 Select 하기 */
 	@RequestMapping(value="dtoStudy1.do", method=RequestMethod.GET)
 	public ModelAndView dtoStudy1(ModelAndView mav){
@@ -46,6 +50,54 @@ public class StudyController {
 		}
 		
 		mav.setViewName("study/studyListForm");
+		return mav;
+	}
+	
+	
+	//// Date 타입 관련 (날짜와 시간 가져오기) ////
+	/** DTO(java.sql.Date 타입) - DB TABLE (DATE 타입) : 일반적인 경우 */
+	@RequestMapping(value="dateStudy1.do", method=RequestMethod.GET)
+	public ModelAndView dateStudy1(ModelAndView mav){
+		
+		List<Object> arry_dto = studyDAO.dateStudy1Select();
+		for (Object object : arry_dto) {
+			System.out.println(object.toString());
+		}
+		mav.setViewName("study/studyListForm");
+		return mav;
+	}
+	
+	/** DTO(java.util.Date 타입) - DB TABLE (DATE 타입) */
+	@RequestMapping(value="dateStudy2.do", method=RequestMethod.GET)
+	public ModelAndView dateStudy2(ModelAndView mav){
+		
+		List<Object> arry_dto = studyDAO.dateStudy2Select();
+		for (Object object : arry_dto) {
+			System.out.println(object.toString());
+		}
+		mav.setViewName("study/studyListForm");
+		return mav;
+	}
+	
+	/** DTO(java.sql.Timestamp 타입) - DB TABLE (DATE 타입) */
+	@RequestMapping(value="dateStudy3.do", method=RequestMethod.GET)
+	public ModelAndView dateStudy3(ModelAndView mav){
+		
+		List<Object> arry_dto = studyDAO.dateStudy3Select();
+		for (Object object : arry_dto) {
+			System.out.println(object.toString());
+			/*Timestamp timestamp = ((DateTest3DTO) object).getT_date();
+			Date dat = new Date(timestamp.getTime());
+			System.out.println("dat : " + dat);*/
+		}
+		mav.setViewName("study/studyListForm");
+		return mav;
+	}
+	
+	@RequestMapping(value="dateStudy4.do", method=RequestMethod.GET)
+	public ModelAndView dateStudy4(ModelAndView mav){
+		
+		mav.setViewName("study/date/datePicker");
 		return mav;
 	}
 	

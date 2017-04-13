@@ -13,5 +13,19 @@
 		<li><a href="dtoStudy2.do">Mybatis DTO 안 DTO 1:N Select 하기</a></li>
 	</ul>
 </fieldset>
+<fieldset>
+	<legend>Date 타입 관련 (날짜와 시간 가져오기)</legend>
+	<ul>
+		<li><a href="dateStudy1.do">DTO(java.sql.Date 타입) - DB TABLE (DATE 타입) : 일반적인 경우</a></li>
+		<li><a href="dateStudy2.do">DTO(java.util.Date 타입) - DB TABLE (DATE 타입)</a></li>
+		<li><a href="dateStudy3.do">DTO(java.sql.Timestamp 타입) - DB TABLE (DATE 타입)</a></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend>Date 타입 관련 (날짜와 시간 넣기)</legend>
+	<ul>
+		<li><a href="dateStudy4.do">DTO(java.sql.Timestamp 타입) - DB TABLE (DATE 타입)</a></li>
+	</ul>
+</fieldset>
 </body>
 </html>
