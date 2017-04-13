@@ -29,7 +29,6 @@
 		$(main_modal).hide();
 		$(smodal).hide();
 	}
-
 	function showf() {
 		$(mback).fadeIn('150');
 		$(main_modal).fadeIn('150');
