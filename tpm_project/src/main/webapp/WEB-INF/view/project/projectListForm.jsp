@@ -710,7 +710,7 @@ function drop4(ev) {
 <%@ include file="/WEB-INF/view/header.jsp"%>	
 	<section class="callaction">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="margin-bottom: 30px;">
 			<div class="col-lg-12">
 				<div class="big-cta">
 					<div class="cta-text">
@@ -737,7 +737,7 @@ function drop4(ev) {
 			<c:otherwise>
 				<c:forEach var="i" items="${plist}">
 								<div id="project_div${i.project_idx}" class="col-lg-3" style="margin-top: 15px;" >
-									<div class="box">
+									<div class="box" style="border: 0px;">
 										<div class="box-gray aligncenter" style="height:210px;">
 											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
 											<h4 id="pn${i.project_idx}">${i.project_name }
