@@ -145,34 +145,37 @@
 	</c:if>
 	 -->
 	 
-	<c:set var="self_tendencylist" value="${self_tendency}"/>
+	 <c:set var="self_tendencylist" value="${self_tendency}"/>
+          <c:forEach var="self_tendency" items="${self_tendencylist}">
+          <script>
+		      var chart = AmCharts.makeChart( "chartdiv", {
+		                "type": "radar",
+		                "theme": "light",
+		                "dataProvider": [ 
+			             	{ "tendency": "외향적", "point": ${self_tendency.tendency_e} },
+			             	{ "tendency": "내향적", "point": ${self_tendency.tendency_i} },
+			                { "tendency": "감각적", "point": ${self_tendency.tendency_s} },
+			                { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
+			                { "tendency": "사고적", "point": ${self_tendency.tendency_t} },
+			                { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
+			                { "tendency": "판단적", "point": ${self_tendency.tendency_j} },
+			                { "tendency": "인식적", "point": ${self_tendency.tendency_p} } ],
+		                "valueAxes": [
+		                	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
+		                "startDuration": 2,
+		                "graphs": [
+		                	{ "balloonText": "[[value]]",
+		                  	  "bullet": "round",
+		                  	  "lineThickness": 2,
+		                  	  "valueField": "litres" } ] ,
+		                "categoryField": "tendency" }) ;
+      	  </script>
+          
 	<c:set var="team_tendencylist" value="${team_tendency}"/>
 	
-	<c:forEach var="self_tendency" items="${self_tendencylist}">
 	<c:forEach var="team_tendency" items="${team_tendencylist}">
 	
 	<script>
-      var chart = AmCharts.makeChart( "chartdiv", {
-                "type": "radar",
-                "theme": "light",
-                "dataProvider": [ 
-	             	{ "tendency": "외향적", "litres": ${self_tendency.tendency_e} },
-	             	{ "tendency": "내향적", "litres": ${self_tendency.tendency_i} },
-	                { "tendency": "감각적", "litres": ${self_tendency.tendency_s} },
-	                { "tendency": "직관적", "litres": ${self_tendency.tendency_n} },
-	                { "tendency": "사고적", "litres": ${self_tendency.tendency_t} },
-	                { "tendency": "감정적", "litres": ${self_tendency.tendency_f} },
-	                { "tendency": "판단적", "litres": ${self_tendency.tendency_j} },
-	                { "tendency": "인식적", "litres": ${self_tendency.tendency_p} } ],
-                "valueAxes": [
-                	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
-                "startDuration": 2,
-                "graphs": [
-                	{ "balloonText": "[[value]]",
-                  	  "bullet": "round",
-                  	  "lineThickness": 2,
-                  	  "valueField": "litres" } ] ,
-                "categoryField": "tendency" } );
       
       var chart = AmCharts.makeChart("chartdiv2", {
     	  "theme": "light",
@@ -210,7 +213,7 @@
      </script>
      </c:forEach>
      </c:forEach>
-     
+	 
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
       <div class="col-md-12">
