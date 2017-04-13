@@ -70,24 +70,20 @@
 <script src="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.js" type="text/javascript"></script>	
 <script>
 window.onload=function(){
-	var sb=localStorage.getItem("sideB");
+	var sb=sessionStorage.getItem("sideB");
 	if(sb=='hide'){
 		var bNode=document.documentElement.lastChild;
 		bNode.setAttribute('class','skin-blue sidebar-collapse sidebar-open');
 	}
 }
 function sideBar(){
-	var sb=localStorage.getItem("sideB");
-	if(sb==null){
-		localStorage.setItem("sideB","show");
-	}
 	var bNode=document.documentElement.lastChild;
-	if(bNode.getAttribute('class')=='skin-blue'||sb=='show'){
+	if(bNode.getAttribute('class')=='skin-blue'){
 		bNode.setAttribute('class','skin-blue sidebar-collapse sidebar-open');
-		localStorage.setItem("sideB","hide");
+		sessionStorage.setItem("sideB","hide");
 	}else{
 		bNode.setAttribute('class','skin-blue');
-		localStorage.setItem("sideB","show");
+		sessionStorage.setItem("sideB","show");
 	}
 }
 </script>
