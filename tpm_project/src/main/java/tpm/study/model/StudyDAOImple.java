@@ -35,5 +35,9 @@ public class StudyDAOImple {
 		return sqlMap.selectList("dateStudy3Select");
 	}
 	
+	public int dateStudy4Insert(DateTest3DTO obj) {
+		return sqlMap.insert("dateStudy4Insert", obj);
+	}
+	
 	
 }

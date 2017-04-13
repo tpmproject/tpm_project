@@ -65,6 +65,11 @@
     <select id="dateStudy3Select" resultType="tpm.study.model.DateTest3DTO">
     	SELECT * FROM datetest1
     </select>
+    
+
+   	<insert id="dateStudy4Insert" parameterType="tpm.study.model.DateTest3DTO">
+    	INSERT INTO datetest1 VALUES (#{t_date})
+    </insert>
   
 	
 </mapper>

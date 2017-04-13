@@ -2,12 +2,15 @@ package tpm.study.controller;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
@@ -98,6 +101,38 @@ public class StudyController {
 	public ModelAndView dateStudy4(ModelAndView mav){
 		
 		mav.setViewName("study/date/datePicker");
+		return mav;
+	}
+	
+	@RequestMapping(value="dateStudy5.do", method=RequestMethod.GET)
+	public ModelAndView dateStudy5(ModelAndView mav){
+		
+		mav.setViewName("study/date/datePicker2");
+		return mav;
+	}
+	
+	@RequestMapping(value="dateStudy5.do", method=RequestMethod.POST)
+	public ModelAndView dateStudy5_datePicker2(ModelAndView mav, @RequestParam(value="t_date") String t_date) throws ParseException{
+		
+		System.out.println(t_date);
+		String temp[] = t_date.split("-");
+		for (String s : temp) {
+			System.out.println(s.trim());
+		}
+		
+		String str= temp[0].trim(); 
+		/*String str= "04/13/2017 9:00 AM"; */
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm aa", Locale.US); 
+		java.util.Date t = sdf.parse(str); 
+		System.out.println("t :" + t);
+		java.sql.Date st = new java.sql.Date(t.getTime());
+		java.sql.Timestamp sts = new java.sql.Timestamp(t.getTime());
+		
+		System.out.println(sts.toString());
+		int result = studyDAO.dateStudy4Insert(new DateTest3DTO(sts));
+		System.out.println(result);
+		
+		mav.setViewName("study/date/datePicker2");
 		return mav;
 	}
 	

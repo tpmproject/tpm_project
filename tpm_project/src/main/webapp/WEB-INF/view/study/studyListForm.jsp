@@ -22,9 +22,10 @@
 	</ul>
 </fieldset>
 <fieldset>
-	<legend>Date 타입 관련 (날짜와 시간 넣기)</legend>
+	<legend>datePicker</legend>
 	<ul>
-		<li><a href="dateStudy4.do">DTO(java.sql.Timestamp 타입) - DB TABLE (DATE 타입)</a></li>
+		<li><a href="dateStudy4.do">Date range Picker</a></li>
+		<li><a href="dateStudy5.do">Date and time range Picker</a></li>
 	</ul>
 </fieldset>
 </body>
