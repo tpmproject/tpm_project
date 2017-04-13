@@ -421,7 +421,20 @@ public class MemberController {
 		
 		String s_member_id = (String)session.getAttribute("s_member_id");
 		
-		int count = mdao.updateMember(mdto);
+		MemberDTO dto = null;
+		
+		if(mdto.getMember_img_file()!=null){
+			String member_id = mdto.getMember_id();
+			String member_pwd = mdto.getMember_pwd();
+			String member_name = mdto.getMember_name();
+			String member_gender = mdto.getMember_gender();
+			String member_tel = mdto.getMember_tel();
+			String member_img = s_member_id+".jpg";
+			
+			dto = new MemberDTO(member_id, member_pwd, member_name, member_gender, member_tel, member_img);
+		}
+		
+		int count = mdao.updateMember(dto);
 		
 		String result = "";
 		if(count>0){
