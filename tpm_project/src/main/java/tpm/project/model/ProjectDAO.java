@@ -16,6 +16,7 @@ public interface ProjectDAO {
 	public int projectInsert(ProjectDTO dto);
 	
 	public ArrayList<MemberDTO> projectUpdateFriend(ProjectMemberDTO dto);
+	
 	public int projectUpdate(ProjectDTO dto);
 	
 	public int projectDelete(int project_idx);

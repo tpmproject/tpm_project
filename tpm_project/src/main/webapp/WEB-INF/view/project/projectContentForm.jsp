@@ -421,10 +421,12 @@ function cateDelResult(){
 }
 
 //성향
-function getTendency(){
+/* function getTendency(){
 	var param = 'tendency=' + $(getTendency).val();
+	window.alert(param);
 	sendRequest('recommend.do',getTendencyResult,null,'GET');
 }
+
 function getTendencyResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
@@ -440,17 +442,15 @@ function getTendencyResult(){
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
-
 				msg2 += '<p class="text-muted">' + member.member_id
 						+ '</p> ';
-
 				msg2 += '</div> ';
 			}
 			var tendency_m = document.getElementById('tendency_m');
 			tendency_m.innerHTML = msg2;		
 		}
 	}
-}
+} */
 </script>
 <style>
 #workback {
