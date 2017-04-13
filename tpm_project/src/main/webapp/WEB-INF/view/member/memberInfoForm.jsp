@@ -82,7 +82,7 @@
 	    				if(workING==0 || workTotal==0){
 	    					workState = 0;
 	    				} else{
-	    					workState = (workING/workTotal)*100;
+	    					workState = 100-((workING/workTotal)*100);
 	    					workState = workState.toFixed(2);
 	    				}
 	    			}
