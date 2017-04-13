@@ -15,14 +15,14 @@ public class ChatDAOImple implements ChatDAO {
 	}
 
 	// 채팅 화면에서 뿌려줄 프로젝트 리스트 정보 가져오기
-	public List<Object> getChatProjectList(Object dto) {
-		return sqlMap.selectList("chatProjectList", dto);
+	public List<Object> getChatProjectList(Object obj) {
+		return sqlMap.selectList("chatProjectList", obj);
 	}
 
 	// 채팅 화면에서 뿌려줄 채널 리스트 정보 가져오기
-	public List<Object> getChatChannelList(Object dto) {
+	public List<Object> getChatChannelList(Object obj) {
 		// TODO Auto-generated method stub
-		return sqlMap.selectList("chatChannelList", dto);
+		return sqlMap.selectList("chatChannelList", obj);
 	}
 
 	public int addChat() {
@@ -38,6 +38,11 @@ public class ChatDAOImple implements ChatDAO {
 	public int delChat() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	// 채팅 화면에 뿌려줄 해당 채널이나 프로젝트의 채팅 내용 가져오기
+	public List<Object> getChatContentList(Object obj) {
+		// TODO Auto-generated method stub
+		return sqlMap.selectList("chatContentList", obj);
 	}
 
 }

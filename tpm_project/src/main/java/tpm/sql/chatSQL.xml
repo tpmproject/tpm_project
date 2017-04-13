@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.chat">
 	<!-- 채팅 화면에서 뿌려줄 프로젝트 리스트 정보 가져오기 -->
-	<select id="chatProjectList" parameterType="tpm.member.model.MemberDTO" resultType="tpm.project.model.ProjectDTO">
+	<select id="chatProjectList" parameterType="Object" resultType="tpm.project.model.ProjectDTO">
 		SELECT * 
 		FROM tpm_project 
 		WHERE project_idx IN (SELECT project_idx 
@@ -12,12 +12,19 @@
 							  WHERE member_idx = #{member_idx})
 	</select>
 	<!-- 채팅 화면에서 뿌려줄 채널 리스트 정보 가져오기 -->
-	<select id="chatChannelList" parameterType="tpm.member.model.MemberDTO" resultType="tpm.channel.model.ChannelDTO">
+	<select id="chatChannelList" parameterType="Object" resultType="tpm.channel.model.ChannelDTO">
 		SELECT * 
 		FROM tpm_channel 
 		WHERE channel_idx IN (SELECT channel_idx 
 							  FROM tpm_channel_member 
 							  WHERE member_idx = #{member_idx})
 	</select>
-	
+	<!--  채팅 화면에 뿌려줄 해당 채널이나 프로젝트의 채팅 내용 가져오기 -->
+	<select id="chatContentList" parameterType="tpm.chat.model.ChatDTO" resultType="tpm.chat.model.ChatDTO">
+		SELECT * 
+		FROM tpm_chat 
+		WHERE chat_cp_code = 'P'
+		AND chat_cp_value = 10
+		ORDER BY chat_date asc
+	</select>
 </mapper>
