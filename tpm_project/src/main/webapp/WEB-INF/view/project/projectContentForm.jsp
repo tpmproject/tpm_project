@@ -18,6 +18,11 @@
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script>
+function fileUp(work_idx){
+	window.alert(work_idx);
+	location.href='fileAdd.do?work_idx='+work_idx;
+}
+
 function cateName(idx){
 	$('#cate'+idx).show();
 	$('#a_cate'+idx).hide();
@@ -462,6 +467,7 @@ function cateDelResult(){
 	}
 }
 
+
 //성향
 function getTendency(){
 	$.ajax({
@@ -665,7 +671,7 @@ function getTendency(){
 											</c:when>
 											</c:choose>
 											
-											<td align="right">코멘트|첨부파일</td>
+											<td align="right"><a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>
