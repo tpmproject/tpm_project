@@ -52,5 +52,19 @@
         SELECT * FROM memo_T m LEFT JOIN comment_t c ON m.memo_idx = c.memo_idx
     </select>
     <!-- -->
-		
+    
+    <!-- DTO(java.sql.Date 타입) - DB TABLE (DATE 타입) : 일반적인 경우 -->
+    <select id="dateStudy1Select" resultType="tpm.study.model.DateTest1DTO">
+    	SELECT * FROM datetest1
+    </select>
+    <!-- DTO(java.util.Date 타입) - DB TABLE (DATE 타입) -->
+    <select id="dateStudy2Select" resultType="tpm.study.model.DateTest2DTO">
+    	SELECT * FROM datetest1
+    </select>
+    <!-- DTO(java.sql.Timestamp 타입) - DB TABLE (DATE 타입) -->
+    <select id="dateStudy3Select" resultType="tpm.study.model.DateTest3DTO">
+    	SELECT * FROM datetest1
+    </select>
+  
+	
 </mapper>

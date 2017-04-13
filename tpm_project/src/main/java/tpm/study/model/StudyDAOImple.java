@@ -22,4 +22,18 @@ public class StudyDAOImple {
 	public List<Object> dtoStudy2Select() {
 		return sqlMap.selectList("dtoStudy2Select");
 	}
+	
+	public List<Object> dateStudy1Select() {
+		return sqlMap.selectList("dateStudy1Select");
+	}
+	
+	public List<Object> dateStudy2Select() {
+		return sqlMap.selectList("dateStudy2Select");
+	}
+	
+	public List<Object> dateStudy3Select() {
+		return sqlMap.selectList("dateStudy3Select");
+	}
+	
+	
 }
