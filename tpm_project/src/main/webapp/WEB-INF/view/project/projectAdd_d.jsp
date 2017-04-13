@@ -18,6 +18,7 @@ if(msg==null){
 		project_idx:<%=dto.getProject_idx()%>,
 		project_name:'<%=dto.getProject_name()%>',
 		project_content:'<%=dto.getProject_content()%>',
-		project_state:<%=dto.getProject_state()%>
+		project_state:<%=dto.getProject_state()%>,
+		project_level:<%=dto.getProject_level()%>
 	}
 }

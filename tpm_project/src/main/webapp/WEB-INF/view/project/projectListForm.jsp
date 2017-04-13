@@ -473,24 +473,24 @@
 					var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
 					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
-					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></a></h4>';
+					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></span></h4>';
 					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
 					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="#">프로젝트 보기버튼</a></div></div>';
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'">프로젝트 보기버튼</a></div></div>';
 					
 					divNode.innerHTML=msg;
 					
 					document.getElementById('contain').appendChild(divNode);
-					
-					closem();
-					
+		
 				}
+				closem();
 			}
 		}
 	}
 //프로젝트 업데이트
 var updateProject_me=0;
+var myLevel=0;
 function updateP(){
 	var pname = document.changeProject.project_name.value;
 	var pcontent = document.changeProject.project_content.value;
@@ -508,7 +508,7 @@ function updateP(){
 	
 	var count=0;
 	var pm_exist=0;
-	var myLevel=0;
+	
 	while (true) {
 		
 		if(childD.nodeName=='DIV'){
@@ -520,18 +520,17 @@ function updateP(){
 				count++;
 			}else{
 				msg+=','+idx.substring(14);
-				msg2+=','+$('#select2'+idx.substring(14)).val();
-				
-				if(idx.substring(14)=='${s_member_idx}'){
-					updateProject_me++;
-					myLevel=$('#select2'+idx.substring(14)).val();
-				}
-				
-				if($('#select2'+idx.substring(14)).val()==3000){
-					pm_exist++;
-				}
-				
+				msg2+=','+$('#select2'+idx.substring(14)).val();	
 			}
+			
+			if(idx.substring(14)=='${s_member_idx}'){
+				updateProject_me++;
+				myLevel=$('#select2'+idx.substring(14)).val();
+			}
+			if($('#select2'+idx.substring(14)).val()==3000){
+				pm_exist++;
+			}
+			
 		}
 		if(childD==lastC)break;
 		childD = childD.nextSibling;
@@ -559,21 +558,21 @@ function updatePResult(){
 				if(updateProject_me==0){
 					$('#project_div'+p.project_idx).remove();
 					updateProject_me=0;
+					closem();
 					return;
 				}
 				updateProject_me=0;
-				var p_name=$('#pn'+p.project_idx);
-				$('#pc'+p.project_idx).innerHTML=p.project_content;
+				var p_name=document.getElementById('pn'+p.project_idx);
+				document.getElementById('pc'+p.project_idx).innerHTML=p.project_content;
 				if(myLevel!='3000'){
 					p_name.innerHTML=p.project_name;	
 				}else{
-					p_name.innerHTML=p.project_name+'<a href="javascript:projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></a>';
+					p_name.innerHTML=p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog"></i></span>';
 					
 				}
 				myLevel=0;
-				
-				closem();
 			}
+			closem();
 		}
 	}
 	
@@ -770,7 +769,7 @@ function drop4(ev) {
 											</c:choose>
 										</div>
 										<div class="box-bottom">
-											<a href="#">프로젝트 보기버튼</a>
+											<a href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트 보기버튼</a>
 										</div>
 									</div>
 								</div>
