@@ -18,10 +18,8 @@
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script>
-function fileUp(work_idx){
-	window.alert(work_idx);
-	location.href='fileAdd.do?work_idx='+work_idx;
-}
+
+
 
 function cateName(idx){
 	$('#cate'+idx).show();
@@ -468,22 +466,10 @@ function cateDelResult(){
 }
 
 
-//성향
-function getTendency(){
-	$.ajax({
-		url:'recommend.do',
-		type:'post',
-		dataType:'json',
-	
-	success : function(json){
-		window.alert(json);
-		var msg='';
-		for(var i=0;i<json.length;i++){
-			msg+='<span>'+json[i].member_idx+','+json[i].member_id+'</span><br>';
-		}
-		$(#ajax_result_content').html(msg);
-	}
-	});
+/* 첨부파일 업로드 */
+function fileUp(work_idx){
+	window.alert(work_idx);
+	location.href='fileUploadForm.do?work_idx='+work_idx;
 }
 
 </script>
@@ -671,7 +657,7 @@ function getTendency(){
 											</c:when>
 											</c:choose>
 											
-											<td align="right"><a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
+											<td align="right">코멘트/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>

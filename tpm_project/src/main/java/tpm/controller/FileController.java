@@ -85,22 +85,26 @@ public class FileController {
 
 	/** 파일 - 파일 등록 페이지 이동 */
 	@RequestMapping(value="fileUploadForm.do",  method=RequestMethod.GET)
-	public ModelAndView fileUpLoadForm(){
+	public ModelAndView fileUpLoadForm(@RequestParam("work_idx")String work_idx){
 		
 		ModelAndView mav = new ModelAndView();
+		System.out.println("업무 idx:"+work_idx);
+		mav.addObject("work_idx",work_idx);
 		mav.setViewName("file/fileUploadForm");
 		return mav;
 	}
 
 	/** 파일 - 파일 등록 */
 	@RequestMapping(value="fileAdd.do",  method=RequestMethod.POST)
-	public ModelAndView fileAdd(HttpServletRequest req,HttpServletResponse response){
+	public ModelAndView fileAdd(HttpServletRequest req,HttpServletResponse response,@RequestParam("work_idx")int work_idx){
+		
 		MultipartHttpServletRequest multipartRequest =  (MultipartHttpServletRequest)req;
 		
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		int project_idx=16;   //프로젝트 idx 가져오기, 임시
-		int work_idx=66;      //업무 idx 가져오기 , 임시
+		
+		System.out.println("work_idx:"+work_idx);
 		
 		
 		

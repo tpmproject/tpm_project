@@ -11,6 +11,7 @@
 <fieldset>
 	<legend>drag and drop</legend>
 	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="work_idx" value="${work_idx}">
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
 	<div id="div_fns"></div>
 	<div id="div_dnd" style="height: 300px; margin: 20px; border:3px dotted red;text-align: center;line-height: 300px;font-size: 50px; background-color: #def;" >HERE</div>
