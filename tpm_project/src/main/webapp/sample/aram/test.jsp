@@ -33,28 +33,28 @@ function allowDrop(ev) {
 
 <body>
 <p>
-휴지와 휴지통으로 비교하자면~
-드래그 하는 애(휴지)는 
-아래 속성을 주고
-draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"
-
-휴지통은 
-draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"
-에다가 
-ondrop="drop(event)"
-까지 줍니다.
-
-drop(event)에다가 드롭했을 때 발생하는 이벤트를 자바스크립트로 적으면 됩니다~
-물론 function 이름을 바꿔도 노 상관 ex) mamdero(event) 로 해서 ㅋㅋ
-이 jsp에 있는게 가장 기본?! ㅋㅋ
-휴지통에 휴지를 넣으면 
-휴지의 id값을 가져올 수 있으니 하고 싶은대로 처리하시면 됩니다~
-
-아래 예제에는 id를 알림으로 띄우고
-초록이에만 휴지통으로 설정해놨슴다~
-
-유효성 검사 잘하시길... 
-초록이도 초록이에 넣을수가 있어서..
+휴지와 휴지통으로 비교하자면~<br>
+드래그 하는 애(휴지)는 <br>
+아래 속성을 주고<br>
+draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"<br>
+<br>
+휴지통은<br> 
+draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"<br>
+에다가<br> 
+ondrop="drop(event)"<br>
+까지 줍니다.<br>
+<br>
+drop(event)에다가 드롭했을 때 발생하는 이벤트를 자바스크립트로 적으면 됩니다~<br>
+물론 function 이름을 바꿔도 노 상관 ex) mamdero(event) 로 해서 ㅋㅋ<br>
+이 jsp에 있는게 가장 기본?! ㅋㅋ<br>
+휴지통에 휴지를 넣으면 <br>
+휴지의 id값을 가져올 수 있으니 하고 싶은대로 처리하시면 됩니다~<br>
+<br>
+아래 예제에는 id를 알림으로 띄우고<br>
+초록이에만 휴지통으로 설정해놨슴다~<br>
+<br>
+유효성 검사 잘하시길...<br> 
+초록이도 초록이에 넣을수가 있어서..<br>
 </p>
 <div id="gree" style="width:50px;height:50px;background: green;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" ondrop="drop(event)"></div>
 <div id="yell" style="width:50px;height:50px;background: yellow;" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
