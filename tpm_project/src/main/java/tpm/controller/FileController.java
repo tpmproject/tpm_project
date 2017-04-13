@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tpm.file.model.FileDAO;
 import tpm.file.model.FileDTO;
+import tpm.file.model.FileSortDTO;
 import tpm.project.model.ProjectDTO;
 
 @Controller
@@ -52,11 +54,19 @@ public class FileController {
 	
 	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,@RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
+	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
+								 @RequestParam(value="line_name",required=false)String line_name,
+								 @RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
+		
 		HttpSession session=req.getSession();
 		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
-		ArrayList<FileDTO> fileList=fdao.getFileList(project_idx);
 		
+		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name);
+		
+		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto);
+		
+		System.out.println("1="+fsdto.getLine_name());
+		System.out.println("2="+fsdto.getProject_idx());
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("fileList", fileList);
@@ -101,7 +111,7 @@ public class FileController {
 		for(int i=0; i<files.size(); i++){
 			String file_name=files.get(i).getOriginalFilename();
 			String file_size=Long.toString(files.get(i).getSize());
-			String file_path="I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
+			String file_path="C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
 			FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
 			int result=fdao.addFile(fdto);
 			copyInto(member_idx, files.get(i));  //파일 복사
@@ -146,7 +156,7 @@ public class FileController {
 	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
 	public ModelAndView fileDown(@RequestParam("file_name") String filename){
 		System.out.println("filename == " + filename);
-		File f = new File("I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
+		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
 		
 		ModelAndView mav = new ModelAndView("tpmDown","downloadFile", f);
 		
@@ -161,7 +171,7 @@ public class FileController {
 		try {
 			byte bytes[]=file_upload.getBytes();
 			
-			File outFile=new File("I:/workspace/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
+			File outFile=new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
 			fos.write(bytes);

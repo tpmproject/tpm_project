@@ -36,13 +36,22 @@
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script>
     
+    /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(i){
-    	
     	
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 	
 	}
+    
+    /*선택한 제목행에따라 정렬하여 파일리스트 출력  */
+    function sizeSort(project_idx, line_name){
+    	var param = 'project_idx='+project_idx +'&line_name='+line_name;
+    	
+    	window.alert(param);
+    	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+    }
+ 
 	function action_ajax(url, param, method, ctype) {
 		sendRequest_extension(url, param, ajax_result, method, ctype);
 		return false;
@@ -220,10 +229,10 @@
                   <thead>
                     <tr>
                       <th>파일 타입</th>
-                      <th>파일 이름</th>
-                      <th>파일 크기</th>
-                      <th>공유한 날짜</th>
-                      <th>공유한 사람</th>
+                      <th onclick="sizeSort(${project_idx},'file_name')">파일 이름</th>
+                      <th onclick="sizeSort(${project_idx},'file_size')">파일 크기</th>
+                      <th onclick="sizeSort(${project_idx},'file_date')">공유한 날짜</th>
+                      <th onclick="sizeSort(${project_idx},'member_idx')">공유한 사람</th>
                     </tr>
                   </thead>
                   

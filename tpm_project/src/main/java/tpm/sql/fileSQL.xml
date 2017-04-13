@@ -8,6 +8,21 @@
 		select * from tpm_file
 		where project_idx=#{project_idx}
 	</select>
+	<select id="fileList_size_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
+		select * from tpm_file
+		where project_idx=#{project_idx}
+		order by file_size desc
+	</select>
+	<select id="fileList_date_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
+		select * from tpm_file
+		where project_idx=#{project_idx}
+		order by file_date desc
+	</select>
+	<select id="fileList_name_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
+		select * from tpm_file
+		where project_idx=#{project_idx}
+		order by file_name desc
+	</select>
 	<!-- 파일등록  -->
 	<insert id="addFile" parameterType="tpm.file.model.FileDTO">
 		insert into tpm_file values (file_idx.nextval,#{project_idx},#{work_idx},#{member_idx},#{file_name},#{file_size},sysdate,#{file_path})

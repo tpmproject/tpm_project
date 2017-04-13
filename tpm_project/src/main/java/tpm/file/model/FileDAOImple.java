@@ -20,9 +20,36 @@ public class FileDAOImple implements FileDAO {
 		return project_list;
 	}
 
-	public ArrayList<FileDTO> getFileList(int project_idx) {
-		ArrayList<FileDTO> arr=(ArrayList)sqlMap.selectList("fileList",project_idx);
-		return arr;
+	public ArrayList<FileDTO> getFileList(FileSortDTO fsdto) {
+		String line_name=fsdto.getLine_name();
+		int project_idx=fsdto.getProject_idx();
+		System.out.println("sql 들어가기전"+line_name);
+		
+		ArrayList<FileDTO> arr =null;
+		if(!(line_name==null)){
+			if(line_name.equals("file_size")){
+			     arr=(ArrayList)sqlMap.selectList("fileList_size_sort",project_idx);
+			     
+			}else if(line_name.equals("file_date")){
+				 arr=(ArrayList)sqlMap.selectList("fileList_date_sort",project_idx);
+				 
+			}else if(line_name.equals("file_name")){
+				 arr=(ArrayList)sqlMap.selectList("fileList_name_sort",project_idx);
+				 
+			}else if(line_name.equals("member_idx")){
+				 arr=(ArrayList)sqlMap.selectList("fileList_size_sort",project_idx);
+				 
+			}else if(line_name.equals("file_size")){
+				 arr=(ArrayList)sqlMap.selectList("fileList_size_sort",project_idx);
+			}
+		}else{
+			arr=(ArrayList)sqlMap.selectList("fileList",project_idx);
+			System.out.println("정렬 안된:"+line_name);
+		}
+		
+			return arr;
+
+		
 	}
 
 	public int searchFile() {
