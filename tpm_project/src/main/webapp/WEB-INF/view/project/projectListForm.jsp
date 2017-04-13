@@ -671,8 +671,9 @@ function drop4(ev) {
     }
 }
 
-</script>
+/**결재 상태*/
 
+</script>
 <style>
 #mback {
 	position: fixed;
@@ -757,8 +758,8 @@ function drop4(ev) {
 
 											<!-- 프로젝트 진행현황 -->
 											<c:choose>
-												<c:when test="${i.project_state == 3 }">
-													<td><input type="button" value="완료"></td>
+												<c:when test="${i.project_level == 3000 }">
+													<button type="button" onclick="sucess()">완료하기</button>
 												</c:when>
 												<c:when test="${i.project_state == 2 }">
 													<td><input type="button" value="평가 대기"></td>
