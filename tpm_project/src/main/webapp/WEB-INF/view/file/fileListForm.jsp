@@ -121,7 +121,7 @@
 		    msg+= ''
 		    
 			msg +='<tr class="odd gradeX" style="margin:10px 30px;">'
-					msg +='<td style="width:-3000px"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></td>'
+					msg +='<td><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></td>'
 					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
 					msg +='<td>'+file.file_size+' byte </td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
@@ -226,6 +226,7 @@
               
                 <table width="100%" class="table table-striped table-bordered table-hover"
                 id="dataTables-example" style="width:500px">
+                
                   <thead>
                     <tr>
                       <th>파일 타입</th>
@@ -235,11 +236,7 @@
                       <th onclick="sizeSort(${project_idx},'member_idx')">공유한 사람</th>
                     </tr>
                   </thead>
-                  
-			
-		
-          
-        
+
                   <tbody id="file_content_list">
                   
                      
