@@ -6,7 +6,7 @@
 	<insert id="workMemberInsert" parameterType="tpm.work.model.WorkMemberDTO">
 		insert into tpm_work_member
 		values(
-			#{work_idx}
+			#{work_idx},
 			#{member_idx}
 		)
 	</insert>

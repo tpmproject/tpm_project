@@ -78,7 +78,7 @@ public class WorkController {
 	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
-	public ModelAndView workAdd(WorkDTO dto, String[] work_member){
+	public ModelAndView workAdd(WorkDTO dto, String[] member_idx){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
@@ -87,8 +87,8 @@ public class WorkController {
 		dto.setWork_idx(work_idx);
 		
 		if(work_idx>0){
-			for(int i=0;i<work_member.length;i++){
-				int w_idx=Integer.parseInt(work_member[i]);
+			for(int i=0;i<member_idx.length;i++){
+				int w_idx=Integer.parseInt(member_idx[i]);
 				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
 				workDAO.workMemberInsert(mdto);
 			}

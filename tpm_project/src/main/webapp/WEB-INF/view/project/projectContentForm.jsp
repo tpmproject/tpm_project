@@ -110,17 +110,22 @@ function showf(category_idx){
 	document.newWork.category_idx.value=category_idx;
 }
 function shows(){
+	var wtit=document.newWork.work_title.value;
+	var wsta=document.newWork.work_start.value;
+	var wend=document.newWork.work_end.value;
+	
+	if (wtit == null || wtit == "" || !wsta || !wend ) {
+		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
+		showf();
+		return;
+	}
+	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
 	var p=${pdto.project_idx};
 	
-	if(document.newWork.work_confirm.checked){
-		document.newWork.work_confirm.value=10;
-	}else{
-		document.newWork.work_confirm.value=20;
-	}
-	
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
+	
 }
 function showsResult(){
 	if (XHR.readyState == 4) {
@@ -704,6 +709,11 @@ function getTendencyResult(){
 							</div>
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자 
+								</h4>
+								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							</div>
+							<div class="col-md-3">
+								<a><h4 class="text-center">추천 목록</h4>
 								<select id="getTendency" onchange="getTendency()">
 									<option value="tendency_e">외향적</option>
 									<option value="tendency_i">내향적</option>
@@ -714,11 +724,7 @@ function getTendencyResult(){
 									<option value="tendency_j">판단적</option>
 									<option value="tendency_p">인식적</option>
 								</select>
-								</h4>
-								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
-							</div>
-							<div class="col-md-3">
-								<h4 class="text-center">추천 목록</h4>
+								</a>
 								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
 								</div>
 							</div>
