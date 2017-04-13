@@ -106,7 +106,7 @@
 		param += '&member_id=' + document.newProject.member_id.value;
 
 		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
-		window.alert(param);
+		
 	}
 
 	/**검색 멤버*/
@@ -122,10 +122,61 @@
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
 					var member = members[i];
+					var dupli=0;
 					
+										
 					if(addOrUpdate==1){
+						var parN=document.getElementById('project_Member');
+						var brother=parN.firstChild;
+						var youngB=parN.lastChild;
+						var repeat=true;
+						do{
+							if(brother.nodeName=='DIV'){
+								var bro_id=brother.getAttribute('id');
+								if(bro_id=='modal_content'+member.member_idx){
+									dupli++;
+									repeat=false;
+								}
+							}
+							if(brother!=youngB){
+								brother=brother.nextSibling;
+							}else{
+								repeat=false;
+							}
+							
+						}while(repeat);
+						
+						if(dupli>0){
+							continue;
+						}
+						
 						msg += '<div id="modal_content';
 					}else if(addOrUpdate==2){
+						var parN=document.getElementById('project_Member2');
+						var brother=parN.firstChild;
+						var youngB=parN.lastChild;
+						var repeat=true;
+						do{
+							if(brother.nodeName=='DIV'){
+								var bro_id=brother.getAttribute('id');
+								
+								if(bro_id=='modal2_content'+member.member_idx){
+									
+									dupli++;
+									repeat=false;
+								}
+							}
+							if(brother!=youngB){
+								brother=brother.nextSibling;
+							}else{
+								repeat=false;
+							}
+						}while(repeat);
+						
+						if(dupli>0){
+							continue;
+						}
+						
 						msg += '<div id="modal2_content';
 					}
 					msg+=member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >';
@@ -169,7 +220,7 @@
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
-				window.alert(result);
+				
 				if (result.trim() == 'true') {
 					if(addOrUpdate==1){
 						var chil=document.getElementById('modal_content'+temp);
@@ -309,7 +360,7 @@
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
-				window.alert(result);
+				
 				var json = JSON.parse(result);
 
 				var msg2 = '';
@@ -389,7 +440,7 @@
 		param += '&project_member=' + my_idx + msg;
 		param += '&level=3000' + msg2;
 		
-		window.alert(param);
+		
 		sendRequest('projectAdd.do', param, addPResult, 'POST');
 
 	}
