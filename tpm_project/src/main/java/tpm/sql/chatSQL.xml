@@ -3,5 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.chat">
-
+	<select id="chatProjectList" parameterType="" resultType="tpm.project.model.ProjectDTO">
+		SELECT * 
+		FROM tpm_project 
+		WHERE project_idx IN (SELECT project_idx 
+							  FROM tpm_project_member 
+							  WHERE member_idx = 3)
+	</select>
 </mapper>

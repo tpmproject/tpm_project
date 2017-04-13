@@ -1,20 +1,28 @@
 package tpm.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import tpm.project.model.ProjectDAO;
+
 @Controller
 public class ChatController {
+	
+	@Autowired
+	private ProjectDAO projectDAO;
 	
 	//// 채팅 ////
 	/** 채팅 - 채팅 리스트 페이지 이동 */
 	@RequestMapping(value="chatList.do",  method=RequestMethod.GET)
 	public ModelAndView chatListForm(){
 		
+		
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("chat/chatListForm");
+		mav.setViewName("chat/chatForm");
 		return mav;
 	}
 	
