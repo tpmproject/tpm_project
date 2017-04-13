@@ -96,7 +96,9 @@
 		$(main_modal).fadeOut('100');
 		$(main_modal2).fadeOut('100');
 		document.newProject.reset();
+		document.changeProject.reset();
 		document.getElementById('project_Member').innerHTML='';
+		document.getElementById('project_Member2').innerHTML='';
 	}
 	//검색멤버
 	var addOrUpdate=0;
@@ -285,7 +287,14 @@
 
 				var f_List_msg='';
 				var pm_List_msg='';
-				var msg2 = '';
+				var msg2 ='';
+				pm_List_msg+='<div id="modal2_content${s_member_idx}" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				pm_List_msg += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
+				pm_List_msg += 'src="/tpm_project/img/member/profile/${s_member_img}">${s_member_name}';
+				pm_List_msg += '<p class="text-muted">${s_member_id}</p> ';	
+				pm_List_msg +='<span><select id="select2${s_member_idx}"><option value="1000">읽기만</option>';
+				pm_List_msg += '<option value="2000">프로젝트 멤버</option>';
+				pm_List_msg += '<option value="3000" selected="selected">프로젝트 책임자</option></select></span></div> ';
 				
 				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 				for (var i = 0; i < members.length; i++) {
@@ -305,9 +314,11 @@
 					msg2 += '<p class="text-muted">' + member.member_id
 							+ '</p> ';
 					if(member.pm%10==1){
-						msg2 +='<span><select id="select2'+member.member_idx+'"><option value="1000">읽기만</option>';
-						msg2 += '<option value="2000">프로젝트 멤버</option>';
-						msg2 += '<option value="3000">프로젝트 책임자</option></select></span>';
+						var lev=member.level;
+						var sel='selected="selected"';
+						msg2 +='<span><select id="select2'+member.member_idx+'"><option value="1000"'+(lev==1000?sel:'')+'>읽기만</option>';
+						msg2 += '<option value="2000" '+(lev==2000?sel:'')+'>프로젝트 멤버</option>';
+						msg2 += '<option value="3000" '+(lev==3000?sel:'')+'>프로젝트 책임자</option></select></span>';
 					}
 					msg2 += '</div> ';
 					
@@ -477,7 +488,39 @@
 			}
 		}
 	}
+//프로젝트 업데이트
+function updateP(){
+	var pname = document.changeProject.project_name.value;
+	var pcontent = document.changeProject.project_content.value;
+
+	var param = 'project_name=' + pname;
+		param += '&project_content=' + pcontent;
+	var parentD = document.getElementById('project_Member2');
+
+	var childD = parentD.firstChild;
+	var lastC = parentD.lastChild;
+	var msg = '';
+	var msg2 = '';
+	while (true) {
+		
+		if(childD.nodeName=='DIV'){
+			var idx=childD.getAttribute('id');
+			msg+=','+idx.substring(14);
+			msg2+=','+$('#select2'+idx.substring(14)).val();
+		}
+		if(childD==lastC)break;
+		childD = childD.nextSibling;
+	}
+
+	var my_idx = ${s_member_idx};
+	param += '&project_member=' + my_idx + msg;
+	param += '&level=3000' + msg2;
 	
+	
+	sendRequest('projectAdd.do', param, addPResult, 'POST');
+	
+}
+
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
@@ -496,8 +539,8 @@ function drop(ev) {
     	var select=document.getElementById('select'+data.substring(13));
     	if(select==null){
     		var spanNode=document.createElement('span');
-	   		var msg='<select id="select'+data.substring(13)+'"><option value="1000">읽기만</option>';
-			msg += '<option value="2000">프로젝트 멤버</option>';
+	   		var msg='<select id="select'+data.substring(13)+'" value="2000"><option value="1000">읽기만</option>';
+			msg += '<option value="2000" selected="selected">프로젝트 멤버</option>';
 			msg += '<option value="3000">프로젝트 책임자</option></select>';
 			
 			spanNode.innerHTML=msg;
@@ -535,7 +578,7 @@ function drop3(ev) {
     if(data.startsWith('modal2_content')){
     	var comp=document.getElementById(data);
     	
-    	var select=document.getElementById('select'+data.substring(14));
+    	var select=document.getElementById('select2'+data.substring(14));
     	if(select==null){
     		var spanNode=document.createElement('span');
 	   		var msg='<select id="select2'+data.substring(14)+'"><option value="1000">읽기만</option>';

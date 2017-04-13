@@ -20,7 +20,7 @@ public class MemberDTO {
 	//projectList수정 시 사용 [프로젝트멤버=1,마이프렌드=10]
 	private int pm;
 	private int mf;
-	
+	private int project_level;
 
 	public MemberDTO() {
 		super();
@@ -148,6 +148,14 @@ public class MemberDTO {
 
 	public void setMf(int mf) {
 		this.mf = mf;
+	}
+	
+	public int getProject_level() {
+		return project_level;
+	}
+
+	public void setProject_level(int project_level) {
+		this.project_level = project_level;
 	}
 
 	@Override

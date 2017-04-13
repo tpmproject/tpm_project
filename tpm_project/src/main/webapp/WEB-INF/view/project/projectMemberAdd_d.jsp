@@ -20,6 +20,7 @@
 		
 		//pm=10 mf=1;
 		obj.put("pm", arry_mdto.get(i).getPm()+arry_mdto.get(i).getMf() );
+		obj.put("level", arry_mdto.get(i).getProject_level());
 		arry_members.add(obj);
 	}
 	
