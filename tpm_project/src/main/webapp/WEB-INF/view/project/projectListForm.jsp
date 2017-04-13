@@ -27,7 +27,7 @@
 <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
-
+<%@ include file="/sample/cho/main/import.jsp"%>
 <script type="text/javascript">
 	window.onload = function() {
 		$(main_modal).hide();
@@ -710,9 +710,8 @@ function drop4(ev) {
 </head>
 
 
-<body>
-<%@include file="../index.jsp" %>
-	
+<body class="skin-blue">
+<%@ include file="/WEB-INF/view/header.jsp"%>	
 	<section class="callaction">
 	<div class="container">
 		<div class="row">
@@ -899,5 +898,6 @@ function drop4(ev) {
 			</div>
 		</div>
 	</form>
+<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
