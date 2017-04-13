@@ -174,10 +174,10 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 수정 */
 	@RequestMapping(value="projectUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView projectUpdate(){
+	public ModelAndView projectUpdate(ProjectDTO dto,String[] project_member,String[] level){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectAdd_d");
 		return mav;
 	}
 	

@@ -492,32 +492,47 @@
 function updateP(){
 	var pname = document.changeProject.project_name.value;
 	var pcontent = document.changeProject.project_content.value;
-
+	var pidx= document.changeProject.project_idx.value;
+		
 	var param = 'project_name=' + pname;
 		param += '&project_content=' + pcontent;
+		param +='&project_idx='+pidx;
 	var parentD = document.getElementById('project_Member2');
 
 	var childD = parentD.firstChild;
 	var lastC = parentD.lastChild;
 	var msg = '';
 	var msg2 = '';
+	
+	var count=0;
 	while (true) {
 		
 		if(childD.nodeName=='DIV'){
+			
 			var idx=childD.getAttribute('id');
-			msg+=','+idx.substring(14);
-			msg2+=','+$('#select2'+idx.substring(14)).val();
+			if(count==0){
+				msg+=idx.substring(14);
+				msg2+=$('#select2'+idx.substring(14)).val();
+				count++;
+			}else{
+				msg+=','+idx.substring(14);
+				msg2+=','+$('#select2'+idx.substring(14)).val();
+			}
 		}
 		if(childD==lastC)break;
 		childD = childD.nextSibling;
 	}
 
 	var my_idx = ${s_member_idx};
-	param += '&project_member=' + my_idx + msg;
-	param += '&level=3000' + msg2;
+	param += '&project_member='+ msg;
+	param += '&level=' + msg2;
 	
 	
-	sendRequest('projectAdd.do', param, addPResult, 'POST');
+	sendRequest('projectUpdate.do', param, updatePResult, 'POST');
+	
+}
+function updatePResult(){
+	
 	
 }
 
