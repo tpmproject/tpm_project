@@ -4,6 +4,7 @@
 <%
 
 String msg=(String)request.getAttribute("msg");
+
 ProjectDTO dto=new ProjectDTO();
 
 if(msg==null){
