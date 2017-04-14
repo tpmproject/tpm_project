@@ -285,21 +285,27 @@ function updateWork(){
  	var work_member=document.getElementById('work_m2');
 	var fch = work_member.firstChild;
 	var lch = work_member.lastChild;
+	if(document.changeWork.work_confirm.checked==true){
+		document.changeWork.work_confirm.value='10';
+	}else{
+		document.changeWork.work_confirm.value='20';
+	}
 	var msg='';
-/* 	var count=0;
+	var count=0;
 	while(true){
 		if(fch.nodeName=='DIV'){
 			var idx=fch.getAttribute('id');
 			if(count==0){
-				msg+=idx.substring(11);
+				msg+=idx.substring(12);
 				count++;
 			}else{
-			msg+=','+idx.substring(11);
+			msg+=','+idx.substring(12);
 			}
 		}
 		if(fch==lch)break;
 		fch=fch.nextSibling;
-	} */
+	}
+	var my_idx=${s_member_idx};
 	var my_idx=${s_member_idx};
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&work_title=' + document.changeWork.work_title.value
