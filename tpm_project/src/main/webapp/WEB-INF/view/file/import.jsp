@@ -68,5 +68,17 @@
 
 <!-- custom scrollbar plugin -->
 <script src="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.js" type="text/javascript"></script>	
+<script>
+function sideBar(){
+	var bNode=document.documentElement.lastChild;
+	if(bNode.getAttribute('class')=='skin-blue'){
+		bNode.setAttribute('class','skin-blue sidebar-collapse sidebar-open');
+		sessionStorage.setItem("sideB","hide");
+	}else{
+		bNode.setAttribute('class','skin-blue');
+		sessionStorage.setItem("sideB","show");
+	}
+}
 
 
+</script>

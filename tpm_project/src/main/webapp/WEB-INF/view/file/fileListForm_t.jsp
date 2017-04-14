@@ -12,7 +12,7 @@
 <body class="skin-blue">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/header.jsp"%>
-		<%@ include file="/WEB-INF/view/aside.jsp"%>
+	
 		
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<div class="content-wrapper">
@@ -39,7 +39,7 @@
 			</section>
 		</div>
 		
-		<%@ include file="/WEB-INF/view/footer.jsp"%>
+	
 	</div>
 </body>
 </html>

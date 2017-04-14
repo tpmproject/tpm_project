@@ -4,6 +4,7 @@
 <!DOCTYPE html">
 <html>
  <head>
+ 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,7 @@
     <meta name="author" content="">
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
     <!-- Bootstrap Core CSS -->
+    <%@ include file="/WEB-INF/view/file/import.jsp"%>
     
     <link href="/tpm_project/css/file/bootstrap.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -39,7 +41,7 @@
     (function($) {
 		$(window).on("load", function() {
 			
-			window.alert('프로젝트idx:${project_idx}');
+			
 			project_fileList('${project_idx}');
 
 		});
@@ -57,7 +59,7 @@
     function sizeSort(project_idx, line_name){
     	var param = 'project_idx='+project_idx +'&line_name='+line_name;
     	
-    	window.alert('sizeSort='+param);
+    	
     	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
     }
  
@@ -170,7 +172,9 @@
     </script>
   </head>
  
-  <body>
+  <body class="skin-blue">
+  <%@ include file="/WEB-INF/view/header.jsp"%>
+	
     <div id="wrapper" class="file-list-form">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -298,5 +302,6 @@
             });
      
     </script>
+    	<%@ include file="/WEB-INF/view/footer.jsp"%>
   </body>
 </html>
