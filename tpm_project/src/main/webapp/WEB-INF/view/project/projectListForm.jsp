@@ -752,7 +752,7 @@ function drop4(ev) {
 			<h4 class="modal-title">프로젝트 생성</h4>
 
 			<div id="f_modal">
-				<div class="box-gray aligncenter">
+				<div class="box-gray aligncenter" style="background: #eee;">
 					<h4>프로젝트1</h4>
 					<div id="btntest" class="icon">
 						<div>
