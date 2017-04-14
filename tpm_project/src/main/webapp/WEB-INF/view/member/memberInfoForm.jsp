@@ -29,8 +29,8 @@
 	<!-- 프로필 이미지 미리보기 -->
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	
 <title>Insert title here</title>
+
 	<style>
       #chartdiv {
                 width: 70%;
@@ -44,10 +44,7 @@
 	   body {
 		    margin: 20px;
 		    font-family: "맑은 고딕";
-	   }	
-	  #image_preview {
-		    display:none;
-		}
+	  }	
     </style>
     <%@ include file="/sample/cho/main/import.jsp"%>
     <script>
@@ -265,12 +262,10 @@
             <br>
             <br>
             <br>
-            <hr>
             <div>
               <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
               <div id="chartdiv" class="col-md-offset-3"></div>
             </div>
-            <hr>
             <div>
               <div>
                 <a class="col-sm-3 btn btn-default disabled">업무 성향</a>
