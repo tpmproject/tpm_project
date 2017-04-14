@@ -1,6 +1,7 @@
 package tpm.project.model;
 
-import java.sql.Date;	
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -72,9 +73,9 @@ public class ProjectDAOImple implements ProjectDAO {
 				
 				int category_idx=tdto.getCategory_idx();
 				String work_title=tdto.getWork_title();
-				Date work_start=tdto.getWork_start();
-				Date work_end=tdto.getWork_end();
-				Date work_complete=tdto.getWork_complete();
+				Timestamp work_start=tdto.getWork_start();
+				Timestamp work_end=tdto.getWork_end();
+				Timestamp work_complete=tdto.getWork_complete();
 				int work_confirm=tdto.getWork_confirm();
 				int work_state=tdto.getWork_state();
 				WorkDTO wdto=new WorkDTO(work_idx, category_idx, work_title, work_start, work_end, work_complete, work_confirm, work_state, tdto.getProject_name(), tdto.getCategory_name(), check_arr);

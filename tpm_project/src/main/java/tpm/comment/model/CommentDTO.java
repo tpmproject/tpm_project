@@ -8,13 +8,13 @@ public class CommentDTO {
 	private int work_idx;
 	private int member_idx;
 	private String comment_content;
-	private Date comment_date;
+	private Timestamp comment_date;
 	
 	public CommentDTO() {
 		super();
 	}
 
-	public CommentDTO(int comment_idx, int work_idx, int member_idx, String comment_content, Date comment_date) {
+	public CommentDTO(int comment_idx, int work_idx, int member_idx, String comment_content, Timestamp comment_date) {
 		super();
 		this.comment_idx = comment_idx;
 		this.work_idx = work_idx;
@@ -55,16 +55,17 @@ public class CommentDTO {
 		this.comment_content = comment_content;
 	}
 
-	public Date getComment_date() {
+	public Timestamp getComment_date() {
 		return comment_date;
 	}
 
-	public void setComment_date(Date comment_date) {
+	public void setComment_date(Timestamp comment_date) {
 		this.comment_date = comment_date;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "CommentDTO [comment_idx=" + comment_idx + ", work_idx=" + work_idx + ", member_idx=" + member_idx
+				+ ", comment_content=" + comment_content + ", comment_date=" + comment_date + "]";
+	}
 }

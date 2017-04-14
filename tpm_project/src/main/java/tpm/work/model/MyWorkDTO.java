@@ -1,6 +1,7 @@
 package tpm.work.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import tpm.checklist.model.ChecklistDTO;
@@ -16,9 +17,9 @@ public class MyWorkDTO {
 	
 	private int work_idx;
 	private String work_title;
-	private Date work_start;
-	private Date work_end;
-	private Date work_complete;
+	private Timestamp work_start;
+	private Timestamp work_end;
+	private Timestamp work_complete;
 	
 	private int work_confirm; //결재 요청여부
 	private int work_state; //결재 상태
@@ -30,7 +31,7 @@ public class MyWorkDTO {
 	}
 
 	public MyWorkDTO(int project_idx, String project_name, String project_content, int project_state, int category_idx,
-			String category_name, int work_idx, String work_title, Date work_start, Date work_end, Date work_complete,
+			String category_name, int work_idx, String work_title, Timestamp work_start, Timestamp work_end, Timestamp work_complete,
 			int work_confirm, int work_state, ArrayList<ChecklistDTO> arry_ckdto) {
 		super();
 		this.project_idx = project_idx;
@@ -113,27 +114,29 @@ public class MyWorkDTO {
 		this.work_title = work_title;
 	}
 
-	public Date getWork_start() {
+
+
+	public Timestamp getWork_start() {
 		return work_start;
 	}
 
-	public void setWork_start(Date work_start) {
+	public void setWork_start(Timestamp work_start) {
 		this.work_start = work_start;
 	}
 
-	public Date getWork_end() {
+	public Timestamp getWork_end() {
 		return work_end;
 	}
 
-	public void setWork_end(Date work_end) {
+	public void setWork_end(Timestamp work_end) {
 		this.work_end = work_end;
 	}
 
-	public Date getWork_complete() {
+	public Timestamp getWork_complete() {
 		return work_complete;
 	}
 
-	public void setWork_complete(Date work_complete) {
+	public void setWork_complete(Timestamp work_complete) {
 		this.work_complete = work_complete;
 	}
 

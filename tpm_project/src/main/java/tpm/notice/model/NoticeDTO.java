@@ -6,23 +6,23 @@ public class NoticeDTO {
 	private int notice_idx;
 	private int member_idx;
 	private int work_idx;
-	private Date notice_date;
+	private Timestamp notice_date;
 	private int notice_type;
 	private int notice_state;
-	
-	final public static int NOTICE_UNREAD=1; //알림을 안읽었을때 상태
-	final public static int NOTICE_READ=2; //알림을 읽었을때 상태
 
-	final public static int NOTICE_NEWWORK=100; //업무 배정받았을때
-	final public static int NOTICE_WORK_ENDDATE=200; //업무 마감일되었을때
-	final public static int NOTICE_WORK_NEED_CONFIRM=300; // 업무 결재 요청 받았을때
-	final public static int NOTICE_PROJECT_JOIN=400; //프로젝트에 초대 되었을때
-	
+	final public static int NOTICE_UNREAD = 1; // 알림을 안읽었을때 상태
+	final public static int NOTICE_READ = 2; // 알림을 읽었을때 상태
+
+	final public static int NOTICE_NEWWORK = 100; // 업무 배정받았을때
+	final public static int NOTICE_WORK_ENDDATE = 200; // 업무 마감일되었을때
+	final public static int NOTICE_WORK_NEED_CONFIRM = 300; // 업무 결재 요청 받았을때
+	final public static int NOTICE_PROJECT_JOIN = 400; // 프로젝트에 초대 되었을때
+
 	public NoticeDTO() {
 		super();
 	}
 
-	public NoticeDTO(int notice_idx, int member_idx, int work_idx, Date notice_date, int notice_type,
+	public NoticeDTO(int notice_idx, int member_idx, int work_idx, Timestamp notice_date, int notice_type,
 			int notice_state) {
 		super();
 		this.notice_idx = notice_idx;
@@ -57,11 +57,11 @@ public class NoticeDTO {
 		this.work_idx = work_idx;
 	}
 
-	public Date getNotice_date() {
+	public Timestamp getNotice_date() {
 		return notice_date;
 	}
 
-	public void setNotice_date(Date notice_date) {
+	public void setNotice_date(Timestamp notice_date) {
 		this.notice_date = notice_date;
 	}
 
@@ -104,8 +104,12 @@ public class NoticeDTO {
 	public static int getNoticeProjectJoin() {
 		return NOTICE_PROJECT_JOIN;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "NoticeDTO [notice_idx=" + notice_idx + ", member_idx=" + member_idx + ", work_idx=" + work_idx
+				+ ", notice_date=" + notice_date + ", notice_type=" + notice_type + ", notice_state=" + notice_state
+				+ "]";
+	}
+
 }
