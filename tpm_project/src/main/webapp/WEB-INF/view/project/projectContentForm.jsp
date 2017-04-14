@@ -322,8 +322,8 @@ function updateWorkResult(){
 			if (result>0) {
 
 			}
-			$(workback).fadeOut('100');
-			$(work_modal).fadeOut('100');
+			$(workback2).fadeOut('100');
+			$(work_modal2).fadeOut('100');
 			location.reload();
 		}
 	}
