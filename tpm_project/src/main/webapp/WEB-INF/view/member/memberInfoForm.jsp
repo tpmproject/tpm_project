@@ -27,6 +27,8 @@
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	
 	<script type="text/javascript" src="js/httpRequest.js"></script>
+	<!-- 프로필 이미지 미리보기 -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	
 <title>Insert title here</title>
 	<style>
@@ -39,6 +41,13 @@
 				height		: 200px;
 				font-size	: 11px;
 	  }	
+	   body {
+		    margin: 20px;
+		    font-family: "맑은 고딕";
+	   }	
+	  #image_preview {
+		    display:none;
+		}
     </style>
     
     <script>
@@ -91,50 +100,28 @@
 	    			INGId.innerHTML = workING;
 	    			var StateId = document.getElementById('myworkState');
 	    			StateId.innerHTML = workState;
-	    			
 	    		}
 	    	}
 	    }
 	    
-	    function selectimg(){
+	    window.onload = function(){
 	    	
-	    	//$('#profile_img').attr('src', $('#select_profile').val());
+	    	$('#select_profile').on('change', function() {
+	      	        
+	      	        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+	      	        
+	      	        //배열에 추출한 확장자가 존재하는지 체크
+	      	        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+	      	            resetFormElement($(this)); //폼 초기화
+	      	            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+	      	        } else {
+	      	            file = $('#select_profile').prop("files")[0];
+	      	            blobURL = window.URL.createObjectURL(file);
+	      	            $('#profile_img').attr('src', blobURL);
+	      	        }
+	      	        return false;
+	      	    });
 	    	
-	    	/* $.ajax( {
-	    		  url: 'updateProfile.do',
-	    		  type: 'POST',
-	    		  data: new FormData( this ),
-	    		  processData: false,
-	    		  contentType: false
-	    		} ); */
-	    	
-	    	//var fileNm = $('#select_profile').val();
-	    	//window.alert(fileNm);
-	    	
-	    	/* if(fileNm != ""){
-	    		var ext = fileNm.slice(fileNm.lastIndexOf(".")+1).toLowerCase();
-	    		
-	    		if(!(ext == "jpg" || ext == "png")){
-	    			window.alert('이미지 파일(.jpg, .png)만 업로드 가능합니다');
-	    			location.reload();
-	    		}
-	    	} */
-	    	
-	    	//var file_name = fileNm.slice(fileNm.lastIndexOf("\\")+1).toLowerCase();
-	    	//window.alert(file_name);
-	    	
-	    	//var param = 'fileName='+fileNm;
-	    	//window.alert(param);
-	    	
-	    	//sendRequest('updateProfile.do', param, uploadimg, 'POST');	
-	    }
-	    
-	    function uploadimg(){
-	    	if(XHR.readyState==4){
-	    		if(XHR.status==200){
-	    			window.alert(1);
-	    		}
-	    	}
 	    }
     </script>
 </head>
@@ -231,11 +218,11 @@
 	              
 	              <!-- 프로필 사진 -->
 	              <div class="form-group">
-	                <div class="col-md-3 col-md-offset-1">
+	                <div class="col-sm-3 col-md-offset-1">
 	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" width="130" height="130">
 	                </div>
-	                <div class="col-md-3"> <input class="btn btn-default" name="member_img_file" type="file" id="select_profile">
-	                <button type="submit" class="btn btn-default"  onclick="selectimg()"> 적용하기 </button>
+	                <div class="col-sm-6">
+	                	<input class="btn btn-default" type="file" name="member_img_file" id="select_profile">	                
 	                </div>
 	              </div>&nbsp;
 	              
