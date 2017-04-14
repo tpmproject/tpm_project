@@ -941,7 +941,6 @@ function drop4(ev) {
 									<c:if test="${status.index %4 == 3 and not status.last}">
 									</div>
 										</div>
-										<div class="carousel-caption"></div>
 									</div>
 									
 										<div class="item">
@@ -953,7 +952,6 @@ function drop4(ev) {
 						</c:choose>
 					</div>
 				</div>
-				<div class="carousel-caption"></div>
 			</div>
 
 		</div>
