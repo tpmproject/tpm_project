@@ -44,8 +44,9 @@ public class ChatController {
 	
 	/** 채팅 - 채팅 데이터 반환 */
 	@RequestMapping(value="chatList.do",  method=RequestMethod.POST)
-	public ModelAndView chatList(){
-		
+	public ModelAndView chatList(ChatDTO ctdto){
+		System.out.println(ctdto.getChat_cp_code());
+		System.out.println(ctdto.getChat_cp_value());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("chat/chatList_d");
 		return mav;
