@@ -15,13 +15,14 @@
 <script>
 function showChatContent(cpCode, cpValue){
 	$.ajax({
-		url : 'ajaxtest2.do',
+		url : 'chatList.do',
 		type : 'post',
 		data : { chat_cp_code : cpCode,
 				 chat_cp_value : cpValue },
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			window.alert('성공');
+			//window.alert(JSON.stringify(json));
+			$('#chatMessageArea').va
 		}
 	});
 }
@@ -50,12 +51,14 @@ function showChatContent(cpCode, cpValue){
 
 	<div id="chatMessageArea">
 		<c:forEach var="ctdto" items="${arry_ctdto}">
-			${ctdto.chat_content}--${ctdto_date}
+			${ctdto.chat_content}--${ctdto.chat_date}<br>
 		</c:forEach>
 	</div>
 </div>
 <br/>
-<input type="text" id="message">
-<input type="button" id="sendBtn" value="전송">
+<form action="chatAdd.do" method="post">
+	<input type="text" id="message">
+	<input type="submit" id="sendBtn" value="전송">
+</form>
 </body>
 </html>

@@ -23,8 +23,8 @@
 	<select id="chatContentList" parameterType="tpm.chat.model.ChatDTO" resultType="tpm.chat.model.ChatDTO">
 		SELECT * 
 		FROM tpm_chat 
-		WHERE chat_cp_code = 'P'
-		AND chat_cp_value = 10
+		WHERE chat_cp_code = #{chat_cp_code}
+		AND chat_cp_value = #{chat_cp_value}
 		ORDER BY chat_date asc
 	</select>
 </mapper>
