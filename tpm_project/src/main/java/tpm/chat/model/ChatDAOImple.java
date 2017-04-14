@@ -25,9 +25,9 @@ public class ChatDAOImple implements ChatDAO {
 		return sqlMap.selectList("chatChannelList", obj);
 	}
 
-	public int addChat() {
+	public int addChat(Object obj) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlMap.update("chatContentInsert", obj);
 	}
 
 	public int updateChat() {

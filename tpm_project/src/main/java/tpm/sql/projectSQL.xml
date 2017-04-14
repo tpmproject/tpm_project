@@ -88,4 +88,8 @@
 		where project_idx=#{project_idx}
 	</update>
 	
+	<delete id="projectDelete" parameterType="tpm.project.model.ProjectDTO">
+		delete  from tpm_project
+		where project_idx=#{project_idx}
+	</delete>
 </mapper>

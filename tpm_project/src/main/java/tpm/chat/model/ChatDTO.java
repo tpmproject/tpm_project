@@ -1,6 +1,9 @@
 package tpm.chat.model;
 
 import java.sql.*;
+import java.util.List;
+
+import tpm.member.model.MemberDTO;
 
 public class ChatDTO {
 
@@ -10,6 +13,8 @@ public class ChatDTO {
 	private int chat_cp_value;
 	private String chat_content;
 	private Timestamp chat_date;
+
+	private MemberDTO mdto;
 
 	public ChatDTO() {
 		super();
@@ -80,11 +85,19 @@ public class ChatDTO {
 		this.chat_date = chat_date;
 	}
 
+	public MemberDTO getMdto() {
+		return mdto;
+	}
+
+	public void setMdto(MemberDTO mdto) {
+		this.mdto = mdto;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatDTO [chat_idx=" + chat_idx + ", member_idx=" + member_idx + ", chat_cp_code=" + chat_cp_code
 				+ ", chat_cp_value=" + chat_cp_value + ", chat_content=" + chat_content + ", chat_date=" + chat_date
-				+ "]";
+				+ ", mdto=" + mdto + "]";
 	}
 
 	

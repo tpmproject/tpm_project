@@ -50,9 +50,27 @@
 		$(main_modal2).fadeIn('150');
 		$(f_modal2).show();
 		$(smodal2).hide();
+		
 		document.changeProject.project_idx.value=idx;
 		document.changeProject.project_name.value=name;
 		document.changeProject.project_content.value=content;
+	}
+	
+	//프로젝트 삭제
+	function projectDelete(project_idx){
+		var param='project_idx='+project_idx;
+		window.alert('param='+param);
+		sendRequest('projectDelete.do',param,projectDelResult,'POST');
+		
+	}
+	function projectDelResult(){
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
+				
+			}
+		}
+			
+		
 	}
 	//친구리스트
 	function shows() {
@@ -109,7 +127,10 @@
 		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 		
 	}
-
+	
+	
+	
+	
 	/**검색 멤버*/
 	function projectMemberAddResult() {
 		if (XHR.readyState == 4) {
@@ -905,6 +926,11 @@ function drop4(ev) {
 														<span
 															onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
 															<i class="glyphicon glyphicon-cog"
+															style="margin-bottom: 0px;"></i>
+														</span>
+														<span
+															onclick="projectDelete('${i.project_idx}')">
+															<i class="glyphicon glyphicon-remove"
 															style="margin-bottom: 0px;"></i>
 														</span>
 													</c:if>

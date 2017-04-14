@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import tpm.chat.model.ChatDAO;
 import tpm.chat.model.ChatDTO;
 import tpm.member.model.MemberDTO;
@@ -31,15 +33,15 @@ public class ChatController {
 		
 		List<Object> arry_pdto = chatDAO.getChatProjectList(session.getAttribute("s_member_idx"));
 		List<Object> arry_chdto = chatDAO.getChatChannelList(session.getAttribute("s_member_idx"));
-		List<Object> arry_ctdto = chatDAO.getChatContentList(new ChatDTO("P", ((ProjectDTO) arry_pdto.get(0)).getProject_idx()));
+		/*List<Object> arry_ctdto = chatDAO.getChatContentList(new ChatDTO("P", ((ProjectDTO) arry_pdto.get(0)).getProject_idx()));
 		System.out.println(arry_ctdto.toString());
 		for (Object object : arry_ctdto) {
 			System.out.println(object.toString());
-		}
+		}*/
 		
 		mav.addObject("arry_pdto", arry_pdto);
 		mav.addObject("arry_chdto", arry_chdto);
-		mav.addObject("arry_ctdto", arry_ctdto);
+		/*mav.addObject("arry_ctdto", arry_ctdto);*/
 		mav.setViewName("chat/chatForm");
 		return mav;
 	}
@@ -48,22 +50,22 @@ public class ChatController {
 	@RequestMapping(value="chatList.do",  method=RequestMethod.POST)
 	public @ResponseBody List<Object> chatList(ChatDTO ctdto){
 		List<Object> arry_ctdto = chatDAO.getChatContentList(ctdto);
+		for (Object object : arry_ctdto) {
+			System.out.println(object);
+		}
 		return arry_ctdto;
 	}
 	
 	/** 채팅 - 채팅 입력 */
 	@RequestMapping(value="chatAdd.do",  method=RequestMethod.POST)
-	public ModelAndView chatAdd(){
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("chat/chatResult_d");
-		return mav;
+	public @ResponseBody Object chatAdd(ChatDTO ctdto, HttpSession session){
+		ctdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
+		return chatDAO.addChat(ctdto) > 0 ? "true" : "false";
 	}
 	
 	/** 채팅 - 채팅 수정 */
 	@RequestMapping(value="chatUpdate.do",  method=RequestMethod.POST)
 	public ModelAndView chatUpdate(){
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("chat/chatResult_d");
 		return mav;

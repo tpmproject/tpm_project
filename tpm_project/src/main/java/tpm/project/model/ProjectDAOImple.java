@@ -137,8 +137,9 @@ public class ProjectDAOImple implements ProjectDAO {
 	
 
 	public int projectDelete(int project_idx) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int count = sqlMap.delete("projectDelete",project_idx);
+		return count;
 	}
 
 	public ProjectDTO findProject(String project_name) {

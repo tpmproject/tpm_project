@@ -200,11 +200,14 @@ public class ProjectController {
 	}
 	
 	/** 프로젝트 - 프로젝트 삭제 */
-	@RequestMapping(value="projectDel.do",  method=RequestMethod.GET)
-	public ModelAndView projectDel(){
+	@RequestMapping(value="projectDelete.do",  method=RequestMethod.POST)
+	public ModelAndView projectDel(ProjectDTO dto){
 		
+	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectAdd_d");
+		
+		
 		return mav;
 	}
 	
