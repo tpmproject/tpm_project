@@ -29,6 +29,7 @@
 	<!-- 프로필 이미지 미리보기 -->
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	
+	
 <title>Insert title here</title>
 	<style>
       #chartdiv {
@@ -48,7 +49,7 @@
 		    display:none;
 		}
     </style>
-    
+    <%@ include file="/sample/cho/main/import.jsp"%>
     <script>
 	    function deletedo(){
 	  	  var id = document.memberInfoForm.member_id.value;
@@ -121,6 +122,7 @@
     </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
       <div class="col-md-12">
@@ -281,7 +283,6 @@
     </div>
     <c:set var="self_tendencylist" value="${self_tendency}"/>
 	          <c:forEach var="self_tendency" items="${self_tendencylist}">
-	          <input type="text" name="test" value="${self_tendency.tendency_e}">
 	          <script>
 			      var chart = AmCharts.makeChart( "chartdiv", {
 			                "type": "radar",
@@ -302,7 +303,7 @@
 			                	{ "balloonText": "[[value]]",
 			                  	  "bullet": "round",
 			                  	  "lineThickness": 2,
-			                  	  "valueField": "litres" } ] ,
+			                  	  "valueField": "point" } ] ,
 			                "categoryField": "tendency" }) ;
 	      	  </script>
           
@@ -345,6 +346,6 @@
 		     </script>
 		     </c:forEach>
 		     </c:forEach>
-		 
+		 <%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
