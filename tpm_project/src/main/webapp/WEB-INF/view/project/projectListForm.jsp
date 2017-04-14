@@ -66,7 +66,33 @@
 	function projectDelResult(){
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
+				var result = XHR.responseText;
+				var objData=eval('('+result+')');
+				var p=objData.p;
 				
+				if(p.project_idx==0){
+					window.alert('오류 발생!');
+				}else{
+					var divNode=document.createElement('DIV');
+					divNode.setAttribute('class','col-lg-3');
+					divNode.setAttribute('style','margin-top: 15px;');
+					divNode.setAttribute('id','project_div'+p.project_idx);
+					
+					var msg='<div class="box">';
+					msg+='<div class="box-gray aligncenter" style="height:210px;">';
+					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
+					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
+					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
+					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
+					msg+='<td><input type="button" value="진행중"></td></div>';
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'">프로젝트 보기버튼</a></div></div>';
+					
+					divNode.innerHTML=msg;
+					
+					document.getElementById('contain').appendChild(divNode);
+		
+				}
+				closem();
 			}
 		}
 			
