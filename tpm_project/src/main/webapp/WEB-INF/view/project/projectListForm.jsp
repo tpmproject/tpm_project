@@ -683,6 +683,7 @@ function drop4(ev) {
 	background: gray;
 	opacity: 0.7;
 	display: none;
+	z-index: 4;
 }
 
 #main_modal, #main_modal2 {
@@ -695,6 +696,7 @@ function drop4(ev) {
 	border-radius: 10px;
 	width: 640px;
 	height: 700px;
+	z-index: 5;
 }
 
 .sd {
@@ -914,7 +916,7 @@ function drop4(ev) {
 
 												<!-- 프로젝트 진행현황 -->
 												<c:choose>
-													<c:when test="${i.project_level == 3000 }">
+													<c:when test="${i.project_level == 3000 and i.project_state == 1}">
 														<button type="button" onclick="sucess()">완료하기</button>
 													</c:when>
 													<c:when test="${i.project_state == 2 }">
