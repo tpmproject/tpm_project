@@ -17,7 +17,8 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
@@ -684,7 +685,7 @@ function drop4(ev) {
 	display: none;
 }
 
-#main_modal,#main_modal2 {
+#main_modal, #main_modal2 {
 	display: none;
 	background: white;
 	position: fixed;
@@ -707,7 +708,7 @@ function drop4(ev) {
 </style>
 </head>
 <body class="skin-blue">
-<%@ include file="/WEB-INF/view/header.jsp"%>	
+	<%@ include file="/WEB-INF/view/header.jsp"%>
 	<section class="callaction">
 	<div class="container">
 		<div class="row" style="margin-bottom: 30px;">
@@ -727,56 +728,7 @@ function drop4(ev) {
 	</div>
 	</section>
 
-	<section>
-	<div class="container" id="contain">
-		<c:set var="plist" value="${plist}"></c:set>
-		<c:choose>
-			<c:when test="${empty plist}">
-			등록된 프로젝트가 없습니다.
-		</c:when>
-			<c:otherwise>
-				<c:forEach var="i" items="${plist}">
-								<div id="project_div${i.project_idx}" class="col-lg-3" style="margin-top: 15px;" >
-									<div class="box" style="border: 0px;">
-										<div class="box-gray aligncenter" style="height:210px;">
-											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
-											<h4 id="pn${i.project_idx}"><span>${i.project_name }</span>
-												<c:if test="${i.project_level eq 3000 }">
-												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-												<i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>
-												</c:if>
-											</h4>
-											<div class="icon">
-												<i class="fa fa-desktop fa-3x"></i>
-											</div>
-											<p id="pc${i.project_idx}">${i.project_content }</p>
-
-											<!-- 프로젝트 진행현황 -->
-											<c:choose>
-												<c:when test="${i.project_level == 3000 }">
-													<button type="button" onclick="sucess()">완료하기</button>
-												</c:when>
-												<c:when test="${i.project_state == 2 }">
-													<td><input type="button" value="평가 대기"></td>
-												</c:when>
-												<c:when test="${i.project_state == 1 }">
-													<td><input type="button" value="진행중"></td>
-												</c:when>
-											</c:choose>
-										</div>
-										<div class="box-bottom">
-											<a href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트 보기버튼</a>
-										</div>
-									</div>
-								</div>
-					<!-- divider -->
-					<!-- end divider -->
-					<!-- Portfolio Projects -->
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</div>
-	</section>
+	
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
@@ -821,13 +773,16 @@ function drop4(ev) {
 				<div class="sd">
 					<h4>친구목록</h4>
 					<div id="myFriend_List"
-						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+						style="width: 300px; height: 200px; overflow-y: scroll"
+						ondrop="drop2(event)" ondragover="allowDrop(event)"
+						ondragstart="drag(event)"></div>
 					<h4>검색 멤버</h4>
 					<div>
 						<input type="text" name="member_id" placeholder="Search" size="15">
 						<button type="button" class="btn" onclick="projectMemberAdd(1)">검색</button>
 					</div>
-					<div id="member_search_content" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
+					<div id="member_search_content" ondrop="drop2(event)"
+						ondragover="allowDrop(event)" ondragstart="drag(event)"
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
 
 				</div>
@@ -835,16 +790,19 @@ function drop4(ev) {
 
 				<div class="sd">
 					<h4>초대 멤버</h4>
-					<div id="project_Member" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
-					</div>
-					<button type="button" class="btn btn-next" id="btn-workbefore" onclick="showf()">이전</button>
+					<div id="project_Member"
+						style="width: 95%; height: 480px; overflow-y: scroll"
+						ondrop="drop(event)" ondragover="allowDrop(event)"
+						ondragstart="drag(event)"></div>
+					<button type="button" class="btn btn-next" id="btn-workbefore"
+						onclick="showf()">이전</button>
 					<button type="button" class="btn btn-next" onclick="addP()">완료</button>
 				</div>
 			</div>
 		</div>
 	</form>
-	
-	
+
+
 	<form name="changeProject" action="projectUpdate.do" method="post">
 		<div id="main_modal2">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -855,8 +813,8 @@ function drop4(ev) {
 					<h4>프로젝트 수정</h4>
 					<div id="btntest" class="icon">
 						<div>
-							<input type="hidden" name="project_idx">
-							프로젝트명: <input type="text" name="project_name">
+							<input type="hidden" name="project_idx"> 프로젝트명: <input
+								type="text" name="project_name">
 						</div>
 						<p>
 							<textarea cols="30" rows="20" name="project_content"></textarea>
@@ -872,13 +830,16 @@ function drop4(ev) {
 				<div class="sd">
 					<h4>친구목록</h4>
 					<div id="myFriend_List2"
-						style="width: 300px; height: 200px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+						style="width: 300px; height: 200px; overflow-y: scroll"
+						ondrop="drop4(event)" ondragover="allowDrop(event)"
+						ondragstart="drag(event)"></div>
 					<h4>검색 멤버</h4>
 					<div>
 						<input type="text" name="member_id" placeholder="Search" size="15">
 						<button type="button" class="btn" onclick="projectMemberAdd(2)">검색</button>
 					</div>
-					<div id="member_search_content2" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"
+					<div id="member_search_content2" ondrop="drop4(event)"
+						ondragover="allowDrop(event)" ondragstart="drag(event)"
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
 
 				</div>
@@ -886,8 +847,10 @@ function drop4(ev) {
 
 				<div class="sd">
 					<h4>프로젝트 멤버</h4>
-					<div id="project_Member2" style="width: 95%; height: 480px; overflow-y: scroll" ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" >
-					</div>
+					<div id="project_Member2"
+						style="width: 95%; height: 480px; overflow-y: scroll"
+						ondrop="drop3(event)" ondragover="allowDrop(event)"
+						ondragstart="drag(event)"></div>
 					<button type="button" class="btn btn-next" onclick="showf2()">이전</button>
 					<button type="button" class="btn btn-next" onclick="updateP()">완료</button>
 				</div>
@@ -897,100 +860,115 @@ function drop4(ev) {
 	<hr>
 	<hr>
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-   
-    <div class="item active">
-      <img src="/tpm_project/sample/khj/img/son1.jpg" style=" width: 200px;; height: 100%;" alt="sonlove" align="middle">
-      <div class="carousel-caption">
-       
-      </div>
-    </div>
-    
-    <div class="item">
-      <img src="/tpm_project/sample/khj/img/son2.jpg" alt="...">
-      <div class="carousel-caption">
-       
-      </div>
-    </div>
-    
-    <div class="item">
-      <div>
-      	<div class="container" id="contain">
-		<c:set var="plist" value="${plist}"></c:set>
-		<c:choose>
-			<c:when test="${empty plist}">
-			등록된 프로젝트가 없습니다.
-		</c:when>
+		<!-- Indicators -->
+		
+		<ol class="carousel-indicators">
+		<c:forEach var="i" items="${plist}" varStatus="status">
+			<c:if test="${status.index %4 == 0}">
+			<c:choose>
+			<c:when test="${status.index ==0}">
+				<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" class="active"></li>
+			</c:when>
 			<c:otherwise>
-				<c:forEach var="i" items="${plist}">
-								<div id="project_div${i.project_idx}" class="col-lg-3" style="margin-top: 15px;" >
-									<div class="box" style="border: 0px;">
-										<div class="box-gray aligncenter" style="height:210px;">
-											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
-											<h4 id="pn${i.project_idx}"><span>${i.project_name }</span>
-												<c:if test="${i.project_level eq 3000 }">
-												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-												<i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>
-												</c:if>
-											</h4>
-											<div class="icon">
-												<i class="fa fa-desktop fa-3x"></i>
-											</div>
-											<p id="pc${i.project_idx}">${i.project_content }</p>
+			<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" ></li>
+			</c:otherwise>
+			</c:choose>
+			</c:if>
+			
+		</c:forEach>
+		</ol>
 
-											<!-- 프로젝트 진행현황 -->
-											<c:choose>
-												<c:when test="${i.project_level == 3000 }">
-													<button type="button" onclick="sucess()">완료하기</button>
-												</c:when>
-												<c:when test="${i.project_state == 2 }">
-													<td><input type="button" value="평가 대기"></td>
-												</c:when>
-												<c:when test="${i.project_state == 1 }">
-													<td><input type="button" value="진행중"></td>
-												</c:when>
-											</c:choose>
-										</div>
-										<div class="box-bottom">
-											<a href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트 보기버튼</a>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+
+			<div class="item active">
+				<div>
+					<div class="container" id="contain">
+						<c:set var="plist" value="${plist}"></c:set>
+						<c:choose>
+							<c:when test="${empty plist}">
+								등록된 프로젝트가 없습니다.
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="i" items="${plist}" varStatus="status">
+									<div id="project_div${i.project_idx}" class="col-lg-3"
+										style="margin-top: 15px;">
+										<div class="box" style="border: 0px;">
+											<div class="box-gray aligncenter" style="height: 210px;">
+												<input type="hidden" id="p_idx${i.project_idx}"
+													value="${i.project_idx}">
+												<h4 id="pn${i.project_idx}">
+													<span>${i.project_name }</span>
+													<c:if test="${i.project_level eq 3000 }">
+														<span
+															onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+															<i class="glyphicon glyphicon-cog"
+															style="margin-bottom: 0px;"></i>
+														</span>
+													</c:if>
+												</h4>
+												<div class="icon">
+													<i class="fa fa-desktop fa-3x"></i>
+												</div>
+												<p id="pc${i.project_idx}">${i.project_content }</p>
+
+												<!-- 프로젝트 진행현황 -->
+												<c:choose>
+													<c:when test="${i.project_level == 3000 }">
+														<button type="button" onclick="sucess()">완료하기</button>
+													</c:when>
+													<c:when test="${i.project_state == 2 }">
+														<td><input type="button" value="평가 대기"></td>
+													</c:when>
+													<c:when test="${i.project_state == 1 }">
+														<td><input type="button" value="진행중"></td>
+													</c:when>
+												</c:choose>
+											</div>
+											<div class="box-bottom">
+												<a
+													href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트
+													보기버튼</a>
+											</div>
 										</div>
 									</div>
-								</div>
-					<!-- divider -->
-					<!-- end divider -->
-					<!-- Portfolio Projects -->
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</div>
-      </div>
-      <div class="carousel-caption">
-       
-      </div>
-    </div>
-    
-  </div>
+									<!-- divider -->
+									<!-- end divider -->
+									<!-- Portfolio Projects -->
+									
+									<c:if test="${status.index %4 == 3 and not status.last}">
+									</div>
+										</div>
+										<div class="carousel-caption"></div>
+									</div>
+									
+										<div class="item">
+									<div>
+									<div class="container" id="contain">
+									</c:if>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+				<div class="carousel-caption"></div>
+			</div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-	
-<%@ include file="/WEB-INF/view/footer.jsp"%>
+		</div>
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+
+	<%@ include file="/WEB-INF/view/footer.jsp"%>
 
 
 </body>
