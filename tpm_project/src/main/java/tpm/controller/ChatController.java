@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.chat.model.ChatDAO;
@@ -38,17 +39,16 @@ public class ChatController {
 		
 		mav.addObject("arry_pdto", arry_pdto);
 		mav.addObject("arry_chdto", arry_chdto);
+		mav.addObject("arry_ctdto", arry_ctdto);
 		mav.setViewName("chat/chatForm");
 		return mav;
 	}
 	
 	/** 채팅 - 채팅 데이터 반환 */
 	@RequestMapping(value="chatList.do",  method=RequestMethod.POST)
-	public ModelAndView chatList(){
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("chat/chatList_d");
-		return mav;
+	public @ResponseBody List<Object> chatList(ChatDTO ctdto){
+		List<Object> arry_ctdto = chatDAO.getChatContentList(ctdto);
+		return arry_ctdto;
 	}
 	
 	/** 채팅 - 채팅 입력 */

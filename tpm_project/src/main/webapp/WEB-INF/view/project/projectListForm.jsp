@@ -24,6 +24,9 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
 <%@ include file="/sample/cho/main/import.jsp"%>
+<script> 
+ $(document).ready(function() { $('#myCarousel').carousel('cycle'); $('#myCarousel2').carousel('cycle'); }); 
+ </script>
 <script type="text/javascript">
 	window.onload = function() {
 		$(main_modal).hide();
@@ -891,6 +894,104 @@ function drop4(ev) {
 			</div>
 		</div>
 	</form>
+	<hr>
+	<hr>
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+   
+    <div class="item active">
+      <img src="/tpm_project/sample/khj/img/son1.jpg" style=" width: 200px;; height: 100%;" alt="sonlove" align="middle">
+      <div class="carousel-caption">
+       
+      </div>
+    </div>
+    
+    <div class="item">
+      <img src="/tpm_project/sample/khj/img/son2.jpg" alt="...">
+      <div class="carousel-caption">
+       
+      </div>
+    </div>
+    
+    <div class="item">
+      <div>
+      	<div class="container" id="contain">
+		<c:set var="plist" value="${plist}"></c:set>
+		<c:choose>
+			<c:when test="${empty plist}">
+			등록된 프로젝트가 없습니다.
+		</c:when>
+			<c:otherwise>
+				<c:forEach var="i" items="${plist}">
+								<div id="project_div${i.project_idx}" class="col-lg-3" style="margin-top: 15px;" >
+									<div class="box" style="border: 0px;">
+										<div class="box-gray aligncenter" style="height:210px;">
+											<input type="hidden" id="p_idx${i.project_idx}" value="${i.project_idx}">
+											<h4 id="pn${i.project_idx}"><span>${i.project_name }</span>
+												<c:if test="${i.project_level eq 3000 }">
+												<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+												<i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>
+												</c:if>
+											</h4>
+											<div class="icon">
+												<i class="fa fa-desktop fa-3x"></i>
+											</div>
+											<p id="pc${i.project_idx}">${i.project_content }</p>
+
+											<!-- 프로젝트 진행현황 -->
+											<c:choose>
+												<c:when test="${i.project_level == 3000 }">
+													<button type="button" onclick="sucess()">완료하기</button>
+												</c:when>
+												<c:when test="${i.project_state == 2 }">
+													<td><input type="button" value="평가 대기"></td>
+												</c:when>
+												<c:when test="${i.project_state == 1 }">
+													<td><input type="button" value="진행중"></td>
+												</c:when>
+											</c:choose>
+										</div>
+										<div class="box-bottom">
+											<a href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트 보기버튼</a>
+										</div>
+									</div>
+								</div>
+					<!-- divider -->
+					<!-- end divider -->
+					<!-- Portfolio Projects -->
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</div>
+      </div>
+      <div class="carousel-caption">
+       
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+	
 <%@ include file="/WEB-INF/view/footer.jsp"%>
+
+
 </body>
 </html>

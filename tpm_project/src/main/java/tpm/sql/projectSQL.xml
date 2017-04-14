@@ -10,8 +10,13 @@
 		where a.project_idx=b.project_idx
 	</select>
 
-	<select id="projectList" resultType="tpm.project.model.ProjectDTO">
-		select * from tpm_project order by project_idx desc
+	<select id="projectList" parameterType="int" resultType="tpm.project.model.ProjectDTO">
+		select * 
+		from tpm_project 
+		WHERE project_idx IN (select project_idx 
+                     		  from tpm_project_member 
+                      		  where member_idx=#{member_idx}) 
+                      		  order by project_idx desc
 	</select>
 	
 	<select id="project_idx" resultType="int">
