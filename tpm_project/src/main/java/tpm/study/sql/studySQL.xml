@@ -5,7 +5,7 @@
 <mapper namespace="tpm.study">
 
 	<!-- Mybatis DTO 안 DTO 1:1 Select 하기 -->
-	<resultMap type="tpm.study.model.Car" id="Car">
+	<resultMap id="Car" type="tpm.study.model.Car" >
 		<!-- column : db 의 컬럼명 -->
 		<!-- property : dto 의 멤버 변수명 -->
 		<result property="ownerId" column="ownerId"  />
@@ -13,7 +13,7 @@
 		<result property="color" column="color"  />
 	</resultMap>
 
-	<resultMap type="tpm.study.model.Person" id="Person">
+	<resultMap id="Person" type="tpm.study.model.Person" >
 		<result property="id" column="id"  />
 		<result property="name" column="name"  />
 		<result property="age" column="age"  />

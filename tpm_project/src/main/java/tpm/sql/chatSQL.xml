@@ -10,7 +10,9 @@
 		WHERE project_idx IN (SELECT project_idx 
 							  FROM tpm_project_member 
 							  WHERE member_idx = #{member_idx})
+		ORDER BY project_idx ASC
 	</select>
+	
 	<!-- 채팅 화면에서 뿌려줄 채널 리스트 정보 가져오기 -->
 	<select id="chatChannelList" parameterType="Object" resultType="tpm.channel.model.ChannelDTO">
 		SELECT * 
@@ -18,13 +20,37 @@
 		WHERE channel_idx IN (SELECT channel_idx 
 							  FROM tpm_channel_member 
 							  WHERE member_idx = #{member_idx})
+		ORDER BY channel_idx ASC
 	</select>
+	
 	<!--  채팅 화면에 뿌려줄 해당 채널이나 프로젝트의 채팅 내용 가져오기 -->
-	<select id="chatContentList" parameterType="tpm.chat.model.ChatDTO" resultType="tpm.chat.model.ChatDTO">
-		SELECT * 
-		FROM tpm_chat 
-		WHERE chat_cp_code = #{chat_cp_code}
-		AND chat_cp_value = #{chat_cp_value}
-		ORDER BY chat_date asc
+	<resultMap id="memberResultMap" type="tpm.member.model.MemberDTO" >
+		<id property="member_idx" column="member_idx"/>
+		<result property="member_id" column="member_id"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_img" column="member_img"/>
+	</resultMap>
+	<resultMap id="chatResultMap" type="tpm.chat.model.ChatDTO" >
+		<id property="chat_idx" column="chat_idx"/>
+		<result property="member_idx" column="member_idx"/>
+		<result property="chat_cp_code" column="chat_cp_code"/>
+		<result property="chat_cp_value" column="chat_cp_value"/>
+		<result property="chat_content" column="chat_content"/>
+		<result property="chat_date" column="chat_date"/>
+		<collection property="mdto" resultMap="memberResultMap" />
+	</resultMap>
+	<select id="chatContentList" parameterType="tpm.chat.model.ChatDTO" resultMap="chatResultMap">
+		SELECT *
+		FROM (SELECT * 
+		      FROM tpm_chat 
+		      WHERE chat_cp_code = #{chat_cp_code}
+		      AND chat_cp_value = #{chat_cp_value}
+		      ORDER BY chat_date asc) ct, tpm_member m
+		WHERE ct.member_idx = m.member_idx
 	</select>
+	
+	<!-- 채팅 등록 하기 -->
+	<insert id="chatContentInsert" parameterType="tpm.chat.model.ChatDTO">
+		INSERT INTO tpm_chat VALUES(chat_idx.nextval, #{member_idx}, #{chat_cp_code}, #{chat_cp_value}, #{chat_content}, SYSDATE) 
+	</insert>
 </mapper>

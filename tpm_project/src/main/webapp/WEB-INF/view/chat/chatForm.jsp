@@ -9,11 +9,21 @@
 <script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script>
 <style>
 #chatArea {
-	width: 200px; height: 100px; overflow-y: auto; border: 1px solid black;
+	width: 1000px; height: 500px; overflow-y: auto; border: 1px solid black;
+}
+#message {
+	width: 1000px; height: 100px;
 }
 </style>
 <script>
+var currCpCode;
+var currCpValue;
+
 function showChatContent(cpCode, cpValue){
+	
+	currCpCode = cpCode;
+	currCpValue = cpValue;
+	
 	$.ajax({
 		url : 'chatList.do',
 		type : 'post',
@@ -21,15 +31,54 @@ function showChatContent(cpCode, cpValue){
 				 chat_cp_value : cpValue },
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			//window.alert(JSON.stringify(json));
-			$('#chatMessageArea').va
+			window.alert(JSON.stringify(json));
+			var msg = '';
+			for(var i = 0 ; i < json.length ; i++){
+				msg += '<span>' + json[i].mdto.member_name + ' : ' + json[i].chat_content + ' -- ' + json[i].chat_date +'</span><br>';
+			}
+			$('#chatMessageArea').html(msg);
+		}
+	});
+}
+
+function InsertChatContent() {
+	var currInsertChatContent = $('#chat_content').val();
+
+	$.ajax({
+		url : 'chatAdd.do',
+		type : 'post',
+		data : { 
+				 chat_cp_code : currCpCode,
+				 chat_cp_value : currCpValue,
+				 chat_content : currInsertChatContent
+		},
+		dataType : 'json',
+		success : function(json) {
+			// 입력 성공시..
+			if(json == true){
+				// 소켓을 통해 메세지를 전달한다.
+			}
 		}
 	});
 }
 
 </script>
 </head>
-<body>
+<c:choose>
+	<c:when test="${!empty arry_pdto}">
+		<body onload="showChatContent('P','${arry_pdto.get(0).project_idx}')">
+	</c:when>
+	<c:otherwise>
+		<c:choose>
+			<c:when test="${!empty arry_chdto}">
+				<body onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
+			</c:when>
+			<c:otherwise>
+				<body>
+			</c:otherwise>
+		</c:choose>
+	</c:otherwise>
+</c:choose>
 <fieldset>
 	<legend>프로젝트 리스트</legend>
 	<ul>
@@ -48,17 +97,12 @@ function showChatContent(cpCode, cpValue){
 </fieldset>
 <h1>대화 영역</h1>
 <div id="chatArea">
-
 	<div id="chatMessageArea">
-		<c:forEach var="ctdto" items="${arry_ctdto}">
-			${ctdto.chat_content}--${ctdto.chat_date}<br>
-		</c:forEach>
+		
 	</div>
 </div>
 <br/>
-<form action="chatAdd.do" method="post">
-	<input type="text" id="message">
-	<input type="submit" id="sendBtn" value="전송">
-</form>
+<input type="text" id="chat_content">
+<input type="button" value="전송" onclick="InsertChatContent()">
 </body>
 </html>
