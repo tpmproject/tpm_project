@@ -24,7 +24,7 @@ function dateTest(){
 	</c:if>
 	<c:if test="${!empty sessionScope.s_member_id}">
 	
-		<c:redirect url="projectList.do"></c:redirect>
+		<%-- <c:redirect url="projectList.do"></c:redirect> --%>
 		
 		${sessionScope.s_member_name }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
 	</c:if>
