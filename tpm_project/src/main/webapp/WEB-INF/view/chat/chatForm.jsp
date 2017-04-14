@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <!-- jQuery 2.1.3 -->
 <script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+<!-- Moment -->
+<script src="/tpm_project/js/date/moment.js"></script>
 <style>
 #chatArea {
 	width: 1000px; height: 500px; overflow-y: auto; border: 1px solid black;
@@ -34,7 +36,11 @@ function showChatContent(cpCode, cpValue){
 			window.alert(JSON.stringify(json));
 			var msg = '';
 			for(var i = 0 ; i < json.length ; i++){
-				msg += '<span>' + json[i].mdto.member_name + ' : ' + json[i].chat_content + ' -- ' + json[i].chat_date +'</span><br>';
+				var fomatdate = new Date(json[i].chat_date);
+				var date1 = fomatdate.toLocaleDateString();
+				//var date2 = fomatdate.format('{yyyy}-{MM}-{dd} {hh}:{mm}:{ss}');
+				var date2 = fomatdate.format('MMMM Do YYYY, h:mm:ss a');
+				msg += '<span>' + json[i].mdto.member_name + ' : ' + json[i].chat_content + ' -- ' + date2 +'</span><br>';
 			}
 			$('#chatMessageArea').html(msg);
 		}
@@ -56,6 +62,7 @@ function InsertChatContent() {
 		success : function(json) {
 			// 입력 성공시..
 			if(json == true){
+				
 				// 소켓을 통해 메세지를 전달한다.
 			}
 		}
