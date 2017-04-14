@@ -586,7 +586,8 @@ function tendencyListResult(){
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
-	location.href='fileUploadForm.do?work_idx='+work_idx+'&project_idx='+project_idx;
+	window.open('fileUploadForm.do?work_idx='+work_idx+'&project_idx='+project_idx,"window", "width=500,height=700");
+
 }
 
 </script>
