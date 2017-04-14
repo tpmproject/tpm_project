@@ -345,6 +345,10 @@ function checkResult() {
 			var ch_sv=document.getElementById('ch_state'+result).value;
 			
 			var div_ch=document.getElementById('div_ch'+result);
+			var work_idx=div_ch.parentNode.getAttribute('id').substring(9);
+			var chTotal=$('#chTotal'+work_idx).val();
+			var chChecked=$('#chChecked'+work_idx);
+			
 			div_ch=div_ch.parentNode.lastChild.previousSibling;
 			
 			if(ch_sv=='1'){
@@ -352,6 +356,8 @@ function checkResult() {
 				ch.className='glyphicon glyphicon-unchecked';
 				$(ch).fadeIn('50');
 				ch_s.value='0';
+				
+				chChecked.val(chChecked.val()-1);
 			}else if(ch_sv=='0'){
 				
 				if(div_ch.value=='0'){
@@ -363,7 +369,11 @@ function checkResult() {
 					$(ch).fadeIn('50');
 				}
 				ch_s.value='1';
+				
+				chChecked.val(parseInt(chChecked.val())+1);
 			}
+			
+			document.getElementById('chBar'+work_idx).style.width=chChecked.val()/chTotal *100+'%';
 		}
 	}
 }
@@ -787,7 +797,9 @@ function fileUp(work_idx){
 										<tr>
 											<td colspan="2">
 												<div class="check_div" id="check_div${wdto.work_idx}">
-													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
+													<c:set var="chTotal" value="0"></c:set>
+													<c:set var="chChecked" value="0"></c:set>
+													<c:forEach var="chdto" items="${wdto.checklist_dtos}" varStatus="status">
 														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >
 													<c:choose>
 													<c:when test="${param.project_level != 1000 }">
@@ -803,8 +815,12 @@ function fileUp(work_idx){
 															</a>
 															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 														</div>
-													
-													
+													<c:if test="${status.last}">
+														<c:set var="chTotal" value="${status.count}"></c:set>
+													</c:if>
+													<c:if test="${chdto.checklist_state eq '1'}">
+													<c:set var="chChecked" value="${chChecked+1}"></c:set>
+													</c:if>
 													</c:forEach>
 												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
 												</div>
@@ -814,9 +830,17 @@ function fileUp(work_idx){
 											<td colspan="2" align="right"><a id="aCheck${wdto.work_idx}" href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a>&nbsp;</td>
 										</tr>
 										<tr>
-											<td>진행률</td>
-											<td>막대그래프</td>
+											<td colspan="2">
+											<div class="progress" style="margin-bottom: 2px; height: 12px;">
+											<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;">			    
+											</div>
+											</div>
+											<input type="hidden" id="chTotal${wdto.work_idx}" value="${chTotal}">
+											<input type="hidden" id="chChecked${wdto.work_idx}" value="${chChecked}">
+											</td>
 										</tr>
+										<c:remove var="chTotal"/>
+										<c:remove var="chChecked"/>
 										<tr>
 											<c:choose>
 											<c:when test="${wdto.work_state == 3 }">
