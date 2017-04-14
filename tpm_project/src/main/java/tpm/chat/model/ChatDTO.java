@@ -1,6 +1,9 @@
 package tpm.chat.model;
 
 import java.sql.*;
+import java.util.List;
+
+import tpm.member.model.MemberDTO;
 
 public class ChatDTO {
 
@@ -10,6 +13,8 @@ public class ChatDTO {
 	private int chat_cp_value;
 	private String chat_content;
 	private Date chat_date;
+
+	private MemberDTO mdto;
 
 	public ChatDTO() {
 		super();
@@ -30,6 +35,18 @@ public class ChatDTO {
 		this.chat_cp_value = chat_cp_value;
 		this.chat_content = chat_content;
 		this.chat_date = chat_date;
+	}
+
+	public ChatDTO(int chat_idx, int member_idx, String chat_cp_code, int chat_cp_value, String chat_content,
+			Date chat_date, MemberDTO mdto) {
+		super();
+		this.chat_idx = chat_idx;
+		this.member_idx = member_idx;
+		this.chat_cp_code = chat_cp_code;
+		this.chat_cp_value = chat_cp_value;
+		this.chat_content = chat_content;
+		this.chat_date = chat_date;
+		this.mdto = mdto;
 	}
 
 	public int getChat_idx() {
@@ -80,11 +97,19 @@ public class ChatDTO {
 		this.chat_date = chat_date;
 	}
 
+	public MemberDTO getMdto() {
+		return mdto;
+	}
+
+	public void setMdto(MemberDTO mdto) {
+		this.mdto = mdto;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatDTO [chat_idx=" + chat_idx + ", member_idx=" + member_idx + ", chat_cp_code=" + chat_cp_code
 				+ ", chat_cp_value=" + chat_cp_value + ", chat_content=" + chat_content + ", chat_date=" + chat_date
-				+ "]";
+				+ ", mdto=" + mdto + "]";
 	}
 
 }

@@ -16,6 +16,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script>
@@ -121,22 +122,24 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
-
+	window.alert(work_confirm);
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.work_upstart.value=work_start;
-	document.changeWork.work_upend.value=work_end;	
+	document.changeWork.work_upend.value=work_end;
+	if(work_confirm==10){
+		document.changeWork.work_confirm.setAttribute('checked','checked');
+	}
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
-	var wsta=document.newWork.work_start.value;
-	var wend=document.newWork.work_end.value;
+	var wsta=document.newWork.work_date.value;
 	
-	if (wtit == null || wtit == "" || !wsta || !wend ) {
+/* 	if (wtit == null || wtit == "" || !wsta ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
 		showf();
 		return;
-	}
+	} */
 	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
@@ -161,7 +164,7 @@ function shows2(){
 	var p=${pdto.project_idx};
 	var w=document.changeWork.work_idx.value;
 	var m= ${s_member_idx}
-	sendRequest('workAdd.do?project_idx='+p+'&work_idx='+w+'&member_idx='+m,null,showsResult,'GET');
+	sendRequest('workUpdate.do?project_idx='+p+'&work_idx='+w+'&member_idx='+m,null,shows2Result,'GET');
 	
 }
 function showsResult(){
@@ -179,10 +182,7 @@ function showsResult(){
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
-
-				msg2 += '<p class="text-muted">' + member.member_id
-						+ '</p> ';
-
+				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
 				msg2 += '</div> ';
 			}
 			var project_m = document.getElementById('project_m');
@@ -202,15 +202,15 @@ function shows2Result(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-
-				msg2 += '<div id="work_member2'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				
+				msg2 += '<div id="work2_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
 				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
 				msg2 += '</div> ';
 				
-				if(member.pm%10==1){
+				if(member.pm==1){
 					w_msg+=msg2;
 				}else{
 					p_msg+=msg2;
@@ -285,21 +285,26 @@ function updateWork(){
  	var work_member=document.getElementById('work_m2');
 	var fch = work_member.firstChild;
 	var lch = work_member.lastChild;
+	if(document.changeWork.work_confirm.checked==true){
+		document.changeWork.work_confirm.value='10';
+	}else{
+		document.changeWork.work_confirm.value='20';
+	}
 	var msg='';
-/* 	var count=0;
+	var count=0;
 	while(true){
 		if(fch.nodeName=='DIV'){
 			var idx=fch.getAttribute('id');
 			if(count==0){
-				msg+=idx.substring(11);
+				msg+=idx.substring(12);
 				count++;
 			}else{
-			msg+=','+idx.substring(11);
+			msg+=','+idx.substring(12);
 			}
 		}
 		if(fch==lch)break;
 		fch=fch.nextSibling;
-	} */
+	}
 	var my_idx=${s_member_idx};
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&work_title=' + document.changeWork.work_title.value
@@ -339,6 +344,10 @@ function checkResult() {
 			var ch_sv=document.getElementById('ch_state'+result).value;
 			
 			var div_ch=document.getElementById('div_ch'+result);
+			var work_idx=div_ch.parentNode.getAttribute('id').substring(9);
+			var chTotal=$('#chTotal'+work_idx).val();
+			var chChecked=$('#chChecked'+work_idx);
+			
 			div_ch=div_ch.parentNode.lastChild.previousSibling;
 			
 			if(ch_sv=='1'){
@@ -346,6 +355,8 @@ function checkResult() {
 				ch.className='glyphicon glyphicon-unchecked';
 				$(ch).fadeIn('50');
 				ch_s.value='0';
+				
+				chChecked.val(chChecked.val()-1);
 			}else if(ch_sv=='0'){
 				
 				if(div_ch.value=='0'){
@@ -357,7 +368,11 @@ function checkResult() {
 					$(ch).fadeIn('50');
 				}
 				ch_s.value='1';
+				
+				chChecked.val(parseInt(chChecked.val())+1);
 			}
+			
+			document.getElementById('chBar'+work_idx).style.width=chChecked.val()/chTotal *100+'%';
 		}
 	}
 }
@@ -513,6 +528,25 @@ function drop3(ev) {
     }
 }
 
+//업무 수정 멤버 추가 드랍
+function drop4(ev){
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('work2_member')){
+    	var comp=document.getElementById(data);
+    	document.getElementById('work_m2').appendChild(comp);
+    }
+}
+//업무 수정 멤버 빼기 드랍
+function drop5(ev){
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if(data.startsWith('work2_member')){
+    	var comp=document.getElementById(data);
+	  	document.getElementById('project_m2').appendChild(comp);
+    }
+}
+
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 function workDrop(ev) {
     ev.preventDefault();
@@ -586,7 +620,8 @@ function tendencyListResult(){
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
-	location.href='fileUploadForm.do?work_idx='+work_idx+'&project_idx='+project_idx;
+	window.open('fileUploadForm.do?work_idx='+work_idx+'&project_idx='+project_idx,"window", "width=500,height=700");
+
 }
 
 </script>
@@ -761,7 +796,9 @@ function fileUp(work_idx){
 										<tr>
 											<td colspan="2">
 												<div class="check_div" id="check_div${wdto.work_idx}">
-													<c:forEach var="chdto" items="${wdto.checklist_dtos}">
+													<c:set var="chTotal" value="0"></c:set>
+													<c:set var="chChecked" value="0"></c:set>
+													<c:forEach var="chdto" items="${wdto.checklist_dtos}" varStatus="status">
 														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >
 													<c:choose>
 													<c:when test="${param.project_level != 1000 }">
@@ -777,8 +814,12 @@ function fileUp(work_idx){
 															</a>
 															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
 														</div>
-													
-													
+													<c:if test="${status.last}">
+														<c:set var="chTotal" value="${status.count}"></c:set>
+													</c:if>
+													<c:if test="${chdto.checklist_state eq '1'}">
+													<c:set var="chChecked" value="${chChecked+1}"></c:set>
+													</c:if>
 													</c:forEach>
 												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
 												</div>
@@ -788,9 +829,17 @@ function fileUp(work_idx){
 											<td colspan="2" align="right"><a id="aCheck${wdto.work_idx}" href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a>&nbsp;</td>
 										</tr>
 										<tr>
-											<td>진행률</td>
-											<td>막대그래프</td>
+											<td colspan="2">
+											<div class="progress" style="margin-bottom: 2px; height: 12px;">
+											<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;">			    
+											</div>
+											</div>
+											<input type="hidden" id="chTotal${wdto.work_idx}" value="${chTotal}">
+											<input type="hidden" id="chChecked${wdto.work_idx}" value="${chChecked}">
+											</td>
 										</tr>
+										<c:remove var="chTotal"/>
+										<c:remove var="chChecked"/>
 										<tr>
 											<c:choose>
 											<c:when test="${wdto.work_state == 3 }">
@@ -846,12 +895,15 @@ function fileUp(work_idx){
 						<input type="hidden" name="category_idx" value="">
 						업무명 : <input type="text" name="work_title">
 					</div>
-					<div>기한</div>
-					<div>
-						<input type="text" id="work_start" name="work_start"
-							rel="stylesheet" /> ~<input type="text" id="work_end"
-							name="work_end" rel="stylesheet" />
-							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
+					<div class="form-group">
+						<label>기한:</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-clock-o"></i>
+							</div>
+								<input type="text" class="form-control pull-right" name="work_date" id="workdate" />
+						</div>
+						<!-- /.input group -->
 					</div>
 					<div>
 						<input type="checkbox" name="work_confirm">결재여부
@@ -869,10 +921,6 @@ function fileUp(work_idx){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
-							</div>
-							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<a><h4 class="text-center">업무 담당자 </h4>
 								<select id="tendency" onchange="tendencyList()">
 									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
@@ -884,13 +932,11 @@ function fileUp(work_idx){
 									<option value="tendency_j">판단적</option>
 									<option value="tendency_p">인식적</option>
 								</select>
-								</a>
-								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3">
-								<h4 class="text-center">추천 목록</h4>
-								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll" >
-								</div>
+							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<h4 class="text-center">업무 담당자 </h4>
+								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
 						</div>
 					</div>
@@ -940,10 +986,6 @@ function fileUp(work_idx){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m2" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
-							</div>
-							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<a><h4 class="text-center">업무 담당자 </h4>
 								<select id="getTendency" onchange="getTendencyList()">
 									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
@@ -955,20 +997,17 @@ function fileUp(work_idx){
 									<option value="tendency_j">판단적</option>
 									<option value="tendency_p">인식적</option>
 								</select>
-								</a>
-								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+								<div id="project_m2" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop5(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3">
-								<h4 class="text-center">추천 목록</h4>
-								<div id="tendency_m2" style="width:100%; height: 320px; overflow-y: scroll" >
-								</div>
+							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<h4 class="text-center">업무 담당자 </h4>
+								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<button type="button" class="btn btn-next" id="btn-workbefore"
 					onclick="showf2()">이전</button>
-				<c:if test=""></c:if>
 				<button type="button" class="btn btn-next" id="btn-workok" onclick="updateWork()">완료</button>
 			</div>
 		</div>
@@ -976,7 +1015,7 @@ function fileUp(work_idx){
 <%@include file="/WEB-INF/view/footer.jsp" %>
 </body>
 <script>
-              //검색 날짜제한 
+/*               //검색 날짜제한 
              $(function() {              
                  
                //datepicker 한국어로 사용하기 위한 언어설정
@@ -1053,6 +1092,11 @@ $("#work_time").timepicker({
 $(document).ready(function(){
 	$("#work_time").timepicker('setTime', "17:30");
 
-});
+}); */
+$(function () {
+	 //Date range picker with time picker
+   $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+});	
+
 </script>
 </html>

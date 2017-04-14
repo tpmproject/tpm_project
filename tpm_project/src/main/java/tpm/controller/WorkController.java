@@ -117,8 +117,6 @@ public class WorkController {
 	/** 업무 - 업무 수정 폼*/
 	@RequestMapping(value="workUpdate.do", method=RequestMethod.GET)
 	public ModelAndView workUpdateForm(FileDTO dto) {
-		
-		
 		ArrayList<MemberDTO> arr=workDAO.workMemberList(dto);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workUpdateResult_d");
@@ -129,12 +127,23 @@ public class WorkController {
 	
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView workUpdate(WorkDTO dto){
-		System.out.println(1);
+	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx){
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
 		int result=workDAO.updateWork(dto);
-		System.out.println(5);
+		if(result>0){
+			result=0;
+			result+=workDAO.workMemberDelete(dto);
+			for(int i=0;i<member_idx.length;i++){
+				int w_idx=Integer.parseInt(member_idx[i]);
+				WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), work_member[i]);
+				result+=workDAO.workMemberInsert(wdto);
+				mav.addObject("dto",dto);
+			}
+		}else{
+			mav.addObject("msg","error");
+		}
 		return mav;
 	}
 	

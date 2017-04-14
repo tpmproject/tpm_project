@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
-<script>
-window.alert('프로젝트:idx=${project_idx}');
-</script>
+
 </head>
 <body>
 	<h1>파일 업로드</h1>

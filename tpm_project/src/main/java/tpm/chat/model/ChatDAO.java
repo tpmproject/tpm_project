@@ -8,7 +8,7 @@ public interface ChatDAO {
 	public List<Object> getChatProjectList(Object obj);
 	public List<Object> getChatChannelList(Object obj);
 	public List<Object> getChatContentList(Object obj);
-	public int addChat();
+	public int addChat(Object obj);
 	public int updateChat();
 	public int delChat();
 
