@@ -15,8 +15,8 @@ public class FileDAOImple implements FileDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<ProjectDTO> projectAllList() {
-		ArrayList<ProjectDTO> project_list=(ArrayList)sqlMap.selectList("projectList");
+	public ArrayList<ProjectDTO> projectAllList(int member_idx) {
+		ArrayList<ProjectDTO> project_list=(ArrayList)sqlMap.selectList("projectList",member_idx);
 		return project_list;
 	}
 
