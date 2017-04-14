@@ -69,9 +69,9 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="myWork.do">
                 <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
+                <span>나의 업무</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
