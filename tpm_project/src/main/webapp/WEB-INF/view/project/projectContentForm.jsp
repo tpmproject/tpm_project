@@ -306,7 +306,6 @@ function updateWork(){
 		fch=fch.nextSibling;
 	}
 	var my_idx=${s_member_idx};
-	var my_idx=${s_member_idx};
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&work_title=' + document.changeWork.work_title.value
 	+'&work_start=' + document.changeWork.work_upstart.value //+ document.newWork.work_time.value

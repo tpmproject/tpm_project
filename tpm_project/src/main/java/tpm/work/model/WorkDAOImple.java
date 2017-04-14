@@ -122,4 +122,9 @@ public class WorkDAOImple implements WorkDAO {
 		return result;
 	}
 	
+	public int workMemberDelete(WorkDTO dto){
+		int result=sqlMap.delete("workMemberDelete", dto.getWork_idx());
+		return result;
+	}
+	
 }

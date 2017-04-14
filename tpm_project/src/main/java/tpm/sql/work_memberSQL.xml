@@ -35,4 +35,9 @@
 		)pm
 		on m.member_idx=pm.member_idx
 	</select>
+	
+	<delete id="workMemberDelete">
+		delete from tpm_work_member
+		where work_idx=#{work_idx}	
+	</delete>
 </mapper>
