@@ -201,10 +201,11 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 삭제 */
 	@RequestMapping(value="projectDelete.do",  method=RequestMethod.POST)
-	public ModelAndView projectDel(ProjectDTO dto){
+	public ModelAndView projectDel(int project_idx){
 		
-	
+		int count=projectDAO.projectDelete(project_idx);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("count",count);
 		mav.setViewName("project/projectAdd_d");
 		
 		

@@ -136,7 +136,7 @@ public class ProjectDAOImple implements ProjectDAO {
 	
 
 	public int projectDelete(int project_idx) {
-
+		
 		int count = sqlMap.delete("projectDelete",project_idx);
 		return count;
 	}

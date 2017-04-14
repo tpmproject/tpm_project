@@ -152,27 +152,29 @@
 						var brother=parN.firstChild;
 						var youngB=parN.lastChild;
 						var repeat=true;
-						do{
-							if(brother.nodeName=='DIV'){
-								var bro_id=brother.getAttribute('id');
-								if(bro_id=='modal_content'+member.member_idx){
-									dupli++;
+						if(brother!=null){
+							do{
+								if(brother.nodeName=='DIV'){
+									var bro_id=brother.getAttribute('id');
+									if(bro_id=='modal_content'+member.member_idx){
+										dupli++;
+										repeat=false;
+									}
+								}
+								if(brother!=youngB){
+									brother=brother.nextSibling;
+								}else{
 									repeat=false;
 								}
-							}
-							if(brother!=youngB){
-								brother=brother.nextSibling;
-							}else{
-								repeat=false;
-							}
+								
+							}while(repeat);
 							
-						}while(repeat);
+							if(dupli>0){
+								continue;
+							}
+						}	
+							msg += '<div id="modal_content';
 						
-						if(dupli>0){
-							continue;
-						}
-						
-						msg += '<div id="modal_content';
 					}else if(addOrUpdate==2){
 						var parN=document.getElementById('project_Member2');
 						var brother=parN.firstChild;
