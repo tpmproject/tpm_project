@@ -15,7 +15,8 @@
 		from tpm_project 
 		WHERE project_idx IN (select project_idx 
                      		  from tpm_project_member 
-                      		  where member_idx=#{member_idx})
+                      		  where member_idx=#{member_idx}) 
+                      		  order by project_idx desc
 	</select>
 	
 	<select id="project_idx" resultType="int">

@@ -45,12 +45,16 @@ public class FileController {
 		
 		HttpSession session=req.getSession();
 		int member_idx=(Integer)session.getAttribute("s_member_idx");
-		int project_idx=(Integer)session.getAttribute("project_idx");
-		
-		System.out.println("프로젝트   idx"+project_idx);
-		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
-		int a=pdto.get(0).getProject_idx();  //sql에서 가져온  프로젝트 첫번째 idx
+		
+		
+		int project_idx=(Integer)session.getAttribute("project_idx");
+		if(!(project_idx>=1)){
+			project_idx=pdto.get(0).getProject_idx();  //sql에서 가져온  프로젝트 첫번째 idx
+		}
+		
+		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
+		
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -116,6 +120,7 @@ public class FileController {
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		//int project_idx=16;   //프로젝트 idx 가져오기, 임시
+		session.setAttribute("project_idx", project_idx);
 		
 		System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
 		System.out.println("work_idx:"+work_idx);
