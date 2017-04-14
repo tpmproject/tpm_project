@@ -10,26 +10,15 @@ public class FileDTO {
 	private int member_idx;
 	private String file_name;
 	private String file_size;
-	private Date file_date;
+	private Timestamp file_date;
 	private String file_path;
-	
+
 	public FileDTO() {
 		super();
 	}
-	 
-	public FileDTO(int project_idx, int work_idx, int member_idx, String file_name, String file_size,
-			String file_path) {
-		super();
-		this.project_idx = project_idx;
-		this.work_idx = work_idx;
-		this.member_idx = member_idx;
-		this.file_name = file_name;
-		this.file_size = file_size;
-		this.file_path = file_path;
-	}
 
 	public FileDTO(int file_idx, int project_idx, int work_idx, int member_idx, String file_name, String file_size,
-			Date file_date, String file_path) {
+			Timestamp file_date, String file_path) {
 		super();
 		this.file_idx = file_idx;
 		this.project_idx = project_idx;
@@ -38,6 +27,17 @@ public class FileDTO {
 		this.file_name = file_name;
 		this.file_size = file_size;
 		this.file_date = file_date;
+		this.file_path = file_path;
+	}
+
+	public FileDTO(int project_idx, int work_idx, int member_idx, String file_name, String file_size,
+			String file_path) {
+		super();
+		this.project_idx = project_idx;
+		this.work_idx = work_idx;
+		this.member_idx = member_idx;
+		this.file_name = file_name;
+		this.file_size = file_size;
 		this.file_path = file_path;
 	}
 
@@ -89,11 +89,11 @@ public class FileDTO {
 		this.file_size = file_size;
 	}
 
-	public Date getFile_date() {
+	public Timestamp getFile_date() {
 		return file_date;
 	}
 
-	public void setFile_date(Date file_date) {
+	public void setFile_date(Timestamp file_date) {
 		this.file_date = file_date;
 	}
 
@@ -104,7 +104,12 @@ public class FileDTO {
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "FileDTO [file_idx=" + file_idx + ", project_idx=" + project_idx + ", work_idx=" + work_idx
+				+ ", member_idx=" + member_idx + ", file_name=" + file_name + ", file_size=" + file_size
+				+ ", file_date=" + file_date + ", file_path=" + file_path + "]";
+	}
+
 }

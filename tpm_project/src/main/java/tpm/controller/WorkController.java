@@ -137,7 +137,7 @@ public class WorkController {
 			result+=workDAO.workMemberDelete(dto);
 			for(int i=0;i<member_idx.length;i++){
 				int w_idx=Integer.parseInt(member_idx[i]);
-				WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), work_member[i]);
+				WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), w_idx);
 				result+=workDAO.workMemberInsert(wdto);
 				mav.addObject("dto",dto);
 			}
