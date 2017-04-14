@@ -19,11 +19,13 @@ function dateTest(){
 </head>
 <body>
 인덱스입.
-
 	<c:if test="${empty sessionScope.s_member_id}">
 		<a href="memberLogin.do">로그인</a>
 	</c:if>
 	<c:if test="${!empty sessionScope.s_member_id}">
+	
+		<c:redirect url="projectList.do"></c:redirect>
+		
 		${sessionScope.s_member_name }님 로그인중...|<a href='memberLogOut.do'>로그아웃</a>
 	</c:if>
 	
