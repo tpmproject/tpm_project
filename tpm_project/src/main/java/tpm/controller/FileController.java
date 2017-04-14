@@ -88,10 +88,12 @@ public class FileController {
 	public ModelAndView fileUpLoadForm(@RequestParam("work_idx")int work_idx,
 									   @RequestParam("project_idx")int project_idx){
 		System.out.println("프로젝트 컨텐트 폼에서 넘어온 idx="+project_idx);
+		System.out.println("업무 idx:"+work_idx);
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println("업무 idx:"+work_idx);
-		mav.addObject("project_idx"+project_idx);
+		
+		
+		mav.addObject("project_idx",project_idx);
 		mav.addObject("work_idx",work_idx);
 		mav.setViewName("file/fileUploadForm");
 		return mav;
@@ -115,18 +117,26 @@ public class FileController {
 		
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
-
+		int result=0;
+		String msg="";
 		//파일이름,파일사이즈,파일경로
 		for(int i=0; i<files.size(); i++){
 			String file_name=files.get(i).getOriginalFilename();
 			String file_size=Long.toString(files.get(i).getSize());
 			String file_path="C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
 			FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
-			int result=fdao.addFile(fdto);
+			result=fdao.addFile(fdto);
 			copyInto(member_idx, files.get(i));  //파일 복사
 		}
-		
-		return new ModelAndView("file/fileResult_d");
+		if(result>0){
+			msg="파일 등록 완료";
+		}else{
+			msg="파일 등록 실패";
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("file/fileResult_d");
+		return mav;
 	
 	}
 	
