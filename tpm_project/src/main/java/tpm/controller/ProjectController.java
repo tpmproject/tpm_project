@@ -205,7 +205,11 @@ public class ProjectController {
 		
 		int count=projectDAO.projectDelete(project_idx);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("count",count);
+		if(count>0){
+			ProjectDTO dto=new ProjectDTO();
+			dto.setProject_idx(project_idx);
+			mav.addObject("pdto",dto);
+		}
 		mav.setViewName("project/projectAdd_d");
 		
 		
