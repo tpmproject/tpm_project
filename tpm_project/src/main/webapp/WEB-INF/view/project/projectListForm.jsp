@@ -66,11 +66,21 @@
 	function projectDelResult(){
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
+				var result = XHR.responseText;
+				var objData=eval('('+result+')');
+				var p=objData.p;
 				
+				if(p.project_idx==0){
+					window.alert('오류 발생!');
+				}else{
+									
+					$('#project_div'+p.project_idx).remove();
+		
+				}
+				closem();
 			}
 		}
-			
-		
+				
 	}
 	//친구리스트
 	function shows() {
