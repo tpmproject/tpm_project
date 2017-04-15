@@ -1,6 +1,7 @@
 package tpm.tendency.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import tpm.member.model.MemberDTO;
@@ -16,5 +17,5 @@ public interface TendencyDAO {
 	
 	public ArrayList<MemberDTO> tendencyList(ProjectMemberDTO dto);
 	
-	public ArrayList<MemberDTO> recommendTendency(String tendency);
+	public ArrayList<MemberDTO> recommendTendency(HashMap<Object, Object> paramMap);
 }

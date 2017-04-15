@@ -1,6 +1,7 @@
 package tpm.tendency.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,8 +41,8 @@ public class TendencyDAOImple implements TendencyDAO {
 		return result;
 	}
 	
-	public ArrayList<MemberDTO> recommendTendency(String tendency){
-		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("recommendTendency");
+	public ArrayList<MemberDTO> recommendTendency(HashMap<Object, Object> paramMap){
+		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("recommendTendency",paramMap);
 		return arr;
 	}
 	

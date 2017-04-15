@@ -1,6 +1,7 @@
 package tpm.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -248,11 +249,14 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="recommand.do", method=RequestMethod.GET)
-	public ModelAndView recommandTendency(String tendency){
-		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(tendency);
+	public ModelAndView recommandTendency(String tendency, int project_idx){
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("tendency", tendency);
+		map.put("project_idx",project_idx);
+		
+		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(map);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("project/projectRecommand");
-		System.out.println(tendency);
 		mav.addObject("arr",arr);
 		return mav;
 	}

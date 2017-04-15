@@ -1,6 +1,11 @@
 package tpm.controller;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -83,7 +89,11 @@ public class WorkController {
 	
 	@RequestMapping(value="tendencyList.do", method=RequestMethod.GET)
 	public ModelAndView tendencyList(String tendency){
-		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(tendency);
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("tendency", tendency);
+		map.put("project_idx",2);
+		
+		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(map);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("work/workResult_d");
 		mav.addObject("arr",arr);
@@ -92,11 +102,26 @@ public class WorkController {
 	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
-	public ModelAndView workAdd(WorkDTO dto, String[] member_idx){
+	public ModelAndView workAdd(WorkDTO dto, String[] member_idx, String workdate) throws ParseException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
 	
+		String temp[]=workdate.split("-");
+		String work_s=temp[0].trim();
+		String work_e=temp[1].trim();
+		System.out.println(work_s+"/"+work_e);
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
+		
+		Date ts = sdf.parse(work_s);
+		Date te = sdf.parse(work_e);
+		
+		Timestamp work_start = new Timestamp(ts.getTime());
+		Timestamp work_end = new Timestamp(te.getTime());
+		System.out.println(ts+"/"+te);
+
+		dto.setWork_start(work_start);
+		dto.setWork_end(work_end);
 		int work_idx=workDAO.addWork(dto);
 		dto.setWork_idx(work_idx);
 		

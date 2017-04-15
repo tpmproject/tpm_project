@@ -133,7 +133,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 }
 function shows(){
 	var wtit=document.newWork.work_title.value;
-	var wsta=document.newWork.work_date.value;
+	var wsta=document.newWork.workdate.value;
 	
 /* 	if (wtit == null || wtit == "" || !wsta ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
@@ -260,9 +260,8 @@ function addWork(){
 	var my_idx=${s_member_idx};
 	var param = 'category_idx=' + document.newWork.category_idx.value
 	+'&work_title=' + document.newWork.work_title.value
-	+'&work_start=' + document.newWork.work_start.value //+ document.newWork.work_time.value
-	+'&work_end=' + document.newWork.work_end.value //+ document.newWork.work_time.value
-	+'&work_confirm=' + document.newWork.work_confirm.value 
+	+'&workdate=' + document.newWork.workdate.value 
+	+'&work_confirm=' + document.newWork.work_confirm.value
 	+'&member_idx=' + msg;
 	window.alert(param);
 	sendRequest('workAdd.do', param, addWorkResult, 'POST');
@@ -588,9 +587,10 @@ function cateDelResult(){
 
 //추천 목록
 function tendencyList(){
-	var param = 'tendency='+document.newWork.tendency.value;
+	var param = 'tendency='+document.newWork.tendency.value
+	+"&project_idx="+ ${param.project_idx};
 	window.alert(param);
-	sendRequest('tendencyList.do',param,tendencyListResult,'GET');
+	sendRequest('recommand.do',param,tendencyListResult,'GET');
 }
 
 function tendencyListResult(){
@@ -1001,7 +1001,7 @@ function fileUp(work_idx){
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-								<input type="text" class="form-control pull-right" name="work_date" id="workdate" />
+								<input type="text" class="form-control pull-right" name="workdate" id="workdate" />
 						</div>
 						<!-- /.input group -->
 					</div>
@@ -1037,6 +1037,10 @@ function fileUp(work_idx){
 							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자 </h4>
 								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							</div>
+							<div class="col-md-3">
+							<h4 class="text-center">추천 멤버 목록</h4>
+								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
 							</div>
 						</div>
 					</div>
@@ -1103,6 +1107,7 @@ function fileUp(work_idx){
 								<h4 class="text-center">업무 담당자 </h4>
 								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
+							
 						</div>
 					</div>
 				</div>
