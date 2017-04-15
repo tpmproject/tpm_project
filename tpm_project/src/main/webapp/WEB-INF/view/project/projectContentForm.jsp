@@ -125,8 +125,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	window.alert(work_confirm);
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
-	document.changeWork.work_upstart.value=work_start;
-	document.changeWork.work_upend.value=work_end;
+	document.changeWork.workdate.value=work_start+"    "+work_end;
 	if(work_confirm==10){
 		document.changeWork.work_confirm.setAttribute('checked','checked');
 	}
@@ -307,8 +306,7 @@ function updateWork(){
 	var my_idx=${s_member_idx};
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&work_title=' + document.changeWork.work_title.value
-	+'&work_start=' + document.changeWork.work_upstart.value //+ document.newWork.work_time.value
-	+'&work_end=' + document.changeWork.work_upend.value //+ document.newWork.work_time.value
+	+'&workdate=' + document.newWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
 	window.alert(param);
@@ -1069,10 +1067,7 @@ function fileUp(work_idx){
 					</div>
 					<div>기한</div>
 					<div>
-						<input type="text" id="work_upstart" name="work_upstart"
-							rel="stylesheet" /> ~<input type="text" id="work_upend"
-							name="work_upend" rel="stylesheet" />
-							<input type="text" name="work_time" placeholder="시간선택"  id="work_time" required size="8" maxlength="5">
+						<input type="text" class="form-control pull-right" name="workdate" id="workdateup" />
 					</div>
 					<div>
 						<input type="checkbox" name="work_confirm">결재여부
@@ -1218,6 +1213,10 @@ $(document).ready(function(){
 $(function () {
 	 //Date range picker with time picker
    $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+});	
+$(function () {
+	 //Date range picker with time picker
+  $('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
 });	
 
 </script>

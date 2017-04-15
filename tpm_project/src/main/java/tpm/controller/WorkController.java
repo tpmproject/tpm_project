@@ -110,7 +110,7 @@ public class WorkController {
 		String temp[]=workdate.split("-");
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
-		System.out.println(work_s+"/"+work_e);
+	
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
 		
 		Date ts = sdf.parse(work_s);
@@ -118,7 +118,6 @@ public class WorkController {
 		
 		Timestamp work_start = new Timestamp(ts.getTime());
 		Timestamp work_end = new Timestamp(te.getTime());
-		System.out.println(ts+"/"+te);
 
 		dto.setWork_start(work_start);
 		dto.setWork_end(work_end);
