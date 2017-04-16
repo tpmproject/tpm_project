@@ -41,7 +41,7 @@
 				height		: 200px;
 				font-size	: 11px;
 	  }	
-	   body {
+	  body {
 		    font-family: "맑은 고딕";
 	  }	
     </style>
