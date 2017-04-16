@@ -42,7 +42,6 @@
 				font-size	: 11px;
 	  }	
 	   body {
-		    margin: 20px;
 		    font-family: "맑은 고딕";
 	  }	
     </style>
@@ -118,7 +117,7 @@
 	    }
     </script>
 </head>
-<body>
+<body class="skin-blue">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
