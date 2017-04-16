@@ -47,8 +47,8 @@ public class FileController {
 		int member_idx=(Integer)session.getAttribute("s_member_idx");
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
 		
-		if(session.getAttribute("project_idx")=="null"){
-			session.setAttribute("project_idx", pdto.get(0).getProject_idx());
+		if(session.getAttribute("project_idx")==null){
+			session.setAttribute("project_idx", pdto.get(1).getProject_idx());
 		}
 		
 		
@@ -70,7 +70,13 @@ public class FileController {
 								 @RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
+		
+			System.out.println("누른 프로젝트idx fileList.do로 :"+project_idx);
+		
 		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
+				
+			System.out.println("세션에 올라간 idx :"+session.getAttribute("project_idx"));
+		
 		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name);
 		
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto);
@@ -97,8 +103,8 @@ public class FileController {
 	@RequestMapping(value="fileUploadForm.do",  method=RequestMethod.GET)
 	public ModelAndView fileUpLoadForm(@RequestParam("work_idx")int work_idx,
 									   @RequestParam("project_idx")int project_idx){
-		System.out.println("프로젝트 컨텐트 폼에서 넘어온 idx="+project_idx);
-		System.out.println("업무 idx:"+work_idx);
+		//System.out.println("프로젝트 컨텐트 폼에서 넘어온 idx="+project_idx);
+		//System.out.println("업무 idx:"+work_idx);
 		ModelAndView mav = new ModelAndView();
 		
 		
@@ -122,8 +128,8 @@ public class FileController {
 		//int project_idx=16;   //프로젝트 idx 가져오기, 임시
 		session.setAttribute("project_idx", project_idx);
 		
-		System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
-		System.out.println("work_idx:"+work_idx);
+		//System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
+		//System.out.println("work_idx:"+work_idx);
 		
 		
 		
@@ -164,7 +170,7 @@ public class FileController {
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.GET)
 	public ModelAndView fileDel(@RequestParam("file_idx")int file_idx){
 		
-		System.out.println("컨트롤러 쪽"+file_idx);
+		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx);
 		String msg="";
 		ModelAndView mav = new ModelAndView();
@@ -185,7 +191,7 @@ public class FileController {
 	
 	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
 	public ModelAndView fileDown(@RequestParam("file_name") String filename){
-		System.out.println("filename == " + filename);
+		//System.out.println("filename == " + filename);
 		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
 		
 		ModelAndView mav = new ModelAndView("tpmDown","downloadFile", f);
@@ -196,8 +202,8 @@ public class FileController {
 	
 	/**복사관련 사용자정의 메서드*/
 	private void copyInto(int s_member_idx, MultipartFile file_upload){
-		System.out.println("작성자:"+s_member_idx);
-		System.out.println("파일명:"+file_upload.getOriginalFilename());		
+		//System.out.println("작성자:"+s_member_idx);
+		//System.out.println("파일명:"+file_upload.getOriginalFilename());		
 		try {
 			byte bytes[]=file_upload.getBytes();
 			

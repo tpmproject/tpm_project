@@ -36,29 +36,30 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
     <script>
    
-    (function($) {
-		$(window).on("load", function() {
-			
-			
-			project_fileList('${project_idx}');
-
-		});
-	})(jQuery);
-     
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(i){
-    	
+    	window.alert('누른 프로젝트 idx:'+i);
 		var param = 'project_idx=' + i;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 		
-	}
+	}sorting_desc
     
     /*선택한 제목행에따라 정렬하여 파일리스트 출력  */
     function sizeSort(project_idx, line_name){
+    
     	var param = 'project_idx='+project_idx +'&line_name='+line_name;
-    	
+       
+    	if($('.sorting').hasClass('sorting')){
+    		window.alert('정렬전');
+    	}else if($('.sorting_asc').hasClass('sorting_asc')){
+    		window.alert('오름차순');
+    	}else if($('.sorting_asc').hasClass('sorting_asc')){
+    		window.alert('내림차순');
+    	}
     	
     	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
     }
@@ -88,6 +89,7 @@
 
 		if(ctype == 'FILE_LIST'){
 			fileList_setting(responseText);
+			
 		} else if(ctype == ''){
 			search_modal_setting(responseText);
 		} else {
@@ -162,7 +164,7 @@
 		var file_content_list = document.getElementById('file_content_list');
 		file_content_list.innerHTML = '';
 		file_content_list.innerHTML = msg;
-		
+	
 	}
 	/* 파일 삭제  */
 	function fileDel(i){
@@ -172,7 +174,7 @@
     </script>
   </head>
  
-  <body class="skin-blue">
+  <body class="skin-blue" onload="project_fileList('${project_idx}')">
   <%@ include file="/WEB-INF/view/header.jsp"%>
 	
     <div id="wrapper" class="file-list-form">
@@ -242,8 +244,8 @@
                 
                   <thead>
                     <tr>
-                      <th>파일 타입</th>
-                      <th onclick="sizeSort(${project_idx},'file_name')">파일 이름</th>
+                      <th>파일 타입 </th>
+                      <th id="th_file_name" onclick="sizeSort(${project_idx},'file_name')">파일 이름</th>
                       <th onclick="sizeSort(${project_idx},'file_size')">파일 크기</th>
                       <th onclick="sizeSort(${project_idx},'file_date')">공유한 날짜</th>
                       <th onclick="sizeSort(${project_idx},'member_idx')">공유한 사람</th>
