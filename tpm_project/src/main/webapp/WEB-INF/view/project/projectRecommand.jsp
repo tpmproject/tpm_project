@@ -19,6 +19,7 @@ for(int i=0;i<arr.size();i++){
 	obj.put("member_gender", arr.get(i).getMember_gender());
 	obj.put("member_tel", arr.get(i).getMember_tel());
 	obj.put("member_img", arr.get(i).getMember_img());
+	obj.put("member_td", arr.get(i).getTd());
 	arry_members.add(obj);
 }
 

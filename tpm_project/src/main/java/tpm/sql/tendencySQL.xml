@@ -28,7 +28,7 @@
 		    (select member_idx, avg(${tendency}) td 
 		    from tpm_tendency group by member_idx) b
 		on 
-		a.member_idx=b.member_idx order by member_name
+		a.member_idx=b.member_idx
 	</select>
 	
 	<select id="tendencyList" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">

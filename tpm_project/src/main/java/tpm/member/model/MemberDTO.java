@@ -21,6 +21,9 @@ public class MemberDTO {
 	private int pm;
 	private int mf;
 	private int project_level;
+	
+	//추천 멤버
+	private int td;
 
 	public MemberDTO() {
 		super();
@@ -167,6 +170,16 @@ public class MemberDTO {
 
 	public void setProject_level(int project_level) {
 		this.project_level = project_level;
+	}
+	
+	
+
+	public int getTd() {
+		return td;
+	}
+
+	public void setTd(int td) {
+		this.td = td;
 	}
 
 	@Override

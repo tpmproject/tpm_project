@@ -8,7 +8,7 @@
 	from
     (tpm_member)m,
     (select member_idx from tpm_project_member where project_idx=#{project_idx})pm
-	where m.member_idx =pm.member_idx
+	where m.member_idx =pm.member_idx order by member_name
 	</select>
 	<select id="workList" parameterType="int" resultType="tpm.work.model.WorkDTO">
 	select * from tpm_work where work_idx=#{work_idx}
