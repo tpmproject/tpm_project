@@ -125,7 +125,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	window.alert(work_confirm);
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
-	document.changeWork.workdate.value=work_start+"    "+work_end;
+	document.changeWork.workdate.value=work_start+"-"+work_end;
 	if(work_confirm==10){
 		document.changeWork.work_confirm.setAttribute('checked','checked');
 	}
