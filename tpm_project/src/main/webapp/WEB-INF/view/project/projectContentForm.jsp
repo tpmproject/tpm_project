@@ -125,7 +125,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	window.alert(work_confirm);
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
-	document.changeWork.workdate.value=work_start+"    "+work_end;
+	document.changeWork.workdate.value=work_start+"-"+work_end;
 	if(work_confirm==10){
 		document.changeWork.work_confirm.setAttribute('checked','checked');
 	}
@@ -602,15 +602,12 @@ function tendencyListResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div id="tendency_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
-				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
-				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
-				msg2 += member.member_name;
-				msg2 += '<p class="text-muted">' + member.member_id + '</p> ';
-				msg2 += '</div> ';
+				if(member.member_td>3){
+					document.getElementById('work_member'+member.member_idx).style.color='blue';
+				}else{
+					document.getElementById('work_member'+member.member_idx).style.color='black';
+				}
 			}
-			var tendency_m = document.getElementById('tendency_m');
-			tendency_m.innerHTML = msg2;		
 		}
 	}
 }
