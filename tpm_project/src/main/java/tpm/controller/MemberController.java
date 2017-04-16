@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -57,7 +58,7 @@ public class MemberController {
 	// 로그인 및 로그아웃
 	/** 친구 상태가아닌 회원 아이디, 이름 검색 */
 	@RequestMapping(value="memberIdAndNameSearch.do", method=RequestMethod.POST)
-	public ModelAndView memberIdAndNameSearch(@RequestParam(value="fkey") String fkey, 
+	public @ResponseBody ArrayList<MemberDTO> memberIdAndNameSearch(@RequestParam(value="fkey") String fkey, 
 			HttpServletRequest req){
 		
 		HttpSession session = req.getSession();
@@ -67,12 +68,7 @@ public class MemberController {
 		mdto.setMember_id(fkey);
 		
 		ArrayList<MemberDTO> arry_mdto = mdao.getMemberIdAndNameSearch(mdto);
-		System.out.println(arry_mdto.toString());
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/memberIdAndNameSearchList_d");
-		mav.addObject("arry_mdto", arry_mdto);
-		return mav;
+		return arry_mdto;
 	}
 	
 	/** 로그인 페이지 이동 */

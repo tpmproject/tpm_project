@@ -1,6 +1,7 @@
 package tpm.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
@@ -44,7 +46,7 @@ public class MyFriendController {
 	
 	/** 친구 - 친구 리스트 데이터 반환 */
 	@RequestMapping(value="myFriendList.do", method=RequestMethod.POST)
-	public ModelAndView myFriendList(HttpServletRequest req){
+	public @ResponseBody ArrayList<MemberDTO> myFriendList(HttpServletRequest req){
 		
 		HttpSession session = req.getSession();
 		int member_idx = (Integer) session.getAttribute("s_member_idx");
@@ -53,21 +55,8 @@ public class MyFriendController {
 		dto.setMember_idx(member_idx);
 		//ArrayList<MyFriendDTO> arry_dto = myFriendDAO.getFriendList(dto);
 		ArrayList<MemberDTO> arry_mdto = myFriendDAO.getFriendMemberInfoList(dto);
-				
-		/*ModelAndView mav = new ModelAndView();
-		mav.setViewName("myfriend/myFriendList_d");
-		mav.addObject("arry_mdto", arry_mdto);
-		return mav;*/
 		
-		ModelAndView mav = new ModelAndView();
-		JSONArray jsonArray = new JSONArray();
-		JSONObject json = new JSONObject();
-
-		json.put("members", jsonArray.fromObject(arry_mdto));
-		
-		mav.setViewName("myfriend/myFriendList_d");
-		mav.addObject("jsonArray", json);
-		return mav;
+		return arry_mdto;
 	}
 	
 	/** 친구 - 친구 등록 */

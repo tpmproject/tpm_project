@@ -1,40 +1,370 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- Bootstrap 3.3.2 -->
-<link href="/tpm_project/sample/cho/main/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<!-- Font Awesome Icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<!-- Ionicons -->
-<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
-<!-- Theme style -->
-<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css">
-	
-<link href="/tpm_project/css/chat/chatContact.css?ver=1" rel="stylesheet" />
-
-<!-- jQuery 2.1.3 -->
-<!-- <script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
-<script src="/tpm_project/js/jquery-3.2.0.js"></script>
-
-<!-- Bootstrap 3.3.2 JS -->
-<script src="/tpm_project/sample/cho/main/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- AdminLTE App -->
-<script src="/tpm_project/sample/cho/main/dist/js/app.min.js" type="text/javascript"></script>
-
-<script type="text/javascript" src="/tpm_project/js/chat/chatContact.js"></script>
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
+<!-- <link href="/tpm_project/css/chat/chatContact.css?ver=1" rel="stylesheet" />
+<script type="text/javascript" src="/tpm_project/js/chat/chatContact.js"></script> -->
 <!-- JavaScrip Search Plugin -->
-<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
+<!-- <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script> -->
+<!-- Moment -->
+<script src="/tpm_project/js/date/moment.js"></script>
+<!-- Slimscroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+<style>
+.bg-white {
+	background-color: #fff;
+}
+.friend-list {
+	list-style: none;
+	margin-left: -40px;
+}
+
+.friend-list li {
+	border-bottom: 1px solid #eee;
+}
+
+.friend-list li a img {
+	float: left;
+	width: 45px;
+	height: 45px;
+	margin-right: 0px;
+}
+
+.friend-list li a {
+	position: relative;
+	display: block;
+	padding: 10px;
+	transition: all .2s ease;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+}
+
+.friend-list li.active a {
+	background-color: #f1f5fc;
+}
+
+.friend-list li a .friend-name, .friend-list li a .friend-name:hover {
+	color: #777;
+}
+
+.friend-list li a .last-message {
+	width: 65%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.friend-list li a .time {
+	position: absolute;
+	top: 10px;
+	right: 8px;
+}
+
+small, .small {
+	font-size: 85%;
+}
+
+.friend-list li a .chat-alert {
+	position: absolute;
+	right: 8px;
+	top: 27px;
+	font-size: 15px;
+	padding: 3px 5px;
+}
+
+.chat-message {
+	padding: 10px 20px;
+}
+
+.chat {
+	list-style: none;
+	margin: 0;
+}
+
+#chat-box{
+	background: #f9f9f9;
+}
+
+.chat-message {
+	background: #f9f9f9;
+}
+
+.chat li img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50em;
+	-moz-border-radius: 50em;
+	-webkit-border-radius: 50em;
+}
+
+img {
+	max-width: 100%;
+}
+
+.chat-body {
+	padding-bottom: 20px;
+}
+
+.chat li.left .chat-body {
+	margin-left: 70px;
+	background-color: #fff;
+}
+
+.chat li .chat-body {
+	position: relative;
+	font-size: 15px;
+	padding: 10px;
+	border: 1px solid #f1f5fc;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.chat li .chat-body .header {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #f1f5fc;
+}
+
+.chat li .chat-body p {
+	margin: 0;
+}
+
+.chat li.left .chat-body:before {
+	position: absolute;
+	top: 10px;
+	left: -8px;
+	display: inline-block;
+	background: #fff;
+	width: 16px;
+	height: 16px;
+	border-top: 1px solid #f1f5fc;
+	border-left: 1px solid #f1f5fc;
+	content: '';
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+}
+
+.chat li.right .chat-body:before {
+	position: absolute;
+	top: 10px;
+	right: -8px;
+	display: inline-block;
+	background: #fff;
+	width: 16px;
+	height: 16px;
+	border-top: 1px solid #f1f5fc;
+	border-right: 1px solid #f1f5fc;
+	content: '';
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+.chat li {
+	margin: 15px 0;
+}
+
+.chat li.right .chat-body {
+	margin-right: 70px;
+	background-color: #fff;
+}
+
+.chat-box {
+	position: fixed;
+	bottom: 0;
+	left: 444px;
+	right: 0;
+	padding: 15px;
+	border-top: 1px solid #eee;
+	transition: all .5s ease;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	-o-transition: all .5s ease;
+}
+
+.primary-font {
+	color: #3c8dbc;
+}
+
+a:hover, a:active, a:focus {
+	text-decoration: none;
+	outline: 0;
+}
+/* .chat_content_user_img_left{
+	width: 40px; height: 40px; border-radius: 50% !important; border: 2px solid #00a65a;
+}
+.chat_content_user_img_right{
+	width: 40px; height: 40px; border-radius: 50% !important; border: 2px solid #dd4b39;
+}
+.chat_content_body_div_left{
+	width: 70%; float: left; margin-left: 10px;
+}
+.chat_content_body_div_right{
+	width: 70%; float: right; margin-right: 20px; 
+}
+.chat_content_user_name{
+	color: #3c8dbc;
+}
+.chat_content_p_right{
+	text-align: right;
+}
+.chat_content_p_left{
+	text-align: left;
+} */
+</style>
+<script>
+var currCpCode;
+var currCpValue;
+var s_member_idx = ${sessionScope.s_member_idx};
+function showChatContent(cpCode, cpValue){
+	
+	currCpCode = cpCode;
+	currCpValue = cpValue;
+	
+	$.ajax({
+		url : 'chatList.do',
+		type : 'post',
+		data : { chat_cp_code : cpCode,
+				 chat_cp_value : cpValue },
+		dataType : 'json', // 제이슨 형식으로 넘어온다.
+		success : function(json) {
+			//window.alert(JSON.stringify(json));
+			var msg = '';
+			for(var i = 0 ; i < json.length ; i++){
+				// 내가 쓴 글일 경우
+				if(json[i].mdto.member_idx == s_member_idx){
+					msg += makeRightChatContent(json[i]);
+				} else { // 타인의 글인 경우.
+					msg += makeLeftChatContent(json[i]);
+				}	
+			}
+			$('#chat_content_ul').html(msg);
+		}
+	});
+}
+
+function makeRightChatContent(ctdto) {
+	var temp_msg = '';
+	temp_msg += '<li class="left clearfix">'; 
+	temp_msg += 	'<span class="chat-img pull-left"> ';
+	temp_msg += 		'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar"> ';
+	temp_msg += 	'</span>';
+	temp_msg += 	'<div class="chat-body clearfix"> ';
+	temp_msg += 		'<div class="header"> ';
+	temp_msg += 			'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
+	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
+	temp_msg += 		'</div> ';
+	temp_msg += 		'<p>' + ctdto.chat_content +'</p>';
+	temp_msg += 	'</div>';
+	temp_msg += '</li>';
+	/* temp_msg += '<div class="item">';
+	temp_msg += 	'<span class="chat-img pull-right"> <img '
+		temp_msg +=		'src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" class="chat_content_user_img_left" alt="User Avatar" '
+		temp_msg +=		'class="online"> '
+		temp_msg +=	'</span> '
+		temp_msg +=	'<div class="chat-body clearfix chat_content_body_div_right"> '
+			temp_msg +=	'<div class="header"> '
+			temp_msg +=		'<small class=" text-muted"><span '
+		temp_msg +=			'class="glyphicon glyphicon-time"></span>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> '
+		temp_msg +=			'<strong class="pull-right primary-font chat_content_user_name">' + ctdto.mdto.member_name + '</strong>'
+			temp_msg +=	'</div>'
+			temp_msg +=	'<p class="chat_content_p_right">' + ctdto.chat_content + '</p>';
+		temp_msg +=	'</div>'
+	temp_msg +='</div>' */
+	
+	return temp_msg;
+}
+
+function makeLeftChatContent(ctdto) {
+	var temp_msg = '';
+	
+	temp_msg +=	'<li class="right clearfix">';
+	temp_msg +=		'<span class="chat-img pull-right">';
+	temp_msg +=			'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar">';
+	temp_msg +=		'</span>';
+	temp_msg +=		'<div class="chat-body clearfix">';
+	temp_msg +=			'<div class="header">';
+	temp_msg +=				'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
+	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small>';
+	temp_msg +=			'</div>';
+	temp_msg +=			'<p>' + ctdto.chat_content + '</p>';
+	temp_msg +=		'</div>';
+	temp_msg +=	'</li>';
+	
+	/* temp_msg += '<div class="item">';
+	temp_msg += 	'<span class="chat-img pull-left"> <img '
+		temp_msg +=		'src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" class="chat_content_user_img_right" alt="User Avatar" '
+		temp_msg +=		'class="online">'
+		temp_msg +=	'</span> '
+		temp_msg +=	'<div class="chat-body clearfix chat_content_body_div_left"> '
+			temp_msg +=	'<div class="header"> '
+		temp_msg +=			'<strong class="primary-font chat_content_user_name">' + ctdto.mdto.member_name + '</strong> '
+			temp_msg +=		'<small class="pull-right text-muted"><span '
+		temp_msg +=			'class="glyphicon glyphicon-time"></span>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> '
+			temp_msg +=	'</div>'
+			temp_msg +=	'<p class="chat_content_p_left">' + ctdto.chat_content + '</p>';
+		temp_msg +=	'</div>'
+	temp_msg +='</div>' */
+	
+	return temp_msg;
+}
+
+function InsertChatContent() {
+	var currInsertChatContent = $('#input_chat_content').val();
+
+	$.ajax({
+		url : 'chatAdd.do',
+		type : 'post',
+		data : { 
+				 chat_cp_code : currCpCode,
+				 chat_cp_value : currCpValue,
+				 chat_content : currInsertChatContent
+		},
+		dataType : 'json',
+		success : function(json) {
+			// 입력 성공시..
+			if(json == true){
+				
+				// 소켓을 통해 메세지를 전달한다.
+			}
+		}
+	});
+}
+
+</script>
 </head>
-<body class="skin-blue">
+<c:choose>
+	<c:when test="${!empty arry_pdto}">
+		<body class="skin-blue" onload="showChatContent('P','${arry_pdto.get(0).project_idx}')">
+	</c:when>
+	<c:otherwise>
+		<c:choose>
+			<c:when test="${!empty arry_chdto}">
+				<body class="skin-blue" onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
+			</c:when>
+			<c:otherwise>
+				<body class="skin-blue">
+			</c:otherwise>
+		</c:choose>
+	</c:otherwise>
+</c:choose>
 	<div class="wrapper">
-		<%@ include file="/WEB-INF/view/header.jsp"%>
-		<%@ include file="/WEB-INF/view/aside.jsp"%>
+		<%@ include file="/WEB-INF/view/include/header.jsp"%>
+		<%@ include file="/WEB-INF/view/include/aside.jsp"%>
 
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<div class="content-wrapper">
@@ -56,189 +386,10 @@
 					<div class="col-md-12">
 						<!-- 컨텐트 삽입 -->
 						<div class="col-md-4">
-							<div class="panel panel-default">
-								<div class="panel-heading c-list">
-									<span class="title">Contacts</span>
-									<ul class="pull-right c-controls">
-									
-										<li><button class="btn btn-box-tool">
-												<i class="glyphicon glyphicon-plus" data-toggle="modal"
-													data-target="#myModal"></i>
-											</button>
-											<!-- <a href="#cant-do-all-the-work-for-you"
-											data-toggle="tooltip" data-placement="top"
-											title="Add Contact"><i class="glyphicon glyphicon-plus"></i></a> --></li>
-										<li><a href="#" class="hide-search"
-											data-command="toggle-search" data-toggle="tooltip"
-											data-placement="top" title="Toggle Search"><i
-												class="fa fa-ellipsis-v"></i></a></li>
-									</ul>
-								</div>
-
-								<div class="row" style="display: none;">
-									<div class="col-xs-12">
-										<div class="input-group c-search">
-											<input type="text" class="form-control"
-												id="contact-list-search"> <span
-												class="input-group-btn">
-												<button class="btn btn-default" type="button">
-													<span class="glyphicon glyphicon-search text-muted"></span>
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<ul class="list-group" id="contact-list">
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/men/49.jpg"
-												alt="Scott Stevens" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Scott Stevens</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="5842 Hillcrest Rd"></span> <span
-												class="visible-xs"> <span class="text-muted">5842
-													Hillcrest Rd</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(870) 288-4149"></span> <span
-												class="visible-xs"> <span class="text-muted">(870)
-													288-4149</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="scott.stevens@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">scott.stevens@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/men/97.jpg"
-												alt="Seth Frazier" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Seth Frazier</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="7396 E North St"></span> <span
-												class="visible-xs"> <span class="text-muted">7396
-													E North St</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(560) 180-4143"></span> <span
-												class="visible-xs"> <span class="text-muted">(560)
-													180-4143</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="seth.frazier@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">seth.frazier@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/women/90.jpg"
-												alt="Jean Myers" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Jean Myers</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="4949 W Dallas St"></span> <span
-												class="visible-xs"> <span class="text-muted">4949
-													W Dallas St</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(477) 792-2822"></span> <span
-												class="visible-xs"> <span class="text-muted">(477)
-													792-2822</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="jean.myers@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">jean.myers@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/men/24.jpg"
-												alt="Todd Shelton" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Todd Shelton</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="5133 Pecan Acres Ln"></span> <span
-												class="visible-xs"> <span class="text-muted">5133
-													Pecan Acres Ln</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(522) 991-3367"></span> <span
-												class="visible-xs"> <span class="text-muted">(522)
-													991-3367</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="todd.shelton@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">todd.shelton@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/women/34.jpg"
-												alt="Rosemary Porter" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Rosemary Porter</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="5267 Cackson St"></span> <span
-												class="visible-xs"> <span class="text-muted">5267
-													Cackson St</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(497) 160-9776"></span> <span
-												class="visible-xs"> <span class="text-muted">(497)
-													160-9776</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="rosemary.porter@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">rosemary.porter@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/women/56.jpg"
-												alt="Debbie Schmidt" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Debbie Schmidt</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="3903 W Alexander Rd"></span> <span
-												class="visible-xs"> <span class="text-muted">3903
-													W Alexander Rd</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(867) 322-1852"></span> <span
-												class="visible-xs"> <span class="text-muted">(867)
-													322-1852</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="debbie.schmidt@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">debbie.schmidt@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="list-group-item">
-										<div class="col-xs-12 col-sm-3">
-											<img src="http://api.randomuser.me/portraits/women/76.jpg"
-												alt="Glenda Patterson" class="img-responsive img-circle" />
-										</div>
-										<div class="col-xs-12 col-sm-9">
-											<span class="name">Glenda Patterson</span><br /> <span
-												class="glyphicon glyphicon-map-marker text-muted c-info"
-												data-toggle="tooltip" title="5020 Poplar Dr"></span> <span
-												class="visible-xs"> <span class="text-muted">5020
-													Poplar Dr</span><br /></span> <span
-												class="glyphicon glyphicon-earphone text-muted c-info"
-												data-toggle="tooltip" title="(538) 718-7548"></span> <span
-												class="visible-xs"> <span class="text-muted">(538)
-													718-7548</span><br /></span> <span
-												class="fa fa-comments text-muted c-info"
-												data-toggle="tooltip" title="glenda.patterson@example.com"></span>
-											<span class="visible-xs"> <span class="text-muted">glenda.patterson@example.com</span><br /></span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-								</ul>
-							</div>
+							<%@ include file="chatList.jsp"%>
+						</div>
+						<div class="col-md-8">
+							<%@ include file="chatContent.jsp"%>
 						</div>
 					</div>
 				</div>
@@ -246,7 +397,7 @@
 		</div>
 		
 		<%@ include file="chatListForm_contact_modal.jsp"%>
-		<%@ include file="/WEB-INF/view/footer.jsp"%>
+		<%@ include file="/WEB-INF/view/include/footer.jsp"%>
 	</div>
 </body>
 </html>

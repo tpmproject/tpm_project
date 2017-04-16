@@ -46,6 +46,25 @@ public class ChatController {
 		return mav;
 	}
 	
+	/** 채팅 - 채팅 리스트 페이지 이동(테스트) */
+	@RequestMapping(value="chatListTest.do",  method=RequestMethod.GET)
+	public ModelAndView chatListTest(ModelAndView mav, HttpSession session){
+		List<Object> arry_pdto = chatDAO.getChatProjectList(session.getAttribute("s_member_idx"));
+		List<Object> arry_chdto = chatDAO.getChatChannelList(session.getAttribute("s_member_idx"));
+
+		mav.addObject("arry_pdto", arry_pdto);
+		mav.addObject("arry_chdto", arry_chdto);
+		mav.setViewName("chat/chatListForm");
+		return mav;
+	}
+	
+	/** 채팅 - 채팅 리스트 페이지2 이동(테스트) */
+	@RequestMapping(value="chatListTest2.do",  method=RequestMethod.GET)
+	public ModelAndView chatListTest2(ModelAndView mav){
+		mav.setViewName("chat/chatTestff");
+		return mav;
+	}
+	
 	/** 채팅 - 채팅 데이터 반환 */
 	@RequestMapping(value="chatList.do",  method=RequestMethod.POST)
 	public @ResponseBody List<Object> chatList(ChatDTO ctdto){
@@ -55,6 +74,7 @@ public class ChatController {
 		}
 		return arry_ctdto;
 	}
+	
 	
 	/** 채팅 - 채팅 입력 */
 	@RequestMapping(value="chatAdd.do",  method=RequestMethod.POST)

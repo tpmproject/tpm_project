@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/sample/cho/main/calender_import.jsp"%>
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
 <link href="/tpm_project/css/calendar/fullcalendar.min.css?ver=1" rel="stylesheet" />
 <link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
 <script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
@@ -155,8 +155,8 @@ function calendarReload(){
 </head>
 <body class="skin-blue" onload="calendarReload()">
 	<div class="wrapper">
-		<%@ include file="/WEB-INF/view/header.jsp"%>
-		<%@ include file="/WEB-INF/view/aside.jsp"%>
+		<%@ include file="/WEB-INF/view/include/header.jsp"%>
+		<%@ include file="/WEB-INF/view/include/aside.jsp"%>
 
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<div class="content-wrapper">
@@ -268,7 +268,7 @@ function calendarReload(){
 		</div>
 		<!-- /.content-wrapper -->
 
-		<%@ include file="/WEB-INF/view/footer.jsp"%>
+		<%@ include file="/WEB-INF/view/include/footer.jsp"%>
 	</div>
 </body>
 </html>
