@@ -11,17 +11,17 @@
 	<select id="fileList_size_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
 		where project_idx=#{project_idx}
-		order by file_size desc
+		order by file_size ${sort}
 	</select>
 	<select id="fileList_date_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
 		where project_idx=#{project_idx}
-		order by file_date desc
+		order by file_date  ${sort}
 	</select>
-	<select id="fileList_name_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
+	<select id="fileList_name_sort" parameterType="Map" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
-		where project_idx=#{project_idx}
-		order by file_name desc
+		where project_idx= #{project_idx}
+		order by file_name ${sort}
 	</select>
 	<!-- 파일등록  -->
 	<insert id="addFile" parameterType="tpm.file.model.FileDTO">

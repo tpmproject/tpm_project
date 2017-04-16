@@ -67,23 +67,29 @@ public class FileController {
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
 	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam(value="line_name",required=false)String line_name,
+								 @RequestParam(value="sort",defaultValue="")String sort,
 								 @RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
-		
-			System.out.println("누른 프로젝트idx fileList.do로 :"+project_idx);
+			//System.out.println("sort 넘어온 값:"+sort);
+			//System.out.println("누른 프로젝트idx fileList.do로 :"+project_idx);
 		
 		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
 				
-			System.out.println("세션에 올라간 idx :"+session.getAttribute("project_idx"));
+			//System.out.println("세션에 올라간 idx :"+session.getAttribute("project_idx"));
+		if(sort=="" && sort=="null"){
+			sort="asc";
+		}else if(sort=="desc"){
+			sort="desc";
+		}
+		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name,sort);
 		
-		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name);
 		
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto);
 		
 		
 		ModelAndView mav = new ModelAndView();
-		
+		session.setAttribute("files1", fileList);
 		mav.addObject("fileList", fileList);
 		mav.setViewName("file/fileList_d");
 		return mav;
