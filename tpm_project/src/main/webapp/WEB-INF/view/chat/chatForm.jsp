@@ -36,11 +36,11 @@ function showChatContent(cpCode, cpValue){
 			window.alert(JSON.stringify(json));
 			var msg = '';
 			for(var i = 0 ; i < json.length ; i++){
-				var fomatdate = new Date(json[i].chat_date);
-				var date1 = fomatdate.toLocaleDateString();
-				//var date2 = fomatdate.format('{yyyy}-{MM}-{dd} {hh}:{mm}:{ss}');
-				var date2 = fomatdate.format('MMMM Do YYYY, h:mm:ss a');
-				msg += '<span>' + json[i].mdto.member_name + ' : ' + json[i].chat_content + ' -- ' + date2 +'</span><br>';
+				//var fomatdate = new Date(json[i].chat_date);
+				//var date1 = fomatdate.toLocaleDateString();
+				var fomatdate = moment(json[i].chat_date).format('YYYY-MM-DD h:mm:ss a');
+
+				msg += '<span>' + json[i].mdto.member_name + ' : ' + json[i].chat_content + ' -- ' + fomatdate +'</span><br>';
 			}
 			$('#chatMessageArea').html(msg);
 		}

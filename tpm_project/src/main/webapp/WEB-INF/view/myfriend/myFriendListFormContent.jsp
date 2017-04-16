@@ -21,7 +21,7 @@
 					<c:forEach var="i" begin="0" end="${arry_mdto.size() - 1}" step="1">
 						<li><input type="hidden" id="del_myfriend_idx_${i}"
 							value="${arry_mdto.get(i).member_idx}"> <img
-							src="/tpm_project/img/member/profile/${arry_mdto.get(i).member_img}"
+							src="/tpm_project/img/member/profile/${arry_mdto.get(i).member_img}" style="width: 128px; height: 128px;"
 							alt="User Image"> <span class="users-list-name">${arry_mdto.get(i).member_name}
 								<a href="javascript:goDelete_member(${i})"><i
 									class="fa fa-fw fa-lg fa-trash-o text-danger"></i></a>
