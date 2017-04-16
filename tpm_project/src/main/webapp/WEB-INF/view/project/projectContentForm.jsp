@@ -134,11 +134,11 @@ function shows(){
 	var wtit=document.newWork.work_title.value;
 	var wsta=document.newWork.workdate.value;
 	
-/* 	if (wtit == null || wtit == "" || !wsta ) {
+	if (wtit == null || wtit == "" || !wsta ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
 		showf();
 		return;
-	} */
+	}
 	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
@@ -149,13 +149,12 @@ function shows(){
 }
 function shows2(){
 	var wtit=document.changeWork.work_title.value;
-	var wsta=document.changeWork.work_upstart.value;
-	var wend=document.changeWork.work_upend.value;
+	var wsta=document.newWork.workdate.value;
 	
-	if (wtit == null || wtit == "" || !wsta || !wend ) {
+/* 	if (wtit == null || wtit == "" || !wsta || !wend ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
 		return;
-	}
+	} */
 	
 	$(w_modal2).hide();
 	$(btnwork4).show();
@@ -606,6 +605,33 @@ function tendencyListResult(){
 					document.getElementById('work_member'+member.member_idx).style.color='blue';
 				}else{
 					document.getElementById('work_member'+member.member_idx).style.color='black';
+				}
+			}
+		}
+	}
+}
+function tendencyList2(){
+	var param = 'tendency='+document.changeWork.tendency.value
+	+"&project_idx="+ ${param.project_idx};
+	window.alert(param);
+	sendRequest('recommand.do',param,tendencyListResult2,'GET');
+}
+
+function tendencyListResult2(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+			
+			var json = JSON.parse(result);		
+			var msg2 = '';
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				if(member.member_td>3){
+					document.getElementById('work2_member'+member.member_idx).style.color='blue';
+				}else{
+					document.getElementById('work2_member'+member.member_idx).style.color='black';
 				}
 			}
 		}
@@ -1082,7 +1108,7 @@ function fileUp(work_idx){
 						<div class="row">
 							<div class="col-md-3">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<select id="getTendency" onchange="getTendencyList()">
+								<select id="tendency" onchange="tendencyList2()">
 									<option>--성향--</option>
 									<option value="tendency_e">외향적</option>
 									<option value="tendency_i">내향적</option>
