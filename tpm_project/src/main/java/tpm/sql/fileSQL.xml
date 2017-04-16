@@ -4,24 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.file">
 	<!--파일 리스트  -->
-	<select id="fileList" parameterType="int" resultType="tpm.file.model.FileDTO">
+	<select id="fileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
-		where project_idx=#{project_idx}
+		where project_idx=#{project_idx} and file_name like '%${search_text}%'
 	</select>
-	<select id="fileList_size_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
+
+	<select id="fileList_sort" parameterType="Map" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
-		where project_idx=#{project_idx}
-		order by file_size ${sort}
-	</select>
-	<select id="fileList_date_sort" parameterType="int" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file
-		where project_idx=#{project_idx}
-		order by file_date  ${sort}
-	</select>
-	<select id="fileList_name_sort" parameterType="Map" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file
-		where project_idx= #{project_idx}
-		order by file_name ${sort}
+		where project_idx= #{project_idx} and file_name like '%${search_text}%'
+		order by ${line_name} ${sort}
 	</select>
 	<!-- 파일등록  -->
 	<insert id="addFile" parameterType="tpm.file.model.FileDTO">
