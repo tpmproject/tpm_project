@@ -604,6 +604,8 @@ function tendencyListResult(){
 				var member = members[i];
 				if(member.member_td>3){
 					document.getElementById('work_member'+member.member_idx).style.color='blue';
+				}else{
+					document.getElementById('work_member'+member.member_idx).style.color='black';
 				}
 			}
 		}
