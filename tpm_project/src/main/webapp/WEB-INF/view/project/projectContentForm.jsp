@@ -644,7 +644,8 @@ function tendencyListResult2(){
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
-	window.open('fileUploadForm.do?work_idx='+work_idx+'&project_idx='+project_idx,"window", "width=500,height=700");
+	
+	
 
 }
 
@@ -837,6 +838,7 @@ a{
 	</div>
 	</c:if>
 	
+	<!--첨부 파일 div 시작  -->
 		<div id="right-side">
 		<a class="menu-toggle" href="#"><i
 			class="glyphicon glyphicon-bookmark"></i></a>
@@ -850,6 +852,7 @@ a{
 			</ul>
 		</div>
 	</div>
+	<!--첨부 파일 div 끝  -->
 	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
@@ -993,7 +996,8 @@ a{
 											</c:when>
 											</c:choose>
 											
-											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/<a href="#" class="menu-toggle">첨부파일</a></td>
+											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/
+											<a href="#" onclick="fileUp('${wdto.work_idx}')" class="menu-toggle">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>
