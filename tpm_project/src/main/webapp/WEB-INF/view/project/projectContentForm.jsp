@@ -776,15 +776,18 @@ function fileUp(work_idx){
 	display: inline-block;
 	width: 200px;
 	float: left;
+	margin-right: 10px;
 }
 .wdiv{
 	width: 200px;
 	padding-left: 10px;
+	background: #ecf0f5;
 }
 .cate_table {
-	border: solid 1px black;
+	background:white;
 	width: 200px;
-	margin: 4px;
+	padding: 4px;
+	margin-bottom: 4px;
 }
 
 .cate_table thead td {
@@ -800,6 +803,7 @@ function fileUp(work_idx){
 	padding-bottom: 7px;
 	text-align: center;
 	height: 34px;
+	background: #3c8dbc;
 }
 
 .table_i {
@@ -825,6 +829,10 @@ function fileUp(work_idx){
 	top:10px;
 	border: 1px solid black;
 }
+a{
+	color: black;
+}
+
 </style>
 </head>
 <body class="skin-blue">
@@ -835,7 +843,7 @@ function fileUp(work_idx){
 	</div>
 	</c:if>
 	
-	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
+	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
 		</div>
@@ -977,7 +985,7 @@ function fileUp(work_idx){
 											</c:when>
 											</c:choose>
 											
-											<td align="right">코멘트/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
+											<td align="right"><a href="">코멘트</a>/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -1152,6 +1160,7 @@ function fileUp(work_idx){
 		</div>
 	</div>
 	
+<%@include file="/WEB-INF/view/comment/comment.jsp" %>
 <%@include file="/WEB-INF/view/footer.jsp" %>
 </body>
 <script>
