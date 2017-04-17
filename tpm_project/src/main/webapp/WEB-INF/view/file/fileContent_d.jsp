@@ -9,7 +9,7 @@
 <%
 	int pageNumber = 1;
 	
-    String filename ="demo.docx";
+    String filename =(String)session.getAttribute("file_name");
 	
    	if (filename.substring(filename.indexOf(".")).equals(".java")) {
 		FileInputStream fis = null;
