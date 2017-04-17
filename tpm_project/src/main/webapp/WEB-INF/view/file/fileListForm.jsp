@@ -157,7 +157,7 @@
 			            
 					msg +=    '<ul class="dropdown-menu dropdown-user">'
 					msg +=     ' <li>'
-					msg +=       ' <a href=="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
+					msg +=       ' <a href="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
 					msg +=      '</li>'
 					msg +=      '<li>'
 					msg +=        '<a onclick="fileDel('+file.file_idx+');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
@@ -178,8 +178,8 @@
 	
 	}
 	/* 파일 삭제  */
-	function fileDel(i){
-		location.href="fileDel.do?file_idx="+i;  //해당파일 올린사람만 지울수있게 바꿔야함
+	function fileDel(file_idx){
+		location.href="fileDel.do?file_idx="+file_idx;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
 	/* 
 	function fileCt(){
