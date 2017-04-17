@@ -112,61 +112,15 @@ public class FileController {
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
 	@RequestMapping(value="fileContent.do",  method=RequestMethod.GET)
-	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request ) throws IOException{
-		System.out.println("파일이름 받아오기"+file_name);
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request ){
+
 		
-		int pageNumber = 1;
-	    String filename = file_name;
 		
-	   	if (filename.substring(filename.indexOf(".")).equals(".java")) {
-			FileInputStream fis = null;
-			FileOutputStream fos = null;
-
-			try {
-				
-				fis = new FileInputStream("C:/Users/abm79/workspace/mya/storage/"+filename); 
-				String file1 = filename.substring(0, filename.indexOf("."));
-				fos = new FileOutputStream("C:/Users/abm79/workspace/mya/storage/"+file1+".txt"); 
-
-				byte[] buffer = new byte[1024];
-				int readcount = 0;
-
-				while ((readcount = fis.read(buffer)) != -1) {
-
-					fos.write(buffer, 0, readcount); 
-
-				}
-				filename=file1+".txt";
-			} catch (Exception e) {
-
-				e.printStackTrace();
-
-			} finally {
-
-				fis.close();
-				fos.close();
-
-			}
-		
-		}
-		
-		if (request.getParameterMap().containsKey("page")) {
-			pageNumber = Integer.valueOf(request.getParameter("page"));
-		}
-		if (request.getParameterMap().containsKey("filename")) {
-			filename = request.getParameter("filename");
-		}
-
-		Document doc = new Document();
-		
-		doc.setFilename(filename);
-		doc.setPageNumber(pageNumber);
-
+	   
 		ModelAndView mav = new ModelAndView();
 		HttpSession session=request.getSession();
 		session.setAttribute("file_name", file_name);
-		mav.addObject("pageNumber",pageNumber);
-		mav.addObject("doc"+doc.getHtmlContent());
+
 		mav.setViewName("file/fileContent_d");
 		return mav;
 	}
@@ -242,12 +196,12 @@ public class FileController {
 	
 	/** 파일 - 파일 삭제 */
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.GET)
-	public ModelAndView fileDel(@RequestParam("file_idx")int file_idx
-								){
-		
+	public ModelAndView fileDel(@RequestParam("file_idx")int file_idx,
+								@RequestParam("file_name")String file_name){
+		System.out.println("file_name"+file_name);
 		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
-		File f = new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/");
+		File f = new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name);
 		f.delete();  //파일경로에 있는 실제파일 삭제
 		
 		String msg="";

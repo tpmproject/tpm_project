@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.groupdocs.ui.Document" %>
+<%@ page import="java.io.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@ page import="com.groupdocs.ui.Document" %>
-<%@ page import="java.io.*" %>
+
 <%
 	int pageNumber = 1;
 	
-    String filename =(String)session.getAttribute("file_name");
+    String filename ="demo.docx";
 	
    	if (filename.substring(filename.indexOf(".")).equals(".java")) {
 		FileInputStream fis = null;
@@ -16,16 +17,16 @@
 
 		try {
 			
-			fis = new FileInputStream("C:/Users/abm79/workspace/mya/storage/"+filename); // ìë³¸íì¼
+			fis = new FileInputStream("C:/Users/abm79/workspace/mya/storage/"+filename);
 			String file1 = filename.substring(0, filename.indexOf("."));
-			fos = new FileOutputStream("C:/Users/abm79/workspace/mya/storage/"+file1+".txt"); // ë³µì¬ìì¹
-
+			fos = new FileOutputStream("C:/Users/abm79/workspace/mya/storage/"+file1+".txt");//
+			
 			byte[] buffer = new byte[1024];
 			int readcount = 0;
 
 			while ((readcount = fis.read(buffer)) != -1) {
 
-				fos.write(buffer, 0, readcount); // íì¼ ë³µì¬ 
+				fos.write(buffer, 0, readcount); 
 
 			}
 			filename=file1+".txt";
@@ -67,7 +68,7 @@
         .navbar .navbar-collapse {
             text-align: center;
         }
-        /* api copylight ë¬¸êµ¬ ì¨ê¸°ê¸° css  */
+    
         .doc-page-trial{
         	display:none;
         }
@@ -86,10 +87,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li><a href="index.jsp?page=1">First</a></li>
-            <li><a href="index.jsp?page=<%= pageNumber - 1 %>">Previous</a></li>
-            <li><a href="index.jsp?page=<%= pageNumber + 1 %>">Next</a></li>
-            <li><a href="index.jsp?page=<%= doc.getPageCount() %>">Last</a></li>
+            <li><a href="fileContent_d.jsp?page=1">First</a></li>
+            <li><a href="fileContent_d.jsp?page=<%= pageNumber - 1 %>">Previous</a></li>
+            <li><a href="fileContent_d.jsp?page=<%= pageNumber + 1 %>">Next</a></li>
+            <li><a href="fileContent_d.jsp?page=<%= doc.getPageCount() %>">Last</a></li>
         </ul>
     </div>
 </nav>
