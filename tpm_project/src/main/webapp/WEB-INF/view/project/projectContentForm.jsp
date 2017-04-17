@@ -653,7 +653,7 @@ function fileUp(work_idx){
  <!-- 임시) 여기부터 첨부파일   -->  
 <style type="text/css">
     
-     #right-side #sidebar-wrapper {
+    #right-side #sidebar-wrapper {
     margin-right: -250px;
     right: 0;
     width: 250px;
@@ -734,7 +734,6 @@ function fileUp(work_idx){
   #right-side .toggle {
     margin: 5px 5px 0 0;
   }
-  
   
  </style>
 
@@ -980,7 +979,7 @@ a{
 											</c:when>
 											</c:choose>
 											
-											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
+											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/<a href="#" class="menu-toggle">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -1136,7 +1135,7 @@ a{
 	</form>
 	
 	<div id="right-side">
-		<a id="menu-toggle" href="#" class="btn btn-primary btn-lg toggle"><i
+		<a class="menu-toggle" href="#"><i
 			class="glyphicon glyphicon-bookmark"></i></a>
 		<div id="sidebar-wrapper">
 		<div><%@include file="/WEB-INF/view/file/fileUploadForm.jsp" %></div>
@@ -1246,7 +1245,7 @@ $("#menu-close").click(function(e) {
   e.preventDefault();
   $("#sidebar-wrapper").toggleClass("active");
 });
-$("#menu-toggle").click(function(e) {
+$(".menu-toggle").click(function(e) {
   e.preventDefault();
   $("#sidebar-wrapper").toggleClass("active");
 });
