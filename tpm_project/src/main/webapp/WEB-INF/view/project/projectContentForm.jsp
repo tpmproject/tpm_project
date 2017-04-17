@@ -1240,7 +1240,6 @@ $(function () {
 $(function () {
 	 //Date range picker with time picker
   $('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-});	
-
+});
 </script>
 </html>
