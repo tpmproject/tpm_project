@@ -48,11 +48,11 @@ public class WorkController {
 
 	// 나의 업무
 	/** 나의 업무 - 나의 업무 페이지 이동 */
-	@RequestMapping(value="myWorkList.do",  method=RequestMethod.GET)
+	@RequestMapping(value="myWork.do",  method=RequestMethod.GET)
 	public ModelAndView myWorkListForm(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mywork/myWorkListForm");
+		mav.setViewName("mywork/myWorkList");
 		return mav;
 	}
 	
