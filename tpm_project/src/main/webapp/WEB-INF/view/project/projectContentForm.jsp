@@ -16,7 +16,8 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
+	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script>
@@ -652,14 +653,13 @@ function fileUp(work_idx){
 
 </script>
 
- 
+
 
 
 <style>
-
-#workback {
+#workback, #workback2 {
 	position: fixed;
-	z-index:4;
+	z-index: 4;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -671,15 +671,47 @@ function fileUp(work_idx){
 
 #work_modal, #work_modal2 {
 	display: none;
-	background: white;
+	border: 1px solid #0054FF;
+	background: #FFFFFF;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6CC0FF),
+		to(#FFFFFF));
+	background: -webkit-linear-gradient(top, #6CC0FF, #FFFFFF);
+	background: -moz-linear-gradient(top, #6CC0FF, #FFFFFF);
+	background: -ms-linear-gradient(top, #6CC0FF, #FFFFFF);
+	background: -o-linear-gradient(top, #6CC0FF, #FFFFFF);
+	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #FFFFFF 100%);
 	position: fixed;
-	z-index:5;
+	z-index: 5;
 	top: 20%;
 	left: 20%;
-	border: solid 10px white;
-	border-radius: 10px;
 	width: 600px;
 	height: 500px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	-moz-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	vertical-align: middle;
+	min-width: 300px;
+	padding: 20px;
+	margin-top: 30px;
+}
+
+#btn-worknext, #btn-workbefore, #btn-workok {
+	border: 1px solid #6CC0FF;
+	background: #E8FFFF;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6CC0FF),
+		to(#E8FFFF));
+	background: -webkit-linear-gradient(top, #6CC0FF, #E8FFFF);
+	background: -moz-linear-gradient(top, #6CC0FF, #E8FFFF);
+	background: -ms-linear-gradient(top, #6CC0FF, #E8FFFF);
+	background: -o-linear-gradient(top, #6CC0FF, #E8FFFF);
+	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #E8FFFF 100%);
 }
 
 .category {
@@ -688,13 +720,15 @@ function fileUp(work_idx){
 	float: left;
 	margin-right: 10px;
 }
-.wdiv{
+
+.wdiv {
 	width: 200px;
 	padding-left: 10px;
 	background: #ecf0f5;
 }
+
 .cate_table {
-	background:white;
+	background: white;
 	width: 200px;
 	padding: 4px;
 	margin-bottom: 4px;
@@ -725,80 +759,92 @@ function fileUp(work_idx){
 .check_div {
 	padding-left: 19px;
 	height: 100px;
-	overflow-y:scroll;
+	overflow-y: scroll;
 }
-.cateName{
+
+.cateName {
 	display: none;
 }
-#trash{
+
+#trash {
 	width: 55px;
 	height: 45px;
 	display: inline-block;
 	position: fixed;
 	left: 50%;
-	top:10px;
+	top: 10px;
 	border: 1px solid black;
 }
-a{
+
+a {
 	color: black;
 }
-
 </style>
 </head>
 <body class="skin-blue">
-<%@include file="/WEB-INF/view/header.jsp" %>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	<c:if test="${param.project_level != 1000 }">
-	<div id="trash" ondrop="drop(event)" class="btn-lg" ondragenter="trashColor()" ondragleave="trashColorReturn()" ondragstart="drag(event)" ondragover="allowDrop(event)">
-		<span id="trash_i" class="glyphicon glyphicon-trash" aria-hidden="true" ondragover="trashColor()" ></span>
-	</div>
+		<div id="trash" ondrop="drop(event)" class="btn-lg"
+			ondragenter="trashColor()" ondragleave="trashColorReturn()"
+			ondragstart="drag(event)" ondragover="allowDrop(event)">
+			<span id="trash_i" class="glyphicon glyphicon-trash"
+				aria-hidden="true" ondragover="trashColor()"></span>
+		</div>
 	</c:if>
-	
-	
-	
+
+
+
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:choose>
-			<c:when test="${(empty pdto.category_dtos) or pdto.category_dtos[0].category_idx == 0}"></c:when>
+			<c:when
+				test="${(empty pdto.category_dtos) or pdto.category_dtos[0].category_idx == 0}"></c:when>
 			<c:otherwise>
 				<c:forEach var="cdto" items="${pdto.category_dtos}">
 					<div class="category" id="cp${cdto.category_idx}">
-						
+
 						<!--카테고리 이름  -->
-						<div class="category_head" id ="c${cdto.category_idx}" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
-						<c:choose>
-						<c:when test="${param.project_level eq 1000 }">
-							<span>${cdto.category_name }</span>
-						</c:when>
-						<c:otherwise>
-							<form action="javascript:categoryUpdate(${cdto.category_idx})">
-								<div id="cate${cdto.category_idx}" class="cateName">
-									<input id="cateIn${cdto.category_idx}" type="text" value="${cdto.category_name }" size="16px">
-									&nbsp;&nbsp;
-								<i class="glyphicon glyphicon-remove" onclick="cateNameRe(${cdto.category_idx})"></i>
-								</div>
-								<div id="a_cate${cdto.category_idx}"><a href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
-								&nbsp;&nbsp;
-								
-								<i class="glyphicon glyphicon-plus" onclick="showf(${cdto.category_idx})"></i>
-								
-								</div>
-							</form>
-						</c:otherwise>
-						</c:choose>
+						<div class="category_head" id="c${cdto.category_idx}"
+							draggable="true" ondragover="allowDrop(event)"
+							ondragstart="drag(event)">
+							<c:choose>
+								<c:when test="${param.project_level eq 1000 }">
+									<span>${cdto.category_name }</span>
+								</c:when>
+								<c:otherwise>
+									<form action="javascript:categoryUpdate(${cdto.category_idx})">
+										<div id="cate${cdto.category_idx}" class="cateName">
+											<input id="cateIn${cdto.category_idx}" type="text"
+												value="${cdto.category_name }" size="16px">
+											&nbsp;&nbsp; <i class="glyphicon glyphicon-remove"
+												onclick="cateNameRe(${cdto.category_idx})"></i>
+										</div>
+										<div id="a_cate${cdto.category_idx}">
+											<a href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
+											&nbsp;&nbsp; <i class="glyphicon glyphicon-plus"
+												onclick="showf(${cdto.category_idx})"></i>
+
+										</div>
+									</form>
+								</c:otherwise>
+							</c:choose>
 						</div>
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
-								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
+									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
-							
+
 									<c:if test="${param.project_level != 1000 }">
-									<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i class="glyphicon glyphicon-cog"></i></span>
+										<span
+											onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i
+											class="glyphicon glyphicon-cog"></i></span>
 									</c:if>
-									
+
 								</div>
 								<table class="cate_table">
 									<tbody>
@@ -808,8 +854,8 @@ a{
 										</tr>
 										<tr>
 											<td colspan="2">
-												<div class="table_i glyphicon glyphicon-user"></div>
-												<c:forEach var="mdto" items="${marr}">
+												<div class="table_i glyphicon glyphicon-user"></div> <c:forEach
+													var="mdto" items="${marr}">
 													<c:if test="${mdto.work_idx eq wdto.work_idx}">
 														<span>${mdto.member_name}</span>
 													</c:if>
@@ -818,104 +864,117 @@ a{
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2">
-											<c:choose>
-											<c:when test="${param.project_level != 1000 }">
-												<form action="javascript:addCheck(${wdto.work_idx})">
-												<div class="table_i glyphicon glyphicon-check"></div>
-												<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width:60%;" required="required">
-												&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
-												</form>
-											</c:when>
-											<c:otherwise>
-												<div class="table_i glyphicon glyphicon-check"></div>
-												<span>체크리스트</span>
-											</c:otherwise>
-											</c:choose>
-											</td>
+											<td colspan="2"><c:choose>
+													<c:when test="${param.project_level != 1000 }">
+														<form action="javascript:addCheck(${wdto.work_idx})">
+															<div class="table_i glyphicon glyphicon-check"></div>
+															<input type="text" id="content${wdto.work_idx}"
+																placeholder="체크리스트" style="width: 60%;"
+																required="required"> &nbsp;<i
+																class="glyphicon glyphicon-plus"
+																onclick="addCheck(${wdto.work_idx})"></i>
+														</form>
+													</c:when>
+													<c:otherwise>
+														<div class="table_i glyphicon glyphicon-check"></div>
+														<span>체크리스트</span>
+													</c:otherwise>
+												</c:choose></td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:set var="chTotal" value="0"></c:set>
 													<c:set var="chChecked" value="0"></c:set>
-													<c:forEach var="chdto" items="${wdto.checklist_dtos}" varStatus="status">
-														<div id="div_ch${chdto.checklist_idx }" style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)" >
-													<c:choose>
-													<c:when test="${param.project_level != 1000 }">
-															<a onclick="javascript:check(${chdto.checklist_idx })">
-													</c:when>
-													<c:otherwise>
-															<a>
-													</c:otherwise>
-													</c:choose>
+													<c:forEach var="chdto" items="${wdto.checklist_dtos}"
+														varStatus="status">
+														<div id="div_ch${chdto.checklist_idx }"
+															style="display:${chdto.checklist_state eq '1' ? 'none' : 'block' }"
+															draggable="true" ondragover="allowDrop(event)"
+															ondragstart="drag(event)">
+															<c:choose>
+																<c:when test="${param.project_level != 1000 }">
+																	<a onclick="javascript:check(${chdto.checklist_idx })">
+																</c:when>
+																<c:otherwise>
+																	<a>
+																</c:otherwise>
+															</c:choose>
 															<i id="ch${chdto.checklist_idx }"
-															class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
-															</i> ${chdto.checklist_content}
-															</a>
-															<input type="hidden" id="ch_state${chdto.checklist_idx}" value="${chdto.checklist_state}">
+																class="${chdto.checklist_state eq '1' ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-unchecked' }">
+															</i> ${chdto.checklist_content} </a> <input type="hidden"
+																id="ch_state${chdto.checklist_idx}"
+																value="${chdto.checklist_state}">
 														</div>
-													<c:if test="${status.last}">
-														<c:set var="chTotal" value="${status.count}"></c:set>
-													</c:if>
-													<c:if test="${chdto.checklist_state eq '1'}">
-													<c:set var="chChecked" value="${chChecked+1}"></c:set>
-													</c:if>
+														<c:if test="${status.last}">
+															<c:set var="chTotal" value="${status.count}"></c:set>
+														</c:if>
+														<c:if test="${chdto.checklist_state eq '1'}">
+															<c:set var="chChecked" value="${chChecked+1}"></c:set>
+														</c:if>
 													</c:forEach>
-												<input type="hidden" id="checkHide${wdto.work_idx}" value="0">
+													<input type="hidden" id="checkHide${wdto.work_idx}"
+														value="0">
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2" align="right"><a id="aCheck${wdto.work_idx}" href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트 보기</a>&nbsp;</td>
+											<td colspan="2" align="right"><a
+												id="aCheck${wdto.work_idx}"
+												href="javascript:showCheck(${wdto.work_idx})">완료한 체크리스트
+													보기</a>&nbsp;</td>
 										</tr>
 										<tr>
 											<td colspan="2">
-											<div class="progress" style="margin-bottom: 2px; height: 12px;">
-											<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;">			    
-											</div>
-											</div>
-											<input type="hidden" id="chTotal${wdto.work_idx}" value="${chTotal}">
-											<input type="hidden" id="chChecked${wdto.work_idx}" value="${chChecked}">
+												<div class="progress"
+													style="margin-bottom: 2px; height: 12px;">
+													<div id="chBar${wdto.work_idx}"
+														class="progress-bar progress-bar-primary "
+														style="width: ${chChecked/chTotal * 100}%;"></div>
+												</div> <input type="hidden" id="chTotal${wdto.work_idx}"
+												value="${chTotal}"> <input type="hidden"
+												id="chChecked${wdto.work_idx}" value="${chChecked}">
 											</td>
 										</tr>
-										<c:remove var="chTotal"/>
-										<c:remove var="chChecked"/>
+										<c:remove var="chTotal" />
+										<c:remove var="chChecked" />
 										<tr>
 											<c:choose>
-											<c:when test="${wdto.work_state == 3 }">
-												<td><input type="button" value="업무 완료됨"></td>
-											</c:when>
-											<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
-												<td><input type="button" value="결재 요청"></td>
-											</c:when>
-											<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
-												<td><input type="button" value="결재 대기 중"></td>
-											</c:when>
-											<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
-												<td><input type="button" value="업무 완료"></td>
-											</c:when>
+												<c:when test="${wdto.work_state == 3 }">
+													<td><input type="button" value="업무 완료됨"></td>
+												</c:when>
+												<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
+													<td><input type="button" value="결재 요청"></td>
+												</c:when>
+												<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
+													<td><input type="button" value="결재 대기 중"></td>
+												</c:when>
+												<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
+													<td><input type="button" value="업무 완료"></td>
+												</c:when>
 											</c:choose>
-											
-											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/
-											<a href="#" onclick="fileUp('${wdto.work_idx}')" class="menu-toggle">첨부파일</a></td>
+
+											<td align="right"><a
+												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a
+												href="#" onclick="fileUp('${wdto.work_idx}')"
+												class="menu-toggle">첨부파일</a></td>
 											<!--첨부 파일 div 시작  -->
-													<div id="right-side">
-													<a class="menu-toggle" href="#"><i
-														class="glyphicon glyphicon-bookmark"></i></a>
-													<div id="sidebar-wrapper">
+											<div id="right-side">
+												<a class="menu-toggle" href="#"><i
+													class="glyphicon glyphicon-bookmark"></i></a>
+												<div id="sidebar-wrapper">
 													<div>
 														<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
 													</div>
-														<ul class="sidebar-nav">
-															<a id="menu-close" href="#"
-																class="btn btn-default btn-lg pull-right toggle"><i
-																class="glyphicon glyphicon-remove"></i></a>
-															
-														</ul>
-													</div>
+													<ul class="sidebar-nav">
+														<a id="menu-close" href="#"
+															class="btn btn-default btn-lg pull-right toggle"><i
+															class="glyphicon glyphicon-remove"></i></a>
+
+													</ul>
 												</div>
-												<!--첨부 파일 div 끝  -->
+											</div>
+											<!--첨부 파일 div 끝  -->
 										</tr>
 									</tbody>
 								</table>
@@ -927,15 +986,15 @@ a{
 		</c:choose>
 
 		<c:if test="${param.project_level !=1000 }">
-		<!-- category add -->
-		<div class="category" id="addCate" style="padding-left: 10px;">
-			<form name="newCategory" action="javascript:categoryAdd()">
-				<input type="text" class="form-control" name="category_name"
-					placeholder="새로운 카테고리">
-			</form>
-		</div>
+			<!-- category add -->
+			<div class="category" id="addCate" style="padding-left: 10px;">
+				<form name="newCategory" action="javascript:categoryAdd()">
+					<input type="text" class="form-control" name="category_name"
+						placeholder="새로운 카테고리">
+				</form>
+			</div>
 		</c:if>
-		
+
 	</div>
 
 
@@ -951,21 +1010,21 @@ a{
 			<div id="w_modal">
 				<div id="btnwork">
 					<div>
-						<h2></h2>
-						<input type="hidden" name="category_idx" value="">
-						업무명 : <input type="text" name="work_title">
+						<input type="hidden" name="category_idx" value=""> <label>업무명
+						</label><input type="text" name="work_title">
 					</div>
 					<div class="form-group">
-						<label>기한:</label>
+						<label>기한 </label>
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-								<input type="text" class="form-control pull-right" name="workdate" id="workdate" />
+							<input type="text" class="form-control pull-right"
+								name="workdate" id="workdate" />
 						</div>
 						<!-- /.input group -->
 					</div>
-					<div>
+					<div align="right">
 						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows()">다음</button>
@@ -992,19 +1051,29 @@ a{
 									<option value="tendency_j">판단적</option>
 									<option value="tendency_p">인식적</option>
 								</select>
-								<div id="project_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+								<div id="project_m"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop3(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자 </h4>
-								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							<div class="col-md-3" ondrop="drop(event)"
+								ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<h4 class="text-center">업무 담당자</h4>
+								<div id="work_m"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop2(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button type="button" class="btn btn-next" id="btn-workbefore"
-					onclick="showf()">이전</button>
-				<c:if test=""></c:if>
-				<button type="button" class="btn btn-next" id="btn-workok" onclick="addWork()">완료</button>
+				<div align="center">
+					<button type="button" class="btn btn-next" id="btn-workbefore"
+						onclick="showf()">이전</button>
+					<c:if test=""></c:if>
+					<button type="button" class="btn btn-next" id="btn-workok"
+						onclick="addWork()">완료</button>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -1019,21 +1088,27 @@ a{
 			<div id="w_modal2">
 				<div id="btnwork3">
 					<div>
-						<h2></h2>
-						<input type="hidden" name="work_idx">
-						업무명 : <input type="text" name="work_title">
+						<input type="hidden" name="work_idx"> <label>업무명 </label><input
+							type="text" name="work_title">
 					</div>
-					<div>기한</div>
-					<div>
-						<input type="text" class="form-control pull-right" name="workdateup" id="workdateup" />
+					<div class="form-group">
+						<label>기한 </label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-clock-o"></i>
+							</div>
+							<div>
+								<input type="text" class="form-control pull-right"
+									name="workdateup" id="workdateup" />
+							</div>
+						</div>
+						<!-- /.input group -->
 					</div>
-					<div>
+					<div align="right">
 						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows2()">다음</button>
-
 					</div>
-
 				</div>
 			</div>
 
@@ -1054,26 +1129,36 @@ a{
 									<option value="tendency_j">판단적</option>
 									<option value="tendency_p">인식적</option>
 								</select>
-								<div id="project_m2" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop5(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
+								<div id="project_m2"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop5(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자 </h4>
-								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
+							<div class="col-md-3" ondrop="drop(event)"
+								ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<h4 class="text-center">업무 담당자</h4>
+								<div id="work_m2"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop4(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button type="button" class="btn btn-next" id="btn-workbefore"
-					onclick="showf2()">이전</button>
-				<button type="button" class="btn btn-next" id="btn-workok" onclick="updateWork()">완료</button>
+				<div margin-top="10" align="center">
+					<button type="button" class="btn btn-next" id="btn-workbefore"
+						onclick="showf2()">이전</button>
+					<button type="button" class="btn btn-next" id="btn-workok"
+						onclick="updateWork()">완료</button>
+				</div>
 			</div>
 		</div>
 	</form>
-	
 
-	
-<%@include file="/WEB-INF/view/comment/comment.jsp" %>
-<%@include file="/WEB-INF/view/footer.jsp" %>
+
+
+	<%@include file="/WEB-INF/view/comment/comment.jsp"%>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 <script>
 /*               //검색 날짜제한 
