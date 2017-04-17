@@ -985,7 +985,7 @@ a{
 											</c:when>
 											</c:choose>
 											
-											<td align="right"><a href="">코멘트</a>/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
+											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/<a href="#" onclick="fileUp('${wdto.work_idx}')">첨부파일</a></td>
 										</tr>
 									</tbody>
 								</table>
