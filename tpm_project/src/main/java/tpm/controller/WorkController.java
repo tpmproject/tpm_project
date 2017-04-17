@@ -48,11 +48,11 @@ public class WorkController {
 
 	// 나의 업무
 	/** 나의 업무 - 나의 업무 페이지 이동 */
-	@RequestMapping(value="myWork.do",  method=RequestMethod.GET)
+	@RequestMapping(value="myWorkList.do",  method=RequestMethod.GET)
 	public ModelAndView myWorkListForm(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mywork/myWorkList");
+		mav.setViewName("mywork/myWorkListForm");
 		return mav;
 	}
 	
@@ -115,15 +115,13 @@ public class WorkController {
 		
 		Date ts = sdf.parse(work_s);
 		Date te = sdf.parse(work_e);
-		
 		Timestamp work_start = new Timestamp(ts.getTime());
 		Timestamp work_end = new Timestamp(te.getTime());
-
 		dto.setWork_start(work_start);
 		dto.setWork_end(work_end);
 		int work_idx=workDAO.addWork(dto);
 		dto.setWork_idx(work_idx);
-		
+
 		if(work_idx>0){
 			for(int i=0;i<member_idx.length;i++){
 				int w_idx=Integer.parseInt(member_idx[i]);
@@ -151,10 +149,23 @@ public class WorkController {
 	
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx){
+	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup) throws ParseException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workResult_d");
+		System.out.println(workdateup);
+		String temp[]=workdateup.split("-");
+		String work_s=temp[0].trim();
+		String work_e=temp[1].trim();
+		System.out.println(work_s);
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
+		Date ts = sdf.parse(work_s);
+		Date te = sdf.parse(work_e);
+		Timestamp work_start = new Timestamp(ts.getTime());
+		Timestamp work_end = new Timestamp(te.getTime());
+		System.out.println(work_start);
+		dto.setWork_start(work_start);
+		dto.setWork_end(work_end);
 		int result=workDAO.updateWork(dto);
 		if(result>0){
 			result=0;
