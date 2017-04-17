@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
+function closeComment(){
+	$(comment_back).fadeOut();
+}
 function comment(work_idx){
 	$(comment_back).hide();
 	$(comment_back).fadeIn();
@@ -41,13 +44,15 @@ function comment(work_idx){
 }
 </style>
 <div id="comment_back">
-	<div id="comment_div">
+<div id="comment_div">
+	<span onclick="closeComment()"><i class="glyphicon glyphicon-remove"></i></span>
 	<div id="cm_work_title"></div>
-		<div>
-		코멘트 내용
-		</div>
-		<form>
-		<input type="text" name="tpm_comment_content">
-		</form>
+	<div>
+	코멘트 내용
 	</div>
+	
+	<form>
+		<input type="text" name="tpm_comment_content">
+	</form>
+</div>
 </div>
