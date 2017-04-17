@@ -14,16 +14,16 @@
     <!-- Bootstrap Core CSS -->
     <%@ include file="/WEB-INF/view/file/import.jsp"%>
     
-    <link href="/tpm_project/css/file/bootstrap.css?ver=1" rel="stylesheet">
+    <link href="/tpm_project/css/file/bootstrap.css?ver=3" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="/tpm_project/css/file/metisMenu.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=1" rel="stylesheet">
+    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=3" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href="/tpm_project/css/file/dataTables.responsive.css"
+    <link href="/tpm_project/css/file/dataTables.responsive.css?ver=2"
     rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/tpm_project/css/file/sb-admin.css?ver=1" rel="stylesheet">
+    <link href="/tpm_project/css/file/sb-admin.css?ver=3" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
     type="text/css">

@@ -27,9 +27,6 @@
     downloading all of them to reduce the load. -->
 <link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
 	type="text/css">
-	
-<!-- custom scrollbar stylesheet -->
-<link rel="stylesheet" href="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.css">	
 
 <!-- jQuery 2.1.3 -->
 <script src="/tpm_project/sample/cho/main/plugins/jQuery/jQuery-2.1.3.min.js"></script>
@@ -66,8 +63,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/tpm_project/sample/cho/main/dist/js/demo.js" type="text/javascript"></script>
 
-<!-- custom scrollbar plugin -->
-<script src="/tpm_project/sample/cho/scroll/jquery.mCustomScrollbar.js" type="text/javascript"></script>	
+
 <script>
 function sideBar(){
 	var bNode=document.documentElement.lastChild;

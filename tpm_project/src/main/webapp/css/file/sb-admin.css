@@ -6,7 +6,19 @@ body {
 #wrapper {
   width: 100%;
 }
-
+.file-list-form #page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
+@media (min-width: 768px) {
+ .file-list-form  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
 .file-list-form .navbar-top-links {
   margin-right: 0;
 }
