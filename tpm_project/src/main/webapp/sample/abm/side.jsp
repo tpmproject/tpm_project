@@ -16,7 +16,7 @@
     margin-right: -250px;
     right: 0;
     width: 250px;
-    background: rgb(0,0,0);
+	background-color:silver;
     position: fixed;
     height: 100%;
     overflow-y: auto;
@@ -82,7 +82,7 @@
 
   #right-side #sidebar-wrapper.active {
     right: 250px;
-    width: 250px;
+    width: 600px;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
     -moz-transition: all 0.5s ease-out 0s;
@@ -103,14 +103,12 @@
 		<a id="menu-toggle" href="#" class="btn btn-primary btn-lg toggle"><i
 			class="glyphicon glyphicon-bookmark"></i></a>
 		<div id="sidebar-wrapper">
+		<div><%@include file="/WEB-INF/view/file/fileUploadForm.jsp" %></div>
 			<ul class="sidebar-nav">
 				<a id="menu-close" href="#"
 					class="btn btn-default btn-lg pull-right toggle"><i
 					class="glyphicon glyphicon-remove"></i></a>
-				<li class="sidebar-brand"><a href="#">Project name</a></li>
-				<li><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				
 			</ul>
 		</div>
 	</div>
