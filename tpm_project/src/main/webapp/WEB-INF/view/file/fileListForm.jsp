@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="tpm.file.model.FileDTO" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html">
 <html>
@@ -15,16 +14,16 @@
     <!-- Bootstrap Core CSS -->
     <%@ include file="/WEB-INF/view/file/import.jsp"%>
     
-    <link href="/tpm_project/css/file/bootstrap.css?ver=1" rel="stylesheet">
+    <link href="/tpm_project/css/file/bootstrap.css?ver=3" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="/tpm_project/css/file/metisMenu.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="/tpm_project/css/file/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=3" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href="/tpm_project/css/file/dataTables.responsive.css"
+    <link href="/tpm_project/css/file/dataTables.responsive.css?ver=2"
     rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/tpm_project/css/file/sb-admin.css?ver=1" rel="stylesheet">
+    <link href="/tpm_project/css/file/sb-admin.css?ver=3" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
     type="text/css">
@@ -40,17 +39,27 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     
     <script>
-   
+
+
+	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
-    function project_fileList(i){
+    function project_fileList(project_idx){
     	
-		var param = 'project_idx=' + i;
+		var param = 'project_idx=' + project_idx;
+
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 		
 	}
-    
+ 	function file_search(i){
+    	var search_text=document.getElementById("search_text").value;
+    	
+		var param = 'project_idx='+i+'&search_text='+search_text;
+
+		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+		
+	}
     /*선택한 제목행에따라 정렬하여 파일리스트 출력  */
-    function sizeSort(project_idx, line_name,th){
+    function file_sort(project_idx, line_name,th){
     	var sort='';
     	
     	if($('#'+th).hasClass('sorting')){
@@ -219,7 +228,7 @@
                 <c:forEach var="p_idxs" items="${p_list}">
                 
                   <li >
-                    <a onclick="project_fileList(${p_idxs.project_idx});" style="color:black;">${p_idxs.project_name }</a>
+                    <a onclick="project_fileList('${p_idxs.project_idx}');" style="color:black;">${p_idxs.project_name } </a>
                     
                   </li>
                   
@@ -239,30 +248,36 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="panel panel-default">
-              <div class="panel-heading">@ 프로젝트 파일 리스트</div>
+              <div class="panel-heading"> 프로젝트 파일 리스트</div>
               <!-- /.panel-heading -->
               <div class="panel-body">
+              	<div style="width:300px;">
+             	 	<input type="text" style="display:inline; float:left;" class="form-control" id="search_text" placeholder="Search...">
+              		<button class="btn btn-default" type="button" onclick="file_search(${project_idx})" style="margin:-30px 300px;float:left; display: inline;">
+                      <i class="fa fa-search"></i>
+                    </button>
+             	</div>
               
-                <table width="90%" class="table table-striped table-bordered table-hover"
+                <table width="95%" class="table table-striped table-bordered table-hover"
                 id="dataTables-example" style="width:500px">
                 
                   <thead>
                     <tr>
                       <th>파일 타입 </th>
-                      <th id="th_file_name" onclick="sizeSort(${project_idx},'file_name','th_file_name')">파일 이름</th>
-                      <th id="th_file_size" onclick="sizeSort(${project_idx},'file_size','th_file_size')">파일 크기</th>
-                      <th id="th_file_date" onclick="sizeSort(${project_idx},'file_date','th_file_date')">공유한 날짜</th>
-                      <th id="th_file_idx" onclick="sizeSort(${project_idx},'member_idx')">공유한 사람</th>
+                      <th id="th_file_name" onclick="file_sort(${project_idx},'file_name','th_file_name')">파일 이름</th>
+                      <th id="th_file_size" onclick="file_sort(${project_idx},'file_size','th_file_size')">파일 크기</th>
+                      <th id="th_file_date" onclick="file_sort(${project_idx},'file_date','th_file_date')">공유한 날짜</th>
+                      <th id="th_file_idx" onclick="file_sort(${project_idx},'member_idx')">공유한 사람</th>
                     </tr>
                   </thead>
 
                   <tbody id="file_content_list">
-                 <%-- 
-                <c:set var="file" value="${fileList}"></c:set>
-                <c:forEach var="f" items="${file}">
-                <script>window.alert('${f.file_name}');</script>
-                  <tr id="file1">
-                      <td id="file2"></td>
+            	
+              <%--   <c:set var="fileaa" value="${fileList}"></c:set>
+                <c:forEach var="fkey" items="${fileaa}">
+            
+                  <tr class="odd gradeX">
+                      <td></td>
                       <td>Firefox 2.0</td>
                       <td>Win 98+ / OSX.2+</td>
                       <td class="center">1.8</td>
@@ -270,8 +285,8 @@
              	  </tr>
                  
                   
-                </c:forEach> --%>
-                      
+                </c:forEach>
+                       --%>
            		    
                 
                   </tbody>
