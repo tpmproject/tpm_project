@@ -40,7 +40,7 @@
     
     <script>
 
-
+	
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(project_idx){
@@ -142,9 +142,8 @@
 			
 			
 		    msg+= ''
-		    
-			msg +='<tr class="odd gradeX" style="margin:10px 30px;">'
-					msg +='<td><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></td>'
+		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">'
+					msg +='<td><a href="fileContent.do?file_name='+file.file_name+'"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>'
 					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
 					msg +='<td>'+file.file_size+' byte </td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
@@ -182,8 +181,13 @@
 	function fileDel(i){
 		location.href="fileDel.do?file_idx="+i;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
-	
+	/* 
+	function fileCt(){
+		window.open("fileContent.do", "fileContent", "width=500px,height=300px");
+	}
+	 */
     </script>
+    
   </head>
  
   <body class="skin-blue" onload="project_fileList('${project_idx}')">

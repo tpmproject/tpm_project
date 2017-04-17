@@ -1,5 +1,6 @@
 package tpm.controller;
 
+import java.io.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,7 +27,7 @@ import tpm.file.model.FileDAO;
 import tpm.file.model.FileDTO;
 import tpm.file.model.FileSortDTO;
 import tpm.project.model.ProjectDTO;
-
+import com.groupdocs.ui.Document;
 @Controller
 public class FileController {
 	
@@ -93,11 +94,11 @@ public class FileController {
 		
 		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name,sort);
 		
-		System.out.println("---------------------------------------------");
+/*		System.out.println("---------------------------------------------");
 		System.out.println("컨트롤러에서의 project_idx:"+project_idx);
 		System.out.println("컨트롤러에서의 sort:"+sort);
 		System.out.println("컨트롤러에서의 line_name:"+line_name);
-		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));
+		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));*/
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto,search_text);
 		
 		
@@ -108,11 +109,64 @@ public class FileController {
 		return mav;
 	}
 	
-	/** 파일 - 파일 내용 반환 (뷰어) */
-	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)
-	public ModelAndView fileContent(){
+	/** 파일 - 파일 내용 반환 (뷰어) 
+	 * @throws IOException */
+	@RequestMapping(value="fileContent.do",  method=RequestMethod.GET)
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request ) throws IOException{
+		System.out.println("파일이름 받아오기"+file_name);
 		
+		int pageNumber = 1;
+	    String filename = file_name;
+		
+	   	if (filename.substring(filename.indexOf(".")).equals(".java")) {
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+
+			try {
+				
+				fis = new FileInputStream("C:/Users/abm79/workspace/mya/storage/"+filename); 
+				String file1 = filename.substring(0, filename.indexOf("."));
+				fos = new FileOutputStream("C:/Users/abm79/workspace/mya/storage/"+file1+".txt"); 
+
+				byte[] buffer = new byte[1024];
+				int readcount = 0;
+
+				while ((readcount = fis.read(buffer)) != -1) {
+
+					fos.write(buffer, 0, readcount); 
+
+				}
+				filename=file1+".txt";
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			} finally {
+
+				fis.close();
+				fos.close();
+
+			}
+		
+		}
+		
+		if (request.getParameterMap().containsKey("page")) {
+			pageNumber = Integer.valueOf(request.getParameter("page"));
+		}
+		if (request.getParameterMap().containsKey("filename")) {
+			filename = request.getParameter("filename");
+		}
+
+		Document doc = new Document();
+		
+		doc.setFilename(filename);
+		doc.setPageNumber(pageNumber);
+
 		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession();
+		session.setAttribute("file_name", file_name);
+		mav.addObject("pageNumber",pageNumber);
+		mav.addObject("doc"+doc.getHtmlContent());
 		mav.setViewName("file/fileContent_d");
 		return mav;
 	}

@@ -16,8 +16,10 @@
 	<input type="hidden" name="project_idx" value="${project_idx}">
 	
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
+	<div id="div_list"></div>
 	<div id="div_fns"></div>
-	<div id="div_dnd" style="height: 300px; margin: 20px; border:3px dotted red;text-align: center;line-height: 300px;font-size: 50px; background-color: #def;" >HERE</div>
+	<div id="div_dnd" style="height: 500px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
+	<img src="/tpm_project/img/fileicon/file.PNG"></div>
 	<input type="submit" value="업로드">
 	</form>
 </fieldset>
@@ -35,12 +37,13 @@
 		evt.preventDefault(); 
 		evt.stopPropagation();
 	}
+	
 	//-- 선택된 파일명 표시
 	var showfns = function(files){
 		var fns = [];
 
 		for(var i=0,m=files.length;i<m;i++){
-			fns.push(files[i].name+'('+files[i].size+' Byte)');
+			fns.push(files[i].name+'('+files[i].size+' Byte)<input type="button" value="삭제" onclick="del('+files[i]+')">' );
 		}
 		
 		div_fns.innerHTML = fns.join('<br>');
