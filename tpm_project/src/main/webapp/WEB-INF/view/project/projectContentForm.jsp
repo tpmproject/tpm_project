@@ -757,7 +757,7 @@ function fileUp(work_idx){
 
 #workback {
 	position: fixed;
-	z-index:0;
+	z-index:4;
 	top: -10%;
 	left: -10%;
 	width: 110%;
