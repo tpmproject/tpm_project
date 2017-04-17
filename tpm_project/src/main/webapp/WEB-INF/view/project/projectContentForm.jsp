@@ -837,6 +837,20 @@ a{
 	</div>
 	</c:if>
 	
+		<div id="right-side">
+		<a class="menu-toggle" href="#"><i
+			class="glyphicon glyphicon-bookmark"></i></a>
+		<div id="sidebar-wrapper">
+		<div><%@include file="/WEB-INF/view/file/fileUploadForm.jsp" %></div>
+			<ul class="sidebar-nav">
+				<a id="menu-close" href="#"
+					class="btn btn-default btn-lg pull-right toggle"><i
+					class="glyphicon glyphicon-remove"></i></a>
+				
+			</ul>
+		</div>
+	</div>
+	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
@@ -1134,20 +1148,7 @@ a{
 		</div>
 	</form>
 	
-	<div id="right-side">
-		<a class="menu-toggle" href="#"><i
-			class="glyphicon glyphicon-bookmark"></i></a>
-		<div id="sidebar-wrapper">
-		<div><%@include file="/WEB-INF/view/file/fileUploadForm.jsp" %></div>
-			<ul class="sidebar-nav">
-				<a id="menu-close" href="#"
-					class="btn btn-default btn-lg pull-right toggle"><i
-					class="glyphicon glyphicon-remove"></i></a>
-				
-			</ul>
-		</div>
-	</div>
-	
+
 	
 <%@include file="/WEB-INF/view/comment/comment.jsp" %>
 <%@include file="/WEB-INF/view/footer.jsp" %>
