@@ -117,23 +117,15 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(work_idx,work_start,work_end,work_confirm){
-	$(workback).fadeIn('150');
+function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
+	$(workback2).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
 	window.alert(work_confirm);
-	
-	var wdiv=document.getElementById('wdiv'+work_idx);
-	var fc=wdiv.firstChild;
-	while(fc.nodeName!='SPAN'){
-		fc=fc.nextSibling;
-	}
-	var work_title=fc.innerHTML;
-	
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
-	document.changeWork.workdate.value=work_start+"-"+work_end;
+	document.changeWork.workdateup.value=work_start+"-"+work_end;
 	if(work_confirm==10){
 		document.changeWork.work_confirm.setAttribute('checked','checked');
 	}
@@ -157,12 +149,12 @@ function shows(){
 }
 function shows2(){
 	var wtit=document.changeWork.work_title.value;
-	var wsta=document.newWork.workdate.value;
+	var wsta=document.changeWork.workdateup.value;
 	
-/* 	if (wtit == null || wtit == "" || !wsta || !wend ) {
+ 	if (wtit == null || wtit == "" || !wsta ) {
 		window.alert('업무명과 기한 모두 입력 부탁 드립니다.');
 		return;
-	} */
+	}
 	
 	$(w_modal2).hide();
 	$(btnwork4).show();
@@ -233,6 +225,7 @@ function shows2Result(){
 }
 function closem() {
 	$(workback).fadeOut('100');
+	$(workback2).fadeOut('100');
 	$(work_modal).fadeOut('100');
 	$(work_modal2).fadeOut('100');
 	document.newWork.reset();
@@ -277,9 +270,6 @@ function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
-			if (result>0) {
-
-			}
 			$(workback).fadeOut('100');
 			$(work_modal).fadeOut('100');
 			location.reload();
@@ -313,7 +303,7 @@ function updateWork(){
 	var my_idx=${s_member_idx};
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&work_title=' + document.changeWork.work_title.value
-	+'&workdate=' + document.newWork.workdateup.value 
+	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
 	window.alert(param);
@@ -323,9 +313,6 @@ function updateWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
-			if (result>0) {
-
-			}
 			$(workback2).fadeOut('100');
 			$(work_modal2).fadeOut('100');
 			location.reload();
@@ -1018,6 +1005,7 @@ a{
 
 
 
+
 	<!-- 업무 설정 modal -->
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
@@ -1075,10 +1063,6 @@ a{
 								<h4 class="text-center">업무 담당자 </h4>
 								<div id="work_m" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop2(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
-							<div class="col-md-3">
-							<h4 class="text-center">추천 멤버 목록</h4>
-								<div id="tendency_m" style="width:100%; height: 320px; overflow-y: scroll"ondrop="drop3(event)" ondragover="allowDrop(event)" ondragstart="drag(event)"></div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -1106,7 +1090,7 @@ a{
 					</div>
 					<div>기한</div>
 					<div>
-						<input type="text" class="form-control pull-right" name="workdate" id="workdateup" />
+						<input type="text" class="form-control pull-right" name="workdateup" id="workdateup" />
 					</div>
 					<div>
 						<input type="checkbox" name="work_confirm">결재여부
@@ -1141,7 +1125,6 @@ a{
 								<h4 class="text-center">업무 담당자 </h4>
 								<div id="work_m2" style="width: 100%; height: 320px; overflow-y: scroll" ondrop="drop4(event)" ondragover="allowDrop(event)" ondragstart="drag(event)" ></div>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -1252,11 +1235,11 @@ $(document).ready(function(){
 }); */
 $(function () {
 	 //Date range picker with time picker
-   $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+ $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
 });	
 $(function () {
 	 //Date range picker with time picker
-  $('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
 });
 </script>
 </html>
