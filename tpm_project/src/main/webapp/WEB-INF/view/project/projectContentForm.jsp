@@ -117,12 +117,20 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
+function workUpdate(work_idx,work_start,work_end,work_confirm){
 	$(workback).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
 	window.alert(work_confirm);
+	
+	var wdiv=document.getElementById('wdiv'+work_idx);
+	var fc=wdiv.firstChild;
+	while(fc.nodeName!='SPAN'){
+		fc=fc.nextSibling;
+	}
+	var work_title=fc.innerHTML;
+	
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdate.value=work_start+"-"+work_end;
@@ -884,7 +892,7 @@ a{
 									<span>${wdto.work_title }</span>
 							
 									<c:if test="${param.project_level != 1000 }">
-									<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_title }','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i class="glyphicon glyphicon-cog"></i></span>
+									<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i class="glyphicon glyphicon-cog"></i></span>
 									</c:if>
 									
 								</div>
