@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
+
+
 <style type="text/css">
     
     #right-side #sidebar-wrapper {
@@ -15,6 +17,7 @@
     position: fixed;
     height: 100%;
     overflow-y: auto;
+    margin-top: -100px;
     z-index: 1000;
     transition: all 0.5s ease-in 0s;
     -webkit-transition: all 0.5s ease-in 0s;
@@ -78,6 +81,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
+    margin-top: -100px;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
     -moz-transition: all 0.5s ease-out 0s;
@@ -90,7 +94,12 @@
   }
   
  </style>
+<script>
+var project_idx=sessionStorage.getItem('con_project_idx');
+var work_idx=sessionStorage.getItem('con_work_idx');
 
+
+</script>
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
@@ -98,9 +107,9 @@
 <fieldset style="border-color:white;">
 	<legend>파일 </legend>
 	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="work_idx" value="${work_idx}">
-	<input type="hidden" name="project_idx" value="${project_idx}">
-	
+	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
+	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx }">
+	 
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
 	<div id="div_list"></div>
 	<div id="div_fns"></div>
@@ -113,6 +122,9 @@
 
 
 <script type="text/javascript">
+
+
+
 	var div_dnd = document.getElementById('div_dnd');
 	var file_dnd = document.getElementById('file_dnd');
 	var div_fns = document.getElementById('div_fns');

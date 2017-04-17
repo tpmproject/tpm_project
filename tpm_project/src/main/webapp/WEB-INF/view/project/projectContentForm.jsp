@@ -644,14 +644,15 @@ function tendencyListResult2(){
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
-	
+	sessionStorage.setItem('con_project_idx', '${pdto.project_idx}');
+	sessionStorage.setItem('con_work_idx', work_idx);
 	
 
 }
 
 </script>
 
- <!-- 임시) 여기부터 첨부파일   -->  
+ 
 
 
 <style>
@@ -752,27 +753,7 @@ a{
 	</div>
 	</c:if>
 	
-	<!--첨부 파일 div 시작  -->
 	
-  
-	
-		<div id="right-side">
-		<a class="menu-toggle" href="#"><i
-			class="glyphicon glyphicon-bookmark"></i></a>
-		<div id="sidebar-wrapper">
-		<div><jsp:include page="/WEB-INF/view/file/fileUploadForm.jsp"> 
-			<jsp:param name="project_idx" value=""/> 
-			</jsp:include> 
-		</div>
-			<ul class="sidebar-nav">
-				<a id="menu-close" href="#"
-					class="btn btn-default btn-lg pull-right toggle"><i
-					class="glyphicon glyphicon-remove"></i></a>
-				
-			</ul>
-		</div>
-	</div>
-	<!--첨부 파일 div 끝  -->
 	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
@@ -918,6 +899,23 @@ a{
 											
 											<td align="right"><a href="javascript:comment(${wdto.work_idx})">코멘트</a>/
 											<a href="#" onclick="fileUp('${wdto.work_idx}')" class="menu-toggle">첨부파일</a></td>
+											<!--첨부 파일 div 시작  -->
+													<div id="right-side">
+													<a class="menu-toggle" href="#"><i
+														class="glyphicon glyphicon-bookmark"></i></a>
+													<div id="sidebar-wrapper">
+													<div>
+														<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+													</div>
+														<ul class="sidebar-nav">
+															<a id="menu-close" href="#"
+																class="btn btn-default btn-lg pull-right toggle"><i
+																class="glyphicon glyphicon-remove"></i></a>
+															
+														</ul>
+													</div>
+												</div>
+												<!--첨부 파일 div 끝  -->
 										</tr>
 									</tbody>
 								</table>
@@ -1174,6 +1172,6 @@ $(".menu-toggle").click(function(e) {
   e.preventDefault();
   $("#sidebar-wrapper").toggleClass("active");
 });
-</script>
+
 </script>
 </html>
