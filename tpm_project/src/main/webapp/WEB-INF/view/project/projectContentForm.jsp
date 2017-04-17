@@ -1070,7 +1070,6 @@ a {
 				<div align="center">
 					<button type="button" class="btn btn-next" id="btn-workbefore"
 						onclick="showf()">이전</button>
-					<c:if test=""></c:if>
 					<button type="button" class="btn btn-next" id="btn-workok"
 						onclick="addWork()">완료</button>
 				</div>
