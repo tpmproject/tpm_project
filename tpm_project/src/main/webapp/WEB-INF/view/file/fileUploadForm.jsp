@@ -94,12 +94,7 @@
   }
   
  </style>
-<script>
-var project_idx=sessionStorage.getItem('con_project_idx');
-var work_idx=sessionStorage.getItem('con_work_idx');
 
-
-</script>
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
@@ -125,9 +120,9 @@ var work_idx=sessionStorage.getItem('con_work_idx');
 
 
 
-	var div_dnd = document.getElementById('div_dnd');
-	var file_dnd = document.getElementById('file_dnd');
-	var div_fns = document.getElementById('div_fns');
+	var div_dnd = document.getElementById('div_dnd');    //드래그앤 드랍 영역
+	var file_dnd = document.getElementById('file_dnd');  //input type="file"
+	var div_fns = document.getElementById('div_fns');    //선택한 파일 목록
 
 	//-- 이벤트를 중지 시킨다
 	var stopevent = function(evt){
@@ -139,7 +134,7 @@ var work_idx=sessionStorage.getItem('con_work_idx');
 	//-- 선택된 파일명 표시
 	var showfns = function(files){
 		var fns = [];
-
+	
 		for(var i=0,m=files.length;i<m;i++){
 			fns.push(files[i].name+'('+files[i].size+' Byte)<input type="button" value="삭제" onclick="del('+files[i]+')">' );
 		}
