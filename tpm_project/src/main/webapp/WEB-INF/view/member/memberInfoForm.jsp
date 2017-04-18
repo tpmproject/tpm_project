@@ -282,12 +282,12 @@
 			                "theme": "light",
 			                "dataProvider": [ 
 				             	{ "tendency": "외향적", "point": ${self_tendency.tendency_e} },
-				             	{ "tendency": "내향적", "point": ${self_tendency.tendency_i} },
 				                { "tendency": "감각적", "point": ${self_tendency.tendency_s} },
-				                { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
 				                { "tendency": "사고적", "point": ${self_tendency.tendency_t} },
-				                { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
 				                { "tendency": "판단적", "point": ${self_tendency.tendency_j} },
+				                { "tendency": "내향적", "point": ${self_tendency.tendency_i} },
+				                { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
+				                { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
 				                { "tendency": "인식적", "point": ${self_tendency.tendency_p} } ],
 			                "valueAxes": [
 			                	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
@@ -308,12 +308,12 @@
 		          "type": "serial",
 		          "dataProvider": [
 		        	  { "tendency": "외향적", "self": ${self_tendency.tendency_e}, "team": ${team_tendency.tendency_e} },
-		        	  { "tendency": "내향적", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
 		        	  { "tendency": "감각적", "self": ${self_tendency.tendency_s}, "team": ${team_tendency.tendency_s} },
-		        	  { "tendency": "직관적", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
 		        	  { "tendency": "사고적", "self": ${self_tendency.tendency_t}, "team": ${team_tendency.tendency_t} },
-		        	  { "tendency": "감정적", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
 		        	  { "tendency": "판단적", "self": ${self_tendency.tendency_j}, "team": ${team_tendency.tendency_j} },
+		        	  { "tendency": "내향적", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
+		        	  { "tendency": "직관적", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
+		        	  { "tendency": "감정적", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
 		        	  { "tendency": "인식적", "self": ${self_tendency.tendency_p}, "team": ${team_tendency.tendency_p} } ],
 		          "valueAxes": [
 		        	  { "position": "left",

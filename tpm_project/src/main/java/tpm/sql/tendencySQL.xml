@@ -7,28 +7,30 @@
 
 	<select id="SelfTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
 		select * from tpm_tendency
-		where member_idx = #{member_idx} and project_idx = 0
+		where member_idx = #{member_idx} and project_idx is null
 	</select>
 
 	<select id="TeamTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
 		select a.*
 		from (select project_idx, avg(tendency_e) as tendency_e, avg(tendency_i) as tendency_i, avg(tendency_s) as tendency_s, avg(tendency_n) as tendency_n, avg(tendency_t) as tendency_t, avg(tendency_f) as tendency_f, avg(tendency_j) as tendency_j, avg(tendency_p) as tendency_p
 			  from tpm_tendency
-			  where member_idx = #{member_idx} and project_idx <![CDATA[>]]> 0
+			  where member_idx = #{member_idx} and project_idx is not null
 			  group by project_idx) a
 	</select>
 	
 	<select id="recommendTendency"  parameterType="hashMap" resultType="tpm.member.model.MemberDTO">
-		select a.*, b.td from 
+		select a.*, b.* from 
 		    (select * from tpm_member
 		    where member_idx in(
 		        select member_idx from tpm_project_member 
-		        where project_idx=#{project_idx})) a
+		        where project_idx=14)) a
 		left join
-		    (select member_idx, avg(${tendency}) td 
+		    (select member_idx, avg(tendency_e) te, avg(tendency_i) ti, avg(tendency_s) ts,
+             avg(tendency_n) tn, avg(tendency_t) tt, avg(tendency_f) tf, avg(tendency_j) tj,
+             avg(tendency_p) tp
 		    from tpm_tendency group by member_idx) b
 		on 
-		a.member_idx=b.member_idx
+		a.member_idx=b.member_idx;
 	</select>
 	
 	<select id="tendencyList" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">

@@ -276,9 +276,7 @@ function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;	
-			$(workback).fadeOut('100');
-			$(work_modal).fadeOut('100');
-			location.reload();
+			closem();			
 		}
 	}
 }
@@ -1056,6 +1054,7 @@ a {
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+
 
 		<c:if test="${pdto.project_level !=1000 }">
 			<!-- category add -->

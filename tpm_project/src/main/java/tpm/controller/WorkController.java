@@ -128,7 +128,7 @@ public class WorkController {
 				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
 				workDAO.workMemberInsert(mdto);
 			}
-			mav.addObject("dto",dto);
+			mav.addObject("mdto",dto);
 		}else{
 		String msg="error";
 		mav.addObject("msg",msg);
