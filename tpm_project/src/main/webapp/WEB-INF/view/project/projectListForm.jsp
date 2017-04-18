@@ -44,6 +44,11 @@
 		$(smodal2).hide();
 	}
 	
+	/**캐러셀 자동 움직임 방지*/
+	
+	$('.carousel').carousel({ interval:false });
+
+
 	/**프로젝트 수정*/
 	function projectUpdate(idx,name,content){
 		$(mback).fadeIn('150');
@@ -894,7 +899,7 @@ function drop4(ev) {
 	</form>
 	<hr>
 	<hr>
-	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+	<div id="carousel-example-generic" class="carousel" data-ride="carousel">
 		<!-- Indicators -->
 		
 		<ol class="carousel-indicators">
@@ -902,7 +907,7 @@ function drop4(ev) {
 			<c:if test="${status.index %4 == 0}">
 			<c:choose>
 			<c:when test="${status.index ==0}">
-				<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" class="#"></li>
 			</c:when>
 			<c:otherwise>
 			<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" ></li>
@@ -914,7 +919,7 @@ function drop4(ev) {
 		</ol>
 
 		<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
+		<div class="carousel-inner" >
 
 			<div class="item active">
 				<div>
