@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.groupdocs.ui.Document" %>
 <%@ page import="java.io.*" %>
-<!DOCTYPE html>
-<html>
-<head>
 
 <%
 	int pageNumber = 1;
@@ -54,13 +51,15 @@
 	Document doc = new Document();
 	doc.setFilename(filename);
 	doc.setPageNumber(pageNumber);
+
 %>
-<head>
+
     <title>GroupDocs.Viewer for Java</title>
     <style>
         article.content {
-            margin-bottom: 70px;
-            width:100px;
+            margin: -30px 50px;
+            width:400px;
+            height:200px
         }
         .navbar .navbar-nav {
             display: inline-block;
@@ -77,12 +76,13 @@
       	 	display:none;
       	}
     </style>
-</head>
-<body>
 
-<article class="content">
-    <%=doc.getHtmlContent() %>
- 
+
+
+<article class="content" >
+	
+	<%=doc.getHtmlContent() %>
+	
 </article>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
@@ -101,5 +101,3 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</body>
-</html>

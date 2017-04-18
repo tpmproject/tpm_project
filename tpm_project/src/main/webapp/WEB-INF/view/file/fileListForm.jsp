@@ -160,7 +160,7 @@
 					msg +=       ' <a href="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
 					msg +=      '</li>'
 					msg +=      '<li>'
-					msg +=        '<a onclick="fileDel('+file.file_idx+', \'' + file.file_name + '\');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
+					msg +=        '<a onclick="fileDel('+file.file_idx+', \''+ file.file_name +'\');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
 					msg +=      '</li>'
 					msg +=    '</ul>'
 					msg +=   '</li>'
@@ -180,27 +180,24 @@
 	/* 미리보기  */
 	function fileContent(filename){
 		window.alert(filename);
-	
+		
 	}
 	/* 파일 삭제  */
 	function fileDel(file_idx,file_name){
 		
 		location.href="fileDel.do?file_idx=d"+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
-	/* 
-	function fileCt(){
-		window.open("fileContent.do", "fileContent", "width=500px,height=300px");
-	}
-	 */
+	
     </script>
     
   </head>
  
   <body class="skin-blue" onload="project_fileList('${project_idx}')">
   
-		<div class="modal fade" id="layerpop" >
+  <!-- 모달 시작 -->
+		<div class="modal fade" id="layerpop">
 		  <div class="modal-dialog">
-		    <div class="modal-content">
+		    <div class="modal-content" style="width: 1000px; height: 800px; margin: auto -180px;">
 		      <!-- header -->
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
@@ -209,20 +206,16 @@
 		        <h4 class="modal-title">미리보기</h4>
 		      </div>
 		      <!-- body -->
-		      <div class="modal-body">
+		      <div class="modal-body" >
 		            <jsp:include page="fileContent_d.jsp">
-		             <jsp:param value="header.jpg" name="filename"/>
+		             <jsp:param value="aaa.html" name="filename"/>
 		            </jsp:include>
-		            
-		      </div>
-		      <!-- Footer -->
-		      <div class="modal-footer">
-		        Footer
-		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		          
 		      </div>
 		    </div>
 		  </div>
 		</div>
+  <!--모달 끝  -->
   
   <%@ include file="/WEB-INF/view/header.jsp"%>
 	
@@ -345,6 +338,7 @@
     </div>
     
     <!-- /#wrapper -->
+    
     <!-- jQuery -->
     
     <script src="/tpm_project/js/file/jquery.js"></script>
