@@ -93,7 +93,7 @@ function categoryAddResult() {
 				
 				dNode.innerHTML=innerH;
 				cbodyNode.insertBefore(dNode,cateNode);
-				cbodyNode.style.width = parseInt(cbodyNode.style.width)+200+"px";
+				cbodyNode.style.width = parseInt(cbodyNode.style.width)+210+"px";
 				document.newCategory.category_name.value='';
 			}
 		}
