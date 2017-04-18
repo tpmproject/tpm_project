@@ -22,7 +22,7 @@ try{
 		int confirm=dto.getWork_confirm();
 		int cidx=dto.getCategory_idx();
 		
-		out.print("{w:{work_idx:"+widx+",work_title:"+title+",work_start:"+start+",work_end:"+end+",work_confirm:"+confirm+",category_idx:"+cidx+"'}}");
+		out.print("{w:{work_idx:"+widx+",work_title:'"+title+"',work_start:'"+start+"',work_end:'"+end+"',work_confirm:"+confirm+",category_idx:"+cidx+"}}");
 		
 	}
 	
