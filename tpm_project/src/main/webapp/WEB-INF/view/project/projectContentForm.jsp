@@ -74,7 +74,6 @@ function categoryAddResult() {
 			if (result != null) {
 				var cate=chData.category;
 				
-			
 				var cbodyNode = document.getElementById('cbody');
 				var cateNode = document.getElementById('addCate');
 				var dNode = document.createElement('div');
@@ -613,6 +612,9 @@ function cateDelResult(){
 			var result=XHR.responseText; //지운 idx
 			result=parseInt(result);
 			$('#cp'+result).remove();
+			
+			var cbodyNode = document.getElementById('cbody');
+			cbodyNode.style.width = parseInt(cbodyNode.style.width)-210+"px";
 		}
 	}
 }
