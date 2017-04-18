@@ -143,7 +143,7 @@
 			
 		    msg+= ''
 		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">'
-					msg +='<td><a href="fileContent.do?file_name='+file.file_name+'"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>'
+					msg +='<td><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>'
 					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
 					msg +='<td>'+file.file_size+' byte </td>'
 					msg +='<td class="center">'+file.file_date+'</td>'
@@ -177,10 +177,15 @@
 		file_content_list.innerHTML = msg;
 	
 	}
+	/* 미리보기  */
+	function fileContent(filename){
+		window.alert(filename);
+	
+	}
 	/* 파일 삭제  */
 	function fileDel(file_idx,file_name){
 		
-		location.href="fileDel.do?file_idx="+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
+		location.href="fileDel.do?file_idx=d"+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
 	/* 
 	function fileCt(){
@@ -192,6 +197,33 @@
   </head>
  
   <body class="skin-blue" onload="project_fileList('${project_idx}')">
+  
+		<div class="modal fade" id="layerpop" >
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <!-- header -->
+		      <div class="modal-header">
+		        <!-- 닫기(x) 버튼 -->
+		        <button type="button" class="close" data-dismiss="modal">×</button>
+		        <!-- header title -->
+		        <h4 class="modal-title">미리보기</h4>
+		      </div>
+		      <!-- body -->
+		      <div class="modal-body">
+		            <jsp:include page="fileContent_d.jsp">
+		             <jsp:param value="header.jpg" name="filename"/>
+		            </jsp:include>
+		            
+		      </div>
+		      <!-- Footer -->
+		      <div class="modal-footer">
+		        Footer
+		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+  
   <%@ include file="/WEB-INF/view/header.jsp"%>
 	
     <div id="wrapper" class="file-list-form">

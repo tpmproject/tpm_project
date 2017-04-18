@@ -9,8 +9,9 @@
 <%
 	int pageNumber = 1;
 	
-    String filename =(String)session.getAttribute("file_name");
+    String filename =request.getParameter("filename");
 	
+	System.out.println(filename);
    	if (filename.substring(filename.indexOf(".")).equals(".java")) {
 		FileInputStream fis = null;
 		FileOutputStream fos = null;

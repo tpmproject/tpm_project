@@ -958,7 +958,7 @@ function drop4(ev) {
 														<button type="button" onclick="sucess()">완료하기</button>
 													</c:when>
 													<c:when test="${i.project_state == 2 }">
-														<td><input type="button" value="평가 대기"></td>
+														<td><input type="button" value="평가 대기" onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'"></td>
 													</c:when>
 													<c:when test="${i.project_state == 1 }">
 														<td><input type="button" value="진행중"></td>

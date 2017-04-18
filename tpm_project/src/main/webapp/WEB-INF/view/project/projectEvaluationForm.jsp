@@ -84,13 +84,16 @@ function addTendencyResult(){
 </script>
 </head>
 <body>
-	<div id="cbody" style="width:${(pdto.category_num +2)*200}px">
+	<div id="pebody">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
 			<h3>${pdto.project_name}</h3>
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:forEach var="arr" items="${arr}">
+			<c:if test="${empty arr.member_idx}">
+			평가완료
+			</c:if>
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
 			<div id="bt${arr.member_idx}">
 			<img src="/tpm_project/img/member/profile/${arr.member_img}">
@@ -170,6 +173,9 @@ function addTendencyResult(){
 				</div>
 			</form>
 		</c:forEach>
+		<c:if test="${empty arr}">
+		모든 멤버의 평가가 완료 되었습니다.
+		</c:if>
 	</div>
 </body>
 </html>
