@@ -14,8 +14,8 @@
 <!-- Moment -->
 <script src="/tpm_project/js/date/moment.js"></script>
 <!-- Slimscroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<link href="/tpm_project/css/hr/hr-text.css?var=3" rel="stylesheet">
 <style>
 .bg-white {
 	background-color: #fff;
@@ -90,11 +90,11 @@ small, .small {
 }
 
 #chat-box{
-	background: #f9f9f9;
+	/* background: #f9f9f9; */
 }
 
 .chat-message {
-	background: #f9f9f9;
+	/* background: #f9f9f9; */
 }
 
 .chat li img {
@@ -230,6 +230,17 @@ a:hover, a:active, a:focus {
 var currCpCode;
 var currCpValue;
 var s_member_idx = ${sessionScope.s_member_idx};
+
+$(function(){
+    $('#chat-box').slimScroll({
+        height: '650px', // 스크롤 처리할 div 의 길이
+        start: 'bottom' // 스크롤의 시작 위치
+    }).bind('slimscrolling', function(e, pos) {
+    	//window.alert("Scroll value: " + pos + "px");
+       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+    });
+});
+
 function showChatContent(cpCode, cpValue){
 	
 	currCpCode = cpCode;
@@ -243,7 +254,7 @@ function showChatContent(cpCode, cpValue){
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
 			//window.alert(JSON.stringify(json));
-			var msg = '';
+			var msg = '<li> <hr class="hr-text" data-content="2017-04-14"> </li>';
 			for(var i = 0 ; i < json.length ; i++){
 				// 내가 쓴 글일 경우
 				if(json[i].mdto.member_idx == s_member_idx){
@@ -253,6 +264,9 @@ function showChatContent(cpCode, cpValue){
 				}	
 			}
 			$('#chat_content_ul').html(msg);
+			
+			//window.alert($("#chat-box").height());
+			$('#chat-box').slimScroll({ scrollTo: $("#chat_message_div").height() });
 		}
 	});
 }

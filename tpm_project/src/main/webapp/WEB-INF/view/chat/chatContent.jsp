@@ -7,9 +7,9 @@
 		<h3 class="box-title">Chat</h3>
 	</div>
 	<div class="box-body chat" id="chat-box">
-		<div class="chat-message">
+		<div class="chat-message" id="chat_message_div">
 			<ul class="chat" id="chat_content_ul">
-				<li class="left clearfix">
+				<!-- <li class="left clearfix">
 					<span class="chat-img pull-left">
 						<img src="http://bootdey.com/img/Content/user_3.jpg"
 						alt="User Avatar">
@@ -101,7 +101,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 							Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales
 							at.</p>
-					</div></li>
+					</div></li> -->
 			</ul>
 		</div>
 	</div>
