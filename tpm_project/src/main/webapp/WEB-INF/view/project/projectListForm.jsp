@@ -11,7 +11,7 @@
 <!-- css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
-<link href="css/jcarousel.css" rel="stylesheet">
+
 <link href="css/flexslider.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <!-- Theme skin -->
@@ -25,9 +25,18 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
 <%@ include file="/sample/cho/main/import.jsp"%>
-<script> 
- $(document).ready(function() { $('#myCarousel').carousel('cycle'); $('#myCarousel2').carousel('cycle'); }); 
- </script>
+ <script> 
+// $(document).ready(function() { $('#myCarousel').carousel('cycle'); $('#myCarousel2').carousel('cycle'); }); 
+ /**캐러셀 자동 움직임 방지*/
+	
+	
+ $(document).ready(function(){
+	 $('.carousel').carousel({ interval:false });
+	});
+
+ </script> 
+ 
+ 
 <script type="text/javascript">
 	window.onload = function() {
 		$(main_modal).hide();
@@ -44,9 +53,7 @@
 		$(smodal2).hide();
 	}
 	
-	/**캐러셀 자동 움직임 방지*/
 	
-	$('.carousel').carousel({ interval:false });
 
 
 	/**프로젝트 수정*/
@@ -745,6 +752,12 @@ function drop4(ev) {
 	float: left;
 	text-align: center;
 }
+
+.carousel-inner{
+	margin: auto;
+	width: 50%;
+	
+}
 </style>
 </head>
 <body class="skin-blue">
@@ -899,18 +912,19 @@ function drop4(ev) {
 	</form>
 	<hr>
 	<hr>
+	
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		
 		<ol class="carousel-indicators">
 		<c:forEach var="i" items="${plist}" varStatus="status">
-			<c:if test="${status.index %4 == 0}">
+			<c:if test="${status.index %2 == 0}">
 			<c:choose>
 			<c:when test="${status.index ==0}">
-				<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" class="#"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="${status.index/2 }" class="#"></li>
 			</c:when>
 			<c:otherwise>
-			<li data-target="#carousel-example-generic" data-slide-to="${status.index/4 }" ></li>
+			<li data-target="#carousel-example-generic" data-slide-to="${status.index/2 }" ></li>
 			</c:otherwise>
 			</c:choose>
 			</c:if>
@@ -981,7 +995,7 @@ function drop4(ev) {
 									<!-- end divider -->
 									<!-- Portfolio Projects -->
 									
-									<c:if test="${status.index %4 == 3 and not status.last}">
+									<c:if test="${status.index %2 == 1 and not status.last}">
 									</div>
 										</div>
 									</div>
