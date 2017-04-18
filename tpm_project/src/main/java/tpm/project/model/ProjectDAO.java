@@ -9,9 +9,9 @@ public interface ProjectDAO {
 
 	public ArrayList<ProjectDTO> projectAllList(int member_idx);
 	
-	public ProjectDTO projectSearch(ProjectDTO dto);
+	public ProjectDTO projectSearch(ProjectMemberDTO dto);
 	
-	public ArrayList<MemberDTO> projectWorkMember(ProjectDTO dto);
+	public ArrayList<MemberDTO> projectWorkMember(ProjectMemberDTO dto);
 	
 	public int projectInsert(ProjectDTO dto);
 	

@@ -9,7 +9,7 @@
 		(tpm_project)a,(select * from tpm_project_member where member_idx=#{member_idx})b
 		where a.project_idx=b.project_idx
 	</select>
-
+	
 	<select id="projectList" parameterType="int" resultType="tpm.project.model.ProjectDTO">
 		select * 
 		from tpm_project 
@@ -34,8 +34,11 @@
 		)
 		
 	</insert>
-	
-	<select id="projectSearch" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.project.model.TotalDTO">
+	<select id="projectLevel" parameterType="tpm.project.model.ProjectMemberDTO" resultType="Integer">
+		select project_level from tpm_project_member
+		where project_idx=#{project_idx} and member_idx=#{member_idx}
+	</select>
+	<select id="projectSearch" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.project.model.TotalDTO">
 		select p.project_name,p.project_content,p.project_state,c.*,co.* from
 		(tpm_project)p
 		left outer join
@@ -71,7 +74,7 @@
 		order by c.category_idx,c.work_idx,c.checklist_idx
 	</select>
 	
-	<select id="projectWorkMember" parameterType="tpm.project.model.ProjectDTO" resultType="tpm.member.model.MemberDTO">
+	<select id="projectWorkMember" parameterType="tpm.project.model.ProjectMemberDTO" resultType="tpm.member.model.MemberDTO">
 	select m.* from
 		(	select w.work_idx from (tpm_category)c,(tpm_work)w
 			where c.category_idx=w.category_idx and c.project_idx=#{project_idx})w,

@@ -509,7 +509,7 @@
 					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
 					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'">프로젝트 보기버튼</a></div></div>';
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
 					
 					divNode.innerHTML=msg;
 					
@@ -967,7 +967,7 @@ function drop4(ev) {
 											</div>
 											<div class="box-bottom">
 												<a
-													href="projectContent.do?project_idx=${i.project_idx}&project_level=${i.project_level}">프로젝트
+													href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">프로젝트
 													보기버튼</a>
 											</div>
 										</div>

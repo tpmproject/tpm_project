@@ -9,6 +9,7 @@ public class TotalDTO {
 	private String project_name;
 	private int project_state;
 	private String project_content;
+	private int project_level;
 	
 	private int category_idx;
 	private String category_name;
@@ -93,6 +94,14 @@ public class TotalDTO {
 
 	public void setProject_content(String project_content) {
 		this.project_content = project_content;
+	}
+
+	public int getProject_level() {
+		return project_level;
+	}
+
+	public void setProject_level(int project_level) {
+		this.project_level = project_level;
 	}
 
 	public int getCategory_idx() {

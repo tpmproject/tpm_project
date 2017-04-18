@@ -30,8 +30,9 @@ public class ProjectDAOImple implements ProjectDAO {
 		return projectAllList;
 	}
 
-	public ProjectDTO projectSearch(ProjectDTO dto) {
+	public ProjectDTO projectSearch(ProjectMemberDTO dto) {
 		
+		int project_level=sqlMap.selectOne("projectLevel", dto);
 		ArrayList<TotalDTO> temp=(ArrayList)sqlMap.selectList("projectSearch",dto);
 		ProjectDTO pdto=new ProjectDTO();
 		ArrayList<CategoryDTO> cate_arr=new ArrayList<CategoryDTO>();
@@ -98,11 +99,11 @@ public class ProjectDAOImple implements ProjectDAO {
 			}
 			
 		}
-		
+		pdto.setProject_level(project_level);
 		return pdto;
 	}
 
-	public ArrayList<MemberDTO> projectWorkMember(ProjectDTO dto) {
+	public ArrayList<MemberDTO> projectWorkMember(ProjectMemberDTO dto) {
 		//업무 배정자
 		ArrayList<MemberDTO> marr=(ArrayList)sqlMap.selectList("projectWorkMember", dto);
 		return marr;

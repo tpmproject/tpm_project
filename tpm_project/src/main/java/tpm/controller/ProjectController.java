@@ -65,7 +65,7 @@ public class ProjectController {
 	
 	/** 프로젝트 - 해당 프로젝트 내용 페이지 이동 ( 업무들이 보여지는 페이지 ) */
 	@RequestMapping(value="projectContent.do",  method=RequestMethod.GET)
-	public ModelAndView projectContentForm(ProjectDTO dto){
+	public ModelAndView projectContentForm(ProjectMemberDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectContentForm");
@@ -220,11 +220,11 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 평가 페이지 이동 */
 	@RequestMapping(value="projectEvaluation.do",  method=RequestMethod.GET)
-	public ModelAndView projectEvaluationForm(ProjectDTO dto, ProjectMemberDTO bdto){
+	public ModelAndView projectEvaluationForm(ProjectMemberDTO bdto){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectEvaluationForm");
-		ProjectDTO pdto=projectDAO.projectSearch(dto);
+		ProjectDTO pdto=projectDAO.projectSearch(bdto);
 		ArrayList<MemberDTO> arr=tendencyDAO.tendencyList(bdto);
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
