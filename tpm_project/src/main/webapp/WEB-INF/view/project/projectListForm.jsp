@@ -25,16 +25,7 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
 <%@ include file="/sample/cho/main/import.jsp"%>
- <script> 
-// $(document).ready(function() { $('#myCarousel').carousel('cycle'); $('#myCarousel2').carousel('cycle'); }); 
- /**캐러셀 자동 움직임 방지*/
-	
-	
- $(document).ready(function(){
-	 $('.carousel').carousel({ interval:false });
-	});
 
- </script> 
  
  
 <script type="text/javascript">
@@ -913,7 +904,7 @@ function drop4(ev) {
 	<hr>
 	<hr>
 	
-	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="500">
 		<!-- Indicators -->
 		
 		<ol class="carousel-indicators">
