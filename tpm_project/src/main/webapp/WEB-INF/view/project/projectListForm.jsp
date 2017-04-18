@@ -899,7 +899,7 @@ function drop4(ev) {
 	</form>
 	<hr>
 	<hr>
-	<div id="carousel-example-generic" class="carousel" data-ride="carousel">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		
 		<ol class="carousel-indicators">
