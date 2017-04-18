@@ -52,7 +52,7 @@ public class WorkController {
 	public ModelAndView myWorkListForm(){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mywork/myWorkListForm");
+		mav.setViewName("mywork/myWorkList");
 		return mav;
 	}
 	
