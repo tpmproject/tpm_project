@@ -13,22 +13,22 @@ public class CommentDAOImple implements CommentDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<CommentDTO> getCommentList() {
+	public ArrayList<CommentDTO> getCommentList(CommentDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int addComment() {
+	public int addComment(CommentDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int updateComment() {
+	public int updateComment(CommentDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int delComment() {
+	public int delComment(CommentDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public interface CommentDAO {
 	
-	public ArrayList<CommentDTO> getCommentList();
-	public int addComment();
-	public int updateComment();
-	public int delComment();
+	public ArrayList<CommentDTO> getCommentList(CommentDTO dto);
+	public int addComment(CommentDTO dto);
+	public int updateComment(CommentDTO dto);
+	public int delComment(CommentDTO dto);
 
 }
