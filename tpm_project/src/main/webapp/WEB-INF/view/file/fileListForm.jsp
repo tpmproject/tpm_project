@@ -40,7 +40,7 @@
     
     <script>
 
-	
+	window.alert('jsp파일쪽 project_idx='+${project_idx});
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(project_idx){
@@ -195,6 +195,8 @@
   <body class="skin-blue" onload="project_fileList('${project_idx}')">
   
   <!-- 모달 시작 -->
+  <div class="row">
+  		
 		<div class="modal fade" id="layerpop">
 		  <div class="modal-dialog">
 		    <div class="modal-content" style="width: 1000px; height: 800px; margin: auto -180px;">
@@ -207,14 +209,17 @@
 		      </div>
 		      <!-- body -->
 		      <div class="modal-body" >
+		      		<div class="col-lg-20">
 		            <jsp:include page="fileContent_d.jsp">
 		             <jsp:param value="aaa.html" name="filename"/>
 		            </jsp:include>
-		          
+		          	</div>
 		      </div>
 		    </div>
 		  </div>
 		</div>
+		
+	</div>
   <!--모달 끝  -->
   
   <%@ include file="/WEB-INF/view/header.jsp"%>
