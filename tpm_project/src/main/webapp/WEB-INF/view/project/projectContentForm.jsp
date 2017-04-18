@@ -844,7 +844,7 @@ a {
 
 
 
-	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
+	<div id="cbody" style="width:${(pdto.category_num +2)*220}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
 		</div>
