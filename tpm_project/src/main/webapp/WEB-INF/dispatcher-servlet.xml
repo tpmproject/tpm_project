@@ -44,6 +44,7 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/"></property>
 		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="2"></property>
 	</bean>
 	
 	<!-- configs -->
@@ -191,6 +192,15 @@
 	<!-- <property name="contentType" value="application/json;charset=UTF-8"/> -->
 	<property name="contentType" value="text/html;charset=UTF-8"/>
 	</bean>
+	
+	<!-- AjaxFileUpload -->
+	<bean id="FileService" class="tpm.sample.model.AjaxFileUploadService"/>
+
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1"></property>
+	</bean>
+
+	<!-- <bean name="JSON" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
 	
 	
 	

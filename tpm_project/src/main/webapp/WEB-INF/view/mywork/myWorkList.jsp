@@ -12,8 +12,7 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"   rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <%@ include file="/sample/cho/main/import.jsp"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
@@ -24,14 +23,20 @@
 	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
-
-
+<style>
+	 #menutest{
+	 	 overflow:hidden;
+	 	 width:200px;
+	 	 display:inline;
+	 }
+</style>
 </head>
+<script src="../../js/jquery-1.7.2.min.js"></script>
 <body>
 <body class="skin-blue">
 <%@include file="/WEB-INF/view/header.jsp"%>
 <div class="container-fluid">
-	<div class="col-xs-2" style="min-width: 140px;margin: 0px;padding: 0px;">
+	<div id="menutest" class="col-xs-2">
 		<table class="table">
 			<thead>
 				<tr>
@@ -80,9 +85,22 @@
 	</div>
 	
 	<div class="col-xs-9">
-	
+	 	<button id="up"> 접기 </button>
+		<button id="down"> 펼치기 </button>
 	</div>
 </div>
 <%@include file="/WEB-INF/view/footer.jsp"%>
+
+<script>
+
+$('#down').click(function() {
+  $('#menutest').animate({width:"200px"},1000);  
+});
+
+$('#up').click(function() {
+	$('#menutest').animate({width:"0px"},1000);
+});
+
+</script>
 </body>
 </html>
