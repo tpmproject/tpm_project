@@ -28,8 +28,8 @@ function cateName(idx){
 function cateNameRe(idx){
 	$('#cate'+idx).hide();
 	$('#a_cate'+idx).show();
-	var ac=document.getElementById('a_cate'+idx);
-	$('#cateIn'+idx).val(ac.firstChild.innerHTML);
+	var ac=document.getElementById('aa_cate'+idx);
+	$('#cateIn'+idx).val(ac.innerHTML);
 	
 }
 
@@ -37,8 +37,9 @@ function categoryUpdate(idx){
 	
 	var param='project_idx='+${param.project_idx}+'&category_idx='+idx;
 	var di=$('#cateIn'+idx).val();
+
+	document.getElementById('cateIn'+idx).value=di;
 	param+='&category_name='+di;
-	
 	sendRequest('categoryUpdate.do', param, categoryUpdateResult, 'POST');
 }
 function categoryUpdateResult(){
@@ -47,9 +48,9 @@ function categoryUpdateResult(){
 			var result = XHR.responseText;
 			result=parseInt(result); //cate_idx
 			
-			var ac=document.getElementById('a_cate'+result);
+			var ac=document.getElementById('aa_cate'+result);
 			
-			ac.firstChild.innerHTML=$('#cateIn'+result).val();
+			ac.innerHTML=$('#cateIn'+result).val();
 			
 			$('#cate'+result).hide();
 			$('#a_cate'+result).show();
@@ -84,11 +85,11 @@ function categoryAddResult() {
 				dNode.setAttribute('id','cp'+idx);
 				
 				var innerH='<div class="category_head" id ="c'+idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';			
-				innerH+='<form action="javascript:categoryUpdate('+idx+')">';
+				innerH+='<form name="cateUp" action="javascript:categoryUpdate('+idx+')">';
 				innerH+='<div id="cate'+idx+'" class="cateName">';
 				innerH+='<input id="cateIn='+idx+'" type="text" value="'+name+'" size="16px">&nbsp;&nbsp;';
 				innerH+='<i class="glyphicon glyphicon-remove" onclick="cateNameRe('+idx+'+)"></i></div>';
-				innerH+='<div id="a_cate'+idx+'"><a href="javascript:cateName('+idx+')">'+name+'</a>&nbsp;&nbsp;';
+				innerH+='<div id="a_cate'+idx+'"><a id="aa_cate'+idx+'" href="javascript:cateName('+idx+')">'+name+'</a>&nbsp;&nbsp;';
 				innerH+='<i class="glyphicon glyphicon-plus" onclick="showf('+idx+')"></i></div></form></div>';
 				
 				dNode.innerHTML=innerH;
@@ -123,7 +124,6 @@ function workUpdate(work_idx,work_start,work_end,work_confirm){
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
-	window.alert(work_confirm);
 	
 	var wdiv=document.getElementById('wdiv'+work_idx);
 	var fc=wdiv.firstChild;
@@ -178,7 +178,6 @@ function showsResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
 			
 			var json = JSON.parse(result);		
 			var msg2 = '';
@@ -202,7 +201,6 @@ function shows2Result(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			var json = JSON.parse(result);	
-			window.alert(result);
 			var w_msg='';
 			var p_msg='';
 			var msg2 = '';
@@ -271,7 +269,7 @@ function addWork(){
 	+'&workdate=' + document.newWork.workdate.value 
 	+'&work_confirm=' + document.newWork.work_confirm.value
 	+'&member_idx=' + msg;
-	window.alert(param);
+	
 	sendRequest('workAdd.do', param, addWorkResult, 'POST');
 
 }
@@ -315,7 +313,7 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
-	window.alert(param);
+	
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
 function updateWorkResult(){
@@ -623,7 +621,7 @@ function cateDelResult(){
 function tendencyList(){
 	var param = 'tendency='+document.newWork.tendency.value
 	+"&project_idx="+ ${param.project_idx};
-	window.alert(param);
+	
 	sendRequest('recommand.do',param,tendencyListResult,'GET');
 }
 
@@ -631,7 +629,6 @@ function tendencyListResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
 			
 			var json = JSON.parse(result);		
 			var msg2 = '';
@@ -650,7 +647,7 @@ function tendencyListResult(){
 function tendencyList2(){
 	var param = 'tendency='+document.changeWork.tendency.value
 	+"&project_idx="+ ${param.project_idx};
-	window.alert(param);
+
 	sendRequest('recommand.do',param,tendencyListResult2,'GET');
 }
 
@@ -658,7 +655,6 @@ function tendencyListResult2(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
 			
 			var json = JSON.parse(result);		
 			var msg2 = '';
@@ -849,7 +845,7 @@ a {
 
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
-			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
+			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}</h3>
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:choose>
@@ -868,7 +864,7 @@ a {
 									<span>${cdto.category_name }</span>
 								</c:when>
 								<c:otherwise>
-									<form action="javascript:categoryUpdate(${cdto.category_idx})">
+									<form name="cateUp" action="javascript:categoryUpdate(${cdto.category_idx})">
 										<div id="cate${cdto.category_idx}" class="cateName">
 											<input id="cateIn${cdto.category_idx}" type="text"
 												value="${cdto.category_name }" size="16px">
@@ -876,7 +872,7 @@ a {
 												onclick="cateNameRe(${cdto.category_idx})"></i>
 										</div>
 										<div id="a_cate${cdto.category_idx}">
-											<a href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
+											<a id="aa_cate${cdto.category_idx}" href="javascript:cateName(${cdto.category_idx})">${cdto.category_name }</a>
 											&nbsp;&nbsp; <i class="glyphicon glyphicon-plus"
 												onclick="showf(${cdto.category_idx})"></i>
 
