@@ -575,7 +575,7 @@ function delResult(){
 			cht=parseInt(cht)-1;
 			$('#chTotal'+wi).val(cht);
 			
-			var chState=$('#chState'+result).val();
+			var chState=$('#ch_state'+result).val();
 			
 			var chTotal=$('#chTotal'+wi).val();
 			var chChecked=$('#chChecked'+wi);
@@ -583,12 +583,15 @@ function delResult(){
 			if(chState=='1'){
 				var chch=chChecked.val();
 				chch=parseInt(chch);
-				chch--;
+				chch=chch-1;
+				$('#chChecked'+wi).val(chch);
 				chChecked_v=chch;
 			}
-			
-			document.getElementById('chBar'+wi).style.width=chChecked_v/chTotal *100+'%';
-			
+			if(chTotal==0){
+				document.getElementById('chBar'+wi).style.width='0%';
+			}else{
+				document.getElementById('chBar'+wi).style.width=chChecked_v/chTotal *100+'%';
+			}
 			$('#div_ch'+result).remove();
 			
 		}
