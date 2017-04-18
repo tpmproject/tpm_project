@@ -802,9 +802,6 @@ function fileUp(work_idx){
 	width: 55px;
 	height: 45px;
 	display: inline-block;
-	position: fixed;
-	left: 50%;
-	top: 10px;
 	border: 1px solid black;
 }
 
@@ -832,20 +829,19 @@ a {
 </head>
 <body class="skin-blue">
 	<%@include file="/WEB-INF/view/header.jsp"%>
-	<c:if test="${pdto.project_level != 1000 }">
-		<div id="trash" ondrop="drop(event)" class="btn-lg"
-			ondragenter="trashColor()" ondragleave="trashColorReturn()"
-			ondragstart="drag(event)" ondragover="allowDrop(event)">
-			<span id="trash_i" class="glyphicon glyphicon-trash"
-				aria-hidden="true" ondragover="trashColor()"></span>
-		</div>
-	</c:if>
-
-
-
+	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
-			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}</h3>
+			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
+			<c:if test="${pdto.project_level != 1000 }">
+				<div id="trash" ondrop="drop(event)" class="btn-lg"
+					ondragenter="trashColor()" ondragleave="trashColorReturn()"
+					ondragstart="drag(event)" ondragover="allowDrop(event)">
+					<span id="trash_i" class="glyphicon glyphicon-trash"
+						aria-hidden="true" ondragover="trashColor()"></span>
+				</div>
+			</c:if>
+			</h3>
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:choose>
