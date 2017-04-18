@@ -801,10 +801,14 @@ function fileUp(work_idx){
 }
 
 #trash {
+	position:fixed;
 	width: 55px;
 	height: 45px;
 	display: inline-block;
 	border: 1px solid black;
+	top:3px;
+	z-index: 2000;
+	left:50%;
 }
 
 a {
@@ -833,7 +837,7 @@ a {
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
-		<div>
+		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
 				<div id="trash" ondrop="drop(event)" class="btn-lg"
@@ -1062,7 +1066,6 @@ a {
 				</form>
 			</div>
 		</c:if>
-
 	</div>
 
 
