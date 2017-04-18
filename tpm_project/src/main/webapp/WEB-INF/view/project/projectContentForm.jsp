@@ -836,7 +836,7 @@ a {
 </head>
 <body class="skin-blue">
 	<%@include file="/WEB-INF/view/header.jsp"%>
-	<c:if test="${param.project_level != 1000 }">
+	<c:if test="${pdto.project_level != 1000 }">
 		<div id="trash" ondrop="drop(event)" class="btn-lg"
 			ondragenter="trashColor()" ondragleave="trashColorReturn()"
 			ondragstart="drag(event)" ondragover="allowDrop(event)">
@@ -864,7 +864,7 @@ a {
 							draggable="true" ondragover="allowDrop(event)"
 							ondragstart="drag(event)">
 							<c:choose>
-								<c:when test="${param.project_level eq 1000 }">
+								<c:when test="${pdto.project_level eq 1000 }">
 									<span>${cdto.category_name }</span>
 								</c:when>
 								<c:otherwise>
@@ -892,7 +892,7 @@ a {
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<span>${wdto.work_title }</span>
 
-									<c:if test="${param.project_level != 1000 }">
+									<c:if test="${pdto.project_level != 1000 }">
 										<span
 											onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i
 											class="glyphicon glyphicon-cog"></i></span>
@@ -918,7 +918,7 @@ a {
 										</tr>
 										<tr>
 											<td colspan="2"><c:choose>
-													<c:when test="${param.project_level != 1000 }">
+													<c:when test="${pdto.project_level != 1000 }">
 														<form action="javascript:addCheck(${wdto.work_idx})">
 															<div class="table_i glyphicon glyphicon-check"></div>
 															<input type="text" id="content${wdto.work_idx}"
@@ -946,7 +946,7 @@ a {
 															draggable="true" ondragover="allowDrop(event)"
 															ondragstart="drag(event)">
 															<c:choose>
-																<c:when test="${param.project_level != 1000 }">
+																<c:when test="${pdto.project_level != 1000 }">
 																	<a onclick="javascript:check(${chdto.checklist_idx })">
 																</c:when>
 																<c:otherwise>
@@ -998,7 +998,7 @@ a {
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
 													<c:choose>
-													<c:when test="${param.project_level == 3000 }">
+													<c:when test="${pdto.project_level == 3000 }">
 													<td>
 														<td><div class="work_btn">업무 완료</div>
 													</td>
@@ -1012,7 +1012,7 @@ a {
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
 													<c:choose>
-													<c:when test="${param.project_level == 3000 }">
+													<c:when test="${pdto.project_level == 3000 }">
 													<td>
 														<div class="work_btn">결재 승인</div>
 														<div class="work_btn">결재 거절</div>
@@ -1059,7 +1059,7 @@ a {
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="${param.project_level !=1000 }">
+		<c:if test="${pdto.project_level !=1000 }">
 			<!-- category add -->
 			<div class="category" id="addCate" style="padding-left: 10px;">
 				<form name="newCategory" action="javascript:categoryAdd()">
