@@ -102,7 +102,6 @@
 	      	        
 	      	        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
 	      	        
-	      	        //배열에 추출한 확장자가 존재하는지 체크
 	      	        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
 	      	            resetFormElement($(this)); //폼 초기화
 	      	            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
