@@ -812,6 +812,9 @@ function fileUp(work_idx){
 a {
 	color: black;
 }
+#right-side #sidebar-wrapper.active{
+	z-index: 3;
+}
 </style>
 </head>
 <body class="skin-blue">
