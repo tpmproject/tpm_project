@@ -418,6 +418,13 @@ function addCheckResult(){
 			var in_ch=div.lastChild.previousSibling;
 			div.insertBefore(dNode,in_ch);
 			
+			var cht=$('#chTotal'+wi).val();
+			cht=parseInt(cht)+1;
+			$('#chTotal'+wi).val(cht);
+			
+			var chTotal=$('#chTotal'+wi).val();
+			var chChecked=$('#chChecked'+wi);
+			document.getElementById('chBar'+wi).style.width=chChecked.val()/chTotal *100+'%';
 			
 		}
 	}
@@ -560,7 +567,30 @@ function delResult(){
 		if (XHR.status == 200) {
 			var result=XHR.responseText; //지운 idx
 			result=parseInt(result);
+			
+			var div_ch=document.getElementById('div_ch'+result);
+			var wi=div_ch.parentNode.getAttribute('id').substring(9);
+			
+			var cht=$('#chTotal'+wi).val();
+			cht=parseInt(cht)-1;
+			$('#chTotal'+wi).val(cht);
+			
+			var chState=$('$chState'+result).val();
+			
+			var chTotal=$('#chTotal'+wi).val();
+			var chChecked=$('#chChecked'+wi);
+			var chChecked_v=chChecked.val();
+			if(chState=='1'){
+				var chch=chChecked.val();
+				chch=parseInt(chch);
+				chch--;
+				chChecked_v=chch;
+			}
+			
+			document.getElementById('chBar'+wi).style.width=chChecked_v/chTotal *100+'%';
+			
 			$('#div_ch'+result).remove();
+			
 		}
 	}
 }
