@@ -746,7 +746,10 @@ function fileUp(work_idx){
 	background: -o-linear-gradient(top, #6CC0FF, #E8FFFF);
 	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #E8FFFF 100%);
 }
-
+.content{
+	overflow-x:auto;
+	height:750px; 
+}
 .category {
 	display: inline-block;
 	width: 200px;
@@ -844,7 +847,7 @@ a {
 
 
 
-	<div id="cbody" style="width:${(pdto.category_num +2)*220}px">
+	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>${pdto.project_name}
 		</div>
