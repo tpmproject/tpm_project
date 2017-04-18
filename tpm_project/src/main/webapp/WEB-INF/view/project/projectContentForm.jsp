@@ -575,7 +575,7 @@ function delResult(){
 			cht=parseInt(cht)-1;
 			$('#chTotal'+wi).val(cht);
 			
-			var chState=$('$chState'+result).val();
+			var chState=$('#chState'+result).val();
 			
 			var chTotal=$('#chTotal'+wi).val();
 			var chChecked=$('#chChecked'+wi);
