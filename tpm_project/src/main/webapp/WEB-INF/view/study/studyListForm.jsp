@@ -22,10 +22,16 @@
 	</ul>
 </fieldset>
 <fieldset>
-	<legend>datePicker</legend>
+	<legend>datePicker 관련</legend>
 	<ul>
 		<li><a href="dateStudy4.do">Date range Picker</a></li>
 		<li><a href="dateStudy5.do">Date and time range Picker</a></li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend>디자인 관련</legend>
+	<ul>
+		<li><a href="designStudy1.do">Slimscroll</a></li>
 	</ul>
 </fieldset>
 </body>

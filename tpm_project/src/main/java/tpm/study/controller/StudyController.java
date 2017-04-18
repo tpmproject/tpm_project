@@ -55,7 +55,7 @@ public class StudyController {
 		mav.setViewName("study/studyListForm");
 		return mav;
 	}
-	
+	////////////////
 	
 	//// Date 타입 관련 (날짜와 시간 가져오기) ////
 	/** DTO(java.sql.Date 타입) - DB TABLE (DATE 타입) : 일반적인 경우 */
@@ -96,21 +96,23 @@ public class StudyController {
 		mav.setViewName("study/studyListForm");
 		return mav;
 	}
+	///////////////////////
 	
+	//// datePicker 관련 ////
+	/** Date range Picker */
 	@RequestMapping(value="dateStudy4.do", method=RequestMethod.GET)
 	public ModelAndView dateStudy4(ModelAndView mav){
 		
 		mav.setViewName("study/date/datePicker");
 		return mav;
 	}
-	
+	/** Date and time range Picker */
 	@RequestMapping(value="dateStudy5.do", method=RequestMethod.GET)
 	public ModelAndView dateStudy5(ModelAndView mav){
 		
 		mav.setViewName("study/date/datePicker2");
 		return mav;
 	}
-	
 	@RequestMapping(value="dateStudy5.do", method=RequestMethod.POST)
 	public ModelAndView dateStudy5_datePicker2(ModelAndView mav, @RequestParam(value="t_date") String t_date) throws ParseException{
 		
@@ -136,5 +138,16 @@ public class StudyController {
 		mav.setViewName("study/date/datePicker2");
 		return mav;
 	}
+	///////////////////////
+	
+	//// 디자인 관련 ////
+	/** Slimscroll */
+	@RequestMapping(value="designStudy1.do", method=RequestMethod.GET)
+	public ModelAndView designStudy1(ModelAndView mav){
+		
+		mav.setViewName("study/scroll/slimscroll");
+		return mav;
+	}
+	
 	
 }
