@@ -812,6 +812,20 @@ function fileUp(work_idx){
 a {
 	color: black;
 }
+.work_btn{
+	display: inline-block;
+	height: 26px;
+	width: 75px;
+	background: #ecf0f5;
+	margin-bottom: 8px;
+    margin-top: 8px;
+    padding-top: 4px;
+    text-align: center;
+    border: 1px solid #3c8dbc;
+}
+.work_btn:HOVER{
+	font-weight: bold;
+}
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
 }
@@ -977,16 +991,37 @@ a {
 										<tr>
 											<c:choose>
 												<c:when test="${wdto.work_state == 3 }">
-													<td><input type="button" value="업무 완료됨"></td>
+													<td><div class="work_btn">업무 완료됨</div></td>
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
-													<td><input type="button" value="결재 요청"></td>
+													<c:choose>
+													<c:when test="${param.project_level == 3000 }">
+													<td>
+														<td><div class="work_btn">업무 완료</div>
+													</td>
+													</c:when>
+													<c:otherwise>
+													<td><div class="work_btn">결재 요청</div></td>
+													</c:otherwise>
+													</c:choose>
+												
+													
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
-													<td><input type="button" value="결재 대기 중"></td>
+													<c:choose>
+													<c:when test="${param.project_level == 3000 }">
+													<td>
+														<div class="work_btn">결재 승인</div>
+														<div class="work_btn">결재 거절</div>
+													</td>
+													</c:when>
+													<c:otherwise>
+													<td><div class="work_btn">결재 대기 중</div></td>
+													</c:otherwise>
+													</c:choose>
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
-													<td><input type="button" value="업무 완료"></td>
+													<td><div class="work_btn">업무 완료</div></td>
 												</c:when>
 											</c:choose>
 
