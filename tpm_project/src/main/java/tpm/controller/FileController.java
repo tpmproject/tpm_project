@@ -49,8 +49,8 @@ public class FileController {
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
 		
 		if(session.getAttribute("project_idx")==null){
+			System.out.println("get방식 fileList.do 쪽 session등록");
 			session.setAttribute("project_idx", pdto.get(1).getProject_idx());
-		 
 		}
 		System.out.println("첫 접속시 프로젝트 idx="+pdto.get(1).getProject_idx());
 		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
@@ -72,13 +72,20 @@ public class FileController {
 								 @RequestParam(value="type",defaultValue="file_idx")String type, HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
-			//System.out.println("sort 넘어온 값:"+sort);
-			//System.out.println("누른 프로젝트idx fileList.do로 :"+project_idx);
+		if((Integer)session.getAttribute("project_idx")!=project_idx){
+			session.removeAttribute("project_idx");
+			System.out.println("세션 지우기");
+			System.out.println("지운세션 확인용 project_idx:"+(Integer)session.getAttribute("project_idx"));
+			session.setAttribute("project_idx", project_idx);  //새로 받아온 project_idx가 세션에 올라간 project_idx와 다르면 새로운 세션값 으로 바꿔줌
+			System.out.println("다시 등록한 세션 확인용 project_idx:"+(Integer)session.getAttribute("project_idx"));
+		}
+		//session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
+		
 		if(project_idx!=(Integer)session.getAttribute("project_idx")||line_name==null){
 			session.setAttribute("search_text","");
 		}
-		
-		session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
+	
+	
 		
 		if(search_text!=null &&search_text!=""){
 		session.setAttribute("search_text", search_text);
@@ -94,11 +101,12 @@ public class FileController {
 		
 		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name,sort);
 		
-/*		System.out.println("---------------------------------------------");
+		System.out.println("---------------------------------------------");
+		System.out.println("컨트롤러에서 세션으로 올라간 project_idx:"+(Integer)session.getAttribute("project_idx"));
 		System.out.println("컨트롤러에서의 project_idx:"+project_idx);
 		System.out.println("컨트롤러에서의 sort:"+sort);
 		System.out.println("컨트롤러에서의 line_name:"+line_name);
-		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));*/
+		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto,search_text);
 		
 		
