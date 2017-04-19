@@ -20,6 +20,8 @@
 	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 function cateName(idx){
 	$('#cate'+idx).show();
@@ -106,6 +108,9 @@ window.onload=function(){
 	$(btnwork2).hide();
 	$(work_modal2).hide();
 	$(btnwork4).hide();
+	$('.content').mCustomScrollbar({
+		axis:"yx"
+	});
 }
 function showf(category_idx){
 	$(workback).fadeIn('150');
@@ -704,6 +709,25 @@ function showWorkTable(work_idx){
 
 
 <style>
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	width: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_draggerRail{
+ display: none;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	height: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
+ display: none;
+}
+
 #workback, #workback2 {
 	position: fixed;
 	z-index: 4;
@@ -761,8 +785,8 @@ function showWorkTable(work_idx){
 	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #E8FFFF 100%);
 }
 .content{
-	overflow-x:auto;
-	height:750px; 
+	height:780px;
+	overflow:auto;
 }
 .category {
 	display: inline-block;
@@ -770,7 +794,6 @@ function showWorkTable(work_idx){
 	float: left;
 	margin-right: 10px;
 }
-
 .wdiv {
 	width: 200px;
 	padding-left: 10px;
