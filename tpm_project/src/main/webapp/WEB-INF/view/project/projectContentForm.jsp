@@ -6,14 +6,13 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<%@ include file="/sample/cho/main/import.jsp"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css"> -->
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
+<!-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
