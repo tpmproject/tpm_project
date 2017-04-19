@@ -684,6 +684,20 @@ function fileUp(work_idx){
 
 }
 
+function showWorkTable(work_idx){
+
+	var show=document.getElementById('showWork'+work_idx).getAttribute('class');
+	if(show=='glyphicon glyphicon-menu-down'){
+		$('#showWork'+work_idx).attr('class','glyphicon glyphicon-menu-right');
+		$('#workTable'+work_idx).fadeOut();
+	}else{
+		$('#showWork'+work_idx).attr('class','glyphicon glyphicon-menu-down');
+		$('#workTable'+work_idx).fadeIn();
+	}
+	
+}
+
+
 </script>
 
 
@@ -890,7 +904,13 @@ a {
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
-									<span>${wdto.work_title }</span>
+									<span onclick="showWorkTable(${wdto.work_idx})">
+										<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
+										&nbsp;${wdto.work_title }
+										<c:if test="${wdto.work_state eq 3}">
+										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
+										</c:if>
+									</span>
 
 									<c:if test="${pdto.project_level != 1000 }">
 										<span
@@ -899,7 +919,7 @@ a {
 									</c:if>
 
 								</div>
-								<table class="cate_table">
+								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
 											<td colspan="2"><div
