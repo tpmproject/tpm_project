@@ -49,8 +49,19 @@
 		WHERE ct.member_idx = m.member_idx
 	</select>
 	
+	<select id="chatContent" parameterType="tpm.chat.model.ChatDTO" resultMap="chatResultMap">
+		SELECT *
+		FROM (SELECT * 
+		      FROM tpm_chat 
+		      WHERE chat_idx = #{chat_idx}) ct, tpm_member m
+		WHERE ct.member_idx = m.member_idx
+	</select>
+	
 	<!-- 채팅 등록 하기 -->
-	<insert id="chatContentInsert" parameterType="tpm.chat.model.ChatDTO">
+	<insert id="chatContentInsert" parameterType="tpm.chat.model.ChatDTO" useGeneratedKeys="true" keyProperty="chat_idx" keyColumn="chat_idx">
 		INSERT INTO tpm_chat VALUES(chat_idx.nextval, #{member_idx}, #{chat_cp_code}, #{chat_cp_value}, #{chat_content}, SYSDATE) 
+		<!-- <selectKey keyProperty="chat_idx" resultType="Integer" order="AFTER"> 
+			SELECT chat_idx.currval FROM dual 
+		</selectKey> -->
 	</insert>
 </mapper>

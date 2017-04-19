@@ -80,7 +80,12 @@ public class ChatController {
 	@RequestMapping(value="chatAdd.do",  method=RequestMethod.POST)
 	public @ResponseBody Object chatAdd(ChatDTO ctdto, HttpSession session){
 		ctdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
-		return chatDAO.addChat(ctdto) > 0 ? "true" : "false";
+		int result = chatDAO.addChat(ctdto);
+		if(result > 0){ // insert 성공시 해당 데이터를 다시 가져온다.
+			return chatDAO.getChatContent(ctdto);
+		} else {
+			return "false";
+		}
 	}
 	
 	/** 채팅 - 채팅 수정 */

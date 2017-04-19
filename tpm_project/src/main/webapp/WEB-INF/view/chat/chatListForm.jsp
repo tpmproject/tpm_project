@@ -15,6 +15,7 @@
 <script src="/tpm_project/js/date/moment.js"></script>
 <!-- Slimscroll -->
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
 <link href="/tpm_project/css/hr/hr-text.css?var=3" rel="stylesheet">
 <style>
 .bg-white {
@@ -229,7 +230,9 @@ a:hover, a:active, a:focus {
 <script>
 var currCpCode;
 var currCpValue;
-var s_member_idx = ${sessionScope.s_member_idx};
+var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
+var s_member_img = '<%=session.getAttribute("s_member_img")%>';
+var wsocket;
 
 $(function(){
     $('#chat-box').slimScroll({
@@ -239,7 +242,77 @@ $(function(){
     	//window.alert("Scroll value: " + pos + "px");
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
+    
+    //페이지 시작시 소켓 연결
+    connect();
+    
+    $('#input_chat_content').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+			InsertChatContent();
+		}
+		event.stopPropagation();
+	});
 });
+
+function connect() {
+	wsocket = new SockJS(
+			"http://localhost:9090/tpm_project/tpm-sockjs.do");
+	wsocket.onopen = onOpen; // 연결 후 결과 메세지
+	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
+	wsocket.onclose = onClose; // 연결 해체 후 메세지
+}
+function disconnect() {
+	wsocket.close();
+}
+function onOpen(evt) {
+	window.alert('연결되었습니다.');
+}
+function onMessage(evt) {
+	var data = evt.data;
+	if (data.substring(0, 4) == "msg:") {
+		var jsonStr = data.substring(4);
+		var json = JSON.parse(jsonStr);
+		
+		appendChatMessage(json);
+	}
+}
+function onClose(evt) {
+	window.alert('연결을 끊었습니다.');
+}
+
+//function chatSend(chat_idx, member_idx, member_name, chat_content, chat_date) {
+function chatSend(json) {
+	var sendMsg = 'msg:'+ JSON.stringify(json);
+	wsocket.send(sendMsg);
+	$("#input_chat_content").val("");
+}
+
+function appendChatMessage(json) {
+	var msg = '';
+	if(json.mdto.member_idx == s_member_idx){
+		msg += makeRightChatContent(json);
+	} else { // 타인의 글인 경우.
+		msg += makeLeftChatContent(json);
+	}
+	
+	$('#chat_content_ul').append(msg);
+	$('#chat-box').slimScroll({ scrollTo: $("#chat_message_div").height() });
+}
+
+/* $(document).ready(function() {
+	$('#message').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+			send();	
+		}
+		event.stopPropagation();
+	});
+	$('#sendBtn').click(function() { send(); });
+	$('#enterBtn').click(function() { connect(); });
+	$('#exitBtn').click(function() { disconnect(); });
+}); */
+
 
 function showChatContent(cpCode, cpValue){
 	
@@ -273,18 +346,18 @@ function showChatContent(cpCode, cpValue){
 
 function makeRightChatContent(ctdto) {
 	var temp_msg = '';
-	temp_msg += '<li class="left clearfix">'; 
-	temp_msg += 	'<span class="chat-img pull-left"> ';
-	temp_msg += 		'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar"> ';
-	temp_msg += 	'</span>';
-	temp_msg += 	'<div class="chat-body clearfix"> ';
-	temp_msg += 		'<div class="header"> ';
-	temp_msg += 			'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
-	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
-	temp_msg += 		'</div> ';
-	temp_msg += 		'<p>' + ctdto.chat_content +'</p>';
-	temp_msg += 	'</div>';
-	temp_msg += '</li>';
+	temp_msg +=	'<li class="right clearfix">';
+	temp_msg +=		'<span class="chat-img pull-right">';
+	temp_msg +=			'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar">';
+	temp_msg +=		'</span>';
+	temp_msg +=		'<div class="chat-body clearfix">';
+	temp_msg +=			'<div class="header">';
+	temp_msg +=				'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
+	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small>';
+	temp_msg +=			'</div>';
+	temp_msg +=			'<p>' + ctdto.chat_content + '</p>';
+	temp_msg +=		'</div>';
+	temp_msg +=	'</li>';
 	/* temp_msg += '<div class="item">';
 	temp_msg += 	'<span class="chat-img pull-right"> <img '
 		temp_msg +=		'src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" class="chat_content_user_img_left" alt="User Avatar" '
@@ -305,19 +378,18 @@ function makeRightChatContent(ctdto) {
 
 function makeLeftChatContent(ctdto) {
 	var temp_msg = '';
-	
-	temp_msg +=	'<li class="right clearfix">';
-	temp_msg +=		'<span class="chat-img pull-right">';
-	temp_msg +=			'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar">';
-	temp_msg +=		'</span>';
-	temp_msg +=		'<div class="chat-body clearfix">';
-	temp_msg +=			'<div class="header">';
-	temp_msg +=				'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
-	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small>';
-	temp_msg +=			'</div>';
-	temp_msg +=			'<p>' + ctdto.chat_content + '</p>';
-	temp_msg +=		'</div>';
-	temp_msg +=	'</li>';
+	temp_msg += '<li class="left clearfix">'; 
+	temp_msg += 	'<span class="chat-img pull-left"> ';
+	temp_msg += 		'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar"> ';
+	temp_msg += 	'</span>';
+	temp_msg += 	'<div class="chat-body clearfix"> ';
+	temp_msg += 		'<div class="header"> ';
+	temp_msg += 			'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
+	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
+	temp_msg += 		'</div> ';
+	temp_msg += 		'<p>' + ctdto.chat_content +'</p>';
+	temp_msg += 	'</div>';
+	temp_msg += '</li>';
 	
 	/* temp_msg += '<div class="item">';
 	temp_msg += 	'<span class="chat-img pull-left"> <img '
@@ -351,9 +423,11 @@ function InsertChatContent() {
 		dataType : 'json',
 		success : function(json) {
 			// 입력 성공시..
-			if(json == true){
-				
+			window.alert(JSON.stringify(json));
+			if(json != false){
 				// 소켓을 통해 메세지를 전달한다.
+				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
+				chatSend(json);
 			}
 		}
 	});

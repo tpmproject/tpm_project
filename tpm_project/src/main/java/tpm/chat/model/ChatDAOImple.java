@@ -27,7 +27,7 @@ public class ChatDAOImple implements ChatDAO {
 
 	public int addChat(Object obj) {
 		// TODO Auto-generated method stub
-		return sqlMap.update("chatContentInsert", obj);
+		return sqlMap.insert("chatContentInsert", obj);
 	}
 
 	public int updateChat() {
@@ -43,6 +43,14 @@ public class ChatDAOImple implements ChatDAO {
 	public List<Object> getChatContentList(Object obj) {
 		// TODO Auto-generated method stub
 		return sqlMap.selectList("chatContentList", obj);
+		
+	}
+
+	@Override
+	public Object getChatContent(Object obj) {
+		// TODO Auto-generated method stub
+		
+		return sqlMap.selectOne("chatContent", obj);
 	}
 
 }
