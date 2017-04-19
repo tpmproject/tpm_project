@@ -4,11 +4,16 @@
 <%@ page import="java.io.*" %>
 
 <%
+	System.out.println("d_jsp들어옴");
+	
+    String filename = "aba.html";  //getAttribute는 객채로 들어옴 , requestParamter는 문자로만
+    if(filename!=null){
+    
+    	
+    System.out.println("if문 안쪽 들어옴");
+	System.out.println("fileContent_d쪽에 들어온 값= "+filename);
+	
 	int pageNumber = 1;
-	
-    String filename =request.getParameter("filename");
-	
-	System.out.println(filename);
    	if (filename.substring(filename.indexOf(".")).equals(".java")) {
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -75,14 +80,17 @@
       	.pg1-text1{
       	 	display:none;
       	}
+      	
     </style>
 
 
 
 <article class="content" >
-	
+	<div class="row">
+		<div class="col-lg-12">
 	<%=doc.getHtmlContent() %>
-	
+		</div>
+	</div>
 </article>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
@@ -97,7 +105,7 @@
 </nav>
 
 <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/.3.7/js/bootstrap.min.js"></script>
+<% } %>

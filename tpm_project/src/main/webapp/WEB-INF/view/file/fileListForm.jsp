@@ -14,11 +14,11 @@
     <!-- Bootstrap Core CSS -->
     <%@ include file="/WEB-INF/view/file/import.jsp"%>
     
-    <link href="/tpm_project/css/file/bootstrap.css?ver=3" rel="stylesheet">
+    <link href="/tpm_project/css/file/bootstrap.css?ver=8" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="/tpm_project/css/file/metisMenu.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=3" rel="stylesheet">
+    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=7" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="/tpm_project/css/file/dataTables.responsive.css?ver=2"
     rel="stylesheet">
@@ -39,7 +39,14 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     
     <script>
-
+    /* 미리보기  */
+	function fileContent(filename){
+		window.alert(filename);
+		
+		var param = "file_name="+filename;
+		action_ajax('fileContent.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+		
+	}
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(project_idx){
@@ -106,11 +113,26 @@
 			fileList_setting(responseText);
 			
 		} else if(ctype == ''){
+			window.alert('result_process들어옴')
+			fileContent_setting(responseText);
+			
+		} else if(ctype == ''){
 			search_modal_setting(responseText);
 		} else {
 			window.alert('잘못된 경로');
 		}
 	}
+  /*   function fileContent_setting(responseText){
+    	window.alert('fileContent_setting 들어옴');
+    	 
+    	var msg ='';
+    		msg += '${doc}'
+    	
+        var file_content = document.getElementById('fileContent');
+        	
+		file_content.innerHTML = '';
+		file_content.innerHTML = msg;
+    } */
 	function fileList_setting(responseText) {
 		var json = JSON.parse(responseText);
 		
@@ -182,11 +204,7 @@
 		file_content_list.innerHTML = msg;
 	
 	}
-	/* 미리보기  */
-	function fileContent(filename){
-		window.alert(filename);
-		
-	}
+	
 	/* 파일 삭제  */
 	function fileDel(file_idx,file_name){
 		
@@ -201,24 +219,23 @@
   
   <!-- 모달 시작 -->
   <div class="row">
-  		
 		<div class="modal fade" id="layerpop">
-		  <div class="modal-dialog">
-		    <div class="modal-content" style="width: 1000px; height: 800px; margin: auto -180px;">
+
 		      <!-- header -->
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
-		        <button type="button" class="close" data-dismiss="modal">×</button>
+		        <button type="button" class="close" data-dismiss="modal" style="font-size:30px; color:white;">×</button>
 		        <!-- header title -->
-		        <h4 class="modal-title">미리보기</h4>
+		       
 		      </div>
 		      <!-- body -->
-		      <div class="modal-body" >
-		      		<div class="col-lg-20">
-		            <jsp:include page="fileContent_d.jsp">
-		             <jsp:param value="aaa.html" name="filename"/>
-		            </jsp:include>
-		          	</div>
+		     	 <div class="modal-body" >
+		     	 
+		     	 <div class="row" id="fileContent">
+		     	 	<div class="col-lg-6">
+		      		  <%@ include file="fileContent_d.jsp" %>
+		      		</div>
+		         </div>
 		      </div>
 		    </div>
 		  </div>

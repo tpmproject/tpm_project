@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,10 +50,10 @@ public class FileController {
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
 		
 		if(session.getAttribute("project_idx")==null){
-			System.out.println("get방식 fileList.do 쪽 session등록");
+			//System.out.println("get방식 fileList.do 쪽 session등록");
 			session.setAttribute("project_idx", pdto.get(1).getProject_idx());
 		}
-		System.out.println("첫 접속시 프로젝트 idx="+pdto.get(1).getProject_idx());
+		//System.out.println("첫 접속시 프로젝트 idx="+pdto.get(1).getProject_idx());
 		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
 		
 		
@@ -74,10 +75,7 @@ public class FileController {
 		HttpSession session=req.getSession();
 		if((Integer)session.getAttribute("project_idx")!=project_idx){
 			session.removeAttribute("project_idx");
-			System.out.println("세션 지우기");
-			System.out.println("지운세션 확인용 project_idx:"+(Integer)session.getAttribute("project_idx"));
 			session.setAttribute("project_idx", project_idx);  //새로 받아온 project_idx가 세션에 올라간 project_idx와 다르면 새로운 세션값 으로 바꿔줌
-			System.out.println("다시 등록한 세션 확인용 project_idx:"+(Integer)session.getAttribute("project_idx"));
 		}
 		//session.setAttribute("project_idx", project_idx);  //프로젝트 선택시 해당 project_idx 세션에 올리기
 		
@@ -101,12 +99,12 @@ public class FileController {
 		
 		FileSortDTO fsdto =new FileSortDTO(project_idx, line_name,sort);
 		
-		System.out.println("---------------------------------------------");
+/*		System.out.println("---------------------------------------------");
 		System.out.println("컨트롤러에서 세션으로 올라간 project_idx:"+(Integer)session.getAttribute("project_idx"));
 		System.out.println("컨트롤러에서의 project_idx:"+project_idx);
 		System.out.println("컨트롤러에서의 sort:"+sort);
 		System.out.println("컨트롤러에서의 line_name:"+line_name);
-		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));
+		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));*/
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto,search_text);
 		
 		
@@ -119,20 +117,24 @@ public class FileController {
 	
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
-	@RequestMapping(value="fileContent.do",  method=RequestMethod.GET)
-	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request ){
+	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name){
 
 		
+		System.out.println("fileContent에 들어온 file_name값= "+file_name);
+	  
 		
-	   
 		ModelAndView mav = new ModelAndView();
-		HttpSession session=request.getSession();
-		session.setAttribute("file_name", file_name);
-
+		
+		mav.addObject("file_name",file_name);
 		mav.setViewName("file/fileContent_d");
 		return mav;
 	}
 	
+	@RequestMapping(value="abm.do",  method=RequestMethod.POST)
+	public @ResponseBody ArrayList<FileDTO> abm(@RequestParam("project_idx")int project_idx){
+		return fdao.searchFile(project_idx);
+	}
 
 	/** 파일 - 파일 등록 페이지 이동 */
 	@RequestMapping(value="fileUploadForm.do",  method=RequestMethod.GET)
@@ -206,7 +208,7 @@ public class FileController {
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.GET)
 	public ModelAndView fileDel(@RequestParam("file_idx")int file_idx,
 								@RequestParam("file_name")String file_name){
-		System.out.println("file_name="+file_name);
+		//System.out.println("file_name="+file_name);
 		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
 		File f = new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name);

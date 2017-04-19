@@ -10,7 +10,7 @@ public interface FileDAO {
 	
 	public ArrayList<ProjectDTO> projectAllList(int member_idx);
 	public ArrayList<FileDTO> getFileList(FileSortDTO fsdto,String search_text);
-	public int searchFile();
+	public ArrayList<FileDTO> searchFile(int project_idx);
 	public int addFile(FileDTO fdto);
 	public int updateFile();
 	public int delFile(int file_idx);
