@@ -904,7 +904,7 @@ function drop4(ev) {
 	<hr>
 	<hr>
 	
-	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="500">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 		<!-- Indicators -->
 		
 		<ol class="carousel-indicators">
