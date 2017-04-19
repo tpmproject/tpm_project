@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="f"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:useBean id="now" class="java.util.Date"/>
 <meta charset=UTF-8>
 <title>TPM</title>
 <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -24,6 +26,20 @@
 	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<script>
+$(function(){
+    $('#mw_div').slimScroll({
+        height: '650px', // 스크롤 처리할 div 의 길이
+    });
+});
+function workEnd(){
+	$('.end').toggle('show');
+}
+function over(){
+	$('.notover').toggle('show');
+}
+</script>
 </head>
 <body>
 <body class="skin-blue">
@@ -53,10 +69,10 @@
 					<td><input type="checkbox">결재대기 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox">완료 업무</td>
+					<td><input type="checkbox" onclick="workEnd()">진행 중 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox">마감일 지난 업무</td>
+					<td><input type="checkbox" onclick="over()">마감일 지난 업무</td>
 				</tr>
 				<tr>
 					<td><input type="checkbox">이번달까지 업무</td>
@@ -77,12 +93,31 @@
 		</table>
 	</div>
 	
-	<div class="col-xs-8">
+	<div class="col-xs-8" id="mw_div">
+	
 	<c:forEach var="i" items="${mwdto}">
-		<div class="panel panel-primary">
+	<div class="${i.work_state eq 3?'end':'ing' } ${now>i.work_end?'over':'notover'}">
+		<span>${i.project_name}<i class="glyphicon glyphicon-chevron-right"></i>${i.category_name}<i class="glyphicon glyphicon-chevron-right"></i></span>
+		
+		<c:choose>
+		<c:when test="${i.work_state eq 3}">
+			<c:set var="state" value="panel-success"></c:set>
+		</c:when>
+		<c:when test="${now>i.work_end}">
+			<c:set var="state" value="panel-danger"></c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="state" value="panel-info"></c:set>
+		</c:otherwise>
+		</c:choose>
+		
+		<div class="panel ${state}">
 			<div class="panel-heading">${i.work_title}</div>
-			<div class="panel-body">test</div>
+			<div class="panel-body">
+			<i class="glyphicon glyphicon-calendar"></i><a><f:formatDate value="${i.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm"/> </a>~<a><f:formatDate value="${i.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm"/></a>
+			</div>
 		</div>
+	</div>
 	</c:forEach>
 	
 	
