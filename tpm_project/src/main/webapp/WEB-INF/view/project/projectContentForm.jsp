@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="f"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -921,8 +922,12 @@ a {
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
-											<td colspan="2"><div
-													class="table_i glyphicon glyphicon-calendar"></div>&nbsp;${wdto.work_start}~${wdto.work_end}</td>
+											<td colspan="2">
+												<div class="table_i glyphicon glyphicon-calendar"></div>
+												&nbsp;<f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm"/><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												~<f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm"/>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
