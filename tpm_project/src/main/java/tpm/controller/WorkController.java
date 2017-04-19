@@ -49,10 +49,17 @@ public class WorkController {
 	// 나의 업무
 	/** 나의 업무 - 나의 업무 페이지 이동 */
 	@RequestMapping(value="myWork.do",  method=RequestMethod.GET)
-	public ModelAndView myWorkListForm(){
+	public ModelAndView myWorkListForm(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		int member_idx=(Integer)session.getAttribute("s_member_idx");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mywork/myWorkList");
+		MemberDTO mdto=new MemberDTO();
+		mdto.setMember_idx(member_idx);
+		ArrayList<MyWorkDTO> arr=workDAO.myWorkAllList(mdto);
+		
+		mav.addObject("mwdto", arr);
 		return mav;
 	}
 	
