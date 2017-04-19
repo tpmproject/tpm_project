@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${failed}');
-	location.href='memberEmailCheck.do';
+	location.reload();
 </script>

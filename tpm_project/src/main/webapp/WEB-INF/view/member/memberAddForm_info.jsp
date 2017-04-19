@@ -16,7 +16,9 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/httpRequest.js"></script>
+
 	<script>
+	
 		function emailCheck(){
 			var user_email = document.memberAddForm.inputEmail.value;
 				
@@ -42,7 +44,7 @@
 						resultId.style.color = 'red';
 						resultId.innerHTML = '이미 사용중인 이메일입니다';
 					} else{
-						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=500, height=250');
+						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=500, height=200');
 					}
 				}
 			}
@@ -101,10 +103,24 @@ function cancle(){
                     </h1>
                 </div>
                 <form class="form-horizontal" name="memberAddForm" action="memberAddTendency.do" method="get">
-                
-                        <c:set var="email" value="${email}"/>
-                        <input type="text" name="test" value="${email}">
-                        
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+						<div class="col-sm-6">
+							<input class="form-control" id="inputEmail" type="email"
+								name="member_id" placeholder="이메일" required="required">
+						</div>
+						<div id="email_check_div">
+							<button class="btn btn-success" type="button"
+								onclick="emailCheck()">이메일 인증 <i class="fa fa-check spaceLeft"></i>
+							</button>
+						</div>
+						<div>
+							<p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
+						</div>
+					</div>
+					
+				<%-- <c:set var="email" value="${email}"/>
                         <c:choose>
                         	<c:when test="${empty email}">
 	                        	<div class="form-group">
@@ -134,7 +150,7 @@ function cancle(){
 	                       		 </div>
 	                    		</div>
                         	</c:otherwise>
-                        </c:choose>
+                        </c:choose> --%>
                     
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
