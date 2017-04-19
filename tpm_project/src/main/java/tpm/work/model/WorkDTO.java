@@ -33,6 +33,7 @@ public class WorkDTO {
 		
 	
 	public WorkDTO() {
+		
 		super();
 	}
 	

@@ -104,10 +104,11 @@ function cancle(){
                 </div>
                 <form class="form-horizontal" name="memberAddForm" action="memberAddTendency.do" method="get">
                 
-                        <c:set var="email" value="${sessionScope.email}"/>
+                        <c:set var="email" value="${email}"/>
+                        <input type="text" name="test" value="${email}">
                         
                         <c:choose>
-                        	<c:when test="${empty sessionScope.email}">
+                        	<c:when test="${empty email}">
 	                        	<div class="form-group">
 	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 	                        		<div class="col-sm-6">

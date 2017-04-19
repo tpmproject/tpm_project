@@ -263,7 +263,31 @@ public class MemberController {
 		if(random==user){
 			result = "인증에 성공하였습니다";
 			
-			Session.setAttribute("email", email);
+			mav.addObject("email", email);
+			mav.addObject("success", result);
+			mav.setViewName("member/memberEmailSuccess");
+		} else{
+			result = "인증번호를 확인해주세요";
+			
+			mav.addObject("failed", result);
+			mav.setViewName("redirect:/memberEmailCheck.do");
+		}
+		
+		return mav;
+	}
+	
+	/** 인증번호 틀렸을 시 - 페이지 재이동*/
+	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.GET)
+	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user, @RequestParam("email") String email){
+		
+		ModelAndView mav = new ModelAndView();
+
+		String result = "";
+		
+		if(random==user){
+			result = "인증에 성공하였습니다";
+			
+			mav.addObject("email", email);
 			mav.addObject("success", result);
 			mav.setViewName("member/memberEmailSuccess");
 		} else{
@@ -456,13 +480,18 @@ public class MemberController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			mav.setViewName("redirect:/memberInfo.do");
 		} else{
 			result = "수정 실패. 관리자에게 문의바랍니다";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberUpdate_ok");
 		}
 		
 		//mav.addObject("result", result);
 		//mav.setViewName("member/memberUpdate_ok");
-		mav.setViewName("redirect:/memberInfo.do");
+		//mav.setViewName("redirect:/memberInfo.do");
 		
 		return mav;
 	}

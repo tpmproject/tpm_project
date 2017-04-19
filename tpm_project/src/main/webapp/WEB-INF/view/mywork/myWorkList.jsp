@@ -23,15 +23,7 @@
 	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
-<style>
-	 #menutest{
-	 	 overflow:hidden;
-	 	 width:200px;
-	 	 display:inline;
-	 }
-</style>
 </head>
-<script src="../../js/jquery-1.7.2.min.js"></script>
 <body>
 <body class="skin-blue">
 <%@include file="/WEB-INF/view/header.jsp"%>
@@ -85,22 +77,9 @@
 	</div>
 	
 	<div class="col-xs-9">
-	 	<button id="up"> 접기 </button>
-		<button id="down"> 펼치기 </button>
 	</div>
 </div>
 <%@include file="/WEB-INF/view/footer.jsp"%>
 
-<script>
-
-$('#down').click(function() {
-  $('#menutest').animate({width:"200px"},1000);  
-});
-
-$('#up').click(function() {
-	$('#menutest').animate({width:"0px"},1000);
-});
-
-</script>
 </body>
 </html>
