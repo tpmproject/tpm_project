@@ -948,6 +948,7 @@ a {
 										</tr>
 										<tr>
 											<td colspan="2">
+											<div class="scr">
 												<div class="check_div" id="check_div${wdto.work_idx}">
 													<c:set var="chTotal" value="0"></c:set>
 													<c:set var="chChecked" value="0"></c:set>
@@ -980,6 +981,7 @@ a {
 													</c:forEach>
 													<input type="hidden" id="checkHide${wdto.work_idx}"
 														value="0">
+												</div>
 												</div>
 											</td>
 										</tr>
