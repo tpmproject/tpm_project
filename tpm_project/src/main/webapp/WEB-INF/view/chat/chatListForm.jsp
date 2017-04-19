@@ -257,7 +257,7 @@ $(function(){
 
 function connect() {
 	wsocket = new SockJS(
-			"http://localhost:9090/tpm_project/tpm-sockjs.do");
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do");
 	wsocket.onopen = onOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onClose; // 연결 해체 후 메세지
