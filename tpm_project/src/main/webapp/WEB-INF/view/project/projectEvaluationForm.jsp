@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<%@ include file="/sample/cho/main/import.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
@@ -84,6 +85,7 @@ function addTendencyResult(){
 </script>
 </head>
 <body>
+	<%@include file="/WEB-INF/view/header.jsp"%>
 	<div id="pebody">
 		<div>
 			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
@@ -96,7 +98,7 @@ function addTendencyResult(){
 			</c:if>
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
 			<div id="bt${arr.member_idx}">
-			<img src="/tpm_project/img/member/profile/${arr.member_img}">
+			<img src="/tpm_project/img/member/profile/${arr.member_img}" style="width: 128px; height: 128px;">
 				<h4>${arr.member_name}(${arr.member_id})</h4>
 				</div>
 				<div class="col-sm-offset-7">

@@ -161,7 +161,7 @@ public class WorkController {
 	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup) throws ParseException{
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workResult_d");
+		mav.setViewName("work/workAdd_d");
 		System.out.println(workdateup);
 		String temp[]=workdateup.split("-");
 		String work_s=temp[0].trim();
