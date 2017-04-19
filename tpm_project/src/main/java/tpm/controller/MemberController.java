@@ -2,6 +2,7 @@ package tpm.controller;
 
 import static org.junit.Assert.fail;
 
+import java.awt.PageAttributes;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -271,30 +272,6 @@ public class MemberController {
 			
 			mav.addObject("failed", result);
 			mav.setViewName("redirect:/memberEmailCheck.do");
-		}
-		
-		return mav;
-	}
-	
-	/** 인증번호 틀렸을 시 - 페이지 재이동*/
-	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.GET)
-	public ModelAndView memberEmailCheck(@RequestParam("random_number") int random, @RequestParam("user_number") int user, @RequestParam("email") String email){
-		
-		ModelAndView mav = new ModelAndView();
-
-		String result = "";
-		
-		if(random==user){
-			result = "인증에 성공하였습니다";
-			
-			mav.addObject("email", email);
-			mav.addObject("success", result);
-			mav.setViewName("member/memberEmailSuccess");
-		} else{
-			result = "인증번호를 확인해주세요";
-			
-			mav.addObject("failed", result);
-			mav.setViewName("member/memberEmailFailed");
 		}
 		
 		return mav;

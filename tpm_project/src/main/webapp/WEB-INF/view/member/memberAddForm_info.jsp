@@ -20,7 +20,6 @@
 		function emailCheck(){
 			var user_email = document.memberAddForm.inputEmail.value;
 				
-			
 			if(!user_email){
 				window.alert('이메일을 입력해주세요');
 				
@@ -29,19 +28,6 @@
 				
 				sendRequest('memberIdCheck.do', email, emailCheckResult, 'POST');
 			}
-		}
-		function passwordCheck(){
-			var user_pwd1=document.memberAddForm.member_pwd.value;
-			var user_pwd2=document.memberAddForm.member_pwd2.value;
-			var pwdCheckMsg = document.getElementById('pwdCheckMsg');
-			if(user_pwd1!=user_pwd2){
-				pwdCheckMsg.style.color = 'red';
-				pwdCheckMsg.innerHTML = '비밀번호가 다릅니다.';
-			}else{
-				pwdCheckMsg.innerHTML = '';
-			}
-			
-			
 		}
 		
 		function emailCheckResult(){
@@ -56,9 +42,21 @@
 						resultId.style.color = 'red';
 						resultId.innerHTML = '이미 사용중인 이메일입니다';
 					} else{
-						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=350, height=120');
+						window.open('memberSendEmail.do?email='+email, 'emailcheck','width=500, height=250');
 					}
 				}
+			}
+		}
+		
+		function passwordCheck(){
+			var user_pwd1=document.memberAddForm.member_pwd.value;
+			var user_pwd2=document.memberAddForm.member_pwd2.value;
+			var pwdCheckMsg = document.getElementById('pwdCheckMsg');
+			if(user_pwd1!=user_pwd2){
+				pwdCheckMsg.style.color = 'red';
+				pwdCheckMsg.innerHTML = '비밀번호가 다릅니다.';
+			}else{
+				pwdCheckMsg.innerHTML = '';
 			}
 		}
 	</script>    
