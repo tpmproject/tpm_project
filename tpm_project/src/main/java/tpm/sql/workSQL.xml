@@ -91,4 +91,17 @@
 	<delete id="workDelete" parameterType="int">
 	delete from tpm_work where work_idx=#{work_idx}
 	</delete>
+	<select id="myWork" parameterType="int" resultType="tpm.project.model.TotalDTO">
+	select * from
+	(select tpm_project.*,tpm_category.category_idx,tpm_category.category_name from
+	tpm_project left outer join tpm_category
+	on tpm_project.project_idx=tpm_category.project_idx)pc
+	left outer join tpm_work
+	on pc.category_idx=tpm_work.category_idx
+	where work_idx in (
+	    select work_idx from tpm_work_member
+	    where member_idx=#{member_idx} 
+	)
+	order by project_idx,pc.category_idx,work_idx
+	</select>
 </mapper>
