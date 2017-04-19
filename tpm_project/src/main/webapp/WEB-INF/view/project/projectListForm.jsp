@@ -25,7 +25,8 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
 <%@ include file="/sample/cho/main/import.jsp"%>
-
+<!-- Slimscroll -->
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
  
  
 <script type="text/javascript">
@@ -43,7 +44,19 @@
 		$(f_modal2).show();
 		$(smodal2).hide();
 	}
+	/**슬림스크롤*/
 	
+		
+	$(function(){
+	
+	    $('#pc').slimScroll({
+	        height: '50px', // 스크롤 처리할 div 의 길이
+	        start: 'bottom' // 스크롤의 시작 위치
+	    }).bind('slimscrolling', function(e, pos) {
+	    	//window.alert("Scroll value: " + pos + "px");
+	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+	    });
+	});
 	
 
 
@@ -227,6 +240,11 @@
 							+ '</p> ';
 
 					msg += '</div> ';
+					
+					
+					
+					
+					
 				}
 				
 				var member_search_content=member_search_content = document.getElementById('member_search_content');
@@ -514,6 +532,7 @@
 					msg+='<td><input type="button" value="진행중"></td></div>';
 					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
 					
+				
 					divNode.innerHTML=msg;
 					
 					document.getElementById('contain').appendChild(divNode);
@@ -986,7 +1005,7 @@ function drop4(ev) {
 									<!-- end divider -->
 									<!-- Portfolio Projects -->
 									
-									<c:if test="${status.index %2 == 1 and not status.last}">
+									<c:if test="${status.index %2== 1 and not status.last}">
 									</div>
 										</div>
 									</div>
