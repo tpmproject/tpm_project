@@ -58,6 +58,19 @@ function over(){
 function wait(){
 	$('.notwait').hide('50');
 }
+function test(){
+	var mwdiv=document.getElementById('mw_div').firstChild;
+	var last=document.getElementById('mw_div').lastChild;
+	do{
+		if(mwdiv.nodeName=='DIV'){
+			var inshow=mwdiv.firstChild;
+			window.alert(mwdiv.getAttribute('class')+inshow.value);
+		}
+		
+		mwdiv=mwdiv.nextSibling;
+	}while(mwdiv!=last);
+	
+}
 </script>
 </head>
 <body>
@@ -111,12 +124,11 @@ function wait(){
 			</tbody>
 		</table>
 	</div>
-	
+	<div style="background: green;" onclick="test()">test</div>
 	<div class="col-xs-8" id="mw_div">
-	
 	<c:forEach var="i" items="${mwdto}">
 	
-	<div class="${i.work_state eq 3 ?'end':'' } ${i.work_state eq 2?'':'notwait' } ${now>i.work_end?'over':'notover'}">
+	<div class="${i.work_state eq 3 ?'end':'' } ${i.work_state eq 2?'':'notwait' } ${now>i.work_end?'over':'notover'}"><input type="hidden" class="show" value="0">
 		<span>${i.project_name}<i class="glyphicon glyphicon-chevron-right"></i>${i.category_name}<i class="glyphicon glyphicon-chevron-right"></i></span>
 		
 		<c:choose>
