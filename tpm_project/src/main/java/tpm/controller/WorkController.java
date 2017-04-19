@@ -128,6 +128,8 @@ public class WorkController {
 		dto.setWork_end(work_end);
 		int work_idx=workDAO.addWork(dto);
 		dto.setWork_idx(work_idx);
+		
+		String msg=dto.getWork_title();
 
 		if(work_idx>0){
 			for(int i=0;i<member_idx.length;i++){
@@ -135,10 +137,10 @@ public class WorkController {
 				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
 				workDAO.workMemberInsert(mdto);
 			}
-			mav.addObject("mdto",dto);
+			mav.addObject("wdto",dto);
 		}else{
-		String msg="error";
-		mav.addObject("msg",msg);
+			msg="error";
+			mav.addObject("msg",msg);
 		}
 		return mav;
 	}

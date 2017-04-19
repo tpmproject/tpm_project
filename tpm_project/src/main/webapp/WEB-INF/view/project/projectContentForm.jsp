@@ -280,11 +280,7 @@ function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			var wData=eval('('+result+')');
-			if(result != null){
-				
-			}
-			closem();			
+			location.reload();
 		}
 	}
 }
