@@ -7,17 +7,16 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-<!-- <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css"> -->
-<%@ include file="/WEB-INF/view/include/import.jsp"%>
-<!-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<%@ include file="/sample/cho/main/import.jsp"%>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
-<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
@@ -730,7 +729,7 @@ function showWorkTable(work_idx){
 
 #workback, #workback2 {
 	position: fixed;
-	z-index: 4;
+	z-index:0;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -739,50 +738,17 @@ function showWorkTable(work_idx){
 	opacity: 0.7;
 	display: none;
 }
-
 #work_modal, #work_modal2 {
 	display: none;
-	border: 1px solid #0054FF;
-	background: #FFFFFF;
-	background: -webkit-gradient(linear, left top, left bottom, from(#6CC0FF),
-		to(#FFFFFF));
-	background: -webkit-linear-gradient(top, #6CC0FF, #FFFFFF);
-	background: -moz-linear-gradient(top, #6CC0FF, #FFFFFF);
-	background: -ms-linear-gradient(top, #6CC0FF, #FFFFFF);
-	background: -o-linear-gradient(top, #6CC0FF, #FFFFFF);
-	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #FFFFFF 100%);
+	background: white;
 	position: fixed;
-	z-index: 5;
+	z-index:5;
 	top: 20%;
 	left: 20%;
+	border: solid 10px white;
+	border-radius: 10px;
 	width: 600px;
 	height: 500px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	-webkit-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
-		rgba(255, 255, 255, 0.4) 0 0px 0;
-	-moz-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
-		rgba(255, 255, 255, 0.4) 0 0px 0;
-	box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
-		rgba(255, 255, 255, 0.4) 0 0px 0;
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	vertical-align: middle;
-	min-width: 300px;
-	padding: 20px;
-	margin-top: 30px;
-}
-
-#btn-worknext, #btn-workbefore, #btn-workok {
-	border: 1px solid #6CC0FF;
-	background: #E8FFFF;
-	background: -webkit-gradient(linear, left top, left bottom, from(#6CC0FF),
-		to(#E8FFFF));
-	background: -webkit-linear-gradient(top, #6CC0FF, #E8FFFF);
-	background: -moz-linear-gradient(top, #6CC0FF, #E8FFFF);
-	background: -ms-linear-gradient(top, #6CC0FF, #E8FFFF);
-	background: -o-linear-gradient(top, #6CC0FF, #E8FFFF);
-	background-image: -ms-linear-gradient(top, #6CC0FF 0%, #E8FFFF 100%);
 }
 .content{
 	height:780px;
@@ -797,7 +763,6 @@ function showWorkTable(work_idx){
 .wdiv {
 	width: 200px;
 	padding-left: 10px;
-	background: #ecf0f5;
 }
 
 .cate_table {
