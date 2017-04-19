@@ -8,32 +8,51 @@
 <meta charset=UTF-8>
 <title>TPM</title>
 
+<script type="text/javascript" src="js/jQuery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/ajax_extension.js"></script>
+<!-- Slimscroll -->
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script type="text/javascript" src="js/ajax_extension.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
 <!-- css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
-
 <link href="css/flexslider.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+
+<!-- Bootstrap 3.3.2 JS -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
-<script type="text/javascript" src="js/ajax_extension.js"></script>
-<%@ include file="/sample/cho/main/import.jsp"%>
-<!-- Slimscroll -->
-<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
- 
- 
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
+
+
 <script type="text/javascript">
-	window.onload = function() {
+
+	$(function(){
+		$('.project_p_div').slimScroll({
+	        height: '30px' // 스크롤 처리할 div 의 길이
+	       
+	    }).bind('slimscrolling', function(e, pos) {
+	    	//window.alert("Scroll value: " + pos + "px");
+	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+	    });
+	}); 
+
+
+ 	window.onload = function() {
 		$(main_modal).hide();
 		$(smodal).hide();
-	}
+		
+	}	 
+		
 	function showf() {
 		$(mback).fadeIn('150');
 		$(main_modal).fadeIn('150');
@@ -45,21 +64,8 @@
 		$(smodal2).hide();
 	}
 	/**슬림스크롤*/
+ 	
 	
-		
-	$(function(){
-	
-	    $('#pc').slimScroll({
-	        height: '50px', // 스크롤 처리할 div 의 길이
-	        start: 'bottom' // 스크롤의 시작 위치
-	    }).bind('slimscrolling', function(e, pos) {
-	    	//window.alert("Scroll value: " + pos + "px");
-	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
-	    });
-	});
-	
-
-
 	/**프로젝트 수정*/
 	function projectUpdate(idx,name,content){
 		$(mback).fadeIn('150');
@@ -84,15 +90,16 @@
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
 				var objData=eval('('+result+')');
-				var p=objData.p;
+				var pson=objData.pson;
 				
-				if(p.project_idx==0){
+				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
 									
-					$('#project_div'+p.project_idx).remove();
+					$('#project_div'+pson.project_idx).remove();
 		
 				}
+				 history.go(0);
 				closem();
 			}
 		}
@@ -143,6 +150,7 @@
 		document.getElementById('project_Member').innerHTML='';
 		document.getElementById('project_Member2').innerHTML='';
 	}
+	
 	//검색멤버
 	var addOrUpdate=0;
 	function projectMemberAdd(aou) {
@@ -513,24 +521,25 @@
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
 				var objData=eval('('+result+')');
-				var p=objData.p;
-				if(p.project_idx==0){
+				var pson=objData.pson;
+				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
 		
 					var divNode=document.createElement('DIV');
 					divNode.setAttribute('class','col-lg-3');
 					divNode.setAttribute('style','margin-top: 15px;');
-					divNode.setAttribute('id','project_div'+p.project_idx);
+					divNode.setAttribute('id','project_div'+pson.project_idx);
 					
 					var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
-					msg+='<input type="hidden" id="p_idx'+p.project_idx+'" value="'+p.project_idx+'">';
-					msg+='<h4 id="pn'+p.project_idx+'">'+p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
+					msg+='<input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
+					msg+='<h4 id="pn'+pson.project_idx+'">'+pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
 					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
-					msg+='<p id="pc'+p.project_idx+'">'+p.project_content+'</p>';
+					
+					msg+='<p id="pc'+pson.project_idx+'">'+pson.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+p.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
 					
 				
 					divNode.innerHTML=msg;
@@ -538,6 +547,8 @@
 					document.getElementById('contain').appendChild(divNode);
 		
 				}
+				// history.go(0);
+				location.reload();
 				closem();
 			}
 		}
@@ -605,27 +616,28 @@ function updatePResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			var objData=eval('('+result+')');
-			var p=objData.p;
-			if(p.project_idx==0){
+			var pson=objData.pb;
+			if(pson.project_idx==0){
 				window.alert('오류 발생!');
 			}else{
 				if(updateProject_me==0){
-					$('#project_div'+p.project_idx).remove();
+					$('#project_div'+pson.project_idx).remove();
 					updateProject_me=0;
 					closem();
 					return;
 				}
 				updateProject_me=0;
-				var p_name=document.getElementById('pn'+p.project_idx);
-				document.getElementById('pc'+p.project_idx).innerHTML=p.project_content;
+				var p_name=document.getElementById('pn'+pson.project_idx);
+				document.getElementById('pc'+pson.project_idx).innerHTML=pson.project_content;
 				if(myLevel!='3000'){
-					p_name.innerHTML=p.project_name;	
+					p_name.innerHTML=pson.project_name;	
 				}else{
-					p_name.innerHTML=p.project_name+'<span onclick="projectUpdate('+p.project_idx+','+p.project_name+','+p.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>';
+					p_name.innerHTML=pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>';
 					
 				}
 				myLevel=0;
 			}
+			location.reload();
 			closem();
 		}
 	}
@@ -920,12 +932,11 @@ function drop4(ev) {
 			</div>
 		</div>
 	</form>
-	<hr>
-	<hr>
 	
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+	
+	
 		<!-- Indicators -->
-		
 		<ol class="carousel-indicators">
 		<c:forEach var="i" items="${plist}" varStatus="status">
 			<c:if test="${status.index %2 == 0}">
@@ -944,7 +955,6 @@ function drop4(ev) {
 
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" >
-
 			<div class="item active">
 				<div>
 					<div class="container" id="contain">
@@ -976,17 +986,19 @@ function drop4(ev) {
 														</span>
 													</c:if>
 												</h4>
+												
 												<div class="icon">
 													<i class="fa fa-desktop fa-3x"></i>
 												</div>
-												<p id="pc${i.project_idx}">${i.project_content }</p>
-
+												<div class="project_p_div">
+													<p id="pc${i.project_idx}">${i.project_content }</p>
+												</div>
 												<!-- 프로젝트 진행현황 -->
 												<c:choose>
-													<c:when test="${i.project_level == 3000 and i.project_state == 1}">
-														<button type="button" onclick="sucess()">완료하기</button>
+													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+														<button type="button" >완료</button>
 													</c:when>
-													<c:when test="${i.project_state == 2 }">
+													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
 														<td><input type="button" value="평가 대기" onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'"></td>
 													</c:when>
 													<c:when test="${i.project_state == 1 }">
@@ -995,9 +1007,7 @@ function drop4(ev) {
 												</c:choose>
 											</div>
 											<div class="box-bottom">
-												<a
-													href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">프로젝트
-													보기버튼</a>
+												<a	href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">프로젝트보기버튼</a>
 											</div>
 										</div>
 									</div>
@@ -1018,9 +1028,9 @@ function drop4(ev) {
 							</c:otherwise>
 						</c:choose>
 					</div>
+					
 				</div>
 			</div>
-
 		</div>
 
 		<!-- Controls -->
@@ -1034,9 +1044,9 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-
+		
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
-
+	
 
 </body>
 </html>

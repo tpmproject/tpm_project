@@ -10,12 +10,12 @@ ProjectDTO dto=new ProjectDTO();
 if(msg==null){
 	dto=(ProjectDTO)request.getAttribute("pdto");	
 }else if(msg.equals("error")){
-	out.print("{p:{project_idx:0}}");
+	out.print("{pson:{project_idx:0}}");
 	return;
 }
 %>
 {
-	p:{
+	pson:{
 		project_idx:<%=dto.getProject_idx()%>,
 		project_name:'<%=dto.getProject_name()%>',
 		project_content:'<%=dto.getProject_content()%>',
