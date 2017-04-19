@@ -28,16 +28,35 @@
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 <script>
+var toggler=1;
 $(function(){
     $('#mw_div').slimScroll({
         height: '650px', // 스크롤 처리할 div 의 길이
     });
+    $('.end').hide();
 });
 function workEnd(){
-	$('.end').toggle('show');
+	if(toggler%2==0){
+		$('.end').hide('50');
+		toggler=toggler+1;
+	}else{
+		$('.end').show('50');
+		toggler=toggler-1;
+	}
+	
 }
 function over(){
-	$('.notover').toggle('show');
+	if(toggler/10<=1){
+		$('.notover').hide('50');
+		toggler=toggler+10;
+	}else{
+		$('.notover').show('50');
+		toggler=toggler-10;
+	}
+	
+}
+function wait(){
+	$('.notwait').hide('50');
 }
 </script>
 </head>
@@ -66,10 +85,10 @@ function over(){
 					<th>필터</th>
 				</tr>
 				<tr>
-					<td><input type="checkbox">결재대기 업무</td>
+					<td><input type="checkbox" onclick="wait()">결재 대기 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" onclick="workEnd()">진행 중 업무</td>
+					<td><input type="checkbox" checked="checked" onclick="workEnd()">진행 중 업무</td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" onclick="over()">마감일 지난 업무</td>
@@ -96,12 +115,16 @@ function over(){
 	<div class="col-xs-8" id="mw_div">
 	
 	<c:forEach var="i" items="${mwdto}">
-	<div class="${i.work_state eq 3?'end':'ing' } ${now>i.work_end?'over':'notover'}">
+	
+	<div class="${i.work_state eq 3 ?'end':'' } ${i.work_state eq 2?'':'notwait' } ${now>i.work_end?'over':'notover'}">
 		<span>${i.project_name}<i class="glyphicon glyphicon-chevron-right"></i>${i.category_name}<i class="glyphicon glyphicon-chevron-right"></i></span>
 		
 		<c:choose>
 		<c:when test="${i.work_state eq 3}">
 			<c:set var="state" value="panel-success"></c:set>
+		</c:when>
+		<c:when test="${i.work_state eq 2}">
+			<c:set var="state" value="panel-warning"></c:set>
 		</c:when>
 		<c:when test="${now>i.work_end}">
 			<c:set var="state" value="panel-danger"></c:set>
