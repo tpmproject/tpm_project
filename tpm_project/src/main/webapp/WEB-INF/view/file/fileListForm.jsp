@@ -40,26 +40,31 @@
     
     <script>
 
-	window.alert('jsp파일쪽 project_idx='+${project_idx});
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(project_idx){
+    	sessionStorage.setItem("project_idx",project_idx); //프로젝트 idx 세션에올리기
     	
-		var param = 'project_idx=' + project_idx;
-
+		var project_idx_s=sessionStorage.getItem("project_idx");
+    	var param = 'project_idx='+project_idx_s;
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 		
 	}
  	function file_search(i){
+ 		var project_idx_s=sessionStorage.getItem("project_idx");
+ 		
     	var search_text=document.getElementById("search_text").value;
     	
-		var param = 'project_idx='+i+'&search_text='+search_text;
+		var param = 'project_idx='+project_idx_s+'&search_text='+search_text;
 
 		action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
 		
 	}
     /*선택한 제목행에따라 정렬하여 파일리스트 출력  */
-    function file_sort(project_idx, line_name,th){
+    function file_sort(line_name, th){
+    	
+    	var project_idx_s=sessionStorage.getItem("project_idx");
+    	
     	var sort='';
     	
     	if($('#'+th).hasClass('sorting')){
@@ -69,7 +74,7 @@
     		sort='asc';
     	}
     	
-    	var param = 'project_idx='+project_idx +'&line_name='+line_name+'&sort='+sort;
+    	var param = 'project_idx='+project_idx_s +'&line_name='+line_name+'&sort='+sort;
 
     	action_ajax('fileList.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
     }
@@ -192,7 +197,7 @@
     
   </head>
  
-  <body class="skin-blue" onload="project_fileList('${project_idx}')">
+  <body class="skin-blue" >
   
   <!-- 모달 시작 -->
   <div class="row">
@@ -288,7 +293,7 @@
               <div class="panel-body">
               	<div style="width:300px;">
              	 	<input type="text" style="display:inline; float:left;" class="form-control" id="search_text" placeholder="Search...">
-              		<button class="btn btn-default" type="button" onclick="file_search(${project_idx})" style="margin:-30px 300px;float:left; display: inline;">
+              		<button class="btn btn-default" type="button" onclick="file_search()" style="margin:-30px 300px;float:left; display: inline;">
                       <i class="fa fa-search"></i>
                     </button>
              	</div>
@@ -298,11 +303,11 @@
                 
                   <thead>
                     <tr>
-                      <th>파일 타입 </th>
-                      <th id="th_file_name" onclick="file_sort(${project_idx},'file_name','th_file_name')">파일 이름</th>
-                      <th id="th_file_size" onclick="file_sort(${project_idx},'file_size','th_file_size')">파일 크기</th>
-                      <th id="th_file_date" onclick="file_sort(${project_idx},'file_date','th_file_date')">공유한 날짜</th>
-                      <th id="th_file_idx" onclick="file_sort(${project_idx},'member_idx')">공유한 사람</th>
+                      <th>파일 타입 ${project_idx}</th>
+                      <th id="th_file_name" onclick="file_sort('file_name','th_file_name')">파일 이름</th>
+                      <th id="th_file_size" onclick="file_sort('file_size','th_file_size')">파일 크기</th>
+                      <th id="th_file_date" onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
+                      <th id="th_file_idx" onclick="file_sort('member_idx')">공유한 사람</th>
                     </tr>
                   </thead>
 
