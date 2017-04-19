@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +11,13 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"   rel="stylesheet" type="text/css"> -->
-<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<%@ include file="/sample/cho/main/import.jsp"%>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css"> -->
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
+<!-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
@@ -27,8 +28,8 @@
 <body>
 <body class="skin-blue">
 <%@include file="/WEB-INF/view/header.jsp"%>
-<div class="container-fluid">
-	<div id="menutest" class="col-xs-2">
+<div>
+	<div class="col-xs-2">
 		<table class="table">
 			<thead>
 				<tr>
@@ -63,12 +64,12 @@
 				<tr>
 					<th>프로젝트</th>
 				</tr>
+				<c:if test="${not empty mwdto }"></c:if>
+				<c:forEach var="i" items="${mwdto}">
 				<tr>
-					<td><input type="checkbox">myproject1</td>
+					<td><input type="checkbox">${i.project_name}</td>
 				</tr>
-				<tr>
-					<td><input type="checkbox">myproject2</td>
-				</tr>
+				</c:forEach>
 				<tr>
 					<td col="2"><input value="필터 취소" type="reset"></td>
 				</tr>
@@ -76,7 +77,15 @@
 		</table>
 	</div>
 	
-	<div class="col-xs-9">
+	<div class="col-xs-8">
+	<c:forEach var="i" items="${mwdto}">
+		<div class="panel panel-primary">
+			<div class="panel-heading">${i.work_title}</div>
+			<div class="panel-body">test</div>
+		</div>
+	</c:forEach>
+	
+	
 	</div>
 </div>
 <%@include file="/WEB-INF/view/footer.jsp"%>
