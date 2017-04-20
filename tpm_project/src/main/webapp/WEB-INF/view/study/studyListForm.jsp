@@ -34,5 +34,11 @@
 		<li><a href="designStudy1.do">Slimscroll</a></li>
 	</ul>
 </fieldset>
+<fieldset>
+	<legend>자동 경로 관련</legend>
+	<ul>
+		<li><a href="pathStudy.do">path</a></li>
+	</ul>
+</fieldset>
 </body>
 </html>
