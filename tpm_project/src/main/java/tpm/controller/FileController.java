@@ -178,7 +178,7 @@ public class FileController {
 			String file_name=files.get(i).getOriginalFilename();
 			String file_size=Long.toString(files.get(i).getSize());
 							  
-			String file_path="C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
+			String file_path="C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
 			FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
 			result=fdao.addFile(fdto);
 			copyInto(member_idx, files.get(i));  //파일 복사
@@ -211,7 +211,7 @@ public class FileController {
 		//System.out.println("file_name="+file_name);
 		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
-		File f = new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name);
+		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name);
 		f.delete();  //파일경로에 있는 실제파일 삭제
 		
 		String msg="";
@@ -234,7 +234,7 @@ public class FileController {
 	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
 	public ModelAndView fileDown(@RequestParam("file_name") String filename){
 		//System.out.println("filename == " + filename);
-		File f = new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
+		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
 		
 		ModelAndView mav = new ModelAndView("tpmDown","downloadFile", f);
 		
@@ -249,7 +249,7 @@ public class FileController {
 		try {
 			byte bytes[]=file_upload.getBytes();
 			
-			File outFile=new File("C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
+			File outFile=new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
 			fos.write(bytes);
