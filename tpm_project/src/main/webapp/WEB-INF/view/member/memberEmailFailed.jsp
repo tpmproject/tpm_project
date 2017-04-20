@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${failed}');
-	location.reload();
+	history.back();
 </script>

@@ -272,38 +272,11 @@ public class MemberController {
 			result = "인증번호를 확인해주세요";
 			
 			mav.addObject("failed", result);
-			mav.setViewName("redirect:/memberEmailCheck.do?random_number="+random+"&user_nunmber="+user+"&email="+email+"");
-			//mav.setViewName("member/memberEmailFailed");
+			mav.setViewName("member/memberEmailFailed");
 		}
 		
 		return mav;
 	}
-	
-	@RequestMapping(value="memberEmailCheck.do", method=RequestMethod.GET)
-	public ModelAndView memberEmailCheck_get(@RequestParam("random_number") int random, @RequestParam("user_number") int user,
-										@RequestParam("email") String email){
-		
-		ModelAndView mav = new ModelAndView();
-
-		String result = "";
-		
-		if(random==user){
-			result = "인증에 성공하였습니다";
-			
-			mav.addObject("email", email);
-			mav.addObject("success", result);
-			mav.setViewName("member/memberEmailSuccess");
-		} else{
-			result = "인증번호를 확인해주세요";
-			
-			mav.addObject("failed", result);
-			mav.setViewName("redirect:/memberEmailCheck.do?random_number="+random+"&user_number="+user+"&email="+email+"");
-			//mav.setViewName("member/memberEmailFailed");
-		}
-		
-		return mav;
-	}
-	
 	
 	// 탈퇴
 	/** 탈퇴 - 회원탈퇴 */

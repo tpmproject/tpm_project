@@ -1,7 +1,9 @@
 package tpm.socket;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.web.socket.CloseStatus;
@@ -11,17 +13,28 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class TpmSocketHandler extends TextWebSocketHandler{
 
-	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
-
+	private Map<String, Map> chatMap = new ConcurrentHashMap<String, Map>();
+	
 	 /**
     * 클라이언트 연결 이후에 실행되는 메소드
     */
 	@Override
 	public void afterConnectionEstablished(
 			WebSocketSession session) throws Exception {
-		log(session.getId() + " 연결 됨");
 		
-		users.put(session.getId(), session);
+		String uri = session.getUri().toString();
+		String paramStr = uri.substring(uri.indexOf('?')+1);
+		String code = paramStr.substring(paramStr.indexOf("=")+1);
+		
+		if(chatMap.get(code) == null){
+			Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
+			chatMap.put(code, users);
+			System.out.println(code + " 소켓룸 생성");
+		}
+		
+		Map<String, WebSocketSession> umap = chatMap.get(code);
+		umap.put(session.getId(), session);
+		System.out.println(code + " 소켓룸 에 " + session.getId() + " 가 접속.");
 		
 	}
 
@@ -31,9 +44,20 @@ public class TpmSocketHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(
 			WebSocketSession session, CloseStatus status) throws Exception {
-		
-		log(session.getId() + " 연결 종료됨");
-		users.remove(session.getId());
+		Set<String> keys = chatMap.keySet();
+		for (String key : keys) {
+			Map<String, WebSocketSession> umap = chatMap.get(key);
+			if(umap.get(session.getId()) != null){
+				umap.remove(session.getId());
+				System.out.println(key + " 소켓룸 에 " + session.getId() + " 가 접속종료.");
+				
+				if(umap.size() == 0){
+					chatMap.remove(key);
+					System.out.println(key + " 소켓룸에 아무도 없으므로 해당 소켓룸 삭제.");
+				}
+				break;
+			}
+		}
 	}
 
 	/**
@@ -42,10 +66,17 @@ public class TpmSocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
+		
 		log(session.getId() + "로부터 메시지 수신: " + message.getPayload());
-		for (WebSocketSession s : users.values()) {
-			s.sendMessage(message);
-			log(s.getId() + "에 메시지 발송: " + message.getPayload());
+		
+		Set<String> keys = chatMap.keySet();
+		for (String key : keys) {
+			Map<String, WebSocketSession> umap = chatMap.get(key);
+			if(umap.get(session.getId()) != null){
+				for (WebSocketSession s : umap.values()) {
+					s.sendMessage(message);
+				}
+			}
 		}
 	}
 

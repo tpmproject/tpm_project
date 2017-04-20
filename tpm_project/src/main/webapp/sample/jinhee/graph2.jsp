@@ -12,12 +12,11 @@
 <title>Insert title here</title>
 <style>
 #chartdiv {
-	width		: 100%;
-	height		: 500px;
+	width		: 50%;
+	height		: 150px;
 	font-size	: 11px;
 }							
 </style>
-
 </head>
 <body>
 <script>
@@ -25,10 +24,10 @@ var chart = AmCharts.makeChart( "chartdiv", {
   "type": "pie",
   "theme": "light",
   "dataProvider": [ {
-    "title": "New",
+    "title": "남은 업무",
     "value": 4852
   }, {
-    "title": "Returning",
+    "title": "완료된 업무",
     "value": 9899
   } ],
   "titleField": "title",
@@ -38,9 +37,6 @@ var chart = AmCharts.makeChart( "chartdiv", {
   "radius": "42%",
   "innerRadius": "60%",
   "labelText": "[[title]]",
-  "export": {
-    "enabled": true
-  }
 } );
 </script>
 
