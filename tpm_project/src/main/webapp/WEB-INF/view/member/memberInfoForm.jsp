@@ -41,7 +41,7 @@
 	  }
 	  #chartdiv3 {
 			width		: 50%;
-			height		: 130px;
+			height		: 150px;
 			font-size	: 11px;
 	}	
     </style>
@@ -92,6 +92,28 @@
 	    			INGId.innerHTML = workING;
 	    			var StateId = document.getElementById('myworkState');
 	    			StateId.innerHTML = workState;
+	    			
+	    			var workComplete = workTotal - workING;
+	    			
+	    			var chart = AmCharts.makeChart( "chartdiv3", {
+	    				
+	  				  "type": "pie",
+	  				  "theme": "light",
+	  				  "dataProvider": [ {
+	  				    "title": "남은 업무",
+	  				    "value": workING
+	  				  }, {
+	  				    "title": "완료된 업무",
+	  				    "value": workComplete
+	  				  } ],
+	  				  "titleField": "title",
+	  				  "valueField": "value",
+	  				  "labelRadius": 5,
+
+	  				  "radius": "42%",
+	  				  "innerRadius": "60%",
+	  				  "labelText": "[[title]]",
+	  			} );
 	    		}
 	    	}
 	    }
@@ -245,8 +267,8 @@
                 </select>
               	<br>
               	<br>
-                <div class="col-md-12">
-                	<div class="col-md-3" id="chartdiv3"></div>	
+                <div class="col-md-12" style="height: 200px;">
+                	<div class="col-md-5" id="chartdiv3"></div>	
 	                <div>
 	                	<a class="col-md-6 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
@@ -356,26 +378,6 @@
 					]
 				}
 			);
-
-			var chart = AmCharts.makeChart( "chartdiv3", {
-				
-				  "type": "pie",
-				  "theme": "light",
-				  "dataProvider": [ {
-				    "title": "남은 업무",
-				    "value": 4852
-				  }, {
-				    "title": "완료된 업무",
-				    "value": 9899
-				  } ],
-				  "titleField": "title",
-				  "valueField": "value",
-				  "labelRadius": 5,
-
-				  "radius": "42%",
-				  "innerRadius": "60%",
-				  "labelText": "[[title]]",
-			} );
 	     </script>
      </c:forEach>
      </c:forEach>
