@@ -1092,8 +1092,7 @@ function drop4(ev) {
 													<c:when test="${i.project_state == 1 }">
 													<!-- 진행중 -->
 														 <div class="panel-heading" id="head" >
-														
-														
+																												
 													</c:when>
 												</c:choose>
 												
@@ -1138,8 +1137,8 @@ function drop4(ev) {
 
 												<div class="panel-footer">
 													<div class="coupon-code">
-														<span class="btn btn-link"><a href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a></span>
-														 <span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+														<a class="btn btn-link" href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
+														 
 														 			 	<!-- 프로젝트 진행현황 -->
 												<c:choose>
 													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
@@ -1147,8 +1146,8 @@ function drop4(ev) {
 													</c:when>
 													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
 														
-														<td><input type="button" value="평가" onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'"></td>
-														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+														
+														<span class="print"> <a onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
 													</c:when>
 													<c:when test="${i.project_state == 1 }">
 														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>
