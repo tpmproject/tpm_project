@@ -36,8 +36,14 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
+<<<<<<< HEAD
     <script src="http://code.jquery.com/jquery-latest.js"></script>
   
+=======
+    <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+	<!-- <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script> -->
+	
+>>>>>>> branch 'master' of https://github.com/tpmproject/tpm_project.git
     <script>
     /* 미리보기  */
 	function fileContent(filename){
@@ -278,20 +284,20 @@
               </li>
               <li class="active">
                 <a href="#" style="color:black;"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                <!--사이드에 프로젝트 리스트명 띄우기  -->
-                <c:set var="p_list" value="${pdto}"></c:set>
-                <c:forEach var="p_idxs" items="${p_list}">
-                
-                  <li >
-                    <a onclick="project_fileList('${p_idxs.project_idx}');" style="color:black;">${p_idxs.project_name } </a>
-                    
-                  </li>
-                  
-                </c:forEach>
-                 
-                </ul>
-                <!-- /.nav-second-level -->
+							<div id="projectList_ul_div">
+								<ul class="nav nav-second-level">
+									<!--사이드에 프로젝트 리스트명 띄우기  -->
+									<c:set var="p_list" value="${pdto}"></c:set>
+									<c:forEach var="p_idxs" items="${p_list}">
+
+										<li><a
+											onclick="project_fileList('${p_idxs.project_idx}');"
+											style="color: black;">${p_idxs.project_name } </a></li>
+
+									</c:forEach>
+
+								</ul>
+							</div> <!-- /.nav-second-level -->
               </li>
             </ul>
           </div>
@@ -366,8 +372,7 @@
     <!-- /#wrapper -->
     
     <!-- jQuery -->
-    
-    <script src="/tpm_project/js/file/jquery.js"></script>
+   <<script src="/tpm_project/js/file/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/tpm_project/js/file/bootstrap.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
@@ -378,12 +383,22 @@
     <script src="/tpm_project/js/file/dataTables.responsive.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="/tpm_project/js/file/sb-admin-2.js"></script>
+    <!-- jQuery 2.1.3 -->
+	<!-- <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
+    
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
       $(document).ready(function() {
                 $('#dataTables-example').DataTable({
                     responsive: true
                 });
+                
+                /* $('#projectList_ul_div').slimScroll({
+                    height: '100px' // 스크롤 처리할 div 의 길이
+                }).bind('slimscrolling', function(e, pos) {
+                	//window.alert("Scroll value: " + pos + "px");
+                   // $('#testDivOut2').append("Scroll value: " + pos + "px");
+                }); */
             });
      
     </script>
