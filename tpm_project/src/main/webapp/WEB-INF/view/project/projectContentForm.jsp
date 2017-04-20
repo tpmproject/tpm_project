@@ -1155,14 +1155,13 @@ a {
 	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">업무 수정</h4>
+			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
+			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;">업무 수정</h4>
 
 			<div id="w_modal2">
 				<div id="btnwork3">
-					<div>
-						<input type="hidden" name="work_idx"> <label>업무명 </label><input
-							type="text" name="work_title">
+					<div style=" padding:10px;">
+						<input type="hidden" name="work_idx"> <label>업무명 </label>&nbsp;&nbsp;<input type="text" name="work_title">
 					</div>
 					<div class="form-group">
 						<label>기한 </label>
@@ -1180,7 +1179,7 @@ a {
 					<div align="right">
 						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
-							onclick="shows2()">다음</button>
+							onclick="shows2()" style="background-color:#1e282c; color:white;" >다음</button>
 					</div>
 				</div>
 			</div>
@@ -1189,25 +1188,14 @@ a {
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3" style="width:330px;">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<select id="tendency" onchange="tendencyList2()">
-									<option>--성향--</option>
-									<option value="tendency_e">외향적</option>
-									<option value="tendency_i">내향적</option>
-									<option value="tendency_s">감각적</option>
-									<option value="tendency_n">직관적</option>
-									<option value="tendency_t">사고적</option>
-									<option value="tendency_f">감정적</option>
-									<option value="tendency_j">판단적</option>
-									<option value="tendency_p">인식적</option>
-								</select>
 								<div id="project_m2"
 									style="width: 100%; height: 320px; overflow-y: scroll"
 									ondrop="drop5(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)"
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
 								ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<div id="work_m2"
@@ -1219,9 +1207,9 @@ a {
 					</div>
 				</div>
 				<div margin-top="10" align="center">
-					<button type="button" class="btn btn-next" id="btn-workbefore"
+					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workbefore"
 						onclick="showf2()">이전</button>
-					<button type="button" class="btn btn-next" id="btn-workok"
+					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workok"
 						onclick="updateWork()">완료</button>
 				</div>
 			</div>
