@@ -12,15 +12,15 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <!-- 개인성향 -->
+    <!-- 개인 성향  그래프-->
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 	<script src="https://www.amcharts.com/lib/3/radar.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-	<!-- 업무 성향 -->
+	<!-- 업무 성향 그래프-->
 	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-	
+	<!-- 업무 분석 도넛 그래프 -->
 	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
 	
 	<script type="text/javascript" src="js/httpRequest.js"></script>
@@ -41,7 +41,7 @@
 	  }
 	  #chartdiv3 {
 			width		: 50%;
-			height		: 150px;
+			height		: 170px;
 			font-size	: 11px;
 	}	
     </style>
