@@ -54,9 +54,5 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <<<<<<< HEAD
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/.3.7/js/bootstrap.min.js"></script> -->
-<% } %>
-=======
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/.3.7/js/bootstrap.min.js"></script>
 
 
->>>>>>> branch 'master' of https://github.com/tpmproject/tpm_project.git
