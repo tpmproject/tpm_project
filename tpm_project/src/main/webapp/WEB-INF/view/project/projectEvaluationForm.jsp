@@ -75,9 +75,9 @@ function addTendencyResult(){
 			result=parseInt(result);
 			window.alert(result);
 
-			if (result>0) {
+			/* if (result>0) {
 				$('#bt'+result).hide();
-			}
+			} */
 			location.reload();
 		}
 	}
