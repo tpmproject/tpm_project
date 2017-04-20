@@ -13,6 +13,10 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <title>Insert title here</title>
 	<style>
+		#enoti{
+			font-weight: bold;
+			text-align: center;
+		}
 		#timer{
 			color:red;
 		}
@@ -59,9 +63,9 @@
             <input type="text" name="random_number" value="${random}">
 			<input type="hidden" name="email" value="${email}">
            <br>
-           <div> 입력하신 메일로 인증번호를 발송했습니다. </div>
-           <div> 시간 안에 입력해주세요. </div>
-           <div> 남은 시간 : <span id="timer"></span></div>
+           <div id="enoti"> 입력하신 메일(${email})로 <br>인증번호를 발송했습니다.<br> 유효 시간 안에 입력해주세요.</div>
+           <div id="enoti"> 남은 시간 : <span id="timer"></span></div>
+           <br>
            	<div class="form-group">
                <div class="input-group">
                	<input type="text" class="form-control" name="user_number" maxlength="6" placeholder="인증번호를 입력해주세요" size="8">

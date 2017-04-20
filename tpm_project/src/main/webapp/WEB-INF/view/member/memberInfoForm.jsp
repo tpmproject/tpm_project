@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 	  }
 	  #chartdiv3 {
 			width		: 50%;
-			height		: 170px;
+			height		: 140px;
 			font-size	: 11px;
 	}	
     </style>
@@ -110,8 +111,8 @@
 	  				  "valueField": "value",
 	  				  "labelRadius": 5,
 
-	  				  "radius": "42%",
-	  				  "innerRadius": "60%",
+	  				  "radius": "40%",
+	  				  "innerRadius": "70%",
 	  				  "labelText": "[[title]]",
 	  			} );
 	    		}
@@ -243,7 +244,7 @@
           
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
-          <c:set var="totalwork" value="${workcomplete/workcount*100}"/>
+          <c:set var="totalwork" value="${workcomplete/workcount*100}" />
           <c:if test="${workcount==0 || workcomplete==0}">
           	<c:set var="totalwork" value="0"/>
           </c:if>
@@ -251,7 +252,7 @@
          <div class="col-md-6">
             <div>
               <div>
-                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${totalwork}%</a>
+                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
               </div>
               <br>
               <br>
