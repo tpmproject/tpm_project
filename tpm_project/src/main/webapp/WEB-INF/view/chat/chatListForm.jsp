@@ -257,7 +257,7 @@ $(function(){
 
 function connect() {
 	wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do");
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
 	wsocket.onopen = onOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onClose; // 연결 해체 후 메세지
@@ -342,6 +342,11 @@ function showChatContent(cpCode, cpValue){
 			$('#chat-box').slimScroll({ scrollTo: $("#chat_message_div").height() });
 		}
 	});
+	
+	disconnect();
+	connect();
+	
+	
 }
 
 function makeRightChatContent(ctdto) {
@@ -411,26 +416,28 @@ function makeLeftChatContent(ctdto) {
 
 function InsertChatContent() {
 	var currInsertChatContent = $('#input_chat_content').val();
-
-	$.ajax({
-		url : 'chatAdd.do',
-		type : 'post',
-		data : { 
-				 chat_cp_code : currCpCode,
-				 chat_cp_value : currCpValue,
-				 chat_content : currInsertChatContent
-		},
-		dataType : 'json',
-		success : function(json) {
-			// 입력 성공시..
-			window.alert(JSON.stringify(json));
-			if(json != false){
-				// 소켓을 통해 메세지를 전달한다.
-				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
-				chatSend(json);
+	if(currInsertChatContent != ''){
+		$.ajax({
+			url : 'chatAdd.do',
+			type : 'post',
+			data : { 
+					 chat_cp_code : currCpCode,
+					 chat_cp_value : currCpValue,
+					 chat_content : currInsertChatContent
+			},
+			dataType : 'json',
+			success : function(json) {
+				// 입력 성공시..
+				window.alert(JSON.stringify(json));
+				if(json != false){
+					// 소켓을 통해 메세지를 전달한다.
+					//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
+					chatSend(json);
+				}
 			}
-		}
-	});
+		});
+	}
+	
 }
 
 </script>
