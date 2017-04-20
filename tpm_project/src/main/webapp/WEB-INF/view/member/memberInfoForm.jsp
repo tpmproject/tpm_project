@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -12,14 +13,16 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <!-- 개인성향 -->
+    <!-- 개인 성향  그래프-->
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 	<script src="https://www.amcharts.com/lib/3/radar.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-	<!-- 업무 성향 -->
+	<!-- 업무 성향 그래프-->
 	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+	<!-- 업무 분석 도넛 그래프 -->
+	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
 	
 	<script type="text/javascript" src="js/httpRequest.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
@@ -36,7 +39,12 @@
 				width		: 100%;
 				height		: 200px;
 				font-size	: 11px;
-	  }	
+	  }
+	  #chartdiv3 {
+			width		: 50%;
+			height		: 140px;
+			font-size	: 11px;
+	}	
     </style>
     <%@ include file="/sample/cho/main/import.jsp"%>
     <script>
@@ -85,6 +93,28 @@
 	    			INGId.innerHTML = workING;
 	    			var StateId = document.getElementById('myworkState');
 	    			StateId.innerHTML = workState;
+	    			
+	    			var workComplete = workTotal - workING;
+	    			
+	    			var chart = AmCharts.makeChart( "chartdiv3", {
+	    				
+	  				  "type": "pie",
+	  				  "theme": "light",
+	  				  "dataProvider": [ {
+	  				    "title": "남은 업무",
+	  				    "value": workING
+	  				  }, {
+	  				    "title": "완료된 업무",
+	  				    "value": workComplete
+	  				  } ],
+	  				  "titleField": "title",
+	  				  "valueField": "value",
+	  				  "labelRadius": 5,
+
+	  				  "radius": "40%",
+	  				  "innerRadius": "70%",
+	  				  "labelText": "[[title]]",
+	  			} );
 	    		}
 	    	}
 	    }
@@ -214,7 +244,7 @@
           
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
-          <c:set var="totalwork" value="${workcomplete/workcount*100}"/>
+          <c:set var="totalwork" value="${workcomplete/workcount*100}" />
           <c:if test="${workcount==0 || workcomplete==0}">
           	<c:set var="totalwork" value="0"/>
           </c:if>
@@ -222,7 +252,7 @@
          <div class="col-md-6">
             <div>
               <div>
-                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : ${totalwork}%</a>
+                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
               </div>
               <br>
               <br>
@@ -238,18 +268,23 @@
                 </select>
               	<br>
               	<br>
-                <div>
+                <div class="col-md-12" style="height: 200px;">
+                	<div class="col-md-5" id="chartdiv3"></div>	
 	                <div>
-	                	<a class="col-sm-12 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
+	                	<a class="col-md-6 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
 	              	<br>
               		<br>
 	              	<div>
-	                	<a class="col-sm-12 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
+	                	<a class="col-md-6 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
 	              	</div>
                 </div>
               </div>
             </div>
+            <br>
+            <br>
+			<br>
+            <br>
             <br>
             <br>
             <br>
@@ -296,8 +331,7 @@
 		<c:set var="team_tendencylist" value="${team_tendency}"/>
 			<c:forEach var="team_tendency" items="${team_tendencylist}">
 			<script>
-				var chart = AmCharts.makeChart("chartdiv2",
-						{
+				var chart = AmCharts.makeChart("chartdiv2",	{
 					"type": "serial",
 					"categoryField": "category",
 					"startDuration": 1,
@@ -345,9 +379,9 @@
 					]
 				}
 			);
-		     </script>
-		     </c:forEach>
-		     </c:forEach>
-		 <%@ include file="/WEB-INF/view/footer.jsp"%>
+	     </script>
+     </c:forEach>
+     </c:forEach>
+	 <%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

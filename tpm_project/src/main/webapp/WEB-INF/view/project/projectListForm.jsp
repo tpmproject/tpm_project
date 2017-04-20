@@ -3,18 +3,20 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
 
-<script type="text/javascript" src="js/jQuery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/ajax_extension.js"></script>
+
 <!-- Slimscroll -->
+
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
 
@@ -31,15 +33,15 @@
 	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 
 <!-- Bootstrap 3.3.2 JS -->
-<script type="text/javascript" src="js/httpRequest.js"></script>
-<%@ include file="/WEB-INF/view/include/import.jsp"%>
+
+
 
 
 <script type="text/javascript">
 
 	$(function(){
-		$('.project_p_div').slimScroll({
-	        height: '30px' // 스크롤 처리할 div 의 길이
+		$('#slimdiv').slimScroll({
+	        height: '5px' // 스크롤 처리할 div 의 길이
 	       
 	    }).bind('slimscrolling', function(e, pos) {
 	    	//window.alert("Scroll value: " + pos + "px");
@@ -617,7 +619,7 @@ function updatePResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			var objData=eval('('+result+')');
-			var pson=objData.pb;
+			var pson=objData.pson;
 			if(pson.project_idx==0){
 				window.alert('오류 발생!');
 			}else{
@@ -1051,7 +1053,7 @@ function drop4(ev) {
 		data-ride="carousel" data-interval="false">
 
 		<!-- Indicators 페이징-->
-		<ol class="carousel-indicators">
+		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
 				
 			<li data-target="#carousel-example-generic" ${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
@@ -1075,11 +1077,27 @@ function drop4(ev) {
 							<div class="item ${status.first?'active':'' }">
 								<div class="container-fluid " id="contain">
 								<div id="project_div${i.project_idx}" style="margin-top: 15px;" align="center">
-									<div class="row" id="red" >
+									<div class="row" id="red">
 										
-											<div class="panel panel-danger coupon" style="width: 70%;">
+											<div class="panel panel-danger coupon" style="width: 80%; border-color: #fff ">
 												
-												<div class="panel-heading" id="head">
+												<c:choose>
+													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+													<!-- 완료 -->
+														<div class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;">
+													</c:when>
+													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
+													<!-- 평가하기 -->
+														<div class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;">
+														
+													</c:when>
+													<c:when test="${i.project_state == 1 }">
+													<!-- 진행중 -->
+														 <div class="panel-heading" id="head" >
+																												
+													</c:when>
+												</c:choose>
+												
 													<div class="panel-title" id="title">
 														<i class="fa fa-github fa-2x"></i>
 														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
@@ -1112,15 +1130,17 @@ function drop4(ev) {
 													</div>
 
 													<div class="col-md-12">
+													<div id="slimdiv">
 														<p class="disclosure" id="pc${i.project_idx}">
 															${i.project_content }</p>
+													</div>
 													</div>
 												</div>
 
 												<div class="panel-footer">
 													<div class="coupon-code">
-														<span class="btn btn-link"><a href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a></span>
-														 <span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+														<a class="btn btn-link" href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
+														 
 														 			 	<!-- 프로젝트 진행현황 -->
 												<c:choose>
 													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
@@ -1128,8 +1148,8 @@ function drop4(ev) {
 													</c:when>
 													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
 														
-														<td><input type="button" value="평가" onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'"></td>
-														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+														
+														<span class="print"> <a onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
 													</c:when>
 													<c:when test="${i.project_state == 1 }">
 														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>

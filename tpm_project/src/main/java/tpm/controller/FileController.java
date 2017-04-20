@@ -27,15 +27,22 @@ import org.springframework.web.servlet.ModelAndView;
 import tpm.file.model.FileDAO;
 import tpm.file.model.FileDTO;
 import tpm.file.model.FileSortDTO;
+import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectDTO;
 import com.groupdocs.ui.Document;
 import com.groupdocs.ui.Utils;
 import com.groupdocs.viewer.config.ViewerConfig;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 @Controller
 public class FileController {
 	
     @Autowired
     private FileDAO fdao;
+    
+   
+    
 	//// 파일 ////
 	/** 파일 - 파일 리스트 페이지 이동 (프로젝트 리스트 보여주기) */
     @RequestMapping("scrollbar.do")
@@ -120,17 +127,79 @@ public class FileController {
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
 	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)
-	public ModelAndView fileContent(@RequestParam("file_name")String file_name){
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request) throws IOException{
 
-		
-		System.out.println("fileContent에 들어온 file_name값= "+file_name);
-	  
-		
 		ModelAndView mav = new ModelAndView();
+		System.out.println("fileContent에 들어온 file_name값= "+file_name);
+	   
+		
+	    String filename =file_name;  //getAttribute는 객채로 들어옴 , requestParamter는 문자로만
+
+	    ViewerConfig config = new ViewerConfig();
+	    config.setStoragePath(Utils.getProjectProperty("storage.path"));	
+	    	
+	    System.out.println("if문 안쪽 들어옴");
+		System.out.println("fileContent_d쪽에 들어온 값= "+filename);
+		
+		int pageNumber = 1;
+	   	if (filename.substring(filename.indexOf(".")).equals(".java")) {
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+
+			try {
+				
+				fis = new FileInputStream(config.getStoragePath()+"/"+filename);
+				String file1 = filename.substring(0, filename.indexOf("."));
+				fos = new FileOutputStream(config.getStoragePath()+"/"+file1+".txt");
+				
+				byte[] buffer = new byte[1024];
+				int readcount = 0;
+
+				while ((readcount = fis.read(buffer)) != -1) {
+
+					fos.write(buffer, 0, readcount); 
+
+				}
+				filename=file1+".txt";
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			} finally {
+
+				fis.close();
+				fos.close();
+
+			}
+		
+		}
+		
+		if (request.getParameterMap().containsKey("page")) {
+			pageNumber = Integer.valueOf(request.getParameter("page"));
+		}
+		if (request.getParameterMap().containsKey("filename")) {
+			filename = request.getParameter("filename");
+		}
+
+		Document doc = new Document();
+
+		doc.setFilename(filename);
+		doc.setPageNumber(pageNumber);
+	    
+		ArrayList<String> docArr=new ArrayList<String>();
+		docArr.add(doc.getHtmlContent());
+
+		JSONArray jsonArray = new JSONArray();
+		JSONObject json = new JSONObject();
+
+		json.put("doc", jsonArray.fromObject(docArr));
+		
+		mav.addObject("json", json);
 		
 		mav.addObject("file_name",file_name);
 		mav.setViewName("file/fileContent_d");
 		return mav;
+		
 	}
 	
 	@RequestMapping(value="abm.do",  method=RequestMethod.POST)
@@ -166,13 +235,14 @@ public class FileController {
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		//int project_idx=16;   //프로젝트 idx 가져오기, 임시
 		session.setAttribute("project_idx", project_idx);
+		System.out.println("파일등록 부분에서 유저id:"+session.getAttribute("s_member_idx"));
+		System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
+		System.out.println("work_idx:"+work_idx);
 		
-		//System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
-		//System.out.println("work_idx:"+work_idx);
-		
-		   ViewerConfig config = new ViewerConfig();
-	       config.setStoragePath(Utils.getProjectProperty("storage.path"));
-	      
+		   
+	       
+		    ViewerConfig config = new ViewerConfig();
+		    config.setStoragePath(Utils.getProjectProperty("storage.path"));
 	        System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
@@ -183,7 +253,7 @@ public class FileController {
 			String file_name=files.get(i).getOriginalFilename();
 			String file_size=Long.toString(files.get(i).getSize());
 							  
-			String file_path="C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name;
+			String file_path=config.getStoragePath()+"/"+file_name;
 			FileDTO fdto=new FileDTO(project_idx, work_idx, member_idx, file_name, file_size, file_path);
 			result=fdao.addFile(fdto);
 			copyInto(member_idx, files.get(i));  //파일 복사
@@ -216,7 +286,11 @@ public class FileController {
 		//System.out.println("file_name="+file_name);
 		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
-		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name);
+		
+		 ViewerConfig config = new ViewerConfig();
+		 config.setStoragePath(Utils.getProjectProperty("storage.path"));
+		    
+		File f = new File(config.getStoragePath()+"/"+file_name);
 		f.delete();  //파일경로에 있는 실제파일 삭제
 		
 		String msg="";
@@ -239,7 +313,9 @@ public class FileController {
 	@RequestMapping(value="fileDown.do", method=RequestMethod.GET)
 	public ModelAndView fileDown(@RequestParam("file_name") String filename){
 		//System.out.println("filename == " + filename);
-		File f = new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+filename);
+		 ViewerConfig config = new ViewerConfig();
+		 config.setStoragePath(Utils.getProjectProperty("storage.path"));
+		File f = new File(config.getStoragePath()+"/"+filename);
 		
 		ModelAndView mav = new ModelAndView("tpmDown","downloadFile", f);
 		
@@ -253,8 +329,9 @@ public class FileController {
 		//System.out.println("파일명:"+file_upload.getOriginalFilename());		
 		try {
 			byte bytes[]=file_upload.getBytes();
-			
-			File outFile=new File("C:/Users/user1/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_upload.getOriginalFilename());
+			 ViewerConfig config = new ViewerConfig();
+			 config.setStoragePath(Utils.getProjectProperty("storage.path"));
+			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
 			fos.write(bytes);
