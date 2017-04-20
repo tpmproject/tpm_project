@@ -741,11 +741,11 @@ function showWorkTable(work_idx){
 	position: fixed;
 	z-index:5;
 	top: 20%;
-	left: 20%;
-	border: solid 10px white;
-	border-radius: 10px;
-	width: 600px;
-	height: 500px;
+	left: 35%;
+	border: solid 2px #1a2226;
+	border-radius: 3px;
+	width: 665px;
+	height: 480px;
 }
 .content{
 	height:780px;
@@ -1089,29 +1089,29 @@ a {
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">업무 추가</h4>
+			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>
+			
+			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;"><i class="glyphicon glyphicon-plus"></i> Add Work</h4>
 
 			<div id="w_modal">
 				<div id="btnwork">
-					<div>
+					<div style=" padding:10px;">
 						<input type="hidden" name="category_idx" value=""> <label>업무명
-						</label><input type="text" name="work_title">
+						</label>&nbsp;&nbsp;<input type="text" name="work_title">
 					</div>
 					<div class="form-group">
-						<label>기한 </label>
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-							<input type="text" class="form-control pull-right"
+							<input type="text" class="form-control pull-right" placeholder="기한을 체크해주세요."
 								name="workdate" id="workdate" />
 						</div>
 						<!-- /.input group -->
 					</div>
-					<div align="right">
-						<input type="checkbox" name="work_confirm">결재여부
-						<button type="button" class="btn btn-next" id="btn-worknext"
+					<div align="right" style="padding:5px;">
+						<input type="checkbox"  name="work_confirm">결재여부
+						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
 
 					</div>
@@ -1123,25 +1123,14 @@ a {
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3" style="width:330px;">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<select id="tendency" onchange="tendencyList()">
-									<option>--성향--</option>
-									<option value="tendency_e">외향적</option>
-									<option value="tendency_i">내향적</option>
-									<option value="tendency_s">감각적</option>
-									<option value="tendency_n">직관적</option>
-									<option value="tendency_t">사고적</option>
-									<option value="tendency_f">감정적</option>
-									<option value="tendency_j">판단적</option>
-									<option value="tendency_p">인식적</option>
-								</select>
 								<div id="project_m"
 									style="width: 100%; height: 320px; overflow-y: scroll"
 									ondrop="drop3(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)"
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
 								ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<div id="work_m"
@@ -1152,10 +1141,10 @@ a {
 						</div>
 					</div>
 				</div>
-				<div align="center">
-					<button type="button" class="btn btn-next" id="btn-workbefore"
+				<div align="center" style="padding:7px;">
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workbefore"
 						onclick="showf()">이전</button>
-					<button type="button" class="btn btn-next" id="btn-workok"
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workok"
 						onclick="addWork()">완료</button>
 				</div>
 			</div>
@@ -1325,11 +1314,11 @@ $(document).ready(function(){
 }); */
 $(function () {
 	 //Date range picker with time picker
- $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+ $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 });	
 $(function () {
 	 //Date range picker with time picker
-$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 });
 
 /* 첨부파일 관련 */
