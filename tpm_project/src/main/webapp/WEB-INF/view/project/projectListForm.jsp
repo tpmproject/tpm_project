@@ -3,18 +3,20 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<%@ include file="/WEB-INF/view/include/import.jsp"%>
 
-<script type="text/javascript" src="js/jQuery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/ajax_extension.js"></script>
+
 <!-- Slimscroll -->
+
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
 
@@ -31,8 +33,8 @@
 	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 
 <!-- Bootstrap 3.3.2 JS -->
-<script type="text/javascript" src="js/httpRequest.js"></script>
-<%@ include file="/WEB-INF/view/include/import.jsp"%>
+
+
 
 
 <script type="text/javascript">
