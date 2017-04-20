@@ -28,43 +28,67 @@
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 <script>
-var toggler=1;
 $(function(){
     $('#mw_div').slimScroll({
         height: '650px', // 스크롤 처리할 div 의 길이
     });
-    $('.end').hide();
+    oneClass('workEnd','ing');
+    showWorks();
 });
-function workEnd(){
-	if(toggler%2==0){
-		$('.end').hide('50');
-		toggler=toggler+1;
-	}else{
-		$('.end').show('50');
-		toggler=toggler-1;
+//over notover 업무기한 초과 여부
+//complete 완료 no, need, wait _confirm 결재-x, 필요, 대기
+function oneClass(cb,name){
+	
+	var val_toggle=1;
+	if(!($('#'+cb).is(':checked'))){
+		val_toggle=-1;
 	}
 	
+	var mwdiv=document.getElementById('mw_div').firstChild;
+	var last=document.getElementById('mw_div').lastChild;
+	do{
+		if(mwdiv.nodeName=='DIV'){
+			var fc=mwdiv.firstChild;
+			var className=$(fc).attr('class');
+			
+			if(className.match(name)!=name){
+				fc.value=parseInt(fc.value)+1*val_toggle;
+			}
+		}
+		
+		mwdiv=mwdiv.nextSibling;
+	}while(mwdiv!=last);
+	showWorks();
 }
-function over(){
-	if(toggler/10<=1){
-		$('.notover').hide('50');
-		toggler=toggler+10;
-	}else{
-		$('.notover').show('50');
-		toggler=toggler-10;
-	}
+
+function showWorks(){
+	var mwdiv=document.getElementById('mw_div').firstChild;
+	var last=document.getElementById('mw_div').lastChild;
+	do{
+		if(mwdiv.nodeName=='DIV'){
+			var inshow=mwdiv.firstChild;
+			if(inshow.value>0){
+				$(mwdiv).hide();
+			}else{
+				$(mwdiv).show();
+			}
+		}
+		
+		mwdiv=mwdiv.nextSibling;
+	}while(mwdiv!=last);
 	
-}
-function wait(){
-	$('.notwait').hide('50');
 }
 function test(){
 	var mwdiv=document.getElementById('mw_div').firstChild;
 	var last=document.getElementById('mw_div').lastChild;
 	do{
 		if(mwdiv.nodeName=='DIV'){
-			var inshow=mwdiv.firstChild;
-			window.alert(mwdiv.getAttribute('class')+inshow.value);
+			var fc=mwdiv.firstChild;
+			var className=$(fc).attr('class');
+			
+			if(className.match(name)==name){
+					
+			}
 		}
 		
 		mwdiv=mwdiv.nextSibling;
@@ -72,12 +96,17 @@ function test(){
 	
 }
 </script>
+<style>
+.over a{
+	color:red;
+}
+</style>
 </head>
 <body>
 <body class="skin-blue">
 <%@include file="/WEB-INF/view/header.jsp"%>
 <div>
-	<div class="col-xs-2">
+	<div class="col-xs-3 col-xs-off-set-1">
 		<table class="table">
 			<thead>
 				<tr>
@@ -98,17 +127,18 @@ function test(){
 					<th>필터</th>
 				</tr>
 				<tr>
-					<td><input type="checkbox" onclick="wait()">결재 대기 업무</td>
+					<td><input type="checkbox" id="workEnd" checked="checked" onclick="oneClass('workEnd','ing')">진행 중 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" checked="checked" onclick="workEnd()">진행 중 업무</td>
+					<td><input type="checkbox" id="over" onclick="oneClass('over','over')">마감일 지난 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" onclick="over()">마감일 지난 업무</td>
+					<td><input type="checkbox" id="need" onclick="oneClass('need','need')">결재 미요청 업무</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox">이번달까지 업무</td>
+					<td><input type="checkbox" id="wait" onclick="oneClass('wait','wait')">결재 대기 업무</td>
 				</tr>
+				
 				<tr>
 					<th>프로젝트</th>
 				</tr>
@@ -127,10 +157,20 @@ function test(){
 	<div style="background: green;" onclick="test()">test</div>
 	<div class="col-xs-8" id="mw_div">
 	<c:forEach var="i" items="${mwdto}">
-	
-	<div class="${i.work_state eq 3 ?'end':'' } ${i.work_state eq 2?'':'notwait' } ${now>i.work_end?'over':'notover'}"><input type="hidden" class="show" value="0">
+		<c:choose>
+		<c:when test="${i.work_state+i.work_confirm >= 20}">
+			<c:set var="in_class" value="no_confirm"></c:set>
+		</c:when>
+		<c:when test="${i.work_state+i.work_confirm eq 11}">
+			<c:set var="in_class" value="need_confirm"></c:set>
+		</c:when>
+		<c:when test="${i.work_state+i.work_confirm eq 12}">
+			<c:set var="in_class" value="wait_confirm"></c:set>
+		</c:when>
+		</c:choose>	
+	<div><input type="hidden" class="${in_class} ${i.work_state eq 3?'complete':'ing'} ${now>i.work_end?'over':'nver'}" value="0">
 		<span>${i.project_name}<i class="glyphicon glyphicon-chevron-right"></i>${i.category_name}<i class="glyphicon glyphicon-chevron-right"></i></span>
-		
+		<c:remove var="in_class"/>
 		<c:choose>
 		<c:when test="${i.work_state eq 3}">
 			<c:set var="state" value="panel-success"></c:set>
@@ -146,9 +186,16 @@ function test(){
 		</c:otherwise>
 		</c:choose>
 		
-		<div class="panel ${state}">
-			<div class="panel-heading">${i.work_title}</div>
-			<div class="panel-body">
+		<div class="panel ${state}"><c:remove var="state"/>
+			<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-10">${i.work_title}</div>
+				<c:if test="${i.work_confirm eq 10}">
+					<span class="label label-warning">결재</span>
+				</c:if>
+			</div>
+			</div>
+			<div class="panel-body ${i.work_state !=3 and now>i.work_end?'over':'notover'}" >
 			<i class="glyphicon glyphicon-calendar"></i><a><f:formatDate value="${i.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm"/> </a>~<a><f:formatDate value="${i.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm"/></a>
 			</div>
 		</div>
