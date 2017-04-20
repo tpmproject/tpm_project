@@ -249,13 +249,11 @@ public class ProjectController {
 		return mav;
 	}
 	
-	@RequestMapping(value="recommand.do", method=RequestMethod.GET)
-	public ModelAndView recommandTendency(String tendency, int project_idx){
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("tendency", tendency);
-		map.put("project_idx",project_idx);
+	//추천 
+	@RequestMapping(value="recommand.do", method=RequestMethod.POST)
+	public ModelAndView recommandTendency(int member_idx){
 		
-		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(map);
+		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(member_idx);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("project/projectRecommand");
 		mav.addObject("arr",arr);

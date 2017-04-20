@@ -17,5 +17,5 @@ public interface TendencyDAO {
 	
 	public ArrayList<MemberDTO> tendencyList(ProjectMemberDTO dto);
 	
-	public ArrayList<MemberDTO> recommendTendency(HashMap<Object, Object> paramMap);
+	public ArrayList<MemberDTO> recommendTendency(int member_idx);
 }
