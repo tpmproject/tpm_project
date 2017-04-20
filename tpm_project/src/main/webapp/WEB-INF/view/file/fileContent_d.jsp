@@ -6,7 +6,8 @@
 <%
 	System.out.println("d_jsp들어옴");
 	
-    String filename = "aba.html";  //getAttribute는 객채로 들어옴 , requestParamter는 문자로만
+    String filename = "header.jpg";
+    	//	"\""+(String)request.getAttribute("file_name");  //getAttribute는 객채로 들어옴 , requestParamter는 문자로만
     if(filename!=null){
     
     	

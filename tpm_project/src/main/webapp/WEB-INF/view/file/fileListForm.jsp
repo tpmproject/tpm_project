@@ -36,9 +36,14 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
+<<<<<<< HEAD
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+=======
     <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 	<!-- <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script> -->
 	
+>>>>>>> branch 'master' of https://github.com/tpmproject/tpm_project.git
     <script>
     /* 미리보기  */
 	function fileContent(filename){
