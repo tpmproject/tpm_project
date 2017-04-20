@@ -19,11 +19,7 @@
 	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<!-- 업무 성향 -->
-	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 	
 	<script type="text/javascript" src="js/httpRequest.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
@@ -300,39 +296,55 @@
 		<c:set var="team_tendencylist" value="${team_tendency}"/>
 			<c:forEach var="team_tendency" items="${team_tendencylist}">
 			<script>
-		      var chart = AmCharts.makeChart("chartdiv2", {
-		    	  "theme": "light",
-		          "type": "serial",
-		          "dataProvider": [
-		        	  { "tendency": "외향적", "self": ${self_tendency.tendency_e}, "team": ${team_tendency.tendency_e} },
-		        	  { "tendency": "감각적", "self": ${self_tendency.tendency_s}, "team": ${team_tendency.tendency_s} },
-		        	  { "tendency": "사고적", "self": ${self_tendency.tendency_t}, "team": ${team_tendency.tendency_t} },
-		        	  { "tendency": "판단적", "self": ${self_tendency.tendency_j}, "team": ${team_tendency.tendency_j} },
-		        	  { "tendency": "내향적", "self": ${self_tendency.tendency_i}, "team": ${team_tendency.tendency_i} },
-		        	  { "tendency": "직관적", "self": ${self_tendency.tendency_n}, "team": ${team_tendency.tendency_n} },
-		        	  { "tendency": "감정적", "self": ${self_tendency.tendency_f}, "team": ${team_tendency.tendency_f} },
-		        	  { "tendency": "인식적", "self": ${self_tendency.tendency_p}, "team": ${team_tendency.tendency_p} } ],
-		          "valueAxes": [
-		        	  { "position": "left",
-		              	"title": "tendency" }],
-		          "startDuration": 2,
-		          "graphs": [
-		        	  { "balloonText": "check tendency <b>[[category]] (team)</b> : <b>[[value]]</b>",
-		              	"fillAlphas": 0.9,
-		              	"title": "team",
-		              	"type": "column",
-		              	"valueField": "team" },
-		              { "balloonText": "check tendency <b>[[category]] (self)</b> : <b>[[value]]</b>",
-		              	"fillAlphas": 0.9,
-		              	"title": "self",
-		              	"type": "column",
-		              	"clustered":false,
-		              	"columnWidth":0.4,
-		              	"valueField": "self" }],
-		          "plotAreaFillAlphas": 0.1,
-		          "categoryField": "tendency",
-		          "categoryAxis": { "gridPosition": "start" }
-		      });
+				var chart = AmCharts.makeChart("chartdiv2",
+						{
+					"type": "serial",
+					"categoryField": "category",
+					"startDuration": 1,
+					"theme": "light",
+					"categoryAxis": { "gridPosition": "start" },
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "self_tendency",
+							"type": "column",
+							"valueField": "column-1" 							},
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "work_tendency",
+							"type": "column",
+							"valueField": "column-2"							}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "tendency"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"dataProvider": [
+						{ "category": "외향적", "column-1": ${self_tendency.tendency_e}, "column-2": ${team_tendency.tendency_e} },
+						{ "category": "내향적", "column-1": ${self_tendency.tendency_i}, "column-2": ${team_tendency.tendency_i} },
+						{ "category": "감각적", "column-1": ${self_tendency.tendency_s}, "column-2": ${team_tendency.tendency_s} },
+						{ "category": "직관적", "column-1": ${self_tendency.tendency_n}, "column-2": ${team_tendency.tendency_n} },
+						{ "category": "사고적", "column-1": ${self_tendency.tendency_t}, "column-2": ${team_tendency.tendency_t} },
+						{ "category": "감정적", "column-1": ${self_tendency.tendency_f}, "column-2": ${team_tendency.tendency_f} },
+						{ "category": "판단적", "column-1": ${self_tendency.tendency_j}, "column-2": ${team_tendency.tendency_j} },
+						{ "category": "인식적", "column-1": ${self_tendency.tendency_p}, "column-2": ${team_tendency.tendency_p} },
+					]
+				}
+			);
 		     </script>
 		     </c:forEach>
 		     </c:forEach>
