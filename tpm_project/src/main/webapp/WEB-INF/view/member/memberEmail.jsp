@@ -18,7 +18,7 @@
 		}
 	</style>
 	<script>
-		window.alert('${result}');
+		//window.alert('${result}');
 		
 		function reSend(){
 			var email = document.emailCheck.email.value;
@@ -59,6 +59,9 @@
             <input type="text" name="random_number" value="${random}">
 			<input type="hidden" name="email" value="${email}">
            <br>
+           <div> 입력하신 메일로 인증번호를 발송했습니다. </div>
+           <div> 시간 안에 입력해주세요. </div>
+           <div> 남은 시간 : <span id="timer"></span></div>
            	<div class="form-group">
                <div class="input-group">
                	<input type="text" class="form-control" name="user_number" maxlength="6" placeholder="인증번호를 입력해주세요" size="8">
@@ -67,7 +70,6 @@
                    	<button class="btn btn-danger" type="button" onclick="reSend()"> 재발송하기</button>
                  	</span>
                </div>
-               <div id="timer"></div>
          	</div>
         </form>
 	</div>
