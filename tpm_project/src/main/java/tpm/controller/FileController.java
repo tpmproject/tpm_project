@@ -29,6 +29,8 @@ import tpm.file.model.FileDTO;
 import tpm.file.model.FileSortDTO;
 import tpm.project.model.ProjectDTO;
 import com.groupdocs.ui.Document;
+import com.groupdocs.ui.Utils;
+import com.groupdocs.viewer.config.ViewerConfig;
 @Controller
 public class FileController {
 	
@@ -168,7 +170,10 @@ public class FileController {
 		//System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
 		//System.out.println("work_idx:"+work_idx);
 		
-		
+		   ViewerConfig config = new ViewerConfig();
+	       config.setStoragePath(Utils.getProjectProperty("storage.path"));
+	      
+	        System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
 		int result=0;
