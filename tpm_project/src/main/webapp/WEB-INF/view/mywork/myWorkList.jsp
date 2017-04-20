@@ -35,8 +35,8 @@ $(function(){
     oneClass('workEnd','ing');
     showWorks();
 });
-//over notover 업무기한 초과 여부
-//complete 완료 no, need, wait _confirm 결재-x, 필요, 대기
+
+//cb에는 체크박스 id, name에는 남길 class이름
 function oneClass(cb,name){
 	
 	var val_toggle=1;
