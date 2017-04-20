@@ -38,8 +38,8 @@
 <script type="text/javascript">
 
 	$(function(){
-		$('.project_p_div').slimScroll({
-	        height: '30px' // 스크롤 처리할 div 의 길이
+		$('#slimdiv').slimScroll({
+	        height: '5px' // 스크롤 처리할 div 의 길이
 	       
 	    }).bind('slimscrolling', function(e, pos) {
 	    	//window.alert("Scroll value: " + pos + "px");
@@ -617,7 +617,7 @@ function updatePResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			var objData=eval('('+result+')');
-			var pson=objData.pb;
+			var pson=objData.pson;
 			if(pson.project_idx==0){
 				window.alert('오류 발생!');
 			}else{
@@ -1051,7 +1051,7 @@ function drop4(ev) {
 		data-ride="carousel" data-interval="false">
 
 		<!-- Indicators 페이징-->
-		<ol class="carousel-indicators">
+		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
 				
 			<li data-target="#carousel-example-generic" ${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
@@ -1075,11 +1075,28 @@ function drop4(ev) {
 							<div class="item ${status.first?'active':'' }">
 								<div class="container-fluid " id="contain">
 								<div id="project_div${i.project_idx}" style="margin-top: 15px;" align="center">
-									<div class="row" id="red" >
+									<div class="row" id="red">
 										
-											<div class="panel panel-danger coupon" style="width: 70%;">
+											<div class="panel panel-danger coupon" style="width: 80%; border-color: #fff ">
 												
-												<div class="panel-heading" id="head">
+												<c:choose>
+													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+													<!-- 완료 -->
+														<div class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;">
+													</c:when>
+													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
+													<!-- 평가하기 -->
+														<div class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;">
+														
+													</c:when>
+													<c:when test="${i.project_state == 1 }">
+													<!-- 진행중 -->
+														 <div class="panel-heading" id="head" >
+														
+														
+													</c:when>
+												</c:choose>
+												
 													<div class="panel-title" id="title">
 														<i class="fa fa-github fa-2x"></i>
 														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
@@ -1112,8 +1129,10 @@ function drop4(ev) {
 													</div>
 
 													<div class="col-md-12">
+													<div id="slimdiv">
 														<p class="disclosure" id="pc${i.project_idx}">
 															${i.project_content }</p>
+													</div>
 													</div>
 												</div>
 
