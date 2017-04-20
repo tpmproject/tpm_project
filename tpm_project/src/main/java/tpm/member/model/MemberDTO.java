@@ -24,6 +24,14 @@ public class MemberDTO {
 	
 	//추천 멤버
 	private int td;
+	private int te;
+	private int ti;
+	private int ts;
+	private int tn;
+	private int tt;
+	private int tf;
+	private int tj;
+	private int tp;
 
 	public MemberDTO() {
 		super();
@@ -180,6 +188,71 @@ public class MemberDTO {
 
 	public void setTd(int td) {
 		this.td = td;
+	}
+	
+
+	public int getTe() {
+		return te;
+	}
+
+	public void setTe(int te) {
+		this.te = te;
+	}
+
+	public int getTi() {
+		return ti;
+	}
+
+	public void setTi(int ti) {
+		this.ti = ti;
+	}
+
+	public int getTs() {
+		return ts;
+	}
+
+	public void setTs(int ts) {
+		this.ts = ts;
+	}
+
+	public int getTn() {
+		return tn;
+	}
+
+	public void setTn(int tn) {
+		this.tn = tn;
+	}
+
+	public int getTt() {
+		return tt;
+	}
+
+	public void setTt(int tt) {
+		this.tt = tt;
+	}
+
+	public int getTf() {
+		return tf;
+	}
+
+	public void setTf(int tf) {
+		this.tf = tf;
+	}
+
+	public int getTj() {
+		return tj;
+	}
+
+	public void setTj(int tj) {
+		this.tj = tj;
+	}
+
+	public int getTp() {
+		return tp;
+	}
+
+	public void setTp(int tp) {
+		this.tp = tp;
 	}
 
 	@Override

@@ -100,19 +100,6 @@ public class WorkController {
 		return mav;
 	}
 	
-	@RequestMapping(value="tendencyList.do", method=RequestMethod.GET)
-	public ModelAndView tendencyList(String tendency){
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("tendency", tendency);
-		map.put("project_idx",2);
-		
-		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(map);
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("work/workResult_d");
-		mav.addObject("arr",arr);
-		return mav;
-	}
-	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
 	public ModelAndView workAdd(WorkDTO dto, String[] member_idx, String workdate) throws ParseException{
