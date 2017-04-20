@@ -296,7 +296,7 @@ public class MemberController {
 			result = "인증번호를 확인해주세요";
 			
 			mav.addObject("failed", result);
-			mav.setViewName("redirect:/memberEmailCheck.do?random_number="+random+"&user_nunmber="+user+"&email="+email+"");
+			mav.setViewName("redirect:/memberEmailCheck.do?random_number="+random+"&user_number="+user+"&email="+email+"");
 			//mav.setViewName("member/memberEmailFailed");
 		}
 		
