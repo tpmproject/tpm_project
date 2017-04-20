@@ -27,7 +27,8 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 
 <!-- Bootstrap 3.3.2 JS -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
@@ -775,10 +776,9 @@ function drop4(ev) {
 	text-align: center;
 }
 
-.carousel-inner{
+.carousel-inner {
 	margin: auto;
 	width: 50%;
-	
 }
 </style>
 </head>
@@ -803,7 +803,7 @@ function drop4(ev) {
 	</div>
 	</section>
 
-	
+
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
@@ -932,8 +932,8 @@ function drop4(ev) {
 			</div>
 		</div>
 	</form>
-	
-	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+
+	<%-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 	
 	
 		<!-- Indicators -->
@@ -1031,10 +1031,10 @@ function drop4(ev) {
 					
 				</div>
 			</div>
-		</div>
+		</div> --%>
 
-		<!-- Controls -->
-		<a class="left carousel-control" href="#carousel-example-generic"
+	<!-- Controls -->
+	<!-- <a class="left carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="prev"> <span
 			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
 			class="sr-only">Previous</span>
@@ -1043,10 +1043,124 @@ function drop4(ev) {
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>
-		
-	<%@ include file="/WEB-INF/view/footer.jsp"%>
-	
+	</div> -->
 
+	<%-- <%@ include file="/WEB-INF/view/footer.jsp"%> --%>
+	<!-- 테스트 폼 -->
+	<div id="carousel-example-generic" class="carousel slide"
+		data-ride="carousel" data-interval="false">
+
+		<!-- Indicators 페이징-->
+		<ol class="carousel-indicators">
+			<c:forEach var="i" items="${plist}" varStatus="status">
+				<c:if test="${status.index%2 == 0}">
+					<c:choose>
+						<c:when test="${status.index ==0}">
+							<li data-target="#carousel-example-generic"
+								data-slide-to="${status.index/2}" class="#"></li>
+						</c:when>
+						<c:otherwise>
+							<li data-target="#carousel-example-generic"
+								data-slide-to="${status.index/2}"></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</c:forEach>
+		</ol>
+
+
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<div class="item active">
+				<div class="container" id="contain">
+					<c:set var="plist" value="${plist}"></c:set>
+					<c:choose>
+						<c:when test="${empty plist}">
+								등록된 프로젝트가 없습니다.
+					</c:when>
+						<c:otherwise>
+							<c:forEach var="i" items="${plist}" varStatus="status">
+								<div id="project_div${i.project_idx}" class="col-lg-3"	style="margin-top: 15px;" align="center">
+									<div class="row" id="red" >
+											<div class="panel panel-danger coupon" style="width: 300px;">
+												<div class="panel-heading" id="head">
+													<div class="panel-title" id="title">
+														<i class="fa fa-github fa-2x"></i>
+														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
+														  <h4 id="pn${i.project_idx}">
+															<span class="hidden-xs">${i.project_name }</span>
+															<c:if test="${i.project_level eq 3000 }">
+
+																<span
+																	onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																	<i class="glyphicon glyphicon-cog"
+																	style="margin-bottom: 0px;"></i>
+																</span>
+
+																<span onclick="projectDelete('${i.project_idx}')">
+																	<i class="glyphicon glyphicon-remove"
+																	style="margin-bottom: 0px;"></i>
+																</span>
+															</c:if>
+														</h4>
+
+													</div>
+												</div>
+												<div class="panel-body">
+													<img src="http://i.imgur.com/e07tg8R.png" class="coupon-img img-rounded" width="250px"height="250px">
+
+													<div class="col-md-9">
+														<ul class="items">
+															<li>멤버 리스트</li>
+														</ul>
+													</div>
+
+													<div class="col-md-12">
+														<p class="disclosure" id="pc${i.project_idx}">
+															${i.project_content }</p>
+													</div>
+												</div>
+
+												<div class="panel-footer">
+													<div class="coupon-code">
+														<span class="btn btn-link"><a href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a></span>
+														 <span class="print"> <a href="#" class="btn btn-link"><i class="fa fa-lg fa-print"></i>평가하기</a></span>
+														 
+													</div>
+												</div>
+											</div>
+										
+									</div>
+								</div>
+			
+			<c:if test="${status.index %2==1 and not status.last}">
+				</div><!-- contain -->
+				</div><!-- item -->
+				
+				<div class="item">
+					<div class="container" id="contain">
+					
+			</c:if>
+				</c:forEach>
+					</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</div>	<!-- carousel-inner -->
+			
+			
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true">
+			</span> <span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+		<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

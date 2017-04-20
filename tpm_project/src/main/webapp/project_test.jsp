@@ -960,7 +960,7 @@ function drop4(ev) {
 		<div class="carousel-inner">
 			<div class="item active">
 
-				<div>
+				
 					<div class="container" id="contain">
 						<c:set var="plist" value="${plist}"></c:set>
 						<c:choose>
@@ -1029,9 +1029,9 @@ function drop4(ev) {
 
 									<c:if test="${status.index %2== 1 and not status.last}">
 					</div>
-				</div>
+				
 
-			</div>
+			</div><!-- item -->
 
 			<div class="item">
 				<div>
@@ -1044,7 +1044,7 @@ function drop4(ev) {
 
 				</div>
 			</div>
-		</div>
+		</div><!-- carousel-inner -->
 
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
@@ -1056,7 +1056,7 @@ function drop4(ev) {
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>
+	</div><!-- gene -->
 
 
 
@@ -1222,7 +1222,7 @@ function drop4(ev) {
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</div>
+		</div><!-- carousel-inner -->
 
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
