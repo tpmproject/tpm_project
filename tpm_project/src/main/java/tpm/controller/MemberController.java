@@ -171,22 +171,23 @@ public class MemberController {
 	
 	/** 회원 가입 - 성향입력 페이지 이동 */
 	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.GET)
-	public ModelAndView memberAddTendencyForm(MemberDTO mdto, HttpServletRequest req){
-		HttpSession session = req.getSession();
-		session.setAttribute("mdto", mdto);
+	public ModelAndView memberAddTendencyForm(MemberDTO mdto){
+		
 		ModelAndView mav = new ModelAndView();
 		
+		System.out.println("성향페이지에서 mdto "+mdto.getMember_id());
+		mav.addObject("mdto", mdto);
 		mav.setViewName("member/memberAddForm_tendency");
 		return mav;
 	}
 	 //*************************************회원 정보입력-> 회원성향 -> 회원등록 할떄 mdto정보 전달 하기
 	/** 회원 가입 - 회원 등록 */
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.POST)
-	public ModelAndView memberAdd(TendencyDTO tdto, HttpServletRequest req){
-		HttpSession session = req.getSession();
-		MemberDTO mdto=(MemberDTO) req.getAttribute("mdto");
+	public ModelAndView memberAdd(TendencyDTO tdto, MemberDTO mdto){
 		
-		System.out.println(mdto.getMember_name());
+		System.out.println("회원가입 등록부분에서의 id:"+mdto.getMember_id());
+		
+		
 		int result=mdao.addMember(mdto);
 		ModelAndView mav = new ModelAndView();
 		

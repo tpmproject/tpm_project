@@ -12,9 +12,11 @@
     rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
+    <script type="text/javascript"></script>
   </head>
   
   <body>
+  
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -48,6 +50,12 @@
               </h1>
             </div>
             <form name="tendencyForm" action="memberAdd.do" method="post">
+            	<input type="hidden" name="member_id" value="${mdto.member_id }">
+			  	<input type="hidden" name="member_pwd" value="${mdto.member_pwd }">
+			  	<input type="hidden" name="member_name" value="${mdto.member_name }">
+			  	<input type="hidden" name="member_gender" value="${mdto.member_gender }">
+			  	<input type="hidden" name="member_tel" value="${mdto.member_tel }">
+			            
               <div class="alert alert-info" style="color:black; background-color:white">
                 <div class="form-inline">
                   <label class="control-label">외향성</label>

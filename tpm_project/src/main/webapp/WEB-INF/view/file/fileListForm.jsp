@@ -37,7 +37,7 @@
     <![endif]-->
     <script type="text/javascript" src="/tpm_project/js/ajax_extension.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    
+    search_text
     <script>
     /* 미리보기  */
 	function fileContent(filename){
@@ -230,18 +230,17 @@
 		      </div>
 		      <!-- body -->
 		     	 <div class="modal-body" >
-		     	 
+		     	
 		     	 <div class="row" id="fileContent">
 		     	 	<div class="col-lg-6">
 		      		  <%@ include file="fileContent_d.jsp" %>
 		      		</div>
 		         </div>
+		         
 		      </div>
-		    </div>
-		  </div>
-		</div>
-		
-	</div>
+		 </div>
+   </div>
+	
   <!--모달 끝  -->
   
   <%@ include file="/WEB-INF/view/header.jsp"%>
