@@ -46,9 +46,9 @@
     /* 미리보기  */
 	function fileContent(filename){
 		window.alert(filename);
-		
+		window.alert('머냐:${doc.get(0)}');
 		var param = "file_name="+filename;
-		action_ajax('fileContent.do',param,'POST', 'FILE_LIST'); // 해당 페이지로 ajax통신 시작
+		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
 		
 	}
 	
@@ -102,7 +102,7 @@
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
-    					
+    				
     					
     				}
     			}
@@ -116,8 +116,9 @@
 		if(ctype == 'FILE_LIST'){
 			fileList_setting(responseText);
 			
-		} else if(ctype == ''){
+		} else if(ctype == 'FILE_CONTENT'){
 			window.alert('result_process들어옴')
+			
 			fileContent_setting(responseText);
 			
 		} else if(ctype == ''){
@@ -137,6 +138,23 @@
 		file_content.innerHTML = '';
 		file_content.innerHTML = msg;
     } */
+    function fileContent_setting(responseText) {
+    	window.alert("setting: "+responseText);
+		var json = JSON.parse(responseText);
+		
+		var msg = '';
+		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
+		
+		msg += json; 
+		
+		var file_con = document.getElementById('fileCon');
+		
+	
+		file_con.innerHTML = '';
+		file_con.innerHTML = msg;
+	
+	}
+	
 	function fileList_setting(responseText) {
 		var json = JSON.parse(responseText);
 		
@@ -212,7 +230,7 @@
 	/* 파일 삭제  */
 	function fileDel(file_idx,file_name){
 		
-		location.href="fileDel.do?file_idx=d"+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
+		location.href="fileDel.do?file_idx="+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
 	
     </script>
@@ -236,8 +254,8 @@
 		     	 <div class="modal-body" >
 		     	
 		     	 <div class="row" id="fileContent">
-		     	 	<div class="col-lg-6">
-		      		  <%@ include file="fileContent_d.jsp" %>
+		     	 	<div class="col-lg-6" id="fileCon">
+		      		${json}
 		      		</div>
 		         </div>
 		         
