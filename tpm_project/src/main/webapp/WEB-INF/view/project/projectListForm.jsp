@@ -1053,37 +1053,32 @@ function drop4(ev) {
 		<!-- Indicators 페이징-->
 		<ol class="carousel-indicators">
 			<c:forEach var="i" items="${plist}" varStatus="status">
-				<c:if test="${status.index%2 == 0}">
-					<c:choose>
-						<c:when test="${status.index ==0}">
-							<li data-target="#carousel-example-generic"
-								data-slide-to="${status.index/2}" class="#"></li>
-						</c:when>
-						<c:otherwise>
-							<li data-target="#carousel-example-generic"
-								data-slide-to="${status.index/2}"></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+				
+			<li data-target="#carousel-example-generic" ${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
+				
 			</c:forEach>
 		</ol>
 
 
 
 		<!-- Wrapper for slides -->
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="container" id="contain">
+		
 					<c:set var="plist" value="${plist}"></c:set>
 					<c:choose>
 						<c:when test="${empty plist}">
 								등록된 프로젝트가 없습니다.
 					</c:when>
 						<c:otherwise>
+						<div class="carousel-inner">
 							<c:forEach var="i" items="${plist}" varStatus="status">
-								<div id="project_div${i.project_idx}" class="col-lg-3"	style="margin-top: 15px;" align="center">
+							
+							<div class="item ${status.first?'active':'' }">
+								<div class="container-fluid " id="contain">
+								<div id="project_div${i.project_idx}" style="margin-top: 15px;" align="center">
 									<div class="row" id="red" >
-											<div class="panel panel-danger coupon" style="width: 300px;">
+										
+											<div class="panel panel-danger coupon" style="width: 70%;">
+												
 												<div class="panel-heading" id="head">
 													<div class="panel-title" id="title">
 														<i class="fa fa-github fa-2x"></i>
@@ -1125,29 +1120,34 @@ function drop4(ev) {
 												<div class="panel-footer">
 													<div class="coupon-code">
 														<span class="btn btn-link"><a href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a></span>
-														 <span class="print"> <a href="#" class="btn btn-link"><i class="fa fa-lg fa-print"></i>평가하기</a></span>
-														 
+														 <span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+														 			 	<!-- 프로젝트 진행현황 -->
+												<c:choose>
+													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+														<span class="print"> <a href="#" class="btn btn-link" style="color: green;"><i class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
+													</c:when>
+													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
+														
+														<td><input type="button" value="평가" onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'"></td>
+														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+													</c:when>
+													<c:when test="${i.project_state == 1 }">
+														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>
+													</c:when>
+												</c:choose>
 													</div>
 												</div>
 											</div>
 										
 									</div>
 								</div>
-			
-			<c:if test="${status.index %2==1 and not status.last}">
-				</div><!-- contain -->
-				</div><!-- item -->
-				
-				<div class="item">
-					<div class="container" id="contain">
-					
-			</c:if>
-				</c:forEach>
+							</div>
+								</div>
+						</c:forEach>
+						</div>
 					</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-			</div>	<!-- carousel-inner -->
+					</c:choose>
+						<!-- carousel-inner -->
 			
 			
 			<!-- Controls -->
