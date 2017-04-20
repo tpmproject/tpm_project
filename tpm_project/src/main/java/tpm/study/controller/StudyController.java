@@ -160,11 +160,11 @@ public class StudyController {
 	        config.setStoragePath(Utils.getProjectProperty("storage.path"));
 		System.out.println(config.getStoragePath());  //project.properties에서 설정한 경로를 불러온다.
 		
-		 /*src/main/resources/project.properties 파일에서 경로 설정을 한다 
-		project.properties 파일에서 설정한 경로-> storage.path=$(basedir)/src/main/webapp/WEB-INF/view/file/upload 
-		불러와야 하는 경로 -> C:\Users\ user1\git\tpm_project\tpm_project/src/main/webapp/WEB-INF/view/file/upload
-		project.propertes파일에서 ${basedir}가   C:\Users\ user1\git\tpm_project\tpm_project/ 까지의 경로를 자동으로 잡아준다.
-		 */
+		//src/main/resources/project.properties 파일에서 경로 설정을 한다 
+		//project.properties 파일에서 설정한 경로-> storage.path=$(basedir)/src/main/webapp/WEB-INF/view/file/upload 
+		//불러와야 하는 경로 -> C:\Users\ user1\git\tpm_project\tpm_project/src/main/webapp/WEB-INF/view/file/upload
+		//project.propertes파일에서 $(basedir )가   C:\Users\ user1\git\tpm_project\tpm_project 까지의 경로를 자동으로 잡아준다.
+		 
 		
 		mav.setViewName("study/path");
 		return mav;
