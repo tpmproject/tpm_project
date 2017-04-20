@@ -122,7 +122,7 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(work_idx,work_title,work_confirm,category_idx){
+function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	$(workback2).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
@@ -133,6 +133,7 @@ function workUpdate(work_idx,work_title,work_confirm,category_idx){
 	while(fc.nodeName!='SPAN'){
 		fc=fc.nextSibling;
 	}
+	
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdateup.value=work_start+"-"+work_end;
@@ -895,7 +896,7 @@ a {
 
 									<c:if test="${pdto.project_level != 1000 }">
 										<span
-											onclick="workUpdate(${wdto.work_idx},'${wdto.work_title}','${wdto.work_confirm}',${cdto.category_idx})"><i
+											onclick="workUpdate(${wdto.work_idx},'${wdto.work_title}','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i
 											class="glyphicon glyphicon-cog"></i></span>
 									</c:if>
 
@@ -905,9 +906,9 @@ a {
 										<tr>
 											<td colspan="2">
 												<div class="table_i glyphicon glyphicon-calendar"></div>
-												&nbsp;<f:formatDate value="${wdto.work_start}" id="wstart" type="both" pattern="yyyy/MM/dd  HH:mm"/><br>
+												&nbsp;<f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  HH:mm"/><br>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												~<f:formatDate value="${wdto.work_end}" id="wend" type="both" pattern="yyyy/MM/dd  HH:mm"/>
+												~<f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  HH:mm"/>
 											</td>
 										</tr>
 										<tr>
