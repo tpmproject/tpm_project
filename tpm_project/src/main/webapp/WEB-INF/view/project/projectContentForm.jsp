@@ -210,10 +210,10 @@ function showsResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div id="work_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
-				msg2 += '<a data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">'+member.member_name+'</a>';
+				msg2 += member.member_name;
 				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
 				msg2 += '</div> ';
 			}
@@ -727,12 +727,28 @@ function showChecklist(work_idx){
 	$('#check_div'+work_idx).toggle('show');
 }
 
+function showTen(member_idx){
+	var tenT=$('#work_member'+member_idx).offset().top;
+	var tenL=$('#work_member'+member_idx).offset().left+120;
+	$('#tendency_pop').css('top',tenT+'px');
+	$('#tendency_pop').css('left',tenL+'px');
+	$('#tendency_pop').fadeIn();
+	
+}
+function hideTen(){
+	$('#tendency_pop').hide();
+}
+
 </script>
-
-
-
-
 <style>
+#tendency_pop{
+	background: green;
+	position:fixed;
+	display: none;
+	width:400px;
+	height: 400px;
+	z-index: 10;
+}
 #mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
  	background-color: black;
  	opacity: 0.4;
@@ -1239,7 +1255,7 @@ a {
 	</form>
 
 
-
+	<%@include file="tendency.jsp"%>
 	<%@include file="/WEB-INF/view/comment/comment.jsp"%>
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
