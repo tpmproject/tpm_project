@@ -8,7 +8,6 @@ String msg=(String)request.getAttribute("msg");
 
 if(msg==null||msg.equals("error")||msg.equals("")){
 	out.print("{w:{work_idx:0}}");
-	return;
 }else{
 	WorkDTO dto=(WorkDTO)request.getAttribute("workDTO");
 	int idx=dto.getWork_idx();

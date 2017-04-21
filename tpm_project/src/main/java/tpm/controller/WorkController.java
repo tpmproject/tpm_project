@@ -133,6 +133,7 @@ public class WorkController {
 				workDAO.workMemberInsert(mdto);
 			}
 			mav.addObject("wdto",dto);
+			mav.addObject("msg",msg);
 		}else{
 			msg="error";
 			mav.addObject("msg",msg);
