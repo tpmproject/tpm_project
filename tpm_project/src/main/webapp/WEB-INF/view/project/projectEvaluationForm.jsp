@@ -116,8 +116,7 @@ function addTendency_l(member_idx){
 	var p_idx = tendency_p.selectedIndex;
 	var p_val = tendency_p.options[p_idx].value;
 	
-	var param = 'member_idx=' + member_idx;
-	
+	var param = 'member_idx=' + member_idx
 	+'&project_idx=' + ${param.project_idx}
 	+'&appraiser_idx=' + ${sessionScope.s_member_idx}
 	+'&tendency_e=' + e_val
@@ -128,11 +127,10 @@ function addTendency_l(member_idx){
 	+'&tendency_f=' + f_val
 	+'&tendency_j=' + j_val
 	+'&tendency_p=' + p_val
-	+'&project_state=' + 3;
 
 	window.alert(param);
 
-	sendRequest('projectEvaluation.do', param, null, 'POST');
+	sendRequest('projectState.do', param, null, 'POST');
 
 }
 </script>

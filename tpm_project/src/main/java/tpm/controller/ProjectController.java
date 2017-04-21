@@ -235,24 +235,35 @@ public class ProjectController {
 	
 	/**프로젝트 멤버 평가*/
 	@RequestMapping(value="projectEvaluation.do", method=RequestMethod.POST)
-	public ModelAndView addTendency(TendencyDTO dto, int project_state, ProjectDTO pdto, int project_idx){
+	public ModelAndView addTendency(TendencyDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectEvaluation_d");
 		
 		mav.addObject("tendencyDTO",dto);
 		int result=tendencyDAO.addTendency(dto);
-		System.out.println(project_state);
-		pdto.setProject_state(project_state);
-		pdto.setProject_idx(project_idx);
+		
 		int msg=dto.getMember_idx();
 		if(result<=0){
 			msg=0;
 		}
-		if(project_state==3){
-			int count=projectDAO.projectState(pdto);
-			mav.setViewName("project/projectListForm");
-		}else{
-			mav.setViewName("project/projectEvaluation_d");
+		mav.addObject("msg",msg);
+		return mav;
+	}
+	
+	/**프로젝트 멤버 평가*/
+	@RequestMapping(value="projectState.do",method=RequestMethod.POST)
+	public ModelAndView addTendencyState(TendencyDTO dto, int project_idx){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectListForm");
+		
+		mav.addObject("tendencyDTO",dto);
+		int result=tendencyDAO.addTendency(dto);
+		int count=projectDAO.projectState(project_idx);
+		
+		int msg=dto.getMember_idx();
+		if(result<=0){
+			msg=0;
 		}
 		mav.addObject("msg",msg);
 		return mav;

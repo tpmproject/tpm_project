@@ -136,8 +136,8 @@ public class ProjectDAOImple implements ProjectDAO {
 		
 	}
 	
-	public int projectState(ProjectDTO dto){
-		int count=sqlMap.update("projectState",dto);
+	public int projectState(int project_idx){
+		int count=sqlMap.update("projectState",project_idx);
 		return count;
 	}
 	
