@@ -325,7 +325,12 @@ function updateWorkResult(){
 		}
 	}
 }
- 
+
+function workDone(work_idx,work_state){
+	var param="work_idx="+work_idx+"&work_state="+work_state;
+	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
+}
+
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -818,15 +823,11 @@ a {
 	display: inline-block;
 	height: 26px;
 	width: 75px;
-	background: #ecf0f5;
 	margin-bottom: 8px;
     margin-top: 8px;
     padding-top: 4px;
     text-align: center;
-    border: 1px solid #3c8dbc;
-}
-.work_btn:HOVER{
-	font-weight: bold;
+    font-size: large;
 }
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
@@ -890,9 +891,6 @@ a {
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
-									<c:if test="${wdto.work_state eq 3}">
-										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
-									</c:if>
 							<c:set var="wstart"><f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 							<c:set var="wend"><f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 									<c:if test="${pdto.project_level != 1000 }">
@@ -1000,23 +998,28 @@ a {
 										<c:remove var="chTotal" />
 										<c:remove var="chChecked" />
 										<tr>
-											<c:choose>
+											<td><div class="work_btn">												
+												<i class="glyphicon glyphicon-play-circle" ${wdto.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone(${wdto.work_idx},1)"></i>
+											<c:if test="${wdto.work_confirm ==10}">
+												<i class="glyphicon glyphicon-record" ${wdto.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${wdto.work_idx},2)"></i>
+											</c:if>
+												<i class="glyphicon glyphicon-ok-circle" ${wdto.work_state eq 3?'style="color:green;"':''} data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone(${wdto.work_idx},3)"></i>
+											</div></td>
+											<%-- <c:choose>
 												<c:when test="${wdto.work_state == 3 }">
-													<td><div class="work_btn">업무 완료됨</div></td>
+													<td><div class="work_btn"><i class="glyphicon glyphicon-ok-sign" style="color: green;"></i></div></td>
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
 													<c:choose>
-													<c:when test="${pdto.project_level == 3000 }">
-													<td>
-														<td><div class="work_btn">업무 완료</div>
-													</td>
-													</c:when>
-													<c:otherwise>
-													<td><div class="work_btn">결재 요청</div></td>
-													</c:otherwise>
+														<c:when test="${pdto.project_level == 3000 }">
+															<td>
+																<td><div class="work_btn">업무 완료</div>
+															</td>
+														</c:when>
+														<c:otherwise>
+															<td><div class="work_btn">결재 요청</div></td>
+														</c:otherwise>
 													</c:choose>
-												
-													
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
 													<c:choose>
@@ -1034,7 +1037,7 @@ a {
 												<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
 													<td><div class="work_btn">업무 완료</div></td>
 												</c:when>
-											</c:choose>
+											</c:choose> --%>
 
 											<td align="right"><a
 												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a
