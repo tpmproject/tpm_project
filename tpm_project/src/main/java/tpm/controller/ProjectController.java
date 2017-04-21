@@ -56,6 +56,7 @@ public class ProjectController {
 		int member_idx=(Integer)session.getAttribute("s_member_idx");
 		
 		ArrayList<ProjectDTO> plist= projectDAO.projectAllList(member_idx);
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("plist",plist);
 		

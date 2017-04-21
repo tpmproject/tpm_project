@@ -895,7 +895,7 @@ a {
 									</span>
 									<c:if test="${wdto.work_state eq 3}">
 										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
-									</c:if>
+										</c:if>
 
 									<c:if test="${pdto.project_level != 1000 }">
 										<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')">
@@ -1301,11 +1301,11 @@ $(document).ready(function(){
 }); */
 $(function () {
 	 //Date range picker with time picker
- $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
+ $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
 });	
 $(function () {
 	 //Date range picker with time picker
-$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
+$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
 });
 
 /* 첨부파일 관련 */
