@@ -314,7 +314,6 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
-	
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
 function updateWorkResult(){
@@ -893,7 +892,7 @@ a {
 									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
 									<c:if test="${wdto.work_state eq 3}">
 										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
-										</c:if>
+									</c:if>
 
 									<c:if test="${pdto.project_level != 1000 }">
 										<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')">
