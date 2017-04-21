@@ -66,7 +66,11 @@ function showWorks(){
 		if(mwdiv.nodeName=='DIV'){
 			var inshow=mwdiv.firstChild;
 			if(inshow.value>0){
-				$(mwdiv).hide();
+				if(inshow.value==100){
+					$(mwdiv).show();
+				}else{
+					$(mwdiv).hide();
+				}
 			}else{
 				$(mwdiv).show();
 			}
@@ -84,12 +88,30 @@ function min_max(work_idx){
 function workDate(){
 	window.alert($('#workDate'.val()));
 }
-function test(){
+function searchDate(){
 	var da=$('#workdate').val();
-	window.alert(da);
-}
-function nonono(){
+	var daa=da.split(' - ');
 	
+	var mwdiv=document.getElementById('mw_div').firstChild;
+	var last=document.getElementById('mw_div').lastChild;
+	do{
+		if(mwdiv.nodeName=='DIV'){
+			var endd=mwdiv.firstChild.nextSibling.nextSibling;
+			if(endd.nodeName=='INPUT'){
+				endd=endd.value;
+				var fc=mwdiv.firstChild;
+				if(daa[0]<=endd && endd <=daa[1]){
+					
+					fc.value=(parseInt(fc.value)%100)+100;
+				}else{
+					fc.value=parseInt(fc.value)%100+200;
+				}
+			}
+		}
+		
+		mwdiv=mwdiv.nextSibling;
+	}while(mwdiv!=last);
+	showWorks();
 }
 </script>
 <style>
@@ -113,8 +135,8 @@ function nonono(){
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="workdate" id="workdate" size="15px" onkeydown="nonono()"/>
-						<span onclick="test()"><i class="glyphicon glyphicon-search"></i></span>
+						<input type="text" name="workdate" id="workdate" size="15px"/>
+						<span onclick="searchDate()"><i class="glyphicon glyphicon-search"></i></span>
 					</td>
 				</tr>
 				<tr>
@@ -161,6 +183,12 @@ function nonono(){
 		</c:when>
 		</c:choose>	
 	<div><input type="hidden" class="project${i.project_idx} ${in_class} ${i.work_state eq 3?'complete':'ing'} ${now>i.work_end?'over':'nver'}" value="0">
+		
+		<c:set var="endDate">
+		<f:formatDate value="${i.work_end}" type="both" pattern="yy/MM/dd"/>
+		</c:set>
+		<input type="hidden" name="endDate" value="${endDate}">
+		
 		<span onclick="min_max(${i.work_idx})"><i id="i${i.work_idx}" class="glyphicon glyphicon-minus"></i>${i.project_name}<i class="glyphicon glyphicon-chevron-right"></i>${i.category_name}<i class="glyphicon glyphicon-chevron-right"></i></span>
 		<c:remove var="in_class"/>
 		<c:choose>
