@@ -123,7 +123,7 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
+function workUpdate(work_idx,work_start,work_end,work_confirm){
 	$(workback2).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
@@ -889,18 +889,17 @@ a {
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
+									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 									<span onclick="showWorkTable(${wdto.work_idx})">
-										<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 										&nbsp;${wdto.work_title }
-										<c:if test="${wdto.work_state eq 3}">
-										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
-										</c:if>
 									</span>
+									<c:if test="${wdto.work_state eq 3}">
+										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
+									</c:if>
 
 									<c:if test="${pdto.project_level != 1000 }">
-										<span
-											onclick="workUpdate(${wdto.work_idx},'${wdto.work_title}','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i
-											class="glyphicon glyphicon-cog"></i></span>
+										<span onclick="workUpdate(${wdto.work_idx},'${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')">
+										<i class="glyphicon glyphicon-cog"></i></span>
 									</c:if>
 
 								</div>
