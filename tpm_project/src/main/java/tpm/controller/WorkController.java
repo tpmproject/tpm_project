@@ -158,11 +158,13 @@ public class WorkController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
 		System.out.println(workdateup);
+		workdateup=workdateup.replaceAll("오전", "AM");
+		workdateup=workdateup.replaceAll("오후", "PM");
 		String temp[]=workdateup.split("-");
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
 		System.out.println(work_s);
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
 		Date ts = sdf.parse(work_s);
 		Date te = sdf.parse(work_e);
 		Timestamp work_start = new Timestamp(ts.getTime());
