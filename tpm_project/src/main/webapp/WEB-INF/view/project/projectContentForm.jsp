@@ -7,8 +7,25 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<%@ include file="/sample/cho/main/import.jsp"%>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- Ionicons -->
+<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<!-- Morris chart -->
+<link href="/tpm_project/sample/cho/main/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+<!-- Daterange picker -->
+<link href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"
+	rel="stylesheet" type="text/css">
+<!-- Theme style -->
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
+    downloading all of them to reduce the load. -->
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- <script src="/tpm_project/sample/cho/main/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->	
+
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="js/httpRequest.js"></script>
@@ -19,9 +36,24 @@
 <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
 <link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
+<script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
 <script>
+window.onload=function(){
+	$('[data-toggle="popover"]').popover();
+	$(work_modal).hide();
+	$(btnwork2).hide();
+	$(work_modal2).hide();
+	$(btnwork4).hide();
+	$('.content').mCustomScrollbar({axis:"yx"});
+}
+function sideBar(){
+	var bNode=document.documentElement.lastChild;
+	$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');
+}
 function cateName(idx){
 	$('#cate'+idx).show();
 	$('#a_cate'+idx).hide();
@@ -102,16 +134,7 @@ function categoryAddResult() {
 }
 
 //업무추가
-window.onload=function(){
-    $('[data-toggle="popover"]').popover({container: "body"});
-	$(work_modal).hide();
-	$(btnwork2).hide();
-	$(work_modal2).hide();
-	$(btnwork4).hide();
-	$('.content').mCustomScrollbar({
-		axis:"yx"
-	});
-}
+
 function showf(category_idx){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
@@ -187,11 +210,11 @@ function showsResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div id="work_member'+member.member_idx+'" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div id=pop_m'+member.member_idx+'></div>" data-trigger=" hover"draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
-				msg2 += member.member_name;
-				msg2 += '<p class="text-muted" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div>ㅇㅇㅇ</div>" data-trigger="hover" >' + member.member_id	+ '</p> ';
+				msg2 += '<a data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">'+member.member_name+'</a>';
+				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
 				msg2 += '</div> ';
 			}
 			var project_m = document.getElementById('project_m');
@@ -1108,7 +1131,7 @@ a {
 						</div>
 						<!-- /.input group -->
 					</div>
-					<div align="right" style="padding:5px;">
+					<div align="center" style="padding:5px;">
 						<input type="checkbox"  name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
