@@ -1,10 +1,9 @@
 package tpm.controller;
 
 import java.io.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Base64.Decoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,7 @@ import tpm.project.model.ProjectDTO;
 import com.groupdocs.ui.Document;
 import com.groupdocs.ui.Utils;
 import com.groupdocs.viewer.config.ViewerConfig;
+import com.sun.mail.util.BASE64DecoderStream;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -127,8 +127,10 @@ public class FileController {
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
 	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)
-	public ModelAndView fileContent(@RequestParam("file_name")String file_name,HttpServletRequest request) throws IOException{
-
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name,
+								
+									HttpServletRequest request) throws IOException{
+		
 		ModelAndView mav = new ModelAndView();
 		System.out.println("fileContent에 들어온 file_name값= "+file_name);
 	   
@@ -183,29 +185,29 @@ public class FileController {
 
 		Document doc = new Document();
 
+		
+		
+		
 		doc.setFilename(filename);
 		doc.setPageNumber(pageNumber);
-	    
-		ArrayList<String> docArr=new ArrayList<String>();
-		docArr.add(doc.getHtmlContent());
-
-		JSONArray jsonArray = new JSONArray();
-		JSONObject json = new JSONObject();
-
-		json.put("doc", jsonArray.fromObject(docArr));
 		
-		mav.addObject("json", json);
+	//	String a = new String("한글".getBytes("EUC-KR"),"UTF-8");
+		System.out.println(doc.getHtmlContent());
 		
-		mav.addObject("file_name",file_name);
+		//Decoder dd = Base64.getDecoder();
+		
+		//byte[] resultbyte = dd.decode(doc.getHtmlContent());
+		
+		System.out.println();
+		
+		mav.addObject("doc_html",doc.getHtmlContent());
+		mav.addObject("filename2",file_name);
 		mav.setViewName("file/fileContent_d");
 		return mav;
 		
 	}
 	
-	@RequestMapping(value="abm.do",  method=RequestMethod.POST)
-	public @ResponseBody ArrayList<FileDTO> abm(@RequestParam("project_idx")int project_idx){
-		return fdao.searchFile(project_idx);
-	}
+	
 
 	/** 파일 - 파일 등록 페이지 이동 */
 	@RequestMapping(value="fileUploadForm.do",  method=RequestMethod.GET)
@@ -223,14 +225,15 @@ public class FileController {
 		return mav;
 	}
 
-	/** 파일 - 파일 등록 */
+	/** 파일 - 파일 등록 
+	 * @throws UnsupportedEncodingException */
 	@RequestMapping(value="fileAdd.do",  method=RequestMethod.POST)
 	public ModelAndView fileAdd(HttpServletRequest req,HttpServletResponse response,
 								@RequestParam("work_idx")int work_idx,
-								@RequestParam("project_idx")int project_idx){
+								@RequestParam("project_idx")int project_idx) throws UnsupportedEncodingException{
 		
 		MultipartHttpServletRequest multipartRequest =  (MultipartHttpServletRequest)req;
-		
+		multipartRequest.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession();
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		//int project_idx=16;   //프로젝트 idx 가져오기, 임시
@@ -246,6 +249,7 @@ public class FileController {
 	        System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
+		
 		int result=0;
 		String msg="";
 		//파일이름,파일사이즈,파일경로
@@ -329,7 +333,9 @@ public class FileController {
 		//System.out.println("파일명:"+file_upload.getOriginalFilename());		
 		try {
 			byte bytes[]=file_upload.getBytes();
+			
 			 ViewerConfig config = new ViewerConfig();
+			 
 			 config.setStoragePath(Utils.getProjectProperty("storage.path"));
 			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
 			FileOutputStream fos=new FileOutputStream(outFile);

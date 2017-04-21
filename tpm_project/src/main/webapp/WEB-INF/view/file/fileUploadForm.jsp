@@ -101,7 +101,7 @@
 	<h1 style="margin: 10px 100px;">파일 업로드</h1>
 <fieldset style="border-color:white;">
 	<legend>파일 </legend>
-	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data">
+	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
 	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx }">
 	 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.groupdocs.ui.Document" %>
+<%@ page import="java.io.*" %>
 <!DOCTYPE html">
 <html>
  <head>
@@ -13,12 +15,39 @@
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
     <!-- Bootstrap Core CSS -->
     <%@ include file="/WEB-INF/view/file/import.jsp"%>
+   
+    <style>
+        article.content {
+            margin: -30px 50px;
+            width:400px;
+            height:200px
+        }
+        .navbar .navbar-nav {
+            display: inline-block;
+            float: none;
+        }
+        .navbar .navbar-collapse {
+            text-align: center;
+        }
     
-    <link href="/tpm_project/css/file/bootstrap.css?ver=8" rel="stylesheet">
+        .doc-page-trial{
+        	display:none;
+        }
+      	.pg1-text1{
+      	 	display:none;
+      	}
+      	.pg1-page{
+      		margin:auto 500px;
+      	    background: white;
+      	}
+
+    </style>
+    
+    <link href="/tpm_project/css/file/bootstrap.css?ver=11" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="/tpm_project/css/file/metisMenu.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=7" rel="stylesheet">
+    <link href="/tpm_project/css/file/dataTables.bootstrap.css?ver=9" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="/tpm_project/css/file/dataTables.responsive.css?ver=2"
     rel="stylesheet">
@@ -45,15 +74,31 @@
     <script>
     /* 미리보기  */
 	function fileContent(filename){
-		window.alert(filename);
-		window.alert('머냐:${doc.get(0)}');
+		var file_con = document.getElementById('fileCon');
+		var f_name = document.getElementById('f_name');
+		f_name.innerHTML = filename;
+		file_con.innerHTML = '';
+		
 		var param = "file_name="+filename;
+		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
+		
+	}
+	
+	function fileContent_page(filename,page){
+		var file_con = document.getElementById('fileCon');
+		var f_name = document.getElementById('f_name');
+		
+		f_name.innerHTML = filename;
+		file_con.innerHTML = '';
+		
+		var param = "file_name="+filename+"&page="+page;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
 		
 	}
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
     function project_fileList(project_idx){
+    
     	sessionStorage.setItem("project_idx",project_idx); //프로젝트 idx 세션에올리기
     	
 		var project_idx_s=sessionStorage.getItem("project_idx");
@@ -101,6 +146,7 @@
     			if(httpRequest.status == 200){
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
+    					
     					result_process(responseText, ctype);
     				
     					
@@ -117,7 +163,6 @@
 			fileList_setting(responseText);
 			
 		} else if(ctype == 'FILE_CONTENT'){
-			window.alert('result_process들어옴')
 			
 			fileContent_setting(responseText);
 			
@@ -139,15 +184,23 @@
 		file_content.innerHTML = msg;
     } */
     function fileContent_setting(responseText) {
-    	window.alert("setting: "+responseText);
-		var json = JSON.parse(responseText);
-		
-		var msg = '';
-		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
-		
-		msg += json; 
-		
+
+		var msg ='';
+		msg +=responseText;	
 		var file_con = document.getElementById('fileCon');
+		
+
+  		msg+= '<nav class="navbar navbar-inverse navbar-fixed-bottom">';
+  		msg+= '<div id="navbar" class="collapse navbar-collapse">';
+  		msg+=    '<ul class="nav navbar-nav">';
+  		msg+=         '<li><a href="#" onclick="">First</a></li>';
+  		msg+=         '<li><a href="#" onclick="">Previous</a></li>';
+  		msg+=         '<li><a href="#" onclick="">Next</a></li>';
+        msg+=         '<li><a href=""> Last</a></li>';
+  		msg+=     '</ul>';
+  		msg+= '</div>';
+  		msg+= '</nav>';
+		
 		
 	
 		file_con.innerHTML = '';
@@ -190,32 +243,32 @@
 			}
 			
 			
-		    msg+= ''
-		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">'
-					msg +='<td><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>'
-					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>'
-					msg +='<td>'+file.file_size+' byte </td>'
-					msg +='<td class="center">'+file.file_date+'</td>'
-					msg +='<td class="center">안병민'
+		   
+		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">';
+					msg +='<td><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>';
+					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
+					msg +='<td>'+file.file_size+' byte </td>';
+					msg +='<td class="center">'+file.file_date+'</td>';
+					msg +='<td class="center">안병민';
 					
-					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">'
-					msg += '<li class="dropdown">'
-					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'
-					msg +=                '<i class="fa fa-gear fa-fw"></i> '
-					msg +=    '</a>'
+					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
+					msg += '<li class="dropdown">';
+					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#">';
+					msg +=                '<i class="fa fa-gear fa-fw"></i> ';
+					msg +=    '</a>';
 			            
-					msg +=    '<ul class="dropdown-menu dropdown-user">'
-					msg +=     ' <li>'
-					msg +=       ' <a href="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>'
-					msg +=      '</li>'
-					msg +=      '<li>'
-					msg +=        '<a onclick="fileDel('+file.file_idx+', \''+ file.file_name +'\');"><i class="fa fa-user fa-fw"></i> 삭제</a>'
-					msg +=      '</li>'
-					msg +=    '</ul>'
-					msg +=   '</li>'
-					msg += '</ul></td>'
+					msg +=    '<ul class="dropdown-menu dropdown-user">';
+					msg +=     ' <li>';
+					msg +=       ' <a href="fileDown.do?file_name='+file.file_name+'"><i class="fa fa-user fa-fw"></i> 다운로드</a>';
+					msg +=      '</li>';
+					msg +=      '<li>';
+					msg +=        '<a onclick="fileDel('+file.file_idx+', \''+ file.file_name +'\');"><i class="fa fa-user fa-fw"></i> 삭제</a>';
+					msg +=      '</li>';
+					msg +=    '</ul>';
+					msg +=   '</li>';
+					msg += '</ul></td>';
 			        
-			msg += '</tr>'
+			msg += '</tr>';
 		
 		}
 		
@@ -237,7 +290,7 @@
     
   </head>
  
-  <body class="skin-blue" >
+  <body class="skin-blue" onload="project_fileList('${project_idx}')">
   
   <!-- 모달 시작 -->
   <div class="row">
@@ -246,16 +299,18 @@
 		      <!-- header -->
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
-		        <button type="button" class="close" data-dismiss="modal" style="font-size:30px; color:white;">×</button>
+		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif;" id="f_name" > </label>
+		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white;">X</button>
 		        <!-- header title -->
 		       
 		      </div>
 		      <!-- body -->
 		     	 <div class="modal-body" >
 		     	
-		     	 <div class="row" id="fileContent">
-		     	 	<div class="col-lg-6" id="fileCon">
-		      		${json}
+		     	 <div class="row" id="fileContent" >
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 350px;">
+		     	 	
+
 		      		</div>
 		         </div>
 		         
@@ -341,7 +396,7 @@
                 
                   <thead>
                     <tr>
-                      <th>파일 타입 ${project_idx}</th>
+                      <th>파일 타입</th>
                       <th id="th_file_name" onclick="file_sort('file_name','th_file_name')">파일 이름</th>
                       <th id="th_file_size" onclick="file_sort('file_size','th_file_size')">파일 크기</th>
                       <th id="th_file_date" onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
@@ -388,7 +443,7 @@
     <!-- /#wrapper -->
     
     <!-- jQuery -->
-   <<script src="/tpm_project/js/file/jquery.js"></script>
+   <script src="/tpm_project/js/file/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/tpm_project/js/file/bootstrap.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
