@@ -134,10 +134,9 @@
 		where project_idx=#{project_idx}
 	</delete>
 	
-	<update id="projectState" parameterType="tpm.project.model.ProjectDTO">
+	<update id="projectState" parameterType="int">
 		update tpm_project
-		set
-		project_state=#{project_state},
+		set project_state=project_state+1
 		where project_idx=#{project_idx}
 	</update>
 </mapper>

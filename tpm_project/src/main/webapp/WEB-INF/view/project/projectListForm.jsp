@@ -29,8 +29,7 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<link rel="stylesheet" 	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 
 <!-- Bootstrap 3.3.2 JS -->
 
@@ -38,7 +37,7 @@
 
 
 <script type="text/javascript">
-
+/* 
 	$(function(){
 		$('#slimdiv').slimScroll({
 	        height: '5px' // 스크롤 처리할 div 의 길이
@@ -47,7 +46,7 @@
 	    	//window.alert("Scroll value: " + pos + "px");
 	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
 	    });
-	}); 
+	});  */
 
 
  	window.onload = function() {
@@ -1069,9 +1068,10 @@ function drop4(ev) {
 					<c:choose>
 						<c:when test="${empty plist}">
 								등록된 프로젝트가 없습니다.
-					</c:when>
+						</c:when>
+						
 						<c:otherwise>
-						<div class="carousel-inner">
+						<div class="carousel-inner" role="listbox">
 							<c:forEach var="i" items="${plist}" varStatus="status">
 							
 							<div class="item ${status.first?'active':'' }">
@@ -1082,22 +1082,21 @@ function drop4(ev) {
 											<div class="panel panel-danger coupon" style="width: 80%; border-color: #fff ">
 												
 												<c:choose>
-													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+													<c:when test="${i.project_state == 3}">
 													<!-- 완료 -->
-														<div class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;">
+														<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;"</c:set>
 													</c:when>
-													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
+													<c:when test="${i.project_state == 2 }">
 													<!-- 평가하기 -->
-														<div class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;">
+														<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;"</c:set>
 														
 													</c:when>
-													<c:when test="${i.project_state == 1 }">
+													<c:otherwise>
 													<!-- 진행중 -->
-														 <div class="panel-heading" id="head" >
-																												
-													</c:when>
+														 <c:set var="ininin">class="panel-heading" id="head"</c:set>
+													</c:otherwise>
 												</c:choose>
-												
+												<div ${ininin}>
 													<div class="panel-title" id="title">
 														<i class="fa fa-github fa-2x"></i>
 														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
@@ -1117,7 +1116,7 @@ function drop4(ev) {
 																</span>
 															</c:if>
 														</h4>
-
+														
 													</div>
 												</div>
 												<div class="panel-body">
@@ -1158,18 +1157,19 @@ function drop4(ev) {
 														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>
 													</c:when>
 												</c:choose>
-													</div>
+													</div >
 												</div>
 											</div>
-										
+										</div>
 									</div>
 								</div>
 							</div>
-								</div>
-						</c:forEach>
+							</c:forEach>
 						</div>
+						
 					</c:otherwise>
 					</c:choose>
+					
 						<!-- carousel-inner -->
 			
 			

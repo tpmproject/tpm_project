@@ -123,7 +123,7 @@ function showf2() {
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
-function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
+function workUpdate(work_idx,work_start,work_end,work_confirm){
 	$(workback2).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
@@ -134,7 +134,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	while(fc.nodeName!='SPAN'){
 		fc=fc.nextSibling;
 	}
-	
+	work_title=fc.innerHTML;
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdateup.value=work_start+"-"+work_end;
@@ -314,8 +314,11 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
-	
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
+}
+function workDone(work_idx,work_state){
+	var param="work_idx="+work_idx+"&work_state="+work_state;
+	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
 }
 function updateWorkResult(){
 	if (XHR.readyState == 4) {
@@ -326,7 +329,7 @@ function updateWorkResult(){
 		}
 	}
 }
- 
+
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -697,7 +700,9 @@ function showWorkTable(work_idx){
 	}
 	
 }
-
+function showChecklist(work_idx){
+	$('#check_div'+work_idx).toggle('show');
+}
 
 </script>
 
@@ -819,15 +824,11 @@ a {
 	display: inline-block;
 	height: 26px;
 	width: 75px;
-	background: #ecf0f5;
 	margin-bottom: 8px;
     margin-top: 8px;
     padding-top: 4px;
     text-align: center;
-    border: 1px solid #3c8dbc;
-}
-.work_btn:HOVER{
-	font-weight: bold;
+    font-size: large;
 }
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
@@ -889,18 +890,13 @@ a {
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
-									<span onclick="showWorkTable(${wdto.work_idx})">
-										<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
-										&nbsp;${wdto.work_title }
-										<c:if test="${wdto.work_state eq 3}">
-										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
-										</c:if>
-									</span>
-
+									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right" style="color:green;"' :'class="glyphicon glyphicon-menu-down"' }></i>
+									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
+							<c:set var="wstart"><f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
+							<c:set var="wend"><f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 									<c:if test="${pdto.project_level != 1000 }">
-										<span
-											onclick="workUpdate(${wdto.work_idx},'${wdto.work_title}','${wdto.work_start}','${wdto.work_end}','${wdto.work_confirm}')"><i
-											class="glyphicon glyphicon-cog"></i></span>
+										<span onclick="workUpdate(${wdto.work_idx},'${wstart}','${wend}','${wdto.work_confirm}')">
+										<i class="glyphicon glyphicon-cog"></i></span>
 									</c:if>
 
 								</div>
@@ -909,9 +905,9 @@ a {
 										<tr>
 											<td colspan="2">
 												<div class="table_i glyphicon glyphicon-calendar"></div>
-												&nbsp;<f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm"/><br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												~<f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm"/>
+												&nbsp;${wstart}<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												~${wend}
 											</td>
 										</tr>
 										<tr>
@@ -926,22 +922,20 @@ a {
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2"><c:choose>
+											<td colspan="2">
+												<form action="javascript:addCheck(${wdto.work_idx})">
+												<div class="table_i glyphicon glyphicon-check" onclick="showChecklist(${wdto.work_idx})"></div>
+											<c:choose>
 													<c:when test="${pdto.project_level != 1000 }">
-														<form action="javascript:addCheck(${wdto.work_idx})">
-															<div class="table_i glyphicon glyphicon-check"></div>
-															<input type="text" id="content${wdto.work_idx}"
-																placeholder="체크리스트" style="width: 60%;"
-																required="required"> &nbsp;<i
-																class="glyphicon glyphicon-plus"
-																onclick="addCheck(${wdto.work_idx})"></i>
-														</form>
+															<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width: 60%;" required="required">
+															&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
 													</c:when>
 													<c:otherwise>
-														<div class="table_i glyphicon glyphicon-check"></div>
 														<span>체크리스트</span>
 													</c:otherwise>
-												</c:choose></td>
+												</c:choose>
+												</form>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
@@ -1003,23 +997,28 @@ a {
 										<c:remove var="chTotal" />
 										<c:remove var="chChecked" />
 										<tr>
-											<c:choose>
+											<td><div class="work_btn">												
+												<i class="glyphicon glyphicon-play-circle" ${wdto.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone(${wdto.work_idx},1)"></i>
+											<c:if test="${wdto.work_confirm ==10}">
+												<i class="glyphicon glyphicon-record" ${wdto.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${wdto.work_idx},2)"></i>
+											</c:if>
+												<i class="glyphicon glyphicon-ok-circle" ${wdto.work_state eq 3?'style="color:green;"':''} data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone(${wdto.work_idx},3)"></i>
+											</div></td>
+											<%-- <c:choose>
 												<c:when test="${wdto.work_state == 3 }">
-													<td><div class="work_btn">업무 완료됨</div></td>
+													<td><div class="work_btn"><i class="glyphicon glyphicon-ok-sign" style="color: green;"></i></div></td>
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 11 }">
 													<c:choose>
-													<c:when test="${pdto.project_level == 3000 }">
-													<td>
-														<td><div class="work_btn">업무 완료</div>
-													</td>
-													</c:when>
-													<c:otherwise>
-													<td><div class="work_btn">결재 요청</div></td>
-													</c:otherwise>
+														<c:when test="${pdto.project_level == 3000 }">
+															<td>
+																<td><div class="work_btn">업무 완료</div>
+															</td>
+														</c:when>
+														<c:otherwise>
+															<td><div class="work_btn">결재 요청</div></td>
+														</c:otherwise>
 													</c:choose>
-												
-													
 												</c:when>
 												<c:when test="${wdto.work_state + wdto.work_confirm == 12 }">
 													<c:choose>
@@ -1037,7 +1036,7 @@ a {
 												<c:when test="${wdto.work_state + wdto.work_confirm == 21 }">
 													<td><div class="work_btn">업무 완료</div></td>
 												</c:when>
-											</c:choose>
+											</c:choose> --%>
 
 											<td align="right"><a
 												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a

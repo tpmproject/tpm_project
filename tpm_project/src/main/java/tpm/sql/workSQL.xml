@@ -87,7 +87,11 @@
 		work_confirm=#{work_confirm}
 		where work_idx=#{work_idx}
 	</update>
-	
+	<update id="workStateUpdate" parameterType="tpm.work.model.WorkDTO">
+		update tpm_work
+		set work_state=#{work_state}
+		where work_idx=#{work_idx}
+	</update>
 	<delete id="workDelete" parameterType="int">
 	delete from tpm_work where work_idx=#{work_idx}
 	</delete>

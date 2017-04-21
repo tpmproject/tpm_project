@@ -113,7 +113,7 @@ public class WorkController {
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
 	
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
 		
 		Date ts = sdf.parse(work_s);
 		Date te = sdf.parse(work_e);
@@ -157,32 +157,45 @@ public class WorkController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
-		System.out.println(workdateup);
-		String temp[]=workdateup.split("-");
-		String work_s=temp[0].trim();
-		String work_e=temp[1].trim();
-		System.out.println(work_s);
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
-		Date ts = sdf.parse(work_s);
-		Date te = sdf.parse(work_e);
-		Timestamp work_start = new Timestamp(ts.getTime());
-		Timestamp work_end = new Timestamp(te.getTime());
-		System.out.println(work_start);
-		dto.setWork_start(work_start);
-		dto.setWork_end(work_end);
-		int result=workDAO.updateWork(dto);
-		if(result>0){
-			result=0;
-			result+=workDAO.workMemberDelete(dto);
-			for(int i=0;i<member_idx.length;i++){
-				int w_idx=Integer.parseInt(member_idx[i]);
-				WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), w_idx);
-				result+=workDAO.workMemberInsert(wdto);
+		int result=0;
+		if(dto.getWork_state()>0){
+			result=workDAO.updateWork(dto);
+			if(result==0){
+				mav.addObject("msg","error");
 				mav.addObject("dto",dto);
 			}
 		}else{
-			mav.addObject("msg","error");
+		
+		
+			workdateup=workdateup.replaceAll("오전", "AM");
+			workdateup=workdateup.replaceAll("오후", "PM");
+			String temp[]=workdateup.split("-");
+			String work_s=temp[0].trim();
+			String work_e=temp[1].trim();
+			
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
+			Date ts = sdf.parse(work_s);
+			Date te = sdf.parse(work_e);
+			Timestamp work_start = new Timestamp(ts.getTime());
+			Timestamp work_end = new Timestamp(te.getTime());
+			System.out.println(work_start);
+			dto.setWork_start(work_start);
+			dto.setWork_end(work_end);
+			result=workDAO.updateWork(dto);
+			if(result>0){
+				result=0;
+				result+=workDAO.workMemberDelete(dto);
+				for(int i=0;i<member_idx.length;i++){
+					int w_idx=Integer.parseInt(member_idx[i]);
+					WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), w_idx);
+					result+=workDAO.workMemberInsert(wdto);
+					mav.addObject("dto",dto);
+				}
+			}else{
+				mav.addObject("msg","error");
+			}
 		}
+		
 		return mav;
 	}
 	

@@ -30,6 +30,6 @@ public interface ProjectDAO {
 	
 	public int projectMemberInsert(ProjectMemberDTO dto);
 	
-	public int projectState(ProjectDTO dto);
+	public int projectState(int project_idx);
 	
 }

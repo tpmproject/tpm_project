@@ -60,7 +60,12 @@ public class WorkDAOImple implements WorkDAO {
 
 	public int updateWork(WorkDTO dto) {
 		// TODO Auto-generated method stub
-		int result = sqlMap.update("workUpdate",dto);
+		int result=0;
+		if(dto.getWork_state()>0){
+			result=sqlMap.update("workStateUpdate",dto);
+		}else{
+			result = sqlMap.update("workUpdate",dto);
+		}
 		return result;
 	}
 
