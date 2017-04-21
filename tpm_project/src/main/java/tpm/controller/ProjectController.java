@@ -255,7 +255,7 @@ public class ProjectController {
 	@RequestMapping(value="projectState.do",method=RequestMethod.POST)
 	public ModelAndView addTendencyState(TendencyDTO dto, int project_idx){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectListForm");
+		mav.setViewName("project/projectEvaluation_d");
 		
 		mav.addObject("tendencyDTO",dto);
 		int result=tendencyDAO.addTendency(dto);

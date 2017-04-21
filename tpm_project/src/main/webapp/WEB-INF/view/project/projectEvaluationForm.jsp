@@ -130,8 +130,17 @@ function addTendency_l(member_idx){
 
 	window.alert(param);
 
-	sendRequest('projectState.do', param, null, 'POST');
+	sendRequest('projectState.do', param, addTendency_lResult, 'POST');
 
+}
+function addTendency_lResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			result=parseInt(result);
+			location.href='projectList.do';
+		}
+	}
 }
 </script>
 </head>
@@ -233,9 +242,6 @@ function addTendency_l(member_idx){
 				</div>
 			</form>
 		</c:forEach>
-		<c:if test="${empty arr}">
-		모든 멤버의 평가가 완료 되었습니다.
-		</c:if>
 	</div>
 </body>
 </html>
