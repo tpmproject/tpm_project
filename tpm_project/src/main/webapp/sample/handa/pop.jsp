@@ -35,11 +35,12 @@
 	</button>
 
 
-		<a href="#" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div></div>" data-delay='{ "hide": 500}' data-trigger="hover">you probably</a>
-
+	<div style="margin-top: 130px;">
+		<a href="#" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div>ㅇㅇㅇ</div>" data-delay='{ "hide": 500}' data-trigger="hover">you probably</a>
+	</div>
 
 	<div>
-		<br />Static text.
+		<br/>Static text.
 	</div>
 	<div style="position: fixed;  left:0; top:300px;" id="fixed-div">
 		<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." id="popover">Popover123</button>

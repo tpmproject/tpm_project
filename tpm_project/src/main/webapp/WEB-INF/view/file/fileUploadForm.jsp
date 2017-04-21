@@ -106,6 +106,7 @@
 	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx }">
 	 
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
+	
 	<div id="div_list"></div>
 	<div id="div_fns"></div>
 	<div id="div_dnd" style="height: 500px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
@@ -136,7 +137,7 @@
 		var fns = [];
 	
 		for(var i=0,m=files.length;i<m;i++){
-			fns.push(files[i].name+'('+files[i].size+' Byte)<input type="button" value="삭제" onclick="del('+files[i]+')">' );
+			fns.push(files[i].name+'('+files[i].size+' Byte)<input type="button" value="삭제" onclick="del(1)">' );
 		}
 		
 		div_fns.innerHTML = fns.join('<br>');
@@ -160,6 +161,62 @@
 	}
 	file_dnd.onchange = function(evt){
 		showfns(this.files); //선택된 파일 목록 표시
+	}
+	
+	function del(file){
+		
+		window.alert($('#file_dnd').val());
+		//var files_dd = $('#file_dnd')[1].val();
+		/* var files = $("#file_dnd")[0].files;
+		for (var i = 0; i < files.length; i++)
+		{
+		 alert(files[i].name);
+		} */
+		
+		//var files = $("#file_dnd")[0].files;
+		//delete $("#file_dnd")[0].files[1];
+
+		//var obj = $("#file_dnd")[0].files[1];
+		//obj.parentNode.removeChild(obj);
+		//obj.parent().removeChild();
+		
+		//var obj = $("#file_dnd");   // Get the <ul> element with id="myList"
+		//obj.removeChild(obj.childNodes[0]);           // Remove <ul>'s first child node (index 0)
+		/* var ccc = $("#file_dnd").data("file");
+		window.alert(ccc);
+		
+		var files = $("#file_dnd")[0].files;
+		for (var i = 0; i < files.length; i++)
+		{
+		 alert(files[i].name);
+		} */
+		/* var newList = [];
+
+		
+		for(var i = 0; i < files.length; i++)
+		{
+		    if(i != 2)
+		    {
+		        newList.push(files.item(i));
+		    }
+		} 
+		
+		
+		*/
+		//window.alert(files_dd);
+		/* var files = $("#file_dnd")[0].files;
+		for (var i = 0; i < files.length; i++){
+		 	alert(files[i].name);
+		}
+		
+		var newList = []; */
+		
+		/* $('#file_dnd')[0].files[1].remove;
+		var files = $("#file_dnd")[0].files;
+		for (var i = 0; i < files.length; i++){
+		 	alert(files[i].name);
+		} */
+		
 	}
 
 </script>

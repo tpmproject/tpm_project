@@ -103,6 +103,7 @@ function categoryAddResult() {
 
 //업무추가
 window.onload=function(){
+    $('[data-toggle="popover"]').popover({container: "body"});
 	$(work_modal).hide();
 	$(btnwork2).hide();
 	$(work_modal2).hide();
@@ -133,6 +134,7 @@ function workUpdate(work_idx,work_title,work_start,work_end,work_confirm){
 	while(fc.nodeName!='SPAN'){
 		fc=fc.nextSibling;
 	}
+	
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdateup.value=work_start+"-"+work_end;
@@ -152,7 +154,6 @@ function shows(){
 	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
-	$(tendency_p).hide();
 	var p=${pdto.project_idx};
 	
 	sendRequest('workAdd.do?project_idx='+p,null,showsResult,'GET');
@@ -186,11 +187,11 @@ function showsResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div id="work_member'+member.member_idx+'"  onmouseover="tendency('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work_member'+member.member_idx+'" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div id=pop_m'+member.member_idx+'></div>" data-trigger=" hover"draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
-				msg2 += '<p class="text-muted">' + member.member_id	+ '</p> ';
+				msg2 += '<p class="text-muted" data-toggle="popover" data-placement="left" data-html="true" title="성향" data-content="<div>ㅇㅇㅇ</div>" data-trigger="hover" >' + member.member_id	+ '</p> ';
 				msg2 += '</div> ';
 			}
 			var project_m = document.getElementById('project_m');
@@ -620,17 +621,7 @@ function cateDelResult(){
 }
 
 //추천
-function tendency(member_idx){
-	$(tendency_p).fadeIn('150');
-	sendRequest('recommand.do?member_idx='+member_idx,null,tendencyResult,'POST');
-}
-function tendencyResult(){
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result=XHR.responseText;
-		}
-	}
-}
+
 //추천 목록
 function tendencyList(){
 	var param = 'tendency='+document.newWork.tendency.value
@@ -750,11 +741,11 @@ function showWorkTable(work_idx){
 	position: fixed;
 	z-index:5;
 	top: 20%;
-	left: 20%;
-	border: solid 10px white;
-	border-radius: 10px;
-	width: 600px;
-	height: 500px;
+	left: 35%;
+	border: solid 2px #1a2226;
+	border-radius: 3px;
+	width: 665px;
+	height: 480px;
 }
 .content{
 	height:780px;
@@ -918,9 +909,9 @@ a {
 										<tr>
 											<td colspan="2">
 												<div class="table_i glyphicon glyphicon-calendar"></div>
-												&nbsp;<f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  HH:mm"/><br>
+												&nbsp;<f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm"/><br>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												~<f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  HH:mm"/>
+												~<f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm"/>
 											</td>
 										</tr>
 										<tr>
@@ -1098,29 +1089,29 @@ a {
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">업무 추가</h4>
+			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>
+			
+			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;"><i class="glyphicon glyphicon-plus"></i> Add Work</h4>
 
 			<div id="w_modal">
 				<div id="btnwork">
-					<div>
+					<div style=" padding:10px;">
 						<input type="hidden" name="category_idx" value=""> <label>업무명
-						</label><input type="text" name="work_title">
+						</label>&nbsp;&nbsp;<input type="text" name="work_title">
 					</div>
 					<div class="form-group">
-						<label>기한 </label>
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-clock-o"></i>
 							</div>
-							<input type="text" class="form-control pull-right"
+							<input type="text" class="form-control pull-right" placeholder="기한을 체크해주세요."
 								name="workdate" id="workdate" />
 						</div>
 						<!-- /.input group -->
 					</div>
-					<div align="right">
-						<input type="checkbox" name="work_confirm">결재여부
-						<button type="button" class="btn btn-next" id="btn-worknext"
+					<div align="right" style="padding:5px;">
+						<input type="checkbox"  name="work_confirm">결재여부
+						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
 
 					</div>
@@ -1132,25 +1123,14 @@ a {
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3" style="width:330px;">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<select id="tendency" onchange="tendencyList()">
-									<option>--성향--</option>
-									<option value="tendency_e">외향적</option>
-									<option value="tendency_i">내향적</option>
-									<option value="tendency_s">감각적</option>
-									<option value="tendency_n">직관적</option>
-									<option value="tendency_t">사고적</option>
-									<option value="tendency_f">감정적</option>
-									<option value="tendency_j">판단적</option>
-									<option value="tendency_p">인식적</option>
-								</select>
 								<div id="project_m"
 									style="width: 100%; height: 320px; overflow-y: scroll"
 									ondrop="drop3(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)"
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
 								ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<div id="work_m"
@@ -1158,17 +1138,13 @@ a {
 									ondrop="drop2(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" id=tendency_p name="tendency_p">
-								<h4 class="text-center">성향 파라미터</h4>
-								<div id="work_m" style="width: 100%; height: 320px;"></div>
-							</div>
 						</div>
 					</div>
 				</div>
-				<div align="center">
-					<button type="button" class="btn btn-next" id="btn-workbefore"
+				<div align="center" style="padding:7px;">
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workbefore"
 						onclick="showf()">이전</button>
-					<button type="button" class="btn btn-next" id="btn-workok"
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workok"
 						onclick="addWork()">완료</button>
 				</div>
 			</div>
@@ -1179,14 +1155,13 @@ a {
 	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">업무 수정</h4>
+			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
+			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;">업무 수정</h4>
 
 			<div id="w_modal2">
 				<div id="btnwork3">
-					<div>
-						<input type="hidden" name="work_idx"> <label>업무명 </label><input
-							type="text" name="work_title">
+					<div style=" padding:10px;">
+						<input type="hidden" name="work_idx"> <label>업무명 </label>&nbsp;&nbsp;<input type="text" name="work_title">
 					</div>
 					<div class="form-group">
 						<label>기한 </label>
@@ -1204,7 +1179,7 @@ a {
 					<div align="right">
 						<input type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
-							onclick="shows2()">다음</button>
+							onclick="shows2()" style="background-color:#1e282c; color:white;" >다음</button>
 					</div>
 				</div>
 			</div>
@@ -1213,25 +1188,14 @@ a {
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3" style="width:330px;">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<select id="tendency" onchange="tendencyList2()">
-									<option>--성향--</option>
-									<option value="tendency_e">외향적</option>
-									<option value="tendency_i">내향적</option>
-									<option value="tendency_s">감각적</option>
-									<option value="tendency_n">직관적</option>
-									<option value="tendency_t">사고적</option>
-									<option value="tendency_f">감정적</option>
-									<option value="tendency_j">판단적</option>
-									<option value="tendency_p">인식적</option>
-								</select>
 								<div id="project_m2"
 									style="width: 100%; height: 320px; overflow-y: scroll"
 									ondrop="drop5(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="col-md-3" ondrop="drop(event)"
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
 								ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<div id="work_m2"
@@ -1243,9 +1207,9 @@ a {
 					</div>
 				</div>
 				<div margin-top="10" align="center">
-					<button type="button" class="btn btn-next" id="btn-workbefore"
+					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workbefore"
 						onclick="showf2()">이전</button>
-					<button type="button" class="btn btn-next" id="btn-workok"
+					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workok"
 						onclick="updateWork()">완료</button>
 				</div>
 			</div>
@@ -1338,11 +1302,11 @@ $(document).ready(function(){
 }); */
 $(function () {
 	 //Date range picker with time picker
- $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+ $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 });	
 $(function () {
 	 //Date range picker with time picker
-$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 });
 
 /* 첨부파일 관련 */
