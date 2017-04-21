@@ -134,7 +134,7 @@ function workUpdate(work_idx,work_start,work_end,work_confirm){
 	while(fc.nodeName!='SPAN'){
 		fc=fc.nextSibling;
 	}
-	
+	work_title=fc.innerHTML;
 	document.changeWork.work_idx.value=work_idx;
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdateup.value=work_start+"-"+work_end;
@@ -890,9 +890,7 @@ a {
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
-									<span onclick="showWorkTable(${wdto.work_idx})">
-										&nbsp;${wdto.work_title }
-									</span>
+									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
 									<c:if test="${wdto.work_state eq 3}">
 										<i class="glyphicon glyphicon-ok-sign" style="color: green;"></i>
 										</c:if>
