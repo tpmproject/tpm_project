@@ -1262,7 +1262,10 @@ a {
 	</form>
 
 
-	<%@include file="tendency.jsp"%>
+	<div id="tendency_pop">
+		헥사그래프
+	</div>
+	
 	<%@include file="/WEB-INF/view/comment/comment.jsp"%>
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
