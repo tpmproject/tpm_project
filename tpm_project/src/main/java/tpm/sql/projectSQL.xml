@@ -95,4 +95,11 @@
 		delete  from tpm_project
 		where project_idx=#{project_idx}
 	</delete>
+	
+	<update id="projectState" parameterType="tpm.project.model.ProjectDTO">
+		update tpm_project
+		set
+		project_state=#{project_state},
+		where project_idx=#{project_idx}
+	</update>
 </mapper>

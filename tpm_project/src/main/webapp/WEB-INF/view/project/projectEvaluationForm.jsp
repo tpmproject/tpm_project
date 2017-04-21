@@ -82,6 +82,59 @@ function addTendencyResult(){
 		}
 	}
 }
+function addTendency_l(member_idx){
+
+	var tendency_e = document.getElementById("tendency_e");
+	var e_idx = tendency_e.selectedIndex;
+	var e_val = tendency_e.options[e_idx].value;
+
+	var tendency_i = document.getElementById("tendency_i");
+	var i_idx = tendency_i.selectedIndex;
+	var i_val = tendency_i.options[i_idx].value;
+	
+	var tendency_s = document.getElementById("tendency_s");
+	var s_idx = tendency_s.selectedIndex;
+	var s_val = tendency_s.options[s_idx].value;
+	
+	var tendency_n = document.getElementById("tendency_n");
+	var n_idx = tendency_n.selectedIndex;
+	var n_val = tendency_n.options[n_idx].value;
+	
+	var tendency_t = document.getElementById("tendency_t");
+	var t_idx = tendency_t.selectedIndex;
+	var t_val = tendency_t.options[t_idx].value;
+	
+	var tendency_f = document.getElementById("tendency_f");
+	var f_idx = tendency_f.selectedIndex;
+	var f_val = tendency_f.options[f_idx].value;
+	
+	var tendency_j = document.getElementById("tendency_j");
+	var j_idx = tendency_j.selectedIndex;
+	var j_val = tendency_j.options[j_idx].value;	
+	
+	var tendency_p = document.getElementById("tendency_p");
+	var p_idx = tendency_p.selectedIndex;
+	var p_val = tendency_p.options[p_idx].value;
+	
+	var param = 'member_idx=' + member_idx;
+	
+	+'&project_idx=' + ${param.project_idx}
+	+'&appraiser_idx=' + ${sessionScope.s_member_idx}
+	+'&tendency_e=' + e_val
+	+'&tendency_i=' + i_val
+	+'&tendency_s=' + s_val
+	+'&tendency_n=' + n_val
+	+'&tendency_t=' + t_val
+	+'&tendency_f=' + f_val
+	+'&tendency_j=' + j_val
+	+'&tendency_p=' + p_val
+	+'&project_state=' + 3;
+
+	window.alert(param);
+
+	sendRequest('projectEvaluation.do', param, null, 'POST');
+
+}
 </script>
 </head>
 <body>
@@ -92,6 +145,7 @@ function addTendencyResult(){
 			<h3>${pdto.project_name}</h3>
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
+		<c:set var="count" value="${count}"></c:set>
 		<c:forEach var="arr" items="${arr}">
 			<c:if test="${empty arr.member_idx}">
 			평가완료
@@ -169,9 +223,15 @@ function addTendencyResult(){
 				</div>
 				<br>
 				<div>
+					<c:if test="${count==1}">
+					<button type="reset" class="btn btn-reset" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="button" class="btn btn-next" id="btn_tb" name="btn_tendencyok" onclick="addTendency_l(${arr.member_idx})">완료</button>
+					</c:if>
+					<c:if test="${count>1 }">
 					<button type="reset" class="btn btn-reset" id="btn_reset" name="btn_reset">초기화</button>
 					<button type="button" class="btn btn-next" id="btn_tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
 					<hr>
+					</c:if>
 				</div>
 			</form>
 		</c:forEach>

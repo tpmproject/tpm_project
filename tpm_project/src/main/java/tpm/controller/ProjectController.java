@@ -226,24 +226,33 @@ public class ProjectController {
 		mav.setViewName("project/projectEvaluationForm");
 		ProjectDTO pdto=projectDAO.projectSearch(bdto);
 		ArrayList<MemberDTO> arr=tendencyDAO.tendencyList(bdto);
+		int count=arr.size();
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
+		mav.addObject("count",count);
 		return mav;
 	}
 	
 	/**프로젝트 멤버 평가*/
 	@RequestMapping(value="projectEvaluation.do", method=RequestMethod.POST)
-	public ModelAndView addTendency(TendencyDTO dto){
+	public ModelAndView addTendency(TendencyDTO dto, int project_state, ProjectDTO pdto, int project_idx){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectEvaluation_d");
 		
 		mav.addObject("tendencyDTO",dto);
 		int result=tendencyDAO.addTendency(dto);
-		
+		System.out.println(project_state);
+		pdto.setProject_state(project_state);
+		pdto.setProject_idx(project_idx);
 		int msg=dto.getMember_idx();
 		if(result<=0){
 			msg=0;
+		}
+		if(project_state==3){
+			int count=projectDAO.projectState(pdto);
+			mav.setViewName("project/projectListForm");
+		}else{
+			mav.setViewName("project/projectEvaluation_d");
 		}
 		mav.addObject("msg",msg);
 		return mav;
