@@ -739,7 +739,7 @@ function drop4(ev) {
     }
 }
 
-/**결재 상태*/
+
 
 </script>
 <style>
@@ -1065,6 +1065,7 @@ function drop4(ev) {
 		<!-- Wrapper for slides -->
 		
 					<c:set var="plist" value="${plist}"></c:set>
+					
 					<c:choose>
 						<c:when test="${empty plist}">
 								등록된 프로젝트가 없습니다.
@@ -1102,17 +1103,16 @@ function drop4(ev) {
 														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
 														  <h4 id="pn${i.project_idx}">
 															<span class="hidden-xs">${i.project_name }</span>
-															<c:if test="${i.project_level eq 3000 }">
+															
+															<c:if test="${pm_dto.project_level eq 3000 }">
 
 																<span
 																	onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																	<i class="glyphicon glyphicon-cog"
-																	style="margin-bottom: 0px;"></i>
+																	<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i>
 																</span>
 
 																<span onclick="projectDelete('${i.project_idx}')">
-																	<i class="glyphicon glyphicon-remove"
-																	style="margin-bottom: 0px;"></i>
+																	<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i>
 																</span>
 															</c:if>
 														</h4>
@@ -1143,20 +1143,27 @@ function drop4(ev) {
 													<div class="coupon-code">
 														<a class="btn btn-link" href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
 														 
-														 			 	<!-- 프로젝트 진행현황 -->
+												<!-- 프로젝트 진행현황 -->
+												<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+												<%-- <c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}"> --%>
+												
 												<c:choose>
-													<c:when test="${i.project_level == 3000 and i.project_state == 3}">
+													<c:when test="${pm_dto.project_level == 3000 and i.project_state == 3}">
+														<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 														<span class="print"> <a href="#" class="btn btn-link" style="color: green;"><i class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
+														</c:if>
 													</c:when>
-													<c:when test="${i.project_level == 3000 and i.project_state == 2 }">
-														
-														
-														<span class="print"> <a onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${i.project_level}&member_idx=${s_member_idx}'" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
+													<c:when test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
+														<span class="print"> <a onclick="location.href='projectEvaluation.do?project_idx=${project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
 													</c:when>
-													<c:when test="${i.project_state == 1 }">
+													<c:when test="${pm_dto.project_level == 1 }">
 														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>
 													</c:when>
 												</c:choose>
+												
+												<%-- </c:if> --%>
+												</c:forEach>
+											
 													</div >
 												</div>
 											</div>
