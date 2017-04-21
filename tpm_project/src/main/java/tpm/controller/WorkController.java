@@ -113,7 +113,7 @@ public class WorkController {
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
 	
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
 		
 		Date ts = sdf.parse(work_s);
 		Date te = sdf.parse(work_e);
