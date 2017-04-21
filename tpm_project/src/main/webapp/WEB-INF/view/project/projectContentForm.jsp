@@ -41,6 +41,13 @@
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
 <script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
+
+<!-- 개인 성향  그래프-->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/radar.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script>
 window.onload=function(){
 	$('[data-toggle="popover"]').popover();
