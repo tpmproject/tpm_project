@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <%@ include file="/sample/cho/main/import.jsp"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
@@ -146,23 +145,21 @@ function addTendency_lResult(){
 </head>
 <body>
 	<%@include file="/WEB-INF/view/header.jsp"%>
-	<div id="pebody">
-		<div>
-			<br>&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
-			<h3>${pdto.project_name}</h3>
+	<div id="pebody" style=" width:100%; height:780px; overflow-y: scroll">
+		<div style="margin-bottom: 30px;">
+			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}</span>
+			</h3>
 		</div>
 		<c:set var="pdto" value="${pdto}"></c:set>
 		<c:set var="count" value="${count}"></c:set>
 		<c:forEach var="arr" items="${arr}">
-			<c:if test="${empty arr.member_idx}">
-			평가완료
-			</c:if>
+		<div id="tendency_m" class="col-md-12" >
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
-			<div id="bt${arr.member_idx}">
+			<div class="col-md-5" style="width: 250px; margin-bottom:25px;" id="bt${arr.member_idx}" >
 			<img src="/tpm_project/img/member/profile/${arr.member_img}" style="width: 128px; height: 128px;">
 				<h4>${arr.member_name}(${arr.member_id})</h4>
 				</div>
-				<div class="col-sm-offset-7">
+				<div class="col-md-6" style="margin-top: 2%;">
 					<a class="btn btn-default disabled">외향성</a> 
 					<select id="tendency_e">
 						<option value="5">5</option>
@@ -231,16 +228,17 @@ function addTendency_lResult(){
 				<br>
 				<div>
 					<c:if test="${count==1}">
-					<button type="reset" class="btn btn-reset" id="btn_reset" name="btn_reset">초기화</button>
-					<button type="button" class="btn btn-next" id="btn_tb" name="btn_tendencyok" onclick="addTendency_l(${arr.member_idx})">완료</button>
+					<button type="reset" class="btn btn-reset" style="background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn_tb" name="btn_tendencyok" onclick="addTendency_l(${arr.member_idx})">완료</button>
 					</c:if>
 					<c:if test="${count>1 }">
-					<button type="reset" class="btn btn-reset" id="btn_reset" name="btn_reset">초기화</button>
-					<button type="button" class="btn btn-next" id="btn_tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
+					<button type="reset" class="btn btn-reset" style="background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn_tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
 					<hr>
 					</c:if>
 				</div>
 			</form>
+			</div>
 		</c:forEach>
 	</div>
 </body>
