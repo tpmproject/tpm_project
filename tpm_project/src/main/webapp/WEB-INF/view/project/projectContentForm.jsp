@@ -303,7 +303,7 @@ function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			location.reload();
+
 		}
 	}
 }
