@@ -1,6 +1,7 @@
 package tpm.project.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tpm.category.model.CategoryDTO;
 
@@ -14,6 +15,7 @@ public class ProjectDTO {
 	private int project_level;
 
 	private ArrayList<CategoryDTO> category_dtos;
+	private List<ProjectMemberDTO> project_member_dtos;
 
 	private int category_num;
 	private int work_num;
@@ -44,6 +46,24 @@ public class ProjectDTO {
 		this.project_state = project_state;
 		this.project_content = project_content;
 		this.category_dtos = category_dtos;
+		this.category_num = category_num;
+		this.work_num = work_num;
+		this.checklist_num = checklist_num;
+	}
+
+	
+
+	public ProjectDTO(int project_idx, String project_name, int project_state, String project_content,
+			int project_level, ArrayList<CategoryDTO> category_dtos, List<ProjectMemberDTO> project_member_dtos,
+			int category_num, int work_num, int checklist_num) {
+		super();
+		this.project_idx = project_idx;
+		this.project_name = project_name;
+		this.project_state = project_state;
+		this.project_content = project_content;
+		this.project_level = project_level;
+		this.category_dtos = category_dtos;
+		this.project_member_dtos = project_member_dtos;
 		this.category_num = category_num;
 		this.work_num = work_num;
 		this.checklist_num = checklist_num;
@@ -121,12 +141,26 @@ public class ProjectDTO {
 		this.project_level = project_level;
 	}
 
+	
+
+	public List<ProjectMemberDTO> getProject_member_dtos() {
+		return project_member_dtos;
+	}
+
+	public void setProject_member_dtos(List<ProjectMemberDTO> project_member_dtos) {
+		this.project_member_dtos = project_member_dtos;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectDTO [project_idx=" + project_idx + ", project_name=" + project_name + ", project_state="
 				+ project_state + ", project_content=" + project_content + ", project_level=" + project_level
-				+ ", category_dtos=" + category_dtos + ", category_num=" + category_num + ", work_num=" + work_num
-				+ ", checklist_num=" + checklist_num + "]";
+				+ ", category_dtos=" + category_dtos + ", project_member_dtos=" + project_member_dtos
+				+ ", category_num=" + category_num + ", work_num=" + work_num + ", checklist_num=" + checklist_num
+				+ "]";
 	}
 
+	
+
+	
 }

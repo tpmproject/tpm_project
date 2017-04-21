@@ -1,6 +1,7 @@
 package tpm.project.model;
 
 import java.util.ArrayList		;
+import java.util.List;
 
 import tpm.member.model.MemberDTO;
 import tpm.project.model.ProjectMemberDTO;
@@ -8,6 +9,8 @@ import tpm.project.model.ProjectMemberDTO;
 public interface ProjectDAO {
 
 	public ArrayList<ProjectDTO> projectAllList(int member_idx);
+	
+	public List<ProjectDTO> projectAllListByMember(int member_idx);
 	
 	public ProjectDTO projectSearch(ProjectMemberDTO dto);
 	

@@ -3,6 +3,7 @@ package tpm.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +56,8 @@ public class ProjectController {
 		HttpSession session=req.getSession();
 		int member_idx=(Integer)session.getAttribute("s_member_idx");
 		
-		ArrayList<ProjectDTO> plist= projectDAO.projectAllList(member_idx);
+		List<ProjectDTO> plist= projectDAO.projectAllListByMember(member_idx);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("plist",plist);
 		

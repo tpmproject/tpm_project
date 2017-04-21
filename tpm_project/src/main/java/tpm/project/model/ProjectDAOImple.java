@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -161,5 +162,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		
 		int count=sqlMap.insert("projectMemberInsert",dto);
 		return count;
+	}
+	@Override
+	public List<ProjectDTO> projectAllListByMember(int member_idx) {
+		// TODO Auto-generated method stub
+		return sqlMap.selectList("projectAllListByMember", member_idx);
 	}
 }

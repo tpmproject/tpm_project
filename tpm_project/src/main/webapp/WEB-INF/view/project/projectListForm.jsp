@@ -1125,7 +1125,10 @@ function drop4(ev) {
 
 													<div class="col-md-9">
 														<ul class="items">
-															<li>멤버 리스트</li>
+															<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+																<li>${pm_dto.mdtos.member_img}</li>
+															</c:forEach>
+											
 														</ul>
 													</div>
 

@@ -259,8 +259,13 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [member_idx=" + member_idx + ", member_id=" + member_id + ", member_pwd=" + member_pwd
 				+ ", member_name=" + member_name + ", member_gender=" + member_gender + ", member_tel=" + member_tel
-				+ ", member_img=" + member_img + ", member_thema=" + member_thema + "]";
+				+ ", member_img=" + member_img + ", member_thema=" + member_thema + ", member_img_file="
+				+ member_img_file + ", work_idx=" + work_idx + ", pm=" + pm + ", mf=" + mf + ", project_level="
+				+ project_level + ", td=" + td + ", te=" + te + ", ti=" + ti + ", ts=" + ts + ", tn=" + tn + ", tt="
+				+ tt + ", tf=" + tf + ", tj=" + tj + ", tp=" + tp + "]";
 	}
+
+	
 
 	
 }

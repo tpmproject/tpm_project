@@ -243,6 +243,21 @@ $(function(){
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
+    $('#chat_project_list_div').slimScroll({
+        height: '296px' // 스크롤 처리할 div 의 길이
+    }).bind('slimscrolling', function(e, pos) {
+    	//window.alert("Scroll value: " + pos + "px");
+       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+    });
+    
+    $('#chat_channel_list_div').slimScroll({
+        height: '296px' // 스크롤 처리할 div 의 길이
+    }).bind('slimscrolling', function(e, pos) {
+    	//window.alert("Scroll value: " + pos + "px");
+       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+    });
+    
+    
     //페이지 시작시 소켓 연결
     connect();
     
@@ -481,7 +496,7 @@ function InsertChatContent() {
 					<div class="col-md-12">
 						<!-- 컨텐트 삽입 -->
 						<div class="col-md-4">
-							<%@ include file="chatList.jsp"%>
+							<%@ include file="chatList_design.jsp"%>
 						</div>
 						<div class="col-md-8">
 							<%@ include file="chatContent.jsp"%>
