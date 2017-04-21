@@ -700,7 +700,9 @@ function showWorkTable(work_idx){
 	}
 	
 }
-
+function showChecklist(work_idx){
+	$('#check_div'+work_idx).toggle('show');
+}
 
 </script>
 
@@ -920,22 +922,20 @@ a {
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2"><c:choose>
+											<td colspan="2">
+												<form action="javascript:addCheck(${wdto.work_idx})">
+												<div class="table_i glyphicon glyphicon-check" onclick="showChecklist(${wdto.work_idx})"></div>
+											<c:choose>
 													<c:when test="${pdto.project_level != 1000 }">
-														<form action="javascript:addCheck(${wdto.work_idx})">
-															<div class="table_i glyphicon glyphicon-check"></div>
-															<input type="text" id="content${wdto.work_idx}"
-																placeholder="체크리스트" style="width: 60%;"
-																required="required"> &nbsp;<i
-																class="glyphicon glyphicon-plus"
-																onclick="addCheck(${wdto.work_idx})"></i>
-														</form>
+															<input type="text" id="content${wdto.work_idx}" placeholder="체크리스트" style="width: 60%;" required="required">
+															&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck(${wdto.work_idx})"></i>
 													</c:when>
 													<c:otherwise>
-														<div class="table_i glyphicon glyphicon-check"></div>
 														<span>체크리스트</span>
 													</c:otherwise>
-												</c:choose></td>
+												</c:choose>
+												</form>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2">

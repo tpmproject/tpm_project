@@ -113,6 +113,10 @@ function searchDate(){
 	}while(mwdiv!=last);
 	showWorks();
 }
+function workDone(work_idx,work_state){
+	var param="work_idx="+work_idx+"&work_state="+work_state;
+	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
+}
 </script>
 <style>
 .over a{
