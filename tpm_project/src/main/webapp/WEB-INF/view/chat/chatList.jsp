@@ -10,6 +10,7 @@
 </fieldset>
 <fieldset>
 	<legend>채널 리스트</legend>
+	
 	<ul>
 		<c:forEach var="chdto" items="${arry_chdto}">
 			<li><a href="javascript:showChatContent('C','${chdto.channel_idx}')">${chdto.channel_name},${chdto.channel_idx}</a></li>

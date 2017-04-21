@@ -55,10 +55,18 @@ public class WorkController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mywork/myWorkList");
-		MemberDTO mdto=new MemberDTO();
+		MemberDTO mdto = new MemberDTO();
 		mdto.setMember_idx(member_idx);
-		ArrayList<MyWorkDTO> arr=workDAO.myWorkAllList(mdto);
-		
+		ArrayList<MyWorkDTO> arr = workDAO.myWorkAllList(mdto);
+
+		mav.addObject("mwdto", arr);
+
+		HashMap<Integer, String> hm = new HashMap<Integer, String>();
+		for (int i = 0; i < arr.size(); i++) {
+			hm.put(arr.get(i).getProject_idx(), arr.get(i).getProject_name());
+		}
+		mav.addObject("pmap", hm);
+
 		mav.addObject("mwdto", arr);
 		return mav;
 	}
