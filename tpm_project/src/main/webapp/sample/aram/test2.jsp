@@ -5,75 +5,26 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-<script type="text/javascript" src="/tpm_project/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">
-	var wsocket;
+<script type="text/javascript" src="/tpm_project/js/jquery.js"></script>
+<script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
+<script>
+function test(){
+	var testt=$('#ata').position();
+	$('#poppop').css('top',testt.top+20+'px');
+	$('#poppop').css('left',testt.left+'px');
+	$('#poppop').fadeIn();
 	
-	function connect() {
-		wsocket = new WebSocket(
-				"ws://localhost:9090/tpm_project/sample/aram/test2.jsp");
-		wsocket.onopen = onOpen;
-		wsocket.onmessage = onMessage;
-		wsocket.onclose = onClose;
-	}
-	function disconnect() {
-		wsocket.close();
-	}
-	function onOpen(evt) {
-		appendMessage("연결되었습니다.");
-	}
-	function onMessage(evt) {
-		var data = evt.data;
-		if (data.substring(0, 4) == "msg:") {
-			appendMessage(data.substring(4));
-		}
-	}
-	function onClose(evt) {
-		appendMessage("연결을 끊었습니다.");
-	}
-	
-	function send() {
-		var nickname = $("#nickname").val();
-		var msg = $("#message").val();
-		wsocket.send("msg:"+nickname+":" + msg);
-		$("#message").val("");
-	}
-
-	function appendMessage(msg) {
-		$("#chatMessageArea").append(msg+"<br>");
-		var chatAreaHeight = $("#chatArea").height();
-		var maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
-		$("#chatArea").scrollTop(maxScroll);
-	}
-
-	$(document).ready(function() {
-		$('#message').keypress(function(event){
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if(keycode == '13'){
-				send();	
-			}
-			event.stopPropagation();
-		});
-		$('#sendBtn').click(function() { send(); });
-		$('#enterBtn').click(function() { connect(); });
-		$('#exitBtn').click(function() { disconnect(); });
-	});
-</script>
-<style>
-#chatArea {
-	width: 200px; height: 100px; overflow-y: auto; border: 1px solid black;
 }
-</style>
+function testclose(){
+	$('#poppop').fadeOut();
+}
+</script>
 </head>
 <body>
-	이름:<input type="text" id="nickname">
-	<input type="button" id="enterBtn" value="입장">
-	<input type="button" id="exitBtn" value="나가기">
-    
-    <h1>대화 영역</h1>
-    <div id="chatArea"><div id="chatMessageArea"></div></div>
-    <br/>
-    <input type="text" id="message">
-    <input type="button" id="sendBtn" value="전송">
+<br>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="ata" onmouseover="test()" onmouseout="testclose()">tes12312t</a>
+<div id="poppop" style="background: green;position:fixed; display: none; width:400px; height: 400px;">우왕굳</div>
 </body>
 </html>
