@@ -1097,7 +1097,7 @@ a {
 												<div id="sidebar-wrapper">
 												    
 													<div>
-														<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+														<%@include file="projectRightSide.jsp"%>
 													</div>
 												
 												</div>
