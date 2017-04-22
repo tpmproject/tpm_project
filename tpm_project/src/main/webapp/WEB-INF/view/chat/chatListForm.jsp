@@ -251,6 +251,7 @@ a:hover, a:active, a:focus {
 
 .btMoveSelect_div{
   margin-top: 196.5px;
+  text-align: center;
 }
 
 
@@ -331,27 +332,6 @@ $(function(){
 	}); */
 });
 
-function initCreateChannel_Selectr_plugin(){
-	$("#chat_myfriend_list_selectBefore").selectr({
-    	title: '친구 목록',
-    	placeholder: 'Search',
-    	resetText: 'Clear All',
-    	width: '600px',
-    	maxListHeight: NaN,
-    	tooltipBreakpoint: 25,
-    	maxSelection: NaN
-    });
-    
-    $("#chat_myfriend_list_selectAfter").selectr({
-    	title: '선택 목록',
-    	placeholder: 'Search',
-    	resetText: 'Clear All',
-    	/* width: '150px', */
-    	maxListHeight: NaN,
-    	tooltipBreakpoint: 25,
-    	maxSelection: NaN
-    });
-}
 
 function connect() {
 	/* wsocket = new SockJS(
@@ -540,36 +520,159 @@ function InsertChatContent() {
 	
 }
 
+function initCreateChannel_Selectr_plugin(json){
+	
+	var innerMsg = '';
+	for(var i = 0 ; i < json.length ; i++){
+		innerMsg += '<option value="' + json[i].member_idx + '">' + json[i].member_idx + ':' + json[i].member_id + ':' + json[i].member_name + ':' + json[i].member_img + '</option>';
+	}
+	$("#chat_myfriend_list_selectBefore").html(innerMsg);
+
+	$("#chat_myfriend_list_selectBefore").selectr({
+    	title: '친구 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	width: '600px',
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
+    
+    $("#chat_myfriend_list_selectAfter").selectr({
+    	title: '선택 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	/* width: '150px', */
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
+}
+
+
 function showCreateChannelModal(){
 	//$('#createChannelModal').modal('show');
-	initCreateChannel_Selectr_plugin();
+	$('#chat_myfriend_list_selectBefore').html('');
+	$('#chat_myfriend_list_selectAfter').html('');
+	//$('.selectr').remove();
 	
+	$.ajax({
+			url : 'myFriendList.do',
+			type : 'post',
+			dataType : 'json', 
+			success : function(json) {
+				//window.alert(JSON.stringify(json));
+				initCreateChannelModal(json);
+			}
+		});
+	
+	
+}
+function initCreateChannelModal(json){
+	initCreateChannel_Selectr_plugin(json);
+	reCreateSeletr();
+	$('#createChannelModal').modal('show');
+}
+
+function reCreateSeletr(){
 	var option_name_div = document.getElementsByClassName('option-name');
 	for(var i = 0 ; i < option_name_div.length; i++){
+		
+		var member_info = $(option_name_div).eq(i).html().split(':');
+		
 		var innerMsg = '';
 		innerMsg += '<div class="feed-element">';
+		innerMsg += 	'<input type="hidden" name="member_idx" value="' + member_info[0] + '" >';
 		innerMsg += 	'<a href="profile.html" class="pull-left">';
-		innerMsg += 		'<img alt="image" class="img-circle" src="/tpm_project/img/member/profile/default_man.jpg">';
+		innerMsg += 		'<img alt="image" class="img-circle" src="/tpm_project/img/member/profile/' + member_info[3] + '">';
 		innerMsg += 	'</a>';
 		innerMsg += 	'<div class="media-body ">';
-		innerMsg += 		'<strong>Monica Smith</strong><br>';
-		innerMsg += 		'<small class="text-muted">whwns4@nate.com</small>';
+		innerMsg += 		'<strong>' + member_info[2] + '</strong><br>';
+		innerMsg += 		'<small class="text-muted">' + member_info[1] + '</small>';
 		innerMsg += 	'</div>';
 		innerMsg += '</div>';
 		
-		option_name_div[i].innerHTML = innerMsg;
+		$(option_name_div[i]).html(innerMsg);
 	}
-	 
-	$('#createChannelModal').modal('show');
-    /* $('#createChannelModal').on('show.bs.modal', function(e) {
-       window.alert('1');
-    }) */
-    
-    /* $('#createChannelModal').on('show.bs.modal', function (e) {
-    	 window.alert('1');
-	}) */
 }
 
+function moveSeleted(direction){
+	//list_groups = document.getElementsByClassName('list-group');
+	/* var list_groups = $('.list-group');
+	var left_list_group = list_groups[0];
+	var right_list_group = list_groups[1];
+	
+	if(direction == 'right'){
+		var left_list_group_seleted = $('.list-group').eq(0).find('li.selected');
+		for(var i = 0 ; i < left_list_group_seleted.length ; i++){
+			var innerMsg = '';
+			innerMsg += '<li class="list-group-item">';
+			innerMsg += left_list_group_seleted.eq(i).html();
+			innerMsg += '</li>';
+			$(right_list_group).append(innerMsg);
+			
+			left_list_group_seleted.eq(i).remove();
+			
+			$('.panel-footer').eq(0).addClass('hidden');
+			$('.current-selection').eq(0).html('');
+		}
+	} else if(direction == 'left'){
+		var right_list_group_seleted = $('.list-group').eq(1).find('li.selected');
+		for(var i = 0 ; i < right_list_group_seleted.length ; i++){
+			var innerMsg = '';
+			innerMsg += '<li class="list-group-item">';
+			innerMsg += right_list_group_seleted.eq(i).html();
+			innerMsg += '</li>';
+			$(left_list_group).append(innerMsg);
+			
+			right_list_group_seleted.eq(i).remove();
+			
+			$('.panel-footer').eq(1).addClass('hidden');
+			$('.current-selection').eq(1).html('');
+		}
+	} */
+	
+	var list_groups = $('.list-group');
+	var left_list_group = list_groups[0];
+	var right_list_group = list_groups[1];
+	
+	if(direction == 'right'){
+		var left_list_group_seleted = $('.list-group').eq(0).find('li.selected');
+		for(var i = 0 ; i < left_list_group_seleted.length ; i++){
+			var innerMsg = '';
+			innerMsg += '<li class="list-group-item">';
+			innerMsg += left_list_group_seleted.eq(i).html();
+			innerMsg += '</li>';
+			$(right_list_group).append(innerMsg);
+			
+			left_list_group_seleted.eq(i).remove();
+			
+			$('.panel-footer').eq(0).addClass('hidden');
+			$('.current-selection').eq(0).html('');
+		}
+	} else if(direction == 'left'){
+		var right_list_group_seleted = $('.list-group').eq(1).find('li.selected');
+		for(var i = 0 ; i < right_list_group_seleted.length ; i++){
+			var innerMsg = '';
+			innerMsg += '<li class="list-group-item">';
+			innerMsg += right_list_group_seleted.eq(i).html();
+			innerMsg += '</li>';
+			$(left_list_group).append(innerMsg);
+			
+			right_list_group_seleted.eq(i).remove();
+			
+			$('.panel-footer').eq(1).addClass('hidden');
+			$('.current-selection').eq(1).html('');
+		}
+	} 
+	
+	$('#chat_myfriend_list_selectBefore').
+	
+	initCreateChannel_Selectr_plugin();
+	reCreateSeletr();
+	
+	
+}
 </script>
 </head>
 <c:choose>
@@ -613,6 +716,7 @@ function showCreateChannelModal(){
 					<div class="col-md-4">
 						<%@ include file="chatList.jsp"%>
 					</div>
+					
 					<div class="col-md-8">
 						<%@ include file="chatContent.jsp"%>
 					</div>	
