@@ -1089,11 +1089,10 @@ a {
 												href="#" onclick="fileUp('${wdto.work_idx}')"
 												class="menu-toggle">첨부파일</a></td>
 												
-											<!--첨부 파일 div 시작  -->
+											<!--옵션,코멘트, 첨부 파일 div 시작  -->
 												
 												<div id="right-side">
-												<a class="menu-toggle" href="#"><i
-													class="glyphicon glyphicon-bookmark"></i></a>
+												
 												<div id="sidebar-wrapper">
 												    
 													<div>
@@ -1103,7 +1102,7 @@ a {
 												</div>
 											</div>
 											
-											<!--첨부 파일 div 끝  -->
+											<!--옵션,코멘트, 첨부 파일 div 끝  -->
 										</tr>
 									</tbody>
 								</table>

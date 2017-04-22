@@ -17,7 +17,7 @@
     position: fixed;
     height: 90%;
     overflow-y: auto;
-    margin-top: -170px;
+    margin-top: -150px;
     z-index: 1000;
     background-color:white;
     transition: all 0.5s ease-in 0s;
@@ -83,7 +83,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
-    margin-top: -170px;
+    margin-top: -150px;
      background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
