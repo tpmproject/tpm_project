@@ -17,13 +17,15 @@
     position: fixed;
     height: 100%;
     overflow-y: auto;
-    margin-top: -100px;
+    margin-top: -150px;
     z-index: 1000;
+    background-color:white;
     transition: all 0.5s ease-in 0s;
     -webkit-transition: all 0.5s ease-in 0s;
     -moz-transition: all 0.5s ease-in 0s;
     -ms-transition: all 0.5s ease-in 0s;
     -o-transition: all 0.5s ease-in 0s;
+    box-shadow: 10px 10px 30px #000808;
   }
 
   #right-side .sidebar-nav {
@@ -81,7 +83,8 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
-    margin-top: -100px;
+    margin-top: -150px;
+     background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
     -moz-transition: all 0.5s ease-out 0s;
