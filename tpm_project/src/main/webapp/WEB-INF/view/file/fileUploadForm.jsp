@@ -95,14 +95,69 @@
   #right-side .toggle {
     margin: 5px 190px 0 0;
   }
-  
+ 
  </style>
+<link href=" /tpm_project/css/file/bootstrap-cerulean.min.css" rel="stylesheet" type="text/css">
+<script src="/tpm_project/js/file/charisma.js"></script>
 
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
 	<h1 style="margin: 10px 100px;">파일 업로드</h1>
-<fieldset style="border-color:white;">
+	
+	<div class="row">
+            <div class="box col-md-4">
+              <div class="box-inner homepage-box">
+                
+                <div class="box-content">
+                  <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                      <a href="#info">Info</a>
+                    </li>
+                    <li>
+                      <a href="#custom">Custom</a>
+                    </li>
+                    <li>
+                      <a href="#messages">Messages</a>
+                    </li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="info">
+                      <h3>Charisma
+                        <small>a full featured template</small>
+                      </h3>
+                      <p>It's a full featured, responsive template for your admin panel. It's optimized
+                        for tablets and mobile phones.</p>
+                      <p>Check how it looks on different devices:</p>
+                      <a href="http://www.responsinator.com/?url=usman.it%2Fthemes%2Fcharisma" target="_blank"><strong>Preview on iPhone size.</strong></a>
+                      <br>
+                      <a href="http://www.responsinator.com/?url=usman.it%2Fthemes%2Fcharisma" target="_blank"><strong>Preview on iPad size.</strong></a>
+                    </div>
+                    <div class="tab-pane" id="custom">
+                      <h3>Custom
+                        <small>small text</small>
+                      </h3>
+                      <p>Sample paragraph.</p>
+                      <p>Your custom text.</p>
+                    </div>
+                    <div class="tab-pane" id="messages">
+                      <h3>Messages
+                        <small>small text</small>
+                      </h3>
+                      <p>Sample paragraph.</p>
+                      <p>Your custom text.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/span-->
+            
+            <!--/span-->
+            
+            <!--/span-->
+          </div>
+<fieldset>
 	<legend>파일 </legend>
 	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
