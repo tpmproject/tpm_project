@@ -17,7 +17,7 @@
     position: fixed;
     height: 100%;
     overflow-y: auto;
-    margin-top: -150px;
+    margin-top: -170px;
     z-index: 1000;
     background-color:white;
     transition: all 0.5s ease-in 0s;
@@ -83,7 +83,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
-    margin-top: -150px;
+    margin-top: -170px;
      background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
@@ -189,9 +189,12 @@
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
-	<h1 style="margin: 10px 100px;">파일 업로드</h1>
-	
-<div style="width:100%">
+	<div style="position:absolute; z-index:1;  ">
+		<a id="menu-close" href="#"
+			class="btn btn-default btn-lg pull-right toggle"><i
+			class="glyphicon glyphicon-remove"></i></a>
+	</div>
+	<div style="width:100%">
       <div class="card hovercard">
         <div class="card-background">
           <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">

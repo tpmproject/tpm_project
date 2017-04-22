@@ -1090,19 +1090,16 @@ a {
 												class="menu-toggle">첨부파일</a></td>
 												
 											<!--첨부 파일 div 시작  -->
-											<div id="right-side">
+												
+												<div id="right-side">
 												<a class="menu-toggle" href="#"><i
 													class="glyphicon glyphicon-bookmark"></i></a>
 												<div id="sidebar-wrapper">
+												    
 													<div>
 														<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
 													</div>
-													<ul class="sidebar-nav">
-														<a id="menu-close" href="#"
-															class="btn btn-default btn-lg pull-right toggle"><i
-															class="glyphicon glyphicon-remove"></i></a>
-
-													</ul>
+												
 												</div>
 											</div>
 											
