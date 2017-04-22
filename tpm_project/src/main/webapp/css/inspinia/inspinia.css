@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.feed-element:first-child {
+    margin-top: 0;
+}
+.feed-activity-list .feed-element {
+    border-bottom: 1px solid #e7eaec;
+}
+.feed-element, .media-body {
+    overflow: hidden;
+}
+.feed-element, .feed-element .media {
+    margin-top: 15px;
+}
+.feed-element {
+    /* padding-bottom: 15px; */
+}
+.feed-element > .pull-left {
+    margin-right: 10px;
+}
+.feed-element img.img-circle, .dropdown-messages-box img.img-circle {
+    width: 38px;
+    height: 38px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.feed-element, .media-body {
+    overflow: hidden;
+}
+.sidebar-panel .feed-element, .media-body, .sidebar-panel p {
+    font-size: 12px;
+}
+.chat-element, .media-body {
+    overflow: hidden;
+}
+.media-body, .media-left, .media-right {
+    display: table-cell;
+    vertical-align: top;
+}
+.text-muted {
+    color: #888888;
+}

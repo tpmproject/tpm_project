@@ -151,7 +151,39 @@ public class StudyController {
 		mav.setViewName("study/scroll/slimscroll");
 		return mav;
 	}
+	/** Material - modal */
+	@RequestMapping(value="material_modal.do", method=RequestMethod.GET)
+	public ModelAndView material_modal(ModelAndView mav){
+		
+		mav.setViewName("study/material/material_modal");
+		return mav;
+	}
+	/** Material - Testimonials */
+	@RequestMapping(value="material_testimonials.do", method=RequestMethod.GET)
+	public ModelAndView material_testimonials(ModelAndView mav){
+		
+		mav.setViewName("study/material/material_testimonials");
+		return mav;
+	}
+	/** SOCIAL NEWSFEED V.2 */
+	@RequestMapping(value="material_social_newspeed2.do", method=RequestMethod.GET)
+	public ModelAndView material_social_newspeed2(ModelAndView mav){
+		
+		mav.setViewName("study/material/material_social_newspeed2");
+		return mav;
+	}
 	
+	/** Multi Select */
+	@RequestMapping(value="designStudy2.do", method=RequestMethod.GET)
+	public ModelAndView designStudy2(ModelAndView mav){
+		
+		mav.setViewName("study/multiselect/multiSelect");
+		return mav;
+	}
+	
+	
+	
+	///////////////////////
 		
 	@RequestMapping(value="pathStudy.do", method=RequestMethod.GET)
 	public ModelAndView pathStudy(ModelAndView mav){

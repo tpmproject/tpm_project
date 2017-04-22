@@ -12,6 +12,7 @@
 //ondragstart 드래그할 때 id값 가져오기!
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+    
 }
 
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트

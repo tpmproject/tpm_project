@@ -32,6 +32,10 @@
 	<legend>디자인 관련</legend>
 	<ul>
 		<li><a href="designStudy1.do">Slimscroll</a></li>
+		<li><a href="material_modal.do">Material - modal</a></li>
+		<li><a href="material_testimonials.do">Material - Testimonials</a></li>
+		<li><a href="material_social_newspeed2.do">SOCIAL NEWSFEED V.2</a></li>
+		<li><a href="designStudy2.do">Multi Select</a></li>
 	</ul>
 </fieldset>
 <fieldset>

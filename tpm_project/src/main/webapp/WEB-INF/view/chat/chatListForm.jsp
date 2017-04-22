@@ -12,11 +12,24 @@
 <!-- JavaScrip Search Plugin -->
 <!-- <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script> -->
 <!-- Moment -->
+
+<link href="/tpm_project/css/hr/hr-text.css?verr=3" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="/tpm_project/css/material/mdb.css?ver=1" rel="stylesheet">
+
+<link href="/tpm_project/css/inspinia/inspinia.css?ver=2" rel="stylesheet">
+
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="/tpm_project/js/material/tether.min.js"></script>
+
 <script src="/tpm_project/js/date/moment.js"></script>
 <!-- Slimscroll -->
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
-<link href="/tpm_project/css/hr/hr-text.css?var=3" rel="stylesheet">
+
+<script src="/tpm_project/js/multiselect/selectr.js"></script>
+
 <style>
 .bg-white {
 	background-color: #fff;
@@ -205,6 +218,44 @@ a:hover, a:active, a:focus {
 	text-decoration: none;
 	outline: 0;
 }
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-dialog.modal-fullsize {
+  width: 800px;
+  height: 800px;
+  margin: 0;
+  padding: 0;
+}
+.modal-content.modal-fullsize {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
+}
+
+.btMoveSelect_div{
+  margin-top: 196.5px;
+}
+
+
+
+
 /* .chat_content_user_img_left{
 	width: 40px; height: 40px; border-radius: 50% !important; border: 2px solid #00a65a;
 }
@@ -268,11 +319,45 @@ $(function(){
 		}
 		event.stopPropagation();
 	});
+    
+    
+    /* $("#createChannelModal").modal('show').css({
+	    'margin-top': function () { //vertical centering
+	        return -($(this).height() / 2);
+	    },
+	    'margin-left': function () { //Horizontal centering
+	        return -($(this).width() / 2);
+	    }
+	}); */
 });
 
+function initCreateChannel_Selectr_plugin(){
+	$("#chat_myfriend_list_selectBefore").selectr({
+    	title: '친구 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	width: '600px',
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
+    
+    $("#chat_myfriend_list_selectAfter").selectr({
+    	title: '선택 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	/* width: '150px', */
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
+}
+
 function connect() {
+	/* wsocket = new SockJS(
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
 	wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
+			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
 	wsocket.onopen = onOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onClose; // 연결 해체 후 메세지
@@ -455,6 +540,36 @@ function InsertChatContent() {
 	
 }
 
+function showCreateChannelModal(){
+	//$('#createChannelModal').modal('show');
+	initCreateChannel_Selectr_plugin();
+	
+	var option_name_div = document.getElementsByClassName('option-name');
+	for(var i = 0 ; i < option_name_div.length; i++){
+		var innerMsg = '';
+		innerMsg += '<div class="feed-element">';
+		innerMsg += 	'<a href="profile.html" class="pull-left">';
+		innerMsg += 		'<img alt="image" class="img-circle" src="/tpm_project/img/member/profile/default_man.jpg">';
+		innerMsg += 	'</a>';
+		innerMsg += 	'<div class="media-body ">';
+		innerMsg += 		'<strong>Monica Smith</strong><br>';
+		innerMsg += 		'<small class="text-muted">whwns4@nate.com</small>';
+		innerMsg += 	'</div>';
+		innerMsg += '</div>';
+		
+		option_name_div[i].innerHTML = innerMsg;
+	}
+	 
+	$('#createChannelModal').modal('show');
+    /* $('#createChannelModal').on('show.bs.modal', function(e) {
+       window.alert('1');
+    }) */
+    
+    /* $('#createChannelModal').on('show.bs.modal', function (e) {
+    	 window.alert('1');
+	}) */
+}
+
 </script>
 </head>
 <c:choose>
@@ -493,21 +608,25 @@ function InsertChatContent() {
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-md-12">
-						<!-- 컨텐트 삽입 -->
-						<div class="col-md-4">
-							<%@ include file="chatList_design.jsp"%>
-						</div>
-						<div class="col-md-8">
-							<%@ include file="chatContent.jsp"%>
-						</div>
+				<div class="col-md-12">
+					<!-- 컨텐트 삽입 -->
+					<div class="col-md-4">
+						<%@ include file="chatList.jsp"%>
 					</div>
+					<div class="col-md-8">
+						<%@ include file="chatContent.jsp"%>
+					</div>	
 				</div>
+			</div>
 			</section>
 		</div>
 		
 		<%@ include file="chatListForm_contact_modal.jsp"%>
+		<%@ include file="chatCreateChannelModal.jsp"%>
 		<%@ include file="/WEB-INF/view/include/footer.jsp"%>
 	</div>
+	
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="/tpm_project/js/material/mdb.min.js"></script>
 </body>
 </html>
