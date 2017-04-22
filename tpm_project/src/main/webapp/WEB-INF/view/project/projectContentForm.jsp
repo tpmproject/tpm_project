@@ -1088,6 +1088,7 @@ a {
 												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a
 												href="#" onclick="fileUp('${wdto.work_idx}')"
 												class="menu-toggle">첨부파일</a></td>
+												
 											<!--첨부 파일 div 시작  -->
 											<div id="right-side">
 												<a class="menu-toggle" href="#"><i
@@ -1104,6 +1105,7 @@ a {
 													</ul>
 												</div>
 											</div>
+											
 											<!--첨부 파일 div 끝  -->
 										</tr>
 									</tbody>

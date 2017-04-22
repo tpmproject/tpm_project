@@ -130,7 +130,7 @@
         <div class="btn-group" role="group">
           <button type="button" id="following" class="btn btn-default" href="#tab3"
           data-toggle="tab">
-            <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon glyphicon-random" aria-hidden="true"></span>
             <div class="hidden-xs">파일</div>
           </button>
         </div>

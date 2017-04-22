@@ -97,186 +97,164 @@
   }
  
  </style>
-<link href=" /tpm_project/css/file/bootstrap-cerulean.min.css" rel="stylesheet" type="text/css">
-<script src="/tpm_project/js/file/charisma.js"></script>
-
+   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+    rel="stylesheet">
+    <style type="text/css">
+      /* USER PROFILE PAGE */
+     .card {
+        margin-top: 20px;
+        padding: 30px;
+        background-color: rgba(214, 224, 226, 0.2);
+        -webkit-border-top-left-radius:5px;
+        -moz-border-top-left-radius:5px;
+        border-top-left-radius:5px;
+        -webkit-border-top-right-radius:5px;
+        -moz-border-top-right-radius:5px;
+        border-top-right-radius:5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .card.hovercard {
+        position: relative;
+        padding-top: 0;
+        overflow: hidden;
+        text-align: center;
+        background-color: #fff;
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .card.hovercard .card-background {
+        height: 130px;
+    }
+    .card-background img {
+        -webkit-filter: blur(25px);
+        -moz-filter: blur(25px);
+        -o-filter: blur(25px);
+        -ms-filter: blur(25px);
+        filter: blur(25px);
+        margin-left: -100px;
+        margin-top: -200px;
+        min-width: 130%;
+    }
+    .card.hovercard .useravatar {
+        position: absolute;
+        top: 15px;
+        left: 0;
+        right: 0;
+    }
+    .card.hovercard .useravatar img {
+        width: 100px;
+        height: 100px;
+        max-width: 100px;
+        max-height: 100px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 5px solid rgba(255, 255, 255, 0.5);
+    }
+    .card.hovercard .card-info {
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        right: 0;
+    }
+    .card.hovercard .card-info .card-title {
+        padding:0 5px;
+        font-size: 20px;
+        line-height: 1;
+        color: #262626;
+        background-color: rgba(255, 255, 255, 0.1);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+    .card.hovercard .card-info {
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 20px;
+        color: #737373;
+        text-overflow: ellipsis;
+    }
+    .card.hovercard .bottom {
+        padding: 0 20px;
+        margin-bottom: 17px;
+    }
+    .btn-pref .btn {
+        -webkit-border-radius:0 !important;
+    }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ 
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
 	<h1 style="margin: 10px 100px;">파일 업로드</h1>
 	
-	<div class="row">
-            <div class="box col-md-4">
-              <div class="box-inner homepage-box">
-                
-                <div class="box-content">
-                  <ul class="nav nav-tabs" id="myTab">
-                    <li class="active">
-                      <a href="#info">Info</a>
-                    </li>
-                    <li>
-                      <a href="#custom">Custom</a>
-                    </li>
-                    <li>
-                      <a href="#messages">Messages</a>
-                    </li>
-                  </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active" id="info">
-                      <h3>Charisma
-                        <small>a full featured template</small>
-                      </h3>
-                      <p>It's a full featured, responsive template for your admin panel. It's optimized
-                        for tablets and mobile phones.</p>
-                      <p>Check how it looks on different devices:</p>
-                      <a href="http://www.responsinator.com/?url=usman.it%2Fthemes%2Fcharisma" target="_blank"><strong>Preview on iPhone size.</strong></a>
-                      <br>
-                      <a href="http://www.responsinator.com/?url=usman.it%2Fthemes%2Fcharisma" target="_blank"><strong>Preview on iPad size.</strong></a>
-                    </div>
-                    <div class="tab-pane" id="custom">
-                      <h3>Custom
-                        <small>small text</small>
-                      </h3>
-                      <p>Sample paragraph.</p>
-                      <p>Your custom text.</p>
-                    </div>
-                    <div class="tab-pane" id="messages">
-                      <h3>Messages
-                        <small>small text</small>
-                      </h3>
-                      <p>Sample paragraph.</p>
-                      <p>Your custom text.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--/span-->
-            
-            <!--/span-->
-            
-            <!--/span-->
+<div style="width:100%">
+      <div class="card hovercard">
+        <div class="card-background">
+          <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
+          <!-- http://lorempixel.com/850/280/people/9/ -->
+        </div>
+        <div class="useravatar">
+          <img alt="" src="http://lorempixel.com/100/100/people/9/">
+        </div>
+        <div class="card-info">
+          <span class="card-title">Pamela Anderson</span>
+        </div>
+      </div>
+      <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group"
+      aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="button" id="stars" class="btn btn-primary" href="#tab1"
+          data-toggle="tab">
+            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <div class="hidden-xs">옵션</div>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="favorites" class="btn btn-default" href="#tab2"
+          data-toggle="tab">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <div class="hidden-xs">코멘트</div>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="following" class="btn btn-default" href="#tab3"
+          data-toggle="tab">
+            <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+            <div class="hidden-xs">파일</div>
+          </button>
+        </div>
+      </div>
+      <div class="well">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="tab1">
+            <h3>This is tab 1</h3>
           </div>
-<fieldset>
-	<legend>파일 </legend>
-	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
-	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx }">
-	 
-	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
-	
-	<div id="div_list"></div>
-	<div id="div_fns"></div>
-	<div id="div_dnd" style="height: 500px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
-	<img src="/tpm_project/img/fileicon/file.PNG"></div>
-	<input type="submit" value="업로드">
-	</form>
-</fieldset>
+          <div class="tab-pane fade in" id="tab2">
+            <h3>This is tab 2</h3>
+          </div>
+          <div class="tab-pane fade in" id="tab3">
+            <h3>This is tab 3</h3>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
 <script type="text/javascript">
 
 
-
-	var div_dnd = document.getElementById('div_dnd');    //드래그앤 드랍 영역
-	var file_dnd = document.getElementById('file_dnd');  //input type="file"
-	var div_fns = document.getElementById('div_fns');    //선택한 파일 목록
-
-	//-- 이벤트를 중지 시킨다
-	var stopevent = function(evt){
-		console.log(evt.type);
-		evt.preventDefault(); 
-		evt.stopPropagation();
-	}
-	
-	//-- 선택된 파일명 표시
-	var showfns = function(files){
-		var fns = [];
-	
-		for(var i=0,m=files.length;i<m;i++){
-			fns.push(files[i].name+'('+files[i].size+' Byte)<input type="button" value="삭제" onclick="del(1)">' );
-		}
-		
-		div_fns.innerHTML = fns.join('<br>');
-	}
-	//-- 드래그 관련 이벤트에 기본적으로 이벤트를 중지 시키도록 한다.
-	div_dnd.ondragstart = stopevent
-	div_dnd.ondragend = stopevent
-	div_dnd.ondragover = stopevent
-	div_dnd.ondragenter = stopevent
-	div_dnd.ondragleave = stopevent
-	div_dnd.ondrag = stopevent
-	// div_dnd.ondrag = stopevent //이 이벤트는 따로 동작시킨다.
-	
-	// ondrop 에서 선택된 파일 제어 구문을 넣는다.
-	div_dnd.ondrop= function(evt){
-		stopevent(evt);//이벤트는 중지 시킨다.
-		var files = evt.dataTransfer.files; //드롭된 파일리스트(FileList)
-		console.log(files);
-		file_dnd.files = files; //input type=file 에 파일을 넣어준다.
-		file_dnd.onchange(); 
-	}
-	file_dnd.onchange = function(evt){
-		showfns(this.files); //선택된 파일 목록 표시
-	}
-	
-	function del(file){
-		
-		window.alert($('#file_dnd').val());
-		//var files_dd = $('#file_dnd')[1].val();
-		/* var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++)
-		{
-		 alert(files[i].name);
-		} */
-		
-		//var files = $("#file_dnd")[0].files;
-		//delete $("#file_dnd")[0].files[1];
-
-		//var obj = $("#file_dnd")[0].files[1];
-		//obj.parentNode.removeChild(obj);
-		//obj.parent().removeChild();
-		
-		//var obj = $("#file_dnd");   // Get the <ul> element with id="myList"
-		//obj.removeChild(obj.childNodes[0]);           // Remove <ul>'s first child node (index 0)
-		/* var ccc = $("#file_dnd").data("file");
-		window.alert(ccc);
-		
-		var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++)
-		{
-		 alert(files[i].name);
-		} */
-		/* var newList = [];
-
-		
-		for(var i = 0; i < files.length; i++)
-		{
-		    if(i != 2)
-		    {
-		        newList.push(files.item(i));
-		    }
-		} 
-		
-		
-		*/
-		//window.alert(files_dd);
-		/* var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++){
-		 	alert(files[i].name);
-		}
-		
-		var newList = []; */
-		
-		/* $('#file_dnd')[0].files[1].remove;
-		var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++){
-		 	alert(files[i].name);
-		} */
-		
-	}
-
+	  $(document).ready(function() {
+          $(".btn-pref .btn").click(function () {
+              $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+              // $(".tab").addClass("active"); // instead of this do the below 
+              $(this).removeClass("btn-default").addClass("btn-primary");   
+          });
+          });
 </script>
 	
 </body>
