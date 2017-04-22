@@ -192,13 +192,13 @@ public class FileController {
 		doc.setPageNumber(pageNumber);
 		
 	//	String a = new String("한글".getBytes("EUC-KR"),"UTF-8");
-		System.out.println(doc.getHtmlContent());
-		
+	//	System.out.println(doc.getHtmlContent());
+	//	
 		//Decoder dd = Base64.getDecoder();
 		
 		//byte[] resultbyte = dd.decode(doc.getHtmlContent());
 		
-		System.out.println();
+		
 		
 		mav.addObject("doc_html",doc.getHtmlContent());
 		mav.addObject("filename2",file_name);
@@ -238,15 +238,15 @@ public class FileController {
 		int member_idx=(Integer) session.getAttribute("s_member_idx"); //멤버 idx
 		//int project_idx=16;   //프로젝트 idx 가져오기, 임시
 		session.setAttribute("project_idx", project_idx);
-		System.out.println("파일등록 부분에서 유저id:"+session.getAttribute("s_member_idx"));
-		System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
-		System.out.println("work_idx:"+work_idx);
+		//System.out.println("파일등록 부분에서 유저id:"+session.getAttribute("s_member_idx"));
+		//System.out.println("fileController쪽으로 넘어온 project_idx="+project_idx);
+		//System.out.println("work_idx:"+work_idx);
 		
 		   
 	       
 		    ViewerConfig config = new ViewerConfig();
 		    config.setStoragePath(Utils.getProjectProperty("storage.path"));
-	        System.out.println( config.getStoragePath());
+	   //     System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
 		
@@ -293,10 +293,11 @@ public class FileController {
 		
 		 ViewerConfig config = new ViewerConfig();
 		 config.setStoragePath(Utils.getProjectProperty("storage.path"));
-		    
+		    // "C:/Users/abm79/git/tpm_project/tpm_project/src/main/webapp/WEB-INF/view/file/upload/"+file_name
 		File f = new File(config.getStoragePath()+"/"+file_name);
-		f.delete();  //파일경로에 있는 실제파일 삭제
 		
+		f.delete();  //파일경로에 있는 실제파일 삭제
+	
 		String msg="";
 		ModelAndView mav = new ModelAndView();
 		if(result==1){
@@ -334,12 +335,18 @@ public class FileController {
 		try {
 			byte bytes[]=file_upload.getBytes();
 			
-			 ViewerConfig config = new ViewerConfig();
-			 
-			 config.setStoragePath(Utils.getProjectProperty("storage.path"));
+			ViewerConfig config = new ViewerConfig();  //자동경로
+			config.setStoragePath(Utils.getProjectProperty("storage.path"));
+		
+			
+			String decoded_result = new String(file_upload.getBytes(), "UTF-8"); 
+
+			System.out.println(decoded_result);
 			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
+			
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
+			
 			fos.write(bytes);
 			fos.close();
 			
