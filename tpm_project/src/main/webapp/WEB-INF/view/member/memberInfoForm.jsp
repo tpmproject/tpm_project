@@ -153,7 +153,7 @@
 	    	
     </script>
 </head>
-<body class="skin-blue">
+<body class="skin-red">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
