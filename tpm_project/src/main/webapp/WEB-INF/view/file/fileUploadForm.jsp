@@ -75,56 +75,7 @@
 	function del(file){
 		
 		window.alert($('#file_dnd').val());
-		//var files_dd = $('#file_dnd')[1].val();
-		/* var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++)
-		{
-		 alert(files[i].name);
-		} */
 		
-		//var files = $("#file_dnd")[0].files;
-		//delete $("#file_dnd")[0].files[1];
-
-		//var obj = $("#file_dnd")[0].files[1];
-		//obj.parentNode.removeChild(obj);
-		//obj.parent().removeChild();
-		
-		//var obj = $("#file_dnd");   // Get the <ul> element with id="myList"
-		//obj.removeChild(obj.childNodes[0]);           // Remove <ul>'s first child node (index 0)
-		/* var ccc = $("#file_dnd").data("file");
-		window.alert(ccc);
-		
-		var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++)
-		{
-		 alert(files[i].name);
-		} */
-		/* var newList = [];
-
-		
-		for(var i = 0; i < files.length; i++)
-		{
-		    if(i != 2)
-		    {
-		        newList.push(files.item(i));
-		    }
-		} 
-		
-		
-		*/
-		//window.alert(files_dd);
-		/* var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++){
-		 	alert(files[i].name);
-		}
-		
-		var newList = []; */
-		
-		/* $('#file_dnd')[0].files[1].remove;
-		var files = $("#file_dnd")[0].files;
-		for (var i = 0; i < files.length; i++){
-		 	alert(files[i].name);
-		} */
 		
 	}
 

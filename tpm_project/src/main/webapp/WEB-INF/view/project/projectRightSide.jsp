@@ -17,7 +17,7 @@
     position: fixed;
     height: 90%;
     overflow-y: auto;
-    margin-top: -150px;
+    margin-top: -423px;
     z-index: 1000;
     background-color:white;
     transition: all 0.5s ease-in 0s;
@@ -83,7 +83,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
-    margin-top: -150px;
+    margin-top: -423px;
      background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
@@ -188,15 +188,10 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script>
 
-	function fileContent_page(filename,page){
-		var file_con = document.getElementById('fileCon');
-		var f_name = document.getElementById('f_name');
+	function project_fileList(){
 		
-		f_name.innerHTML = filename;
-		file_con.innerHTML = '';
-		
-		var param = "file_name="+filename+"&page="+page;
-		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
+		var param = 1;
+		action_ajax('fileContent.do',param,'POST', 'PROJECT_FILELIST'); // 해당 페이지로 ajax통신 시작
 		
 	}
 	
@@ -225,8 +220,8 @@
     }
     function result_process(responseText, ctype) {
 
-		if(ctype == 'FILE_LIST'){
-			fileList_setting(responseText);
+		if(ctype == 'PROJECT_FILELIST'){
+			project_fileList_setting(responseText);
 			
 		} else if(ctype == 'FILE_CONTENT'){
 			
@@ -240,28 +235,28 @@
 	}
 
 	
-	function fileList_setting(responseText) {
-		var json = JSON.parse(responseText);
+	function project_fileList_setting(responseText) {
+		
 		
 		var msg = '';
-		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
-		for(var i = 0 ; i < files.length; i++){
-			var file = files[i];
-			var filename=file.file_name;
-			var filetype='';
-
 		   
-		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">';
-
-			        
-			msg += '</tr>';
+		msg += '<table id="mytable" class="table table-bordred table-striped" style="width: 100%;table-layout: fixed; border-spacing: 0;">';
+			msg += ' <thead>';
+				msg += '   <tr>';
+					msg += '      <th>파일 이름</th>';
+						msg += '     <th>공유한 날짜</th>';
+							msg += '     <th>공유한 사람</th>';
+								msg += '     <th>Delete</th>';
+									msg += '   </tr>';
+										msg += '  </thead>';
+											msg += '  </table>';
 		
-		}
 		
-		var file_content_list = document.getElementById('file_content_list');
+		
+		var proejct_filelist = document.getElementById('tab3');
 	
-		file_content_list.innerHTML = '';
-		file_content_list.innerHTML = msg;
+		proejct_filelist.innerHTML = '';
+		proejct_filelist.innerHTML = msg;
 	}
 
     </script>
@@ -307,7 +302,7 @@
           <button type="button" id="following" class="btn btn-default" href="#tab3"
           data-toggle="tab">
             <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-            <div class="hidden-xs">파일</div>
+            <div class="hidden-xs" onclick="project_fileList()">파일</div>
           </button>
         </div>
       </div>
@@ -320,11 +315,10 @@
             <h3>This is tab 2</h3>
           </div>
           <div class="tab-pane fade in" id="tab3">
+         
+        	
           
-          
-          
-          
-           <%--    <%@include file="/WEB-INF/view/project/projectFileList.jsp"%> --%>
+            <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
            <%--  <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
         </div>

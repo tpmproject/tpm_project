@@ -1087,11 +1087,11 @@ a {
 											<td align="right"><a
 												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a
 												href="#" onclick="fileUp('${wdto.work_idx}')"
-												class="menu-toggle">첨부파일</a></td>
+												class="menu-toggle">첨부파일</a>
 												
 											<!--옵션,코멘트, 첨부 파일 div 시작  -->
 												
-												<div id="right-side">
+											<div id="right-side">
 												
 												<div id="sidebar-wrapper">
 												    
@@ -1101,7 +1101,7 @@ a {
 												
 												</div>
 											</div>
-											
+											</td>
 											<!--옵션,코멘트, 첨부 파일 div 끝  -->
 										</tr>
 									</tbody>
