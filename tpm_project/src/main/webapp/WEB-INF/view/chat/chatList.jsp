@@ -53,7 +53,7 @@
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body table-responsive no-padding" id="chat_channel_list_div">
-		<table class="table table-hover">
+		<table class="table table-hover" id="channel_list_table">
 			<c:forEach var="chdto" items="${arry_chdto}">
 				<tr>
 					<th><a href="javascript:showChatContent('C','${chdto.channel_idx}')">${chdto.channel_name},${chdto.channel_idx}</a></th>

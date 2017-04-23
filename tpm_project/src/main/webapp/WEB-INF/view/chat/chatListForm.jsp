@@ -546,6 +546,8 @@ function InsertChannel(){
 				// 소켓을 통해 메세지를 전달한다.
 				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
 				reLoadChannelList();
+				
+				$('#createChannelModal').modal().hide();
 			} 
 		}
 	});
@@ -561,11 +563,14 @@ function reLoadChannelList(){
 		success : function(json) {
 			// 입력 성공시..
 			window.alert(JSON.stringify(json));
-			/* if(json != false){
-				// 소켓을 통해 메세지를 전달한다.
-				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
-				reLoadChannelList();
-			}  */
+			var innerMsg = '';
+			for(var i = 0 ; i < json.length; i++){
+				innerMsg += '<tr>';
+				innerMsg += '<th><a href="javascript:showChatContent(\'C\',\'' + json[i].channel_idx + '\')">' + json[i].channel_name + ',' + json[i].channel_idx + '</a></th>';
+				innerMsg += '</tr>';
+			}
+			
+			$('#channel_list_table').html(innerMsg);
 		}
 	});
 }
