@@ -19,17 +19,17 @@
   
   <body>
     
-    <div class="container">
+    <div class="container" style="width:100%">
       <div class="row">
-        <div class="col-md-12" style="width:650px; margin: -10px -10px;">
+        <div class="col-md-12" style="width: 590px; margin: -10px -10px;">
           <div class="table-responsive"></div>
           <table id="mytable" class="table table-bordred table-striped" style="width: 100%;table-layout: fixed; border-spacing: 0;">
             <thead>
               <tr>
                 <th>파일 이름</th>
-                <th>공유한 날짜</th>
-                <th >공유한 사람</th>
-               
+                <th style="width:25%;">공유한 날짜</th>
+                <th style="width:20%;">공유한 사람</th>
+               	<th style="width:15%;"></th>
               </tr>
             </thead>
             <tbody>
