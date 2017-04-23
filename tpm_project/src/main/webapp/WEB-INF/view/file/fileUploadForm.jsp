@@ -5,13 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
+<script>
+function fileUpload(work_idx){
+	$('input[name=work_idx]').attr('value',work_idx); 
+}
 
+
+
+</script>
 </head>
 <body>
 <fieldset>
 	<legend></legend>
 	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
+	<input type="hidden" name="work_idx" id="id_work_idx" >
 	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
 	 
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
@@ -20,7 +27,7 @@
 	<div id="div_fns"></div>
 	<div id="div_dnd" style="height: 350px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
 	<img src="/tpm_project/img/fileicon/file.PNG"></div>
-	<input type="submit" value="업로드">
+	<input type="submit" value="업로드" onclick="show1()">
 	</form>
 </fieldset>
 

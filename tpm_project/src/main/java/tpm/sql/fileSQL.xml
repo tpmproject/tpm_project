@@ -17,8 +17,9 @@
 	
 	<!--업무 파일 리스트  -->
 	<select id="workFileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file 
-		where project_idx=#{project_idx}
+		
+		select * from tpm_file
+		where project_idx=${project_idx} and work_idx=${work_idx}
 		
 	</select>
 	

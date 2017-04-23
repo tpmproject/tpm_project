@@ -726,13 +726,12 @@ function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
 	sessionStorage.setItem('con_project_idx', '${pdto.project_idx}');
 	sessionStorage.setItem('con_work_idx', work_idx);
-	
-
 }
 /* 업무 오른쪽 사이드창  */
 function workSide(work_idx){
 	window.alert('컨텐트폼쪽 업무 idx: '+work_idx);
 	project_fileList(work_idx);
+	fileUpload(work_idx);
 	return work_idx;
 } 
  

@@ -130,14 +130,18 @@ public class FileController {
 	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam("work_idx")int work_idx){
 		
-		System.out.println("project_idx:"+project_idx);
-		System.out.println("work_idx:"+work_idx);
+	//	System.out.println("project_idx:"+project_idx);
+	//	System.out.println("work_idx:"+work_idx);
+		
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("project_idx", project_idx);
 		map.put("work_idx", work_idx);
 		
-		
-		
+		ArrayList<FileDTO>fileArr=fdao.getWorkFileList(map);
+		for(int i=0; i<fileArr.size(); i++){
+			System.out.println(fileArr.get(i).getFile_name());
+		}
+	
 		ModelAndView mav = new ModelAndView();
 	    
 		
@@ -362,7 +366,7 @@ public class FileController {
 			
 			String decoded_result = new String(file_upload.getBytes(), "UTF-8"); 
 
-			System.out.println(decoded_result);
+			//System.out.println(decoded_result);
 			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outFile);
