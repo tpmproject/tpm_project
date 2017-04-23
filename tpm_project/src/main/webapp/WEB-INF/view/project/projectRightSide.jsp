@@ -17,7 +17,7 @@
     position: fixed;
     height: 90%;
     overflow-y: auto;
-    margin-top: -423px;
+    margin-top: -402px;
     z-index: 1000;
     background-color:white;
     transition: all 0.5s ease-in 0s;
@@ -83,7 +83,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 600px;
-    margin-top: -423px;
+    margin-top: -402px;
      background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
@@ -97,8 +97,7 @@
   }
  
  </style>
-   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-    rel="stylesheet">
+  <!--   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <style type="text/css">
       /* USER PROFILE PAGE */
      .card {
@@ -184,8 +183,7 @@
         -webkit-border-radius:0 !important;
     }
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  
 <!--   <script>
 
 	function project_fileList(){
@@ -318,7 +316,7 @@
          
         	
           
-            <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
+    <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
            <%-- <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
         </div>

@@ -21,8 +21,7 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h4>업무 파일 리스트</h4>
+        <div class="col-md-12" style="width:650px; margin: -10px -10px;">
           <div class="table-responsive"></div>
           <table id="mytable" class="table table-bordred table-striped" style="width: 100%;table-layout: fixed; border-spacing: 0;">
             <thead>
