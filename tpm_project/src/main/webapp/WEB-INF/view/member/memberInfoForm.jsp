@@ -54,13 +54,39 @@
 	  	  location.href='memberDel.do?id='+id;
 	    }
 	    
-	    function getProjectIdx(){
-	    	var projectidx = $(getProject).val();
-
-	    	if(projectidx=='select'){
-	    		window.alert('프로젝트를 선택해주세요');
-	    	}
+	    function selectProfile(){
+	    	$('#select_profile').on('change', function() {
+	      	        
+	      	        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+	      	        
+	      	        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+	      	            resetFormElement($(this)); //폼 초기화
+	      	            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+	      	        } else {
+	      	            file = $('#select_profile').prop("files")[0];
+	      	            blobURL = window.URL.createObjectURL(file);
+	      	            $('#profile_img').attr('src', blobURL);
+	      	        }
+	      	        return false;
+	      	    });
+	    }
+	    
+	    function changeThema(){
+	    	var selected = $('#selectThema').val();
+	    	window.alert(selected);
 	    	
+	    	var bgcolor = $('.main-header').css('background-color');
+	    	window.alert(bgcolor);
+	    	
+	    	$('.main-header').css('background-color','#FF0000');
+	    	window.alert(bgcolor);
+	    
+	    }
+	    
+	    function getProjectIdx(){
+	    	var projectidx = $('#getProject').val();
+	    		//$(getProject).val();
+
 	    	var param = 'project_idx='+projectidx+'&member_idx='+${sessionScope.s_member_idx};
 	    	
 	    	sendRequest('getWork.do?'+param, null, setProjectidx, 'GET');
@@ -120,23 +146,11 @@
 	    }
 	    
 	    window.onload = function(){
-	    	
-	    	$('#select_profile').on('change', function() {
-	      	        
-	      	        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
-	      	        
-	      	        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-	      	            resetFormElement($(this)); //폼 초기화
-	      	            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
-	      	        } else {
-	      	            file = $('#select_profile').prop("files")[0];
-	      	            blobURL = window.URL.createObjectURL(file);
-	      	            $('#profile_img').attr('src', blobURL);
-	      	        }
-	      	        return false;
-	      	    });
+	    	selectProfile();
+	    	getProjectIdx();
 	    	
 	    }
+	    	
     </script>
 </head>
 <body class="skin-blue">
@@ -157,9 +171,11 @@
              <c:forEach var="dto" items="${list}">
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
-	                <select>
-	                  <option>색상1</option>
-	                  <option>색상2</option>
+	                <select id="selectThema" onchange="changeThema()">
+	                  <option value="white"> white </option>
+	                  <option value="black"> black </option>
+	                  <option value="red"> red </option>
+	                  <option value="blue"> blue </option>
 	                </select>
 	              </div>
 	              <br>
@@ -261,9 +277,9 @@
               <div>
                 <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
                 <select id="getProject" onchange="getProjectIdx()">
-                	<option value="select"> 선택 </option>
+                	<!-- <option value="select"> 선택 </option> -->
                 <c:forEach var="project" items="${myproject}">
-                  <option value="${project.project_idx}">${project.project_name}</option>
+                  	<option value="${project.project_idx}">${project.project_name}</option>
                 </c:forEach>
                 </select>
               	<br>
