@@ -16,16 +16,16 @@
                 <div class="md-form">
                     <i class="fa fa-edit prefix"></i>
                     <!-- <i class="fa fa-edit" aria-hidden="true"></i> -->
-                    <input type="text" id="form22" class="mform-control minput-text">
+                    <input type="text" id="channel_name" class="mform-control minput-text" required="required">
                     <label for="form22">채널명</label>
                     
                     <div class="row createChatChannel_content_div">
-						<div class="col-sm-5">
+						<div class="col-sm-5" id="chat_myfriend_list_selectBeforeDiv">
 							<!-- Using data attributes -->
-							<select id="chat_myfriend_list_selectBefore" name="foods" multiple>
+							<!-- <select id="chat_myfriend_list_selectBefore" name="foods" multiple>
 								
 								
-							</select>
+							</select>  -->
 						</div>
 						<div class="col-sm-2 btMoveSelect_div">
 							<!-- Using data attributes -->
@@ -36,18 +36,20 @@
 								<i class="fa fa-chevron-right"></i>
 							</button>
 						</div>
-						<div class="col-sm-5">
+						<form id="sssform">
+						<div class="col-sm-5" id="chat_myfriend_list_selectAfterDiv">
 							<!-- Using data attributes -->
-							<select id="chat_myfriend_list_selectAfter" name="foods" multiple>
+							<!-- <select id="chat_myfriend_list_selectAfter" name="foods" multiple>
 								
-							</select>
+							</select> -->
 						</div>
+						</form>
 					</div>
                 </div>
             </div>
             <!--Footer-->
             <div class="modal-footer">
-           		<button class="mbtn mbtn-primary">생성</button>
+           		<button class="mbtn mbtn-primary" onclick="InsertChannel()">생성</button>
                 <button type="button" class="mbtn mbtn-default" data-dismiss="modal">닫기</button>
             </div>
         </div>

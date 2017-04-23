@@ -46,6 +46,12 @@ public class ChatController {
 		return mav;
 	}
 	
+	/** 채팅 - 채널 리스트 데이터 반환 */
+	@RequestMapping(value="chatChannelList.do",  method=RequestMethod.POST)
+	public @ResponseBody List<Object> chatList_ajax(ModelAndView mav, HttpSession session){
+		return chatDAO.getChatChannelList(session.getAttribute("s_member_idx"));
+	}
+	
 	/** 채팅 - 채팅 리스트 페이지 이동(테스트) */
 	@RequestMapping(value="chatListTest.do",  method=RequestMethod.GET)
 	public ModelAndView chatListTest(ModelAndView mav, HttpSession session){
@@ -57,6 +63,8 @@ public class ChatController {
 		mav.setViewName("chat/chatListForm");
 		return mav;
 	}
+	
+	
 	
 	/** 채팅 - 채팅 리스트 페이지2 이동(테스트) */
 	@RequestMapping(value="chatListTest2.do",  method=RequestMethod.GET)
