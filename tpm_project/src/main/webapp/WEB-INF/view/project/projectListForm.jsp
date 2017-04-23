@@ -13,7 +13,7 @@
 
 <!-- Slimscroll -->
 
-<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/ajax_extension.js"></script>
 
@@ -29,24 +29,17 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet" 	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
-
+<link rel="stylesheet"
+	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 <!-- Bootstrap 3.3.2 JS -->
+
+<!-- ----------------------------------------- -->
 
 
 
 
 <script type="text/javascript">
-/* 
-	$(function(){
-		$('#slimdiv').slimScroll({
-	        height: '5px' // 스크롤 처리할 div 의 길이
-	       
-	    }).bind('slimscrolling', function(e, pos) {
-	    	//window.alert("Scroll value: " + pos + "px");
-	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
-	    });
-	});  */
+
 
 
  	window.onload = function() {
@@ -934,181 +927,216 @@ function drop4(ev) {
 		</div>
 	</form>
 
+
+	<section class="content">
 	<div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
 
 		<!-- Indicators 페이징-->
 		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
-				
-			<li data-target="#carousel-example-generic" ${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
-				
+
+				<li data-target="#carousel-example-generic"
+					${status.first?'class="active"':'' }
+					data-slide-to="${status.index}"></li>
+
 			</c:forEach>
 		</ol>
 
 
 
 		<!-- Wrapper for slides -->
-		
-					<c:set var="plist" value="${plist}"></c:set>
-					
-					<c:choose>
-						<c:when test="${empty plist}">
+
+		<c:set var="plist" value="${plist}"></c:set>
+
+		<c:choose>
+			<c:when test="${empty plist}">
 								등록된 프로젝트가 없습니다.
 						</c:when>
-						
-						<c:otherwise>
-						<div class="carousel-inner" role="listbox">
-							<c:forEach var="i" items="${plist}" varStatus="status">
-							
-							<div class="item ${status.first?'active':'' }">
-								<div class="container-fluid " id="contain">
-								<div id="project_div${i.project_idx}" style="margin-top: 15px;" align="center">
+
+			<c:otherwise>
+				<div class="carousel-inner" role="listbox">
+					<c:forEach var="i" items="${plist}" varStatus="status">
+
+						<div class="item ${status.first?'active':'' }">
+							<div class="container-fluid " id="contain">
+								<div id="project_div${i.project_idx}" style="margin-top: 15px;"
+									align="center">
 									<div class="row" id="red">
-										
-											<div class="panel panel-danger coupon" style="width: 100%; height:100%; border-color: #fff ">
-												
-												<c:choose>
-													<c:when test="${i.project_state == 3}">
+
+										<div class="panel panel-danger coupon"
+											style="width: 100%; height: 100%; border-color: #fff">
+
+											<c:choose>
+												<c:when test="${i.project_state == 3}">
 													<!-- 완료 -->
-														<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;"</c:set>
-													</c:when>
-													<c:when test="${i.project_state == 2 }">
+													<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;"</c:set>
+												</c:when>
+												<c:when test="${i.project_state == 2 }">
 													<!-- 평가하기 -->
-														<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;"</c:set>
-														
-													</c:when>
-													<c:otherwise>
+													<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;"</c:set>
+
+												</c:when>
+												<c:otherwise>
 													<!-- 진행중 -->
-														 <c:set var="ininin">class="panel-heading" id="head"</c:set>
-													</c:otherwise>
-												</c:choose>
-												<div ${ininin} style="margin: auto;">
-													<div class="panel-title" id="title">
-														<i class="fa fa-github fa-2x"></i>
-														<input type="hidden" id="p_idx${i.project_idx}" value= "${i.project_idx}">
-														  <h4 id="pn${i.project_idx}">
-															<span class="hidden-xs">${i.project_name }</span>
-															
-															<c:if test="${pm_dto.project_level eq 3000 }">
+													<c:set var="ininin">class="panel-heading" id="head"</c:set>
+												</c:otherwise>
+											</c:choose>
+											<div ${ininin} style="margin: auto;">
+												<div class="panel-title" id="title">
+													<i class="fa fa-github fa-2x"></i> <input type="hidden"
+														id="p_idx${i.project_idx}" value="${i.project_idx}">
+													<h4 id="pn${i.project_idx}">
+														<span class="hidden-xs">${i.project_name }</span>
 
-																<span
-																	onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																	<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i>
-																</span>
+														<c:if test="${pm_dto.project_level eq 3000 }">
 
-																<span onclick="projectDelete('${i.project_idx}')">
-																	<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i>
-																</span>
-															</c:if>
-														</h4>
-														
+															<span
+																onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																<i class="glyphicon glyphicon-cog"
+																style="margin-bottom: 0px;"></i>
+															</span>
+
+															<span onclick="projectDelete('${i.project_idx}')">
+																<i class="glyphicon glyphicon-remove"
+																style="margin-bottom: 0px;"></i>
+															</span>
+														</c:if>
+													</h4>
+
+												</div>
+											</div>
+											<div class="panel-body">
+												<img src="http://i.imgur.com/e07tg8R.png"
+													class="coupon-img img-rounded" width="250px" height="250px">
+
+												<div class="col-md-6" align="center"
+													style="margin-left: 30%;">
+
+													<div class="items">
+
+														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+
+															<div class="col-md-2" align="center">
+																<img class="thumb-lg img-circle bx-s"
+																	src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
+																	style="width: 50px; height: 50px;" alt="pic">
+															</div>
+
+														</c:forEach>
+
+													</div>
+
+												</div>
+
+												<div class="col-md-12">
+													<div id="slimdiv"
+														style="border-color: orange; border-style: dashed; width: 300px; height: 100px; scroll; overflow: auto; overflow-y: hidden">
+														<span class="disclosure" id="pc${i.project_idx}">${i.project_content }</span>
 													</div>
 												</div>
-												<div class="panel-body">
-													<img src="http://i.imgur.com/e07tg8R.png" class="coupon-img img-rounded" width="250px"height="250px">
+											</div>
 
-													<div class="col-md-9" style="margin-left: 10%;">
-													
-														<ul class="items">
-														
-															<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-																
-																<div class="col-md-6" style="margin: auto;"><img class="thumb-lg img-circle bx-s" src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}" style="width: 50px; height: 50px;" alt="pic">
-																</div>
-																
-															</c:forEach>
-														
-														</ul>
-														
-													</div>
+											<div class="panel-footer">
+												<div class="coupon-code">
+													<a class="btn btn-link"
+														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
 
-													<div class="col-md-12">
-													<div id="slimdiv" style="border-color: orange; border-style: dashed;">
-														<p class="disclosure" id="pc${i.project_idx}">${i.project_content }</p>
-													</div>
-													</div>
-												</div>
+													<!-- 프로젝트 진행현황 -->
+													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+														<%-- <c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}"> --%>
 
-												<div class="panel-footer">
-													<div class="coupon-code">
-														<a class="btn btn-link" href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
-														 
-												<!-- 프로젝트 진행현황 -->
-												<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-												<%-- <c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}"> --%>
-												
-												<c:choose>
-													<c:when test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-														<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-														<span class="print"> <a href="#" class="btn btn-link" style="color: green;"><i class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
-														<span
-																	onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																	<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i>
-																</span>
+														<c:choose>
+															<c:when
+																test="${pm_dto.project_level == 3000 and i.project_state == 3}">
+																<c:if
+																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																	<span class="print"> <a href="#"
+																		class="btn btn-link" style="color: green;"><i
+																			class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
+																	<span
+																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																		<i class="glyphicon glyphicon-cog"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
 
-																<span onclick="projectDelete('${i.project_idx}')">
-																	<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i>
-																</span>
-														</c:if>
-													</c:when>
-													<c:when test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-														<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-														<span class="print"> <a onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'" class="btn btn-link"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>
-														<span
-																	onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																	<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i>
-																</span>
+																	<span onclick="projectDelete('${i.project_idx}')">
+																		<i class="glyphicon glyphicon-remove"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
+																</c:if>
+															</c:when>
+															<c:when
+																test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
+																<c:if
+																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																	<span class="print"> <a
+																		onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
+																		class="btn btn-link"><i
+																			class="glyphicon glyphicon-check"></i>평가하기</a></span>
+																	<span
+																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																		<i class="glyphicon glyphicon-cog"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
 
-																<span onclick="projectDelete('${i.project_idx}')">
-																	<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i>
-																</span>
-														</c:if>
-													</c:when>
-													<c:when test="${i.project_state == 1 }">
-													<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-														<span class="print"> <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-time"></i>진행중</a></span>
-														<span onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																	<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i>
-																</span>
+																	<span onclick="projectDelete('${i.project_idx}')">
+																		<i class="glyphicon glyphicon-remove"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
+																</c:if>
+															</c:when>
+															<c:when test="${i.project_state == 1 }">
+																<c:if
+																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																	<span class="print"> <a href="#"
+																		class="btn btn-link"><i
+																			class="glyphicon glyphicon-time"></i>진행중</a></span>
+																	<span
+																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																		<i class="glyphicon glyphicon-cog"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
 
-																<span onclick="projectDelete('${i.project_idx}')">
-																	<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i>
-																</span>
-														</c:if>
-													</c:when>
-												</c:choose>
-												
-												<%-- </c:if> --%>
-												</c:forEach>
-											
-													</div >
+																	<span onclick="projectDelete('${i.project_idx}')">
+																		<i class="glyphicon glyphicon-remove"
+																		style="margin-bottom: 0px;"></i>
+																	</span>
+																</c:if>
+															</c:when>
+														</c:choose>
+
+														<%-- </c:if> --%>
+													</c:forEach>
+
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							</c:forEach>
 						</div>
-						
-					</c:otherwise>
-					</c:choose>
-					
-						<!-- carousel-inner -->
-			
-			
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic"
-				role="button" data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true">
-			</span> <span class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#carousel-example-generic"
-				role="button" data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-		<%@ include file="/WEB-INF/view/footer.jsp"%>
+					</c:forEach>
+				</div>
+
+			</c:otherwise>
+		</c:choose>
+
+		<!-- carousel-inner -->
+
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>
+			<span class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+	</section>
+	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
