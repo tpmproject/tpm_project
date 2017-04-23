@@ -188,8 +188,8 @@
 
 	function project_fileList(work_idx){
 		
-		window.alert('사이드창쪽 업무 idx: '+work_idx);
-		window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
+		//window.alert('사이드창쪽 업무 idx: '+work_idx);
+		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
 		
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
