@@ -18,7 +18,7 @@
     height: 90%;
     overflow-y: auto;
     margin-top: -402px;
-    z-index: 1000;
+    z-index: 1;
     background-color:white;
     transition: all 0.5s ease-in 0s;
     -webkit-transition: all 0.5s ease-in 0s;
