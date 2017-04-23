@@ -50,6 +50,7 @@
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script>
 window.onload=function(){
+	$('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 	$('[data-toggle="popover"]').popover();
 	$(work_modal).hide();
 	$(btnwork2).hide();
@@ -154,10 +155,21 @@ function showf2() {
 	$(btnwork4).hide();
 }
 function workUpdate(work_idx,work_start,work_end,work_confirm){
+	var startDate = work_start.split(' ',3);
+	var endDate = work_end.split(' ',3);
+	
 	$(workback2).fadeIn('150');
 	$(work_modal2).fadeIn('150');
 	$(w_modal2).show();
 	$(btnwork4).hide();
+	
+	$('#workdateup').daterangepicker({
+		timePicker: true
+		, timePickerIncrement: 30
+		, format: 'YYYY/MM/DD h:mm A'
+		, "startDate"  : startDate[0]
+		, "endDate" : endDate[0]
+	});
 	
 	var wdiv=document.getElementById('wdiv'+work_idx);
 	var fc=wdiv.firstChild;
@@ -1133,10 +1145,9 @@ a {
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
-			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>
-			
+<%-- 		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%> --%>
+ 			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;"><i class="glyphicon glyphicon-plus"></i> Add Work</h4>
-
 			<div id="w_modal">
 				<div id="btnwork">
 					<div style=" padding:10px;">
@@ -1151,18 +1162,14 @@ a {
 							<input type="text" class="form-control pull-right" placeholder="기한을 체크해주세요."
 								name="workdate" id="workdate" />
 						</div>
-						<!-- /.input group -->
 					</div>
 					<div align="center" style="padding:5px;">
 						<input type="checkbox"  name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
-
 					</div>
-
 				</div>
 			</div>
-
 			<div id="btnwork2">
 				<div class="section">
 					<div class="container">
@@ -1190,18 +1197,17 @@ a {
 						onclick="showf()">이전</button>
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workok"
 						onclick="addWork()">완료</button>
-				</div>
+				</div> 
 			</div>
 		</div>
 	</form>
-
 	<!-- 업무 수정 modal -->
 	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
-			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
+<%-- 		<%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%> --%>
+ 			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;">업무 수정</h4>
-
 			<div id="w_modal2">
 				<div id="btnwork3">
 					<div style=" padding:10px;">
@@ -1218,7 +1224,6 @@ a {
 									name="workdateup" id="workdateup" />
 							</div>
 						</div>
-						<!-- /.input group -->
 					</div>
 					<div align="right">
 						<input type="checkbox" name="work_confirm">결재여부
@@ -1227,7 +1232,6 @@ a {
 					</div>
 				</div>
 			</div>
-
 			<div id="btnwork4">
 				<div class="section">
 					<div class="container">
@@ -1259,8 +1263,6 @@ a {
 			</div>
 		</div>
 	</form>
-
-
 	<div id="tendency_pop">
 		헥사그래프
 	</div>
@@ -1347,15 +1349,6 @@ $(document).ready(function(){
 	$("#work_time").timepicker('setTime', "17:30");
 
 }); */
-$(function () {
-	 //Date range picker with time picker
- $('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
-});	
-$(function () {
-	 //Date range picker with time picker
-$('#workdateup').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
-});
-
 /* 첨부파일 관련 */
 $("#menu-close").click(function(e) {
   e.preventDefault();
