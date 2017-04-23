@@ -186,7 +186,7 @@
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script>
+<!--   <script>
 
 	function project_fileList(){
 		
@@ -260,7 +260,7 @@
 	}
 
     </script>
-    
+     -->
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
@@ -302,7 +302,7 @@
           <button type="button" id="following" class="btn btn-default" href="#tab3"
           data-toggle="tab">
             <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-            <div class="hidden-xs" onclick="project_fileList()">파일</div>
+            <div class="hidden-xs">파일</div>
           </button>
         </div>
       </div>
@@ -319,7 +319,7 @@
         	
           
             <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
-           <%--  <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
+           <%-- <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
         </div>
       </div>
