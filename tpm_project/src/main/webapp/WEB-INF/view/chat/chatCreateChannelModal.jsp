@@ -23,26 +23,16 @@
 						<div class="col-sm-5">
 							<!-- Using data attributes -->
 							<select id="chat_myfriend_list_selectBefore" name="foods" multiple>
-								<option value="bacon">
-								dfdffffffffffffffffffffffffffffffffffffffffffffffffff
-								</option>
-								<option value="eggs"
-									selected>Eggs</option>
-								<option value="toast">Toast</option>
-								<option value="oatmeal">Oatmeal</option>
-								<option value="steak"
-									selected>Steak</option>
-								<option value="sausage">Sausage</option>
-								<option value="fruit">Fresh
-									Fruit</option>
+								
+								
 							</select>
 						</div>
 						<div class="col-sm-2 btMoveSelect_div">
 							<!-- Using data attributes -->
-							<button class="btn btn-sm btn-success waves-effect waves-light">
+							<button class="btn btn-sm btn-success waves-effect waves-light" onclick="moveSeleted('left')">
 								<i class="fa fa-chevron-left"></i>
 							</button>
-							<button class="btn btn-sm btn-success waves-effect waves-light">
+							<button class="btn btn-sm btn-success waves-effect waves-light" onclick="moveSeleted('right')">
 								<i class="fa fa-chevron-right"></i>
 							</button>
 						</div>
