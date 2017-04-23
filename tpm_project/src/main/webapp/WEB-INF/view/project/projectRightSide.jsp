@@ -167,6 +167,7 @@
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
+        margin-
     }
     .card.hovercard .card-info {
         overflow: hidden;
@@ -185,7 +186,86 @@
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
- 
+  <script>
+
+	function fileContent_page(filename,page){
+		var file_con = document.getElementById('fileCon');
+		var f_name = document.getElementById('f_name');
+		
+		f_name.innerHTML = filename;
+		file_con.innerHTML = '';
+		
+		var param = "file_name="+filename+"&page="+page;
+		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
+		
+	}
+	
+	function action_ajax(url, param, method, ctype) {
+		sendRequest_extension(url, param, ajax_result, method, ctype);
+		return false;
+	}
+	
+	
+    function ajax_result(httpRequest, ctype) {
+    	return function() {
+    		if(httpRequest.readyState == 4){
+    			if(httpRequest.status == 200){
+    				if(!httpRequest.responseText.match(null)){
+    					var responseText = httpRequest.responseText;
+    					
+    					result_process(responseText, ctype);
+    				
+    					
+    				}
+    			}
+    		} else {
+
+    		}
+    	}
+    }
+    function result_process(responseText, ctype) {
+
+		if(ctype == 'FILE_LIST'){
+			fileList_setting(responseText);
+			
+		} else if(ctype == 'FILE_CONTENT'){
+			
+			fileContent_setting(responseText);
+			
+		} else if(ctype == ''){
+			search_modal_setting(responseText);
+		} else {
+			window.alert('잘못된 경로');
+		}
+	}
+
+	
+	function fileList_setting(responseText) {
+		var json = JSON.parse(responseText);
+		
+		var msg = '';
+		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
+		for(var i = 0 ; i < files.length; i++){
+			var file = files[i];
+			var filename=file.file_name;
+			var filetype='';
+
+		   
+		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">';
+
+			        
+			msg += '</tr>';
+		
+		}
+		
+		var file_content_list = document.getElementById('file_content_list');
+	
+		file_content_list.innerHTML = '';
+		file_content_list.innerHTML = msg;
+	}
+
+    </script>
+    
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
@@ -240,15 +320,18 @@
             <h3>This is tab 2</h3>
           </div>
           <div class="tab-pane fade in" id="tab3">
-            	<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+          
+          
+          
+          
+           <%--    <%@include file="/WEB-INF/view/project/projectFileList.jsp"%> --%>
+           <%--  <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
         </div>
       </div>
     </div>
-
-
-
-<script type="text/javascript">
+	
+	<script type="text/javascript">
 
 
 	  $(document).ready(function() {
