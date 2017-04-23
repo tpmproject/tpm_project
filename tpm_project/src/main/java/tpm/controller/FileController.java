@@ -124,6 +124,27 @@ public class FileController {
 		return mav;
 	}
 	
+
+	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
+	@RequestMapping(value="workFileList.do",  method=RequestMethod.POST)
+	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
+								 @RequestParam("work_idx")int work_idx){
+		
+		System.out.println("project_idx:"+project_idx);
+		System.out.println("work_idx:"+work_idx);
+		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		map.put("project_idx", project_idx);
+		map.put("work_idx", work_idx);
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+	    
+		
+	
+		return mav;
+	}
+	
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
 	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)

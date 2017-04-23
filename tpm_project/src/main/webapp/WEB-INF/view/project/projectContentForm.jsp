@@ -729,7 +729,13 @@ function fileUp(work_idx){
 	
 
 }
-
+/* 업무 오른쪽 사이드창  */
+function workSide(work_idx){
+	window.alert('컨텐트폼쪽 업무 idx: '+work_idx);
+	project_fileList(work_idx);
+	return work_idx;
+} 
+ 
 function showWorkTable(work_idx){
 
 	var show=document.getElementById('showWork'+work_idx).getAttribute('class');
@@ -1097,9 +1103,8 @@ a {
 											</c:choose> --%>
 
 											<td align="right"><a
-												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ <a
-												href="#" onclick="fileUp('${wdto.work_idx}')"
-												class="menu-toggle">첨부파일</a>
+												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ 
+												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx }')" class="menu-toggle">첨부파일</a>
 												
 												<!--옵션,코멘트, 첨부 파일 div 시작  -->
 													

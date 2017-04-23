@@ -10,10 +10,19 @@
 		
 	</select>
 	
-	<select id="fileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
+    <select id="fileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
 		where project_idx=#{project_idx} and file_name like '%${search_text}%'
 	</select>
+	
+	<!--업무 파일 리스트  -->
+	<select id="workFileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
+		select * from tpm_file 
+		where project_idx=#{project_idx}
+		
+	</select>
+	
+
 
 	<select id="fileList_sort" parameterType="Map" resultType="tpm.file.model.FileDTO">
 		select * from tpm_file
