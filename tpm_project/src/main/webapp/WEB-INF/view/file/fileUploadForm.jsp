@@ -18,7 +18,7 @@
 	
 	<div id="div_list"></div>
 	<div id="div_fns"></div>
-	<div id="div_dnd" style="height: 500px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
+	<div id="div_dnd" style="height: 350px; margin: 20px;text-align: center;line-height: 500px;font-size: 50px; background-color: #def;" >
 	<img src="/tpm_project/img/fileicon/file.PNG"></div>
 	<input type="submit" value="업로드">
 	</form>

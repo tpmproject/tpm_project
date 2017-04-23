@@ -167,6 +167,7 @@
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
+        margin-
     }
     .card.hovercard .card-info {
         overflow: hidden;
@@ -240,15 +241,18 @@
             <h3>This is tab 2</h3>
           </div>
           <div class="tab-pane fade in" id="tab3">
-            	<%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+          
+          
+          
+          
+         <%--    <%@include file="/WEB-INF/view/project/projectFileList.jsp"%> --%>
+           <%--  <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
         </div>
       </div>
     </div>
-
-
-
-<script type="text/javascript">
+	
+	<script type="text/javascript">
 
 
 	  $(document).ready(function() {
