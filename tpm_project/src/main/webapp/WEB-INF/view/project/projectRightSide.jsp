@@ -184,12 +184,15 @@
     }
     </style>
   
-<!--   <script>
+  <script>
 
-	function project_fileList(){
+	function project_fileList(work_idx){
 		
-		var param = 1;
-		action_ajax('fileContent.do',param,'POST', 'PROJECT_FILELIST'); // 해당 페이지로 ajax통신 시작
+		window.alert('사이드창쪽 업무 idx: '+work_idx);
+		window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
+		
+		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
+		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 		
 	}
 	
@@ -218,7 +221,7 @@
     }
     function result_process(responseText, ctype) {
 
-		if(ctype == 'PROJECT_FILELIST'){
+		if(ctype == 'WORK_FILELIST'){
 			project_fileList_setting(responseText);
 			
 		} else if(ctype == 'FILE_CONTENT'){
@@ -258,7 +261,7 @@
 	}
 
     </script>
-     -->
+    
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
@@ -300,25 +303,38 @@
           <button type="button" id="following" class="btn btn-default" href="#tab3"
           data-toggle="tab">
             <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-            <div class="hidden-xs">파일</div>
+            <div class="hidden-xs">파일 리스트</div>
+          </button>
+        </div>
+         <div class="btn-group" role="group">
+          <button type="button" id="fileUpload" class="btn btn-default" href="#tab4"
+          data-toggle="tab">
+            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+            <div class="hidden-xs">파일 업로드</div>
           </button>
         </div>
       </div>
       <div class="well">
         <div class="tab-content">
+        
           <div class="tab-pane fade in active" id="tab1">
             <h3>This is tab 1</h3>
           </div>
+          
           <div class="tab-pane fade in" id="tab2">
             <h3>This is tab 2</h3>
           </div>
-          <div class="tab-pane fade in" id="tab3">
-         
-        	
           
-    <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
+          <div class="tab-pane fade in" id="tab3">
+   			 <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
            <%-- <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
+          
+          <div class="tab-pane fade in" id="tab4">
+             <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+          </div>
+          
+          
         </div>
       </div>
     </div>

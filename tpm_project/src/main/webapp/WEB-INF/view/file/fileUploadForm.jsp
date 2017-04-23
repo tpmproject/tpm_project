@@ -11,8 +11,8 @@
 <fieldset>
 	<legend></legend>
 	<form name="fileUpLoadForm" action="fileAdd.do" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="work_idx" id="id_work_idx" value="">
-	<input type="hidden" name="project_idx" id="id_project_idx" value="">
+	<input type="hidden" name="work_idx" id="id_work_idx" value="${wdto.work_idx}">
+	<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
 	 
 	<input type="file" id="file_dnd" name="file_upload" multiple="multiple">
 	

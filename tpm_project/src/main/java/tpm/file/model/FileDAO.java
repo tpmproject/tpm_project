@@ -1,6 +1,7 @@
 package tpm.file.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,5 +15,5 @@ public interface FileDAO {
 	public int addFile(FileDTO fdto);
 	public int updateFile();
 	public int delFile(int file_idx);
-
+	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Integer> map);
 }
