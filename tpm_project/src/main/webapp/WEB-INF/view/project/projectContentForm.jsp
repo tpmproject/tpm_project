@@ -1145,8 +1145,8 @@ a {
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
-<%-- 		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%> --%>
- 			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
+		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%>
+<!--  			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;"><i class="glyphicon glyphicon-plus"></i> Add Work</h4>
 			<div id="w_modal">
 				<div id="btnwork">
@@ -1198,15 +1198,15 @@ a {
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workok"
 						onclick="addWork()">완료</button>
 				</div> 
-			</div>
+			</div> -->
 		</div>
 	</form>
 	<!-- 업무 수정 modal -->
 	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
-<%-- 		<%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%> --%>
- 			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
+ 		<%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%>
+<!--  			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;">업무 수정</h4>
 			<div id="w_modal2">
 				<div id="btnwork3">
@@ -1260,7 +1260,7 @@ a {
 					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workok"
 						onclick="updateWork()">완료</button>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</form>
 	<div id="tendency_pop">
