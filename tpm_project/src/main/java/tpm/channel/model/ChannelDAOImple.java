@@ -11,10 +11,9 @@ public class ChannelDAOImple implements ChannelDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-		
-	public int createChannel() {
+	public int createChannel(Object obj) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlMap.insert("channelInsert", obj);
 	}
 
 }

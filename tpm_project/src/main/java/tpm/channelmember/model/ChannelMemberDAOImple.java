@@ -1,5 +1,7 @@
 package tpm.channelmember.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class ChannelMemberDAOImple implements ChannelMemberDAO {
@@ -20,5 +22,15 @@ public class ChannelMemberDAOImple implements ChannelMemberDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int insertChannelMember(Object obj) {
+		// TODO Auto-generated method stub
+		return sqlMap.insert("channelMemberInsert", obj);
+	}
+
+
+
+	
 
 }

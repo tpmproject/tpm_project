@@ -3,5 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.channel">
-
+	<!-- 채널 등록 하기 -->
+	<insert id="channelInsert" parameterType="tpm.channel.model.ChannelDTO" useGeneratedKeys="true" keyProperty="channel_idx" keyColumn="channel_idx">
+		INSERT INTO tpm_channel VALUES(channel_idx.nextval, #{channel_name})
+	</insert>
 </mapper>

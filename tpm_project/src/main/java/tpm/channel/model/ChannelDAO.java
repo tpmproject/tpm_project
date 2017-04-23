@@ -2,5 +2,5 @@ package tpm.channel.model;
 
 public interface ChannelDAO {
 	
-	public int createChannel();
+	public int createChannel(Object obj);
 }

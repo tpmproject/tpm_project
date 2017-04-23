@@ -520,11 +520,88 @@ function InsertChatContent() {
 	
 }
 
+function InsertChannel(){
+	
+	var channel_name = $('#channel_name').val();
+	var selected_member_idxs =$('#chat_myfriend_list_selectAfterDiv').find('input[name="member_idx"]');
+	// name이 같은 체크박스의 값들을 배열에 담는다.
+    var member_idxValues = [];
+    $(selected_member_idxs).each(function(i) {
+        member_idxValues.push($(this).val());
+    });
+	
+	
+	$.ajax({
+		url : 'channelAdd.do',
+		type : 'post',
+		data : { 
+				 channel_name : channel_name,
+				 selected_member_idxs : member_idxValues
+		},
+		dataType : 'json',
+		success : function(json) {
+			// 입력 성공시..
+			//window.alert(JSON.stringify(json));
+			if(json != false){
+				// 소켓을 통해 메세지를 전달한다.
+				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
+				reLoadChannelList();
+			} 
+		}
+	});
+}
+
+function reLoadChannelList(){
+	$.ajax({
+		url : 'chatChannelList.do',
+		type : 'post',
+		data : { 		
+		},
+		dataType : 'json',
+		success : function(json) {
+			// 입력 성공시..
+			window.alert(JSON.stringify(json));
+			/* if(json != false){
+				// 소켓을 통해 메세지를 전달한다.
+				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
+				reLoadChannelList();
+			}  */
+		}
+	});
+}
+
+function showCreateChannelModal(){
+	//$('#createChannelModal').modal('show');
+	//reLoadCreateChannelModal();
+	
+	$.ajax({
+			url : 'myFriendList.do',
+			type : 'post',
+			dataType : 'json', 
+			success : function(json) {
+				//window.alert(JSON.stringify(json));
+				initCreateChannelModal(json);
+			}
+		});
+}
+function initCreateChannelModal(json){
+	initCreateChannel_Selectr_plugin(json);
+	reCreateSeletr();
+	$('#createChannelModal').modal('show');
+}
+
 function initCreateChannel_Selectr_plugin(json){
+	
+	$('#chat_myfriend_list_selectBefore').remove();
+	$('#chat_myfriend_list_selectAfter').remove();
+	$('.selectr').remove();
+	
+	$('#chat_myfriend_list_selectBeforeDiv').html('<select id="chat_myfriend_list_selectBefore" multiple></select>');
+	$('#chat_myfriend_list_selectAfterDiv').html('<select id="chat_myfriend_list_selectAfter" multiple></select>');
 	
 	var innerMsg = '';
 	for(var i = 0 ; i < json.length ; i++){
-		innerMsg += '<option value="' + json[i].member_idx + '">' + json[i].member_idx + ':' + json[i].member_id + ':' + json[i].member_name + ':' + json[i].member_img + '</option>';
+		innerMsg += '<option id="friend_op_' + json[i].member_idx + '" value="' + json[i].member_idx + '">' + json[i].member_idx + ':' + json[i].member_id + ':' + json[i].member_name + ':' + json[i].member_img + '</option>';
 	}
 	$("#chat_myfriend_list_selectBefore").html(innerMsg);
 
@@ -549,39 +626,61 @@ function initCreateChannel_Selectr_plugin(json){
     });
 }
 
+function reCreateChannel_Selectr_plugin(){
+	var left_select_html = $('#chat_myfriend_list_selectBefore').html();
+	var right_select_html = $('#chat_myfriend_list_selectAfter').html();
+	
+	$('#chat_myfriend_list_selectBefore').remove();
+	$('#chat_myfriend_list_selectAfter').remove();
+	$('.selectr').remove();
+	
+	$('#chat_myfriend_list_selectBeforeDiv').html('<select id="chat_myfriend_list_selectBefore" multiple></select>');
+	$('#chat_myfriend_list_selectAfterDiv').html('<select id="chat_myfriend_list_selectAfter" multiple></select>');
 
-function showCreateChannelModal(){
-	//$('#createChannelModal').modal('show');
-	$('#chat_myfriend_list_selectBefore').html('');
-	$('#chat_myfriend_list_selectAfter').html('');
-	//$('.selectr').remove();
+	$('#chat_myfriend_list_selectBefore').html(left_select_html);
+	$('#chat_myfriend_list_selectAfter').html(right_select_html);
 	
-	$.ajax({
-			url : 'myFriendList.do',
-			type : 'post',
-			dataType : 'json', 
-			success : function(json) {
-				//window.alert(JSON.stringify(json));
-				initCreateChannelModal(json);
-			}
-		});
-	
-	
-}
-function initCreateChannelModal(json){
-	initCreateChannel_Selectr_plugin(json);
-	reCreateSeletr();
-	$('#createChannelModal').modal('show');
+	$("#chat_myfriend_list_selectBefore").selectr({
+    	title: '친구 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	width: '600px',
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
+    
+    $("#chat_myfriend_list_selectAfter").selectr({
+    	title: '선택 목록',
+    	placeholder: 'Search',
+    	resetText: 'Clear All',
+    	/* width: '150px', */
+    	maxListHeight: NaN,
+    	tooltipBreakpoint: 25,
+    	maxSelection: NaN
+    });
 }
 
 function reCreateSeletr(){
+	var list_groups = $('.list-group');
+	var left_list_group = list_groups[0];
+	var right_list_group = list_groups[1];
+	
+	$(left_list_group).attr('ondragover','allowDrop(event)');
+	$(left_list_group).attr('ondrop','leftdrop(event)');
+	
+	$(right_list_group).attr('ondragover','allowDrop(event)');
+	$(right_list_group).attr('ondrop','rightdrop(event)');
+	
 	var option_name_div = document.getElementsByClassName('option-name');
+	
 	for(var i = 0 ; i < option_name_div.length; i++){
 		
+		$(option_name_div).eq(i).removeAttr('title');
 		var member_info = $(option_name_div).eq(i).html().split(':');
-		
+	
 		var innerMsg = '';
-		innerMsg += '<div class="feed-element">';
+		innerMsg += '<div class="feed-element" id="feed_element_' + member_info[0] + '" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 		innerMsg += 	'<input type="hidden" name="member_idx" value="' + member_info[0] + '" >';
 		innerMsg += 	'<a href="profile.html" class="pull-left">';
 		innerMsg += 		'<img alt="image" class="img-circle" src="/tpm_project/img/member/profile/' + member_info[3] + '">';
@@ -594,6 +693,12 @@ function reCreateSeletr(){
 		
 		$(option_name_div[i]).html(innerMsg);
 	}
+	
+	$('.list-group').slimScroll({
+        height: '290px' // 스크롤 처리할 div 의 길이
+    }).bind('slimscrolling', function(e, pos) {
+
+    });
 }
 
 function moveSeleted(direction){
@@ -635,43 +740,73 @@ function moveSeleted(direction){
 	var list_groups = $('.list-group');
 	var left_list_group = list_groups[0];
 	var right_list_group = list_groups[1];
+	var deleteIdArry = new Array();
 	
 	if(direction == 'right'){
-		var left_list_group_seleted = $('.list-group').eq(0).find('li.selected');
-		for(var i = 0 ; i < left_list_group_seleted.length ; i++){
-			var innerMsg = '';
-			innerMsg += '<li class="list-group-item">';
-			innerMsg += left_list_group_seleted.eq(i).html();
-			innerMsg += '</li>';
-			$(right_list_group).append(innerMsg);
-			
-			left_list_group_seleted.eq(i).remove();
-			
-			$('.panel-footer').eq(0).addClass('hidden');
-			$('.current-selection').eq(0).html('');
+		var left_list_group_item = $(left_list_group).find('li.list-group-item');
+		for(var i = 0 ; i < left_list_group_item.length ; i++){
+		 	if($(left_list_group_item[i]).hasClass('selected') == true){
+		 		$('#chat_myfriend_list_selectAfter').append($('#chat_myfriend_list_selectBefore').find('option').eq(i).clone().wrapAll('<option/>').parent().html());
+		 		deleteIdArry.push($('#chat_myfriend_list_selectBefore').find('option').eq(i).attr('id'));
+		 	}
+		}
+		for(var i = 0 ; i < deleteIdArry.length ; i++){
+			$('#chat_myfriend_list_selectBefore').find('#'+deleteIdArry[i]).remove();
 		}
 	} else if(direction == 'left'){
-		var right_list_group_seleted = $('.list-group').eq(1).find('li.selected');
-		for(var i = 0 ; i < right_list_group_seleted.length ; i++){
-			var innerMsg = '';
-			innerMsg += '<li class="list-group-item">';
-			innerMsg += right_list_group_seleted.eq(i).html();
-			innerMsg += '</li>';
-			$(left_list_group).append(innerMsg);
-			
-			right_list_group_seleted.eq(i).remove();
-			
-			$('.panel-footer').eq(1).addClass('hidden');
-			$('.current-selection').eq(1).html('');
+		var right_list_group_item = $(right_list_group).find('li.list-group-item');
+		for(var i = 0 ; i < right_list_group_item.length ; i++){
+		 	if($(right_list_group_item[i]).hasClass('selected') == true){		 	
+		 		$('#chat_myfriend_list_selectBefore').append($('#chat_myfriend_list_selectAfter').find('option').eq(i).clone().wrapAll('<option/>').parent().html());
+		 		deleteIdArry.push($('#chat_myfriend_list_selectAfter').find('option').eq(i).attr('id'));
+		 	}
+		}
+		for(var i = 0 ; i < deleteIdArry.length ; i++){
+			$('#chat_myfriend_list_selectAfter').find('#'+deleteIdArry[i]).remove();
 		}
 	} 
 	
-	$('#chat_myfriend_list_selectBefore').
-	
-	initCreateChannel_Selectr_plugin();
+	reCreateChannel_Selectr_plugin();
 	reCreateSeletr();
-	
-	
+}
+
+//ondragstart 드래그할 때 id값 가져오기!
+function drag(ev) {
+    ev.dataTransfer.setData("evid", ev.target.id);
+    
+}
+
+//ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
+function rightdrop(ev) {
+    ev.preventDefault();
+    var evid = ev.dataTransfer.getData("evid");
+    var ev_idx = evid.split('_')[2];
+    var dropSeletedItem = $('#chat_myfriend_list_selectBefore').find('#friend_op_'+ev_idx);
+    
+    $('#chat_myfriend_list_selectAfter').append($(dropSeletedItem).clone().wrapAll('<option/>').parent().html());
+    $(dropSeletedItem).remove();
+    
+    reCreateChannel_Selectr_plugin();
+	reCreateSeletr();
+   
+}
+
+function leftdrop(ev) {
+    ev.preventDefault();
+    var evid = ev.dataTransfer.getData("evid");
+    var ev_idx = evid.split('_')[2];
+    var dropSeletedItem = $('#chat_myfriend_list_selectAfter').find('#friend_op_'+ev_idx);
+    
+    $('#chat_myfriend_list_selectBefore').append($(dropSeletedItem).clone().wrapAll('<option/>').parent().html());
+    $(dropSeletedItem).remove();
+   
+    reCreateChannel_Selectr_plugin();
+	reCreateSeletr();
+}
+
+//ondragover 드래그 완료시 해당 엘리먼트의 기본 동작 막아줌
+function allowDrop(ev) {
+    ev.preventDefault();
 }
 </script>
 </head>
