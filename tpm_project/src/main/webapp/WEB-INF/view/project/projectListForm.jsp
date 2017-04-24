@@ -423,7 +423,7 @@
 		$('#modal_content' + member_idx).fadeIn('100');
 	}
 
-	function projectMemberAddResult3() {
+	/* function projectMemberAddResult3() {
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
@@ -478,7 +478,7 @@
 			}
 		}
 	}
-
+ */
 	function addP() {
 
 		var pname = document.newProject.project_name.value;
@@ -760,7 +760,9 @@ function drop4(ev) {
 	height: 700px;
 	z-index: 5;
 }
-
+.content{
+	
+}
 .sd {
 	display: inline-block;
 	background: #f8f8f8;
@@ -778,24 +780,7 @@ function drop4(ev) {
 </head>
 <body class="skin-blue">
 	<%@ include file="/WEB-INF/view/header.jsp"%>
-	<section class="callaction">
-	<div class="container">
-		<div class="row" style="margin-bottom: 30px;">
-			<div class="col-lg-12">
-				<div class="big-cta">
-					<div class="cta-text">
-						<h2>
-							<span>TPM</span>.PROJECT
-						</h2>
-						<h5>
-							<a onclick="showf()">프로젝트추가</a>
-						</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</section>
+
 
 
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -836,9 +821,6 @@ function drop4(ev) {
 			</div>
 
 			<div id="smodal">
-
-
-
 				<div class="sd">
 					<h4>친구목록</h4>
 					<div id="myFriend_List"
@@ -855,8 +837,6 @@ function drop4(ev) {
 						style="width: 300px; height: 200px; overflow-y: scroll"></div>
 
 				</div>
-
-
 				<div class="sd">
 					<h4>초대 멤버</h4>
 					<div id="project_Member"
@@ -928,10 +908,28 @@ function drop4(ev) {
 	</form>
 
 
-	<section class="content">
+	
 	<div id="carousel-example-generic" class="carousel slide center-block"
-		data-ride="carousel" data-interval="false">
-
+		data-ride="carousel" data-interval="false" >
+	
+	<section class="callaction">
+	<div class="container">
+		<div class="row" style="margin-bottom: 30px; ">
+			<div class="col-lg-12">
+				<div class="big-cta">
+					<div class="cta-text">
+						<h2>
+							<span>TPM</span>.PROJECT
+						</h2>
+						<h5>
+							<a onclick="showf()">프로젝트추가</a>
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
 		<!-- Indicators 페이징-->
 		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
@@ -959,14 +957,12 @@ function drop4(ev) {
 					<c:forEach var="i" items="${plist}" varStatus="status">
 
 						<div class="item ${status.first?'active':'' }">
-							<div class="container-fluid " id="contain">
-								<div id="project_div${i.project_idx}" style="margin-top: 15px;"
-									align="center">
+							<div id="contain" class="container-fluid " >
+								<div id="project_div${i.project_idx}" style="margin-top: 15px;"	align="center">
 									<div class="row" id="red">
 
 										<div class="panel panel-danger coupon"
 											style="width: 100%; height: 100%; border-color: #fff">
-
 											<c:choose>
 												<c:when test="${i.project_state == 3}">
 													<!-- 완료 -->
@@ -1136,7 +1132,7 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	</section>
+	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
