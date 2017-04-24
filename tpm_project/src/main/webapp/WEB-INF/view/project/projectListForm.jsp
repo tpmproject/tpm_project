@@ -1423,6 +1423,7 @@ pre.prettyprint {
 												</c:otherwise>
 											</c:choose>
 											<div ${ininin} style="margin: auto;">
+											
 												<div class="panel-title" id="title">
 													<i class="fa fa-github fa-2x"></i> <input type="hidden"
 														id="p_idx${i.project_idx}" value="${i.project_idx}">
@@ -1594,8 +1595,10 @@ pre.prettyprint {
 						</c:when>
 
 			<c:otherwise>
-				
+			<!-- 	<div class="carousel-inner" role="listbox  -->">
 					<c:forEach var="i" items="${plist}" varStatus="status">
+					
+					<div id="project_div${i.project_idx}" style="margin-top: 15px;">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="col-md-4 col-sm-6">
 							<div class="card-container manual-flip">
@@ -1690,10 +1693,13 @@ pre.prettyprint {
 
 						<div class="space-200"></div>
 					</div>
+					</div>
+					
 					</c:forEach>
 				</div><!--end carousel-inner -->
 			</c:otherwise>
 		</c:choose>
+	</div>
 	
 
 
