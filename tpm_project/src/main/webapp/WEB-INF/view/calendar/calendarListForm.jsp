@@ -155,7 +155,7 @@ function calendarReload(){
 	});
 </script>
 </head>
-<body class="skin-blue" onload="calendarReload()">
+<body class="skin-${sessionScope.s_member_thema}" onload="calendarReload()">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/include/header.jsp"%>
 		<%@ include file="/WEB-INF/view/include/aside.jsp"%>

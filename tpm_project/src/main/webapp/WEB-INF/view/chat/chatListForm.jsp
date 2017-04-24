@@ -817,15 +817,15 @@ function allowDrop(ev) {
 </head>
 <c:choose>
 	<c:when test="${!empty arry_pdto}">
-		<body class="skin-blue" onload="showChatContent('P','${arry_pdto.get(0).project_idx}')">
+		<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('P','${arry_pdto.get(0).project_idx}')">
 	</c:when>
 	<c:otherwise>
 		<c:choose>
 			<c:when test="${!empty arry_chdto}">
-				<body class="skin-blue" onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
+				<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
 			</c:when>
 			<c:otherwise>
-				<body class="skin-blue">
+				<body class="skin-${sessionScope.s_member_thema}">
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
