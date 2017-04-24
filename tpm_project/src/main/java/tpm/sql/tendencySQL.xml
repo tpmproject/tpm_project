@@ -21,9 +21,7 @@
 	<select id="recommendTendency"  parameterType="int" resultType="tpm.member.model.MemberDTO">
 		select a.*, b.te, b.ti, b.ts, b.tn, b.tt, b.tf, b.tj, b.tp from 
 		    (select * from tpm_member
-		    where member_idx in(
-		        select member_idx from tpm_project_member 
-		        where member_idx=#{member_idx})) a
+		    where member_idx =#{member_idx}) a
 		left join
 		    (select member_idx, avg(tendency_e) te, avg(tendency_i) ti, avg(tendency_s) ts,
              avg(tendency_n) tn, avg(tendency_t) tt, avg(tendency_f) tf, avg(tendency_j) tj,

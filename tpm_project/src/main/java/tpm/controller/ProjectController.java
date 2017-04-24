@@ -74,7 +74,8 @@ public class ProjectController {
 		ProjectDTO pdto=projectDAO.projectSearch(dto);
 		ArrayList<MemberDTO> marr=projectDAO.projectWorkMember(dto);
 		mav.addObject("pdto", pdto);
-		mav.addObject("marr", marr);
+		mav.addObject("marr", marr);	
+		
 		return mav;
 	}
 	

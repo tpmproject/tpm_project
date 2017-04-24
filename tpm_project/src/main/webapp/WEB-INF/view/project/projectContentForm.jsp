@@ -58,6 +58,29 @@ window.onload=function(){
 	$(btnwork4).hide();
 	$('.content').mCustomScrollbar({axis:"yx"});
 }
+function tenChart(e,s,t,j,i,n,f,p){
+	var chart = AmCharts.makeChart( "chartdiv", {
+	    "type": "radar",
+	    "theme": "light",
+	    "dataProvider": [ 
+	     	{ "tendency": "외향적", "point": e },
+	        { "tendency": "감각적", "point": s },
+	        { "tendency": "사고적", "point": t },
+	        { "tendency": "판단적", "point": j },
+	        { "tendency": "내향적", "point": i },
+	        { "tendency": "직관적", "point": n },
+	        { "tendency": "감정적", "point": f },
+	        { "tendency": "인식적", "point": p } ],
+	    "valueAxes": [
+	    	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
+	    "startDuration": 2,
+	    "graphs": [
+	    	{ "balloonText": "[[value]]",
+	      	  "bullet": "round",
+	      	  "lineThickness": 2,
+	      	  "valueField": "point" } ] ,
+ 			  "categoryField": "tendency" }) ;
+}
 function sideBar(){
 	var bNode=document.documentElement.lastChild;
 	$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');
@@ -73,7 +96,6 @@ function cateNameRe(idx){
 	$('#cateIn'+idx).val(ac.innerHTML);
 	
 }
-
 function categoryUpdate(idx){
 	
 	var param='project_idx='+${param.project_idx}+'&category_idx='+idx;
@@ -99,7 +121,6 @@ function categoryUpdateResult(){
 		}
 	}
 }
-
 function categoryAdd() {
 	var param = 'project_idx=' + ${param.project_idx}
 	+'&category_name=' + document.newCategory.category_name.value;
@@ -140,9 +161,7 @@ function categoryAddResult() {
 		}
 	}
 }
-
 //업무추가
-
 function showf(category_idx){
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
@@ -371,7 +390,6 @@ function updateWorkResult(){
 		}
 	}
 }
-
 function check(ch){
 	var param='checklist_idx='+ch;
 	sendRequest('checkUpdate.do', param, checkResult, 'POST');
@@ -419,8 +437,6 @@ function checkResult() {
 		}
 	}
 }
-
-
 function addCheck(work_idx){
 	
 	var cont=$('#content'+work_idx).val();
@@ -472,7 +488,6 @@ function addCheckResult(){
 		}
 	}
 }
-
 /*완료한 체크리스트 목록 보기 */
 function showCheck(work_idx){
 	
@@ -512,12 +527,10 @@ function showCheck(work_idx){
 		document.getElementById('aCheck'+work_idx).innerHTML='완료한 체크리스트 숨기기';
 	}
 }
-
 //ondragstart 드래그할 때 id값 가져오기!
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
-
 //ondragover
 function allowDrop(ev) {
     ev.preventDefault();
@@ -528,7 +541,6 @@ function trashColor(){
 function trashColorReturn(){
 	document.getElementById('trash_i').style.color='black';
 }
-
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 //휴지통
 function drop(ev) {
@@ -557,7 +569,6 @@ function drop(ev) {
     	sendRequest('categoryDel.do', param, cateDelResult, 'POST');
     }
 }
-
 //업무 생성 시 멤버 추가 드랍
 function drop2(ev) {
     ev.preventDefault();
@@ -567,7 +578,6 @@ function drop2(ev) {
     	document.getElementById('work_m').appendChild(comp);
     }
 }
-
 //업무 생성 시 멤버 빼기 드랍
 function drop3(ev) {
     ev.preventDefault();
@@ -577,7 +587,6 @@ function drop3(ev) {
 	  	document.getElementById('project_m').appendChild(comp);
     }
 }
-
 //업무 수정 멤버 추가 드랍
 function drop4(ev){
     ev.preventDefault();
@@ -596,7 +605,6 @@ function drop5(ev){
 	  	document.getElementById('project_m2').appendChild(comp);
     }
 }
-
 //ondrop =>나 위에 드랍했을 때 일어나는 이벤트 ->data는 드래그 당한 컴포넌트
 function workDrop(ev) {
     ev.preventDefault();
@@ -664,43 +672,6 @@ function cateDelResult(){
 		}
 	}
 }
-
-//추천
-
-//추천 목록
-function tendencyList(){
-	var param = 'tendency='+document.newWork.tendency.value
-	+"&project_idx="+ ${param.project_idx};
-	
-	sendRequest('recommand.do',param,tendencyListResult,'POST');
-}
-/* function tendencyList2(){
-	var param = 'tendency='+document.changeWork.tendency.value
-	+"&project_idx="+ ${param.project_idx};
-
-	sendRequest('recommand.do',param,tendencyListResult2,'GET');
-}
-
-function tendencyListResult2(){
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result = XHR.responseText;
-			
-			var json = JSON.parse(result);		
-			var msg2 = '';
-			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-			for (var i = 0; i < members.length; i++) {
-				var member = members[i];
-				if(member.member_td>3){
-					document.getElementById('work2_member'+member.member_idx).style.color='blue';
-				}else{
-					document.getElementById('work2_member'+member.member_idx).style.color='black';
-				}
-			}
-		}
-	}
-} */
-
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
 	var project_idx='${pdto.project_idx}';
@@ -714,7 +685,6 @@ function workSide(work_idx){
 	fileUpload(work_idx);
 	return work_idx;
 } 
- 
 function showWorkTable(work_idx){
 
 	var show=document.getElementById('showWork'+work_idx).getAttribute('class');
@@ -730,7 +700,6 @@ function showWorkTable(work_idx){
 function showChecklist(work_idx){
 	$('#check_div'+work_idx).toggle('show');
 }
-
 function showTen(member_idx){
 	var param = 'member_idx='+member_idx;
 	var tenT=$('#work_member'+member_idx).offset().top;
@@ -745,6 +714,23 @@ function tendencyListResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			
+			var json = JSON.parse(result);	
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				$('#ten').html(member.member_name);
+				var e=member.member_te;
+				var s=member.member_ts;
+				var t=member.member_tt;
+				var j=member.member_tj;
+				var i=member.member_ti;
+				var n=member.member_tn;
+				var f=member.member_tf;
+				var p=member.member_tp;
+				
+				tenChart(e,s,t,j,i,n,f,p);
+			}
+			
 		}
 	}
 }
@@ -755,10 +741,11 @@ function hideTen(){
 </script>
 <style>
 #tendency_pop{
+	background: white;
 	position:fixed;
 	display: none;
-	width:400px;
-	height: 400px;
+	width:300px;
+	height: 300px;
 	z-index: 10;
 }
 #mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
@@ -883,6 +870,10 @@ a {
 }
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
+}
+#chartdiv {
+                width: 300px;
+                height: 250px;
 }
 </style>
 </head>
@@ -1254,93 +1245,17 @@ a {
 				</div>
 			</div>
 		</div>
+		
 	</form>
 	<div id="tendency_pop">
-		헥사그래프
+		<div id=ten></div>
+		<div id="chartdiv"></div>
 	</div>
 	
 	<%@include file="/WEB-INF/view/comment/comment.jsp"%>
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 <script>
-/*               //검색 날짜제한 
-             $(function() {              
-                 
-               //datepicker 한국어로 사용하기 위한 언어설정
-               $.datepicker.setDefaults($.datepicker.regional['ko']); 
-
-               //시작일.
-               $('#work_start').datepicker({
-                    //dateFormat: "yy-mm-dd",
-                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-                    //dayNamesMin:["일","월","화","수","목","금","토"],
-                   //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
-                   //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-                   //buttonText: "날짜선택",             // 버튼의 대체 텍스트
-                   dateFormat: "yy-mm-dd",             // 날짜의 형식
-                   changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-                   onClose: function( selectedDate ) {    
-                       // 시작일(fromDate) datepicker가 닫힐때
-                       // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                       $("#work_end").datepicker( "option", "minDate", selectedDate );
-                   }                
-               });
- 
-               //종료일
-               $('#work_end').datepicker({
-                    //dateFormat: "yy-mm-dd",
-                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-                    //dayNamesMin:["일","월","화","수","목","금","토"], 
-                   dateFormat: "yy-mm-dd",
-                   changeMonth: true,
-                   onClose: function( selectedDate ) {
-                       // 종료일(toDate) datepicker가 닫힐때
-                       // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-                       $("#work_start").datepicker( "option", "maxDate", selectedDate );
-                   }                
-               });
-               
-               //시작일.
-               $('#work_upstart').datepicker({
-	                    //dateFormat: "yy-mm-dd",
-	                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-	                    //dayNamesMin:["일","월","화","수","목","금","토"],
-	                   //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
-	                   //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-	                   //buttonText: "날짜선택",             // 버튼의 대체 텍스트
-	                   dateFormat: "yy-mm-dd",             // 날짜의 형식
-	                   changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-	                   onClose: function( selectedDate ) {    
-	                       // 시작일(fromDate) datepicker가 닫힐때
-	                       // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-	                       $("#work_upend").datepicker( "option", "minDate", selectedDate );
-	                   }                
-	               });
-	 
-	               //종료일
-	               $('#work_upend').datepicker({
-	                    //dateFormat: "yy-mm-dd",
-	                    //monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-	                    //dayNamesMin:["일","월","화","수","목","금","토"], 
-	                   dateFormat: "yy-mm-dd",
-	                   changeMonth: true,
-	                   onClose: function( selectedDate ) {
-	                       // 종료일(toDate) datepicker가 닫힐때
-	                       // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-	                       $("#work_upstart").datepicker( "option", "maxDate", selectedDate );
-	                   }                
-	               });
-               
-           });
-
-$("#work_time").timepicker({
-	step: 30,            //시간간격 
-	timeFormat: "H:i"    //시간:분 으로표시
-});
-$(document).ready(function(){
-	$("#work_time").timepicker('setTime', "17:30");
-
-}); */
 /* 첨부파일 관련 */
 $("#menu-close").click(function(e) {
   e.preventDefault();
