@@ -81,7 +81,7 @@ function InsertChatContent() {
 				<body onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
 			</c:when>
 			<c:otherwise>
-				<body>
+				<body >
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
