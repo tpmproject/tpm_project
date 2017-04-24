@@ -382,7 +382,7 @@
     
   </head>
  
-  <body class="skin-blue" onload="project_fileList('${project_idx}')">
+  <body class="skin-${sessionScope.s_member_thema}" onload="project_fileList('${project_idx}')">
   
   <!-- 모달 시작 -->
   <div class="row">

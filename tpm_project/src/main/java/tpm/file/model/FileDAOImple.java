@@ -70,14 +70,14 @@ public class FileDAOImple implements FileDAO {
 	public int delFile(int file_idx) {
 		
 		int result=sqlMap.delete("delFile",file_idx);
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 	//업무쪽 파일리스트
 	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Integer> map) {
 		ArrayList<FileDTO> fileArr= (ArrayList) sqlMap.selectList("workFileList", map);
 		
-		System.out.println(fileArr.get(0).getFile_date());
+		
 		return fileArr;
 	}
 }

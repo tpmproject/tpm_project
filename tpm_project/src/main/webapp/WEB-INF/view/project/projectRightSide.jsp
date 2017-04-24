@@ -308,12 +308,13 @@
 				msg += '		<div class="tw-file-link" data-title="h.jpg" style=" display: flex; align-items: center; justify-content: flex-start;">';
 				msg += '		<div class="tw-file-link__thumbnail" style="margin-right: 15px; flex: none;">';
 				msg += '         	<a style="font-family: inherit; transition: none; text-decoration: none; outline: 0;">';
-				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 40px; height: 100%; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
+				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 50px; height: 50px; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
 				msg += '        <div class="tw-image" style="position: relative; height: 100%;">';
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
 				if(filetype=='jpg'){
-					msg += '             <img src="/tpm_project/upload/'+file.file_name+'">';
+					msg += '             <img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+				
 				}else{
 					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG" ';
 					msg += '                        style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
