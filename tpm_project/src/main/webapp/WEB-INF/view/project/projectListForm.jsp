@@ -1069,20 +1069,23 @@ function drop4(ev) {
 												</div>
 											</div>
 											<div class="panel-body">
-												<img src="http://i.imgur.com/e07tg8R.png"
-													class="coupon-img img-rounded" width="250px" height="250px">
-
-												<div class="col-md-6" align="center"
-													style="margin-left: 30%;">
-
+												<div class="col-md-6" align="center"style="margin-left: 30%;">
 													<div class="items">
 
 														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-
+															
 															<div class="col-md-2" align="center">
-																<img class="thumb-lg img-circle bx-s"
-																	src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
+															
+																<c:if test="${pm_dto.project_level eq 3000 }">
+																	<img  src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
+																	style="width: 50px; height:50px; margin: 30px;" alt="pic"><br>
+																	
+																</c:if>
+																<c:if test="${pm_dto.project_level != 3000 }">
+																<img class="thumb-lg img-circle bx-s" src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
 																	style="width: 50px; height: 50px;" alt="pic">
+																</c:if>
+																
 															</div>
 
 														</c:forEach>
@@ -1101,8 +1104,9 @@ function drop4(ev) {
 
 											<div class="panel-footer">
 												<div class="coupon-code">
+												
 													<a class="btn btn-link"
-														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
+														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i class="fa fa-clone left"></i>업무확인</a>
 
 													<!-- 프로젝트 진행현황 -->
 													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
@@ -1195,6 +1199,22 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
+	<hr>
+	<!--Second column-->
+        <div class="col-md-12 mb-r">
+            <!--Card-->
+            <div class="card-overlay" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(14).jpg')">
+
+                <!--Content-->
+                <div class="white-text text-center">
+                    <div class="card-block">
+                        <a href="" class="teal-text"><h5><i class="fa fa-pie-chart"></i> Marketing</h5></a>
+                        <h3>Project title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem, optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!.</p>
+                        <a class="btn btn-lg btn-outline-white"><i class="fa fa-clone left"></i> View project</a>
+                    </div>
+                </div>
+	
 	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
