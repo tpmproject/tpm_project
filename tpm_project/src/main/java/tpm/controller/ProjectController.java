@@ -274,7 +274,6 @@ public class ProjectController {
 	//추천 
 	@RequestMapping(value="recommand.do", method=RequestMethod.POST)
 	public ModelAndView recommandTendency(int member_idx){
-		
 		ArrayList<MemberDTO> arr=tendencyDAO.recommendTendency(member_idx);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("project/projectRecommand");

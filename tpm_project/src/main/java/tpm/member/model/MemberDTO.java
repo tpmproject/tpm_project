@@ -11,7 +11,7 @@ public class MemberDTO {
 	private String member_gender;
 	private String member_tel;
 	private String member_img;
-	private int member_thema;
+	private String member_thema;
 	private MultipartFile member_img_file;
 
 	// projectContent 에서 업무 배정자 불러올 때 사용함
@@ -23,7 +23,6 @@ public class MemberDTO {
 	private int project_level;
 	
 	//추천 멤버
-	private int td;
 	private int te;
 	private int ti;
 	private int ts;
@@ -49,7 +48,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(int member_idx, String member_id, String member_pwd, String member_name, String member_gender,
-			String member_tel, String member_img, int member_thema) {
+			String member_tel, String member_img, String member_thema) {
 		super();
 		this.member_idx = member_idx;
 		this.member_id = member_id;
@@ -62,7 +61,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(int member_idx, String member_id, String member_pwd, String member_name, String member_gender,
-			String member_tel, String member_img, int member_thema, MultipartFile member_img_file, int work_idx) {
+			String member_tel, String member_img, String member_thema, MultipartFile member_img_file, int work_idx) {
 		super();
 		this.member_idx = member_idx;
 		this.member_id = member_id;
@@ -132,11 +131,11 @@ public class MemberDTO {
 		this.member_img = member_img;
 	}
 
-	public int getMember_thema() {
+	public String getMember_thema() {
 		return member_thema;
 	}
 
-	public void setMember_thema(int member_thema) {
+	public void setMember_thema(String member_thema) {
 		this.member_thema = member_thema;
 	}
 
@@ -179,17 +178,6 @@ public class MemberDTO {
 	public void setProject_level(int project_level) {
 		this.project_level = project_level;
 	}
-	
-	
-
-	public int getTd() {
-		return td;
-	}
-
-	public void setTd(int td) {
-		this.td = td;
-	}
-	
 
 	public int getTe() {
 		return te;
@@ -261,7 +249,7 @@ public class MemberDTO {
 				+ ", member_name=" + member_name + ", member_gender=" + member_gender + ", member_tel=" + member_tel
 				+ ", member_img=" + member_img + ", member_thema=" + member_thema + ", member_img_file="
 				+ member_img_file + ", work_idx=" + work_idx + ", pm=" + pm + ", mf=" + mf + ", project_level="
-				+ project_level + ", td=" + td + ", te=" + te + ", ti=" + ti + ", ts=" + ts + ", tn=" + tn + ", tt="
+				+ project_level + ",  te=" + te + ", ti=" + ti + ", ts=" + ts + ", tn=" + tn + ", tt="
 				+ tt + ", tf=" + tf + ", tj=" + tj + ", tp=" + tp + "]";
 	}
 
