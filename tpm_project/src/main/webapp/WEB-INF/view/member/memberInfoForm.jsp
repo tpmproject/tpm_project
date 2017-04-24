@@ -76,7 +76,7 @@
 	    	var selected = $('#selectThema').val();
 	    	window.alert(selected);
 	    	
-	    	//$('body').attr('class','skin-'+selected+'');
+	    	//$('body').attr('class','skin-'+selected+'')
 	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
 	    	
 	    	sendRequest('memberSetThema.do?'+param, null, setThema, 'GET');
@@ -85,7 +85,7 @@
 	    function setThema(){
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
-	    			var result = XHR.responseTest.trim();
+	    			var result = XHR.responseText.trim();
 	    			window.alert(result);
 	    			
 	    		}

@@ -478,6 +478,7 @@ public class MemberController {
 	@RequestMapping(value="memberSetThema.do", method=RequestMethod.GET)
 	public ModelAndView memberSetThema(MemberDTO dto, @RequestParam("member_thema") String selectThema, HttpSession session){
 		
+		
 		ModelAndView mav = new ModelAndView();
 		
 		int member_idx = (Integer)session.getAttribute("s_member_idx");
