@@ -1186,7 +1186,7 @@ function drop4(ev) {
 		
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev" style="width: 50px; margin-left: 422px;color: red;"> <span
+			role="button" data-slide="prev" style="width: 50px; margin-left: 422px;color: red; float: left;"> <span
 			class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>
 			<span class="sr-only">Previous</span>
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
