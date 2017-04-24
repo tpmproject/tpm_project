@@ -7,15 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<%@ include file="/WEB-INF/view/include/import.jsp"%>
 
 	<script type="text/javascript" src="js/httpRequest.js"></script>
 	
- 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+ 	<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- 개인 성향  그래프-->
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 	<script src="https://www.amcharts.com/lib/3/radar.js"></script>
@@ -27,7 +25,6 @@
 	<!-- 업무 분석 도넛 그래프 -->
 	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	
 <title>Insert title here</title>
 
@@ -47,8 +44,13 @@
 			font-size	: 11px;
 	}	
     </style>
-    <%@ include file="/sample/cho/main/import.jsp"%>
     <script>
+	    window.onload = function(){
+	    	settingThema();
+	    	selectProfile();
+	    	getProjectIdx();
+	    }
+    	
 	    function deletedo(){
 	  	  var id = document.memberInfoForm.member_id.value;
 	  	  
@@ -71,6 +73,14 @@
 	      	        return false;
 	      	    });
 	    }
+	    
+	    function settingThema(){
+	    	var userThema = $('#userThema').val();
+	    	//window.alert(userThema);
+	    	
+	    	$('body').attr('class','skin-'+userThema+'');
+	    }
+	    
 	    
 	    function changeThema(){
 	    	var selected = $('#selectThema').val();
@@ -160,12 +170,6 @@
 	    	}
 	    }
 	    
-	    window.onload = function(){
-	    	selectProfile();
-	    	getProjectIdx();
-	    	
-	    }
-	    	
     </script>
 </head>
 <body class="skin-black-light">
@@ -203,7 +207,7 @@
 	              </div>
 	              <br>
 	              <br>
-	              
+	              <input type="hidden" id="userThema" value="${dto.member_thema}">
 	              <!-- 프로필 사진 -->
 	              <div class="form-group">
 	                <div class="col-sm-3 col-md-offset-1">
