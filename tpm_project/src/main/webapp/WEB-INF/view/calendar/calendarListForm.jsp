@@ -62,6 +62,8 @@ function calendarReload(){
 
 
 		$('#calendar').fullCalendar({
+			
+					/* height: 650, */
 					header: {
 						left: 'prev,next today',
 						center: 'title',
