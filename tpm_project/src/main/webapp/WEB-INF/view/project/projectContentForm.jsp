@@ -270,7 +270,7 @@ function shows2Result(){
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
 				
-				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen2('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" "draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
@@ -754,7 +754,7 @@ function hideTen(){
 	display: none;
 	width:300px;
 	height: 300px;
-	z-index: 9000;
+	z-index: 900;
 }
 #mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
  	background-color: black;
@@ -777,7 +777,7 @@ function hideTen(){
 
 #workback, #workback2 {
 	position: fixed;
-	z-index:8200;
+	z-index:820;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -790,7 +790,7 @@ function hideTen(){
 	display: none;
 	background: white;
 	position: fixed;
-	z-index:8300;
+	z-index:830;
 	top: 20%;
 	left: 35%;
 	border: solid 2px #1a2226;
