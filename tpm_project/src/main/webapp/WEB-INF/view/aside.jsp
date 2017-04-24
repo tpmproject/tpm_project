@@ -68,6 +68,7 @@
                 <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
               </ul>
             </li>
+            
             <li class="treeview">
               <a href="myWork.do">
                 <i class="fa fa-laptop"></i>
@@ -75,6 +76,18 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
+            
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-laptop"></i> <span>나의 업무</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="myWork.do"><i class="fa fa-calendar-check-o"></i> 업무 보기</a></li>
+                <li><a href="calendarList.do"><i class="fa fa-calendar"></i> 달력 보기</a></li>
+              </ul>
+            </li>    
+                     
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Forms</span>
