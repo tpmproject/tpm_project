@@ -822,25 +822,6 @@ function drop4(ev) {
 	height:780px;
 	overflow:auto;
 }
-
-#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
- 	background-color: black;
- 	opacity: 0.4;
- 	width: 7px;
- 	border-radius: 7px;
-}
-#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_draggerRail{
- display: none;
-}
-#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_dragger_bar{
- 	background-color: black;
- 	opacity: 0.4;
- 	height: 7px;
- 	border-radius: 7px;
-}
-#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
- display: none;
-}
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
@@ -1069,20 +1050,18 @@ function drop4(ev) {
 												</div>
 											</div>
 											<div class="panel-body">
-												<img src="http://i.imgur.com/e07tg8R.png"
-													class="coupon-img img-rounded" width="250px" height="250px">
-
-												<div class="col-md-6" align="center"
-													style="margin-left: 30%;">
-
+												<div class="col-md-6" align="center"style="margin-left: 30%;">
 													<div class="items">
 
 														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-
+															
 															<div class="col-md-2" align="center">
-																<img class="thumb-lg img-circle bx-s"
-																	src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
-																	style="width: 50px; height: 50px;" alt="pic">
+															
+																
+																	<img  src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
+																	style="width: 65px; height:65px; margin-left: 100px;" >
+															
+																
 															</div>
 
 														</c:forEach>
@@ -1091,18 +1070,19 @@ function drop4(ev) {
 
 												</div>
 
-												<div class="col-md-12">
+												<div class="col-md-12"><hr>
 													<div class="slimdiv"
-														style="border-color: orange; border-style: dashed; width: 300px; height: 100px;">
-														<span class="disclosure" id="pc${i.project_idx}">${i.project_content }</span>
+														style="width: 100px; height: 100px;">
+														<span  id="pc${i.project_idx}">${i.project_content }</span>
 													</div>
 												</div>
 											</div>
 
 											<div class="panel-footer">
 												<div class="coupon-code">
+												
 													<a class="btn btn-link"
-														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}">업무확인</a>
+														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i class="fa fa-clone left"></i>업무확인</a>
 
 													<!-- 프로젝트 진행현황 -->
 													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
@@ -1195,6 +1175,22 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
+	<hr>
+	<!--Second column-->
+        <div class="col-md-12 mb-r">
+            <!--Card-->
+            <div class="card-overlay" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(14).jpg')">
+
+                <!--Content-->
+                <div class="white-text text-center">
+                    <div class="card-block">
+                        <a href="" class="teal-text"><h5><i class="fa fa-pie-chart"></i> Marketing</h5></a>
+                        <h3>Project title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem, optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!.</p>
+                        <a class="btn btn-lg btn-outline-white"><i class="fa fa-clone left"></i> View project</a>
+                    </div>
+                </div>
+	
 	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
