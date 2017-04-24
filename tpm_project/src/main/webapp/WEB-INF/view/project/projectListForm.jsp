@@ -822,25 +822,6 @@ function drop4(ev) {
 	height:780px;
 	overflow:auto;
 }
-
-#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
- 	background-color: black;
- 	opacity: 0.4;
- 	width: 7px;
- 	border-radius: 7px;
-}
-#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_draggerRail{
- display: none;
-}
-#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_dragger_bar{
- 	background-color: black;
- 	opacity: 0.4;
- 	height: 7px;
- 	border-radius: 7px;
-}
-#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
- display: none;
-}
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
