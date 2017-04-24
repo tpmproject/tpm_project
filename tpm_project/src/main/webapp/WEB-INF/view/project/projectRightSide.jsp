@@ -186,7 +186,9 @@
     </style>
   
 <script>
-
+	
+	var publ_member_idx=0;
+    
 	function project_fileList(work_idx){
 		
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
@@ -246,40 +248,16 @@
 		var msg = '';
 	    
 		var proejct_filelist = document.getElementById('file_tbody');
-		
+		var filetype='';
 		for(var i=0; i<files.length; i++){
 			var file=files[i];
 			
 			/* 파일 타입 뽑기 */
-			var filename=file.file_name;
-			
-			var filetype='';
-			
-			if (filename.substring(filename.indexOf('.'))=='.txt') {
-				filetype='txt';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.doc') {
-				filetype='doc';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.jpg') {
-				filetype='jpg';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.pdf') {
-				filetype='pdf';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.png') {
-				filetype='png';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.xls') {
-				filetype='xls';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.rar') {
-				filetype='rar';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.html') {
-				filetype='html';
-			}
+			var filename=file.file_name.toLowerCase();
 		
+			var file_type=filename.substring(filename.indexOf('.')+1);
+			
+		  
 			/* 파일 날짜 뽑기  */
 			var date = new Date(files[i].file_date); 
 		    
@@ -308,15 +286,15 @@
 				msg += '		<div class="tw-file-link" data-title="h.jpg" style=" display: flex; align-items: center; justify-content: flex-start;">';
 				msg += '		<div class="tw-file-link__thumbnail" style="margin-right: 15px; flex: none;">';
 				msg += '         	<a style="font-family: inherit; transition: none; text-decoration: none; outline: 0;">';
-				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 50px; height: 50px; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
+				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 50px; height: 55px; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
 				msg += '        <div class="tw-image" style="position: relative; height: 100%;">';
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
-				if(filetype=='jpg'){
+				if(file_type=='jpg'||file_type=='gif'||file_type=='png'){
 					msg += '             <img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
 				
 				}else{
-					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG" ';
+					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"';
 					msg += '                        style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
 				}
 				
@@ -346,7 +324,7 @@
                 msg += '<span class="glyphicon glyphicon-ok"></span>';
                 msg += '  </button>&nbsp;';
 
-                msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"';
+                msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" onclick="fileDelParam('+file.file_idx+','+file.member_idx+',\''+file.file_name+'\')"';
                 msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';
                	msg += '        <span class="glyphicon glyphicon-trash"></span>';
                	msg += '   </button>';
@@ -362,13 +340,18 @@
 		proejct_filelist.innerHTML = msg;
 		   
 		
-		
-		
-		
+
+	}
+	function fileDelParam(file_idx, file_member_idx, file_name){
 	
+		publ_member_idx = file_member_idx;
 		
 	}
-
+	
+	function fileDel(){
+		
+		window.alert('fileDel에서 idx:'+publ_member_idx);
+	} 
     </script>
     
 <!-- 임시) 여기까지 첨부파일   -->
@@ -394,13 +377,7 @@
       </div>
       <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group"
       aria-label="...">
-        <div class="btn-group" role="group">
-          <button type="button" id="stars" class="btn btn-primary" href="#tab1"
-          data-toggle="tab">
-            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <div class="hidden-xs">옵션</div>
-          </button>
-        </div>
+        
         <div class="btn-group" role="group">
           <button type="button" id="favorites" class="btn btn-default" href="#tab2"
           data-toggle="tab">

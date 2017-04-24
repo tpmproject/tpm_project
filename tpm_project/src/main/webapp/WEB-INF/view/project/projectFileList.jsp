@@ -12,7 +12,6 @@
 
 	
 	
-	
   </head>
   
   <body>
@@ -57,8 +56,9 @@
               <span class="glyphicon glyphicon-warning-sign" >&nbsp;</span> h.jpg 파일을 정말 삭제 하시겠습니까?</div>
           </div>
           <div class="modal-footer ">
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-success" onclick="fileDel()">
               <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Yes</button>
+              
             <button type="button" class="btn btn-default"
             data-dismiss="modal">
               <span class="glyphicon glyphicon-remove"></span>&nbsp;No</button>
