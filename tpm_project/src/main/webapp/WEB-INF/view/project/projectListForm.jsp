@@ -843,7 +843,7 @@ function drop4(ev) {
 }
 </style>
 </head>
-<body class="skin-blue">
+<body class="skin-${sessionScope.s_member_thema}">
 	<%@ include file="/WEB-INF/view/header.jsp"%>
 
 	<!-- Placed at the end of the document so the pages load faster -->

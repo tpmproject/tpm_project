@@ -11,8 +11,6 @@
 
 	<script type="text/javascript" src="js/httpRequest.js"></script>
 	
- 	<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
-    <!-- <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <!-- 개인 성향  그래프-->
     <script src="/tpm_project/js/graph/amcharts.js"></script>
@@ -46,7 +44,7 @@
     </style>
     <script>
 	    window.onload = function(){
-	    	settingThema();
+	    	/* settingThema(); */
 	    	selectProfile();
 	    	getProjectIdx();
 	    }
@@ -74,13 +72,6 @@
 	      	    });
 	    }
 	    
-	    function settingThema(){
-	    	var userThema = $('#userThema').val();
-	    	//window.alert(userThema);
-	    	
-	    	$('body').attr('class','skin-'+userThema+'');
-	    }
-	    
 	    function selectThema(){
 	    	var selected = $('#themaSelect').val();
 	    	//var selectclass = $('body').attr('class');
@@ -100,7 +91,6 @@
 	    			
 	    			if(!result){
 	    				$('body').attr('class','skin-blue');
-	    				
 	    			}else{
 	    				$('body').attr('class','skin-'+result+'');	
 	    			}
@@ -171,7 +161,7 @@
 	    
     </script>
 </head>
-<body class="skin-black-light">
+<body class="skin-${sessionScope.s_member_thema}">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
@@ -206,7 +196,6 @@
 	              </div>
 	              <br>
 	              <br>
-	              <input type="hidden" id="userThema" value="${dto.member_thema}">
 	              <!-- 프로필 사진 -->
 	              <div class="form-group">
 	                <div class="col-sm-3 col-md-offset-1">

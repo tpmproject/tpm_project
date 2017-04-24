@@ -113,6 +113,7 @@ public class MemberController {
 			session.setAttribute("s_member_idx", list.get(0).getMember_idx());
 			session.setAttribute("s_member_name", list.get(0).getMember_name());
 			session.setAttribute("s_member_img", list.get(0).getMember_img());
+			session.setAttribute("s_member_thema", list.get(0).getMember_thema());
 			mav.addObject("msg", msg);
 			mav.setViewName("member/memberLogin_ok");
 		}
@@ -490,6 +491,7 @@ public class MemberController {
 		if(count>0){
 			result = selectThema;
 			
+			session.setAttribute("s_member_thema", selectThema);
 			mav.addObject("result", result);
 			mav.setViewName("member/memberThema_ok");
 		} else{

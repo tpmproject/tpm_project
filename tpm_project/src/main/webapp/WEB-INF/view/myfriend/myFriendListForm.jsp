@@ -172,7 +172,7 @@
 	
 </script>
 </head>
-<body class="skin-blue">
+<body class="skin-${sessionScope.s_member_thema}">
 	<input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/include/header.jsp"%>
