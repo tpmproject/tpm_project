@@ -865,7 +865,7 @@ function drop4(ev) {
 
 			<div id="f_modal">
 				<div class="box-gray aligncenter" style="background: #eee;">
-					<h4>프로젝트1</h4>
+					
 					<div id="btntest" class="icon">
 						<div>
 							프로젝트명: <input type="text" name="project_name">
@@ -969,20 +969,16 @@ function drop4(ev) {
 
 		<section class="callaction">
 	<div class="container">
-		<div class="row" ">
-			<div class="col-lg-12">
+		
 				<div class="big-cta">
 					<div class="cta-text">
-						<h2>
-							<span>TPM</span>.PROJECT
-						</h2>
 						<h5>
-							<a onclick="showf()">프로젝트추가</a>
+							<a class="glyphicon glyphicon-plus-sign" onclick="showf()" style="size: 600px;">프로젝트추가</a>
 						</h5>
 					</div>
 				</div>
-			</div>
-		</div>
+			
+		
 	</div>
 	</section>
 	
@@ -1189,6 +1185,49 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
+	<hr>
+	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-subscription">
+Subscription form
+</button>
+                                
+<!-- Modal Subscription -->
+<div class="modal fade modal-ext" id="modal-subscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Project ADD</h4>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <br>
+                <div class="md-form">
+               		 <label for="form22">Project name</label>
+                    <i class="fa fa-user prefix"></i>
+                    <input type="text" id="form22" class="form-control">
+                    
+                </div>
+
+                <div class="md-form">
+                   	<label for="form32">Project Content</label>
+                    <i class="fa fa-envelope prefix"></i>
+                    <input type="text" id="form32" class="form-control">
+                </div>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+            	 <button class="btn btn-primary">Next</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
 	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
