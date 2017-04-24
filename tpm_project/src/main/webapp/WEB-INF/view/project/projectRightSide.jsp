@@ -82,7 +82,7 @@
 
   #right-side #sidebar-wrapper.active {
     right: 250px;
-    width: 600px;
+    width: 630px;
     margin-top: -100px;
      z-index: 1020;
      background-color:white;
@@ -250,6 +250,37 @@
 		for(var i=0; i<files.length; i++){
 			var file=files[i];
 			
+			/* 파일 타입 뽑기 */
+			var filename=file.file_name;
+			
+			var filetype='';
+			
+			if (filename.substring(filename.indexOf('.'))=='.txt') {
+				filetype='txt';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.doc') {
+				filetype='doc';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.jpg') {
+				filetype='jpg';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.pdf') {
+				filetype='pdf';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.png') {
+				filetype='png';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.xls') {
+				filetype='xls';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.rar') {
+				filetype='rar';
+			}
+			if (filename.substring(filename.indexOf('.'))=='.html') {
+				filetype='html';
+			}
+		
+			/* 파일 날짜 뽑기  */
 			var date = new Date(files[i].file_date); 
 		    
 			var file_year = date.getFullYear();
@@ -268,7 +299,7 @@
 		    	ampm = "오전";
 		    }
 			
-		    file_now = file_year+'년'+file_month+'월'+file_date+'일<br>'+ampm+' '+file_hour+':'+file_minute;
+		    file_now = file_year+'-'+file_month+'-'+file_date+'<br>'+ampm+' '+file_hour+':'+file_minute;
 
 				msg += ' <!-- 시작 -->';
 				msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
@@ -277,10 +308,19 @@
 				msg += '		<div class="tw-file-link" data-title="h.jpg" style=" display: flex; align-items: center; justify-content: flex-start;">';
 				msg += '		<div class="tw-file-link__thumbnail" style="margin-right: 15px; flex: none;">';
 				msg += '         	<a style="font-family: inherit; transition: none; text-decoration: none; outline: 0;">';
-				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 40px; height: 40px; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
+				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 40px; height: 100%; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
 				msg += '        <div class="tw-image" style="position: relative; height: 100%;">';
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
-				msg += '             <img src="https://us-backend.taskworld.com/api/upload/20170422%2F02386618-d709-40c7-a4e1-9743dd61846b%2FthumbH.jpg" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+				
+				if(filetype=='jpg'){
+					msg += '             <img src="/tpm_project/WEB_INF/view/file/upload/'+file.file_name+'">';
+				}else{
+					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG" ';
+					msg += '                        style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+				}
+				
+				
+				
 				msg += '        </div>';
 				msg += '        </div>';
 				msg += '        </div>';
@@ -303,7 +343,7 @@
                 msg += '  <button type="button" class="btn btn-success btn-xs" title="Approved"';
                 msg += 'style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
                 msg += '<span class="glyphicon glyphicon-ok"></span>';
-                msg += '  </button>';
+                msg += '  </button>&nbsp;';
 
                 msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"';
                 msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';

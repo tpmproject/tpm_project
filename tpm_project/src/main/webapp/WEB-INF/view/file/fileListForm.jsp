@@ -143,8 +143,7 @@
     <!-- Custom CSS -->
     <link href="/tpm_project/css/file/sb-admin.css?ver=3" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="/tpm_project/css/file/font-awesome.css" rel="stylesheet"
-    type="text/css">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
     queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file://
@@ -303,9 +302,13 @@
 		var msg = '';
 		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
 		for(var i = 0 ; i < files.length; i++){
+			
 			var file = files[i];
+			
 			var filename=file.file_name;
+			
 			var filetype='';
+			
 			if (filename.substring(filename.indexOf('.'))=='.txt') {
 				filetype='txt';
 			}
@@ -545,7 +548,8 @@
     <script src="/tpm_project/js/file/sb-admin-2.js"></script>
     <!-- jQuery 2.1.3 -->
 	<!-- <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
-    
+    <!-- AdminLTE App -->
+<script src="dist/js/app.min.js" type="text/javascript"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
       $(document).ready(function() {
