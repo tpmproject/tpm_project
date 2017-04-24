@@ -9,14 +9,14 @@
 
 <style type="text/css">
     
-    #right-side #sidebar-wrapper {
+    #right-side #sidebar-wrapper{
     margin-right: -250px;
     right: 0;
     width: 250px;
 	background-color:silver;
     position: fixed;
     height: 90%;
-    overflow-y: auto;
+  	overflow:auto;
     margin-top: -100px;
     z-index: 1020;
     background-color:white;
@@ -27,7 +27,7 @@
     -o-transition: all 0.5s ease-in 0s;
     box-shadow: 5px 0px 20px #000808;
   }
-
+  
   #right-side .sidebar-nav {
     position: absolute;
     top: 0;
@@ -244,24 +244,88 @@
 		var json = JSON.parse(responseText);
 		var files = json; // 맵 객체로부터 members 값인 배열을 가져온다.
 		var msg = '';
+	    
+		var proejct_filelist = document.getElementById('file_tbody');
 		
 		for(var i=0; i<files.length; i++){
 			var file=files[i];
 			
-			msg += ''
+			var date = new Date(files[i].file_date); 
+		    
+			var file_year = date.getFullYear();
+		    var file_month = date.getMonth()+1;
+		    var file_date = date.getDate();
+		    var file_hour = date.getHours();
+		    var file_minute = date.getMinutes();
+		    var file_seconde = date.getSeconds();
+		    var ampm;
+		    var file_now;
+		    
+		    if(file_hour >= 12){
+		    	file_hour = file_hour -12;
+		    	ampm = "오후";
+		    }else{
+		    	ampm = "오전";
+		    }
+			
+		    file_now = file_year+'-'+file_month+'-'+file_date+'-'+ampm+''
 
+				msg += ' <!-- 시작 -->';
+				msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
+				msg += '	<td style="width: 43.333333333333336%;">';
+				msg += '		<div class="table-responsive">';
+				msg += '		<div class="tw-file-link" data-title="h.jpg" style=" display: flex; align-items: center; justify-content: flex-start;">';
+				msg += '		<div class="tw-file-link__thumbnail" style="margin-right: 15px; flex: none;">';
+				msg += '         	<a style="font-family: inherit; transition: none; text-decoration: none; outline: 0;">';
+				msg += '        <div class="tw-attachment-thumbnail --size_small" style="width: 40px; height: 40px; border-radius: 3px; background: #e6e8ec; border: 1px solid #e6e8ec;">';
+				msg += '        <div class="tw-image" style="position: relative; height: 100%;">';
+				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
+				msg += '             <img src="https://us-backend.taskworld.com/api/upload/20170422%2F02386618-d709-40c7-a4e1-9743dd61846b%2FthumbH.jpg" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+				msg += '        </div>';
+				msg += '        </div>';
+				msg += '        </div>';
+				msg += '       		</a>';
+				msg += '      	</div>';
+				
+				msg += '      <div class="tw-file-link__title">';
+				msg += '    	 <a href="https://us-backend.taskworld.com/api/upload/20170422%2F54e0a0dc-d029-4841-aba7-f4bec16af98f%2Fh.jpg?message=58fb0a1c12b364f35ac8be3e&amp;title=h.jpg&amp;download=1"';
+				msg += '        		 class="tw-link" download="" target="_blank" style="font-family: inherit; transition: none; text-decoration: none; outline:0;">';
+				msg += ' 	 	<span class="tw-file-link__name">'+file.file_name+'</span></a>';
+				msg += '       <div class="tw-file-link__location" style="margin-top: 7px; margin-right: 1em; ';
+				msg += '                                 text-overflow: ellipsis; overflow:hidden; white-space: nowrap; ">'+file.file_size+'kB</div>';
+                msg += '      </div>';
+                msg += '      </div>';
+                msg += '      </div>';
+                msg += '     </td>';
+                msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit;">'+date+'</td>';
+                msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.member_idx+'</td>';
+                msg += '    <td style="display: table-cell;vertical-align: inherit;">';
+                msg += '  <button type="button" class="btn btn-success btn-xs" title="Approved"';
+                msg += 'style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
+                msg += '<span class="glyphicon glyphicon-ok"></span>';
+                msg += '  </button>';
+
+                msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"';
+                msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';
+               	msg += '        <span class="glyphicon glyphicon-trash"></span>';
+               	msg += '   </button>';
+               	msg += '</td>';
+             
+               	msg += ' </tr>';
+             
+ 
+               	
 		}
 	
-		
+		proejct_filelist.innerHTML = '';
+		proejct_filelist.innerHTML = msg;
 		   
 		
 		
 		
 		
-		var proejct_filelist = document.getElementById('tab3');
 	
-		proejct_filelist.innerHTML = '';
-		proejct_filelist.innerHTML = msg;
+		
 	}
 
     </script>
@@ -331,7 +395,6 @@
           
           <div class="tab-pane fade in" id="tab3">
    			 <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
-           <%-- <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%> --%>
           </div>
           
           <div class="tab-pane fade in" id="tab4">

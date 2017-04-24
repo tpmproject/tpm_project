@@ -77,6 +77,7 @@ public class FileDAOImple implements FileDAO {
 	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Integer> map) {
 		ArrayList<FileDTO> fileArr= (ArrayList) sqlMap.selectList("workFileList", map);
 		
+		System.out.println(fileArr.get(0).getFile_date());
 		return fileArr;
 	}
 }
