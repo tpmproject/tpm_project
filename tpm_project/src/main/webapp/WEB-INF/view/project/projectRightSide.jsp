@@ -313,7 +313,7 @@
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
 				if(filetype=='jpg'){
-					msg += '             <img src="/tpm_project/WEB_INF/view/file/upload/'+file.file_name+'">';
+					msg += '             <img src="/tpm_project/upload/'+file.file_name+'">';
 				}else{
 					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG" ';
 					msg += '                        style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
