@@ -38,7 +38,7 @@
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script> --%>
 <!-- ----------------------------------------- -->
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- Ionicons -->
 <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
 <!-- Morris chart -->
@@ -70,6 +70,7 @@
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
 <script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
+<script src="dist/js/app.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 
@@ -1186,6 +1187,7 @@ function drop4(ev) {
 		</a>
 	</div>
 	<hr>
+	
 	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-subscription">
 Subscription form
 </button>
