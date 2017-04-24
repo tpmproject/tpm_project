@@ -163,8 +163,8 @@ public class WorkController {
 			result=workDAO.updateWork(dto);
 			if(result==0){
 				mav.addObject("msg","error");
-				mav.addObject("dto",dto);
 			}
+			mav.addObject("dto",dto);
 		}else{
 		
 		
