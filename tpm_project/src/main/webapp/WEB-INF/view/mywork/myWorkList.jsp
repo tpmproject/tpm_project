@@ -137,10 +137,15 @@ function updateWorkResult(){
 					var wsColor='black';
 					
 					if(firstC.getAttribute('name')==ws){
+						var pclass='';
 						switch(ws){
-							case 1:wsColor='#367fa9';break;
-							case 2:wsColor='#f0ad4e';break;
-							case 3:wsColor='green';				
+							case 1:wsColor='#367fa9';pclass='panel panel-info';break;
+							case 2:wsColor='#f0ad4e';pclass='panel panel-warning';break;
+							case 3:wsColor='green';pclass='panel panel-success';				
+						}
+						if($('#'+wi).attr('class')!='panel panel-danger'){
+							$('#'+wi).removeClass();
+							$('#'+wi).addClass(pclass);
 						}
 					}
 					firstC.style.color=wsColor;
@@ -225,7 +230,7 @@ function updateWorkResult(){
 			<c:set var="in_class" value="wait_confirm"></c:set>
 		</c:when>
 		</c:choose>	
-	<div><input type="hidden" class="project${i.project_idx} ${in_class} ${i.work_state eq 3?'complete':'ing'} ${now>i.work_end?'over':'nver'}" value="0">
+	<div><input id="input${i.work_idx}" type="hidden" class="project${i.project_idx} ${in_class} ${i.work_state eq 3?'complete':'ing'} ${now>i.work_end?'over':'nver'}" value="0">
 		
 		<c:set var="endDate">
 		<f:formatDate value="${i.work_end}" type="both" pattern="yy/MM/dd"/>
