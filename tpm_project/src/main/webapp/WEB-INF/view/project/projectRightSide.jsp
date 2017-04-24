@@ -268,7 +268,7 @@
 		    	ampm = "오전";
 		    }
 			
-		    file_now = file_year+'-'+file_month+'-'+file_date+'-'+ampm+''
+		    file_now = file_year+'년'+file_month+'월'+file_date+'일<br>'+ampm+' '+file_hour+':'+file_minute;
 
 				msg += ' <!-- 시작 -->';
 				msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
@@ -297,7 +297,7 @@
                 msg += '      </div>';
                 msg += '      </div>';
                 msg += '     </td>';
-                msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit;">'+date+'</td>';
+                msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit; font-family: sans-serif; font-size:12px">'+file_now+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.member_idx+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">';
                 msg += '  <button type="button" class="btn btn-success btn-xs" title="Approved"';
