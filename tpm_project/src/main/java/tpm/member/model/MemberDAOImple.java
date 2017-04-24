@@ -114,5 +114,11 @@ public class MemberDAOImple implements MemberDAO {
 		return arry_mdto;
 	}
 	
+	public int setThema(MemberDTO dto) {
+		int count = sqlMap.update("memberThema", dto);
+		
+		return count;
+	}
+	
 
 }

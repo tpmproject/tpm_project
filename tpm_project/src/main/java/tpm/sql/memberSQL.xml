@@ -53,4 +53,10 @@
 		where member_id=#{member_id}
 	</update>
 	
+	<update id="memberThema" parameterType="tpm.member.model.MemberDTO">
+		update tpm_member
+		set member_thema = #{member_thema}
+		where member_idx = #{member_idx}
+	</update>
+	
 </mapper>

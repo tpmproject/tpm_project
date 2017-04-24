@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script type="text/javascript" src="js/httpRequest.js"></script>
+	
  	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -23,8 +26,6 @@
 	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<!-- 업무 분석 도넛 그래프 -->
 	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
-	
-	<script type="text/javascript" src="js/httpRequest.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	
@@ -75,17 +76,24 @@
 	    	var selected = $('#selectThema').val();
 	    	window.alert(selected);
 	    	
-	    	var bgcolor = $('.main-header').css('background-color');
-	    	window.alert(bgcolor);
+	    	//$('body').attr('class','skin-'+selected+'');
+	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
 	    	
-	    	$('.main-header').css('background-color','#FF0000');
-	    	window.alert(bgcolor);
+	    	sendRequest('memberSetThema.do?'+param, null, setThema, 'GET');
+	    }
 	    
+	    function setThema(){
+	    	if(XHR.readyState==4){
+	    		if(XHR.status==200){
+	    			var result = XHR.responseTest.trim();
+	    			window.alert(result);
+	    			
+	    		}
+	    	}
 	    }
 	    
 	    function getProjectIdx(){
 	    	var projectidx = $('#getProject').val();
-	    		//$(getProject).val();
 
 	    	var param = 'project_idx='+projectidx+'&member_idx='+${sessionScope.s_member_idx};
 	    	
@@ -153,7 +161,7 @@
 	    	
     </script>
 </head>
-<body class="skin-red">
+<body class="skin-black">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
@@ -172,10 +180,12 @@
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	                <select id="selectThema" onchange="changeThema()">
-	                  <option value="white"> white </option>
 	                  <option value="black"> black </option>
-	                  <option value="red"> red </option>
 	                  <option value="blue"> blue </option>
+	                  <option value="green"> green </option>
+	                  <option value="purple"> purple </option>
+	                  <option value="red"> red </option>
+	                  <option value="yellow"> yellow </option>
 	                </select>
 	              </div>
 	              <br>

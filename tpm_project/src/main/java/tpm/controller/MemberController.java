@@ -474,6 +474,32 @@ public class MemberController {
 		return mav;
 	}
 	
+	/** 개인정보 - 테마*/
+	@RequestMapping(value="memberSetThema.do", method=RequestMethod.GET)
+	public ModelAndView memberSetThema(MemberDTO dto, @RequestParam("member_thema") String selectThema, HttpSession session){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int member_idx = (Integer)session.getAttribute("s_member_idx");
+		
+		int count = mdao.setThema(dto);
+		
+		String result = "";
+		
+		if(count>0){
+			result = selectThema;
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberThema_ok");
+		} else{
+			result = "수정 실패";
+			
+			mav.addObject("result", result);
+			mav.setViewName("member/memberThema_ok");
+		}
+		return mav;
+	}
+	
 	/** 개인정보 - 개인 성향 수정 (평가 ) *//*
 	@RequestMapping(value="memberUpdate.do", method=RequestMethod.GET)
 	public ModelAndView memberUpdate_ajax(){
