@@ -125,9 +125,9 @@ public class FileController {
 	}
 	
 
-	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
+	/** 업무쪽 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="workFileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
+	public @ResponseBody ArrayList<FileDTO> fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam("work_idx")int work_idx){
 		
 	//	System.out.println("project_idx:"+project_idx);
@@ -137,16 +137,10 @@ public class FileController {
 		map.put("project_idx", project_idx);
 		map.put("work_idx", work_idx);
 		
-		ArrayList<FileDTO>fileArr=fdao.getWorkFileList(map);
-		for(int i=0; i<fileArr.size(); i++){
-			System.out.println(fileArr.get(i).getFile_name());
-		}
-	
-		ModelAndView mav = new ModelAndView();
-	    
 		
+		ArrayList<FileDTO>fileArr=fdao.getWorkFileList(map);
 	
-		return mav;
+		return  fileArr;
 	}
 	
 	/** 파일 - 파일 내용 반환 (뷰어) 

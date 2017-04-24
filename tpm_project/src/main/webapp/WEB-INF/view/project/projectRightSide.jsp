@@ -18,7 +18,7 @@
     height: 90%;
     overflow-y: auto;
     margin-top: -100px;
-    z-index: 1;
+    z-index: 1020;
     background-color:white;
     transition: all 0.5s ease-in 0s;
     -webkit-transition: all 0.5s ease-in 0s;
@@ -84,6 +84,7 @@
     right: 250px;
     width: 600px;
     margin-top: -100px;
+     z-index: 1020;
      background-color:white;
     transition: all 0.5s ease-out 0s;
     -webkit-transition: all 0.5s ease-out 0s;
@@ -98,7 +99,7 @@
  
  </style>
   <!--   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"> -->
-    <style type="text/css">
+<style type="text/css">
       /* USER PROFILE PAGE */
      .card {
         margin-top: 20px;
@@ -184,13 +185,13 @@
     }
     </style>
   
-  <script>
+<script>
 
 	function project_fileList(work_idx){
 		
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
-		
+	
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 		
@@ -208,7 +209,7 @@
     			if(httpRequest.status == 200){
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
-    					
+    				
     					result_process(responseText, ctype);
     				
     					
@@ -222,7 +223,9 @@
     function result_process(responseText, ctype) {
 
 		if(ctype == 'WORK_FILELIST'){
+
 			project_fileList_setting(responseText);
+			
 			
 		} else if(ctype == 'FILE_CONTENT'){
 			
@@ -237,20 +240,21 @@
 
 	
 	function project_fileList_setting(responseText) {
-		
-		
+
+		var json = JSON.parse(responseText);
+		var files = json; // 맵 객체로부터 members 값인 배열을 가져온다.
 		var msg = '';
+		
+		for(var i=0; i<files.length; i++){
+			var file=files[i];
+			
+			msg += ''
+
+		}
+	
+		
 		   
-		msg += '<table id="mytable" class="table table-bordred table-striped" style="width: 100%;table-layout: fixed; border-spacing: 0;">';
-			msg += ' <thead>';
-				msg += '   <tr>';
-					msg += '      <th>파일 이름</th>';
-						msg += '     <th>공유한 날짜</th>';
-							msg += '     <th>공유한 사람</th>';
-								msg += '     <th>Delete</th>';
-									msg += '   </tr>';
-										msg += '  </thead>';
-											msg += '  </table>';
+		
 		
 		
 		

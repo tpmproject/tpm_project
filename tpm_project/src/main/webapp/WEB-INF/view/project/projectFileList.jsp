@@ -72,14 +72,14 @@
              
               </tr>
                  <!-- 끝 -->
-                 
-            
             </tbody>
           </table>
+          
           <div class="clearfix"></div>
         </div>
       </div>
     </div>
+    
     
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit"
     aria-hidden="true">
