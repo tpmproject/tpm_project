@@ -885,7 +885,7 @@ a {
 }
 </style>
 </head>
-<body class="skin-blue">
+<body class="skin-${sessionScope.s_member_thema}">
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
 	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
