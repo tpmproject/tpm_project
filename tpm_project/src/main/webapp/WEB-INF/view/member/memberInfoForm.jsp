@@ -81,19 +81,18 @@
 	    	$('body').attr('class','skin-'+userThema+'');
 	    }
 	    
-	    
-	    function changeThema(){
-	    	var selected = $('#selectThema').val();
+	    function selectThema(){
+	    	var selected = $('#themaSelect').val();
 	    	//var selectclass = $('body').attr('class');
 	    	//window.alert(selectclass);
 	    	//window.alert(selected);
 	    	
 	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
 	    	
-	    	sendRequest('memberSetThema.do?'+param, null, setThema, 'GET');
+	    	sendRequest('memberSetThema.do?'+param, null, changeThema, 'GET');
 	    }
 	    
-	    function setThema(){
+	    function changeThema(){
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
 	    			var result = XHR.responseText.trim();
@@ -190,7 +189,7 @@
              <c:forEach var="dto" items="${list}">
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
-	                <select id="selectThema" onchange="changeThema()">
+	                <select id="themaSelect" onchange="selectThema()">
 	                  <option value="black"> black </option>
 	                  <option value="black-light"> black-light </option>
 	                  <option value="blue"> blue </option>
