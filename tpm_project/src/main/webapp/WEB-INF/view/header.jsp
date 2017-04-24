@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="wrapper">
 <header class="main-header">
-	<a href="projectList.do" class="logo"><b>Admin</b>LTE</a>
+	<a href="projectList.do" class="logo"><b>TPM</b></a>
 	<!-- Header Navbar: style can be found in header.less -->
 	<nav class="navbar navbar-static-top" role="navigation">
 		<!-- Sidebar toggle button-->
