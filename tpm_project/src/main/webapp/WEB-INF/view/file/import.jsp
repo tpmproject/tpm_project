@@ -6,9 +6,7 @@
 <link href="/tpm_project/sample/cho/main/bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
 <!-- Font Awesome Icons -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
 <!-- Ionicons -->
 <link
 	href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"
@@ -34,8 +32,7 @@
 <!-- <script src="/tpm_project/sample/cho/main/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> -->
 <!-- FastClick -->
 <script src="/tpm_project/sample/cho/main/plugins/fastclick/fastclick.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/tpm_project/sample/cho/main/dist/js/app.min.js" type="text/javascript"></script>
+
 <!-- Sparkline -->
 <script src="/tpm_project/sample/cho/main/plugins/sparkline/jquery.sparkline.min.js"
 	type="text/javascript"></script>
