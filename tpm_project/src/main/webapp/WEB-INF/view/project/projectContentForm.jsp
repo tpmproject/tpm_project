@@ -55,9 +55,7 @@
 window.onload=function(){
 	$('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 	$('[data-toggle="popover"]').popover();
-	$(work_modal).hide();
 	$(btnwork2).hide();
-	$(work_modal2).hide();
 	$(btnwork4).hide();
 	$('.content').mCustomScrollbar({axis:"yx"});
 }
@@ -83,10 +81,6 @@ function tenChart(e,s,t,j,i,n,f,p){
 	      	  "lineThickness": 2,
 	      	  "valueField": "point" } ] ,
  			  "categoryField": "tendency" }) ;
-}
-function sideBar(){
-	var bNode=document.documentElement.lastChild;
-	$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');
 }
 function cateName(idx){
 	$('#cate'+idx).show();
@@ -303,6 +297,7 @@ function closem() {
 	$(workback2).fadeOut('100');
 	$(work_modal).fadeOut('100');
 	$(work_modal2).fadeOut('100');
+	hideTen();	
 	document.newWork.reset();
 	document.changeWork.reset();
 }
@@ -759,7 +754,7 @@ function hideTen(){
 	display: none;
 	width:300px;
 	height: 300px;
-	z-index: 10;
+	z-index: 9000;
 }
 #mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
  	background-color: black;
@@ -782,7 +777,7 @@ function hideTen(){
 
 #workback, #workback2 {
 	position: fixed;
-	z-index:0;
+	z-index:8200;
 	top: -10%;
 	left: -10%;
 	width: 110%;
@@ -795,7 +790,7 @@ function hideTen(){
 	display: none;
 	background: white;
 	position: fixed;
-	z-index:5;
+	z-index:8300;
 	top: 20%;
 	left: 35%;
 	border: solid 2px #1a2226;
