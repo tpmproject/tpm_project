@@ -104,6 +104,9 @@
 	
 	/**프로젝트 수정*/
 	function projectUpdate(idx,name,content){
+		var wid=(window.innerWidth/2)-320;
+		$('#main_modal2').css('left',wid+'px');
+		
 		$(mback).fadeIn('150');
 		$(main_modal2).fadeIn('150');
 		$(f_modal2).show();
@@ -794,7 +797,6 @@ function drop4(ev) {
 	background: white;
 	position: fixed;
 	top: 10%;
-	left: 30%;
 	border: solid 10px white;
 	border-radius: 10px;
 	width: 640px;
@@ -1193,50 +1195,6 @@ function drop4(ev) {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	<hr>
-	
-	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-subscription">
-Subscription form
-</button>
-                                
-<!-- Modal Subscription -->
-<div class="modal fade modal-ext" id="modal-subscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Project ADD</h4>
-            </div>
-            <!--Body-->
-            <div class="modal-body">
-                <br>
-                <div class="md-form">
-               		 <label for="form22">Project name</label>
-                    <i class="fa fa-user prefix"></i>
-                    <input type="text" id="form22" class="form-control">
-                    
-                </div>
-
-                <div class="md-form">
-                   	<label for="form32">Project Content</label>
-                    <i class="fa fa-envelope prefix"></i>
-                    <input type="text" id="form32" class="form-control">
-                </div>
-
-            </div>
-            <!--Footer-->
-            <div class="modal-footer">
-            	 <button class="btn btn-primary">Next</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
 	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
