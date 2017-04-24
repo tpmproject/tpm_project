@@ -908,11 +908,7 @@ function drop4(ev) {
 	</form>
 
 
-	
-	<div id="carousel-example-generic" class="carousel slide center-block"
-		data-ride="carousel" data-interval="false" >
-	
-	<section class="callaction">
+		<section class="callaction">
 	<div class="container">
 		<div class="row" style="margin-bottom: 30px; ">
 			<div class="col-lg-12">
@@ -930,6 +926,10 @@ function drop4(ev) {
 		</div>
 	</div>
 	</section>
+	<div id="carousel-example-generic" class="carousel slide center-block"
+		data-ride="carousel" data-interval="false" style="height: 650px; width: 1690px;]">
+	
+
 		<!-- Indicators 페이징-->
 		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
@@ -962,7 +962,7 @@ function drop4(ev) {
 									<div class="row" id="red">
 
 										<div class="panel panel-danger coupon"
-											style="width: 100%; height: 100%; border-color: #fff">
+											style="width: 550px; height: 100%; border-color: #fff">
 											<c:choose>
 												<c:when test="${i.project_state == 3}">
 													<!-- 완료 -->
@@ -1123,11 +1123,11 @@ function drop4(ev) {
 
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev"> <span
+			role="button" data-slide="prev" style="width: 50px; margin-left: 422px;"> <span
 			class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>
 			<span class="sr-only">Previous</span>
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next"> <span
+			role="button" data-slide="next" style="width: 30px; margin-right: 422px;"> <span
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
