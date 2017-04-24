@@ -8,8 +8,9 @@
 <meta charset=UTF-8>
 <title>TPM</title>
 
+
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
 <!-- Ionicons -->
 <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
 <!-- Morris chart -->
@@ -48,6 +49,8 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<!-- jQuery 2.1.3 -->
+<script src="dist/js/app.min.js" type="text/javascript"></script>
 <script>
 window.onload=function(){
 	$('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
