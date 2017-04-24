@@ -322,7 +322,7 @@ function addWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-
+			location.reload();
 		}
 	}
 }
@@ -672,29 +672,9 @@ function tendencyList(){
 	var param = 'tendency='+document.newWork.tendency.value
 	+"&project_idx="+ ${param.project_idx};
 	
-	sendRequest('recommand.do',param,tendencyListResult,'GET');
+	sendRequest('recommand.do',param,tendencyListResult,'POST');
 }
-
-function tendencyListResult(){
-	if (XHR.readyState == 4) {
-		if (XHR.status == 200) {
-			var result = XHR.responseText;
-			
-			var json = JSON.parse(result);		
-			var msg2 = '';
-			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-			for (var i = 0; i < members.length; i++) {
-				var member = members[i];
-				if(member.member_td>3){
-					document.getElementById('work_member'+member.member_idx).style.color='blue';
-				}else{
-					document.getElementById('work_member'+member.member_idx).style.color='black';
-				}
-			}
-		}
-	}
-}
-function tendencyList2(){
+/* function tendencyList2(){
 	var param = 'tendency='+document.changeWork.tendency.value
 	+"&project_idx="+ ${param.project_idx};
 
@@ -719,7 +699,7 @@ function tendencyListResult2(){
 			}
 		}
 	}
-}
+} */
 
 /* 첨부파일 업로드 */
 function fileUp(work_idx){
@@ -752,12 +732,21 @@ function showChecklist(work_idx){
 }
 
 function showTen(member_idx){
+	var param = 'member_idx='+member_idx;
 	var tenT=$('#work_member'+member_idx).offset().top;
 	var tenL=$('#work_member'+member_idx).offset().left+120;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
 	$('#tendency_pop').fadeIn();
-	
+	sendRequest('recommand.do',param,tendencyListResult,'POST');
+}
+function tendencyListResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			
+		}
+	}
 }
 function hideTen(){
 	$('#tendency_pop').hide();
@@ -766,7 +755,6 @@ function hideTen(){
 </script>
 <style>
 #tendency_pop{
-	background: green;
 	position:fixed;
 	display: none;
 	width:400px;
@@ -1149,8 +1137,8 @@ a {
 	<form name="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
-		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%>
-<!--  			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
+<%-- 		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%> --%>
+  			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;"><i class="glyphicon glyphicon-plus"></i> Add Work</h4>
 			<div id="w_modal">
 				<div id="btnwork">
@@ -1202,15 +1190,15 @@ a {
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workok"
 						onclick="addWork()">완료</button>
 				</div> 
-			</div> -->
+			</div>
 		</div>
 	</form>
 	<!-- 업무 수정 modal -->
 	<form name="changeWork" action="workUpdate.do" method="post">
 		<div id="workback2" onclick="closem()"></div>
 		<div id="work_modal2">
- 		<%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%>
-<!--  			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
+ 		<%-- <%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%> --%>
+  			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
 			<h4 class="modal-title" style=" background: #222d32;  padding: 10px; border-radius: 0px; color:white;">업무 수정</h4>
 			<div id="w_modal2">
 				<div id="btnwork3">
@@ -1264,7 +1252,7 @@ a {
 					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workok"
 						onclick="updateWork()">완료</button>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</form>
 	<div id="tendency_pop">

@@ -304,11 +304,9 @@ function workDrop(ev) {
     var data = ev.dataTransfer.getData("text");
 }
 //추천 목록
-function tendencyList(){
-	var param = 'tendency='+document.newWork.tendency.value
-	+"&project_idx="+ ${param.project_idx};
-	
-	sendRequest('recommand.do',param,tendencyListResult,'GET');
+function tendencyList(member_idx){
+	var param = 'member_idx='+member_idx;
+	sendRequest('recommand.do',param,tendencyListResult,'POST');
 }
 function tendencyListResult(){
 	if (XHR.readyState == 4) {
@@ -320,23 +318,10 @@ function tendencyListResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				if(member.member_td>3){
-					document.getElementById('work_member'+member.member_idx).style.color='blue';
-				}else{
-					document.getElementById('work_member'+member.member_idx).style.color='black';
-				}
+				msg2 += '<div>'+member.member_name+'</div>';
 			}
+			document.getElementById('tendency_pop').innerHTML(msg2);
 		}
-	}
-}
-function showWorkTable(work_idx){
-	var show=document.getElementById('showWork'+work_idx).getAttribute('class');
-	if(show=='glyphicon glyphicon-menu-down'){
-		$('#showWork'+work_idx).attr('class','glyphicon glyphicon-menu-right');
-		$('#workTable'+work_idx).fadeOut();
-	}else{
-		$('#showWork'+work_idx).attr('class','glyphicon glyphicon-menu-down');
-		$('#workTable'+work_idx).fadeIn();
 	}
 }
 function showTen(member_idx){
@@ -345,6 +330,9 @@ function showTen(member_idx){
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
 	$('#tendency_pop').fadeIn();
+	var param = 'member_idx='+member_idx;
+
+	sendRequest('recommand.do',param,tendencyListResult,'POST');
 }
 function hideTen(){
 	$('#tendency_pop').hide();
