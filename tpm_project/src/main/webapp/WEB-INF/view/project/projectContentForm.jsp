@@ -1093,19 +1093,7 @@ a {
 												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ 
 												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx }')" class="menu-toggle">첨부파일</a>
 												
-												<!--옵션,코멘트, 첨부 파일 div 시작  -->
-													
-												<div id="right-side">
-													
-													<div id="sidebar-wrapper">
-													    
-														<div>
-															<%@include file="projectRightSide.jsp"%>
-														</div>
-													
-													</div>
-												</div>
-												<!--옵션,코멘트, 첨부 파일 div 끝  -->
+												
 											</td>
 										
 										</tr>
@@ -1130,7 +1118,19 @@ a {
 		</c:if>
 	</div>
 
-
+<!--옵션,코멘트, 첨부 파일 div 시작  -->
+													
+<div id="right-side">
+	
+	<div id="sidebar-wrapper">
+	    
+		<div>
+			<%@include file="projectRightSide.jsp"%>
+		</div>
+	
+	</div>
+</div>
+<!--옵션,코멘트, 첨부 파일 div 끝  -->
 
 
 	<!-- 업무 설정 modal -->
