@@ -39,22 +39,29 @@
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script> --%>
 <!-- ----------------------------------------- -->
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
 <!-- Ionicons -->
-<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<link
+	href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"
+	rel="stylesheet" type="text/css">
 <!-- Morris chart -->
-<link href="/tpm_project/sample/cho/main/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+<link href="/tpm_project/sample/cho/main/plugins/morris/morris.css"
+	rel="stylesheet" type="text/css">
 <!-- Daterange picker -->
-<link href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"
+<link
+	href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"
 	rel="stylesheet" type="text/css">
 <!-- Theme style -->
-<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css"
+	rel="stylesheet" type="text/css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
     downloading all of them to reduce the load. -->
-<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
-	type="text/css">
+<link
+	href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css"
+	rel="stylesheet" type="text/css">
 
-<!-- <script src="/tpm_project/sample/cho/main/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->	
+<!-- <script src="/tpm_project/sample/cho/main/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
@@ -63,21 +70,26 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
+	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
-<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
-<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
-<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet"
+	href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet"
+	href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
+<script
+	src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
 <script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
 <script src="dist/js/app.min.js" type="text/javascript"></script>
 
 
 <!-- 회전 카드 -->
-<link href = "/tpm_project/sample/khj/css/bootstrap.css"rel = "stylesheet"/>
-              <link href = "/tpm_project/sample/khj/css/rotating-card.css"rel = "stylesheet"/>
-            <!--   <link href = "http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"rel = "stylesheet"/> -->
+<link href="/tpm_project/sample/khj/css/bootstrap.css" rel="stylesheet" />
+<link href="/tpm_project/sample/khj/css/rotating-card.css"
+	rel="stylesheet" />
+<!--   <link href = "http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"rel = "stylesheet"/> -->
 
 
 <script type="text/javascript">
@@ -824,10 +836,11 @@ function rotateCard(btn){
 	width: 640px;
 	z-index: 830;
 }
-.content{
-	height:780px;
 
+.content {
+	height: 780px;
 }
+
 .sd {
 	display: inline-block;
 	height: 600px;
@@ -835,23 +848,21 @@ function rotateCard(btn){
 	float: left;
 	text-align: center;
 }
+
 .carousel-inner {
 	margin: auto;
 	width: 50%;
 }
 
-.content{
-	height:780px;
-	overflow:auto;
+.content {
+	height: 780px;
+	overflow: auto;
 }
-
-
 
 /* Add rounded corners to the top left and the top right corner of the image */
 img {
-    border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
 }
-
 
 /**연습용*/
 body {
@@ -860,60 +871,57 @@ body {
 	font-family: 'Arima Madurai', cursive;
 	background-color: #E5E9ED;
 }
-.btn:hover,
-.btn:focus,
-.btn:active{
-    outline: 0 !important;
+
+.btn:hover, .btn:focus, .btn:active {
+	outline: 0 !important;
 }
 /* entire container, keeps perspective */
 .card-container {
-	  -webkit-perspective: 800px;
-   -moz-perspective: 800px;
-     -o-perspective: 800px;
-        perspective: 800px;
-        margin-bottom: 30px;
+	-webkit-perspective: 800px;
+	-moz-perspective: 800px;
+	-o-perspective: 800px;
+	perspective: 800px;
+	margin-bottom: 30px;
 }
 /* flip the pane when hovered */
-.card-container:not(.manual-flip):hover .card,
-.card-container.hover.manual-flip .card{
-	-webkit-transform: rotateY( 180deg );
--moz-transform: rotateY( 180deg );
- -o-transform: rotateY( 180deg );
-    transform: rotateY( 180deg );
+.card-container:not (.manual-flip ):hover .card, .card-container.hover.manual-flip .card
+	{
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
 
-
-.card-container.static:hover .card,
-.card-container.static.hover .card {
+.card-container.static:hover .card, .card-container.static.hover .card {
 	-webkit-transform: none;
--moz-transform: none;
- -o-transform: none;
-    transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+	transform: none;
 }
 /* flip speed goes here */
 .card {
-	 -webkit-transition: -webkit-transform .5s;
-   -moz-transition: -moz-transform .5s;
-     -o-transition: -o-transform .5s;
-        transition: transform .5s;
--webkit-transform-style: preserve-3d;
-   -moz-transform-style: preserve-3d;
-     -o-transform-style: preserve-3d;
-        transform-style: preserve-3d;
+	-webkit-transition: -webkit-transform .5s;
+	-moz-transition: -moz-transform .5s;
+	-o-transition: -o-transform .5s;
+	transition: transform .5s;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
 	position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
 	-webkit-backface-visibility: hidden;
-   -moz-backface-visibility: hidden;
-     -o-backface-visibility: hidden;
-        backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
 	background-color: #FFF;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
 }
 
 /* front pane, placed above back */
@@ -923,261 +931,290 @@ body {
 
 /* back, initially hidden pane */
 .back {
-		-webkit-transform: rotateY( 180deg );
-   -moz-transform: rotateY( 180deg );
-     -o-transform: rotateY( 180deg );
-        transform: rotateY( 180deg );
-        z-index: 3;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	z-index: 3;
 }
 
-.back .btn-simple{
-    position: absolute;
-    left: 0;
-    bottom: 4px;
+.back .btn-simple {
+	position: absolute;
+	left: 0;
+	bottom: 4px;
 }
 /*        Style       */
-
-
-.card{
-    background: none repeat scroll 0 0 #FFFFFF;
-    border-radius: 4px;
-    color: #444444;
+.card {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 4px;
+	color: #444444;
 }
+
 .card-container, .front, .back {
 	width: 100%;
 	height: 420px;
 	border-radius: 4px;
-	-webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
--moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
-}
-.card .cover{
-    height: 105px;
-    overflow: hidden;
-    border-radius: 4px 4px 0 0;
-}
-.card .cover img{
-    width: 100%;
-}
-.card .user{
-    border-radius: 50%;
-    display: block;
-    height: 120px;
-    margin: -55px auto 0;
-    overflow: hidden;
-    width: 120px;
-}
-.card .user img{
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 4px solid #FFFFFF;
-    width: 100%;
+	-webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
+	-moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
+	box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.16);
 }
 
-.card .content{
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: none;
-    padding: 10px 20px 20px;
+.card .cover {
+	height: 105px;
+	overflow: hidden;
+	border-radius: 4px 4px 0 0;
 }
+
+.card .cover img {
+	width: 100%;
+}
+
+.card .user {
+	border-radius: 50%;
+	display: block;
+	height: 120px;
+	margin: -55px auto 0;
+	overflow: hidden;
+	width: 120px;
+}
+
+.card .user img {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 4px solid #FFFFFF;
+	width: 100%;
+}
+
+.card .content {
+	background-color: rgba(0, 0, 0, 0);
+	box-shadow: none;
+	padding: 10px 20px 20px;
+}
+
 .card .content .main {
-    min-height: 160px;
-}
-.card .back .content .main {
-    height: 215px;
-}
-.card .name {
-		font-family: 'Arima Madurai', cursive;
-    font-size: 22px;
-    line-height: 28px;
-    margin: 10px 0 0;
-    text-align: center;
-    text-transform: capitalize;
-}
-.card h5{
-    margin: 5px 0;
-    font-weight: 400;
-    line-height: 20px;
-}
-.card .profession{
-    color: #999999;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.card .footer {
-    border-top: 1px solid #EEEEEE;
-    color: #999999;
-    margin: 30px 0 0;
-    padding: 10px 0 0;
-    text-align: center;
-}
-.card .footer .social-links{
-    font-size: 18px;
-}
-.card .footer .social-links a{
-    margin: 0 7px;
-}
-.card .footer .btn-simple{
-    margin-top: -6px;
-}
-.card .header {
-    padding: 15px 20px;
-    height: 90px;
-}
-.card .motto{
-		font-family: 'Arima Madurai', cursive;
-    border-bottom: 1px solid #EEEEEE;
-    color: #999999;
-    font-size: 14px;
-    font-weight: 400;
-    padding-bottom: 10px;
-    text-align: center;
+	min-height: 160px;
 }
 
-.card .stats-container{
+.card .back .content .main {
+	height: 215px;
+}
+
+.card .name {
+	font-family: 'Arima Madurai', cursive;
+	font-size: 22px;
+	line-height: 28px;
+	margin: 10px 0 0;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.card h5 {
+	margin: 5px 0;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.card .profession {
+	color: #999999;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.card .footer {
+	border-top: 1px solid #EEEEEE;
+	color: #999999;
+	margin: 30px 0 0;
+	padding: 10px 0 0;
+	text-align: center;
+}
+
+.card .footer .social-links {
+	font-size: 18px;
+}
+
+.card .footer .social-links a {
+	margin: 0 7px;
+}
+
+.card .footer .btn-simple {
+	margin-top: -6px;
+}
+
+.card .header {
+	padding: 15px 20px;
+	height: 90px;
+}
+
+.card .motto {
+	font-family: 'Arima Madurai', cursive;
+	border-bottom: 1px solid #EEEEEE;
+	color: #999999;
+	font-size: 14px;
+	font-weight: 400;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.card .stats-container {
 	width: 100%;
 	margin-top: 50px;
 }
-.card .stats{
+
+.card .stats {
 	display: block;
 	float: left;
 	width: 33.333333%;
 	text-align: center;
 }
 
-.card .stats:first-child{
+.card .stats:first-child {
 	border-right: 1px solid #EEEEEE;
 }
-.card .stats:last-child{
+
+.card .stats:last-child {
 	border-left: 1px solid #EEEEEE;
 }
-.card .stats h4{
-		font-family: 'Arima Madurai', cursive;
+
+.card .stats h4 {
+	font-family: 'Arima Madurai', cursive;
 	font-weight: 300;
 	margin-bottom: 5px;
 }
-.card .stats p{
+
+.card .stats p {
 	color: #777777;
 }
 /*      Just for presentation        */
+.title {
+	color: #506A85;
+	text-align: center;
+	font-weight: 300;
+	font-size: 44px;
+	margin-bottom: 90px;
+	line-height: 90%;
+}
 
-.title{
-    color: #506A85;
-    text-align: center;
-    font-weight: 300;
-    font-size: 44px;
-    margin-bottom: 90px;
-    line-height: 90%;
+.title small {
+	font-size: 17px;
+	color: #999;
+	text-transform: uppercase;
+	margin: 0;
 }
-.title small{
-    font-size: 17px;
-    color: #999;
-    text-transform: uppercase;
-    margin: 0;
-}
-.space-30{
+
+.space-30 {
 	height: 30px;
 	display: block;
 }
-.space-50{
-    height: 50px;
-    display: block;
-}
-.space-200{
-    height: 200px;
-    display: block;
-}
-.white-board{
-    background-color: #FFFFFF;
-    min-height: 200px;
-    padding: 60px 60px 20px;
-}
-.ct-heart{
-    color: #F74933;
+
+.space-50 {
+	height: 50px;
+	display: block;
 }
 
- pre.prettyprint{
-    background-color: #ffffff;
-    border: 1px solid #999;
-    margin-top: 20px;
-    padding: 20px;
-    text-align: left;
-}
-.atv, .str{
-    color: #05AE0E;
-}
-.tag, .pln, .kwd{
-     color: #3472F7;
-}
-.atn{
-  color: #2C93FF;
-}
-.pln{
-   color: #333;
-}
-.com{
-    color: #999;
+.space-200 {
+	height: 200px;
+	display: block;
 }
 
-.btn-simple{
-    opacity: .8;
-    color: #666666;
-    background-color: transparent;
+.white-board {
+	background-color: #FFFFFF;
+	min-height: 200px;
+	padding: 60px 60px 20px;
 }
 
-.btn-simple:hover,
-.btn-simple:focus{
-    background-color: transparent;
-    box-shadow: none;
-    opacity: 1;
-}
-.btn-simple i{
-    font-size: 16px;
+.ct-heart {
+	color: #F74933;
 }
 
-.navbar-brand-logo{
-    padding: 0;
-}
-.navbar-brand-logo .logo{
-    border: 1px solid #333333;
-    border-radius: 50%;
-    float: left;
-    overflow: hidden;
-    width: 60px;
-}
-.navbar .navbar-brand-logo .brand{
-    color: #FFFFFF;
-    float: left;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-left: 10px;
-    margin-top: 10px;
-    width: 60px;
-}
-.navbar-default .navbar-brand-logo .brand{
-    color: #555;
+pre.prettyprint {
+	background-color: #ffffff;
+	border: 1px solid #999;
+	margin-top: 20px;
+	padding: 20px;
+	text-align: left;
 }
 
+.atv, .str {
+	color: #05AE0E;
+}
+
+.tag, .pln, .kwd {
+	color: #3472F7;
+}
+
+.atn {
+	color: #2C93FF;
+}
+
+.pln {
+	color: #333;
+}
+
+.com {
+	color: #999;
+}
+
+.btn-simple {
+	opacity: .8;
+	color: #666666;
+	background-color: transparent;
+}
+
+.btn-simple:hover, .btn-simple:focus {
+	background-color: transparent;
+	box-shadow: none;
+	opacity: 1;
+}
+
+.btn-simple i {
+	font-size: 16px;
+}
+
+.navbar-brand-logo {
+	padding: 0;
+}
+
+.navbar-brand-logo .logo {
+	border: 1px solid #333333;
+	border-radius: 50%;
+	float: left;
+	overflow: hidden;
+	width: 60px;
+}
+
+.navbar .navbar-brand-logo .brand {
+	color: #FFFFFF;
+	float: left;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 20px;
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 60px;
+}
+
+.navbar-default .navbar-brand-logo .brand {
+	color: #555;
+}
 
 /*       Fix bug for IE      */
-
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    .front, .back{
-        -ms-backface-visibility: visible;
-        backface-visibility: visible;
-    }
-
-    .back {
-        visibility: hidden;
-        -ms-transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
-    }
-    .front{
-        z-index: 4;
-    }
-    .card-container:not(.manual-flip):hover .back,
-    .card-container.manual-flip.hover .back{
-        z-index: 5;
-        visibility: visible;
-    }
+@media screen and (-ms-high-contrast: active) , ( -ms-high-contrast :
+	none) {
+	.front, .back {
+		-ms-backface-visibility: visible;
+		backface-visibility: visible;
+	}
+	.back {
+		visibility: hidden;
+		-ms-transition: all 0.2s cubic-bezier(.92, .01, .83, .67);
+	}
+	.front {
+		z-index: 4;
+	}
+	.card-container:not (.manual-flip ):hover .back, .card-container.manual-flip.hover .back
+		{
+		z-index: 5;
+		visibility: visible;
+	}
 }
 </style>
 </head>
@@ -1203,26 +1240,27 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 		<div id="main_modal">
 			<div class="modal-header">
 				<button type="button" class="close" onclick="closem()">×</button>
-				<h4 class="modal-title w-100" >프로젝트 생성</h4>
+				<h4 class="modal-title w-100">프로젝트 생성</h4>
 			</div>
-			
+
 			<div id="f_modal">
 				<div class="modal-body">
-                <div class="md-form">
-               		 <label for="form22">Project name</label>
-                    <i class="fa fa-user prefix"></i>
-                    <input type="text" name="project_name" class="form-control">
-                </div>
-                <div class="md-form">
-                   	<label for="form32">Project Content</label>
-                    <i class="fa fa-envelope prefix"></i>
-                    <input type="text" name="project_content" class="form-control">
-                </div>
-                <hr>
-                <div style="float: right;">
-                <button type="button" class="btn btn-next" id="btn-next" onclick="shows()">다음</button>
+					<div class="md-form">
+						<label for="form22">Project name</label> <i
+							class="fa fa-user prefix"></i> <input type="text"
+							name="project_name" class="form-control">
+					</div>
+					<div class="md-form">
+						<label for="form32">Project Content</label> <i
+							class="fa fa-envelope prefix"></i> <input type="text"
+							name="project_content" class="form-control">
+					</div>
+					<hr>
+					<div style="float: right;">
+						<button type="button" class="btn btn-next" id="btn-next"
+							onclick="shows()">다음</button>
+					</div>
 				</div>
-            	</div>
 			</div>
 
 			<div id="smodal">
@@ -1264,22 +1302,22 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 			</div>
 			<div id="f_modal2">
 				<div class="modal-body">
-                <div class="md-form">
-                	<input type="hidden" name="project_idx">
-               		<label for="form22">Project name</label>
-                    <i class="fa fa-user prefix"></i>
-                    <input type="text" name="project_name" class="form-control">
-                </div>
-                <div class="md-form">
-                   	<label for="form32">Project Content</label>
-                    <i class="fa fa-envelope prefix"></i>
-                    <input type="text" name="project_content" class="form-control">
-                </div>
-                <hr>
-                <div style="float: right;">
-                <button type="button" class="btn btn-next" id="btn-next" onclick="shows2()">다음</button>
+					<div class="md-form">
+						<input type="hidden" name="project_idx"> <label
+							for="form22">Project name</label> <i class="fa fa-user prefix"></i>
+						<input type="text" name="project_name" class="form-control">
+					</div>
+					<div class="md-form">
+						<label for="form32">Project Content</label> <i
+							class="fa fa-envelope prefix"></i> <input type="text"
+							name="project_content" class="form-control">
+					</div>
+					<hr>
+					<div style="float: right;">
+						<button type="button" class="btn btn-next" id="btn-next"
+							onclick="shows2()">다음</button>
+					</div>
 				</div>
-            	</div>
 			</div>
 
 			<div id="smodal2">
@@ -1315,23 +1353,24 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 	</form>
 
 
-		<section class="callaction">
+	<section class="callaction">
 	<div class="container">
-		
-				<div class="big-cta">
-					<div class="cta-text">
-						<h5>
-							<a class="glyphicon glyphicon-plus-sign" onclick="showf()" style="size: 600px;">프로젝트추가</a>
-						</h5>
-					</div>
-				</div>
-			
-		
+
+		<div class="big-cta">
+			<div class="cta-text">
+				<h5>
+					<a class="glyphicon glyphicon-plus-sign" onclick="showf()"
+						style="size: 600px;">프로젝트추가</a>
+				</h5>
+			</div>
+		</div>
+
+
 	</div>
 	</section>
-	
+
 	<div id="carousel-example-generic" class="carousel slide center-block"
-		data-ride="carousel" data-interval="false" >
+		data-ride="carousel" data-interval="false">
 
 
 		<!-- Indicators 페이징-->
@@ -1361,8 +1400,9 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 					<c:forEach var="i" items="${plist}" varStatus="status">
 
 						<div class="item ${status.first?'active':'' }">
-							<div id="contain" class="container-fluid " >
-								<div id="project_div${i.project_idx}" style="margin-top: 15px;"	align="center">
+							<div id="contain" class="container-fluid ">
+								<div id="project_div${i.project_idx}" style="margin-top: 15px;"
+									align="center">
 									<div class="row" id="red">
 
 										<div class="panel panel-danger coupon"
@@ -1407,18 +1447,20 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 												</div>
 											</div>
 											<div class="panel-body">
-												<div class="col-md-6" align="center"style="margin-left: 30%;">
+												<div class="col-md-6" align="center"
+													style="margin-left: 30%;">
 													<div class="items">
 
 														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-															
+
 															<div class="col-md-2" align="center">
-															
-																
-																	<img  src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
-																	style="width: 65px; height:65px; margin-left: 100px;" >
-															
-																
+
+
+																<img
+																	src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
+																	style="width: 65px; height: 65px; margin-left: 100px;">
+
+
 															</div>
 
 														</c:forEach>
@@ -1427,19 +1469,20 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 
 												</div>
 
-												<div class="col-md-12"><hr>
-													<div class="slimdiv"
-														style="width: 100px; height: 100px;">
-														<span  id="pc${i.project_idx}">${i.project_content }</span>
+												<div class="col-md-12">
+													<hr>
+													<div class="slimdiv" style="width: 100px; height: 100px;">
+														<span id="pc${i.project_idx}">${i.project_content }</span>
 													</div>
 												</div>
 											</div>
 
 											<div class="panel-footer">
 												<div class="coupon-code">
-												
+
 													<a class="btn btn-link"
-														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i class="fa fa-clone left"></i>업무확인</a>
+														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
+														class="fa fa-clone left"></i>업무확인</a>
 
 													<!-- 프로젝트 진행현황 -->
 													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
@@ -1506,7 +1549,7 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 														</c:choose>
 													</c:forEach>
 												</div>
-												
+
 											</div>
 										</div>
 									</div>
@@ -1520,103 +1563,152 @@ box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 
 		<!-- carousel-inner -->
 
-		
+
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev" style="width: 50px; color: red; float: left;"> <span
-			class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>
-			<span class="sr-only">Previous</span>
+			role="button" data-slide="prev"
+			style="width: 50px; color: red; float: left;"> <span
+			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
+		</span> <span class="sr-only">Previous</span>
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next" style="width: 30px;  color: red;"> <span
-			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+			role="button" data-slide="next" style="width: 30px; color: red;">
+			<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-		</div>
-		<hr>
- 	<hr><hr>
- 	
- 	<div class="container">
-    <div class="row">
-     <div class="col-sm-10 col-sm-offset-1">
-       
-        <div class="col-md-4 col-sm-6">
-             <div class="card-container manual-flip">
-                <div class="card">
-                    <div class="front">
-                        <div class="cover">
-                            <img src="https://www.clipartsgram.com/image/124089475-california-beaches-tumblr-wallpaper-3.jpg"/>
-                        </div>
-                        <div class="user">
-                            <img class="img-circle" src="http://www.outbrain.com/risingstars/wp-content/uploads/708x708-RS-Profile-Ashley-Callahan-400x400.jpg"/>
-                        </div>
-                        <div class="content">
-                            <div class="main">
-                                <h3 class="name">Andrew Mike</h3>
-                                <p class="profession">Web Developer</p>
-                                <p class="text-center">"Lamborghini Mercy <br>Your chick she so thirsty <br>I'm in that two seat Lambo"</p>
-                            </div>
-                            <div class="footer">
-                                <button class="btn btn-simple" onclick="rotateCard(this)">
-                                    <i class="fa fa-mail-forward"></i> Manual Rotation
-                                </button>
-                            </div>
-                        </div>
-                    </div> <!-- end front panel -->
-                    <div class="back">
-                        <div class="header">
-                            <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
-                        </div>
-                        <div class="content">
-                            <div class="main">
-                                <h4 class="text-center">Job Description</h4>
-                                <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+	</div>
+	<hr>
+	<hr>
+	<hr>
 
-                                <div class="stats-container">
-                                    <div class="stats">
-                                        <h4>235</h4>
-                                        <p>
-                                            Followers
-                                        </p>
-                                    </div>
-                                    <div class="stats">
-                                        <h4>114</h4>
-                                        <p>
-                                            Following
-                                        </p>
-                                    </div>
-                                    <div class="stats">
-                                        <h4>35</h4>
-                                        <p>
-                                            Projects
-                                        </p>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
-                                <i class="fa fa-reply"></i> Back
-                            </button>
-                            <div class="social-links text-center">
-                                <a href="http://deepak646.blogspot.in/" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
-                                <a href="http://deepak646.blogspot.in/" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
-                                <a href="http://deepak646.blogspot.in/" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
-                            </div>
-                        </div>
-                    </div> <!-- end back panel -->
-                </div> <!-- end card -->
-            </div> <!-- end card-container -->
-        </div> <!-- end col sm 3 -->
+	<div id="carousel-example-generic" class="carousel slide center-block"
+		data-ride="carousel" data-interval="false">
+		<!-- 앞화면 -->
 
-    <div class="space-200"></div>
-</div>
- 	
- 	
-                   
 
-	
-	
+		<c:set var="plist" value="${plist}"></c:set>
+
+		<c:choose>
+			<c:when test="${empty plist}">
+								등록된 프로젝트가 없습니다.
+						</c:when>
+
+			<c:otherwise>
+				<div class="carousel-inner" role="listbox">
+					<c:forEach var="i" items="${plist}" varStatus="status">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="col-md-4 col-sm-6">
+							<div class="card-container manual-flip">
+								<div class="card">
+									<div class="front">
+										<!--  배경화면-->
+										<div class="cover">
+											<img src="/tpm_project/sample/khj/img/son.jpg" />
+										</div>
+
+										<!-- 상태 아이콘 -->
+										<div class="user">
+											<img class="img-circle"
+												src="/tpm_project/sample/khj/img/son2.jpg"
+												style="width: 130px; height: 130px;" />
+										</div>
+
+										<!--화면단  -->
+										<div class="content">
+											<div class="main">
+												<input type="hidden" id="p_idx${i.project_idx}"
+													value="${i.project_idx}">
+												<h4 id="pn${i.project_idx}">
+													<span class="hidden-xs">${i.project_name }</span>
+												</h4>
+												<p class="profession">Web Developer</p>
+												<p class="text-center">
+													"Lamborghini Mercy <br>Your chick she so thirsty <br>I'm
+													in that two seat Lambo"
+												</p>
+											</div>
+											<div class="footer">
+												<button class="btn btn-simple" onclick="rotateCard(this)">
+													<i class="fa fa-mail-forward"></i> Manual Rotation
+												</button>
+											</div>
+										</div>
+									</div>
+									<!-- end front panel -->
+
+									<!-- 뒷화면 -->
+									<div class="back">
+										<div class="header">
+											<h5 class="motto">"To be or not to be, this is my
+												awesome motto!"</h5>
+										</div>
+										<div class="content">
+											<div class="main">
+												<h4 class="text-center">Job Description</h4>
+												<p class="text-center">Web design, Adobe Photoshop,
+													HTML5, CSS3, Corel and many others...</p>
+
+												<div class="stats-container">
+													<div class="stats">
+														<h4>235</h4>
+														<p>Followers</p>
+													</div>
+													<div class="stats">
+														<h4>114</h4>
+														<p>Following</p>
+													</div>
+													<div class="stats">
+														<h4>35</h4>
+														<p>Projects</p>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="footer">
+											<button class="btn btn-simple" rel="tooltip"
+												title="Flip Card" onclick="rotateCard(this)">
+												<i class="fa fa-reply"></i> Back
+											</button>
+											<div class="social-links text-center">
+												<a href="http://deepak646.blogspot.in/" class="facebook"><i
+													class="fa fa-facebook fa-fw"></i></a> <a
+													href="http://deepak646.blogspot.in/" class="google"><i
+													class="fa fa-google-plus fa-fw"></i></a> <a
+													href="http://deepak646.blogspot.in/" class="twitter"><i
+													class="fa fa-twitter fa-fw"></i></a>
+											</div>
+										</div>
+									</div>
+									<!-- end back panel -->
+								</div>
+								<!-- end card -->
+							</div>
+							<!-- end card-container -->
+						</div>
+						<!-- end col sm 3 -->
+
+						<div class="space-200"></div>
+					</div>
+					</c:forEach>
+				</div><!--end carousel-inner -->
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+
+
+	<!-- Indicators 페이징-->
+	<ol class="carousel-indicators" style="bottom: -15px;">
+		<c:forEach var="i" items="${plist}" varStatus="status">
+
+			<li data-target="#carousel-example-generic"
+				${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
+
+		</c:forEach>
+	</ol>
+
+
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
