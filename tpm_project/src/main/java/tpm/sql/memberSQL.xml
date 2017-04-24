@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.member">
 	<insert id="memberInsert" parameterType="tpm.member.model.MemberDTO">
-		insert into tpm_member values (member_idx.nextval,#{member_id},#{member_pwd},#{member_name},#{member_gender},#{member_tel},'0',0)
+		insert into tpm_member values (member_idx.nextval,#{member_id},#{member_pwd},#{member_name},#{member_gender},#{member_tel},'0',null)
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="String">

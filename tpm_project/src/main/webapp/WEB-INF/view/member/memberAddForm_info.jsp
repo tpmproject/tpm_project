@@ -184,8 +184,8 @@ function cancle(){
                         <label class="col-sm-3 control-label" for="inputName">성별</label>
                         <div class="col-sm-6">
                             <select class="form-control" style="width:79px; float:left;" name="member_gender">
-                                <option value="남">남자</option>
-                                <option value="여">여자</option>
+                                <option value="남자">남자</option>
+                                <option value="여자">여자</option>
                             </select>
                         </div>
                     </div>

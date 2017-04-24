@@ -74,6 +74,8 @@
 	    
 	    function changeThema(){
 	    	var selected = $('#selectThema').val();
+	    	//var selectclass = $('body').attr('class');
+	    	//window.alert(selectclass);
 	    	//window.alert(selected);
 	    	
 	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
@@ -166,7 +168,7 @@
 	    	
     </script>
 </head>
-<body class="skin-black">
+<body class="skin-black-light">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
       <div class="col-md-6 col-md-offset-3"></div>
@@ -186,11 +188,17 @@
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	                <select id="selectThema" onchange="changeThema()">
 	                  <option value="black"> black </option>
+	                  <option value="black-light"> black-light </option>
 	                  <option value="blue"> blue </option>
+	                  <option value="blue-light"> blue-light </option>
 	                  <option value="green"> green </option>
+	                  <option value="green-light"> green-light </option>
 	                  <option value="purple"> purple </option>
+	                  <option value="purple-light"> purple-light </option>
 	                  <option value="red"> red </option>
+	                  <option value="red-light"> red-light </option>
 	                  <option value="yellow"> yellow </option>
+	                  <option value="yellow-light"> yellow-light </option>
 	                </select>
 	              </div>
 	              <br>
