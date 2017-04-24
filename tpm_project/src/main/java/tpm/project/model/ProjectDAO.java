@@ -12,6 +12,8 @@ public interface ProjectDAO {
 	
 	public List<ProjectDTO> projectAllListByMember(int member_idx);
 	
+	public int projectLevel(ProjectMemberDTO dto);
+	
 	public ProjectDTO projectSearch(ProjectMemberDTO dto);
 	
 	public ArrayList<MemberDTO> projectWorkMember(ProjectMemberDTO dto);

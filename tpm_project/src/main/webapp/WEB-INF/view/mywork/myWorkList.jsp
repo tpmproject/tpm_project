@@ -118,8 +118,8 @@ function workDone(work_idx,work_state){
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
 
-function workDone(work_idx,work_state){
-	var param="work_idx="+work_idx+"&work_state="+work_state;
+function workDone(project_idx,work_idx,work_state){
+	var param="project_idx="+project_idx+"&work_idx="+work_idx+"&work_state="+work_state;
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
 }
 function updateWorkResult(){
@@ -128,6 +128,12 @@ function updateWorkResult(){
 			var result = XHR.responseText;	
 			var wData=eval('('+result+')');
 			var wi=wData.work.work_idx;
+			
+			if(wi==0){
+				window.alert('권한이 없습니다.');
+				return;
+			}
+			
 			var ws=wData.work.work_state;
 			ws=parseInt(ws);
 			var firstC=document.getElementById('work_state'+wi).firstChild;
@@ -267,11 +273,11 @@ function updateWorkResult(){
 			<i class="glyphicon glyphicon-calendar"></i><a><f:formatDate value="${i.work_start}" type="both" pattern="yyyy/MM/dd  HH:mm"/>&nbsp;~&nbsp;<f:formatDate value="${i.work_end}" type="both" pattern="yyyy/MM/dd  HH:mm"/></a>
 			
 			<span class="work_btn" id="work_state${i.work_idx}">												
-				<i name="1" class="glyphicon glyphicon-play-circle" ${i.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="진행 중" onclick="workDone(${i.work_idx},1)"></i>
+				<i name="1" class="glyphicon glyphicon-play-circle" ${i.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="진행 중" onclick="workDone(${i.project_idx},${i.work_idx},1)"></i>
 			<c:if test="${i.work_confirm ==10}">
-				<i name="2" class="glyphicon glyphicon-record" ${i.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${i.work_idx},2)"></i>
+				<i name="2" class="glyphicon glyphicon-record" ${i.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${i.project_idx},${i.work_idx},2)"></i>
 			</c:if>
-				<i name="3" class="glyphicon glyphicon-ok-circle" ${i.work_state eq 3?'style="color:green;"':''} data-toggle="tooltip" data-placement="bottom" title="완료" onclick="workDone(${i.work_idx},3)"></i>
+				<i name="3" class="glyphicon glyphicon-ok-circle" ${i.work_state eq 3?'style="color:green;"':''} data-toggle="tooltip" data-placement="bottom" title="완료" onclick="workDone(${i.project_idx},${i.work_idx},3)"></i>
 			</span>
 			
 			</div>

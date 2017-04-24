@@ -31,9 +31,14 @@ public class ProjectDAOImple implements ProjectDAO {
 		return projectAllList;
 	}
 
+	public int projectLevel(ProjectMemberDTO dto){
+		int project_level=sqlMap.selectOne("projectLevel", dto);
+		return project_level;
+	}
+	
 	public ProjectDTO projectSearch(ProjectMemberDTO dto) {
 		
-		int project_level=sqlMap.selectOne("projectLevel", dto);
+		int project_level=projectLevel(dto);
 		ArrayList<TotalDTO> temp=(ArrayList)sqlMap.selectList("projectSearch",dto);
 		ProjectDTO pdto=new ProjectDTO();
 		ArrayList<CategoryDTO> cate_arr=new ArrayList<CategoryDTO>();

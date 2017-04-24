@@ -28,6 +28,7 @@ import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.file.model.FileDTO;
 import tpm.member.model.MemberDTO;
+import tpm.project.model.ProjectDAO;
 import tpm.project.model.ProjectMemberDTO;
 import tpm.tendency.model.TendencyDAO;
 import tpm.work.model.MyWorkDTO;
@@ -40,6 +41,9 @@ public class WorkController {
 	
 	@Autowired
 	private WorkDAO workDAO;
+	
+	@Autowired
+	private ProjectDAO projectDAO;
 	
 	@Autowired
 	private TendencyDAO tendencyDAO;
@@ -152,13 +156,23 @@ public class WorkController {
 	
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup) throws ParseException{
+	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup,int project_idx,HttpServletRequest req) throws ParseException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
 		int result=0;
 		if(dto.getWork_state()>0){
-			result=workDAO.updateWork(dto);
+			
+			ProjectMemberDTO pmdto=new ProjectMemberDTO();
+			pmdto.setProject_idx(project_idx);
+			HttpSession session = req.getSession();
+			pmdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
+			
+			int p_level=projectDAO.projectLevel(pmdto);
+			if(p_level>1000){
+				result=workDAO.updateWork(dto);
+			}
+			
 			if(result==0){
 				mav.addObject("msg","error");
 			}
