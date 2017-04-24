@@ -59,8 +59,6 @@ public class WorkController {
 		mdto.setMember_idx(member_idx);
 		ArrayList<MyWorkDTO> arr = workDAO.myWorkAllList(mdto);
 
-		mav.addObject("mwdto", arr);
-
 		HashMap<Integer, String> hm = new HashMap<Integer, String>();
 		for (int i = 0; i < arr.size(); i++) {
 			hm.put(arr.get(i).getProject_idx(), arr.get(i).getProject_name());
@@ -164,7 +162,7 @@ public class WorkController {
 			if(result==0){
 				mav.addObject("msg","error");
 			}
-			mav.addObject("dto",dto);
+			mav.addObject("wdto",dto);
 		}else{
 		
 		
@@ -190,7 +188,7 @@ public class WorkController {
 					int w_idx=Integer.parseInt(member_idx[i]);
 					WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), w_idx);
 					result+=workDAO.workMemberInsert(wdto);
-					mav.addObject("dto",dto);
+					mav.addObject("wdto",dto);
 				}
 			}else{
 				mav.addObject("msg","error");
