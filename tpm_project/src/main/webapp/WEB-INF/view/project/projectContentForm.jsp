@@ -177,6 +177,7 @@ function showf2() {
 	$(btnwork4).hide();
 }
 function workUpdate(work_idx,work_start,work_end,work_confirm){
+		
 	var startDate = work_start.split(' ',3);
 	var endDate = work_end.split(' ',3);
 	
@@ -275,7 +276,7 @@ function shows2Result(){
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
 				
-				msg2 += '<div id="work2_member'+member.member_idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen2('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" "draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
@@ -707,6 +708,15 @@ function showTen(member_idx){
 	var param = 'member_idx='+member_idx;
 	var tenT=$('#work_member'+member_idx).offset().top;
 	var tenL=$('#work_member'+member_idx).offset().left+120;
+	$('#tendency_pop').css('top',tenT+'px');
+	$('#tendency_pop').css('left',tenL+'px');
+	$('#tendency_pop').fadeIn();
+	sendRequest('recommand.do',param,tendencyListResult,'POST');
+}
+function showTen2(member_idx){
+	var param = 'member_idx='+member_idx;
+	var tenT=$('#work2_member'+member_idx).offset().top;
+	var tenL=$('#work2_member'+member_idx).offset().left+120;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
 	$('#tendency_pop').fadeIn();
