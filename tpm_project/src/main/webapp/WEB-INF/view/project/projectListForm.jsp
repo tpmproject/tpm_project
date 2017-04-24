@@ -1132,7 +1132,7 @@ function drop4(ev) {
 																<c:if
 																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																	<span class="print"> <a href="#"
-																		class="btn btn-link"><i
+																		class="btn btn-link" style="color: red;"><i
 																			class="glyphicon glyphicon-time"></i>진행중</a></span>
 																	<span
 																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
