@@ -8,7 +8,7 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
-<%@ include file="/WEB-INF/view/include/import.jsp"%>
+<%-- <%@ include file="/WEB-INF/view/include/import.jsp"%>
 
 
 <!-- Slimscroll -->
@@ -29,15 +29,47 @@
 <!-- Theme skin -->
 <link href="skins/default.css" rel="stylesheet">
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css//bootstrap-theme.min.css">
 <!-- Bootstrap 3.3.2 JS -->
-
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script> --%>
 <!-- ----------------------------------------- -->
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- Ionicons -->
+<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<!-- Morris chart -->
+<link href="/tpm_project/sample/cho/main/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+<!-- Daterange picker -->
+<link href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"
+	rel="stylesheet" type="text/css">
+<!-- Theme style -->
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
+    downloading all of them to reduce the load. -->
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
+	type="text/css">
 
+<!-- <script src="/tpm_project/sample/cho/main/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->	
 
-
-
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
+<link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
+<script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 
 
@@ -45,9 +77,15 @@
  	window.onload = function() {
 		$(main_modal).hide();
 		$(smodal).hide();
-		
+		$('.slimdiv').mCustomScrollbar({axis:"yx"});
 	}	 
 		
+ 	function sideBar(){
+ 		var bNode=document.documentElement.lastChild;
+ 		$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');
+ 	}
+ 	
+ 	
 	function showf() {
 		$(mback).fadeIn('150');
 		$(main_modal).fadeIn('150');
@@ -761,7 +799,8 @@ function drop4(ev) {
 	z-index: 5;
 }
 .content{
-	
+	height:780px;
+
 }
 .sd {
 	display: inline-block;
@@ -771,22 +810,43 @@ function drop4(ev) {
 	float: left;
 	text-align: center;
 }
-
 .carousel-inner {
 	margin: auto;
 	width: 50%;
+}
+
+.content{
+	height:780px;
+	overflow:auto;
+}
+
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	width: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_draggerRail{
+ display: none;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	height: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
+ display: none;
 }
 </style>
 </head>
 <body class="skin-blue">
 	<%@ include file="/WEB-INF/view/header.jsp"%>
 
-
-
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.js"></script>
+	<!-- <script src="js/jquery.js"></script> -->
 	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<!-- <script src="js/bootstrap.min.js"></script> -->
 	<script src="js/jquery.fancybox.pack.js"></script>
 	<script src="js/jquery.fancybox-media.js"></script>
 	<script src="js/google-code-prettify/prettify.js"></script>
@@ -851,7 +911,6 @@ function drop4(ev) {
 		</div>
 	</form>
 
-
 	<form name="changeProject" action="projectUpdate.do" method="post">
 		<div id="main_modal2">
 			<button type="button" class="close" onclick="closem()">×</button>
@@ -910,7 +969,7 @@ function drop4(ev) {
 
 		<section class="callaction">
 	<div class="container">
-		<div class="row" style="margin-bottom: 30px; ">
+		<div class="row" ">
 			<div class="col-lg-12">
 				<div class="big-cta">
 					<div class="cta-text">
@@ -926,8 +985,9 @@ function drop4(ev) {
 		</div>
 	</div>
 	</section>
+	
 	<div id="carousel-example-generic" class="carousel slide center-block"
-		data-ride="carousel" data-interval="false" style="height: 650px; width: 1690px;]">
+		data-ride="carousel" data-interval="false" >
 	
 
 		<!-- Indicators 페이징-->
@@ -1026,8 +1086,8 @@ function drop4(ev) {
 												</div>
 
 												<div class="col-md-12">
-													<div id="slimdiv"
-														style="border-color: orange; border-style: dashed; width: 300px; height: 100px; scroll; overflow: auto; overflow-y: hidden">
+													<div class="slimdiv"
+														style="border-color: orange; border-style: dashed; width: 300px; height: 100px;">
 														<span class="disclosure" id="pc${i.project_idx}">${i.project_content }</span>
 													</div>
 												</div>
@@ -1101,11 +1161,9 @@ function drop4(ev) {
 																</c:if>
 															</c:when>
 														</c:choose>
-
-														<%-- </c:if> --%>
 													</c:forEach>
-
 												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -1114,21 +1172,20 @@ function drop4(ev) {
 						</div>
 					</c:forEach>
 				</div>
-
 			</c:otherwise>
 		</c:choose>
 
 		<!-- carousel-inner -->
 
-
+		
 		<!-- Controls -->
 		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev" style="width: 50px; margin-left: 422px;"> <span
-			class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>
+			role="button" data-slide="prev" style="width: 50px; margin-left: 422px;color: red;"> <span
+			class="glyphicon glyphicon-triangle-left" aria-hidden="true"> </span>
 			<span class="sr-only">Previous</span>
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next" style="width: 30px; margin-right: 422px;"> <span
-			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			role="button" data-slide="next" style="width: 30px; margin-right: 422px; color: red;"> <span
+			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
