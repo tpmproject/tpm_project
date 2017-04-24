@@ -1594,7 +1594,7 @@ pre.prettyprint {
 						</c:when>
 
 			<c:otherwise>
-				<div class="carousel-inner" role="listbox">
+				
 					<c:forEach var="i" items="${plist}" varStatus="status">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="col-md-4 col-sm-6">
@@ -1694,7 +1694,7 @@ pre.prettyprint {
 				</div><!--end carousel-inner -->
 			</c:otherwise>
 		</c:choose>
-	</div>
+	
 
 
 
