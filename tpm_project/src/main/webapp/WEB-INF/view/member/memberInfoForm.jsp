@@ -74,9 +74,8 @@
 	    
 	    function changeThema(){
 	    	var selected = $('#selectThema').val();
-	    	window.alert(selected);
+	    	//window.alert(selected);
 	    	
-	    	//$('body').attr('class','skin-'+selected+'')
 	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
 	    	
 	    	sendRequest('memberSetThema.do?'+param, null, setThema, 'GET');
@@ -86,8 +85,14 @@
 	    	if(XHR.readyState==4){
 	    		if(XHR.status==200){
 	    			var result = XHR.responseText.trim();
-	    			window.alert(result);
+	    			//window.alert(result);
 	    			
+	    			if(!result){
+	    				$('body').attr('class','skin-blue');
+	    				
+	    			}else{
+	    				$('body').attr('class','skin-'+result+'');	
+	    			}
 	    		}
 	    	}
 	    }
