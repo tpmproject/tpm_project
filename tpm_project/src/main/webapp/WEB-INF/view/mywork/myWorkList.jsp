@@ -117,10 +117,49 @@ function workDone(work_idx,work_state){
 	var param="work_idx="+work_idx+"&work_state="+work_state;
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
+
+function workDone(work_idx,work_state){
+	var param="work_idx="+work_idx+"&work_state="+work_state;
+	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
+}
+function updateWorkResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;	
+			var wData=eval('('+result+')');
+			var wi=wData.work.work_idx;
+			var ws=wData.work.work_state;
+			ws=parseInt(ws);
+			var firstC=document.getElementById('work_state'+wi).firstChild;
+			var lastC=document.getElementById('work_state'+wi).lastChild;
+			do{
+				if(firstC.nodeName=='I'){
+					var wsColor='black';
+					
+					if(firstC.getAttribute('name')==ws){
+						switch(ws){
+							case 1:wsColor='#367fa9';break;
+							case 2:wsColor='#f0ad4e';break;
+							case 3:wsColor='green';				
+						}
+					}
+					firstC.style.color=wsColor;
+				}
+				
+				firstC=firstC.nextSibling;
+			}while(firstC!=lastC);
+		}
+	}
+}
 </script>
 <style>
 .over a{
 	color:red;
+}
+.work_btn{
+	float:right;
+    text-align: center;
+    font-size: large;
 }
 </style>
 </head>
@@ -221,9 +260,15 @@ function workDone(work_idx,work_state){
 			</div>
 			<div class="panel-body ${i.work_state !=3 and now>i.work_end?'over':'notover'}" >
 			<i class="glyphicon glyphicon-calendar"></i><a><f:formatDate value="${i.work_start}" type="both" pattern="yyyy/MM/dd  HH:mm"/>&nbsp;~&nbsp;<f:formatDate value="${i.work_end}" type="both" pattern="yyyy/MM/dd  HH:mm"/></a>
-			<c:if test="${i.work_state==3}">
-			<span><i class="glyphicon glyphicon-ok" style="color: green;"></i><f:formatDate value="${i.work_complete}" type="both" pattern="yyyy/MM/dd  HH:mm"/></span>
+			
+			<span class="work_btn" id="work_state${i.work_idx}">												
+				<i name="1" class="glyphicon glyphicon-play-circle" ${i.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="진행 중" onclick="workDone(${i.work_idx},1)"></i>
+			<c:if test="${i.work_confirm ==10}">
+				<i name="2" class="glyphicon glyphicon-record" ${i.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${i.work_idx},2)"></i>
 			</c:if>
+				<i name="3" class="glyphicon glyphicon-ok-circle" ${i.work_state eq 3?'style="color:green;"':''} data-toggle="tooltip" data-placement="bottom" title="완료" onclick="workDone(${i.work_idx},3)"></i>
+			</span>
+			
 			</div>
 		</div>
 	</div>
