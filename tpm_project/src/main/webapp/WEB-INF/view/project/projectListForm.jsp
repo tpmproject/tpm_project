@@ -88,6 +88,8 @@
  	
  	
 	function showf() {
+		var wid=(window.innerWidth/2)-320;
+		$('#main_modal').css('left',wid+'px');
 		$(mback).fadeIn('150');
 		$(main_modal).fadeIn('150');
 		$(f_modal).show();
@@ -784,7 +786,7 @@ function drop4(ev) {
 	background: gray;
 	opacity: 0.7;
 	display: none;
-	z-index: 4;
+	z-index: 820;
 }
 
 #main_modal, #main_modal2 {
@@ -796,8 +798,7 @@ function drop4(ev) {
 	border: solid 10px white;
 	border-radius: 10px;
 	width: 640px;
-	height: 700px;
-	z-index: 5;
+	z-index: 830;
 }
 .content{
 	height:780px;
@@ -805,7 +806,6 @@ function drop4(ev) {
 }
 .sd {
 	display: inline-block;
-	background: #f8f8f8;
 	height: 600px;
 	width: 48%;
 	float: left;
@@ -861,24 +861,28 @@ function drop4(ev) {
 	<form name="newProject" action="projectAdd.do" method="post">
 		<div id="mback" onclick="closem()"></div>
 		<div id="main_modal">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">프로젝트 생성</h4>
-
+			<div class="modal-header">
+				<button type="button" class="close" onclick="closem()">×</button>
+				<h4 class="modal-title w-100" >프로젝트 생성</h4>
+			</div>
+			
 			<div id="f_modal">
-				<div class="box-gray aligncenter" style="background: #eee;">
-					
-					<div id="btntest" class="icon">
-						<div>
-							프로젝트명: <input type="text" name="project_name">
-						</div>
-						<p>
-							<textarea cols="30" rows="20" name="project_content"></textarea>
-						</p>
-						<button type="button" class="btn btn-next" id="btn-next"
-							onclick="shows()">다음</button>
-					</div>
-
+				<div class="modal-body">
+                <div class="md-form">
+               		 <label for="form22">Project name</label>
+                    <i class="fa fa-user prefix"></i>
+                    <input type="text" name="project_name" class="form-control">
+                </div>
+                <div class="md-form">
+                   	<label for="form32">Project Content</label>
+                    <i class="fa fa-envelope prefix"></i>
+                    <input type="text" name="project_content" class="form-control">
+                </div>
+                <hr>
+                <div style="float: right;">
+                <button type="button" class="btn btn-next" id="btn-next" onclick="shows()">다음</button>
 				</div>
+            	</div>
 			</div>
 
 			<div id="smodal">
@@ -914,25 +918,28 @@ function drop4(ev) {
 
 	<form name="changeProject" action="projectUpdate.do" method="post">
 		<div id="main_modal2">
-			<button type="button" class="close" onclick="closem()">×</button>
-			<h4 class="modal-title">프로젝트 수정</h4>
-
+			<div class="modal-header">
+				<button type="button" class="close" onclick="closem()">×</button>
+				<h4 class="modal-title w-100">프로젝트 수정</h4>
+			</div>
 			<div id="f_modal2">
-				<div class="box-gray aligncenter">
-					<h4>프로젝트 수정</h4>
-					<div id="btntest" class="icon">
-						<div>
-							<input type="hidden" name="project_idx"> 프로젝트명: <input
-								type="text" name="project_name">
-						</div>
-						<p>
-							<textarea cols="30" rows="20" name="project_content"></textarea>
-						</p>
-						<button type="button" class="btn btn-next" id="btn-next"
-							onclick="shows2()">다음</button>
-					</div>
-
+				<div class="modal-body">
+                <div class="md-form">
+                	<input type="hidden" name="project_idx">
+               		<label for="form22">Project name</label>
+                    <i class="fa fa-user prefix"></i>
+                    <input type="text" name="project_name" class="form-control">
+                </div>
+                <div class="md-form">
+                   	<label for="form32">Project Content</label>
+                    <i class="fa fa-envelope prefix"></i>
+                    <input type="text" name="project_content" class="form-control">
+                </div>
+                <hr>
+                <div style="float: right;">
+                <button type="button" class="btn btn-next" id="btn-next" onclick="shows2()">다음</button>
 				</div>
+            	</div>
 			</div>
 
 			<div id="smodal2">
