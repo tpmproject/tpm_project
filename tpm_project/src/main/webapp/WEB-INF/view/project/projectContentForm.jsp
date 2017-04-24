@@ -382,7 +382,7 @@ function updateWork(){
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
 function workDone(work_idx,work_state){
-	var param="work_idx="+work_idx+"&work_state="+work_state;
+	var param="project_idx="+${param.project_idx}+"&work_idx="+work_idx+"&work_state="+work_state;
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
 }
 function updateWorkResult(){
