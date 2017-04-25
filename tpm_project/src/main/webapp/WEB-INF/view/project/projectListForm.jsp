@@ -1325,11 +1325,11 @@ img {
 																			<c:if
 																				test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																				<div style="float: right;">
-																					<span
+																					<span  rel="tooltip"title="수정하기"
 																						onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
 																						<i class="glyphicon glyphicon-cog"
 																						style="margin-bottom: 0px;"></i>
-																					</span> <span onclick="projectDelete('${i.project_idx}')">
+																					</span> <span rel="tooltip"title="삭제하기"onclick="projectDelete('${i.project_idx}')">
 																						<i class="glyphicon glyphicon-remove"
 																						style="margin-bottom: 0px;"></i>
 																					</span>
@@ -1380,6 +1380,7 @@ img {
 																					<c:if
 																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
+																						평가하기
 																							<span class="print" rel="tooltip" title="평가하기">
 																								<a
 																								onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
