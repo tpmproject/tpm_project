@@ -1350,7 +1350,7 @@ img {
 																</c:forEach>
 																<hr>
 																<div class="stats-container">
-																	<div class="stats">
+																	<div class="stats" align="center">
 																		<a class="btn btn-link"
 																			href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
 																			class="fa fa-clone left"></i>업무확인</a>
