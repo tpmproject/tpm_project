@@ -102,6 +102,13 @@
 		$('.slimdiv').mCustomScrollbar({axis:"yx"});
 	}	 
 		
+ 	
+ 	$(window).resize(function() {
+ 		var wid=(window.innerWidth/2)-320;
+		$('#main_modal').css('left',wid+'px');
+		$('#main_modal2').css('left',wid+'px');
+ 	})
+ 	
  	function sideBar(){
  		var bNode=document.documentElement.lastChild;
  		$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');

@@ -44,7 +44,9 @@
     </style>
     <script>
 	    window.onload = function(){
-	    	/* settingThema(); */
+	    	var user_thema = '${sessionScope.s_member_thema}';
+	    	$("#themaSelect").val(user_thema).prop("selected", true);
+	    	
 	    	selectProfile();
 	    	getProjectIdx();
 	    }
@@ -74,9 +76,9 @@
 	    
 	    function selectThema(){
 	    	var selected = $('#themaSelect').val();
+	    	//window.alert(selected);
 	    	//var selectclass = $('body').attr('class');
 	    	//window.alert(selectclass);
-	    	//window.alert(selected);
 	    	
 	    	var param  = 'member_idx='+${sessionScope.s_member_idx}+'&member_thema='+ selected;
 	    	
