@@ -180,8 +180,8 @@
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	                <select id="themaSelect" onchange="selectThema()">
-	                  <option value="black"> black </option>
-	                  <option value="black-light"> black-light </option>
+	                  <option value="black"> white </option>
+	                  <option value="black-light"> white-light </option>
 	                  <option value="blue"> blue </option>
 	                  <option value="blue-light"> blue-light </option>
 	                  <option value="green"> green </option>

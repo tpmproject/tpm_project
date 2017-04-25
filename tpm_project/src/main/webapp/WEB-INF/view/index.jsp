@@ -48,7 +48,7 @@ function dateTest(){
 <a href="ajaxtest.do">아작스에 대하여..</a><br>
 <a href="sockettest.do">소켓에 대하여..</a><br>
 <a href="scrollbar.do">스크롤 테스트..</a><br>
-
+<a href="lteTest.do">LTE테스트</a><br>
 <a href="studyList.do">스터디 참고용</a>
 
 

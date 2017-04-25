@@ -188,4 +188,10 @@ public class SampleController {
 		return "sample/socket/chat_sockjsTest";
 	}
 	
+	/** lteTest 페이지 이동 */
+	@RequestMapping(value="lteTest.do", method=RequestMethod.GET)
+	public String lteTest(){
+		return "sample/lteTest";
+	}
+	
 }
