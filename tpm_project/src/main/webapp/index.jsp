@@ -5,6 +5,6 @@
 		<jsp:forward page="memberLogin.do"></jsp:forward>
 	</c:when>
 	<c:otherwise>
-		<jsp:forward page="index.do"></jsp:forward>
+		<jsp:forward page="projectList.do"></jsp:forward>
 	</c:otherwise>
 </c:choose>
