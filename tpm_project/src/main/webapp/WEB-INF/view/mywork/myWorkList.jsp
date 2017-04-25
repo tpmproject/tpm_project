@@ -104,9 +104,7 @@ function min_max(work_idx){
 	$('#i'+work_idx).toggleClass('glyphicon-minus glyphicon-plus');
 	
 }
-function workDate(){
-	window.alert($('#workDate'.val()));
-}
+
 function searchDate(){
 	var da=$('#workdate').val();
 	var daa=da.split(' - ');
