@@ -229,7 +229,7 @@
 	function fileContent(filename){
 		var file_con = document.getElementById('fileCon2');
 		var f_name = document.getElementById('f_name2');
-		window.alert(filename);
+		//window.alert(filename);
 		f_name.innerHTML = filename;
 		file_con.innerHTML = '';
 		
@@ -250,7 +250,7 @@
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
-						window.alert(responseText);
+						//window.alert(responseText);
     				}
     			}
     		} else {
@@ -267,7 +267,7 @@
 			
 			
 		} else if(ctype == 'FILE_CONTENT'){
-			window.alert('result_process');
+		//	window.alert('result_process');
 			fileContent_setting(responseText);
 			
 		} else if(ctype == ''){
@@ -384,7 +384,7 @@
 	}
 	//미리보기 관련
 	function fileContent_setting(responseText) {
-		window.alert('미리보기 setting ');
+		//window.alert('미리보기 setting ');
 		var msg ='';
 		msg +=responseText;	
 		var file_con2 = document.getElementById('fileCon2');
@@ -424,7 +424,7 @@
 	} 
 	/*파일 다운  */
 	function fileDown2(file_name){
-		window.alert(file_name);
+		//window.alert(file_name);
 		  location.href="fileDown.do?file_name="+file_name;
 	}
     </script>
