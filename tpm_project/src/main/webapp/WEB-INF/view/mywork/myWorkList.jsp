@@ -204,6 +204,13 @@ function changeWorkState(wi,ws){
     text-align: center;
     font-size: large;
 }
+.help{
+	display: inline-block;
+	width: 100px;
+	height: 20px;
+	border-radius: 5px;
+	text-align: center;
+}
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
@@ -256,6 +263,12 @@ function changeWorkState(wi,ws){
 		</table>
 	</div>
 	<div id="scr">
+	<div>
+		<div class="help" style="background: #d0e9f5; ">진행 중</div>
+		<div class="help" style="background: #fbf5d9;">결재 대기</div>
+		<div class="help" style="background: #f0d9d9;">마감일 초과</div>
+		<div class="help" style="background: #d7ecce;">완료</div>
+	</div>
 	<div id="mw_div" style="width:80%;max-width: 700px;">
 	<c:forEach var="i" items="${mwdto}">
 		<c:choose>
