@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+#tendency_pop{
+	background: white;
+	position:fixed;
+	display: none;
+	width:300px;
+	height: 300px;
+	z-index: 900;
+}
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	width: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_vertical .mCSB_draggerRail{
+ display: none;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_dragger_bar{
+ 	background-color: black;
+ 	opacity: 0.4;
+ 	height: 7px;
+ 	border-radius: 7px;
+}
+#mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
+ display: none;
+}
+
+#workback, #workback2 {
+	position: fixed;
+	z-index:820;
+	top: -10%;
+	left: -10%;
+	width: 110%;
+	height: 110%;
+	background: gray;
+	opacity: 0.7;
+	display: none;
+}
+#work_modal, #work_modal2 {
+	display: none;
+	background: white;
+	position: fixed;
+	z-index:830;
+	top: 20%;
+	border: solid 2px #1a2226;
+	border-radius: 3px;
+	width: 665px;
+	height: 480px;
+}
+.content{
+	height:780px;
+	overflow:auto;
+}
+.category {
+	display: inline-block;
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+}
+.wdiv {
+	width: 200px;
+	padding-left: 10px;
+}
+
+.cate_table {
+	background: white;
+	width: 200px;
+	padding: 4px;
+	margin-bottom: 4px;
+}
+
+.cate_table thead td {
+	padding: 4px;
+}
+
+.cate_table tbody td {
+	padding-left: 4px;
+}
+
+.category_head {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	text-align: center;
+	height: 34px;
+	background: #3c8dbc;
+}
+
+.table_i {
+	display: inline-block;
+	height: 18px;
+	vertical-align: text-top;
+}
+
+.check_div {
+	padding-left: 19px;
+	height: 100px;
+	overflow-y: scroll;
+}
+
+.cateName {
+	display: none;
+}
+
+#trash {
+	position:fixed;
+	width: 55px;
+	height: 45px;
+	display: inline-block;
+	border: 1px solid black;
+	top:3px;
+	z-index: 2000;
+	left:50%;
+}
+
+a {
+	color: black;
+}
+.work_btn{
+	display: inline-block;
+	height: 26px;
+	width: 75px;
+	margin-bottom: 8px;
+    margin-top: 8px;
+    padding-top: 4px;
+    text-align: center;
+    font-size: large;
+}
+#right-side #sidebar-wrapper.active{
+	z-index: 3;
+}
+#chartdiv {
+                width: 300px;
+                height: 250px;
+}
