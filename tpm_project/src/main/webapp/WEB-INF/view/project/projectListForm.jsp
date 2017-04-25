@@ -86,9 +86,8 @@
 
 
 <!-- 회전 카드 -->
-<link href="/tpm_project/sample/khj/css/bootstrap.css" rel="stylesheet" />
-<link href="/tpm_project/sample/khj/css/rotating-card.css"
-	rel="stylesheet" />
+<!-- <link href="/tpm_project/sample/khj/css/bootstrap.css" rel="stylesheet" /> -->
+<link href="/tpm_project/sample/khj/css/rotating-card.css" rel="stylesheet" />
 <!--   <link href = "http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"rel = "stylesheet"/> -->
 
 
@@ -865,12 +864,12 @@ img {
 }
 
 /**연습용*/
-body {
+/* body {
 	margin-top: 60px;
 	font-size: 14px;
 	font-family: 'Arima Madurai', cursive;
 	background-color: #E5E9ED;
-}
+} */
 
 .btn:hover, .btn:focus, .btn:active {
 	outline: 0 !important;
@@ -1110,8 +1109,8 @@ body {
 	display: block;
 }
 
-.space-200 {
-	height: 200px;
+.space-400 {
+	height: 400px;
 	display: block;
 }
 
@@ -1369,7 +1368,7 @@ pre.prettyprint {
 	</div>
 	</section>
 
-	<div id="carousel-example-generic" class="carousel slide center-block"
+	<%-- <div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
 
 
@@ -1489,7 +1488,7 @@ pre.prettyprint {
 
 													<!-- 프로젝트 진행현황 -->
 													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-														<%-- <c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}"> --%>
+														<c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}">
 
 														<c:choose>
 															<c:when
@@ -1562,6 +1561,7 @@ pre.prettyprint {
 					</c:forEach>
 				</div>
 			</c:otherwise>
+			
 		</c:choose>
 
 		<!-- carousel-inner -->
@@ -1581,28 +1581,39 @@ pre.prettyprint {
 	</div>
 	<hr>
 	<hr>
-	<hr>
+	<hr> --%>
 
 
 	<div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
+		
+		<!-- Indicators 페이징-->
+		<ol class="carousel-indicators" style="bottom: -15px;">
+			<c:forEach var="i" items="${plist}" varStatus="status">
+
+				<li data-target="#carousel-example-generic"
+					${status.first?'class="active"':'' }
+					data-slide-to="${status.index}"></li>
+
+			</c:forEach>
+		</ol>
+		
 		<!-- 앞화면 -->
-
-
 		<c:set var="plist" value="${plist}"></c:set>
-
 		<c:choose>
 			<c:when test="${empty plist}">
 								등록된 프로젝트가 없습니다.
 						</c:when>
 
 			<c:otherwise>
-				<!-- 	<div class="carousel-inner" role="listbox  -->">
+			<div class="carousel-inner" role="listbox">
+				<!-- 	<div class="carousel-inner" role="listbox  -->
 					<c:forEach var="i" items="${plist}" varStatus="status">
-
+					<div class="item ${status.first?'active':'' }">
+					<div id="contain" class="container-fluid ">
 					<div id="project_div${i.project_idx}" style="margin-top: 15px;">
 						<div class="col-sm-10 col-sm-offset-1">
-							<div class="col-md-4 col-sm-6">
+							<div class="col-md-4 col-sm-6" style="width: 500px;">
 								<div class="card-container manual-flip">
 									<div class="card">
 										<div class="front">
@@ -1619,7 +1630,7 @@ pre.prettyprint {
 											</div>
 
 											<!--화면단  -->
-											<div class="content">
+											<div class="content" >
 												<div class="main">
 													<input type="hidden" id="p_idx${i.project_idx}"
 														value="${i.project_idx}">
@@ -1760,17 +1771,27 @@ pre.prettyprint {
 							</div>
 							<!-- end col sm 3 -->
 
-							<div class="space-200"></div>
+							<div class="space-400"></div>
 						</div>
 					</div>
-
+					</div>
+					</div>
 				</c:forEach>
-	</div>
-	<!--end carousel-inner -->
-	</c:otherwise>
+				</div>
+				</c:otherwise>
+	
 	</c:choose>
-	</div>
-
+	<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"
+			style="width: 50px; color: red; float: left;"> <span
+			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
+		</span> <span class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next" style="width: 30px; color: red;">
+			<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 
 
 
@@ -1783,6 +1804,12 @@ pre.prettyprint {
 
 		</c:forEach>
 	</ol>
+	</div>
+	<!--end carousel-inner -->
+		
+		
+
+	
 
 
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
