@@ -13,7 +13,7 @@
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <!-- <script type="text/javascript" src="js/jquery.timepicker.min.js"></script> -->
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="/tpm_project/js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <!-- <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet"> -->
 <!-- <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet"> -->
 <link href="/tpm_project/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
