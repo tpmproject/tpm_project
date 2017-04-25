@@ -356,11 +356,11 @@
                 msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit; font-family: sans-serif; font-size:12px">'+file_now+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.member_idx+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">';
-                msg += '  	<button type="button" class="btn btn-success btn-xs" title="Approved"';
+                msg += '  	<button type="button" onclick="fileDown2(\''+file.file_name+'\')" class="btn btn-success btn-xs" title="Approved"';
                 msg += '				  style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
                 msg += '		<span class="glyphicon glyphicon-ok"></span>';
                 msg += '  	</button>&nbsp;';
-		
+              
 				if('${s_member_idx}'==file.member_idx){
 					
 					 msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" onclick="fileDelParam('+file.file_idx+',\''+file.file_name+'\')"';
@@ -409,7 +409,7 @@
 	}
 	
 	/* 파일 삭제 관련 */
-	function fileDelParam(file_idx, file_name){
+	function fileDelParam(file_idx,file_name){
 		del_file_idx = file_idx;
 	    del_file_name = file_name;
 	   
@@ -422,9 +422,15 @@
 		
 		project_fileList(del_work_idx);
 	} 
+	/*파일 다운  */
+	function fileDown2(file_name){
+		window.alert(file_name);
+		  location.href="fileDown.do?file_name="+file_name;
+	}
     </script>
     
 <!-- 임시) 여기까지 첨부파일   -->
+
 </head>
 <body>
  <!-- 모달 시작 -->
