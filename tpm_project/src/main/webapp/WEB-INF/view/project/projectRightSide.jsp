@@ -187,15 +187,18 @@
   
 <script>
 	
-	var publ_member_idx=0;
+	var del_file_idx;
+    var del_file_name;
+    var del_work_idx = sessionStorage.getItem('delete_work_idx');
     
 	function project_fileList(work_idx){
-		
+		sessionStorage.setItem('delete_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
 	
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
+		
 		
 	}
 	
@@ -211,21 +214,20 @@
     			if(httpRequest.status == 200){
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
-    				
     					result_process(responseText, ctype);
-    				
-    					
+
     				}
     			}
     		} else {
 
     		}
     	}
+    	
     }
     function result_process(responseText, ctype) {
 
 		if(ctype == 'WORK_FILELIST'){
-
+				
 			project_fileList_setting(responseText);
 			
 			
@@ -255,7 +257,7 @@
 			/* 파일 타입 뽑기 */
 			var filename=file.file_name.toLowerCase();
 		
-			var file_type=filename.substring(filename.indexOf('.')+1);
+			var file_type=filename.substring(filename.lastIndexOf('.')+1);
 			
 		  
 			/* 파일 날짜 뽑기  */
@@ -319,15 +321,20 @@
                 msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit; font-family: sans-serif; font-size:12px">'+file_now+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.member_idx+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">';
-                msg += '  <button type="button" class="btn btn-success btn-xs" title="Approved"';
-                msg += 'style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
-                msg += '<span class="glyphicon glyphicon-ok"></span>';
-                msg += '  </button>&nbsp;';
-
-                msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" onclick="fileDelParam('+file.file_idx+','+file.member_idx+',\''+file.file_name+'\')"';
-                msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';
-               	msg += '        <span class="glyphicon glyphicon-trash"></span>';
-               	msg += '   </button>';
+                msg += '  	<button type="button" class="btn btn-success btn-xs" title="Approved"';
+                msg += '				  style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
+                msg += '		<span class="glyphicon glyphicon-ok"></span>';
+                msg += '  	</button>&nbsp;';
+		
+				if(${s_member_idx}==file.member_idx){
+					
+					 msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" onclick="fileDelParam('+file.file_idx+',\''+file.file_name+'\')"';
+		             msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';
+		             msg += '        <span class="glyphicon glyphicon-trash"></span>';
+		             msg += '</button>';
+		             
+				}
+               
                	msg += '</td>';
              
                	msg += ' </tr>';
@@ -335,22 +342,25 @@
  
                	
 		}
-	
 		proejct_filelist.innerHTML = '';
 		proejct_filelist.innerHTML = msg;
-		   
-		
+
 
 	}
-	function fileDelParam(file_idx, file_member_idx, file_name){
 	
-		publ_member_idx = file_member_idx;
-		
+	/* 파일 삭제 관련 */
+	function fileDelParam(file_idx, file_name){
+		del_file_idx = file_idx;
+	    del_file_name = file_name;
+	   
 	}
-	
-	function fileDel(){
+	function workFileDelete(){
+		var work_idx=sessionStorage.getItem('delete_work_idx');
 		
-		window.alert('fileDel에서 idx:'+publ_member_idx);
+		var param = 'file_idx='+del_file_idx+'&file_name='+del_file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
+		action_ajax('fileDel.do',param,'POST', 'FILEDEL'); // 해당 페이지로 ajax통신 시작
+		
+		project_fileList(work_idx);
 	} 
     </script>
     

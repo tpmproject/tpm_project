@@ -328,9 +328,25 @@ public class FileController {
 			mav.addObject("msg",msg);
 			mav.setViewName("file/fileListForm");
 		}
-		
-		
+
 		return mav;
+	}
+	/** 파일 - ajax 파일 삭제 */
+	@RequestMapping(value="fileDel.do",  method=RequestMethod.POST)
+	public void fileDel2(@RequestParam("file_idx")int file_idx,
+								@RequestParam("file_name")String file_name){
+		System.out.println("file_name="+file_name);
+		System.out.println("컨트롤러 쪽"+file_idx);
+		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
+		
+		 ViewerConfig config = new ViewerConfig();
+		 config.setStoragePath(Utils.getProjectProperty("storage.path"));
+		 
+		File f = new File(config.getStoragePath()+"/"+file_name);
+		
+		f.delete();  //파일경로에 있는 실제파일 삭제
+	
+		
 	}
 	/** 파일리스트 다운로드*/
 	
