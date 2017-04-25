@@ -69,7 +69,7 @@ function oneClass(cb,name){
 			var className=$(fc).attr('class');
 			
 			if(className.match(name)==hideName){
-				fc.value=parseInt(fc.value)+1*val_toggle;
+				fc.value=parseInt(fc.value)+val_toggle;
 			}
 		}
 		
@@ -145,7 +145,6 @@ function updateWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
 			var wData=eval('('+result+')');
 			var wi=wData.work.work_idx;
 			
