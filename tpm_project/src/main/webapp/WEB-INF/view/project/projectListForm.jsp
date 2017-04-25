@@ -1250,12 +1250,12 @@ img {
 		data-ride="carousel" data-interval="false">
 
 		<!-- Indicators 페이징-->
-		<ol class="carousel-indicators" style="bottom: -15px;">
+		<ol class="carousel-indicators" style="bottom: -15px;color: black;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
 
 				<li data-target="#carousel-example-generic"
 					${status.first?'class="active"':'' }
-					data-slide-to="${status.index}"></li>
+					data-slide-to="${status.index}" style="background:red;"></li>
 
 			</c:forEach>
 		</ol>
@@ -1268,6 +1268,7 @@ img {
 						</c:when>
 
 			<c:otherwise>
+			<div style="background: white;">
 				<div class="carousel-inner" role="listbox">
 					<!-- 	<div class="carousel-inner" role="listbox  -->
 					<c:forEach var="i" items="${plist}" varStatus="status">
@@ -1426,7 +1427,7 @@ img {
 					</c:forEach>
 
 				</div>
-
+			</div>
 				<!--완료된 프로젝트 리스트  -->
 
 
