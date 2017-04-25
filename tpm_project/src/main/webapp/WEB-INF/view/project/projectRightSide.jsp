@@ -187,10 +187,6 @@
   
 <script>
 	
-	var del_file_idx;
-    var del_file_name;
-    var del_work_idx = sessionStorage.getItem('delete_work_idx');
-    
 	function project_fileList(work_idx){
 		sessionStorage.setItem('delete_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
@@ -202,6 +198,18 @@
 		
 	}
 	
+	 /* 미리보기  */
+	function fileContent(filename){
+		//var file_con = document.getElementById('fileCon');
+		//var f_name = document.getElementById('f_name');
+		window.alert(filename);
+		//f_name.innerHTML = filename;
+		//file_con.innerHTML = '';
+		
+		var param = "file_name="+filename;
+		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
+		
+	}
 	function action_ajax(url, param, method, ctype) {
 		sendRequest_extension(url, param, ajax_result, method, ctype);
 		return false;
@@ -215,7 +223,7 @@
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
-
+						window.alert(responseText);
     				}
     			}
     		} else {
@@ -227,12 +235,12 @@
     function result_process(responseText, ctype) {
 
 		if(ctype == 'WORK_FILELIST'){
-				
+			
 			project_fileList_setting(responseText);
 			
 			
 		} else if(ctype == 'FILE_CONTENT'){
-			
+			window.alert('result_process');
 			fileContent_setting(responseText);
 			
 		} else if(ctype == ''){
@@ -283,7 +291,7 @@
 
 				msg += ' <!-- 시작 -->';
 				msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
-				msg += '	<td style="width: 43.333333333333336%;">';
+				msg += '	<td style="width: 43.333333333333336%;" >';
 				msg += '		<div class="table-responsive">';
 				msg += '		<div class="tw-file-link" data-title="h.jpg" style=" display: flex; align-items: center; justify-content: flex-start;">';
 				msg += '		<div class="tw-file-link__thumbnail" style="margin-right: 15px; flex: none;">';
@@ -293,11 +301,11 @@
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
 				if(file_type=='jpg'||file_type=='gif'||file_type=='png'){
-					msg += '             <img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+					msg += '             <a class="btn btn-default" data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
 				
 				}else{
-					msg += '             <img src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"';
-					msg += '                        style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;">';
+					msg += '             <a class="btn btn-default" data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"';
+					msg += '                  style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
 				}
 				
 				
@@ -326,7 +334,7 @@
                 msg += '		<span class="glyphicon glyphicon-ok"></span>';
                 msg += '  	</button>&nbsp;';
 		
-				if(${s_member_idx}==file.member_idx){
+				if('${s_member_idx}'==file.member_idx){
 					
 					 msg += '<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" onclick="fileDelParam('+file.file_idx+',\''+file.file_name+'\')"';
 		             msg += ' 		 		data-target="#delete" style="padding: 3px 5px;font-size: 15px;line-height: 1.5; border-radius: 3px;">';
@@ -347,6 +355,31 @@
 
 
 	}
+	//미리보기 관련
+	function fileContent_setting(responseText) {
+		window.alert('미리보기 setting ');
+		var msg ='';
+		msg +=responseText;	
+		var file_con2 = document.getElementById('fileCon2');
+		
+
+  		msg+= '<nav class="navbar navbar-inverse navbar-fixed-bottom">';
+  		msg+= '<div id="navbar" class="collapse navbar-collapse">';
+  		msg+=    '<ul class="nav navbar-nav">';
+  		msg+=         '<li><a href="#" onclick="">First</a></li>';
+  		msg+=         '<li><a href="#" onclick="">Previous</a></li>';
+  		msg+=         '<li><a href="#" onclick="">Next</a></li>';
+        msg+=         '<li><a href=""> Last</a></li>';
+  		msg+=     '</ul>';
+  		msg+= '</div>';
+  		msg+= '</nav>';
+		
+		
+	
+		file_con2.innerHTML = '';
+		file_con2.innerHTML = msg;
+	
+	}
 	
 	/* 파일 삭제 관련 */
 	function fileDelParam(file_idx, file_name){
@@ -355,18 +388,21 @@
 	   
 	}
 	function workFileDelete(){
-		var work_idx=sessionStorage.getItem('delete_work_idx');
+		del_work_idx = sessionStorage.getItem('delete_work_idx');
 		
 		var param = 'file_idx='+del_file_idx+'&file_name='+del_file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 		action_ajax('fileDel.do',param,'POST', 'FILEDEL'); // 해당 페이지로 ajax통신 시작
 		
-		project_fileList(work_idx);
+		project_fileList(del_work_idx);
 	} 
     </script>
     
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
+
+
+
 	<div style="position:absolute; z-index:1;  ">
 		<a id="menu-close" href="#"
 			class="btn btn-default btn-lg pull-right toggle"><i
@@ -433,7 +469,8 @@
         </div>
       </div>
     </div>
-	
+    
+	 
 	<script type="text/javascript">
 
 

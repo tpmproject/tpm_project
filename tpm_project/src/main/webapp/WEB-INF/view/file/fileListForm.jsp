@@ -305,43 +305,41 @@
 			
 			var file = files[i];
 			
-			var filename=file.file_name;
+
+			/* 파일 타입 뽑기 */
+			var filename=file.file_name.toLowerCase();
+		
+			var file_type=filename.substring(filename.lastIndexOf('.')+1);
 			
-			var filetype='';
+			/* 파일 날짜 뽑기  */
+			var date = new Date(files[i].file_date); 
+		    
+			var file_year = date.getFullYear();
+		    var file_month = date.getMonth()+1;
+		    var file_date = date.getDate();
+		    var file_hour = date.getHours();
+		    var file_minute = date.getMinutes();
+		    var file_seconde = date.getSeconds();
+		    var ampm;
+		    var file_now;
+		    
+		    if(file_hour >= 12){
+		    	file_hour = file_hour -12;
+		    	ampm = "오후";
+		    }else{
+		    	ampm = "오전";
+		    }
 			
-			if (filename.substring(filename.indexOf('.'))=='.txt') {
-				filetype='txt';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.doc') {
-				filetype='doc';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.jpg') {
-				filetype='jpg';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.pdf') {
-				filetype='pdf';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.png') {
-				filetype='png';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.xls') {
-				filetype='xls';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.rar') {
-				filetype='rar';
-			}
-			if (filename.substring(filename.indexOf('.'))=='.html') {
-				filetype='html';
-			}
-			
+		    file_now = file_year+'-'+file_month+'-'+file_date+''+ampm+' '+file_hour+'시'+file_minute+'분';
+		 
 			
 		   
-		    msg+= '<tr class="odd gradeX" style="margin:10px 30px;">';
-					msg +='<td><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG"></a></td>';
-					msg +='<td><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
-					msg +='<td>'+file.file_size+' byte </td>';
-					msg +='<td class="center">'+file.file_date+'</td>';
-					msg +='<td class="center">안병민';
+		    msg+= '<tr class="odd gradeX" style="margin:10px 30px; vertical-align: inherit;font-family: sans-serif;">';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a></td>';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;" class="center">안병민';
 					
 					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
 					msg += '<li class="dropdown">';

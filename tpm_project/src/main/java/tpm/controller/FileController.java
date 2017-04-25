@@ -130,8 +130,8 @@ public class FileController {
 	public @ResponseBody ArrayList<FileDTO> fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam("work_idx")int work_idx){
 		
-	//	System.out.println("project_idx:"+project_idx);
-	//	System.out.println("work_idx:"+work_idx);
+		//System.out.println("project_idx:"+project_idx);
+		//System.out.println("work_idx:"+work_idx);
 		
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("project_idx", project_idx);
@@ -146,8 +146,7 @@ public class FileController {
 	/** 파일 - 파일 내용 반환 (뷰어) 
 	 * @throws IOException */
 	@RequestMapping(value="fileContent.do",  method=RequestMethod.POST)
-	public ModelAndView fileContent(@RequestParam("file_name")String file_name,
-								
+	public ModelAndView fileContent(@RequestParam("file_name")String file_name,				
 									HttpServletRequest request) throws IOException{
 		
 		ModelAndView mav = new ModelAndView();
@@ -335,8 +334,8 @@ public class FileController {
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.POST)
 	public void fileDel2(@RequestParam("file_idx")int file_idx,
 								@RequestParam("file_name")String file_name){
-		System.out.println("file_name="+file_name);
-		System.out.println("컨트롤러 쪽"+file_idx);
+		//System.out.println("file_name="+file_name);
+		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
 		
 		 ViewerConfig config = new ViewerConfig();
