@@ -1310,6 +1310,27 @@ img {
 													<!-- 뒷화면 -->
 													<div class="back">
 														<div class="header">
+															<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+																<c:choose>
+																	<c:when test="${pm_dto.project_level ==3000 }">
+																		<c:if
+																			test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																			<div style="float: right;">
+																			<span
+																				onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																				<i class="glyphicon glyphicon-cog"
+																				style="margin-bottom: 0px;"></i>
+																			</span>
+																			<span onclick="projectDelete('${i.project_idx}')">
+																				<i class="glyphicon glyphicon-remove"
+																				style="margin-bottom: 0px;"></i>
+																			</span>
+																			</div>
+																		</c:if>
+																	</c:when>
+																</c:choose>
+
+															</c:forEach>
 															<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
 														</div>
 														<div class="content">
@@ -1340,16 +1361,7 @@ img {
 																							class="btn btn-link" style="color: green;"><i
 																								class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
 																					</div>
-																					<div class="stats">
-																						<span
-																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																							<i class="glyphicon glyphicon-cog"
-																							style="margin-bottom: 0px;"></i>
-																						</span> <span onclick="projectDelete('${i.project_idx}')">
-																							<i class="glyphicon glyphicon-remove"
-																							style="margin-bottom: 0px;"></i>
-																						</span>
-																					</div>
+
 																				</c:if>
 																			</c:when>
 																			<c:when
@@ -1362,16 +1374,7 @@ img {
 																							class="btn btn-link"><i
 																								class="glyphicon glyphicon-check"></i>평가하기</a></span>
 																					</div>
-																					<div class="stats">
-																						<span
-																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																							<i class="glyphicon glyphicon-cog"
-																							style="margin-bottom: 0px;"></i>
-																						</span> <span onclick="projectDelete('${i.project_idx}')">
-																							<i class="glyphicon glyphicon-remove"
-																							style="margin-bottom: 0px;"></i>
-																						</span>
-																					</div>
+
 																				</c:if>
 																			</c:when>
 																			<c:when test="${i.project_state == 1 }">
@@ -1382,16 +1385,7 @@ img {
 																							class="btn btn-link" style="color: red;"><i
 																								class="glyphicon glyphicon-time"></i>진행중</a></span>
 																					</div>
-																					<div class="stats">
-																						<span
-																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																							<i class="glyphicon glyphicon-cog"
-																							style="margin-bottom: 0px;"></i>
-																						</span> <span onclick="projectDelete('${i.project_idx}')">
-																							<i class="glyphicon glyphicon-remove"
-																							style="margin-bottom: 0px;"></i>
-																						</span>
-																					</div>
+
 																				</c:if>
 																			</c:when>
 																		</c:choose>
@@ -1420,15 +1414,15 @@ img {
 								</div>
 							</div>
 						</div>
-				
-				
+
+
 					</c:forEach>
-					
+
 				</div>
 
 				<!--완료된 프로젝트 리스트  -->
 
-				
+
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -1447,7 +1441,7 @@ img {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
+
 
 
 
