@@ -159,10 +159,10 @@ public class WorkController {
 	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup,int project_idx,HttpServletRequest req) throws ParseException{
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workUpdate_d");
 		int result=0;
 		String msg=dto.getWork_title();
 		if(dto.getWork_state()>0){
+			mav.setViewName("work/workAdd_d");
 			
 			ProjectMemberDTO pmdto=new ProjectMemberDTO();
 			pmdto.setProject_idx(project_idx);
@@ -179,6 +179,8 @@ public class WorkController {
 			}
 			mav.addObject("wdto",dto);
 		}else{
+			mav.setViewName("work/workUpdate_d");
+			
 			workdateup=workdateup.replaceAll("오전", "AM");
 			workdateup=workdateup.replaceAll("오후", "PM");
 			String temp[]=workdateup.split("-");

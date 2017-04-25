@@ -18,6 +18,10 @@
 <!-- <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet"> -->
 <link href="/tpm_project/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<!-- ws-->
+<script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
+<script type="text/javascript" src="js/project/ws_project.js"></script>
+
 <script>
 $(function(){
 	$('#workdate').daterangepicker({timePicker: false, format: 'YY/MM/DD'});
@@ -26,7 +30,22 @@ $(function(){
     });
     oneClass('workEnd','ing');
     showWorks();
+
 });
+//ws 응답시 @overriding
+function onMessage(evt) {
+	var data = evt.data;
+	data=data.split(',');
+	if(data[0]=='work'){
+		var work_idx=data[1];
+		if(data[2]=='work_state'){
+			var ws=data[3];
+			ws=parseInt(ws);
+			
+			changeWorkState(work_idx,ws);
+		}
+	}
+}
 
 //cb에는 체크박스 id, name에는 남길 class이름
 function oneClass(cb,name){
@@ -125,7 +144,8 @@ function workDone(project_idx,work_idx,work_state){
 function updateWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
-			var result = XHR.responseText;	
+			var result = XHR.responseText;
+			window.alert(result);
 			var wData=eval('('+result+')');
 			var wi=wData.work.work_idx;
 			
@@ -136,31 +156,44 @@ function updateWorkResult(){
 			
 			var ws=wData.work.work_state;
 			ws=parseInt(ws);
-			var firstC=document.getElementById('work_state'+wi).firstChild;
-			var lastC=document.getElementById('work_state'+wi).lastChild;
-			do{
-				if(firstC.nodeName=='I'){
-					var wsColor='black';
-					
-					if(firstC.getAttribute('name')==ws){
-						var pclass='';
-						switch(ws){
-							case 1:wsColor='#367fa9';pclass='panel panel-info';break;
-							case 2:wsColor='#f0ad4e';pclass='panel panel-warning';break;
-							case 3:wsColor='green';pclass='panel panel-success';				
-						}
-						if($('#'+wi).attr('class')!='panel panel-danger'){
-							$('#'+wi).removeClass();
-							$('#'+wi).addClass(pclass);
-						}
-					}
-					firstC.style.color=wsColor;
-				}
-				
-				firstC=firstC.nextSibling;
-			}while(firstC!=lastC);
+			
+			//ws
+			msg=['work',wi,'work_state',ws];
+			updateWS(msg);
+
 		}
 	}
+}
+
+function changeWorkState(wi,ws){
+	var firstC=document.getElementById('work_state'+wi).firstChild;
+	var lastC=document.getElementById('work_state'+wi).lastChild;
+	do{
+		if(firstC.nodeName=='I'){
+			var wsColor='black';
+			
+			if(firstC.getAttribute('name')==ws){
+				var pclass='';
+				switch(ws){
+					case 1:wsColor='#367fa9';pclass='panel panel-info';break;
+					case 2:wsColor='#f0ad4e';pclass='panel panel-warning';break;
+					case 3:wsColor='green';pclass='panel panel-success';				
+				}
+				
+				var temp=firstC.parentNode.parentNode.getAttribute('class');
+				if(ws!=3 && temp.match('over')!=null){
+					pclass='panel panel-danger';
+				}
+				
+				$('#'+wi).removeClass();
+				$('#'+wi).addClass(pclass);	
+			}
+			firstC.style.color=wsColor;
+		}
+		firstC=firstC.nextSibling;
+	}while(firstC!=lastC);
+	
+	
 }
 </script>
 <style>
@@ -213,6 +246,8 @@ function updateWorkResult(){
 				</tr>
 				<c:if test="${not empty mwdto and not empty pmap }">
 				<c:forEach var="i" items="${pmap}">
+				<!-- ws접속 -->
+				<script>connect(${i.key})</script>
 				<tr>
 					<td><input type="checkbox" checked="checked" id="${i.key}" onclick="oneClass('${i.key}','project${i.key}')">${i.value}</td>
 				</tr>
@@ -268,7 +303,7 @@ function updateWorkResult(){
 				</c:if>
 			</div>
 			</div>
-			<div class="panel-body ${i.work_state !=3 and now>i.work_end?'over':'notover'}" >
+			<div class="panel-body ${i.work_state !=3 and now>i.work_end?'over':'nver'}" >
 			<i class="glyphicon glyphicon-calendar"></i><a><f:formatDate value="${i.work_start}" type="both" pattern="yyyy/MM/dd  HH:mm"/>&nbsp;~&nbsp;<f:formatDate value="${i.work_end}" type="both" pattern="yyyy/MM/dd  HH:mm"/></a>
 			
 			<span class="work_btn" id="work_state${i.work_idx}">												
