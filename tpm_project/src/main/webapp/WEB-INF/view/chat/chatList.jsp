@@ -21,8 +21,8 @@
 	<div class="box-body table-responsive no-padding" id="chat_project_list_div">
 		<table class="table table-hover">
 			<c:forEach var="pdto" items="${arry_pdto}">
-				<tr>
-					<th><a href="javascript:showChatContent('P','${pdto.project_idx}')">${pdto.project_name},${pdto.project_idx}</a></th>
+				<tr onclick="showChatContent('P','${pdto.project_idx}')" style="cursor: pointer;">
+					<th><div>${pdto.project_name}</div></th>
 				</tr>		
 			</c:forEach>
 		</table>
@@ -55,8 +55,8 @@
 	<div class="box-body table-responsive no-padding" id="chat_channel_list_div">
 		<table class="table table-hover" id="channel_list_table">
 			<c:forEach var="chdto" items="${arry_chdto}">
-				<tr>
-					<th><a href="javascript:showChatContent('C','${chdto.channel_idx}')">${chdto.channel_name},${chdto.channel_idx}</a></th>
+				<tr onclick="showChatContent('C','${chdto.channel_idx}')" style="cursor: pointer;">
+					<th><div>${chdto.channel_name}</div></th>
 				</tr>		
 			</c:forEach>
 		</table>

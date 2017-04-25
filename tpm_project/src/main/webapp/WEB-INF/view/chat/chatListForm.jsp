@@ -30,6 +30,9 @@
 
 <script src="/tpm_project/js/multiselect/selectr.js"></script>
 
+<!-- CK Editor -->
+<script src="/tpm_project/ckeditor/ckeditor.js?ver=4"></script>
+
 <style>
 .bg-white {
 	background-color: #fff;
@@ -316,11 +319,29 @@ $(function(){
     $('#input_chat_content').keypress(function(event){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
 		if(keycode == '13'){
-			InsertChatContent();
+			//InsertChatContent();
+			if(event.shiftKey){
+				window.alert('1');
+			}
 		}
 		event.stopPropagation();
 	});
     
+    // 에디터 생성
+    CKEDITOR.replace('input_chat_content');
+    CKEDITOR.on('dialogDefinition', function( ev ){
+        var dialogName = ev.data.name;
+        var dialogDefinition = ev.data.definition;
+      
+        switch (dialogName) {
+            case 'image': //Image Properties dialog
+                //dialogDefinition.removeContents('info');
+                dialogDefinition.removeContents('Link');
+                dialogDefinition.removeContents('advanced');
+                break;
+        }
+    });
+
     
     /* $("#createChannelModal").modal('show').css({
 	    'margin-top': function () { //vertical centering
@@ -407,14 +428,24 @@ function showChatContent(cpCode, cpValue){
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
 			//window.alert(JSON.stringify(json));
-			var msg = '<li> <hr class="hr-text" data-content="2017-04-14"> </li>';
-			for(var i = 0 ; i < json.length ; i++){
+			var msg = '';
+			for(var i = 0 ; i < json.length ; i++){		
+				if(i == 0){
+					msg += '<li> <hr class="hr-text" data-content="' + moment(json[i].chat_date).format('YYYY-MM-DD') + '"> </li>';
+				}else{
+					if(moment(json[i].chat_date).format('YYYY-MM-DD') != moment(json[i-1].chat_date).format('YYYY-MM-DD')){
+						msg += '<li> <hr class="hr-text" data-content="' + moment(json[i].chat_date).format('YYYY-MM-DD') + '"> </li>';
+					}
+				}
+					
 				// 내가 쓴 글일 경우
 				if(json[i].mdto.member_idx == s_member_idx){
 					msg += makeRightChatContent(json[i]);
 				} else { // 타인의 글인 경우.
 					msg += makeLeftChatContent(json[i]);
 				}	
+				
+				
 			}
 			$('#chat_content_ul').html(msg);
 			
