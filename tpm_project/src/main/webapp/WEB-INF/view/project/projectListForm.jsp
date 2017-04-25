@@ -70,8 +70,8 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
+<!-- <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
+	type="text/javascript"></script> -->
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -87,7 +87,8 @@
 
 <!-- 회전 카드 -->
 <!-- <link href="/tpm_project/sample/khj/css/bootstrap.css" rel="stylesheet" /> -->
-<link href="/tpm_project/sample/khj/css/rotating-card.css"	rel="stylesheet" />
+<link href="/tpm_project/sample/khj/css/rotating-card.css"
+	rel="stylesheet" />
 <!--   <link href = "http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"rel = "stylesheet"/> -->
 
 
@@ -863,8 +864,16 @@ img {
 	border-radius: 5px 5px 0 0;
 }
 
-/**연습용*/
+/**캐러셀 css*/
+.glyphicon-triangle-right {
+	font-size: 50px;
+}
 
+.glyphicon-triangle-left {
+	font-size: 50px;
+}
+
+/**연습용*/
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
@@ -1002,21 +1011,17 @@ img {
 	</form>
 
 
-	<section class="callaction">
-	<div class="container">
-
-		<div class="big-cta">
-			<div class="cta-text">
-				<h5>
-					<a class="glyphicon glyphicon-plus-sign" onclick="showf()"
-						style="size: 600px;">프로젝트추가</a>
-				</h5>
-			</div>
-		</div>
 
 
+
+
+	<div class="cta-text" style="background: white;">
+		<h2>
+			TPM.<a class="glyphicon glyphicon-plus-sign" onclick="showf()"
+				style="size: 600px;">프로젝트 추가</a>
+		</h2>
 	</div>
-	</section>
+
 
 	<%-- <div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
@@ -1236,7 +1241,7 @@ img {
 
 	<div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
-		
+
 		<!-- Indicators 페이징-->
 		<ol class="carousel-indicators" style="bottom: -15px;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
@@ -1247,7 +1252,7 @@ img {
 
 			</c:forEach>
 		</ol>
-		
+
 		<!-- 앞화면 -->
 		<c:set var="plist" value="${plist}"></c:set>
 		<c:choose>
@@ -1256,210 +1261,194 @@ img {
 						</c:when>
 
 			<c:otherwise>
-			<div class="carousel-inner" role="listbox">
-				<!-- 	<div class="carousel-inner" role="listbox  -->
+				<div class="carousel-inner" role="listbox">
+					<!-- 	<div class="carousel-inner" role="listbox  -->
 					<c:forEach var="i" items="${plist}" varStatus="status">
-					<div class="item ${status.first?'active':'' }">
-					<div id="contain" class="container-fluid ">
-					<div id="project_div${i.project_idx}" style="margin-top: 15px;">
-						<div class="col-sm-10 col-sm-offset-1">
-							<div class="col-md-4 col-sm-6" style="width: 500px;">
-								<div class="card-container manual-flip">
-									<div class="card">
-										<div class="front">
-											<!--  배경화면-->
-											<div class="cover">
-												<img src="/tpm_project/sample/khj/img/son.jpg" />
-											</div>
-
-											<!-- 상태 아이콘 -->
-											<div class="user">
-												<img class="img-circle"
-													src="/tpm_project/sample/khj/img/son2.jpg"
-													style="width: 130px; height: 130px;" />
-											</div>
-
-											<!--화면단  -->
-											<div class="content" >
-												<div class="main">
-													<input type="hidden" id="p_idx${i.project_idx}"
-														value="${i.project_idx}">
-													<h4 id="pn${i.project_idx}">
-														<span class="hidden-xs">${i.project_name }</span>
-													</h4>
-													<p class="profession">TPM Project</p>
-													<p class="text-center">
-														<span id="pc${i.project_idx}">${i.project_content }</span>
-													</p>
-												</div>
-												<div class="footer">
-													<button class="btn btn-simple" onclick="rotateCard(this)">
-														<i class="fa fa-mail-forward"></i> Manual Rotation
-													</button>
-												</div>
-											</div>
-										</div>
-										<!-- end front panel -->
-
-										<!-- 뒷화면 -->
-										<div class="back">
-											<div class="header">
-												<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
-											</div>
-											<div class="content">
-												<div class="main">
-													<h4 class="text-center">${i.project_name }</h4>
-													<hr>
-
-													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-														<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
-													</c:forEach>
-													<hr>
-													<div class="stats-container">
-														<div class="stats">
-															<a class="btn btn-link"
-																href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
-																class="fa fa-clone left"></i>업무확인</a>
+						<div class="item ${status.first?'active':'' }">
+							<div id="contain" class="container-fluid ">
+								<div id="project_div${i.project_idx}" style="margin-top: 15px;">
+									<div class="col-sm-10 col-sm-offset-1">
+										<div class="col-md-4 col-sm-6" style="width: 500px;">
+											<div class="card-container manual-flip">
+												<div class="card">
+													<div class="front">
+														<!--  배경화면-->
+														<div class="cover">
+															<img src="/tpm_project/sample/khj/img/son.jpg" />
 														</div>
-														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-															<c:choose>
-																<c:when
-																	test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 
-																		<div class="stats">
-																			<span class="print"> <a href="#"
-																				class="btn btn-link" style="color: green;"><i
-																					class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
-																		</div>
-																		<div class="stats">
-																			<span
-																				onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																				<i class="glyphicon glyphicon-cog"
-																				style="margin-bottom: 0px;"></i>
-																			</span> <span onclick="projectDelete('${i.project_idx}')">
-																				<i class="glyphicon glyphicon-remove"
-																				style="margin-bottom: 0px;"></i>
-																			</span>
-																		</div>
-																	</c:if>
-																</c:when>
-																<c:when
-																	test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																		<div class="stats">
-																			<span class="print"> <a
-																				onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
-																				class="btn btn-link"><i
-																					class="glyphicon glyphicon-check"></i>평가하기</a></span>
-																		</div>
-																		<div class="stats">
-																			<span
-																				onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																				<i class="glyphicon glyphicon-cog"
-																				style="margin-bottom: 0px;"></i>
-																			</span> <span onclick="projectDelete('${i.project_idx}')">
-																				<i class="glyphicon glyphicon-remove"
-																				style="margin-bottom: 0px;"></i>
-																			</span>
-																		</div>
-																	</c:if>
-																</c:when>
-																<c:when test="${i.project_state == 1 }">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																		<div class="stats">
-																			<span class="print"> <a href="#"
-																				class="btn btn-link" style="color: red;"><i
-																					class="glyphicon glyphicon-time"></i>진행중</a></span>
-																		</div>
-																		<div class="stats">
-																			<span
-																				onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																				<i class="glyphicon glyphicon-cog"
-																				style="margin-bottom: 0px;"></i>
-																			</span> <span onclick="projectDelete('${i.project_idx}')">
-																				<i class="glyphicon glyphicon-remove"
-																				style="margin-bottom: 0px;"></i>
-																			</span>
-																		</div>
-																	</c:if>
-																</c:when>
+														<!-- 상태 아이콘 -->
+														<div class="user">
+															<img class="img-circle"
+																src="/tpm_project/sample/khj/img/son2.jpg"
+																style="width: 130px; height: 130px;" />
+														</div>
 
-															</c:choose>
-														</c:forEach>
-
-
-
-
+														<!--화면단  -->
+														<div class="content">
+															<div class="main">
+																<input type="hidden" id="p_idx${i.project_idx}"
+																	value="${i.project_idx}">
+																<h4 id="pn${i.project_idx}">
+																	<span class="hidden-xs">${i.project_name }</span>
+																</h4>
+																<p class="profession">TPM Project</p>
+																<p class="text-center">
+																	<span id="pc${i.project_idx}">${i.project_content }</span>
+																</p>
+															</div>
+															<div class="footer">
+																<button class="btn btn-simple"
+																	onclick="rotateCard(this)">
+																	<i class="fa fa-mail-forward"></i> Manual Rotation
+																</button>
+															</div>
+														</div>
 													</div>
+													<!-- end front panel -->
 
+													<!-- 뒷화면 -->
+													<div class="back">
+														<div class="header">
+															<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
+														</div>
+														<div class="content">
+															<div class="main">
+																<h4 class="text-center">${i.project_name }</h4>
+																<hr>
+
+																<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+																	<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
+																</c:forEach>
+																<hr>
+																<div class="stats-container">
+																	<div class="stats">
+																		<a class="btn btn-link"
+																			href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
+																			class="fa fa-clone left"></i>업무확인</a>
+																	</div>
+																	<c:forEach var="pm_dto"
+																		items="${i.project_member_dtos}">
+																		<c:choose>
+																			<c:when
+																				test="${pm_dto.project_level == 3000 and i.project_state == 3}">
+																				<c:if
+																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+
+																					<div class="stats">
+																						<span class="print"> <a href="#"
+																							class="btn btn-link" style="color: green;"><i
+																								class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
+																					</div>
+																					<div class="stats">
+																						<span
+																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																							<i class="glyphicon glyphicon-cog"
+																							style="margin-bottom: 0px;"></i>
+																						</span> <span onclick="projectDelete('${i.project_idx}')">
+																							<i class="glyphicon glyphicon-remove"
+																							style="margin-bottom: 0px;"></i>
+																						</span>
+																					</div>
+																				</c:if>
+																			</c:when>
+																			<c:when
+																				test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
+																				<c:if
+																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																					<div class="stats">
+																						<span class="print"> <a
+																							onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
+																							class="btn btn-link"><i
+																								class="glyphicon glyphicon-check"></i>평가하기</a></span>
+																					</div>
+																					<div class="stats">
+																						<span
+																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																							<i class="glyphicon glyphicon-cog"
+																							style="margin-bottom: 0px;"></i>
+																						</span> <span onclick="projectDelete('${i.project_idx}')">
+																							<i class="glyphicon glyphicon-remove"
+																							style="margin-bottom: 0px;"></i>
+																						</span>
+																					</div>
+																				</c:if>
+																			</c:when>
+																			<c:when test="${i.project_state == 1 }">
+																				<c:if
+																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																					<div class="stats">
+																						<span class="print"> <a href="#"
+																							class="btn btn-link" style="color: red;"><i
+																								class="glyphicon glyphicon-time"></i>진행중</a></span>
+																					</div>
+																					<div class="stats">
+																						<span
+																							onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																							<i class="glyphicon glyphicon-cog"
+																							style="margin-bottom: 0px;"></i>
+																						</span> <span onclick="projectDelete('${i.project_idx}')">
+																							<i class="glyphicon glyphicon-remove"
+																							style="margin-bottom: 0px;"></i>
+																						</span>
+																					</div>
+																				</c:if>
+																			</c:when>
+																		</c:choose>
+																	</c:forEach>
+																</div>
+															</div>
+														</div>
+														<div class="footer">
+															<button class="btn btn-simple" rel="tooltip"
+																title="Flip Card" onclick="rotateCard(this)">
+																<i class="fa fa-reply"></i> Back
+															</button>
+
+														</div>
+													</div>
+													<!-- end back panel -->
 												</div>
+												<!-- end card -->
 											</div>
-											<div class="footer">
-												<button class="btn btn-simple" rel="tooltip"
-													title="Flip Card" onclick="rotateCard(this)">
-													<i class="fa fa-reply"></i> Back
-												</button>
-												<div class="social-links text-center">
-													<a href="http://deepak646.blogspot.in/" class="facebook"><i
-														class="fa fa-facebook fa-fw"></i></a> <a
-														href="http://deepak646.blogspot.in/" class="google"><i
-														class="fa fa-google-plus fa-fw"></i></a> <a
-														href="http://deepak646.blogspot.in/" class="twitter"><i
-														class="fa fa-twitter fa-fw"></i></a>
-												</div>
-											</div>
+											<!-- end card-container -->
 										</div>
-										<!-- end back panel -->
-									</div>
-									<!-- end card -->
-								</div>
-								<!-- end card-container -->
-							</div>
-							<!-- end col sm 3 -->
+										<!-- end col sm 3 -->
 
-							<div class="space-400"></div>
+										<div class="space-400"></div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-					</div>
-					</div>
-				</c:forEach>
+				
+				
+					</c:forEach>
+					
 				</div>
-				</c:otherwise>
-	
-	</c:choose>
+
+				<!--완료된 프로젝트 리스트  -->
+
+				
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<!--end carousel-inner -->
 	<!-- Controls -->
+	<div class="controls">
 		<a class="left carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="prev"
-			style="width: 50px; color: red; float: left;"> <span
+			style="width: 100px; color: red; margin-top: 15%;"> <span
 			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
 		</span> <span class="sr-only">Previous</span>
 		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next" style="width: 30px; color: red;">
-			<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+			role="button" data-slide="next"
+			style="width: 100px; color: red; margin-top: 15%;"> <span
+			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-
-
-
-	<!-- Indicators 페이징-->
-	<ol class="carousel-indicators" style="bottom: -15px;">
-		<c:forEach var="i" items="${plist}" varStatus="status">
-
-			<li data-target="#carousel-example-generic"
-				${status.first?'class="active"':'' } data-slide-to="${status.index}"></li>
-
-		</c:forEach>
-	</ol>
 	</div>
-	<!--end carousel-inner -->
-		
-		
 
-	
+
 
 
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
