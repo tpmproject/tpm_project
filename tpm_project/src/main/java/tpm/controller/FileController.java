@@ -367,6 +367,18 @@ public class FileController {
 		//System.out.println("작성자:"+s_member_idx);
 		//System.out.println("파일명:"+file_upload.getOriginalFilename());		
 		try {
+			/*HttpSession session = req.getSession();
+			
+			String userid = (String)session.getAttribute("s_member_id");		
+			String savepath = req.getServletContext().getRealPath("img/member/profile/")+userid;
+			
+			File uploadDirectory = new File(savepath);
+			System.out.println(uploadDirectory);
+			
+			if(!uploadDirectory.exists()){
+				System.out.println(uploadDirectory.mkdirs());
+			}
+			*/
 			byte bytes[]=file_upload.getBytes();
 			
 			ViewerConfig config = new ViewerConfig();  //자동경로
