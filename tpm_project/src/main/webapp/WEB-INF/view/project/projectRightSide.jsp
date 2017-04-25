@@ -6,9 +6,36 @@
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
 
-
-<style type="text/css">
+ <style>
+        article.content {
+            margin: -30px 50px;
+            width:400px;
+            height:200px
+        }
+        .navbar .navbar-nav {
+            display: inline-block;
+            float: none;
+        }
+        .navbar .navbar-collapse {
+            text-align: center;
+        }
     
+        .doc-page-trial{
+        	display:none;
+        }
+      	.pg1-text1{
+      	 	display:none;
+      	}
+      	.pg1-page{
+      		margin:auto 500px;
+      	    background: white;
+      	}
+
+    </style>
+<style type="text/css">
+    .doc-page-trial{
+    display: none;
+    }
     #right-side #sidebar-wrapper{
     margin-right: -250px;
     right: 0;
@@ -200,11 +227,11 @@
 	
 	 /* 미리보기  */
 	function fileContent(filename){
-		//var file_con = document.getElementById('fileCon');
-		//var f_name = document.getElementById('f_name');
+		var file_con = document.getElementById('fileCon2');
+		var f_name = document.getElementById('f_name2');
 		window.alert(filename);
-		//f_name.innerHTML = filename;
-		//file_con.innerHTML = '';
+		f_name.innerHTML = filename;
+		file_con.innerHTML = '';
 		
 		var param = "file_name="+filename;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
@@ -301,10 +328,10 @@
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
 				if(file_type=='jpg'||file_type=='gif'||file_type=='png'){
-					msg += '             <a class="btn btn-default" data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
+					msg += '             <a data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
 				
 				}else{
-					msg += '             <a class="btn btn-default" data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"';
+					msg += '             <a data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"';
 					msg += '                  style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
 				}
 				
@@ -400,7 +427,33 @@
 <!-- 임시) 여기까지 첨부파일   -->
 </head>
 <body>
+ <!-- 모달 시작 -->
+  <div class="row">
+		<div class="modal fade" id="layerpop">
 
+		      <!-- header -->
+		      <div class="modal-header">
+		        <!-- 닫기(x) 버튼 -->
+		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif; opacity:.80;" id="f_name2"> </label>
+		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white; opacity:.80;">X</button>
+		        <!-- header title -->
+		       
+		      </div>
+		      <!-- body -->
+		     	 <div class="modal-body" >
+		     	
+		     	 <div class="row" id="fileContent" >
+		     	 	<div class="col-lg-6" id="fileCon2" style="margin: auto 350px;">
+		     	 	
+
+		      		</div>
+		         </div>
+		         
+		      </div>
+		 </div>
+   </div>
+
+  <!--모달 끝  -->
 
 
 	<div style="position:absolute; z-index:1;  ">

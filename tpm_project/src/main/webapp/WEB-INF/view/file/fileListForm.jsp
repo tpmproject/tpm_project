@@ -335,7 +335,7 @@
 			
 		   
 		    msg+= '<tr class="odd gradeX" style="margin:10px 30px; vertical-align: inherit;font-family: sans-serif;">';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a class="btn btn-default" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a></td>';
+					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a href="#" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a></td>';
 					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
 					msg +='<td style="vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
 					msg +='<td style="vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
@@ -390,7 +390,7 @@
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
 		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif;" id="f_name" > </label>
-		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white;">X</button>
+		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white; opacity:.80;">X</button>
 		        <!-- header title -->
 		       
 		      </div>
