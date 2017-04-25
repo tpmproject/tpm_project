@@ -1250,12 +1250,12 @@ img {
 		data-ride="carousel" data-interval="false">
 
 		<!-- Indicators 페이징-->
-		<ol class="carousel-indicators" style="bottom: -15px;color: black;">
+		<ol class="carousel-indicators" style="bottom: -15px; color: black;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
 
 				<li data-target="#carousel-example-generic"
 					${status.first?'class="active"':'' }
-					data-slide-to="${status.index}" style="background:red;"></li>
+					data-slide-to="${status.index}" style="background: red;"></li>
 
 			</c:forEach>
 		</ol>
@@ -1268,166 +1268,173 @@ img {
 						</c:when>
 
 			<c:otherwise>
-			<div style="background: white;">
-				<div class="carousel-inner" role="listbox">
-					<!-- 	<div class="carousel-inner" role="listbox  -->
-					<c:forEach var="i" items="${plist}" varStatus="status">
-						<div class="item ${status.first?'active':'' }">
-							<div id="contain" class="container-fluid ">
-								<div id="project_div${i.project_idx}" style="margin-top: 15px;">
-									<div class="col-sm-10 col-sm-offset-1">
-										<div class="col-md-4 col-sm-6" style="width: 500px;">
-											<div class="card-container manual-flip">
-												<div class="card">
-													<div class="front">
-														<!--  배경화면-->
-														<div class="cover">
-															<img src="/tpm_project/sample/khj/img/son.jpg" />
-														</div>
-
-														<!-- 상태 아이콘 -->
-														<div class="user">
-															<img class="img-circle"
-																src="/tpm_project/sample/khj/img/son2.jpg"
-																style="width: 130px; height: 130px;" />
-														</div>
-
-														<!--화면단  -->
-														<div class="content">
-															<div class="main">
-																<input type="hidden" id="p_idx${i.project_idx}"
-																	value="${i.project_idx}">
-																<h4 id="pn${i.project_idx}">
-																	<span class="hidden-xs">${i.project_name }</span>
-																</h4>
-																<p class="profession">TPM Project</p>
-																<p class="text-center">
-																	<span id="pc${i.project_idx}">${i.project_content }</span>
-																</p>
+				<div style="background: white;">
+					<div class="carousel-inner" role="listbox">
+						<!-- 	<div class="carousel-inner" role="listbox  -->
+						<c:forEach var="i" items="${plist}" varStatus="status">
+							<div class="item ${status.first?'active':'' }">
+								<div id="contain" class="container-fluid ">
+									<div id="project_div${i.project_idx}" style="margin-top: 15px;">
+										<div class="col-sm-10 col-sm-offset-1">
+											<div class="col-md-4 col-sm-6" style="width: 500px;">
+												<div class="card-container manual-flip">
+													<div class="card">
+														<div class="front">
+															<!--  배경화면-->
+															<div class="cover">
+																<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
 															</div>
-															<div class="footer">
-																<button class="btn btn-simple"
-																	onclick="rotateCard(this)">
-																	<i class="fa fa-mail-forward"></i> Manual Rotation
-																</button>
+
+															<!-- 상태 아이콘 -->
+															<div class="user">
+																<img class="img-circle"
+																	src="/tpm_project/sample/khj/img/cat.png"
+																	style="width: 140px; height: 140px;" />
 															</div>
-														</div>
-													</div>
-													<!-- end front panel -->
 
-													<!-- 뒷화면 -->
-													<div class="back">
-														<div class="header">
-															<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-																<c:choose>
-																	<c:when test="${pm_dto.project_level ==3000 }">
-																		<c:if
-																			test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																			<div style="float: right;">
-																			<span
-																				onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																				<i class="glyphicon glyphicon-cog"
-																				style="margin-bottom: 0px;"></i>
-																			</span>
-																			<span onclick="projectDelete('${i.project_idx}')">
-																				<i class="glyphicon glyphicon-remove"
-																				style="margin-bottom: 0px;"></i>
-																			</span>
-																			</div>
-																		</c:if>
-																	</c:when>
-																</c:choose>
+															<!--화면단  -->
+															<div class="content">
+																<div class="main">
+																	<input type="hidden" id="p_idx${i.project_idx}"
+																		value="${i.project_idx}">
+																	<h4 id="pn${i.project_idx}">
+																		<span class="hidden-xs">${i.project_name }</span>
+																	</h4>
+																	<p class="profession">TPM Project</p>
+																	<p class="text-center">
+																		<span id="pc${i.project_idx}">${i.project_content }</span>
+																	</p>
+																</div>
+																<div class="footer"  rel="tooltip"title="프로젝트 확인">
+																	<button class="btn btn-simple"
+																		onclick="rotateCard(this)">
+																		<i class="fa fa-mail-forward"></i> Manual Rotation
+																	</button>
 
-															</c:forEach>
-															<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
-														</div>
-														<div class="content">
-															<div class="main">
-																<h4 class="text-center">${i.project_name }</h4>
-																<hr>
-
-																<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-																	<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
-																</c:forEach>
-																<hr>
-																<div class="stats-container">
-																	<div class="stats" align="center">
-																		<a class="btn btn-link"
-																			href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
-																			class="fa fa-clone left"></i>업무확인</a>
-																	</div>
-																	<c:forEach var="pm_dto"
-																		items="${i.project_member_dtos}">
-																		<c:choose>
-																			<c:when
-																				test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-																				<c:if
-																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-
-																					<div class="stats">
-																						<span class="print"> <a href="#"
-																							class="btn btn-link" style="color: green;"><i
-																								class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
-																					</div>
-
-																				</c:if>
-																			</c:when>
-																			<c:when
-																				test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-																				<c:if
-																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																					<div class="stats">
-																						<span class="print"> <a
-																							onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
-																							class="btn btn-link"><i
-																								class="glyphicon glyphicon-check"></i>평가하기</a></span>
-																					</div>
-
-																				</c:if>
-																			</c:when>
-																			<c:when test="${i.project_state == 1 }">
-																				<c:if
-																					test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																					<div class="stats">
-																						<span class="print"> <a href="#"
-																							class="btn btn-link" style="color: red;"><i
-																								class="glyphicon glyphicon-time"></i>진행중</a></span>
-																					</div>
-
-																				</c:if>
-																			</c:when>
-																		</c:choose>
-																	</c:forEach>
 																</div>
 															</div>
 														</div>
-														<div class="footer">
-															<button class="btn btn-simple" rel="tooltip"
-																title="Flip Card" onclick="rotateCard(this)">
-																<i class="fa fa-reply"></i> Back
-															</button>
+														<!-- end front panel -->
 
+														<!-- 뒷화면 -->
+														<div class="back">
+															<div class="header">
+																<c:forEach var="pm_dto" items="${i.project_member_dtos}">
+																	<c:choose>
+																		<c:when test="${pm_dto.project_level ==3000 }">
+																			<c:if
+																				test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																				<div style="float: right;">
+																					<span
+																						onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																						<i class="glyphicon glyphicon-cog"
+																						style="margin-bottom: 0px;"></i>
+																					</span> <span onclick="projectDelete('${i.project_idx}')">
+																						<i class="glyphicon glyphicon-remove"
+																						style="margin-bottom: 0px;"></i>
+																					</span>
+																				</div>
+																			</c:if>
+																		</c:when>
+																	</c:choose>
+
+																</c:forEach>
+																<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
+															</div>
+															<div class="content">
+																<div class="main">
+																	<h4 class="text-center">${i.project_name }</h4>
+																	<hr>
+
+																	<c:forEach var="pm_dto"
+																		items="${i.project_member_dtos}">
+																		<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
+																	</c:forEach>
+																	<hr>
+																	<div class="stats-container">
+																		<div class="stats" align="center"  rel="tooltip"title="업무확인">
+																			<a class="btn btn-link"
+																				href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
+																				class="fa fa-clone left"></i>업무확인</a>
+																		</div>
+																		<c:forEach var="pm_dto"
+																			items="${i.project_member_dtos}">
+																			<c:choose>
+																				<c:when
+																					test="${pm_dto.project_level == 3000 and i.project_state == 3}">
+																					<c:if
+																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+
+																						<div class="stats">
+																							<span class="print" rel="tooltip" title="완료상태">
+																								<a href="#" class="btn btn-link"
+																								style="color: green;"><i
+																									class="glyphicon glyphicon-ok-circle"></i>완료</a>
+																							</span>
+																						</div>
+
+																					</c:if>
+																				</c:when>
+																				<c:when
+																					test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
+																					<c:if
+																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																						<div class="stats">
+																							<span class="print" rel="tooltip" title="평가하기">
+																								<a
+																								onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
+																								class="btn btn-link"><i
+																									class="glyphicon glyphicon-check"></i>평가하기</a>
+																							</span>
+																						</div>
+
+																					</c:if>
+																				</c:when>
+																				<c:when test="${i.project_state == 1 }">
+																					<c:if
+																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																						<div class="stats">
+																							<span class="print" rel="tooltip" title="진행중">
+																								<a href="#" class="btn btn-link"
+																								style="color: red;"><i
+																									class="glyphicon glyphicon-time"></i>진행중</a>
+																							</span>
+																						</div>
+
+																					</c:if>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+																	</div>
+																</div>
+															</div>
+															<div class="footer">
+																<button class="btn btn-simple" rel="tooltip"
+																	title="되돌아가기" onclick="rotateCard(this)">
+																	<i class="fa fa-reply"></i> Back
+																</button>
+
+															</div>
 														</div>
+														<!-- end back panel -->
 													</div>
-													<!-- end back panel -->
+													<!-- end card -->
 												</div>
-												<!-- end card -->
+												<!-- end card-container -->
 											</div>
-											<!-- end card-container -->
-										</div>
-										<!-- end col sm 3 -->
+											<!-- end col sm 3 -->
 
-										<div class="space-400"></div>
+											<div class="space-400"></div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
 
-					</c:forEach>
+						</c:forEach>
 
+					</div>
 				</div>
-			</div>
 				<!--완료된 프로젝트 리스트  -->
 
 
