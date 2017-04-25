@@ -332,14 +332,14 @@
 			
 		    file_now = file_year+'-'+file_month+'-'+file_date+''+ampm+' '+file_hour+'시'+file_minute+'분';
 		 
-			
+		  
 		   
 		    msg+= '<tr class="odd gradeX" style="margin:10px 30px; vertical-align: inherit;font-family: sans-serif;">';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a href="#" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:auto 70px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a></td>';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;"><a href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
-					msg +='<td style="vertical-align: inherit;font-family: sans-serif;" class="center">안병민';
+					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;"><a style="  width: 30px;position: absolute;margin-top: 15px;margin-left: 60px;" href="#" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:-20px -50px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a>';
+					msg +='<a style="margin-top: -10px; margin-left: 60px; vertical-align: inherit;" href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
+					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
+					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
+					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">안병민';
 					
 					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
 					msg += '<li class="dropdown">';
@@ -389,18 +389,23 @@
 		      <!-- header -->
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
-		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif;" id="f_name" > </label>
+		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:cursive;" id="f_name" > </label>
 		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white; opacity:.80;">X</button>
 		        <!-- header title -->
-		       
-		      </div>
+				
+			</div>
 		      <!-- body -->
 		     	 <div class="modal-body" >
 		     	
 		     	 <div class="row" id="fileContent" >
-		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 350px;">
 		     	 	
-
+		     		<div class="col-lg-6" style="position: absolute; margin: 180px 600px; width:50px">
+		     	 			<!-- 로딩 부분 -->
+		     	 			<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px;">
+		     	 			
+		     	    </div>
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 350px;">
+		     	 		
 		      		</div>
 		         </div>
 		         
@@ -486,7 +491,6 @@
                 
                   <thead>
                     <tr>
-                      <th>파일 타입</th>
                       <th id="th_file_name" onclick="file_sort('file_name','th_file_name')">파일 이름</th>
                       <th id="th_file_size" onclick="file_sort('file_size','th_file_size')">파일 크기</th>
                       <th id="th_file_date" onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
