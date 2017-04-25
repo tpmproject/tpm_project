@@ -44,7 +44,7 @@
 <script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
 
 <!-- 개인 성향  그래프-->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="/tpm_project/js/graph/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/radar.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -145,7 +145,7 @@ function categoryAddResult() {
 				var innerH='<div class="category_head" id ="c'+idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';			
 				innerH+='<form name="cateUp" action="javascript:categoryUpdate('+idx+')">';
 				innerH+='<div id="cate'+idx+'" class="cateName">';
-				innerH+='<input id="cateIn='+idx+'" type="text" value="'+name+'" size="16px">&nbsp;&nbsp;';
+				innerH+='<input id="cateIn'+idx+'" type="text" value="'+name+'" size="16px">&nbsp;&nbsp;';
 				innerH+='<i class="glyphicon glyphicon-remove" onclick="cateNameRe('+idx+'+)"></i></div>';
 				innerH+='<div id="a_cate'+idx+'"><a id="aa_cate'+idx+'" href="javascript:cateName('+idx+')">'+name+'</a>&nbsp;&nbsp;';
 				innerH+='<i class="glyphicon glyphicon-plus" onclick="showf('+idx+')"></i></div></form></div>';
@@ -374,6 +374,7 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
+	window.alert(param);
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
 }
 function workDone(work_idx,work_state){

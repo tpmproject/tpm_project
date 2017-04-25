@@ -1,0 +1,7 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="tpm.work.model.WorkDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String msg=(String)request.getAttribute("msg");
+%>
