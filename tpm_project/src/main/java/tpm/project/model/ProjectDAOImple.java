@@ -147,6 +147,10 @@ public class ProjectDAOImple implements ProjectDAO {
 		return count;
 	}
 	
+	public int workState(int project_idx) {
+		int count = sqlMap.selectOne("workState", project_idx);
+		return count;
+	}
 
 	public int projectDelete(int project_idx) {
 		

@@ -487,7 +487,7 @@
           </div>
           
           <div class="tab-pane fade in" id="tab2">
-            <h3>This is tab 2</h3>
+            <%@include file="/WEB-INF/view/comment/comment.jsp"%>
           </div>
           
           <div class="tab-pane fade in" id="tab3">

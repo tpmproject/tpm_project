@@ -1,5 +1,5 @@
 window.onload=function(){
-	$('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
+	
 	$('[data-toggle="popover"]').popover();
 	$(btnwork2).hide();
 	$(btnwork4).hide();
@@ -146,9 +146,9 @@ function ws_categoryAdd(idx,name){
 }
 //업무추가
 function showf(category_idx){
-	
 	var wid=(window.innerWidth/2)-320;
 	$('#work_modal').css('left',wid+'px');
+	$('#workdate').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'YYYY/MM/DD h:mm A'});
 	
 	$(workback).fadeIn('150');
 	$(work_modal).fadeIn('150');
@@ -157,12 +157,10 @@ function showf(category_idx){
 	document.newWork.category_idx.value=category_idx;
 }
 function showf2() {
-	
 	$(w_modal2).show();
 	$(btnwork4).hide();
 }
 function workUpdate(work_idx,work_start,work_end,work_confirm){
-	
 	var wid=(window.innerWidth/2)-320;
 	$('#work_modal2').css('left',wid+'px');
 	

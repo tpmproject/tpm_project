@@ -73,6 +73,7 @@ public class ProjectController {
 		mav.setViewName("project/projectContentForm");
 		ProjectDTO pdto=projectDAO.projectSearch(dto);
 		ArrayList<MemberDTO> marr=projectDAO.projectWorkMember(dto);
+
 		mav.addObject("pdto", pdto);
 		mav.addObject("marr", marr);	
 		

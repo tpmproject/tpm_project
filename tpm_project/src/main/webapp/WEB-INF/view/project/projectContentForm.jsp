@@ -291,13 +291,10 @@ var member_idx=${param.member_idx};
 												</c:when>
 											</c:choose> --%>
 
-											<td align="right"><a
-												href="javascript:comment(${wdto.work_idx})">코멘트</a>/ 
-												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx }')" class="menu-toggle">첨부파일</a>
-												
-												
+											<td align="right">
+												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx }')" class="menu-toggle">코멘트</a>/ 
+												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx }')" class="menu-toggle">첨부파일</a>	
 											</td>
-										
 										</tr>
 									</tbody>
 								</table>
@@ -463,7 +460,6 @@ var member_idx=${param.member_idx};
 		<div id="chartdiv"></div>
 	</div>
 	
-	<%@include file="/WEB-INF/view/comment/comment.jsp"%>
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 <script>

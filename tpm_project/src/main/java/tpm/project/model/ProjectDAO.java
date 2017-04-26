@@ -34,4 +34,6 @@ public interface ProjectDAO {
 	
 	public int projectState(int project_idx);
 	
+	public int workState(int project_idx);
+	
 }

@@ -139,4 +139,12 @@
 		set project_state=project_state+1
 		where project_idx=#{project_idx}
 	</update>
+	
+	<select id="workState" parameterType="int" resultType="int">
+		select *
+		from (select distinct work_state from tpm_work where category_idx in(
+				select category_idx from tpm_category where project_idx=#{project_idx})
+				order by work_state)
+		where rownum=1
+	</select>
 </mapper>

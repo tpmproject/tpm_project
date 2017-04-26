@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
 <script>
 function closeComment(){
 	localStorage.removeItem('work_idx');
@@ -36,43 +41,81 @@ function addCommentResult(){
 	
 }
 </script>
-<style>
-#comment_back{
-	display:none;
-	min-width:300px;
-	width:30%;
-	height:2000%;
-	position: fixed;
-	right: 0px;
-	top:-200px;
-	background: #ecf0f5;
-	z-index: 2;
-	border-left: 1px solid #3c8dbc;
-	padding-left: 5px;
-}
-#comment_div{
-	position: fixed;
-	top: 20%;
-	
-	z-index: 3;
-	width:100%;
-}
-#cm_work_title{
-	height:40px;
-	width:100%;
-}
-</style>
-<div id="comment_back">
-<div id="comment_div">
-	<span onclick="closeComment()"><i class="glyphicon glyphicon-remove"></i></span>
-	<div id="cm_work_title"></div>
-	<div>
-		<table>
-		</table>
-	</div>
-	
-	<form name="comment" action="javascript:addComment()">
-		<input type="text" name="tpm_comment_content"><span class="glyphicon glyphicon-comment btn-lg" onclick="addComment()"></span>
-	</form>
-</div>
-</div>
+<body>
+            <div class="box-header">
+              <i class="fa fa-comments-o"></i>
+
+              <h3 class="box-title">Comment</h3>
+
+              <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
+              </div>
+            </div>
+            <div class="box-body chat" id="chat-box">
+              <!-- chat item -->
+              <div class="item">
+                <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+                    Mike Doe
+                  </a>
+                  I would like to meet you to discuss the latest news about
+                  the arrival of the new theme. They say it is going to be one the
+                  best themes on the market
+                </p>
+                <div class="attachment">
+                  <h4>Attachments:</h4>
+
+                  <p class="filename">
+                    Theme-thumbnail-image.jpg
+                  </p>
+
+                </div>
+                <!-- /.attachment -->
+              </div>
+              <!-- /.item -->
+              <!-- chat item -->
+              <div class="item">
+                <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
+                    Alexander Pierce
+                  </a>
+                  I would like to meet you to discuss the latest news about
+                  the arrival of the new theme. They say it is going to be one the
+                  best themes on the market
+                </p>
+              </div>
+              <!-- /.item -->
+              <!-- chat item -->
+              <div class="item">
+                <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
+                    Susan Doe
+                  </a>
+                  I would like to meet you to discuss the latest news about
+                  the arrival of the new theme. They say it is going to be one the
+                  best themes on the market
+                </p>
+              </div>
+              <!-- /.item -->
+            </div>
+            <!-- /.chat -->
+            <div class="box-footer">
+              <div class="input-group">
+                <input class="form-control" placeholder="Type message...">
+
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+</body>
+</html>
