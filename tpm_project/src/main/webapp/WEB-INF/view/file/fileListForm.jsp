@@ -165,7 +165,7 @@
 		var file_con = document.getElementById('fileCon');
 		var f_name = document.getElementById('f_name');
 		f_name.innerHTML = filename;
-		file_con.innerHTML = '';
+		
 		
 		var param = "file_name="+filename;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
@@ -177,7 +177,7 @@
 		var f_name = document.getElementById('f_name');
 		
 		f_name.innerHTML = filename;
-		file_con.innerHTML = '';
+		
 		
 		var param = "file_name="+filename+"&page="+page;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
@@ -234,14 +234,11 @@
     			if(httpRequest.status == 200){
     				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
-    					
     					result_process(responseText, ctype);
-    				
-    					
     				}
     			}
     		} else {
-
+    			
     		}
     	}
     }
@@ -399,13 +396,10 @@
 		     	
 		     	 <div class="row" id="fileContent" >
 		     	 	
-		     		<div class="col-lg-6" style="position: absolute; margin: 180px 600px; width:50px">
-		     	 			<!-- 로딩 부분 -->
-		     	 			<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px;">
-		     	 			
-		     	    </div>
-		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 350px;">
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 420px;">
 		     	 		
+    					<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; margin: 230px 380px;;">
+    				
 		      		</div>
 		         </div>
 		         
