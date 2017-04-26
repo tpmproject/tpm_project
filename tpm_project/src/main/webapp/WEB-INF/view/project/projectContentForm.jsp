@@ -60,16 +60,21 @@ var member_idx=${param.member_idx};
 
 <script type="text/javascript" src="js/project/projectContent.js"></script>
 <link rel="stylesheet" href="css/projectContent.css">
+<style>
+#fileCon img{
+   vertical-align: middle; width: 130%; margin: auto 340px;
+}
+</style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
 <!-- 모달 시작 -->
   <div class="row">
-		<div class="modal fade" id="layerpop">
+		<div class="modal fade" id="layerpop" style="z-index:2500">
 
 		      <!-- header -->
 		      <div class="modal-header">
 		        <!-- 닫기(x) 버튼 -->
-		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif; opacity:.80;" id="f_name2"> </label>
+		        <label style="color:white; font-size:30px; margin:auto 20px; font-family:serif; opacity:.80;" id="f_name"> </label>
 		        <button type="button" class="close" data-dismiss="modal" style="font-size:40px; color:white; opacity:.80;">X</button>
 		        <!-- header title -->
 		       
@@ -78,8 +83,9 @@ var member_idx=${param.member_idx};
 		     	 <div class="modal-body" >
 		     	
 		     	 <div class="row" id="fileContent" >
-		     	 	<div class="col-lg-6" id="fileCon2" style="margin: auto 350px;">
-		     	 	
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto -30px;">
+		     	 		
+		     	 		
 
 		      		</div>
 		         </div>

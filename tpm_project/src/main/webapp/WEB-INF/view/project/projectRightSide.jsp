@@ -227,8 +227,8 @@
 	
 	 /* 미리보기  */
 	function fileContent(filename){
-		var file_con = document.getElementById('fileCon2');
-		var f_name = document.getElementById('f_name2');
+		var file_con = document.getElementById('fileCon');
+		var f_name = document.getElementById('f_name');
 		//window.alert(filename);
 		f_name.innerHTML = filename;
 		file_con.innerHTML = '';
@@ -387,7 +387,7 @@
 		//window.alert('미리보기 setting ');
 		var msg ='';
 		msg +=responseText;	
-		var file_con2 = document.getElementById('fileCon2');
+		var file_con2 = document.getElementById('fileCon');
 		
 
   		msg+= '<nav class="navbar navbar-inverse navbar-fixed-bottom">';
