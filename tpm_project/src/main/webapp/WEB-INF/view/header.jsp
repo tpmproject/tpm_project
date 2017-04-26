@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:if test="${ empty s_member_idx}"><c:redirect url="index.do"></c:redirect> </c:if>
 <div class="wrapper">
 <header class="main-header">
 	<a href="projectList.do" class="logo"><b>TPM</b></a>

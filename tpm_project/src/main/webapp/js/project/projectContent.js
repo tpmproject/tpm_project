@@ -59,6 +59,13 @@ function onMessage(evt) {
 		var name=data[2];
 		ws_categoryAdd(idx,name);
 	}
+	//카테고리 이름 수정
+	if(data[0]=='categoryName'){
+		var idx=data[1];
+		var name=data[2];
+		ws_categoryUpdate(idx,name);
+	}
+	
 	
 }
 
@@ -88,15 +95,19 @@ function categoryUpdateResult(){
 			var result = XHR.responseText;
 			result=parseInt(result); //cate_idx
 			
-			var ac=document.getElementById('aa_cate'+result);
+			var catename=$('#cateIn'+result).val();
 			
-			ac.innerHTML=$('#cateIn'+result).val();
-			
-			$('#cate'+result).hide();
-			$('#a_cate'+result).show();
-			
+			updateWS('categoryName,'+idx+','+catename);
+
 		}
 	}
+}
+function ws_categoryUpdate(idx,name){
+	
+	document.getElementById('aa_cate'+idx).innerHTML=name;
+	
+	$('#cate'+idx).hide();
+	$('#a_cate'+idx).show();
 }
 function categoryAdd() {
 	var param = 'project_idx=' + project_idx
