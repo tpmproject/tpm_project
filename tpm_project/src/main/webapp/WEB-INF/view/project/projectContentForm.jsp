@@ -143,7 +143,7 @@ var member_idx=${param.member_idx};
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
 								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
-									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right" style="color:green;"' :'class="glyphicon glyphicon-menu-down"' }></i>
+									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
 							<c:set var="wstart"><f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 							<c:set var="wend"><f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
