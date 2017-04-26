@@ -18,6 +18,17 @@ function dateTest(){
 </script>
 </head>
 <body>
+
+<c:choose>
+	<c:when test="${empty s_member_idx}">
+		<c:redirect url="memberLogin.do"></c:redirect>
+	</c:when>
+	<c:otherwise>
+		<c:redirect url="projectList.do"></c:redirect>
+	</c:otherwise>
+</c:choose>
+
+
 인덱스입.
 	<c:if test="${empty sessionScope.s_member_id}">
 		<a href="memberLogin.do">로그인</a>
