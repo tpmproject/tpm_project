@@ -13,6 +13,9 @@ $(window).resize(function() {
 	var wid=(window.innerWidth/2)-320;
 	$('#work_modal').css('left',wid+'px');
 	$('#work_modal2').css('left',wid+'px');
+	
+	var hei=window.innerHeigth-200;
+	$('.mCSB_container').css('height',hei+'px');
 })
 
 function tenChart(e,s,t,j,i,n,f,p){
@@ -58,6 +61,9 @@ function onMessage(evt) {
 		var idx=data[1];
 		var name=data[2];
 		ws_categoryAdd(idx,name);
+		
+		var cbodyNode = document.getElementById('cbody');
+		cbodyNode.style.width = parseInt(cbodyNode.style.width)+210+"px";
 	}
 	//카테고리 이름 수정
 	if(data[0]=='categoryName'){
@@ -65,7 +71,14 @@ function onMessage(evt) {
 		var name=data[2];
 		ws_categoryUpdate(idx,name);
 	}
-	
+	//카테고리 삭제
+	if(data[0]=='categoryDel'){
+		var idx=data[1];
+		
+		$('#cp'+idx).remove();
+		var cbodyNode = document.getElementById('cbody');
+		cbodyNode.style.width = parseInt(cbodyNode.style.width)-210+"px";
+	}
 	
 }
 
@@ -97,15 +110,15 @@ function categoryUpdateResult(){
 			
 			var catename=$('#cateIn'+result).val();
 			
-			updateWS('categoryName,'+idx+','+catename);
-
+			updateWS('categoryName,'+result+','+catename);
+			
 		}
 	}
 }
 function ws_categoryUpdate(idx,name){
 	
 	document.getElementById('aa_cate'+idx).innerHTML=name;
-	
+	$('#cateIn'+idx).val(name);
 	$('#cate'+idx).hide();
 	$('#a_cate'+idx).show();
 }
@@ -172,16 +185,10 @@ function showf2() {
 	$(btnwork4).hide();
 }
 function workUpdate(work_idx,work_start,work_end,work_confirm){
-	var wid=(window.innerWidth/2)-320;
-	$('#work_modal2').css('left',wid+'px');
+	/*$('div').remove('.daterangepicker.dropdown-menu.opensleft');*/
 	
 	var startDate = work_start.split(' ',3);
 	var endDate = work_end.split(' ',3);
-	
-	$(workback2).fadeIn('150');
-	$(work_modal2).fadeIn('150');
-	$(w_modal2).show();
-	$(btnwork4).hide();
 	
 	$('#workdateup').daterangepicker({
 		timePicker: true
@@ -190,6 +197,15 @@ function workUpdate(work_idx,work_start,work_end,work_confirm){
 		, "startDate"  : startDate[0]
 		, "endDate" : endDate[0]
 	});
+	
+	
+	var wid=(window.innerWidth/2)-320;
+	$('#work_modal2').css('left',wid+'px');
+	
+	$(workback2).fadeIn('150');
+	$(work_modal2).fadeIn('150');
+	$(w_modal2).show();
+	$(btnwork4).hide();
 	
 	var wdiv=document.getElementById('wdiv'+work_idx);
 	var fc=wdiv.firstChild;
@@ -698,10 +714,8 @@ function cateDelResult(){
 		if (XHR.status == 200) {
 			var result=XHR.responseText; //지운 idx
 			result=parseInt(result);
-			$('#cp'+result).remove();
 			
-			var cbodyNode = document.getElementById('cbody');
-			cbodyNode.style.width = parseInt(cbodyNode.style.width)-210+"px";
+			updateWS('categoryDel,'+result);
 		}
 	}
 }
