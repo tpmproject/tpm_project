@@ -37,7 +37,7 @@ var member_idx=${param.member_idx};
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
