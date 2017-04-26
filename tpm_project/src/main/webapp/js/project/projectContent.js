@@ -55,6 +55,7 @@ function onMessage(evt) {
 			
 			changeWorkState(work_idx,ws);
 		}
+		return;
 	}
 	//카테고리 더할 때
 	if(data[0]=='categoryAdd'){
@@ -65,12 +66,14 @@ function onMessage(evt) {
 		var wid=$('#mCSB_1_container').css('width');
 		wid=parseInt(wid)+210;
 		$('#mCSB_1_container').css('width',wid+'px');
+		return;
 	}
 	//카테고리 이름 수정
 	if(data[0]=='categoryName'){
 		var idx=data[1];
 		var name=data[2];
 		ws_categoryUpdate(idx,name);
+		return;
 	}
 	//카테고리 삭제
 	if(data[0]=='categoryDel'){
@@ -80,6 +83,15 @@ function onMessage(evt) {
 		var wid=$('#mCSB_1_container').css('width');
 		wid=parseInt(wid)-210;
 		$('#mCSB_1_container').css('width',wid+'px');
+		return;
+	}
+	
+	if(data[0]=='checkAdd'){
+		var wi=data[1];
+		var chc=data[2];
+		var chi=data[3];
+		
+		ws_addCheckResult(wi,chc,chi);
 	}
 	
 }
@@ -147,8 +159,6 @@ function categoryAddResult() {
 
 function ws_categoryAdd(idx,name){
 	
-	
-
 		var cbodyNode = document.getElementById('cbody');
 		var cateNode = document.getElementById('addCate');
 		var dNode = document.createElement('div');
@@ -509,35 +519,37 @@ function addCheckResult(){
 			var chc=chData.checklist.checklist_content;
 			var chi=chData.checklist.checklist_idx;
 			
-			var chAdd="<a onclick='javascript:check("+chi+")'>"
-					+"<i id='ch"+chi+"' class='glyphicon glyphicon-unchecked'>"
-					+"</i>&nbsp;"+chc+"</a>"
-					+"<input type='hidden' id='ch_state"+chi+"' value='0'>";
-					
-			var dNode = document.createElement('div');
-			dNode.setAttribute('id','div_ch'+chi);
-			dNode.setAttribute('draggable','true');
-			dNode.setAttribute('ondragover','allowDrop(event)');
-			dNode.setAttribute('ondragstart','drag(event)');
-			
-			dNode.innerHTML = chAdd;
-			
-			document.getElementById('content'+wi).value='';
-			
-			var div=document.getElementById('check_div'+wi);
-			var in_ch=div.lastChild.previousSibling;
-			div.insertBefore(dNode,in_ch);
-			
-			var cht=$('#chTotal'+wi).val();
-			cht=parseInt(cht)+1;
-			$('#chTotal'+wi).val(cht);
-			
-			var chTotal=$('#chTotal'+wi).val();
-			var chChecked=$('#chChecked'+wi);
-			document.getElementById('chBar'+wi).style.width=chChecked.val()/chTotal *100+'%';
-			
+			updateWS('checkAdd,'+wi+','+chc+','+chi);
 		}
 	}
+}
+function ws_addCheckResult(wi,chc,chi){
+	var chAdd="<a onclick='javascript:check("+chi+")'>"
+	+"<i id='ch"+chi+"' class='glyphicon glyphicon-unchecked'>"
+	+"</i>&nbsp;"+chc+"</a>"
+	+"<input type='hidden' id='ch_state"+chi+"' value='0'>";
+	
+	var dNode = document.createElement('div');
+	dNode.setAttribute('id','div_ch'+chi);
+	dNode.setAttribute('draggable','true');
+	dNode.setAttribute('ondragover','allowDrop(event)');
+	dNode.setAttribute('ondragstart','drag(event)');
+	
+	dNode.innerHTML = chAdd;
+	
+	document.getElementById('content'+wi).value='';
+	
+	var div=document.getElementById('check_div'+wi);
+	var in_ch=div.lastChild.previousSibling;
+	div.insertBefore(dNode,in_ch);
+	
+	var cht=$('#chTotal'+wi).val();
+	cht=parseInt(cht)+1;
+	$('#chTotal'+wi).val(cht);
+	
+	var chTotal=$('#chTotal'+wi).val();
+	var chChecked=$('#chChecked'+wi);
+	document.getElementById('chBar'+wi).style.width=chChecked.val()/chTotal *100+'%';
 }
 /*완료한 체크리스트 목록 보기 */
 function showCheck(work_idx){
