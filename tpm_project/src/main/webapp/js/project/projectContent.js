@@ -14,8 +14,8 @@ $(window).resize(function() {
 	$('#work_modal').css('left',wid+'px');
 	$('#work_modal2').css('left',wid+'px');
 	
-	var hei=window.innerHeigth-200;
-	$('.mCSB_container').css('height',hei+'px');
+	var hei=window.innerHeight-130;
+	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
 })
 
 function tenChart(e,s,t,j,i,n,f,p){
@@ -62,8 +62,9 @@ function onMessage(evt) {
 		var name=data[2];
 		ws_categoryAdd(idx,name);
 		
-		var cbodyNode = document.getElementById('cbody');
-		cbodyNode.style.width = parseInt(cbodyNode.style.width)+210+"px";
+		var wid=$('#mCSB_1_container').css('width');
+		wid=parseInt(wid)+210;
+		$('#mCSB_1_container').css('width',wid+'px');
 	}
 	//카테고리 이름 수정
 	if(data[0]=='categoryName'){
@@ -76,8 +77,9 @@ function onMessage(evt) {
 		var idx=data[1];
 		
 		$('#cp'+idx).remove();
-		var cbodyNode = document.getElementById('cbody');
-		cbodyNode.style.width = parseInt(cbodyNode.style.width)-210+"px";
+		var wid=$('#mCSB_1_container').css('width');
+		wid=parseInt(wid)-210;
+		$('#mCSB_1_container').css('width',wid+'px');
 	}
 	
 }
