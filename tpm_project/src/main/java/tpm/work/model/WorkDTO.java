@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import tpm.checklist.model.ChecklistDTO;
+import tpm.member.model.MemberDTO;
 
 public class WorkDTO {
 	
@@ -21,6 +22,7 @@ public class WorkDTO {
 	
 	private String project_name;
 	private String category_name;
+	private ArrayList<MemberDTO> member_dtos;
 	private ArrayList<ChecklistDTO> checklist_dtos;
 	
 	final public static int WORK_NEED_CONFIRM=10; //결재 필요 업무

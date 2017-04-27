@@ -1,3 +1,6 @@
+<%@page import="tpm.member.model.MemberDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="tpm.work.model.WorkMemberDTO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="tpm.work.model.WorkDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

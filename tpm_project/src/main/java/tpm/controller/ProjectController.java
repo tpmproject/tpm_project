@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.project.model.ProjectDAO;
@@ -73,7 +74,6 @@ public class ProjectController {
 		mav.setViewName("project/projectContentForm");
 		ProjectDTO pdto=projectDAO.projectSearch(dto);
 		ArrayList<MemberDTO> marr=projectDAO.projectWorkMember(dto);
-
 		mav.addObject("pdto", pdto);
 		mav.addObject("marr", marr);	
 		
@@ -90,16 +90,18 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public ModelAndView projectInsert(ProjectDTO dto,String[] project_member,String[] level){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectAdd_d");
+	public @ResponseBody Object projectInsert(ProjectDTO dto,String[] project_member,String[] level){
+		
+		
 		
 		//프로젝트 생성 후 project_idx를 반환
 		int project_idx= projectDAO.projectInsert(dto);
+		System.out.println(project_idx);
 		dto.setProject_idx(project_idx);
 		
 		//생성된 프로젝트에 멤버 추가
 		if(project_idx>0){
+			List<ProjectMemberDTO> temp_list_projectMember=new ArrayList<ProjectMemberDTO>();
 			for(int i=0;i<project_member.length;i++){
 				int pm_idx=Integer.parseInt(project_member[i]);
 				int pm_level=Integer.parseInt(level[i]);
@@ -107,15 +109,14 @@ public class ProjectController {
 				ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, pm_idx, pm_level);
 				
 				projectDAO.projectMemberInsert(pmdto);
+				temp_list_projectMember.add(pmdto);
 			}
-			
-			mav.addObject("pdto", dto);
+			dto.setProject_member_dtos(temp_list_projectMember);
+			return dto;
 		}else{
 			String msg="error";
-			mav.addObject("msg", msg);
+			return msg;
 		}
-		
-		return mav;
 	}
 	
 	/**등록된친구 리스트*/
