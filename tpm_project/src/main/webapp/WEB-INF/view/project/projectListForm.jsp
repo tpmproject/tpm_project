@@ -600,10 +600,10 @@
 					var divNode=document.createElement('DIV');
 					divNode.setAttribute('class','item ');
 					//divNode.setAttribute('style','margin-top: 15px;');
-					var cNode = document.getElementById('pcarousel');
+					var cNode = document.getElementById('ptest');
 					
 					
-					/* var msg='<div class="box">';
+					var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
 					msg+='<input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
 					msg+='<h4 id="pn'+pson.project_idx+'">'+pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
@@ -611,31 +611,31 @@
 					
 					msg+='<p id="pc'+pson.project_idx+'">'+pson.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>'; */
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
 					
 					/* var pmarry = pson.project_member_dtos;
 				    pmarry[i].pro_m */
-				   var msg=' <div id="contain" class="container-fluid ">';
+				 /*   var msg=' <div id="contain" class="container-fluid ">';
 				   msg+='<div id="project_div'+pson.project_idx+'" style="margin-top: 15px;">';
 					   msg+='<div class="col-sm-10 col-sm-offset-1">';
 						   msg+='<div class="col-md-4 col-sm-6" style="width: 500px;">';
 							   msg+='<div class="card-container manual-flip">';
 								   msg+='<div class="card">';
-									msg+='	<div class="front">';
+									msg+='	<div class="front">'; */
 											//<!--  배경화면-->
-											msg+='<div class="cover">';
+											//msg+='<div class="cover">';
 											//	<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
-													msg+='</div>';
+											//		msg+='</div>';
 
 											//<!-- 상태 아이콘 -->
-											msg+='<div class="user">';
+											/* msg+='<div class="user">';
 												msg+='<img class="img-circle"';
 													msg+='	src="/tpm_project/sample/khj/img/cat.png"';
 														msg+='	style="width: 140px; height: 140px;" />';
-															msg+='</div>';
+															msg+='</div>'; */
 
-											<!--화면단  -->
-											msg+='<div class="content">';
+											//<!--화면단  -->
+										/* 	msg+='<div class="content">';
 												msg+='<div class="main">';
 													msg+='<input type="hidden" id="p_idx'+pson.project_idx+'"';
 														msg+='value="'+pson.project_idx+'">';
@@ -655,11 +655,11 @@
 
 																												msg+='</div>';
 																													msg+='</div>';
-																														msg+='</div>';
-										<!-- end front panel -->
+																														msg+='</div>'; */
+										//<!-- end front panel -->
 
-										/* <!-- 뒷화면 -->
-										<div class="back">
+										// <!-- 뒷화면 -->
+										/*<div class="back">
 											<div class="header">
 												<c:forEach var="pm_dto" items="${i.project_member_dtos}">
 													<c:choose>
@@ -760,19 +760,19 @@
 
 											</div>
 										</div> */
-										<!-- end back panel -->
+										//<!-- end back panel -->
 										
-										msg+='</div>';
-									<!-- end card -->
-									msg+='</div>';
-								<!-- end card-container -->
-								msg+='</div>';
-							<!-- end col sm 3 -->
+									//	msg+='</div>';
+									//<!-- end card -->
+									//msg+='</div>';
+								//<!-- end card-container -->
+								//msg+='</div>';
+							//<!-- end col sm 3 -->
 
-							msg+='<div class="space-400"></div>';
+							/* sg+='<div class="space-400"></div>';
 								msg+='</div>';
 									msg+='</div>';
-										msg+='</div>';//컨테이너-end
+							 */			//msg+='</div>';//컨테이너-end
 							
 					
 				
@@ -1437,7 +1437,7 @@ img {
 
 			<c:otherwise>
 				<div style="background: white;">
-					<div id="pcarousel" class="carousel-inner" role="listbox">
+					<div id="ptest" class="carousel-inner" role="listbox">
 						<!-- 	<div class="carousel-inner" role="listbox  -->
 						<c:forEach var="i" items="${plist}" varStatus="status">
 							<div class="item ${status.first?'active':'' }">
