@@ -13,9 +13,14 @@ public class CommentDAOImple implements CommentDAO {
 		this.sqlMap=sqlMap;
 	}
 	
-	public ArrayList<CommentDTO> getCommentList(CommentDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<CommentDTO> getCommentList(int work_idx) {
+		ArrayList<CommentDTO> arr = (ArrayList)sqlMap.selectList("listComment", work_idx);
+		return arr;
+	}
+	
+	public ArrayList<CommentDTO> CommentList(int work_idx) {
+		ArrayList<CommentDTO> arr = (ArrayList)sqlMap.selectList("commentList", work_idx);
+		return arr;
 	}
 
 	public int addComment(CommentDTO dto) {

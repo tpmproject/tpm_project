@@ -1,5 +1,7 @@
 package tpm.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +20,15 @@ public class CommentController {
 	//// 코멘트 ////
 	/** 코멘트 - 코멘트 데이터 반환 */
 	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
-	public ModelAndView commentList(){
+	public ModelAndView commentList(int work_idx){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("comment/commentList_d");
+		
+		ArrayList<CommentDTO> dto = cdao.CommentList(work_idx);
+		
+		mav.addObject("arr", dto);
+		mav.setViewName("comment/comment");
+		
 		return mav;
 	}
 	
@@ -30,16 +37,14 @@ public class CommentController {
 	public ModelAndView commentAdd(CommentDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println(dto.getComment_date());
+		
 		int result = cdao.addComment(dto);
+		//System.out.println(result);
 		
-		String msg = "ok";
-		
-		System.out.println(result);
+		String msg = "";
 		
 		if(result<=0){
 			msg = "등록 실패";
-			
 		}
 		
 		mav.addObject("msg", msg);
