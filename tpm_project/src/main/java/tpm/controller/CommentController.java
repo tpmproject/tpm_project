@@ -25,6 +25,8 @@ public class CommentController {
 	public ModelAndView commentAdd(CommentDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
+		
+		
 		mav.setViewName("comment/commentResult_d");
 		return mav;
 	}
