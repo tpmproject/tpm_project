@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import tpm.checklist.model.ChecklistDTO;
-import tpm.member.model.MemberDTO;
 
 public class WorkDTO {
 	
@@ -22,8 +21,8 @@ public class WorkDTO {
 	
 	private String project_name;
 	private String category_name;
-	private ArrayList<MemberDTO> member_dtos;
 	private ArrayList<ChecklistDTO> checklist_dtos;
+	private ArrayList<WorkMemberDTO> workmember_dtos;
 	
 	final public static int WORK_NEED_CONFIRM=10; //결재 필요 업무
 	final public static int WORK_NO_CONFIRM=20; //결재 불필요 업무
@@ -60,6 +59,28 @@ public class WorkDTO {
 		this.category_name = category_name;
 		this.checklist_dtos = checklist_dtos;
 	}
+	
+	
+
+
+	public WorkDTO(int work_idx, int category_idx, String work_title, Timestamp work_start, Timestamp work_end,
+			Timestamp work_complete, int work_confirm, int work_state, String project_name, String category_name,
+			ArrayList<ChecklistDTO> checklist_dtos, ArrayList<WorkMemberDTO> workmember_dtos) {
+		super();
+		this.work_idx = work_idx;
+		this.category_idx = category_idx;
+		this.work_title = work_title;
+		this.work_start = work_start;
+		this.work_end = work_end;
+		this.work_complete = work_complete;
+		this.work_confirm = work_confirm;
+		this.work_state = work_state;
+		this.project_name = project_name;
+		this.category_name = category_name;
+		this.checklist_dtos = checklist_dtos;
+		this.workmember_dtos = workmember_dtos;
+	}
+
 
 
 	public int getWork_idx() {
@@ -173,5 +194,30 @@ public class WorkDTO {
 	public void setChecklist_dtos(ArrayList<ChecklistDTO> checklist_dtos) {
 		this.checklist_dtos = checklist_dtos;
 	}
+
+
+
+	public ArrayList<WorkMemberDTO> getWorkmember_dtos() {
+		return workmember_dtos;
+	}
+
+
+
+	public void setWorkmember_dtos(ArrayList<WorkMemberDTO> workmember_dtos) {
+		this.workmember_dtos = workmember_dtos;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "WorkDTO [work_idx=" + work_idx + ", category_idx=" + category_idx + ", work_title=" + work_title
+				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_complete=" + work_complete
+				+ ", work_confirm=" + work_confirm + ", work_state=" + work_state + ", project_name=" + project_name
+				+ ", category_name=" + category_name + ", checklist_dtos=" + checklist_dtos + ", workmember_dtos="
+				+ workmember_dtos + "]";
+	}
+	
+	
 	
 }

@@ -106,11 +106,8 @@ public class WorkController {
 	
 	/** 업무 - 업무 추가 */
 	@RequestMapping(value="workAdd.do",  method=RequestMethod.POST)
-	public ModelAndView workAdd(WorkDTO dto, String[] member_idx, String workdate) throws ParseException{
+	public @ResponseBody Object workAdd(WorkDTO dto, String[] member_idx, String workdate) throws ParseException{
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workAdd_d");
-	
 		String temp[]=workdate.split("-");
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
@@ -129,19 +126,21 @@ public class WorkController {
 		String msg=dto.getWork_title();
 
 		if(work_idx>0){
+			
+			ArrayList<WorkMemberDTO> temp_arry_wmdto = new ArrayList<WorkMemberDTO>();
 			for(int i=0;i<member_idx.length;i++){
 				int w_idx=Integer.parseInt(member_idx[i]);
 				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
 				workDAO.workMemberInsert(mdto);
+				
+				temp_arry_wmdto.add(mdto);
+				
 			}
-
-			mav.addObject("wdto",dto);		
-			mav.addObject("msg",msg);
+			dto.setWorkmember_dtos(temp_arry_wmdto);
+			return dto;
 		}else{
-			msg="error";
-			mav.addObject("msg",msg);
+			return "error";
 		}
-		return mav;
 	}
 	
 	/** 업무 - 업무 수정 폼*/

@@ -369,11 +369,10 @@ function addWorkResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			if (result != null) {
-				var obj=eval('('+result+')');
-				var member = obj.members;
-				var work=obj.work;
+				
+				var work=eval('('+result+')');
+		
 				var cNode = document.getElementById('cp'+work.category_idx);
-				var workNode = document.getElementById('ct'+work.category_idx);
 				var dNode = document.createElement('div');
 			
 				var msg='<div id="wdiv'+work.work_idx+'" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		

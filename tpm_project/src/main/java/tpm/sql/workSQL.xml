@@ -96,8 +96,4 @@
 	<delete id="workDelete" parameterType="int">
 	delete from tpm_work where work_idx=#{work_idx}
 	</delete>
-	<select id="workMember" parameterType="int" resultType="tpm.member.model.MemberDTO">
-		select * from tpm_member where member_idx in(
-		select member_idx from tpm_work_member c where work_idx=#{work_idx})
-	</select>
 </mapper>
