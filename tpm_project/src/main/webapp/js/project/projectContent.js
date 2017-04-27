@@ -371,7 +371,7 @@ function addWorkResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			if (result != null) {
-				
+				window.alert(result);
 				var work=eval('('+result+')');
 		
 				var cNode = document.getElementById('cp'+work.category_idx);
