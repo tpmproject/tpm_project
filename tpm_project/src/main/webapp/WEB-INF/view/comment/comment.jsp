@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript" src="js/httpRequest.js"></script>
 <script>
-	
 /* function closeComment(){
 	localStorage.removeItem('work_idx');
 	$(comment_back).fadeOut();
@@ -42,8 +42,9 @@ function addCommentResult(){
 	
 } */
  	function comment(work_idx){
-		$('input[name=work_idx]').attr('value',work_idx); 
-} 
+		//$('input[name=work_idx]').attr('value',work_idx); 
+		window.alert('comment페이지 업무 idx='+work_idx);
+	} 
 </script>
 <body>
 	<div class="box-header">
@@ -77,11 +78,12 @@ function addCommentResult(){
 	<!-- /.chat -->
 	
 	<div class="box-footer">
-	<form name="newComment" action="javascript:commentAdd()">
+	<form name="newComment" action="commentAdd()" method="post">
 	  <div class="input-group">
     	<input type="text" class="form-control" id="comment" name="inputComment" placeholder="Type message...">
+    	<input type="text" name="work_idx" value="${work_idx}">
       	<div class="input-group-btn">
-	  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+	  		<button class="btn btn-success" type="button" onclick="commentAdd()"><i class="fa fa-plus"></i></button>
 	    </div>
 	  </div>
 	  </form>
