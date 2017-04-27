@@ -35,8 +35,11 @@ public class CommentController {
 		
 		String msg = "ok";
 		
+		System.out.println(result);
+		
 		if(result<=0){
 			msg = "등록 실패";
+			
 		}
 		
 		mav.addObject("msg", msg);
