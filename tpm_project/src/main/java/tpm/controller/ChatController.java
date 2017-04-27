@@ -158,7 +158,7 @@ public class ChatController {
                     + callback
                     + ",'"
                     + fileUrl
-                    + "','이미지를 업로드 하였습니다.'"
+                    + "'"
                     + ")</script>");
             printWriter.flush();
  

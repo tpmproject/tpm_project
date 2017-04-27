@@ -114,7 +114,7 @@ small, .small {
 	/* background: #f9f9f9; */
 }
 
-.chat li img {
+.chat li img.chat_content_user_img {
 	width: 45px;
 	height: 45px;
 	border-radius: 50em;
@@ -316,20 +316,24 @@ $(function(){
     //페이지 시작시 소켓 연결
     connect();
     
-    $('#input_chat_content').keypress(function(event){
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if(keycode == '13'){
-			//InsertChatContent();
-			if(event.shiftKey){
-				window.alert('1');
-			}
-		}
-		event.stopPropagation();
-	});
+   
     
     // 에디터 생성
-    CKEDITOR.replace('input_chat_content');
-    CKEDITOR.on('dialogDefinition', function( ev ){
+   var ckedit = CKEDITOR.replace('input_chat_content',{
+	   shiftEnterMode : '3'
+   });
+    
+ 	
+   
+   ckedit.on( 'key', function( event ) {
+	   if ( event.data.keyCode == 13 ) {
+	     event.cancel();
+	     var data = CKEDITOR.instances.input_chat_content.getData();
+	     ckedit.setData('');
+	     InsertChatContent(data);
+	   }
+	 });
+   /* CKEDITOR.on('dialogDefinition', function( ev ){
         var dialogName = ev.data.name;
         var dialogDefinition = ev.data.definition;
       
@@ -340,8 +344,24 @@ $(function(){
                 dialogDefinition.removeContents('advanced');
                 break;
         }
-    });
+    }); */
+   
+  
+   
 
+   
+  /*  $('#cke_input_chat_content').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+			//InsertChatContent();
+			if(event.shiftKey){
+				window.alert('1');
+			}
+		}
+		event.stopPropagation();
+	}); */
+   /*  var focusManager = new CKEDITOR.focusManager(ckedit);
+	focusManager.focus(); */
     
     /* $("#createChannelModal").modal('show').css({
 	    'margin-top': function () { //vertical centering
@@ -464,14 +484,18 @@ function makeRightChatContent(ctdto) {
 	var temp_msg = '';
 	temp_msg +=	'<li class="right clearfix">';
 	temp_msg +=		'<span class="chat-img pull-right">';
-	temp_msg +=			'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar">';
+	temp_msg +=			'<img class="chat_content_user_img" src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar">';
 	temp_msg +=		'</span>';
 	temp_msg +=		'<div class="chat-body clearfix">';
 	temp_msg +=			'<div class="header">';
 	temp_msg +=				'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
 	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small>';
 	temp_msg +=			'</div>';
-	temp_msg +=			'<p>' + ctdto.chat_content + '</p>';
+	temp_msg +=			'<div class="row">';
+	temp_msg +=				'<div class="col-md-12">';
+	temp_msg +=					ctdto.chat_content;
+	temp_msg +=				'</div>';
+	temp_msg +=			'</div>';
 	temp_msg +=		'</div>';
 	temp_msg +=	'</li>';
 	/* temp_msg += '<div class="item">';
@@ -496,14 +520,18 @@ function makeLeftChatContent(ctdto) {
 	var temp_msg = '';
 	temp_msg += '<li class="left clearfix">'; 
 	temp_msg += 	'<span class="chat-img pull-left"> ';
-	temp_msg += 		'<img src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar"> ';
+	temp_msg += 		'<img class="chat_content_user_img" src="/tpm_project/img/member/profile/' + ctdto.mdto.member_img + '" alt="User Avatar"> ';
 	temp_msg += 	'</span>';
 	temp_msg += 	'<div class="chat-body clearfix"> ';
 	temp_msg += 		'<div class="header"> ';
 	temp_msg += 			'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
 	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
 	temp_msg += 		'</div> ';
-	temp_msg += 		'<p>' + ctdto.chat_content +'</p>';
+	temp_msg +=			'<div class="row">';
+	temp_msg +=				'<div class="col-md-12">';
+	temp_msg +=					ctdto.chat_content;
+	temp_msg +=				'</div>';
+	temp_msg +=			'</div>';
 	temp_msg += 	'</div>';
 	temp_msg += '</li>';
 	
@@ -525,8 +553,8 @@ function makeLeftChatContent(ctdto) {
 	return temp_msg;
 }
 
-function InsertChatContent() {
-	var currInsertChatContent = $('#input_chat_content').val();
+function InsertChatContent(data) {
+	var currInsertChatContent = data;
 	if(currInsertChatContent != ''){
 		$.ajax({
 			url : 'chatAdd.do',
