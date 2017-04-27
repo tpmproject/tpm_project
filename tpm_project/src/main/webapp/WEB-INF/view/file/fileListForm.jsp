@@ -166,6 +166,8 @@
 		var f_name = document.getElementById('f_name');
 		f_name.innerHTML = filename;
 		
+		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 230px 400px;">';
+		file_con.innerHTML = msg;
 		
 		var param = "file_name="+filename;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
@@ -232,10 +234,10 @@
     	return function() {
     		if(httpRequest.readyState == 4){
     			if(httpRequest.status == 200){
-    				if(!httpRequest.responseText.match(null)){
+    			//window.alert(httpRequest.responseText);
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
-    				}
+    				
     			}
     		} else {
     			
@@ -269,7 +271,7 @@
 		file_content.innerHTML = msg;
     } */
     function fileContent_setting(responseText) {
-
+    
 		var msg ='';
 		msg +=responseText;	
 		var file_con = document.getElementById('fileCon');
@@ -295,14 +297,14 @@
 	
 	function fileList_setting(responseText) {
 		var json = JSON.parse(responseText);
-		
+	 
 		var msg = '';
-		var files = json.files; // 맵 객체로부터 members 값인 배열을 가져온다.
+		var files = json; // 맵 객체로부터 members 값인 배열을 가져온다.
 		for(var i = 0 ; i < files.length; i++){
 			
 			var file = files[i];
 			
-
+		
 			/* 파일 타입 뽑기 */
 			var filename=file.file_name.toLowerCase();
 		
@@ -336,7 +338,7 @@
 					msg +='<a style="margin-top: -10px; margin-left: 60px; vertical-align: inherit;" href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
 					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
 					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
-					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">안병민';
+					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file.memberdto.member_name;
 					
 					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
 					msg += '<li class="dropdown">';
@@ -398,7 +400,7 @@
 		     	 	
 		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 420px;">
 		     	 		
-    					<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; margin: 230px 380px;">
+    					
     				
 		      		</div>
 		         </div>

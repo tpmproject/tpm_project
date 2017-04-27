@@ -214,6 +214,7 @@
   
 <script>
 	
+	
 	function project_fileList(work_idx){
 		sessionStorage.setItem('delete_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
@@ -230,8 +231,9 @@
 		var file_con = document.getElementById('fileCon');
 		var f_name = document.getElementById('f_name');
 		//window.alert(filename);
+		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 15% 750px;">';
 		f_name.innerHTML = filename;
-		file_con.innerHTML = '';
+		file_con.innerHTML = msg;
 		
 		var param = "file_name="+filename;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
@@ -247,11 +249,8 @@
     	return function() {
     		if(httpRequest.readyState == 4){
     			if(httpRequest.status == 200){
-    				if(!httpRequest.responseText.match(null)){
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
-						//window.alert(responseText);
-    				}
     			}
     		} else {
 
@@ -262,14 +261,10 @@
     function result_process(responseText, ctype) {
 
 		if(ctype == 'WORK_FILELIST'){
-			
-			project_fileList_setting(responseText);
-			
-			
+			project_fileList_setting(responseText);	
 		} else if(ctype == 'FILE_CONTENT'){
 		//	window.alert('result_process');
 			fileContent_setting(responseText);
-			
 		} else if(ctype == ''){
 			search_modal_setting(responseText);
 		} else {
@@ -281,6 +276,7 @@
 	function project_fileList_setting(responseText) {
 
 		var json = JSON.parse(responseText);
+		//window.alert(responseText);
 		var files = json; // 맵 객체로부터 members 값인 배열을 가져온다.
 		var msg = '';
 	    
@@ -354,7 +350,7 @@
                 msg += '      </div>';
                 msg += '     </td>';
                 msg += '    <td style="width: 20%; display: table-cell;vertical-align: inherit; font-family: sans-serif; font-size:12px">'+file_now+'</td>';
-                msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.member_idx+'</td>';
+                msg += '    <td style="display: table-cell;vertical-align: inherit;">'+file.memberdto.member_name+'</td>';
                 msg += '    <td style="display: table-cell;vertical-align: inherit;">';
                 msg += '  	<button type="button" onclick="fileDown2(\''+file.file_name+'\')" class="btn btn-success btn-xs" title="Approved"';
                 msg += '				  style="padding: 3px 5px; font-size: 15px; line-height: 1.5; border-radius: 3px;">';
@@ -403,9 +399,9 @@
 		
 		
 	
-		file_con2.innerHTML = '';
+  		file_con2.innerHTML = '';
 		file_con2.innerHTML = msg;
-	
+		
 	}
 	
 	/* 파일 삭제 관련 */
@@ -424,7 +420,7 @@
 	} 
 	/*파일 다운  */
 	function fileDown2(file_name){
-		//window.alert(file_name);
+	
 		  location.href="fileDown.do?file_name="+file_name;
 	}
     </script>

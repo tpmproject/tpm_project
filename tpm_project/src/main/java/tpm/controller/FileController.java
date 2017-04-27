@@ -75,7 +75,7 @@ public class FileController {
 	
 	/** 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="fileList.do",  method=RequestMethod.POST)
-	public ModelAndView fileList(@RequestParam("project_idx")int project_idx,
+	public @ResponseBody ArrayList<FileDTO> fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam(value="line_name",required=false)String line_name,
 								 @RequestParam(value="sort",defaultValue="")String sort,
 								 @RequestParam(value="search_text",required=false)String search_text,
@@ -116,12 +116,8 @@ public class FileController {
 		System.out.println("컨트롤러에서의 세션으로 올라간 검색어:"+session.getAttribute("search_text"));*/
 		ArrayList<FileDTO> fileList=fdao.getFileList(fsdto,search_text);
 		
-		
-		ModelAndView mav = new ModelAndView();
-	    
-		mav.addObject("fileList", fileList);
-		mav.setViewName("file/fileList_d");
-		return mav;
+
+		return fileList;
 	}
 	
 
@@ -130,8 +126,8 @@ public class FileController {
 	public @ResponseBody ArrayList<FileDTO> fileList(@RequestParam("project_idx")int project_idx,
 								 @RequestParam("work_idx")int work_idx){
 		
-		//System.out.println("project_idx:"+project_idx);
-		//System.out.println("work_idx:"+work_idx);
+		System.out.println("project_idx:"+project_idx);
+		System.out.println("work_idx:"+work_idx);
 		
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("project_idx", project_idx);
@@ -139,7 +135,8 @@ public class FileController {
 		
 		
 		ArrayList<FileDTO>fileArr=fdao.getWorkFileList(map);
-	
+	   
+	    
 		return  fileArr;
 	}
 	

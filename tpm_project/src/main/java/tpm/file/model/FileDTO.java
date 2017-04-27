@@ -1,6 +1,9 @@
 package tpm.file.model;
 
 import java.sql.*;
+import java.util.List;
+
+import tpm.member.model.MemberDTO;
 
 public class FileDTO {
 
@@ -12,10 +15,49 @@ public class FileDTO {
 	private String file_size;
 	private Timestamp file_date;
 	private String file_path;
-
+	private MemberDTO memberdto;
+	
 	public FileDTO() {
 		super();
 	}
+
+	
+	
+	
+	
+	public MemberDTO getMemberdto() {
+		return memberdto;
+	}
+
+
+
+
+
+	public void setMemberdto(MemberDTO memberdto) {
+		this.memberdto = memberdto;
+	}
+
+
+
+
+
+	public FileDTO(int file_idx, int project_idx, int work_idx, int member_idx, String file_name, String file_size,
+			Timestamp file_date, String file_path, MemberDTO memberdto) {
+		super();
+		this.file_idx = file_idx;
+		this.project_idx = project_idx;
+		this.work_idx = work_idx;
+		this.member_idx = member_idx;
+		this.file_name = file_name;
+		this.file_size = file_size;
+		this.file_date = file_date;
+		this.file_path = file_path;
+		this.memberdto = memberdto;
+	}
+
+
+
+
 
 	public FileDTO(int file_idx, int project_idx, int work_idx, int member_idx, String file_name, String file_size,
 			Timestamp file_date, String file_path) {
@@ -40,6 +82,8 @@ public class FileDTO {
 		this.file_size = file_size;
 		this.file_path = file_path;
 	}
+
+	
 
 	public int getFile_idx() {
 		return file_idx;
@@ -105,11 +149,17 @@ public class FileDTO {
 		this.file_path = file_path;
 	}
 
+
+
+
+
 	@Override
 	public String toString() {
 		return "FileDTO [file_idx=" + file_idx + ", project_idx=" + project_idx + ", work_idx=" + work_idx
 				+ ", member_idx=" + member_idx + ", file_name=" + file_name + ", file_size=" + file_size
-				+ ", file_date=" + file_date + ", file_path=" + file_path + "]";
+				+ ", file_date=" + file_date + ", file_path=" + file_path + ", memberdto=" + memberdto + "]";
 	}
+
+	
 
 }

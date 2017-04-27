@@ -76,8 +76,7 @@ public class FileDAOImple implements FileDAO {
 	//업무쪽 파일리스트
 	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Integer> map) {
 		ArrayList<FileDTO> fileArr= (ArrayList) sqlMap.selectList("workFileList", map);
-		
-		
+	
 		return fileArr;
 	}
 }

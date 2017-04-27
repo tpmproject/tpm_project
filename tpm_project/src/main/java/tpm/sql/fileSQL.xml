@@ -3,33 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.file">
-	<!--파일 리스트  -->
-	<select id="allList" parameterType="int" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file 
-		where project_idx=#{project_idx}
-		
+
+	<resultMap id="memberResultMap" type="tpm.member.model.MemberDTO" >
+		<id property="member_idx" column="member_idx"/>
+		<result property="member_id" column="member_id"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_img" column="member_img"/>
+	</resultMap>
+	
+    <resultMap id="fileResultMap" type="tpm.file.model.FileDTO">
+        <id property="file_idx" column="file_idx"/>
+        <result property="project_idx" column="project_idx"/>
+        <result property="work_idx" column="work_idx"/>
+        <result property="member_idx" column="member_idx"/>
+        <result property="file_name" column="file_name"/>
+        <result property="file_size" column="file_size"/>
+        <result property="file_date" column="file_date"/>
+        <result property="file_path" column="file_path"/>
+        <collection property="memberdto" resultMap="memberResultMap"/>
+    </resultMap>
+    
+    <!--파일 리스트  -->
+	<select id="allList" parameterType="int" resultMap="fileResultMap">
+		SELECT * FROM tpm_file f, tpm_member m 
+		WHERE f.member_idx = m.member_idx and project_idx=#{project_idx}	
 	</select>
 	
-    <select id="fileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file
-		where project_idx=#{project_idx} and file_name like '%${search_text}%'
+    <select id="fileList" parameterType="Map" resultMap="fileResultMap">
+    	SELECT * FROM tpm_file f, tpm_member m 
+		WHERE f.member_idx = m.member_idx and project_idx=#{project_idx} 
+										  and file_name like '%${search_text}%'
+	</select>
+	
+	<select id="fileList_sort" parameterType="Map" resultMap="fileResultMap">
+		SELECT * FROM tpm_file f, tpm_member m WHERE f.member_idx = m.member_idx and 
+		project_idx= #{project_idx} and file_name like '%${search_text}%'
+		order by ${line_name} ${sort}
+	
+	
 	</select>
 	
 	<!--업무 파일 리스트  -->
-	<select id="workFileList" parameterType="Map" resultType="tpm.file.model.FileDTO">
+	<select id="workFileList" parameterType="Map" resultMap="fileResultMap">
 		
-		select * from tpm_file
-		where project_idx=${project_idx} and work_idx=${work_idx}
-		
+		SELECT * FROM tpm_file f, tpm_member m WHERE f.member_idx = m.member_idx and 
+		f.project_idx=#{project_idx} and f.work_idx =#{work_idx}
 	</select>
+
 	
-
-
-	<select id="fileList_sort" parameterType="Map" resultType="tpm.file.model.FileDTO">
-		select * from tpm_file
-		where project_idx= #{project_idx} and file_name like '%${search_text}%'
-		order by ${line_name} ${sort}
-	</select>
+	
 	<!-- 파일등록  -->
 	<insert id="addFile" parameterType="tpm.file.model.FileDTO">
 		insert into tpm_file values (file_idx.nextval,#{project_idx},#{work_idx},#{member_idx},#{file_name},#{file_size},sysdate,#{file_path})

@@ -85,7 +85,7 @@ var member_idx=${param.member_idx};
 		     	 <div class="row" id="fileContent" >
 		     	 	
 		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto -30px;">
-		     	 		<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 15% 40%;">
+		     	 		
 		     	 	
 
 		      		</div>
