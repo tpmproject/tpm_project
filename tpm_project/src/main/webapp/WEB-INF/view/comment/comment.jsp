@@ -41,6 +41,9 @@ function addCommentResult(){
 	
 	
 } */
+ 	function comment(work_idx){
+		$('input[name=work_idx]').attr('value',work_idx); 
+} 
 </script>
 <body>
 	<div class="box-header">
@@ -62,7 +65,7 @@ function addCommentResult(){
 	      best themes on the market
 	    </p>
 		    <div class="attachment">
-		      <h4> 첨부 파일 :</h4>
+		      <h4> 첨부 파일 : </h4>
 		      <p class="filename">
 		        Theme-thumbnail-image.jpg
 		      </p>

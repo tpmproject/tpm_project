@@ -215,12 +215,10 @@
 <script>
 	function commentAdd(work_idx){
 		window.alert(work_idx);		
-		var t = document.getElementById('comment').value;
-		window.alert(t);
 		
 		var param = 'work_idx='+ work_idx +
-			'&member_idx=' + ${s_memeber_idx } + '&comment_content=' + document.newComment.inputComment.value;
-			
+			'&member_idx=' + ${s_member_idx } + '&comment_content=' + document.newComment.inputComment.value;
+		window.alert(param);
 		sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	}
 	

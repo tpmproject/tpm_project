@@ -789,6 +789,7 @@ function workSide(work_idx){
 	//window.alert('컨텐트폼쪽 업무 idx: '+work_idx);
 	project_fileList(work_idx);
 	fileUpload(work_idx);
+	comment(work_idx);
 	commentAdd(work_idx);
 	return work_idx;
 } 
