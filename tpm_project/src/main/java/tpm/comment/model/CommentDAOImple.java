@@ -19,8 +19,8 @@ public class CommentDAOImple implements CommentDAO {
 	}
 
 	public int addComment(CommentDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlMap.update("addComment", dto);
+		return count;
 	}
 
 	public int updateComment(CommentDTO dto) {

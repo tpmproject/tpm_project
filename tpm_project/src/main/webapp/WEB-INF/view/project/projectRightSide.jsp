@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
 
- <style>
+<style>
         article.content {
             margin: -30px 50px;
             width:400px;
@@ -213,6 +213,26 @@
     </style>
   
 <script>
+	function commentAdd(work_idx){
+		window.alert(work_idx);		
+		var t = document.getElementById('comment').value;
+		window.alert(t);
+		
+		var param = 'work_idx='+ work_idx +
+			'&member_idx=' + ${s_memeber_idx } + '&comment_content=' + document.newComment.inputComment.value;
+			
+		sendRequest('commentAdd.do', param, commentAddResult, 'POST');
+	}
+	
+	function commentAddResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var result = XHR.responseText;
+				window.alert(result);
+			}
+		}
+	}
+	
 	
 	function project_fileList(work_idx){
 		sessionStorage.setItem('delete_work_idx',work_idx);

@@ -7,22 +7,7 @@
 <title>Insert title here</title>
 </head>
 <script>
-	function commentAdd(){
-		var param = 'work_idx='+ ${work_idx} +
-			'&member_idx=' + ${s_memeber_idx } + '&comment_content=' + document.newComment.inputComment.value;
-			
-		sendRequest('commentAdd.do', param, commentAddResult, 'POST');
-	}
 	
-	function commentAddResult(){
-		if(XHR.readyState==4){
-			if(XHR.status==200){
-				var result = XHR.responseText;
-				window.alert(result);
-			}
-		}
-		
-	}
 /* function closeComment(){
 	localStorage.removeItem('work_idx');
 	$(comment_back).fadeOut();
@@ -91,7 +76,7 @@ function addCommentResult(){
 	<div class="box-footer">
 	<form name="newComment" action="javascript:commentAdd()">
 	  <div class="input-group">
-    	<input type="text" class="form-control" name="inputComment" placeholder="Type message...">
+    	<input type="text" class="form-control" id="comment" name="inputComment" placeholder="Type message...">
       	<div class="input-group-btn">
 	  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
 	    </div>
