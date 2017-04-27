@@ -30,7 +30,7 @@ public class CommentController {
 	public ModelAndView commentAdd(CommentDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println(dto.getComment_date());
 		int result = cdao.addComment(dto);
 		
 		String msg = "ok";

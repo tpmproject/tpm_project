@@ -5,7 +5,7 @@
 <mapper namespace="tpm.comment">
 	<insert id="addComment" parameterType="tpm.comment.model.CommentDTO">
 		insert into tpm_comment
-		values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, 'sysdate')
+		values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, sysdate)
 	</insert>
 
 </mapper>
