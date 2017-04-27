@@ -33,7 +33,7 @@ public class CommentController {
 		
 		int result = cdao.addComment(dto);
 		
-		String msg = "";
+		String msg = "ok";
 		
 		if(result<=0){
 			msg = "등록 실패";

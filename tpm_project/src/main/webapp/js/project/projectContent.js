@@ -791,7 +791,6 @@ function workSide(work_idx){
 	project_fileList(work_idx);
 	fileUpload(work_idx);
 	comment(work_idx);
-	commentAdd(work_idx);
 	return work_idx;
 } 
 function showWorkTable(work_idx){
