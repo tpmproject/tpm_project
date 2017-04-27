@@ -18,9 +18,26 @@
     
     <div class="container" style="width:100%">
       <div class="row">
-        <div class="col-md-12" style="width: 590px; margin: -10px -10px;">
+        <div class="col-md-12" style="width: 590px; height: 610px; margin: -10px -10px;">
           <div class="table-responsive"></div>
-          <table id="mytable" class="table table-bordred table-striped" style="width:100%;table-layout: fixed; border-spacing: 0;">
+          
+				<div class="container1">
+					<div class="row">
+						<div class="span12" style="width:300px">
+							   <form id="custom-search-form" style="width: 300px;"
+									class="form-search form-horizontal pull-right">
+								    <div class="input-append span12" style="width:300px">
+										<input type="text" class="search-query" placeholder="Search" style="width: 530px; height: 35px; margin:5px -15px;">
+										<button type="submit" class="btn" style="margin: 9px;">
+											<i class="icon-search"></i>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+				<table id="mytable" class="table table-bordred table-striped" style="width:100%;table-layout: fixed; border-spacing: 0;">
             <thead>
               <tr>
                 <th style="width:40%">파일 이름</th>
