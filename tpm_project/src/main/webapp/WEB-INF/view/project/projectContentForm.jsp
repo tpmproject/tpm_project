@@ -98,7 +98,7 @@ var member_idx=${param.member_idx};
   <!--모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
-	<div id="cbody" style="width:${(pdto.category_num +2)*210}px">
+	<div id="cbody" style="width:${(pdto.category_num +2)*210}px" style="margin-left: 20px;">
 		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
