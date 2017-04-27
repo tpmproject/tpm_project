@@ -190,6 +190,7 @@ function showf(category_idx){
 	$(work_modal).fadeIn('150');
 	$(w_modal).show();
 	$(btnwork2).hide();
+	document.getElementById('work_m').innerHTML='';
 	document.newWork.category_idx.value=category_idx;
 }
 function showf2() {
@@ -244,7 +245,7 @@ function shows(){
 	
 	$(w_modal).fadeOut();
 	$(btnwork2).fadeIn();
-	
+	hideTen();	
 	sendRequest('workAdd.do?project_idx='+project_idx,null,showsResult,'GET');
 	
 }
@@ -259,7 +260,7 @@ function shows2(){
 	
 	$(w_modal2).hide();
 	$(btnwork4).show();
-	
+	hideTen();	
 	var w=document.changeWork.work_idx.value;
 	sendRequest('workUpdate.do?project_idx='+project_idx+'&work_idx='+w+'&member_idx='+member_idx,null,shows2Result,'GET');
 	
@@ -328,6 +329,7 @@ function closem() {
 	hideTen();	
 	document.newWork.reset();
 	document.changeWork.reset();
+	document.getElementById('work_m').innerHTML='';
 }
 function addWork(){
 
@@ -407,8 +409,7 @@ function addWorkResult(){
 				
 				dNode.innerHTML = msg;
 				cNode.appendChild(dNode);
-				$(workback).fadeOut('100');
-				$(work_modal).fadeOut('100');
+				closem();
 				hideTen();	
 				document.newWork.reset();
 				checkResult()

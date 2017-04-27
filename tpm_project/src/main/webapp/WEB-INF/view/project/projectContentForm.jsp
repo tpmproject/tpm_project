@@ -340,7 +340,7 @@ var member_idx=${param.member_idx};
 
 
 	<!-- 업무 설정 modal -->
-	<form name="newWork" action="workAdd.do" method="post">
+	<form name="newWork" id="newWork" action="workAdd.do" method="post">
 		<div id="workback" onclick="closem()"></div>
 		<div id="work_modal">
 <%-- 		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%> --%>

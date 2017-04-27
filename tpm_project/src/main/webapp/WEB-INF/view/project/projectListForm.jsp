@@ -122,6 +122,7 @@
 		$(main_modal).fadeIn('150');
 		$(f_modal).show();
 		$(smodal).hide();
+		document.getElementById('project_Member').innerHTML='';
 	}
 	function showf2() {
 		$(f_modal2).show();
