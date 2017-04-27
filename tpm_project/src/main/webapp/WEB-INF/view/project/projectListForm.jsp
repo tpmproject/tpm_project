@@ -598,8 +598,9 @@
 				}else{
 					var pmarry = pson.project_member_dtos;
 					var divNode=document.createElement('DIV');
-					divNode.setAttribute('id','project_div'+pson.project_idx);
-					divNode.setAttribute('style','margin-top: 15px;');
+					divNode.setAttribute('class','item ');
+					//divNode.setAttribute('style','margin-top: 15px;');
+					var cNode = document.getElementById('pcarousel');
 					
 					
 					/* var msg='<div class="box">';
@@ -611,44 +612,50 @@
 					msg+='<p id="pc'+pson.project_idx+'">'+pson.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
 					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>'; */
+					
 					/* var pmarry = pson.project_member_dtos;
 				    pmarry[i].pro_m */
-				    
-				    var msg='<div class="col-sm-10 col-sm-offset-1">';
-				    msg='<div class="col-md-4 col-sm-6" style="width: 500px;">';
-				    	msg='<div class="card-container manual-flip">';
-				    		msg='<div class="card">';
-				    			msg='<div class="front">';
-								/* 			<!--  배경화면--> */
-											msg='<div class="cover">';
-												/* <!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> --> */
-											msg='</div>';
+				   var msg=' <div id="contain" class="container-fluid ">';
+				   msg+='<div id="project_div'+pson.project_idx+'" style="margin-top: 15px;">';
+					   msg+='<div class="col-sm-10 col-sm-offset-1">';
+						   msg+='<div class="col-md-4 col-sm-6" style="width: 500px;">';
+							   msg+='<div class="card-container manual-flip">';
+								   msg+='<div class="card">';
+									msg+='	<div class="front">';
+											//<!--  배경화면-->
+											msg+='<div class="cover">';
+											//	<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
+													msg+='</div>';
 
-											/* <!-- 상태 아이콘 --> */
-msg='<div class="user">';
-	msg='<img class="img-circle" src="/tpm_project/sample/khj/img/cat.png"style="width: 140px; height: 140px;" />';
-		msg='</div>';
+											//<!-- 상태 아이콘 -->
+											msg+='<div class="user">';
+												msg+='<img class="img-circle"';
+													msg+='	src="/tpm_project/sample/khj/img/cat.png"';
+														msg+='	style="width: 140px; height: 140px;" />';
+															msg+='</div>';
 
-											/* <!--화면단  --> */
-											msg='<div class="content">';
-												msg='<div class="main">';
-													msg='<input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
-													msg='<h4 id="pn'+pson.project_idx+'">';
-													msg='<span class="hidden-xs">'+pson.project_name+'</span>';
-													msg='</h4>';
-														msg='<p class="profession">TPM Project</p>';
-															msg='<p class="text-center">';
-																msg='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span>';
-																msg='</p>';
-																	msg='</div>';
-																		msg='<div class="footer"  rel="tooltip"title="프로젝트 확인">';
-																			msg='<button class="btn btn-simple" onclick="rotateCard(this)">';
-																				msg='<i class="fa fa-mail-forward"></i> Manual Rotation';
-																					msg='</button>';
+											<!--화면단  -->
+											msg+='<div class="content">';
+												msg+='<div class="main">';
+													msg+='<input type="hidden" id="p_idx'+pson.project_idx+'"';
+														msg+='value="'+pson.project_idx+'">';
+															msg+='<h4 id="pn'+pson.project_idx+'">';
+																msg+='<span class="hidden-xs">'+pson.project_name+'</span>';
+																	msg+='</h4>';
+																		msg+='<p class="profession">TPM Project</p>';
+																			msg+='<p class="text-center">';
+																				msg+='<span id="pc'+pson.project_idx+'"'+pson.project_content+'</span>';
+																					msg+='</p>';
+																						msg+='</div>';
+																							msg+='<div class="footer" rel="tooltip" title="프로젝트 확인">';
+																								msg+='<button class="btn btn-simple"';
+																									msg+='onclick="rotateCard(this)">';
+																										msg+='<i class="fa fa-mail-forward"></i> Manual Rotation';
+																											msg+='</button>';
 
-																						msg='</div>';
-																							msg='</div>';
-																								msg='</div>';
+																												msg+='</div>';
+																													msg+='</div>';
+																														msg+='</div>';
 										<!-- end front panel -->
 
 										/* <!-- 뒷화면 -->
@@ -660,11 +667,12 @@ msg='<div class="user">';
 															<c:if
 																test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																<div style="float: right;">
-																	<span  rel="tooltip"title="수정하기"
+																	<span rel="tooltip" title="수정하기"
 																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
 																		<i class="glyphicon glyphicon-cog"
 																		style="margin-bottom: 0px;"></i>
-																	</span> <span rel="tooltip"title="삭제하기"onclick="projectDelete('${i.project_idx}')">
+																	</span> <span rel="tooltip" title="삭제하기"
+																		onclick="projectDelete('${i.project_idx}')">
 																		<i class="glyphicon glyphicon-remove"
 																		style="margin-bottom: 0px;"></i>
 																	</span>
@@ -687,7 +695,8 @@ msg='<div class="user">';
 													</c:forEach>
 													<hr>
 													<div class="stats-container">
-														<div class="stats" align="center"  rel="tooltip"title="업무확인">
+														<div class="stats" align="center" rel="tooltip"
+															title="업무확인">
 															<a class="btn btn-link"
 																href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
 																class="fa fa-clone left"></i>업무확인</a>
@@ -715,9 +724,8 @@ msg='<div class="user">';
 																	<c:if
 																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																		<div class="stats">
-																		평가하기
-																			<span class="print" rel="tooltip" title="평가하기">
-																				<a
+																			평가하기 <span class="print" rel="tooltip"
+																				title="평가하기"> <a
 																				onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
 																				class="btn btn-link"><i
 																					class="glyphicon glyphicon-check"></i>평가하기</a>
@@ -752,21 +760,26 @@ msg='<div class="user">';
 
 											</div>
 										</div> */
-										/* <!-- end back panel --> */
-									msg='</div>';
-									/* <!-- end card --> */
-								msg='</div>';
-								/* <!-- end card-container --> */
-							msg='</div>';
-							/* <!-- end col sm 3 --> */
-							msg='<div class="space-400"></div>';
-							msg='</div>';
+										<!-- end back panel -->
+										
+										msg+='</div>';
+									<!-- end card -->
+									msg+='</div>';
+								<!-- end card-container -->
+								msg+='</div>';
+							<!-- end col sm 3 -->
+
+							msg+='<div class="space-400"></div>';
+								msg+='</div>';
+									msg+='</div>';
+										msg+='</div>';//컨테이너-end
+							
 					
 				
 				    
 				    
 					divNode.innerHTML=msg;
-					document.getElementById('contain').appendChild(divNode);
+					cNode.appendChild(divNode);
 		
 				}
 				// history.go(0);
@@ -1424,7 +1437,7 @@ img {
 
 			<c:otherwise>
 				<div style="background: white;">
-					<div class="carousel-inner" role="listbox">
+					<div id="pcarousel" class="carousel-inner" role="listbox">
 						<!-- 	<div class="carousel-inner" role="listbox  -->
 						<c:forEach var="i" items="${plist}" varStatus="status">
 							<div class="item ${status.first?'active':'' }">
