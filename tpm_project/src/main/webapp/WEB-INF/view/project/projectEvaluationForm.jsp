@@ -156,11 +156,11 @@ function addTendency_lResult(){
 		<div id="tendency_m" class="col-md-12" >
 			<form class="form-horizontal" name="memberTendency" action="memberUpdate.do">
 			<div class="col-md-5" style="width: 250px; margin-bottom:25px;" id="bt${arr.member_idx}" >
-			<img src="/tpm_project/img/member/profile/${arr.member_img}" style="width: 128px; height: 128px;">
-				<h4>${arr.member_name}(${arr.member_id})</h4>
+			<img src="/tpm_project/img/member/profile/${arr.member_img}" style="width: 115px; height: 115px; border-radius: 50%; margin-left: 35%; margin-top: 5%;">
+				<h5 style="margin-left: 32%;">${arr.member_name}</br>(${arr.member_id})</h5>
 				</div>
-				<div class="col-md-6" style="margin-top: 2%;">
-					<a class="btn btn-default disabled">외향성</a> 
+				<div class="col-md-6" style="margin-top: 2%; margin-left: 5%;">
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #f6d15c; margin-bottom: 8px;">외향성</a> 
 					<select id="tendency_e">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -168,7 +168,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">사고형</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #eccfc9; margin-left: 8px; margin-bottom: 8px;">내향성</a>
 					<select id="tendency_i">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -176,7 +176,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">내향성</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #687ac8; margin-left: 8px; margin-bottom: 8px;">감각형</a>
 					<select id="tendency_s">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -184,15 +184,15 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">감정형</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #98b446; margin-left: 8px; margin-bottom: 8px;">직감형</a>
 					<select id="tendency_n">
 						<option value="5">5</option>
 						<option value="4">4</option>
 						<option value="3">3</option>
 						<option value="2">2</option>
 						<option value="1">1</option>
-					</select>
-					<a class="btn btn-default disabled">감각형</a>
+					</select></br>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #f27025;">사고형</a>
 					<select id="tendency_t">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -200,7 +200,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">판단형</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #d6317d; margin-left: 8px;">감정형</a>
 					<select id="tendency_f">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -208,7 +208,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">직감형</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #41919d; margin-left: 8px;">판단형</a>
 					<select id="tendency_j">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -216,7 +216,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled">인식형</a>
+					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #2780bf; margin-left: 8px;">인식형</a>
 					<select id="tendency_p">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -226,15 +226,14 @@ function addTendency_lResult(){
 					</select>
 				</div>
 				<br>
-				<div>
+				<div class="col-md-7" style="margin-top: 33px;">
 					<c:if test="${count==1}">
-					<button type="reset" class="btn btn-reset" style="background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="reset" class="btn btn-reset" style="margin-left: 28%; background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn_tb" name="btn_tendencyok" onclick="addTendency_l(${arr.member_idx})">완료</button>
 					</c:if>
 					<c:if test="${count>1 }">
-					<button type="reset" class="btn btn-reset" style="background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
+					<button type="reset" class="btn btn-reset" style="margin-left: 28%; background-color:#1e282c; color:white;" id="btn_reset" name="btn_reset">초기화</button>
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn_tb" name="btn_tendencyok" onclick="addTendency(${arr.member_idx})">완료</button>
-					<hr>
 					</c:if>
 				</div>
 			</form>

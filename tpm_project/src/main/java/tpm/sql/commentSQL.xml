@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.comment">
 
-	<resultMap id="memberResultMap" type="tpm.member.model.MemberDTO" >
+<!-- 	<resultMap id="memberResultMap" type="tpm.member.model.MemberDTO" >
 		<id property="member_idx" column="member_idx"/>
 		<result property="member_id" column="member_id"/>
 		<result property="member_name" column="member_name"/>
@@ -18,7 +18,7 @@
         <result property="comment_content" column="comment_content"/>
         <result property="comment_date" column="comment_date"/>
         <collection property="memberdto" resultMap="memberResultMap"/>
-    </resultMap>
+    </resultMap> -->
     
 	<insert id="addComment" parameterType="tpm.comment.model.CommentDTO">
 		insert into tpm_comment
@@ -33,8 +33,8 @@
 		where work_idx=283
 		order by comment_date asc
 	</select>
-	<select id="commentList" parameterType="int" resultType="commentResultMap">
+<!-- 	<select id="commentList" parameterType="int" resultType="commentResultMap">
 	SELECT * FROM tpm_comment c, tpm_member m 
 		WHERE c.member_idx = m.member_idx and work_idx=#{work_idx}
-	</select>
+	</select> -->
 </mapper>
