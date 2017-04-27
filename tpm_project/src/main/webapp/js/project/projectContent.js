@@ -370,11 +370,12 @@ function addWorkResult(){
 			var result = XHR.responseText;
 			if (result != null) {
 				var obj=eval('('+result+')');
+				var member = obj.members;
 				var work=obj.work;
 				var cNode = document.getElementById('cp'+work.category_idx);
 				var workNode = document.getElementById('ct'+work.category_idx);
 				var dNode = document.createElement('div');
-				
+			
 				var msg='<div id="wdiv'+work.work_idx+'" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 				msg+='<i id="showWork'+work.work_idx+'"></i>';
 				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
@@ -385,7 +386,9 @@ function addWorkResult(){
 				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+work.work_start+'<br>';
 				msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 				msg+='~'+work.work_end+'</td></tr>';
-				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div></td></tr>';
+				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
+				msg+='<c:forEach var="mdto" items="${marr}"><c:if test="${mdto.work_idx eq '+work.work_idx+'">';
+				msg+='<span>${mdto.member_name}</span></c:if></c:forEach></td></tr>';
 				msg+='<tr><td colspan="2"><form action="javascript:addCheck('+work.work_idx+')">';
 				msg+='<div class="table_i glyphicon glyphicon-check" onclick="showChecklist('+work.work_idx+')"></div>';
 				msg+='<input type="text" id="content'+work.work_idx+'" placeholder="체크리스트" style="width: 60%;" required="required">';
@@ -409,6 +412,7 @@ function addWorkResult(){
 				$(work_modal).fadeOut('100');
 				hideTen();	
 				document.newWork.reset();
+				checkResult()
 			}	
 		}
 	}
@@ -468,6 +472,7 @@ function updateWorkResult(){
 			//ws
 			msg=['work',wi,'work_state',ws];
 			updateWS(msg);
+			
 		}
 	}
 }
@@ -784,7 +789,6 @@ function workSide(work_idx){
 	//window.alert('컨텐트폼쪽 업무 idx: '+work_idx);
 	project_fileList(work_idx);
 	fileUpload(work_idx);
-	comment(work_idx);
 	return work_idx;
 } 
 function showWorkTable(work_idx){
