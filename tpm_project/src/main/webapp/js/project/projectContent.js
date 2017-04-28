@@ -418,9 +418,7 @@ function addWorkResult(){
 				dNode.innerHTML = msg;
 				cNode.appendChild(dNode);
 				closem();
-				hideTen();	
 				document.newWork.reset();
-				checkResult()
 			}	
 		}
 	}
