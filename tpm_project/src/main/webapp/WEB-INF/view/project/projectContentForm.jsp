@@ -98,7 +98,7 @@ var member_idx=${param.member_idx};
   <!--모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
-	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*210}px">
+	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*220+100}px">
 		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
@@ -147,7 +147,13 @@ var member_idx=${param.member_idx};
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
-								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
+							<c:choose>
+								<c:when test="${wdto.work_state eq 1}"><c:set var="pan" value="panel-info"></c:set></c:when>
+								<c:when test="${wdto.work_state eq 2}"><c:set var="pan" value="panel-warning"></c:set></c:when>
+								<c:when test="${wdto.work_state eq 3}"><c:set var="pan" value="panel-success"></c:set></c:when>
+							</c:choose> 
+								<div class="panel ${pan}">
+								<div id="wdiv${wdto.work_idx}" class="wdiv panel-heading" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
@@ -159,6 +165,7 @@ var member_idx=${param.member_idx};
 									</c:if>
 
 								</div>
+								<div class="panel-body" style="padding: 0px;">
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
@@ -304,6 +311,8 @@ var member_idx=${param.member_idx};
 										</tr>
 									</tbody>
 								</table>
+								</div>
+							</div>
 							</c:forEach>
 						</c:if>
 					</div>

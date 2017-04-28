@@ -63,7 +63,7 @@ function onMessage(evt) {
 		ws_categoryAdd(idx,name);
 		
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)+210;
+		wid=parseInt(wid)+220;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
@@ -80,7 +80,7 @@ function onMessage(evt) {
 		
 		$('#cp'+idx).remove();
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)-210;
+		wid=parseInt(wid)-220;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
@@ -184,7 +184,7 @@ function ws_categoryAdd(idx,name){
 		
 		dNode.innerHTML=innerH;
 		cbodyNode.insertBefore(dNode,cateNode);
-		cbodyNode.style.width = parseInt(cbodyNode.style.width)+210+"px";
+		cbodyNode.style.width = parseInt(cbodyNode.style.width)+220+"px";
 		document.newCategory.category_name.value='';
 	
 }
@@ -502,6 +502,12 @@ function changeWorkState(wi,ws){
 		}
 		firstC=firstC.nextSibling;
 	}while(firstC!=lastC);
+	var pc=document.getElementById('wdiv'+wi).parentNode;
+	switch(ws){
+	case 1 : pc.setAttribute('class','panel panel-info');break;
+	case 2 : pc.setAttribute('class','panel panel-warning');break;
+	case 3 : pc.setAttribute('class','panel panel-success');
+	}
 	
 }
 
