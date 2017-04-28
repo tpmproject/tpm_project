@@ -308,8 +308,7 @@ var skin_color='';
 											</c:choose> --%>
 
 											<td align="right">
-												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx}')" class="menu-toggle">코멘트</a>/ 
-												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx}')" class="menu-toggle">첨부파일</a>	
+												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx}')" class="menu-toggle">코멘트/파일</a>	
 											</td>
 										</tr>
 									</tbody>
