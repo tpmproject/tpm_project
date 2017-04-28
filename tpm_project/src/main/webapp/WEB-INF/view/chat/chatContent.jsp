@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Chat box -->
-<div class="box box-success">
+<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 	<div class="box-header">
 		<i class="fa fa-comments-o"></i>
 		<h3 class="box-title">Chat</h3>
