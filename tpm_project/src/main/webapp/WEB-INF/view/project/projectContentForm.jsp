@@ -371,14 +371,14 @@ var member_idx=${param.member_idx};
 				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="workmember_div">
+							<div class="col-md-3" style="width:330px;">
 								<h4 class="text-center">프로젝트 멤버 목록</h4>
 								<div id="project_m"
 									style="width: 100%; height: 320px; overflow-y: scroll"
 									ondrop="drop3(event)" ondragover="allowDrop(event)"
 									ondragstart="drag(event)"></div>
 							</div>
-							<div class="workmember_div" ondrop="drop(event)"
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
 								ondragover="allowDrop(event)" ondragstart="drag(event)">
 								<h4 class="text-center">업무 담당자</h4>
 								<div id="work_m"
@@ -430,21 +430,25 @@ var member_idx=${param.member_idx};
 				</div>
 			</div>
 			<div id="btnwork4">
-				<div align="center">
-					<div class="workmember_div">
-						<h4 class="text-center">프로젝트 멤버 목록</h4>
-						<div id="project_m2"
-							style="width: 100%; height: 320px; overflow-y: scroll"
-							ondrop="drop5(event)" ondragover="allowDrop(event)"
-							ondragstart="drag(event)"></div>
-					</div>
-					<div class="workmember_div" ondrop="drop(event)"
-						ondragover="allowDrop(event)" ondragstart="drag(event)">
-						<h4 class="text-center">업무 담당자</h4>
-						<div id="work_m2"
-							style="width: 100%; height: 320px; overflow-y: scroll"
-							ondrop="drop4(event)" ondragover="allowDrop(event)"
-							ondragstart="drag(event)"></div>
+				<div class="section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3" style="width:330px;">
+								<h4 class="text-center">프로젝트 멤버 목록</h4>
+								<div id="project_m2"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop5(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
+							</div>
+							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
+								ondragover="allowDrop(event)" ondragstart="drag(event)">
+								<h4 class="text-center">업무 담당자</h4>
+								<div id="work_m2"
+									style="width: 100%; height: 320px; overflow-y: scroll"
+									ondrop="drop4(event)" ondragover="allowDrop(event)"
+									ondragstart="drag(event)"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div margin-top="10" align="center">
