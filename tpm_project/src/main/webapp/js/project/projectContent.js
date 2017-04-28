@@ -6,6 +6,9 @@ window.onload=function(){
 	connect(project_idx);
 	var hei=window.innerHeight-130;
 	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
+	
+	$('#loading_div').hide();
+	$('#load_s').hide();
 }
 
 $(window).resize(function() {
