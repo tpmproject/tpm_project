@@ -681,9 +681,9 @@
 											msg+='<div class="main">';
 												msg+='<h4 class="text-center">'+pmarry.project_name+'</h4>';
 													msg+='<hr>';
-														/* for(var i=0;i<dtos.length;i++){
+														 for(var i=0;i<dtos.length;i++){
 															msg+='<h5 class="text-center">'+dtos[i].member_id+'</h5>';
-														} */
+														} 
 													msg+='<hr>';
 													msg+='<div class="stats-container">';
 														msg+='<div class="stats" align="center" rel="tooltip"';
