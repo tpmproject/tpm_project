@@ -535,11 +535,11 @@ function ws_checkResult(result){
 		ch.className='glyphicon glyphicon-unchecked';
 		$(ch).fadeIn('50');
 		ch_s.value='0';
-		
+		$('#div_ch'+result).show();
 		chChecked.val(chChecked.val()-1);
 	}else if(ch_sv=='0'){
-		
-		if(div_ch.value=='0'){
+		var check_hide=$('#checkHide'+work_idx).val();
+		if(check_hide=='0'){
 			ch.className='glyphicon glyphicon-ok';
 			$('#div_ch'+result).hide('100');
 		}else{
