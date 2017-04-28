@@ -6,7 +6,8 @@ window.onload=function(){
 	$('.content').mCustomScrollbar({axis:"yx"});
 	
 	connect(project_idx);
-
+	var hei=window.innerHeight-130;
+	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
 }
 
 $(window).resize(function() {
@@ -85,13 +86,18 @@ function onMessage(evt) {
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
-	
+	//checklist add
 	if(data[0]=='checkAdd'){
 		var wi=data[1];
 		var chc=data[2];
 		var chi=data[3];
 		
 		ws_addCheckResult(wi,chc,chi);
+	}
+	//checklist check
+	if(data[0]=='check'){
+		var idx=data[1];
+		ws_checkResult(idx);
 	}
 	
 }
@@ -507,43 +513,49 @@ function checkResult() {
 			var result = XHR.responseText;
 			result=parseInt(result); //checklist_idx
 			
-			var ch=document.getElementById('ch'+result);
-			var ch_s=document.getElementById('ch_state'+result);
-			var ch_sv=document.getElementById('ch_state'+result).value;
-			
-			var div_ch=document.getElementById('div_ch'+result);
-			var work_idx=div_ch.parentNode.getAttribute('id').substring(9);
-			var chTotal=$('#chTotal'+work_idx).val();
-			var chChecked=$('#chChecked'+work_idx);
-			
-			div_ch=div_ch.parentNode.lastChild.previousSibling;
-			
-			if(ch_sv=='1'){
-				$(ch).hide();
-				ch.className='glyphicon glyphicon-unchecked';
-				$(ch).fadeIn('50');
-				ch_s.value='0';
-				
-				chChecked.val(chChecked.val()-1);
-			}else if(ch_sv=='0'){
-				
-				if(div_ch.value=='0'){
-					ch.className='glyphicon glyphicon-ok';
-					$('#div_ch'+result).hide('100');
-				}else{
-					$(ch).hide();
-					ch.className='glyphicon glyphicon-ok';
-					$(ch).fadeIn('50');
-				}
-				ch_s.value='1';
-				
-				chChecked.val(parseInt(chChecked.val())+1);
-			}
-			
-			document.getElementById('chBar'+work_idx).style.width=chChecked.val()/chTotal *100+'%';
+			updateWS('check,'+result);
+
 		}
 	}
 }
+function ws_checkResult(result){
+	var ch=document.getElementById('ch'+result);
+	var ch_s=document.getElementById('ch_state'+result);
+	var ch_sv=document.getElementById('ch_state'+result).value;
+	
+	var div_ch=document.getElementById('div_ch'+result);
+	var work_idx=div_ch.parentNode.getAttribute('id').substring(9);
+	var chTotal=$('#chTotal'+work_idx).val();
+	var chChecked=$('#chChecked'+work_idx);
+	
+	div_ch=div_ch.parentNode.lastChild.previousSibling;
+	
+	if(ch_sv=='1'){
+		$(ch).hide();
+		ch.className='glyphicon glyphicon-unchecked';
+		$(ch).fadeIn('50');
+		ch_s.value='0';
+		
+		chChecked.val(chChecked.val()-1);
+	}else if(ch_sv=='0'){
+		
+		if(div_ch.value=='0'){
+			ch.className='glyphicon glyphicon-ok';
+			$('#div_ch'+result).hide('100');
+		}else{
+			$(ch).hide();
+			ch.className='glyphicon glyphicon-ok';
+			$(ch).fadeIn('50');
+		}
+		ch_s.value='1';
+		
+		chChecked.val(parseInt(chChecked.val())+1);
+	}
+	
+	document.getElementById('chBar'+work_idx).style.width=chChecked.val()/chTotal *100+'%';
+	
+}
+
 function addCheck(work_idx){
 	
 	var cont=$('#content'+work_idx).val();

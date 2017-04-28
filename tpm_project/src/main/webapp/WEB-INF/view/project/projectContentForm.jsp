@@ -130,8 +130,7 @@ var member_idx=${param.member_idx};
 								<c:otherwise>
 									<form name="cateUp" action="javascript:categoryUpdate(${cdto.category_idx})">
 										<div id="cate${cdto.category_idx}" class="cateName">
-											<input id="cateIn${cdto.category_idx}" type="text"
-												value="${cdto.category_name }" size="16px">
+											<input id="cateIn${cdto.category_idx}" type="text" value="${cdto.category_name }" size="16px">
 											&nbsp;&nbsp; <i class="glyphicon glyphicon-remove"
 												onclick="cateNameRe(${cdto.category_idx})"></i>
 										</div>
