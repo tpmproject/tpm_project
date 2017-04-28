@@ -211,7 +211,7 @@
         -webkit-border-radius:0 !important;
     }
     </style>
-<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
 <style type="text/css">
       #custom-search-form {
         margin:0;
