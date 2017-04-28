@@ -67,6 +67,7 @@ var member_idx=${param.member_idx};
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
+<div id="loading_div"></div>
 <!-- 모달 시작 -->
   <div class="row">
 		<div class="modal fade" id="layerpop" style="z-index:2500">
