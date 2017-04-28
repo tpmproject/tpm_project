@@ -99,6 +99,10 @@ function onMessage(evt) {
 		var idx=data[1];
 		ws_checkResult(idx);
 	}
+	//checklist del
+	if(data[0]=='checkDel'){
+		ws_checkDel(data[1]);
+	}
 	
 }
 
@@ -739,35 +743,36 @@ function delResult(){
 		if (XHR.status == 200) {
 			var result=XHR.responseText; //지운 idx
 			result=parseInt(result);
-			
-			var div_ch=document.getElementById('div_ch'+result);
-			var wi=div_ch.parentNode.getAttribute('id').substring(9);
-			
-			var cht=$('#chTotal'+wi).val();
-			cht=parseInt(cht)-1;
-			$('#chTotal'+wi).val(cht);
-			
-			var chState=$('#ch_state'+result).val();
-			
-			var chTotal=$('#chTotal'+wi).val();
-			var chChecked=$('#chChecked'+wi);
-			var chChecked_v=chChecked.val();
-			if(chState=='1'){
-				var chch=chChecked.val();
-				chch=parseInt(chch);
-				chch=chch-1;
-				$('#chChecked'+wi).val(chch);
-				chChecked_v=chch;
-			}
-			if(chTotal==0){
-				document.getElementById('chBar'+wi).style.width='0%';
-			}else{
-				document.getElementById('chBar'+wi).style.width=chChecked_v/chTotal *100+'%';
-			}
-			$('#div_ch'+result).remove();
-			
+			updateWS('checkDel,'+result);
 		}
 	}
+}
+function ws_checkDel(result){
+	var div_ch=document.getElementById('div_ch'+result);
+	var wi=div_ch.parentNode.getAttribute('id').substring(9);
+	
+	var cht=$('#chTotal'+wi).val();
+	cht=parseInt(cht)-1;
+	$('#chTotal'+wi).val(cht);
+	
+	var chState=$('#ch_state'+result).val();
+	
+	var chTotal=$('#chTotal'+wi).val();
+	var chChecked=$('#chChecked'+wi);
+	var chChecked_v=chChecked.val();
+	if(chState=='1'){
+		var chch=chChecked.val();
+		chch=parseInt(chch);
+		chch=chch-1;
+		$('#chChecked'+wi).val(chch);
+		chChecked_v=chch;
+	}
+	if(chTotal==0){
+		document.getElementById('chBar'+wi).style.width='0%';
+	}else{
+		document.getElementById('chBar'+wi).style.width=chChecked_v/chTotal *100+'%';
+	}
+	$('#div_ch'+result).remove();
 }
 //work 삭제 콜백 함수
 function workDelResult(){
