@@ -652,6 +652,7 @@ function showCheck(work_idx){
 }
 //ondragstart 드래그할 때 id값 가져오기!
 function drag(ev) {
+	hideTen();
     ev.dataTransfer.setData("text", ev.target.id);
 }
 //ondragover
