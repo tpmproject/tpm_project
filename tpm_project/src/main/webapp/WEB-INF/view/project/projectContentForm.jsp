@@ -98,7 +98,7 @@ var member_idx=${param.member_idx};
   <!--모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
-	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*210}px">
+	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*220+100}px">
 		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
@@ -147,7 +147,13 @@ var member_idx=${param.member_idx};
 
 						<c:if test="${not empty cdto.work_dtos}">
 							<c:forEach var="wdto" items="${cdto.work_dtos }">
-								<div id="wdiv${wdto.work_idx}" class="wdiv" draggable="true"
+							<c:choose>
+								<c:when test="${wdto.work_state eq 1}"><c:set var="pan" value="panel-info"></c:set></c:when>
+								<c:when test="${wdto.work_state eq 2}"><c:set var="pan" value="panel-warning"></c:set></c:when>
+								<c:when test="${wdto.work_state eq 3}"><c:set var="pan" value="panel-success"></c:set></c:when>
+							</c:choose> 
+								<div class="panel ${pan}">
+								<div id="wdiv${wdto.work_idx}" class="wdiv panel-heading" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
 									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
@@ -159,6 +165,7 @@ var member_idx=${param.member_idx};
 									</c:if>
 
 								</div>
+								<div class="panel-body" style="padding: 0px;">
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
@@ -304,6 +311,8 @@ var member_idx=${param.member_idx};
 										</tr>
 									</tbody>
 								</table>
+								</div>
+							</div>
 							</c:forEach>
 						</c:if>
 					</div>
@@ -340,7 +349,7 @@ var member_idx=${param.member_idx};
 
 	<!-- 업무 설정 modal -->
 	<form name="newWork" id="newWork" action="workAdd.do" method="post">
-		<div id="workback" onclick="closem()"></div>
+		<div id="workback" onclick="closem()" onmouseover="hideTen()"></div>
 		<div id="work_modal">
 <%-- 		<%@include file="/WEB-INF/view/work/workAddForm.jsp"%> --%>
   			<button type="button" class="close" style="padding: 10px; color:white;"onclick="closem()">×</button>	
@@ -368,26 +377,23 @@ var member_idx=${param.member_idx};
 				</div>
 			</div>
 			<div id="btnwork2">
-				<div class="section">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3" style="width:330px;">
-								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m"
-									style="width: 100%; height: 320px; overflow-y: scroll"
-									ondrop="drop3(event)" ondragover="allowDrop(event)"
-									ondragstart="drag(event)"></div>
-							</div>
-							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
-								ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자</h4>
-								<div id="work_m"
-									style="width: 100%; height: 320px; overflow-y: scroll"
-									ondrop="drop2(event)" ondragover="allowDrop(event)"
-									ondragstart="drag(event)"></div>
-							</div>
-						</div>
+				<div align="center">
+					<div class="workmember_div">
+						<h4 class="text-center">프로젝트 멤버 목록</h4>
+						<div id="project_m"
+							style="width: 100%; height: 320px; overflow-y: scroll"
+							ondrop="drop3(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
 					</div>
+					<div class="workmember_div" ondrop="drop(event)"
+						ondragover="allowDrop(event)" ondragstart="drag(event)">
+						<h4 class="text-center">업무 담당자</h4>
+						<div id="work_m"
+							style="width: 100%; height: 320px; overflow-y: scroll"
+							ondrop="drop2(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
+					</div>
+			
 				</div>
 				<div align="center" style="padding:7px;">
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workbefore"
@@ -400,7 +406,7 @@ var member_idx=${param.member_idx};
 	</form>
 	<!-- 업무 수정 modal -->
 	<form name="changeWork" action="workUpdate.do" method="post">
-		<div id="workback2" onclick="closem()"></div>
+		<div id="workback2" onclick="closem()" onmouseover="hideTen()"></div>
 		<div id="work_modal2">
  		<%-- <%@include file="/WEB-INF/view/work/workUpdateForm.jsp"%> --%>
   			<button type="button" class="close" style="padding: 10px; color:white;" onclick="closem()">×</button>
@@ -430,28 +436,24 @@ var member_idx=${param.member_idx};
 				</div>
 			</div>
 			<div id="btnwork4">
-				<div class="section">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3" style="width:330px;">
-								<h4 class="text-center">프로젝트 멤버 목록</h4>
-								<div id="project_m2"
-									style="width: 100%; height: 320px; overflow-y: scroll"
-									ondrop="drop5(event)" ondragover="allowDrop(event)"
-									ondragstart="drag(event)"></div>
-							</div>
-							<div class="col-md-3" style="width:310px;" ondrop="drop(event)"
-								ondragover="allowDrop(event)" ondragstart="drag(event)">
-								<h4 class="text-center">업무 담당자</h4>
-								<div id="work_m2"
-									style="width: 100%; height: 320px; overflow-y: scroll"
-									ondrop="drop4(event)" ondragover="allowDrop(event)"
-									ondragstart="drag(event)"></div>
-							</div>
-						</div>
+				<div align="center">
+					<div class="workmember_div">
+						<h4 class="text-center">프로젝트 멤버 목록</h4>
+						<div id="project_m2"
+							style="width: 100%; height: 320px; overflow-y: scroll"
+							ondrop="drop5(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
+					</div>
+					<div class="workmember_div" ondrop="drop(event)"
+						ondragover="allowDrop(event)" ondragstart="drag(event)">
+						<h4 class="text-center">업무 담당자</h4>
+						<div id="work_m2"
+							style="width: 100%; height: 320px; overflow-y: scroll"
+							ondrop="drop4(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
 					</div>
 				</div>
-				<div margin-top="10" align="center">
+				<div align="center">
 					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workbefore"
 						onclick="showf2()">이전</button>
 					<button type="button" style="background-color:#1e282c; color:white;"  class="btn btn-next" id="btn-workok"

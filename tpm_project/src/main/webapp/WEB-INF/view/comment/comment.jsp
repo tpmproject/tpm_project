@@ -10,6 +10,47 @@
 </head>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script>
+	function comment(work_idx) {
+		//window.alert('comment페이지 업무 idx='+work_idx);
+	}
+	
+	/* window. onload = 
+		function showComment(){
+		var param = document.newComment.work_idx.value;
+		window.alert(work_idx);
+		
+		$.ajax({
+			url : 'commentList.do',
+			type : 'post',
+			data : work_idx,
+			dataType : 'json',
+			success : function(json){
+				//window.alert(JSON.stringify(json));
+				var msg = '';
+				
+				for(var i=0; i<json.length; i++){
+					
+				}
+				
+				<div class="box-body chat" id="chat-box">
+					<div class="item">
+						<img src="/tpm_project/img/member/profile/${comment.member_img}" class="online">
+						<p class="message">
+							<a href="#" class="name"> <small class="text-muted pull-right">
+								<i class="fa fa-clock-o"></i> ${comment.comment_date}</small> ${comment.member_name}(${comment.member_id})
+							</a>
+							${comment.comment_content}
+						</p>
+						<div class="attachment">
+							<h4>첨부 파일 :</h4>
+							<p class="filename">Theme-thumbnail-image.jpg</p>
+						</div>
+					</div>
+				</div>
+			}
+		}) 
+	} */
+	
 	/* function closeComment(){
 	 localStorage.removeItem('work_idx');
 	 $(comment_back).fadeOut();
@@ -43,9 +84,6 @@
 	
 	
 	 } */
-	function comment(work_idx) {
-		//window.alert('comment페이지 업무 idx='+work_idx);
-	}
 </script>
 <body>
 	<div class="box-header">
@@ -53,31 +91,7 @@
 		<h3 class="box-title">Comment</h3>
 	</div>
 
-	<c:set var="comments" value="${arr}" />
-	<div class="box-body chat" id="chat-box">
-
-		<c:forEach var="comment" items="${comments.member_idx}">
-		<!-- chat item -->
-			<div class="item">
-				<img src="/tpm_project/img/member/profile/${comment.member_img}"
-					class="online">
-	
-				<p class="message">
-					<a href="#" class="name"> <small class="text-muted pull-right">
-						<i class="fa fa-clock-o"></i> ${comment.comment_date}</small> ${comment.member_name}(${comment.member_id})
-					</a>
-					${comment.comment_content}
-				</p>
-				<div class="attachment">
-					<h4>첨부 파일 :</h4>
-					<p class="filename">Theme-thumbnail-image.jpg</p>
-				</div>
-				<!-- /.attachment -->
-			</div>
-		</c:forEach>
-		<!-- /.item -->
-	</div>
-	<!-- /.chat -->
+	<div id="comment_content"> </div>
 
 	<div class="box-footer">
 		<form name="newComment" action="javascript:commentAdd()" method="post">

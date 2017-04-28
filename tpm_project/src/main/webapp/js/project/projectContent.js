@@ -1,8 +1,6 @@
 window.onload=function(){
 	
 	$('[data-toggle="popover"]').popover();
-	$(btnwork2).hide();
-	$(btnwork4).hide();
 	$('.content').mCustomScrollbar({axis:"yx"});
 	
 	connect(project_idx);
@@ -65,7 +63,7 @@ function onMessage(evt) {
 		ws_categoryAdd(idx,name);
 		
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)+210;
+		wid=parseInt(wid)+220;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
@@ -82,7 +80,7 @@ function onMessage(evt) {
 		
 		$('#cp'+idx).remove();
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)-210;
+		wid=parseInt(wid)-220;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
@@ -186,7 +184,7 @@ function ws_categoryAdd(idx,name){
 		
 		dNode.innerHTML=innerH;
 		cbodyNode.insertBefore(dNode,cateNode);
-		cbodyNode.style.width = parseInt(cbodyNode.style.width)+210+"px";
+		cbodyNode.style.width = parseInt(cbodyNode.style.width)+220+"px";
 		document.newCategory.category_name.value='';
 	
 }
@@ -285,7 +283,7 @@ function showsResult(){
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
-				msg2 += '<div id="work_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
@@ -309,7 +307,7 @@ function shows2Result(){
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
 				
-				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" onmouseleave="hideTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
@@ -420,9 +418,7 @@ function addWorkResult(){
 				dNode.innerHTML = msg;
 				cNode.appendChild(dNode);
 				closem();
-				hideTen();	
 				document.newWork.reset();
-				checkResult()
 			}	
 		}
 	}
@@ -504,6 +500,12 @@ function changeWorkState(wi,ws){
 		}
 		firstC=firstC.nextSibling;
 	}while(firstC!=lastC);
+	var pc=document.getElementById('wdiv'+wi).parentNode;
+	switch(ws){
+	case 1 : pc.setAttribute('class','panel panel-info');break;
+	case 2 : pc.setAttribute('class','panel panel-warning');break;
+	case 3 : pc.setAttribute('class','panel panel-success');
+	}
 	
 }
 
@@ -654,6 +656,7 @@ function showCheck(work_idx){
 }
 //ondragstart 드래그할 때 id값 가져오기!
 function drag(ev) {
+	hideTen();
     ev.dataTransfer.setData("text", ev.target.id);
 }
 //ondragover
@@ -828,7 +831,7 @@ function showChecklist(work_idx){
 function showTen(member_idx){
 	var param = 'member_idx='+member_idx;
 	var tenT=$('#work_member'+member_idx).offset().top;
-	var tenL=$('#work_member'+member_idx).offset().left+120;
+	var tenL=$('#work_member'+member_idx).offset().left+220;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
 	$('#tendency_pop').fadeIn();

@@ -34,6 +34,61 @@
 <script src="/tpm_project/ckeditor/ckeditor.js?ver=4"></script>
 
 <style>
+/* 스킨 */
+.skin-border-top-color-white{
+	border-top-color: #fff;
+}
+.skin-border-top-color-white-light{
+	border-top-color: #fff;
+}
+.skin-border-top-color-blue{
+	border-top-color: #3c8dbc;
+}
+.skin-border-top-color-blue-light{
+	border-top-color: #3c8dbc;
+}
+.skin-border-top-color-green{
+	border-top-color: #00a65a;
+}
+.skin-border-top-color-green-light{
+	border-top-color: #00a65a;
+}
+.skin-border-top-color-purple{
+	border-top-color: #605ca8;
+}
+.skin-border-top-color-purple-light{
+	border-top-color: #605ca8;
+}
+.skin-border-top-color-red{
+	border-top-color: #dd4b39;
+}
+.skin-border-top-color-red-light{
+	border-top-color: #dd4b39;
+}
+.skin-border-top-color-yellow{
+	border-top-color: #f39c12;
+}
+.skin-border-top-color-yellow-light{
+	border-top-color: #f39c12;
+}
+
+.list-border-left{
+	
+}
+.list-border-left:ACTIVE,
+.list-border-left:HOVER{
+	border-left: 3px solid transparent;
+	border-left-color: #adadad;
+}
+.list-border-left-selected{
+	border-left: 3px solid transparent;
+	border-left-color: #adadad;
+}
+
+
+.show-blind{
+	display: none;
+}
 .bg-white {
 	background-color: #fff;
 }
@@ -290,6 +345,7 @@ var s_member_img = '<%=session.getAttribute("s_member_img")%>';
 var wsocket;
 
 $(function(){
+	// 스크롤 연결
     $('#chat-box').slimScroll({
         height: '650px', // 스크롤 처리할 div 의 길이
         start: 'bottom' // 스크롤의 시작 위치
@@ -313,18 +369,15 @@ $(function(){
     });
     
     
-    //페이지 시작시 소켓 연결
-    connect();
+   //페이지 시작시 소켓 연결
+   connect();
     
    
     
-    // 에디터 생성
+   // ck 에디터 생성
    var ckedit = CKEDITOR.replace('input_chat_content',{
 	   shiftEnterMode : '3'
    });
-    
- 	
-   
    ckedit.on( 'key', function( event ) {
 	   if ( event.data.keyCode == 13 ) {
 	     event.cancel();
@@ -333,6 +386,21 @@ $(function(){
 	     InsertChatContent(data);
 	   }
 	 });
+   
+   
+	
+   
+   /* $('#project_list_search').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+			//InsertChatContent();
+			if(event.shiftKey){
+				window.alert('1');
+			}
+		}
+		event.stopPropagation();
+	}); */
+   
    /* CKEDITOR.on('dialogDefinition', function( ev ){
         var dialogName = ev.data.name;
         var dialogDefinition = ev.data.definition;
@@ -345,10 +413,6 @@ $(function(){
                 break;
         }
     }); */
-   
-  
-   
-
    
   /*  $('#cke_input_chat_content').keypress(function(event){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -373,12 +437,11 @@ $(function(){
 	}); */
 });
 
-
 function connect() {
-	wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
 	/* wsocket = new SockJS(
-			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
+	wsocket = new SockJS(
+			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); 
 	wsocket.onopen = onOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onClose; // 연결 해체 후 메세지
@@ -435,7 +498,10 @@ function appendChatMessage(json) {
 }); */
 
 
-function showChatContent(cpCode, cpValue){
+function showChatContent(cpCode, cpValue, me){
+	
+	$('tr.list-border-left').removeClass('list-border-left-selected');
+	$(me).addClass('list-border-left-selected');
 	
 	currCpCode = cpCode;
 	currCpValue = cpValue;
@@ -605,8 +671,8 @@ function InsertChannel(){
 				// 소켓을 통해 메세지를 전달한다.
 				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
 				reLoadChannelList();
-				
-				$('#createChannelModal').modal().hide();
+				// 모달 종료
+				$('#createChannelModal').modal('hide');
 			} 
 		}
 	});
@@ -624,8 +690,8 @@ function reLoadChannelList(){
 			window.alert(JSON.stringify(json));
 			var innerMsg = '';
 			for(var i = 0 ; i < json.length; i++){
-				innerMsg += '<tr>';
-				innerMsg += '<th><a href="javascript:showChatContent(\'C\',\'' + json[i].channel_idx + '\')">' + json[i].channel_name + ',' + json[i].channel_idx + '</a></th>';
+				innerMsg += '<tr class="list-border-left" onclick="showChatContent(\'C\',' + json[i].channel_idx + ')" style="cursor: pointer;">';
+				innerMsg += '<th><div>' + json[i].channel_name + '</div></th>';
 				innerMsg += '</tr>';
 			}
 			
@@ -872,6 +938,29 @@ function leftdrop(ev) {
 function allowDrop(ev) {
     ev.preventDefault();
 }
+
+// 프로젝트 리스트 서치 이벤트 등록
+
+function startSuggest(id, me){
+	
+   var list = $('#' + id).find('tbody tr');
+  
+   
+   for(var i = 0 ; i < list.length; i++){
+	   
+	   // 포함 되어있지 않다면 -1 리턴
+	   if($(list).find('th div').eq(i).html().trim().indexOf($(me).val().trim()) == -1){
+		   $(list).eq(i).addClass('show-blind');
+	   }else{
+		   $(list).eq(i).removeClass('show-blind');
+	   }
+   }
+	/* if(checkFirst == false){
+		setTimeout('goSearch_member()', 100);
+	}
+	checkFirst = true; */
+}
+	
 </script>
 </head>
 <c:choose>
@@ -898,12 +987,12 @@ function allowDrop(ev) {
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Contact
+					Chat
 					<!--  <small>Control panel</small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Contact</li>
+					<li class="active">Chat</li>
 				</ol>
 			</section>
 

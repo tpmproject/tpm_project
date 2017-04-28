@@ -597,14 +597,13 @@
 				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
-					var pmarry = pson.project_member_dtos;
+					var pmarry = pson.project_member_dtos; //project_memberDTO
 					var divNode=document.createElement('DIV');
 					divNode.setAttribute('class','item ');
 					//divNode.setAttribute('style','margin-top: 15px;');
 					var cNode = document.getElementById('ptest');
-					
-					
-					var msg='<div class="box">';
+										
+					/* var msg='<div class="box">';
 					msg+='<div class="box-gray aligncenter" style="height:210px;">';
 					msg+='<input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
 					msg+='<h4 id="pn'+pson.project_idx+'">'+pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
@@ -612,31 +611,27 @@
 					
 					msg+='<p id="pc'+pson.project_idx+'">'+pson.project_content+'</p>';
 					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>';
+					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>'; */
 					
 					/* var pmarry = pson.project_member_dtos;
 				    pmarry[i].pro_m */
-				 /*   var msg=' <div id="contain" class="container-fluid ">';
+				  var msg=' <div id="contain" class="container-fluid ">';
 				   msg+='<div id="project_div'+pson.project_idx+'" style="margin-top: 15px;">';
 					   msg+='<div class="col-sm-10 col-sm-offset-1">';
 						   msg+='<div class="col-md-4 col-sm-6" style="width: 500px;">';
 							   msg+='<div class="card-container manual-flip">';
 								   msg+='<div class="card">';
-									msg+='	<div class="front">'; */
-											//<!--  배경화면-->
-											//msg+='<div class="cover">';
+									msg+='	<div class="front">'; 
+										msg+='<div class="cover">';
 											//	<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
-											//		msg+='</div>';
-
-											//<!-- 상태 아이콘 -->
-											/* msg+='<div class="user">';
+											msg+='</div>';
+											 msg+='<div class="user">';
 												msg+='<img class="img-circle"';
 													msg+='	src="/tpm_project/sample/khj/img/cat.png"';
 														msg+='	style="width: 140px; height: 140px;" />';
-															msg+='</div>'; */
+															msg+='</div>'; 
 
-											//<!--화면단  -->
-										/* 	msg+='<div class="content">';
+											msg+='<div class="content">';
 												msg+='<div class="main">';
 													msg+='<input type="hidden" id="p_idx'+pson.project_idx+'"';
 														msg+='value="'+pson.project_idx+'">';
@@ -656,7 +651,7 @@
 
 																												msg+='</div>';
 																													msg+='</div>';
-																														msg+='</div>'; */
+																														msg+='</div>';
 										//<!-- end front panel -->
 
 										// <!-- 뒷화면 -->
@@ -763,17 +758,17 @@
 										</div> */
 										//<!-- end back panel -->
 										
-									//	msg+='</div>';
+										msg+='</div>';
 									//<!-- end card -->
-									//msg+='</div>';
+									msg+='</div>';
 								//<!-- end card-container -->
-								//msg+='</div>';
+								msg+='</div>';
 							//<!-- end col sm 3 -->
 
-							/* sg+='<div class="space-400"></div>';
+							msg+='<div class="space-400"></div>';
 								msg+='</div>';
 									msg+='</div>';
-							 */			//msg+='</div>';//컨테이너-end
+							msg+='</div>';//컨테이너-end
 							
 					
 				
@@ -1197,223 +1192,6 @@ img {
 				style="size: 600px;">프로젝트 추가</a>
 		</h2>
 	</div>
-
-
-	<%-- <div id="carousel-example-generic" class="carousel slide center-block"
-		data-ride="carousel" data-interval="false">
-
-
-		<!-- Indicators 페이징-->
-		<ol class="carousel-indicators" style="bottom: -15px;">
-			<c:forEach var="i" items="${plist}" varStatus="status">
-
-				<li data-target="#carousel-example-generic"
-					${status.first?'class="active"':'' }
-					data-slide-to="${status.index}"></li>
-
-			</c:forEach>
-		</ol>
-
-
-
-		<!-- Wrapper for slides -->
-
-		<c:set var="plist" value="${plist}"></c:set>
-
-		<c:choose>
-			<c:when test="${empty plist}">
-								등록된 프로젝트가 없습니다.
-						</c:when>
-
-			<c:otherwise>
-				<div class="carousel-inner" role="listbox">
-					<c:forEach var="i" items="${plist}" varStatus="status">
-
-						<div class="item ${status.first?'active':'' }">
-							<div id="contain" class="container-fluid ">
-								<div id="project_div${i.project_idx}" style="margin-top: 15px;"
-									align="center">
-									<div class="row" id="red">
-
-										<div class="panel panel-danger coupon"
-											style="width: 550px; height: 100%; border-color: #fff">
-											<c:choose>
-												<c:when test="${i.project_state == 3}">
-													<!-- 완료 -->
-													<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#dff0d8; border-color:#fff;"</c:set>
-												</c:when>
-												<c:when test="${i.project_state == 2 }">
-													<!-- 평가하기 -->
-													<c:set var="ininin">class="panel-heading" id="head" style="color:#fff; background:#d9edf7; border-color:#fff;"</c:set>
-
-												</c:when>
-												<c:otherwise>
-													<!-- 진행중 -->
-													<c:set var="ininin">class="panel-heading" id="head"</c:set>
-												</c:otherwise>
-											</c:choose>
-											<div ${ininin} style="margin: auto;">
-
-												<div class="panel-title" id="title">
-													<i class="fa fa-github fa-2x"></i> <input type="hidden"
-														id="p_idx${i.project_idx}" value="${i.project_idx}">
-													<h4 id="pn${i.project_idx}">
-														<span class="hidden-xs">${i.project_name }</span>
-
-														<!--수정 버튼 -->
-														<c:if test="${pm_dto.project_level eq 3000 }">
-
-															<span
-																onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																<i class="glyphicon glyphicon-cog"
-																style="margin-bottom: 0px;"></i>
-															</span>
-
-															<span onclick="projectDelete('${i.project_idx}')">
-																<i class="glyphicon glyphicon-remove"
-																style="margin-bottom: 0px;"></i>
-															</span>
-														</c:if>
-													</h4>
-
-												</div>
-											</div>
-											<div class="panel-body">
-												<div class="col-md-6" align="center"
-													style="margin-left: 30%;">
-													<div class="items">
-
-														<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-
-															<div class="col-md-2" align="center">
-
-
-																<img
-																	src="/tpm_project/img/member/profile/${pm_dto.mdtos.member_img}"
-																	style="width: 65px; height: 65px; margin-left: 100px;">
-
-
-															</div>
-
-														</c:forEach>
-
-													</div>
-
-												</div>
-
-												<!--프로젝트 내용  -->
-												<div class="col-md-12">
-													<hr>
-													<div class="slimdiv" style="width: 100px; height: 100px;">
-														<span id="pc${i.project_idx}">${i.project_content }</span>
-													</div>
-												</div>
-											</div>
-
-											<div class="panel-footer">
-												<div class="coupon-code">
-
-													<a class="btn btn-link"
-														href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
-														class="fa fa-clone left"></i>업무확인</a>
-
-													<!-- 프로젝트 진행현황 -->
-													<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-														<c:if test=" ${pm_dto.member_idx eq sessionScope.s_member_idx}">
-
-														<c:choose>
-															<c:when
-																test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-																<c:if
-																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																	<span class="print"> <a href="#"
-																		class="btn btn-link" style="color: green;"><i
-																			class="glyphicon glyphicon-ok-circle"></i>완료</a></span>
-																	<span
-																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																		<i class="glyphicon glyphicon-cog"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-
-																	<span onclick="projectDelete('${i.project_idx}')">
-																		<i class="glyphicon glyphicon-remove"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-																</c:if>
-															</c:when>
-															<c:when
-																test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-																<c:if
-																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																	<span class="print"> <a
-																		onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
-																		class="btn btn-link"><i
-																			class="glyphicon glyphicon-check"></i>평가하기</a></span>
-																	<span
-																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																		<i class="glyphicon glyphicon-cog"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-
-																	<span onclick="projectDelete('${i.project_idx}')">
-																		<i class="glyphicon glyphicon-remove"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-																</c:if>
-															</c:when>
-															<c:when test="${i.project_state == 1 }">
-																<c:if
-																	test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																	<span class="print"> <a href="#"
-																		class="btn btn-link" style="color: red;"><i
-																			class="glyphicon glyphicon-time"></i>진행중</a></span>
-																	<span
-																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																		<i class="glyphicon glyphicon-cog"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-
-																	<span onclick="projectDelete('${i.project_idx}')">
-																		<i class="glyphicon glyphicon-remove"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-																</c:if>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</c:otherwise>
-			
-		</c:choose>
-
-		<!-- carousel-inner -->
-
-
-		<!-- Controls -->
-		<a class="left carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="prev"
-			style="width: 50px; color: red; float: left;"> <span
-			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
-		</span> <span class="sr-only">Previous</span>
-		</a> <a class="right carousel-control" href="#carousel-example-generic"
-			role="button" data-slide="next" style="width: 30px; color: red;">
-			<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div>
-	<hr>
-	<hr>
-	<hr> --%>
-
 
 	<div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">

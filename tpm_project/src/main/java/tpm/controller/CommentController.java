@@ -1,11 +1,12 @@
 package tpm.controller;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import tpm.comment.model.CommentDAO;
@@ -15,21 +16,33 @@ import tpm.comment.model.CommentDTO;
 public class CommentController {
 	
 	@Autowired
-	private CommentDAO cdao;
+	private CommentDAO commentDAO;
 
 	//// 코멘트 ////
 	/** 코멘트 - 코멘트 데이터 반환 */
-	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
 	public ModelAndView commentList(int work_idx){
 		
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<CommentDTO> dto = cdao.CommentList(work_idx);
+		ArrayList<CommentDTO> dto = commentDAO.CommentList(work_idx);
 		
 		mav.addObject("arr", dto);
 		mav.setViewName("comment/comment");
 		
 		return mav;
+	}*/
+	
+	/** 코멘트 - 코멘트 데이터 반환*/
+	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
+	public @ResponseBody List<Object> commentList(CommentDTO cdto){
+		List<Object> arr_cdto = commentDAO.getCommentList(cdto);
+		
+		for(Object object: arr_cdto){
+			System.out.println(object);
+		}
+		
+		return arr_cdto;
 	}
 	
 	/** 코멘트 - 코멘트 입력 */
@@ -38,18 +51,21 @@ public class CommentController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		int result = cdao.addComment(dto);
+		int result = commentDAO.commentAdd(dto);
 		//System.out.println(result);
 		
-		String msg = "";
-		
-		if(result<=0){
-			msg = "등록 실패";
-		}
-		
-		mav.addObject("msg", msg);
-		mav.setViewName("comment/commentResult_d");
+		mav.addObject("result", result);
+		mav.setViewName("comment/commentAdd_d");
 		return mav;
+	}
+	
+	/** 코멘트 - 코멘트 입력 AJAX 테스트*/
+	@RequestMapping(value="addComment.do", method=RequestMethod.POST)
+	public @ResponseBody Object addComment(CommentDTO cdto){
+		
+		//int result = commentDAO.addComment(cdto);
+		
+		return commentDAO.addComment(cdto);
 	}
 	
 	/** 코멘트 - 코멘트 수정 */
