@@ -9,6 +9,7 @@ window.onload=function(){
 	
 	$('#loading_div').hide();
 	$('#load_s').hide();
+	categoryHead(skin);
 }
 
 $(window).resize(function() {
@@ -19,7 +20,17 @@ $(window).resize(function() {
 	var hei=window.innerHeight-130;
 	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
 })
-
+function categoryHead(skin){
+	switch (skin) {
+		case 'white': case 'white-light':skin_color='#fff'; break;
+		case 'blue': case 'blue-light':skin_color='#3c8dbc'; break;
+		case 'green': case 'green-light':skin_color='#00a65a'; break;
+		case 'purple': case 'purple-light':skin_color='#605ca8'; break;
+		case 'red': case 'red-light':skin_color='#dd4b39'; break;
+		case 'yellow': case 'yellow-light':skin_color='#f39c12'; break;
+	}
+	$('.category_head').css('background',skin_color);
+}
 function tenChart(e,s,t,j,i,n,f,p){
 	var chart = AmCharts.makeChart( "chartdiv", {
 	    "type": "radar",
@@ -177,7 +188,7 @@ function ws_categoryAdd(idx,name){
 		dNode.setAttribute('class','category');
 		dNode.setAttribute('id','cp'+idx);
 		
-		var innerH='<div class="category_head" id ="c'+idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';			
+		var innerH='<div class="category_head" style="background:'+skin_color+';" id ="c'+idx+'" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';			
 		innerH+='<form name="cateUp" action="javascript:categoryUpdate('+idx+')">';
 		innerH+='<div id="cate'+idx+'" class="cateName">';
 		innerH+='<input id="cateIn'+idx+'" type="text" value="'+name+'" size="16px">&nbsp;&nbsp;';

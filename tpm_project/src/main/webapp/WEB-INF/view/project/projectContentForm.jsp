@@ -10,6 +10,8 @@
 <script type="text/javascript">
 var project_idx=${param.project_idx};
 var member_idx=${param.member_idx};
+var skin='${sessionScope.s_member_thema}';
+var skin_color='';
 </script>
 
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
