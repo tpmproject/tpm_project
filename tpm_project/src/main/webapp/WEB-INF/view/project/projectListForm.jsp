@@ -167,7 +167,7 @@
 					$('#project_div'+pson.project_idx).remove();
 		
 				}
-				 /* history.go(0); */
+				 history.go(0);
 				/*  location.reload(); */
 				closem();
 			}
@@ -591,9 +591,8 @@
 				var result = XHR.responseText;
 				window.alert(result);
 				var objData=eval('('+result+')');
-				
 				var pson=objData; // projectDTO
-				
+				var dtos = pson.mdtos;
 				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
@@ -640,7 +639,7 @@
 																	msg+='</h4>';
 																		msg+='<p class="profession">TPM Project</p>';
 																			msg+='<p class="text-center">';
-																				msg+='<span id="pc'+pson.project_idx+'"'+pson.project_content+'</span>';
+																				msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span>';
 																					msg+='</p>';
 																						msg+='</div>';
 																							msg+='<div class="footer" rel="tooltip" title="프로젝트 확인">';
@@ -655,107 +654,86 @@
 										//<!-- end front panel -->
 
 										// <!-- 뒷화면 -->
-										/*<div class="back">
-											<div class="header">
-												<c:forEach var="pm_dto" items="${i.project_member_dtos}">
-													<c:choose>
-														<c:when test="${pm_dto.project_level ==3000 }">
-															<c:if
-																test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																<div style="float: right;">
-																	<span rel="tooltip" title="수정하기"
-																		onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
-																		<i class="glyphicon glyphicon-cog"
-																		style="margin-bottom: 0px;"></i>
-																	</span> <span rel="tooltip" title="삭제하기"
-																		onclick="projectDelete('${i.project_idx}')">
-																		<i class="glyphicon glyphicon-remove"
-																		style="margin-bottom: 0px;"></i>
-																	</span>
-																</div>
-															</c:if>
-														</c:when>
-													</c:choose>
-
-												</c:forEach>
-												<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
-											</div>
-											<div class="content">
-												<div class="main">
-													<h4 class="text-center">${i.project_name }</h4>
-													<hr>
-
-													<c:forEach var="pm_dto"
-														items="${i.project_member_dtos}">
-														<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
-													</c:forEach>
-													<hr>
-													<div class="stats-container">
-														<div class="stats" align="center" rel="tooltip"
-															title="업무확인">
-															<a class="btn btn-link"
-																href="projectContent.do?project_idx=${i.project_idx}&member_idx=${s_member_idx}"><i
-																class="fa fa-clone left"></i>업무확인</a>
-														</div>
-														<c:forEach var="pm_dto"
-															items="${i.project_member_dtos}">
-															<c:choose>
-																<c:when
-																	test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-
-																		<div class="stats">
-																			<span class="print" rel="tooltip" title="완료상태">
-																				<a href="#" class="btn btn-link"
-																				style="color: green;"><i
-																					class="glyphicon glyphicon-ok-circle"></i>완료</a>
-																			</span>
-																		</div>
-
-																	</c:if>
-																</c:when>
-																<c:when
-																	test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																		<div class="stats">
-																			평가하기 <span class="print" rel="tooltip"
-																				title="평가하기"> <a
-																				onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
-																				class="btn btn-link"><i
-																					class="glyphicon glyphicon-check"></i>평가하기</a>
-																			</span>
-																		</div>
-
-																	</c:if>
-																</c:when>
-																<c:when test="${i.project_state == 1 }">
-																	<c:if
-																		test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																		<div class="stats">
-																			<span class="print" rel="tooltip" title="진행중">
-																				<a href="#" class="btn btn-link"
-																				style="color: red;"><i
-																					class="glyphicon glyphicon-time"></i>진행중</a>
-																			</span>
-																		</div>
-
-																	</c:if>
-																</c:when>
-															</c:choose>
-														</c:forEach>
-													</div>
-												</div>
-											</div>
-											<div class="footer">
-												<button class="btn btn-simple" rel="tooltip"
-													title="되돌아가기" onclick="rotateCard(this)">
-													<i class="fa fa-reply"></i> Back
-												</button>
-
-											</div>
-										</div> */
+										msg+='<div class="back">';
+										msg+='<div class="header">';
+												window.alert('s_member_idx='+${sessionScope.s_member_idx});
+														 for(var i=0;i<pmarry.length;i++){
+															if(pmarry[i].project_level==3000){
+																if(pmarry[i].member_idx == '${sessionScope.s_member_idx}'){
+																	msg+='<div style="float: right;">';
+																	msg+='<span rel="tooltip" title="수정"';
+																		msg+='onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')">';
+																		msg+='<i class="glyphicon glyphicon-cog"';
+																			msg+='style="margin-bottom: 0px;"></i>';
+																				msg+='</span> <span rel="tooltip" title="삭제"';
+																					msg+='onclick="projectDelete('+pson.project_idx+')">';
+																				msg+='<i class="glyphicon glyphicon-remove"';
+																					msg+='style="margin-bottom: 0px;"></i>';
+																						msg+='</span>';
+																	msg+='</div>';
+																}
+															}
+														}
+																						
+												msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>';
+												msg+='</div>';
+											msg+='<div class="content">';
+											msg+='<div class="main">';
+												msg+='<h4 class="text-center">'+pmarry.project_name+'</h4>';
+													msg+='<hr>';
+														/* for(var i=0;i<dtos.length;i++){
+															msg+='<h5 class="text-center">'+dtos[i].member_id+'</h5>';
+														} */
+													msg+='<hr>';
+													msg+='<div class="stats-container">';
+														msg+='<div class="stats" align="center" rel="tooltip"';
+															msg+='title="업무확인">';
+																msg+='<a class="btn btn-link"';
+																	msg+='href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">';
+																	msg+='<i class="fa fa-clone left"></i>업무확인</a>';
+																		msg+='</div>';
+																		 for(var i=0;i<pmarry.length;i++){
+																			 if(pmarry[i].project_level==3000 && pson.project_state==3){
+																				 if(pmarry[i].member_idx == '${sessionScope.s_member_idx}'){
+																					 msg+='<div class="stats">';
+																					 msg+='<span class="print" rel="tooltip" title="완료상태">';
+																					 msg+='<a href="#" class="btn btn-link"style="color: green;">';
+																					 msg+='<i class="glyphicon glyphicon-ok-circle"></i>완료</a>';
+																						 msg+='</span>';
+																							 msg+='</div>';
+																				 }
+																			 }else if(pmarry[i].project_level==3000 && pson.project_state==2){
+																				 if(pmarry[i].member_idx == '${sessionScope.s_member_idx}'){
+																					 msg+='<div class="stats">';
+																						 msg+='평가하기 <span class="print" rel="tooltip" title="평가하기"> ';
+																							 msg+='<a class="btn btn-link" onclick="location.href=projectEvaluation.do?project_idx='+pson.project_idx+'&project_level='+pmarry[i].project_level+'&member_idx=${s_member_idx}">';
+																								 msg+='<i class="glyphicon glyphicon-check"></i>평가하기</a>';
+																									 msg+='</span>';
+																										 msg+='</div>';
+																				 }
+																			 }else if(pson.project_state==1){
+																				 if(pmarry[i].member_idx == '${sessionScope.s_member_idx}'){
+																					 msg+='<div class="stats">';
+																						 msg+='<span class="print" rel="tooltip" title="진행중">';
+																							 msg+='<a href="#" class="btn btn-link"	style="color: red;">';
+																								 msg+='<i class="glyphicon glyphicon-time"></i>진행중</a>';
+																									 msg+='</span>';
+																										 msg+='</div>';
+																				 }
+																			 }
+																		 }
+											
+													msg+='</div>';
+													msg+='</div>';
+													msg+='</div>';
+											msg+='<div class="footer">';
+											msg+='<button class="btn btn-simple" rel="tooltip"';
+												msg+='title="되돌아가기" onclick="rotateCard(this)">';
+													msg+='<i class="fa fa-reply"></i> Back';
+														msg+='</button>';
+											msg+='</div> ';
+											
+										msg+='뒷화면</div>';
 										//<!-- end back panel -->
 										
 										msg+='</div>';
@@ -1272,11 +1250,11 @@ img {
 																			<c:if
 																				test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																				<div style="float: right;">
-																					<span rel="tooltip" title="수정하기"
-																						onclick="projectUpdate(${i.project_idx},'${i.project_name }','${i.project_content}')">
+																					<span rel="tooltip" title="수정"
+																						onclick="projectUpdate('${i.project_idx}','${i.project_name }','${i.project_content}')">
 																						<i class="glyphicon glyphicon-cog"
 																						style="margin-bottom: 0px;"></i>
-																					</span> <span rel="tooltip" title="삭제하기"
+																					</span> <span rel="tooltip" title="삭제"
 																						onclick="projectDelete('${i.project_idx}')">
 																						<i class="glyphicon glyphicon-remove"
 																						style="margin-bottom: 0px;"></i>
