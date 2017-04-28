@@ -211,6 +211,7 @@
         -webkit-border-radius:0 !important;
     }
     </style>
+<!--  <link href="/tpm_project/css/file/bootstrap-combined.css?ver=16" rel="stylesheet"> -->
 <style type="text/css">
       #custom-search-form {
         margin:0;
@@ -482,12 +483,14 @@
     </script>
     
 <!-- 임시) 여기까지 첨부파일   -->
+<style>
 
+</style>
 </head>
 <body>
  
 
-
+<div class="work-right-side">
 	<div style="position:absolute; z-index:1;  ">
 		<a id="menu-close" href="#"
 			class="btn btn-default btn-lg pull-right toggle"><i
@@ -555,7 +558,7 @@
       </div>
     </div>
     
-	 
+</div>	 
 	<script type="text/javascript">
 
 
