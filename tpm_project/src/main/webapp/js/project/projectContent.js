@@ -8,8 +8,8 @@ window.onload=function(){
 	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
 	
 	$('#loading_div').hide();
-	$('#load_s').hide();
 	categoryHead(skin);
+	$('#load_s').hide();
 }
 
 $(window).resize(function() {
@@ -395,20 +395,21 @@ function addWorkResult(){
 			if (result != null) {
 				window.alert(result);
 				var work=eval('('+result+')');
-		
+				var seDate=work.project_name.split("&");
+				
 				var cNode = document.getElementById('cp'+work.category_idx);
 				var dNode = document.createElement('div');
 			
 				var msg='<div id="wdiv'+work.work_idx+'" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 				msg+='<i id="showWork'+work.work_idx+'"></i>';
 				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
-				msg+='<c:set var="wstart"><f:formatDate value="'+work.work_start+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<c:set var="wend"><f:formatDate value="'+work.work_end+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<span onclick="workUpdate(${wdto.work_idx},'+work.work_start+','+work.work_end+','+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
+				msg+='<c:set var="wstart"><f:formatDate value="'+seDate[0]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
+				msg+='<c:set var="wend"><f:formatDate value="'+seDate[1]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
+				msg+='<span onclick="workUpdate(${wdto.work_idx},"${wstart}","${wend}",'+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
 				msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
-				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+work.work_start+'<br>';
+				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;"${wstart}"<br>';
 				msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-				msg+='~'+work.work_end+'</td></tr>';
+				msg+='~${wend}</td></tr>';
 				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
 				msg+='<c:forEach var="mdto" items="${marr}"><c:if test="${mdto.work_idx eq '+work.work_idx+'">';
 				msg+='<span>${mdto.member_name}</span></c:if></c:forEach></td></tr>';
