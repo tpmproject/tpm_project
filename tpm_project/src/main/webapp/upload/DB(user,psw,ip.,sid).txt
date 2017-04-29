@@ -1,5 +1,0 @@
-user:           project01_02
-password:	project01_02
-sid:		ORCL
-port:		9000
-ip:		yongstudy.iptime.org

@@ -415,9 +415,20 @@ function commentAdd(){
 		
 		return temp_msg;
 	} */
-	
+	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx){
 		sessionStorage.setItem('s_work_idx',work_idx);
+		//window.alert('사이드창쪽 업무 idx: '+work_idx);
+		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
+	
+		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
+		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
+		
+		
+	}
+	/*파일 리스트 탭눌럿을때 업무리스트  */
+	function project_fileList2(){
+		var work_idx=sessionStorage.getItem('s_work_idx');
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
 	
@@ -688,7 +699,7 @@ function commentAdd(){
         </div>
         <div class="btn-group" role="group">
           <button type="button" id="following" class="btn btn-default" href="#tab3"
-          data-toggle="tab">
+          data-toggle="tab" onclick="project_fileList2()">
             <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
             <div class="hidden-xs">파일 리스트</div>
           </button>
@@ -716,11 +727,16 @@ function commentAdd(){
           </div>
           
           <div class="tab-pane fade in" id="tab3">
+          	<div style="position:static;">
+          	  <%@include file="/WEB-INF/view/file/test1.jsp"%>
+          	</div>
+         	<div style="position:static;">
    			 <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
+   			</div>
           </div>
           
           <div class="tab-pane fade in" id="tab4">
-             <%@include file="/WEB-INF/view/file/test1.jsp"%>
+             
           </div>
           
           <div class="tab-pane fade in" id="tab5">

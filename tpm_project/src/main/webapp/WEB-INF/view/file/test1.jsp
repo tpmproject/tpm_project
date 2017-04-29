@@ -38,15 +38,11 @@ function fileUpload(work_idx){
   
   <body>
     <div class="navbar navbar-default navbar-fixed-top" >
-      <div class="container" style="width: 100%; width: 600px;">
-        
-        
-      </div>
     </div>
-    <div class="container">
+    <div class="container" style="width: 600px;">
   
       
-      <form id="fileupload" action="fileAdd.do" method="post" enctype="multipart/form-data">
+      <form id="fileupload" style="width: 570px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
       
 		<input type="hidden" name="work_idx" id="id_work_idx" >
 		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
@@ -57,7 +53,7 @@ function fileUpload(work_idx){
         <!-- The fileupload-buttonbar contains buttons to add/delete files and
         start/cancel the upload -->
         <div class="row fileupload-buttonbar">
-          <div class="col-lg-7" style="width:600px;">
+          <div class="col-lg-7" style="width:600px; ">
             <!-- The fileinput-button span is used to style the file input field as
             button -->
             <span class="btn btn-success fileinput-button">
@@ -82,18 +78,10 @@ function fileUpload(work_idx){
             <span class="fileupload-process"></span>
           </div>
           <!-- The global progress state -->
-          <div class="col-lg-5 fileupload-progress fade">
-            <!-- The global progress bar -->
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0"
-            aria-valuemax="100">
-              <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-            </div>
-            <!-- The extended global progress state -->
-            <div class="progress-extended">&nbsp;</div>
-          </div>
+          
         </div>
         <!-- The table listing the files available for upload/download -->
-        <table role="presentation" class="table table-striped" style="width: 50%;">
+        <table role="presentation" class="table table-striped" style="width: 100%;">
           <tbody class="files"></tbody>
         </table>
       </form>

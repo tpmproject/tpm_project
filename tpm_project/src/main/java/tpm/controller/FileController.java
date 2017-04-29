@@ -249,7 +249,7 @@ public class FileController {
 	/** 파일 - 파일 등록 
 	 * @throws UnsupportedEncodingException */
 	@RequestMapping(value="fileAdd.do",  method=RequestMethod.POST)
-	public @ResponseBody void fileAdd(HttpServletRequest req,HttpServletResponse response,
+	public void fileAdd(HttpServletRequest req,HttpServletResponse response,
 								@RequestParam("work_idx")int work_idx,
 								@RequestParam("project_idx")int project_idx) throws UnsupportedEncodingException{
 		System.out.println("들어옴");
