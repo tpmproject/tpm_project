@@ -36,7 +36,7 @@ public class CommentController {
 	}*/
 	
 	/** 코멘트 - 코멘트 데이터 반환*/
-	@RequestMapping(value="commentList.do",  method=RequestMethod.GET)
+	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
 	public @ResponseBody List<Object> commentList(CommentDTO cdto){
 		/*List<Object> arr_cdto = commentDAO.getCommentList(cdto);
 		
