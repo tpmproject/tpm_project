@@ -327,7 +327,8 @@ function commentAdd(){
 		}
 	} */
 	
-	function showComment(){
+	function showComment(work_idx){
+		//var work_idx = document.newComment.work_idx.value;
 		var param  = 'work_idx='+work_idx;
 		window.alert(param);
 		

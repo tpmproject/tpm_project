@@ -53,4 +53,16 @@ public class ChatDAOImple implements ChatDAO {
 		return sqlMap.selectOne("chatContent", obj);
 	}
 
+	@Override
+	public List<Object> getChatMemberList(Object obj) {
+		if(((ChatDTO) obj).getChat_cp_code().equals("P")){
+			return sqlMap.selectList("chatMemberList_P", obj);
+		} else if(((ChatDTO) obj).getChat_cp_code().equals("C")){
+			return sqlMap.selectList("chatMemberList_C", obj);
+		} else {
+			return null;
+		}
+		
+	}
+
 }

@@ -54,7 +54,10 @@
 		<h3 class="box-title">Comment</h3>
 	</div>
 	
-	<div id="comment_content"> test </div>
+	<div class="box-body comment" id="comment-box">
+		<div id="comment_content"> test </div>
+		<a onclick="javascript:showComment(${work_idx})"> 리스트 테스트</a>
+	</div>
 
 	<div class="box-footer">
 		<form name="newComment" action="javascript:commentAdd()" method="post">

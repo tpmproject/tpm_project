@@ -1,5 +1,7 @@
 package tpm.calendar.model;
 
-public interface CalendarDAO {
+import java.util.List;
 
+public interface CalendarDAO {
+	public List<Object> getCalendarList(Object obj);
 }

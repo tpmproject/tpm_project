@@ -176,6 +176,12 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="calendarDAO" class="tpm.calendar.model.CalendarDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
 	<bean id="sampleWorkDAO" class="tpm.sample.model.SampleWorkDAO">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>

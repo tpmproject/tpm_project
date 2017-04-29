@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+/* 스킨 */
+.skin-border-top-color-white{
+	border-top-color: #fff;
+}
+.skin-border-top-color-white-light{
+	border-top-color: #fff;
+}
+.skin-border-top-color-blue{
+	border-top-color: #3c8dbc;
+}
+.skin-border-top-color-blue-light{
+	border-top-color: #3c8dbc;
+}
+.skin-border-top-color-green{
+	border-top-color: #00a65a;
+}
+.skin-border-top-color-green-light{
+	border-top-color: #00a65a;
+}
+.skin-border-top-color-purple{
+	border-top-color: #605ca8;
+}
+.skin-border-top-color-purple-light{
+	border-top-color: #605ca8;
+}
+.skin-border-top-color-red{
+	border-top-color: #dd4b39;
+}
+.skin-border-top-color-red-light{
+	border-top-color: #dd4b39;
+}
+.skin-border-top-color-yellow{
+	border-top-color: #f39c12;
+}
+.skin-border-top-color-yellow-light{
+	border-top-color: #f39c12;
+}
