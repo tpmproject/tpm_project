@@ -87,6 +87,7 @@ public class CommentController {
 		cdto.setMember_idx((Integer)session.getAttribute("s_member_idx"));
 		
 		int result = commentDAO.addComment(cdto);
+		
 		if(result > 0){
 			return commentDAO.getCommentContent(cdto);
 		} else{

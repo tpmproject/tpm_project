@@ -253,52 +253,44 @@
     </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
-	function commentAdd(){
-		
-		var work_idx = document.newComment.work_idx.value;
-		var comment_content = document.newComment.inputComment.value;
-		
-		/* var param = 'work_idx='+ work_idx +
-				'&member_idx=' + ${s_member_idx} + '&comment_content=' + comment_content;
-		window.alert(param); //여기까지 성공 */
-				
-		$.ajax({
-			url : 'addComment.do',
-			type : 'post',
-			data : {
-				work_idx : work_idx,
-				member_idx : member_idx,
-				comment_content : comment_content
-			},
-			dataType : 'json',
-			success : function(json){
-				//window.alert('jason(?):'+json);
-				window.alert('json:'+JSON.stringify(json,null,2));
-				
-				/* var member_name = json.member_name;
-				window.alert(member_name);
-				
-				var msg = '';
-				var Did = document.getElementById('comment_content');
-				
-				msg += '<div class="box-body chat" id="chat-box">';
-				msg += 		'<div class="item">';
-				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.member_img +'" class="online">';
-				msg += 			'<p class="message">';
-				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-				msg += 					'<i class="fa fa-clock-o"></i> '+ json.comment_date+'</small>'+ json.member_name +'('+ json.member_id +')';
-				msg += 				'</a>';
-				msg += 				 json.comment_content;
-				msg +=			 '</p>';
-				msg += 		'</div>';
-				msg += '</div>';
-				
-				Did.innerHTML = msg; */
-				
-			}
-		
-			//$('#comment_content').html(msg);
-		});
+function commentAdd(){
+	
+	var work_idx = document.newComment.work_idx.value;
+	var comment_content = document.newComment.inputComment.value;
+	
+	var param = 'work_idx='+ work_idx + '&comment_content=' + comment_content;
+	//window.alert(param);
+			
+	$.ajax({
+		url : 'addComment.do',
+		type : 'post',
+		data : param,
+		dataType : 'json',
+		success : function(json){
+			//window.alert('jason(?):'+json);
+			window.alert('json:'+JSON.stringify(json,null,2));
+			
+			var msg = '';
+			var Did = document.getElementById('comment_content');
+			
+			msg += '<div class="box-body chat" id="chat-box">';
+			msg += 		'<div class="item">';
+			msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'" class="online">';
+			msg += 			'<p class="message">';
+			msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+			msg += 					'<i class="fa fa-clock-o"></i> '+ json.comment_date+'</small>'+ json.mdto.member_name +'('+ json.mdto.member_id +')';
+			msg += 				'</a>';
+			msg += 				 json.comment_content;
+			msg +=			 '</p>';
+			msg += 		'</div>';
+			msg += '</div>';
+			
+			Did.innerHTML = msg;
+			
+		}
+	
+		//$('#comment_content').html(msg);
+	});
 		
 		/* var work_idx = document.newComment.work_idx.value;
 		
