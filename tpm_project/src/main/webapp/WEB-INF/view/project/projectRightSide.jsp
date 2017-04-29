@@ -261,7 +261,7 @@ function commentAdd(){
 	var comment_content = document.newComment.inputComment.value;
 	
 	var param = 'work_idx='+ work_idx + '&comment_content=' + comment_content;
-	//window.alert(param);
+	window.alert(param);
 			
 		$.ajax({
 			url : 'addComment.do',
@@ -472,7 +472,12 @@ function commentAdd(){
 		sendRequest_extension(url, param, ajax_result, method, ctype);
 		return false;
 	}
-	
+	function fileAdd(){
+		
+		var param = "file_name="+filename;
+		action_ajax('fileAdd.do',param,'POST', 'FILE_ADD'); // 해당 페이지로 ajax통신 시작
+		
+	}
 	
     function ajax_result(httpRequest, ctype) {
     	return function() {
@@ -698,10 +703,6 @@ function commentAdd(){
       <div class="well">
         <div class="tab-content" style="width:600px">
         
-          <div class="tab-pane fade in active" id="tab1">
-            <h3>This is tab 1</h3>
-          </div>
-          
           <div class="tab-pane fade in" id="tab2">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>
           </div>
@@ -711,7 +712,7 @@ function commentAdd(){
           </div>
           
           <div class="tab-pane fade in" id="tab4">
-             <%@include file="/WEB-INF/view/file/test1.jsp"%>
+         <%--     <%@include file="/WEB-INF/view/file/test1.jsp"%> --%>
           </div>
           
           

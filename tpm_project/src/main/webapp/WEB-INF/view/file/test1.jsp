@@ -63,36 +63,8 @@
     <div class="container">
       <h1>jQuery File Upload Demo</h1>
       <h2 class="lead">Basic Plus UI version</h2>
-      <ul class="nav nav-tabs">
-        <li>
-          <a href="basic.html">Basic</a>
-        </li>
-        <li>
-          <a href="basic-plus.html">Basic Plus</a>
-        </li>
-        <li class="active">
-          <a href="index.html">Basic Plus UI</a>
-        </li>
-        <li>
-          <a href="angularjs.html">AngularJS</a>
-        </li>
-        <li>
-          <a href="jquery-ui.html">jQuery UI</a>
-        </li>
-      </ul>
-      <br>
-      <blockquote>
-        <p>File Upload widget with multiple file selection, drag&amp;drop support,
-          progress bars, validation and preview images, audio and video for jQuery.
-          <br>Supports cross-domain, chunked and resumable file uploads and client-side
-          image resizing.
-          <br>Works with any server-side platform (PHP, Python, Ruby on Rails, Java,
-          Node.js, Go etc.) that supports standard HTML form file uploads.</p>
-      </blockquote>
-      <br>
-      <!-- The file upload form used as target for the file upload widget -->
-      <form id="fileupload" action="fileAdd.do" method="POST"
-      enctype="multipart/form-data">
+      
+      <form id="fileupload" action="fileAdd.do" method="post" enctype="multipart/form-data">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <noscript>
           <input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/">
@@ -136,7 +108,7 @@
           </div>
         </div>
         <!-- The table listing the files available for upload/download -->
-        <table role="presentation" class="table table-striped">
+        <table role="presentation" class="table table-striped" style="width: 50%;">
           <tbody class="files"></tbody>
         </table>
       </form>
@@ -145,27 +117,7 @@
         <div class="panel-heading">
           <h3 class="panel-title">Demo Notes</h3>
         </div>
-        <div class="panel-body">
-          <ul>
-            <li>The maximum file size for uploads in this demo is
-              <strong>999 KB</strong>(default file size is unlimited).</li>
-            <li>Only image files (
-              <strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is
-              no file type restriction).</li>
-            <li>Uploaded files will be deleted automatically after
-              <strong>5 minutes or less</strong>(demo files are stored in memory).</li>
-            <li>You can
-              <strong>drag &amp; drop</strong>files from your desktop on this webpage (see
-              <a
-              href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
-            <li>Please refer to the
-              <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a>and
-              <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a>for more information.</li>
-            <li>Built with the
-              <a href="http://getbootstrap.com/">Bootstrap</a>CSS framework and Icons from
-              <a href="http://glyphicons.com/">Glyphicons</a>.</li>
-          </ul>
-        </div>
+       
       </div>
     </div>
     <!-- The blueimp Gallery widget -->
@@ -290,7 +242,7 @@
     <!-- The File Upload user interface plugin -->
     <script src="/tpm_project/js/file/upload/jquery.fileupload-ui.js"></script>
     <!-- The main application script -->
-    <script src="/tpm_project/js/file/upload/main.js"></script>
+    <script src="/tpm_project/js/file/upload/main.js?ver=1"></script>
     <!-- The XDomainRequest Transport is included for cross-domain
     file deletion for IE 8 and IE 9 -->
     <!--[if (gte IE 8)&(lt IE 10)]>
