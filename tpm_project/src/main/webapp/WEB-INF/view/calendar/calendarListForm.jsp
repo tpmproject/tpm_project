@@ -20,21 +20,165 @@
 <script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
 <!-- iCheck 1.0.1 -->
 <script src="/tpm_project/plugins/iCheck/icheck.min.js"></script>
-
+<style>
+.bg-progressing {
+	color: #fff;
+    border-color: #308dcc;
+    background: #3498db;
+}
+.bg-approvalwait {
+	color: #fff;
+    border-color: #d67520;
+    background: #e67e22;
+}
+.bg-closingdateexcess {
+	color: #fff;
+    border-color: #cf4436;
+    background: #e74c3c;
+}
+.bg-complete {
+	color: #fff;
+    border-color: #29b765;
+    background: #2ecc71;
+}
+</style>
 <script type="text/javascript">
+var currCalendarData;
+var originalData;
+
+
+function initCalenderPage(){
+	initMyProjectList();
+	initMyWorkListData();
+	
+}
+
 function calendarReload(){
+	
+	var arry_pdto = originalData;
+	var temp_arry = [];
+	for(var i = 0 ; i < arry_pdto.length; i++){
+		var project_name = arry_pdto[i].project_name;
+		
+		var arry_cdto = arry_pdto[i].arry_cdto;
+		for(var j = 0 ; j < arry_cdto.length ; j++){
+			var category_name = arry_cdto[j].category_name;
+			
+			var arry_wdto = arry_cdto[j].arry_wdto;
+			for(var k = 0 ; k < arry_wdto.length ; k++){
+				var work_title = arry_wdto[k].work_title;
+				var work_start = arry_wdto[k].work_start;
+				var work_end = arry_wdto[k].work_end;
+				var work_state = arry_wdto[k].work_state;
+				
+				//window.alert(work_title + "- START : " + moment(work_start).format('YYYY-MM-DD, h:mm:ss a'));
+				//window.alert(work_title + "- END : " + moment(work_end).format('YYYY-MM-DD, h:mm:ss a'));
+				//window.alert(work_title + "- START : " + new Date(work_start));
+				
+				
+				
+				var calendarInfo = {};
+				calendarInfo.title = project_name + '>' + category_name + '>' + work_title;
+				//calendarInfo.allDay = 'false';
+				//calendarInfo.start = moment(work_start).format('YYYY-MM-DD, h:mm:ss a');
+				//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
+				//calendarInfo.start = work_start;
+				//calendarInfo.end = work_end;
+				
+				calendarInfo.start = new Date(work_start);
+				calendarInfo.end = new Date(work_end);
+				
+				// 진행중인 업무
+				if(work_state == '1'){
+					var date = new Date();
+					// 마감일 지난 업무
+					if(date >= new Date(work_end)){
+						calendarInfo.className = 'bg-closingdateexcess';
+					} else {
+						calendarInfo.className = 'bg-progressing';
+					}
+				// 결제 대기
+				} else if(work_state == '2'){
+					calendarInfo.className = 'bg-approvalwait';
+				// 결제 완료 및 완료
+				} else if(work_state == '3'){					
+					calendarInfo.className = 'bg-complete';			
+				}
+				
+				calendarInfo.editable = 'true';
+				temp_arry.push(calendarInfo);
+			}
+		}
+		
+	}
+	
+	currCalendarData = temp_arry;
+	
+	$.each(currCalendarData, function(i, calevent){
+		$('#calendar').fullCalendar('renderEvent',
+				calevent, true);
+	});
+	
+}
+function initMyWorkListData(){
 	$.ajax({
-		url : 'calendarList.do',
+		url : 'calendarJsonList.do',
 		type : 'post',
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
-		success : function(calevents) {
-			window.alert(JSON.stringify(calevents));
-			$.each(calevents, function(i, calevent){
-				$('#calendar').fullCalendar('renderEvent',
-						calevent, true);
-			});
+		success : function(json) {
+			window.alert(JSON.stringify(json));
+			originalData = json;
+			
+			calendarReload();
 		}
 	});
+	
+	/* $.ajax({
+	url : 'calendarJsonList.do',
+	type : 'post',
+	dataType : 'json', // 제이슨 형식으로 넘어온다.
+	success : function(calevents) {
+		window.alert(JSON.stringify(calevents));
+		$.each(calevents, function(i, calevent){
+			$('#calendar').fullCalendar('renderEvent',
+					calevent, true);
+		});
+	}
+	}); */
+}
+
+function initMyProjectList(){
+	$.ajax({
+		url : 'calendarMyProjectList.do',
+		type : 'post',
+		dataType : 'json', // 제이슨 형식으로 넘어온다.
+		success : function(json) {
+			window.alert(JSON.stringify(json));
+			
+			var innerMsg = '';
+			for(var i = 0 ; i < json.length; i++){
+				innerMsg += '<tr>';
+				innerMsg += 	'<th>';
+				innerMsg += 		'<div>';
+				innerMsg += 			'<label><input type="checkbox" name="checkBox_MyProjectList" class="flat-red" value="' + json[i].project_idx +'" checked>&nbsp;' + json[i].project_name + '</label>';
+				innerMsg += 		'</div>';
+				innerMsg += 	'</th>';
+				innerMsg += '</tr>';
+			}
+			
+			$('#calendar_project_list_table').html(innerMsg);
+			
+			iCheckPlugin();
+			//$('input[name="checkBox_MyProjectList"]:checked')
+		}
+	});
+}
+
+function iCheckPlugin(){
+	$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+	    checkboxClass: 'icheckbox_flat-green',
+	    radioClass: 'iradio_flat-green'
+  	});
 }
 
 	$(document).ready(function() {
@@ -65,11 +209,9 @@ function calendarReload(){
 		}
 		ini_events($('#external-events div.external-event')); */
 		//Flat red color scheme for iCheck
-	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-	      checkboxClass: 'icheckbox_flat-green',
-	      radioClass: 'iradio_flat-green'
-	    });
-
+	  
+		
+		
 		$('#calendar').fullCalendar({
 			
 					/* height: 650, */
@@ -164,7 +306,7 @@ function calendarReload(){
 	});
 </script>
 </head>
-<body class="skin-${sessionScope.s_member_thema}" onload="calendarReload()">
+<body class="skin-${sessionScope.s_member_thema}" onload="initCalenderPage()">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/include/header.jsp"%>
 		<%@ include file="/WEB-INF/view/include/aside.jsp"%>
@@ -190,24 +332,7 @@ function calendarReload(){
 						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 							<div class="box-header">
 								<h3 class="box-title">필터</h3>
-								<div class="box-tools">
-									<div class="input-group">
-										<input type="text" name="table_search"
-											onkeyup="startSuggest('channel_list_table', this)"
-											class="form-control input-sm pull-right" style="width: 100px;"
-											placeholder="Search" />
-										<div class="input-group-btn">
-											<button class="btn btn-sm btn-default">
-												<i class="fa fa-search"></i>
-											</button>
-											<button class="btn btn-sm btn-default"
-												onclick="showCreateChannelModal()">
-												<i class="fa fa-plus"></i>
-											</button>
-										</div>
-	
-									</div>
-								</div>
+								
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body table-responsive no-padding"
@@ -259,11 +384,7 @@ function calendarReload(){
 										<div class="input-group-btn">
 											<button class="btn btn-sm btn-default">
 												<i class="fa fa-search"></i>
-											</button>
-											<button class="btn btn-sm btn-default"
-												onclick="showCreateChannelModal()">
-												<i class="fa fa-plus"></i>
-											</button>
+											</button>									
 										</div>
 	
 									</div>
@@ -273,34 +394,7 @@ function calendarReload(){
 							<div class="box-body table-responsive no-padding"
 								id="calendar_project_list_div">
 								<table class="table table-hover" id="calendar_project_list_table">
-									<tr>
-										<th>
-											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;진행 중 업무</label>
-											</div>
-										</th>
-									</tr>
-									<tr>
-										<th>
-											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;마감일 지난 업무</label>
-											</div>
-										</th>
-									</tr>
-									<tr>
-										<th>
-											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;결재 미요청 업무</label>
-											</div>
-										</th>
-									</tr>
-									<tr>
-										<th>
-											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;결재 대기 업무</label>
-											</div>
-										</th>
-									</tr>
+									<!-- 프로젝트 리스트 데이터가 들어갈 곳 -->
 								</table>
 							</div>
 							<!-- /.box-body -->	

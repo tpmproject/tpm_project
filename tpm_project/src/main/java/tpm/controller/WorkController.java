@@ -244,7 +244,7 @@ public class WorkController {
 	}
 	
 	/** 캘린더 - 캘린더 데이터 반환 */
-	@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax(HttpServletRequest req){
 		
 		MemberDTO mdto = new MemberDTO();
@@ -270,10 +270,10 @@ public class WorkController {
 		}
 		
 		return arry_cldto;
-	}
+	}*/
 	
 	/** 캘린더 - 캘린더 데이터 반환2  */
-	@RequestMapping(value="calendarJsonList.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="calendarJsonList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax_json(MemberDTO mdto, HttpSession session){
 
 		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
@@ -297,7 +297,7 @@ public class WorkController {
 		}
 		
 		return arry_cldto;
-	}
+	}*/
 	
 	/** 캘린더 - 필터  업무 데이터 */
 	@RequestMapping(value="calendarFilterList.do",  method=RequestMethod.POST)

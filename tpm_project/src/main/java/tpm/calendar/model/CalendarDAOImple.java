@@ -15,7 +15,11 @@ public class CalendarDAOImple implements CalendarDAO {
 
 	@Override
 	public List<Object> getCalendarList(Object obj) {
-		// TODO Auto-generated method stub
 		return sqlMap.selectList("calendarContentList", obj);
+	}
+
+	@Override
+	public List<Object> getCalendarMyProjectList(Object obj) {
+		return sqlMap.selectList("calendarMyProjectList", obj);
 	}
 }
