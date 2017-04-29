@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tpm.calendar">
+	
+	<resultMap id="calendarCheckListResultMap" type="tpm.calendar.model.CalendarCheckListDTO" >
+		<id property="checklist_idx" column="checklist_idx"/>
+		<result property="work_idx" column="work_idx_1"/>
+		<result property="checklist_content" column="checklist_content"/>
+		<result property="checklist_state" column="checklist_state"/>
+	</resultMap>
+	<resultMap id="calendarWorkResultMap" type="tpm.calendar.model.CalendarWorkDTO" >
+		<id property="work_idx" column="work_idx"/>
+		<result property="category_idx" column="category_idx"/>
+		<result property="work_title" column="work_title"/>
+		<result property="work_start" column="work_start"/>
+		<result property="work_end" column="work_end"/>
+		<result property="work_complete" column="work_complete"/>
+		<result property="work_confirm" column="work_confirm"/>
+		<result property="work_state" column="work_state"/>
+		<collection property="arry_ckdto" notNullColumn="checklist_idx" javaType="java.util.List" resultMap="calendarCheckListResultMap" />
+	</resultMap>
+	<select id="calendarContentList" parameterType="tpm.member.model.MemberDTO" resultMap="calendarWorkResultMap">
+		SELECT *
+		FROM tpm_work w
+		LEFT OUTER JOIN tpm_checklist ck
+		ON w.work_idx = ck.work_idx
+		WHERE w.work_idx IN (SELECT work_idx 
+                   			 FROM tpm_work_member 
+                   			 WHERE member_idx = #{member_idx})
+	</select>
+	
+	
+</mapper>

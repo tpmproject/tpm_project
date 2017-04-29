@@ -124,6 +124,13 @@ public class ChatController {
 		return mav;
 	}
 	
+	/** 채팅 - 채팅 멤버 리스트 반환 */
+	@RequestMapping(value="chatCpMemberList.do",  method=RequestMethod.POST)
+	public @ResponseBody Object chatCpMemberList(ChatDTO ctdto){
+		return chatDAO.getChatMemberList(ctdto);
+	}
+	
+	
 	/**
      * 이미지 업로드
      * @param request

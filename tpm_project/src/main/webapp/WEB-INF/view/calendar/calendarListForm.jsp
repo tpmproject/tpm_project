@@ -13,9 +13,13 @@
 <%@ include file="/WEB-INF/view/include/import.jsp"%>
 <link href="/tpm_project/css/calendar/fullcalendar.min.css?ver=1" rel="stylesheet" />
 <link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="/tpm_project/plugins/iCheck/all.css">
+<link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
 <script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
 <script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
-
+<!-- iCheck 1.0.1 -->
+<script src="/tpm_project/plugins/iCheck/icheck.min.js"></script>
 
 <script type="text/javascript">
 function calendarReload(){
@@ -24,6 +28,7 @@ function calendarReload(){
 		type : 'post',
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(calevents) {
+			window.alert(JSON.stringify(calevents));
 			$.each(calevents, function(i, calevent){
 				$('#calendar').fullCalendar('renderEvent',
 						calevent, true);
@@ -59,7 +64,11 @@ function calendarReload(){
 			});
 		}
 		ini_events($('#external-events div.external-event')); */
-
+		//Flat red color scheme for iCheck
+	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+	      checkboxClass: 'icheckbox_flat-green',
+	      radioClass: 'iradio_flat-green'
+	    });
 
 		$('#calendar').fullCalendar({
 			
@@ -167,7 +176,7 @@ function calendarReload(){
 				<h1>
 					Calendar <small>Control panel</small>
 				</h1>
-				
+
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Calendar</li>
@@ -178,7 +187,125 @@ function calendarReload(){
 			<section class="content">
 				<div class="row">
 					<div class="col-md-4">
+						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
+							<div class="box-header">
+								<h3 class="box-title">필터</h3>
+								<div class="box-tools">
+									<div class="input-group">
+										<input type="text" name="table_search"
+											onkeyup="startSuggest('channel_list_table', this)"
+											class="form-control input-sm pull-right" style="width: 100px;"
+											placeholder="Search" />
+										<div class="input-group-btn">
+											<button class="btn btn-sm btn-default">
+												<i class="fa fa-search"></i>
+											</button>
+											<button class="btn btn-sm btn-default"
+												onclick="showCreateChannelModal()">
+												<i class="fa fa-plus"></i>
+											</button>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body table-responsive no-padding"
+								id="chat_channel_list_div">
+								<table class="table table-hover" id="channel_list_table">
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;진행 중 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;마감일 지난 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;결재 미요청 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;결재 대기 업무</label>
+											</div>
+										</th>
+									</tr>
+								</table>
+							</div>
+							<!-- /.box-body -->	
+						</div>
+						<!-- /.box -->
 						
+						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
+							<div class="box-header">
+								<h3 class="box-title">프로젝트</h3>
+								<div class="box-tools">
+									<div class="input-group">
+										<input type="text" name="table_search"
+											onkeyup="startSuggest('channel_list_table', this)"
+											class="form-control input-sm pull-right" style="width: 100px;"
+											placeholder="Search" />
+										<div class="input-group-btn">
+											<button class="btn btn-sm btn-default">
+												<i class="fa fa-search"></i>
+											</button>
+											<button class="btn btn-sm btn-default"
+												onclick="showCreateChannelModal()">
+												<i class="fa fa-plus"></i>
+											</button>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body table-responsive no-padding"
+								id="calendar_project_list_div">
+								<table class="table table-hover" id="calendar_project_list_table">
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;진행 중 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;마감일 지난 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;결재 미요청 업무</label>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th>
+											<div>
+											<label><input type="checkbox" class="flat-red">&nbsp;결재 대기 업무</label>
+											</div>
+										</th>
+									</tr>
+								</table>
+							</div>
+							<!-- /.box-body -->	
+						</div>
+						<!-- /.box -->
 					</div>
 					<!-- <div class="col-md-3">
 						<div class="box box-solid">

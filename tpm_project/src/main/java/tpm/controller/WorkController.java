@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 
+import tpm.calendar.model.CalendarDAO;
 import tpm.calendar.model.CalendarDTO;
 import tpm.category.model.CategoryDTO;
 import tpm.file.model.FileDTO;
@@ -47,6 +48,9 @@ public class WorkController {
 	
 	@Autowired
 	private TendencyDAO tendencyDAO;
+	
+	@Autowired
+	private CalendarDAO calendarDAO;
 
 	//// 업무 ////
 
@@ -260,7 +264,34 @@ public class WorkController {
 			temp_cldto.setEditable("true");
 			temp_cldto.setBackgroundColor("#f56954");
 			temp_cldto.setBorderColor("#f56954");
+			System.out.println(temp_cldto);
+			arry_cldto.add(temp_cldto);
+		}
+		
+		return arry_cldto;
+	}
+	
+	/** 캘린더 - 캘린더 데이터 반환2  */
+	@RequestMapping(value="calendarJsonList.do",  method=RequestMethod.POST)
+	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax_json(MemberDTO mdto, HttpSession session){
 
+		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
+		ArrayList<MyWorkDTO> arry_mwdto = workDAO.myWorkAllList(mdto);
+
+		ArrayList<CalendarDTO> arry_cldto = new ArrayList<CalendarDTO>();
+		for (MyWorkDTO myWorkDTO : arry_mwdto) {
+			CalendarDTO temp_cldto = new CalendarDTO();
+			temp_cldto.setId("work_" + myWorkDTO.getWork_idx());
+			temp_cldto.setTitle(myWorkDTO.getWork_title());
+			temp_cldto.setAllDay("false");
+			temp_cldto.setStart(myWorkDTO.getWork_start().toString());
+			temp_cldto.setEnd(myWorkDTO.getWork_end().toString());
+			temp_cldto.setUrl("index.do");
+			temp_cldto.setClassName("calendar_work_content");
+			temp_cldto.setEditable("true");
+			temp_cldto.setBackgroundColor("#f56954");
+			temp_cldto.setBorderColor("#f56954");
+			System.out.println(temp_cldto);
 			arry_cldto.add(temp_cldto);
 		}
 		

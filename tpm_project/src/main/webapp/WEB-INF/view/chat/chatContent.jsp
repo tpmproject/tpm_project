@@ -4,7 +4,7 @@
 <div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 	<div class="box-header">
 		<i class="fa fa-comments-o"></i>
-		<h3 class="box-title">Chat</h3>
+		<h3 class="box-title" id="chat_content_cpname">Chat</h3>
 	</div>
 	<div class="box-body chat" id="chat-box">
 		<div class="chat-message" id="chat_message_div">

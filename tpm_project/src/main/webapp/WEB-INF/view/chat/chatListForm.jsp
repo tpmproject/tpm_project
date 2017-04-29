@@ -18,7 +18,7 @@
 <link href="/tpm_project/css/material/mdb.css?ver=1" rel="stylesheet">
 
 <link href="/tpm_project/css/inspinia/inspinia.css?ver=2" rel="stylesheet">
-
+<link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
 
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="/tpm_project/js/material/tether.min.js"></script>
@@ -34,43 +34,7 @@
 <script src="/tpm_project/ckeditor/ckeditor.js?ver=4"></script>
 
 <style>
-/* 스킨 */
-.skin-border-top-color-white{
-	border-top-color: #fff;
-}
-.skin-border-top-color-white-light{
-	border-top-color: #fff;
-}
-.skin-border-top-color-blue{
-	border-top-color: #3c8dbc;
-}
-.skin-border-top-color-blue-light{
-	border-top-color: #3c8dbc;
-}
-.skin-border-top-color-green{
-	border-top-color: #00a65a;
-}
-.skin-border-top-color-green-light{
-	border-top-color: #00a65a;
-}
-.skin-border-top-color-purple{
-	border-top-color: #605ca8;
-}
-.skin-border-top-color-purple-light{
-	border-top-color: #605ca8;
-}
-.skin-border-top-color-red{
-	border-top-color: #dd4b39;
-}
-.skin-border-top-color-red-light{
-	border-top-color: #dd4b39;
-}
-.skin-border-top-color-yellow{
-	border-top-color: #f39c12;
-}
-.skin-border-top-color-yellow-light{
-	border-top-color: #f39c12;
-}
+
 
 .list-border-left{
 	
@@ -340,6 +304,7 @@ a:hover, a:active, a:focus {
 <script>
 var currCpCode;
 var currCpValue;
+var currCpName;
 var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
 var s_member_img = '<%=session.getAttribute("s_member_img")%>';
 var wsocket;
@@ -368,9 +333,16 @@ $(function(){
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
+    $('#chat_member_list_div').slimScroll({
+        height: '296px' // 스크롤 처리할 div 의 길이
+    }).bind('slimscrolling', function(e, pos) {
+    	//window.alert("Scroll value: " + pos + "px");
+       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+    });
+    
     
    //페이지 시작시 소켓 연결
-   connect();
+   chatConnect();
     
    
     
@@ -388,7 +360,6 @@ $(function(){
 	 });
    
    
-	
    
    /* $('#project_list_search').keypress(function(event){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -437,22 +408,22 @@ $(function(){
 	}); */
 });
 
-function connect() {
+function chatConnect() {
 	/* wsocket = new SockJS(
 			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
 	wsocket = new SockJS(
 			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); 
-	wsocket.onopen = onOpen; // 연결 후 결과 메세지
-	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
-	wsocket.onclose = onClose; // 연결 해체 후 메세지
+	wsocket.onopen = onChatOpen; // 연결 후 결과 메세지
+	wsocket.onmessage = onChatMessage; // 서버에서 메세지가 푸시될때 처리
+	wsocket.onclose = onChatClose; // 연결 해체 후 메세지
 }
-function disconnect() {
+function disChatConnect() {
 	wsocket.close();
 }
-function onOpen(evt) {
+function onChatOpen(evt) {
 	window.alert('연결되었습니다.');
 }
-function onMessage(evt) {
+function onChatMessage(evt) {
 	var data = evt.data;
 	if (data.substring(0, 4) == "msg:") {
 		var jsonStr = data.substring(4);
@@ -461,7 +432,7 @@ function onMessage(evt) {
 		appendChatMessage(json);
 	}
 }
-function onClose(evt) {
+function onChatClose(evt) {
 	window.alert('연결을 끊었습니다.');
 }
 
@@ -498,13 +469,18 @@ function appendChatMessage(json) {
 }); */
 
 
-function showChatContent(cpCode, cpValue, me){
+function showChatContent(cpCode, cpValue, cpName, me){
 	
-	$('tr.list-border-left').removeClass('list-border-left-selected');
-	$(me).addClass('list-border-left-selected');
+	if(me == null){
+		$('tr.list-border-left').eq(0).addClass('list-border-left-selected');
+	}else{
+		$('tr.list-border-left').removeClass('list-border-left-selected');
+		$(me).addClass('list-border-left-selected');
+	}
 	
 	currCpCode = cpCode;
 	currCpValue = cpValue;
+	currCpName = cpName;
 	
 	$.ajax({
 		url : 'chatList.do',
@@ -513,7 +489,7 @@ function showChatContent(cpCode, cpValue, me){
 				 chat_cp_value : cpValue },
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			//window.alert(JSON.stringify(json));
+			window.alert(JSON.stringify(json));
 			var msg = '';
 			for(var i = 0 ; i < json.length ; i++){		
 				if(i == 0){
@@ -537,13 +513,48 @@ function showChatContent(cpCode, cpValue, me){
 			
 			//window.alert($("#chat-box").height());
 			$('#chat-box').slimScroll({ scrollTo: $("#chat_message_div").height() });
+			$('#chat_content_cpname').html(currCpName);
+			
+			settingCpMember();
 		}
 	});
 	
-	disconnect();
-	connect();
 	
 	
+	disChatConnect();
+	chatConnect();
+}
+function settingCpMember(){
+	$.ajax({
+		url : 'chatCpMemberList.do',
+		type : 'post',
+		data : { chat_cp_code : currCpCode,
+				 chat_cp_value : currCpValue },
+		dataType : 'json', // 제이슨 형식으로 넘어온다.
+		success : function(json) {
+			window.alert(JSON.stringify(json));
+			var msg = '';
+			for(var i = 0 ; i < json.length; i++){
+				msg += '<tr class="list-border-left" style="cursor: pointer;">';
+				msg += 		'<th>';
+				msg +=			'<div>';
+				msg += 				'<div class="feed-element">';
+				msg += 					'<a href="profile.html" class="pull-left">';
+				msg += 						'<img alt="image" class="img-circle" src="/tpm_project/img/member/profile/' + json[i].member_img + '">';
+				msg += 					'</a>';
+				msg += 					'<div class="media-body ">';
+				msg += 						'<strong>' + json[i].member_name + '</strong><br>';
+				msg += 						'<small class="text-muted">' + json[i].member_id +'</small>';
+				msg += 					'</div>';
+				msg += 				'</div>';
+				msg += 			'</div>'
+				msg +=		'</th>';
+				msg += '</tr>';
+			}
+			
+			$('#cpmember_list_table').html(msg);
+		}
+	});
 }
 
 function makeRightChatContent(ctdto) {
@@ -555,7 +566,8 @@ function makeRightChatContent(ctdto) {
 	temp_msg +=		'<div class="chat-body clearfix">';
 	temp_msg +=			'<div class="header">';
 	temp_msg +=				'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
-	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small>';
+	temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>&nbsp;' + moment(ctdto.chat_date).format('a h:mm') + '</small>';
+	//temp_msg +=				'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>&nbsp;' + moment(ctdto.chat_date).startOf('hour').fromNow() + '</small>';
 	temp_msg +=			'</div>';
 	temp_msg +=			'<div class="row">';
 	temp_msg +=				'<div class="col-md-12">';
@@ -591,7 +603,8 @@ function makeLeftChatContent(ctdto) {
 	temp_msg += 	'<div class="chat-body clearfix"> ';
 	temp_msg += 		'<div class="header"> ';
 	temp_msg += 			'<strong class="primary-font">' + ctdto.mdto.member_name + '</strong> ';
-	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
+	//temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>&nbsp;' + moment(ctdto.chat_date).format('YYYY-MM-DD h:mm:ss a') + '</small> ';
+	temp_msg += 			'<small class="pull-right text-muted"><i class="fa fa-clock-o"></i>&nbsp;' + moment(ctdto.chat_date).format('a h:mm') + '</small> ';
 	temp_msg += 		'</div> ';
 	temp_msg +=			'<div class="row">';
 	temp_msg +=				'<div class="col-md-12">';
@@ -690,7 +703,7 @@ function reLoadChannelList(){
 			window.alert(JSON.stringify(json));
 			var innerMsg = '';
 			for(var i = 0 ; i < json.length; i++){
-				innerMsg += '<tr class="list-border-left" onclick="showChatContent(\'C\',' + json[i].channel_idx + ')" style="cursor: pointer;">';
+				innerMsg += '<tr class="list-border-left" onclick="showChatContent(\'C\',\'' + json[i].channel_idx + '\', \'' + json[i].channel_name +'\',this)" style="cursor: pointer;">';
 				innerMsg += '<th><div>' + json[i].channel_name + '</div></th>';
 				innerMsg += '</tr>';
 			}
@@ -960,17 +973,37 @@ function startSuggest(id, me){
 	}
 	checkFirst = true; */
 }
+
+function startSuggest_memberList(id, me){
+	
+	   var list = $('#' + id).find('tbody tr');
+	  
+	   
+	   for(var i = 0 ; i < list.length; i++){
+		   
+		   // 포함 되어있지 않다면 -1 리턴
+		   if($(list).find('th div div div strong').eq(i).html().trim().indexOf($(me).val().trim()) == -1 && $(list).find('th div div div small').eq(i).html().trim().indexOf($(me).val().trim()) == -1){
+			   $(list).eq(i).addClass('show-blind');  
+		   }else{
+			   $(list).eq(i).removeClass('show-blind');
+		   }
+	   }
+		/* if(checkFirst == false){
+			setTimeout('goSearch_member()', 100);
+		}
+		checkFirst = true; */
+}
 	
 </script>
 </head>
 <c:choose>
 	<c:when test="${!empty arry_pdto}">
-		<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('P','${arry_pdto.get(0).project_idx}')">
+		<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('P','${arry_pdto.get(0).project_idx}','${arry_pdto.get(0).project_name}')">
 	</c:when>
 	<c:otherwise>
 		<c:choose>
 			<c:when test="${!empty arry_chdto}">
-				<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('C','${arry_chdto.get(0).channel_idx}')">
+				<body class="skin-${sessionScope.s_member_thema}" onload="showChatContent('C','${arry_chdto.get(0).channel_idx}','${arry_chdto.get(0).channel_name}')">
 			</c:when>
 			<c:otherwise>
 				<body class="skin-${sessionScope.s_member_thema}">
