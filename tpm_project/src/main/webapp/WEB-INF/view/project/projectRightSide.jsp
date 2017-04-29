@@ -7,6 +7,7 @@
 <title>여기에 제목을 입력하십시오</title>
 <link href="/tpm_project/css/hr/hr-text.css?verr=3" rel="stylesheet">
 
+
 <style>
         article.content {
             margin: -30px 50px;
@@ -327,8 +328,7 @@ function commentAdd(){
 		}
 	} */
 	
-	function showComment(work_idx){
-		//var work_idx = document.newComment.work_idx.value;
+	function showComment(){
 		var param  = 'work_idx='+work_idx;
 		window.alert(param);
 		

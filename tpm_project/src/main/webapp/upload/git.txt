@@ -1,7 +1,0 @@
-
-tpmproject
-a123456789
-
-
-
-<img class="tw-login-form__google-logo" src="https://enterprise-cdn.taskworld.com/assets/logo-google-52e002d6.svg">

@@ -65,7 +65,7 @@ function fileUpload(work_idx){
               <span>Add files...</span>
               <input type="file" name="file_upload" multiple="multiple">
             </span>
-            <button type="button" class="btn btn-primary start" >
+            <button type="submit" class="btn btn-primary start" >
               <i class="glyphicon glyphicon-upload"></i>
               <span>Start upload</span>
             </button>
