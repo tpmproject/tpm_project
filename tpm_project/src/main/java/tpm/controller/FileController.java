@@ -273,7 +273,8 @@ public class FileController {
 	   //     System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
-		System.out.println(files.get(0).getOriginalFilename());
+		System.out.println("등록한 파일이름:"+files.get(0).getOriginalFilename());
+		
 		int result=0;
 		String msg="";
 		//파일이름,파일사이즈,파일경로
@@ -349,6 +350,7 @@ public class FileController {
 		 
 		 String savepath = req.getServletContext().getRealPath("upload/"+file_name);
 		 File uploadDirectory = new File(savepath);
+		 System.out.println(uploadDirectory);
 		 uploadDirectory.delete();
 		 
 		
