@@ -2,6 +2,8 @@ package tpm.controller;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +63,7 @@ public class CommentController {
 	}*/
 	
 	/** 코멘트 - 코멘트 입력(jSON1)*/
-	@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
 	public ModelAndView commentAdd(CommentDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
@@ -76,15 +78,20 @@ public class CommentController {
 		
 		mav.setViewName("comment/commentAdd_d");
 		return mav;
-	}
+	}*/
 	
 	/** 코멘트 - 코멘트 입력 JSON 테스트*/
 	@RequestMapping(value="addComment.do", method=RequestMethod.POST)
-	public @ResponseBody Object addComment(CommentDTO cdto){
+	public @ResponseBody Object addComment(CommentDTO cdto, HttpSession session){
 		
-		//int result = commentDAO.addComment(cdto);
+		cdto.setMember_idx((Integer)session.getAttribute("s_member_idx"));
 		
-		return commentDAO.addComment(cdto);
+		int result = commentDAO.addComment(cdto);
+		if(result > 0){
+			return commentDAO.getCommentContent(cdto);
+		} else{
+			return "false";
+		}
 	}
 	
 	/** 코멘트 - 코멘트 수정 */

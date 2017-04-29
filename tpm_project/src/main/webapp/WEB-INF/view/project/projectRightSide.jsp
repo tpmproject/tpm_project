@@ -258,45 +258,25 @@
 		var work_idx = document.newComment.work_idx.value;
 		var comment_content = document.newComment.inputComment.value;
 		
-		var param = 'work_idx='+ work_idx +
+		/* var param = 'work_idx='+ work_idx +
 				'&member_idx=' + ${s_member_idx} + '&comment_content=' + comment_content;
-		
-		/* var date = new Date();
-		
-		var year = date.getYear();
-			if(year < 2000) year += 1900;
-		var month = date.getMonth()+1;
-		var day = date.getDate();
-		
-		var hour = date.getHours();
-			if(hour > 12){
-				hour = '오후 ' + (hour-12);
-			} else if(hour = 12){
-				hour = '오후 ' + hour-12;
-			} else{
-				hour = '오전 ' + hour;
-			}
-		var minute = date.getMinutes();
-		var second = date.getSeconds();
-			
-		var time = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
-		window.alert(time);
-		
-		var param = 'work_idx='+ work_idx + '&member_idx=' + ${s_member_idx} +
-				'&comment_content=' + comment_content + '&comment_date=' + time; */
+		window.alert(param); //여기까지 성공 */
 				
-		window.alert(param);
-				
-		
-		
 		$.ajax({
 			url : 'addComment.do',
 			type : 'post',
-			data : param,
+			data : {
+				work_idx : work_idx,
+				member_idx : member_idx,
+				comment_content : comment_content
+			},
 			dataType : 'json',
-			success: function(json){
+			success : function(json){
 				//window.alert('jason(?):'+json);
-				window.alert('jason2(?):'+JSON.stringify(json,null,2));
+				window.alert('json:'+JSON.stringify(json,null,2));
+				
+				/* var member_name = json.member_name;
+				window.alert(member_name);
 				
 				var msg = '';
 				var Did = document.getElementById('comment_content');
@@ -313,7 +293,7 @@
 				msg += 		'</div>';
 				msg += '</div>';
 				
-				Did.innerHTML = msg;
+				Did.innerHTML = msg; */
 				
 			}
 		
@@ -327,6 +307,30 @@
 		window.alert(param); 
 		sendRequest('commentAdd.do', param, commentAddResult, 'POST'); */
 	}
+	
+	/* var date = new Date();
+	
+	var year = date.getYear();
+		if(year < 2000) year += 1900;
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	
+	var hour = date.getHours();
+		if(hour > 12){
+			hour = '오후 ' + (hour-12);
+		} else if(hour = 12){
+			hour = '오후 ' + hour-12;
+		} else{
+			hour = '오전 ' + hour;
+		}
+	var minute = date.getMinutes();
+	var second = date.getSeconds();
+		
+	var time = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+	window.alert(time);
+	
+	var param = 'work_idx='+ work_idx + '&member_idx=' + ${s_member_idx} +
+			'&comment_content=' + comment_content + '&comment_date=' + time; */
 	
 	/* function commentAddResult(){
 		if(XHR.readyState==4){
