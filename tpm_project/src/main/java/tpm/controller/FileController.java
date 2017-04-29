@@ -249,10 +249,13 @@ public class FileController {
 	/** 파일 - 파일 등록 
 	 * @throws UnsupportedEncodingException */
 	@RequestMapping(value="fileAdd.do",  method=RequestMethod.POST)
-	public ModelAndView fileAdd(HttpServletRequest req,HttpServletResponse response,
+	public @ResponseBody void fileAdd(HttpServletRequest req,HttpServletResponse response,
 								@RequestParam("work_idx")int work_idx,
 								@RequestParam("project_idx")int project_idx) throws UnsupportedEncodingException{
 		System.out.println("들어옴");
+		System.out.println("work"+work_idx);
+		System.out.println("project_idx"+project_idx);
+		
 		MultipartHttpServletRequest multipartRequest =  (MultipartHttpServletRequest)req;
 		multipartRequest.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession();
@@ -270,7 +273,7 @@ public class FileController {
 	   //     System.out.println( config.getStoragePath());
 		
 		List<MultipartFile> files = multipartRequest.getFiles("file_upload");
-		
+		System.out.println(files.get(0).getOriginalFilename());
 		int result=0;
 		String msg="";
 		//파일이름,파일사이즈,파일경로
@@ -288,11 +291,7 @@ public class FileController {
 		}else{
 			msg="파일 등록 실패";
 		}
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg",msg);
-		mav.setViewName("file/fileResult_d");
-		return mav;
-	
+		
 	}
 	
 	/** 파일 - 파일 수정 */

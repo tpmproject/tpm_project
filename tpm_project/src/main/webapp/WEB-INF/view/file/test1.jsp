@@ -13,9 +13,7 @@
     <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap styles -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Generic page styles -->
-    <link rel="stylesheet" href="/tpm_project/css/file/upload//style.css">
     <!-- blueimp Gallery styles -->
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <!-- CSS to style the file input field as button and adjust the Bootstrap
@@ -29,42 +27,29 @@
     <noscript>
       <link rel="stylesheet" href="/tpm_project/css/file/upload/jquery.fileupload-ui-noscript.css">
     </noscript>
+    
+<script>
+function fileUpload(work_idx){
+	$('input[name=work_idx]').attr('value',work_idx); 
+}
+
+</script>
   </head>
   
   <body>
     <div class="navbar navbar-default navbar-fixed-top" >
       <div class="container" style="width: 100%;">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="https://github.com/blueimp/jQuery-File-Upload/tags">Download</a>
-            </li>
-            <li>
-              <a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a>
-            </li>
-            <li>
-              <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a>
-            </li>
-            <li>
-              <a href="https://blueimp.net">© Sebastian Tschan</a>
-            </li>
-          </ul>
-        </div>
+        
+        
       </div>
     </div>
     <div class="container">
-      <h1>jQuery File Upload Demo</h1>
-      <h2 class="lead">Basic Plus UI version</h2>
+  
       
       <form id="fileupload" action="fileAdd.do" method="post" enctype="multipart/form-data">
+      
+		<input type="hidden" name="work_idx" id="id_work_idx" >
+		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <noscript>
           <input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/">
@@ -78,9 +63,9 @@
             <span class="btn btn-success fileinput-button">
               <i class="glyphicon glyphicon-plus"></i>
               <span>Add files...</span>
-              <input type="file" name="files[]" multiple="multiple">
+              <input type="file" name="file_upload" multiple="multiple">
             </span>
-            <button type="submit" class="btn btn-primary start">
+            <button type="button" class="btn btn-primary start" >
               <i class="glyphicon glyphicon-upload"></i>
               <span>Start upload</span>
             </button>
@@ -112,13 +97,8 @@
           <tbody class="files"></tbody>
         </table>
       </form>
-      <br>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Demo Notes</h3>
-        </div>
-       
-      </div>
+      
+     
     </div>
     <!-- The blueimp Gallery widget -->
     <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls"
@@ -206,7 +186,6 @@
                 </tr>
             {% } %}
     </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI
     is already included -->
     <script src="/tpm_project/js/file/upload/vendor/jquery.ui.widget.js"></script>
@@ -221,7 +200,6 @@
     <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
     <!-- Bootstrap JS is not required, but included for the responsive
     demo navigation -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- blueimp Gallery script -->
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <!-- The Iframe Transport is required for browsers without support

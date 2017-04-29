@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
 <link href="/tpm_project/css/hr/hr-text.css?verr=3" rel="stylesheet">
-<script src="/tpm_project/js/date/moment.js"></script>
 
 <style>
         article.content {
@@ -699,6 +698,13 @@ function commentAdd(){
             <div class="hidden-xs">파일 업로드</div>
           </button>
         </div>
+           <div class="btn-group" role="group">
+          <button type="button" id="fileUpload" class="btn btn-default" href="#tab5"
+          data-toggle="tab">
+            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+            <div class="hidden-xs">파일 업로드</div>
+          </button>
+        </div>
       </div>
       <div class="well">
         <div class="tab-content" style="width:600px">
@@ -712,9 +718,12 @@ function commentAdd(){
           </div>
           
           <div class="tab-pane fade in" id="tab4">
-         <%--     <%@include file="/WEB-INF/view/file/test1.jsp"%> --%>
+             <%@include file="/WEB-INF/view/file/test1.jsp"%>
           </div>
           
+          <div class="tab-pane fade in" id="tab5">
+             <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+          </div>
           
         </div>
       </div>
