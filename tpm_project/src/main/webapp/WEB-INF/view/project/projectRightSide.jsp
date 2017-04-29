@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
+<link href="/tpm_project/css/hr/hr-text.css?verr=3" rel="stylesheet">
+<script src="/tpm_project/js/date/moment.js"></script>
 
 <style>
         article.content {
@@ -261,43 +263,36 @@ function commentAdd(){
 	var param = 'work_idx='+ work_idx + '&comment_content=' + comment_content;
 	//window.alert(param);
 			
-	$.ajax({
-		url : 'addComment.do',
-		type : 'post',
-		data : param,
-		dataType : 'json',
-		success : function(json){
-			//window.alert('jason(?):'+json);
-			window.alert('json:'+JSON.stringify(json,null,2));
-			
-			var msg = '';
-			var Did = document.getElementById('comment_content');
-			
-			msg += '<div class="box-body chat" id="chat-box">';
-			msg += 		'<div class="item">';
-			msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'" class="online">';
-			msg += 			'<p class="message">';
-			msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-			msg += 					'<i class="fa fa-clock-o"></i> '+ json.comment_date+'</small>'+ json.mdto.member_name +'('+ json.mdto.member_id +')';
-			msg += 				'</a>';
-			msg += 				 json.comment_content;
-			msg +=			 '</p>';
-			msg += 		'</div>';
-			msg += '</div>';
-			
-			Did.innerHTML = msg;
-			
-		}
-	
-		//$('#comment_content').html(msg);
-	});
+		$.ajax({
+			url : 'addComment.do',
+			type : 'post',
+			data : param,
+			dataType : 'json',
+			success : function(json){
+				//window.alert('jason(?):'+json);
+				window.alert('json:'+JSON.stringify(json,null,2));
+				
+				var msg = '';
+				var Did = document.getElementById('comment_content');
+				
+				msg += '<div class="box-body chat" id="chat-box">';
+				msg += 		'<div class="item">';
+				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'" class="online">';
+				msg += 			'<p class="message">';
+				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json.mdto.member_name +'('+ json.mdto.member_id +')';
+				msg += 				'</a>';
+				msg += 				  json.comment_content;
+				msg +=			 '</p>';
+				msg += 		'</div>';
+				msg += '</div>';
+				
+				Did.innerHTML = msg;
+			}
 		
-		/* var work_idx = document.newComment.work_idx.value;
+		});
 		
-		var param = 'work_idx='+ work_idx +
-			'&member_idx=' + ${s_member_idx} + '&comment_content=' + document.newComment.inputComment.value;
-		window.alert(param); 
-		sendRequest('commentAdd.do', param, commentAddResult, 'POST'); */
+		//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	}
 	
 	/* var date = new Date();
