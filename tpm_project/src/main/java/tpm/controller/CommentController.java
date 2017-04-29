@@ -34,32 +34,51 @@ public class CommentController {
 	}*/
 	
 	/** 코멘트 - 코멘트 데이터 반환*/
-	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
+	@RequestMapping(value="commentList.do",  method=RequestMethod.GET)
 	public @ResponseBody List<Object> commentList(CommentDTO cdto){
-		List<Object> arr_cdto = commentDAO.getCommentList(cdto);
+		/*List<Object> arr_cdto = commentDAO.getCommentList(cdto);
 		
 		for(Object object: arr_cdto){
 			System.out.println(object);
 		}
 		
-		return arr_cdto;
+		return arr_cdto;*/
+		return commentDAO.getCommentList(cdto);
 	}
 	
 	/** 코멘트 - 코멘트 입력 */
-	@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
 	public ModelAndView commentAdd(CommentDTO dto){
 		
 		ModelAndView mav = new ModelAndView();
 		
 		int result = commentDAO.commentAdd(dto);
-		//System.out.println(result);
+		System.out.println(result);
 		
 		mav.addObject("result", result);
 		mav.setViewName("comment/commentAdd_d");
 		return mav;
+	}*/
+	
+	/** 코멘트 - 코멘트 입력(jSON1)*/
+	@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
+	public ModelAndView commentAdd(CommentDTO dto){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		dto = commentDAO.addComment(dto);
+		System.out.println(dto.getComment_idx());
+		System.out.println(dto.getComment_date());
+		
+		if(dto!=null){
+			mav.addObject("comment", dto);
+		}
+		
+		mav.setViewName("comment/commentAdd_d");
+		return mav;
 	}
 	
-	/** 코멘트 - 코멘트 입력 AJAX 테스트*/
+	/** 코멘트 - 코멘트 입력 JSON 테스트*/
 	@RequestMapping(value="addComment.do", method=RequestMethod.POST)
 	public @ResponseBody Object addComment(CommentDTO cdto){
 		

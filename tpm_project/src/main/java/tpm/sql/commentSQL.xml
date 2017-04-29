@@ -29,7 +29,7 @@
 		from tpm_comment a
 		left join tpm_member b
 		on b.member_idx = a.member_idx
-		where work_idx = #{work_idx}
+		where work_idx = 283
 		order by comment_date asc
 	</select>
 <!-- 	<select id="commentList" parameterType="int" resultType="commentResultMap">

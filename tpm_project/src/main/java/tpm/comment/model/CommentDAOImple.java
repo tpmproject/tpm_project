@@ -27,13 +27,23 @@ public class CommentDAOImple implements CommentDAO {
 		return arr;
 	}*/
 
-	public int addComment(CommentDTO dto) {
+	/*public int addComment(CommentDTO dto) {
 		int count = sqlMap.insert("addComment", dto);
 		return count;
-	}
+	}*/
 	
-	public int commentAdd(CommentDTO dto){
+	/*public int commentAdd(CommentDTO dto){
 		return sqlMap.insert("addComment", dto);
+	}*/
+	
+	public CommentDTO addComment(CommentDTO dto) {
+		int result = sqlMap.insert("addComment", dto);
+		
+		if(result>0){
+			return dto;
+		} else{
+			return null;
+		}
 	}
 
 	public int updateComment(CommentDTO dto) {

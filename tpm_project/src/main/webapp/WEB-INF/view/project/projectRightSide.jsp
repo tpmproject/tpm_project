@@ -259,8 +259,34 @@
 		
 		var param = 'work_idx='+ work_idx +
 				'&member_idx=' + ${s_member_idx} + '&comment_content=' + comment_content;
+		
+		/* var date = new Date();
+		
+		var year = date.getYear();
+			if(year < 2000) year += 1900;
+		var month = date.getMonth()+1;
+		var day = date.getDate();
+		
+		var hour = date.getHours();
+			if(hour > 12){
+				hour = '오후 ' + (hour-12);
+			} else if(hour = 12){
+				hour = '오후 ' + hour-12;
+			} else{
+				hour = '오전 ' + hour;
+			}
+		var minute = date.getMinutes();
+		var second = date.getSeconds();
+			
+		var time = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+		window.alert(time);
+		
+		var param = 'work_idx='+ work_idx + '&member_idx=' + ${s_member_idx} +
+				'&comment_content=' + comment_content + '&comment_date=' + time; */
 				
 		window.alert(param);
+				
+		
 		
 		$.ajax({
 			url : 'addComment.do',
@@ -268,16 +294,36 @@
 			data : param,
 			dataType : 'json',
 			success: function(json){
-				window.alert('jason(?):'+json);
-				window.alert('jason2(?):'+JSON.stringify(json));
+				//window.alert('jason(?):'+json);
+				window.alert('jason2(?):'+JSON.stringify(json,null,2));
+				
+				var msg = '';
+				var Did = document.getElementById('comment_content');
+				
+				msg += '<div class="box-body chat" id="chat-box">';
+				msg += 		'<div class="item">';
+				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.member_img +'" class="online">';
+				msg += 			'<p class="message">';
+				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+				msg += 					'<i class="fa fa-clock-o"></i> '+ json.comment_date+'</small>'+ json.member_name +'('+ json.member_id +')';
+				msg += 				'</a>';
+				msg += 				 json.comment_content;
+				msg +=			 '</p>';
+				msg += 		'</div>';
+				msg += '</div>';
+				
+				Did.innerHTML = msg;
+				
 			}
+		
+			//$('#comment_content').html(msg);
 		});
 		
 		/* var work_idx = document.newComment.work_idx.value;
 		
 		var param = 'work_idx='+ work_idx +
 			'&member_idx=' + ${s_member_idx} + '&comment_content=' + document.newComment.inputComment.value;
-		window.alert(param);
+		window.alert(param); 
 		sendRequest('commentAdd.do', param, commentAddResult, 'POST'); */
 	}
 	
@@ -290,26 +336,55 @@
 		}
 	} */
 	
-	function showComment(){
+	/* function showComment(){
+		var param  = 'work_idx='+work_idx;
+		window.alert(param);
+		
+		//sendRequest('commentList.do', param, showCommentResult, 'POST');
+		
 		$.ajax({
 			url : 'commentList.do',
 			type : 'post',
-			data : work_idx,
+			data : param,
 			dataType : 'json',
 			success : function(json){
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
+					//var comments = json[0];
 					
-					msg += makeCommentContent(json[i]);	
+					msg += '<div class="box-body chat" id="chat-box">';
+					msg += 		'<div class="item">';
+					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[0].cdto.mdto.member_ing +'" class="online">';
+					msg += 			'<p class="message">';
+					msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+					msg += 					'<i class="fa fa-clock-o"></i> '+ json[0].cdto.comment_date+'</small>'+ json[0].cdto.mdto.member_name +'('+ json[0].cdto.mdto.member_id +')';
+					msg += 				'</a>';
+					msg += 				 json[0].cdto.comment_content;
+					msg +=			 '</p>';
+					msg += 		'</div>';
+					msg += '</div>';
 				}
 				
 				$('#comment_content').html(msg);
 			}
 			
 		});
-		
-	}
+	} */
+	
+	/* function showCommentResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var JSONData = XHR.responseText;
+				window.alert(JSONData);
+				
+				var objData = eval('('+JSONData+')');
+				window.alert(objData);
+				
+				var comments = objData.
+			}
+		}
+	} */
 	
 	/* <div class="box-body chat" id="chat-box">
 			<div class="item">
@@ -327,7 +402,7 @@
 			</div>
 		</div> */
 	
-	function makeCommentContent(cdto){
+	/* function makeCommentContent(cdto){
 		
 		var temp_msg = '';
 		
@@ -344,7 +419,7 @@
 		temp_msg += '</div>';
 		
 		return temp_msg;
-	}
+	} */
 	
 	function project_fileList(work_idx){
 		sessionStorage.setItem('delete_work_idx',work_idx);
