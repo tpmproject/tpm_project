@@ -405,11 +405,11 @@ function addWorkResult(){
 				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
 				msg+='<c:set var="wstart"><f:formatDate value="'+seDate[0]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
 				msg+='<c:set var="wend"><f:formatDate value="'+seDate[1]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<span onclick="workUpdate(${wdto.work_idx},"${wstart}","${wend}",'+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
+				msg+='<span onclick="workUpdate(${wdto.work_idx},"'+seDate[0]+'","'+seDate[1]+'",'+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
 				msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
-				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;"${wstart}"<br>';
+				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+seDate[0]+'<br>';
 				msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-				msg+='~${wend}</td></tr>';
+				msg+='~'+seDate[1]+'</td></tr>';
 				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
 				msg+='<c:forEach var="mdto" items="${marr}"><c:if test="${mdto.work_idx eq '+work.work_idx+'">';
 				msg+='<span>${mdto.member_name}</span></c:if></c:forEach></td></tr>';
