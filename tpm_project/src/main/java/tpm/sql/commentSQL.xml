@@ -27,8 +27,7 @@
 	</select>
 	
 	<insert id="addComment" parameterType="tpm.comment.model.CommentDTO" useGeneratedKeys="true" keyProperty="comment_idx" keyColumn="comment_idx">
-		insert into tpm_comment
-		values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, sysdate)
+		insert into tpm_comment values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, sysdate)
 	</insert>
 	
 	<select id="listComment" parameterType="tpm.comment.model.CommentDTO" resultMap="commentResultMap">
@@ -43,7 +42,7 @@
 	
 	
 <!-- 	<select id="commentList" parameterType="int" resultType="commentResultMap">
-	SELECT * FROM tpm_comment c, tpm_member m 
+		SELECT * FROM tpm_comment c, tpm_member m 
 		WHERE c.member_idx = m.member_idx and work_idx=#{work_idx}
 	</select> -->
 </mapper>
