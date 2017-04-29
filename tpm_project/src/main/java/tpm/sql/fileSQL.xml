@@ -49,7 +49,12 @@
 		SELECT * FROM tpm_file f, tpm_member m WHERE f.member_idx = m.member_idx and 
 		f.project_idx=#{project_idx} and f.work_idx =#{work_idx}
 	</select>
-
+    	<select id="workSearchFileList" parameterType="Map" resultMap="fileResultMap">
+		
+		SELECT * FROM tpm_file f, tpm_member m WHERE f.member_idx = m.member_idx and 
+		f.project_idx=#{project_idx} and f.work_idx =#{work_idx} and f.file_name like '%${file_name}%'
+	</select>
+    
 	
 	
 	<!-- 파일등록  -->

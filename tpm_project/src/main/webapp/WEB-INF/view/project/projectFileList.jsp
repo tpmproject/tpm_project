@@ -27,9 +27,9 @@
 							   <form id="custom-search-form" style="width: 300px;"
 									class="form-search form-horizontal pull-right">
 								    <div class="input-append span12" style="width:300px">
-										<input type="text" class="search-query" placeholder="Search" style="width: 530px; height: 35px; margin:5px -15px;">
-										<button type="submit" class="btn" style="margin: 9px;">
-											<i class="icon-search"></i>
+										<input type="text" id="f_search" class="search-query" placeholder="Search" style="width: 540px; height: 35px; margin:5px 20px;">
+										<button type="button" class="btn" style="margin: 9px -20px;" onclick="file_search()">
+											<i class="glyphicon glyphicon-search"></i>
 										</button>
 									</div>
 								</form>
@@ -56,35 +56,7 @@
       </div>
     </div>
     
-    
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit"
-    aria-hidden="true">
-      <div class="modal-dialog" style="margin: 70px auto; width: 450px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
-            <h4 class="modal-title custom_align" id="Heading" style="text-align:left; margin:auto 10px">파일 삭제</h4>
-          </div>
-          
-          <div class="modal-body">
-            <div class="alert alert-danger" style="text-align: left;">
-              <span class="glyphicon glyphicon-warning-sign" >&nbsp;</span> h.jpg 파일을 정말 삭제 하시겠습니까?</div>
-          </div>
-          <div class="modal-footer ">
-            <button type="button" class="btn btn-success" onclick="workFileDelete()"  data-dismiss="modal">
-              <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Yes</button>
-              
-            <button type="button" class="btn btn-default"
-            data-dismiss="modal">
-              <span class="glyphicon glyphicon-remove"></span>&nbsp;No</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
+   
     <script type="text/javascript">
       $(document).ready(function(){
             $("#mytable #checkall").click(function () {

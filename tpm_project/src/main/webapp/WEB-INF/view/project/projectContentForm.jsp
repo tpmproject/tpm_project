@@ -62,14 +62,59 @@ var member_idx=${param.member_idx};
 <link rel="stylesheet" href="css/projectContent.css">
 <style>
 #fileCon img{
-   vertical-align: middle; width: 130%; margin: auto 340px;
+   vertical-align: middle; width: 130%; margin: auto -100px;
 }
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
-<!-- 모달 시작 -->
+<!--옵션,코멘트, 첨부 파일 div 시작  -->
+													
+<div id="right-side">
+	
+	<div id="sidebar-wrapper">
+	    
+		<div>
+			<%@include file="projectRightSide.jsp"%>
+		</div>
+	
+	</div>
+</div>
+<!--옵션,코멘트, 첨부 파일 div 끝  -->
+ <!-- 파일 삭제 모달 시작  -->
+    <div class="modal fade" style="background: rgba(0, 0, 0, 0.71);" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit"
+    aria-hidden="true">
+      <div class="modal-dialog" style="margin: 70px auto; width: 450px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+            <h4 class="modal-title custom_align" id="Heading" style="text-align:left; margin:auto 10px">파일 삭제</h4>
+          </div>
+          
+          <div class="modal-body">
+            <div class="alert alert-danger" style="text-align: left;">
+              <span class="glyphicon glyphicon-warning-sign" >&nbsp;</span><p id="work_del_file_name"
+              style="display:inline;"> </p></div>
+          </div>
+          <div class="modal-footer ">
+            <button type="button" class="btn btn-success" onclick="workFileDelete()"  data-dismiss="modal">
+              <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Yes</button>
+              
+            <button type="button" class="btn btn-default"
+            data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove"></span>&nbsp;No</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- 파일 삭제 모달 끝 -->
+
+<!-- 미리보기 모달 시작 -->
   <div class="row">
-		<div class="modal fade" id="layerpop" style="z-index:2500">
+		<div class="modal fade" id="layerpop" style="z-index:2500; background:rgba(0, 0, 0, 0.71);">
 
 		      <!-- header -->
 		      <div class="modal-header">
@@ -84,7 +129,7 @@ var member_idx=${param.member_idx};
 		     	
 		     	 <div class="row" id="fileContent" >
 		     	 	
-		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto -30px;">
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 450px;">
 		     	 		
 		     	 	
 
@@ -95,7 +140,7 @@ var member_idx=${param.member_idx};
 		 </div>
    </div>
 
-  <!--모달 끝  -->
+  <!--미리보기 모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
 	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*220+100}px">
@@ -331,20 +376,6 @@ var member_idx=${param.member_idx};
 			</div>
 		</c:if>
 	</div>
-
-<!--옵션,코멘트, 첨부 파일 div 시작  -->
-													
-<div id="right-side">
-	
-	<div id="sidebar-wrapper">
-	    
-		<div>
-			<%@include file="projectRightSide.jsp"%>
-		</div>
-	
-	</div>
-</div>
-<!--옵션,코멘트, 첨부 파일 div 끝  -->
 
 
 	<!-- 업무 설정 modal -->

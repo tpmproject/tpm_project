@@ -124,18 +124,24 @@ public class FileController {
 	/** 업무쪽 파일 - 파일 리스트 데이터 반환 (프로젝트 별 파일들) */
 	@RequestMapping(value="workFileList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<FileDTO> fileList(@RequestParam("project_idx")int project_idx,
-								 @RequestParam("work_idx")int work_idx){
-		
+								 					 @RequestParam("work_idx")int work_idx,
+								 					 @RequestParam(value="search_file_name",required=false)String search_file_name){
+		System.out.println("------업무쪽 파일 리스트 검색 부분-------");
+		System.out.println("search_file_name:"+search_file_name);
 		System.out.println("project_idx:"+project_idx);
 		System.out.println("work_idx:"+work_idx);
 		
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("project_idx", project_idx);
 		map.put("work_idx", work_idx);
+		ArrayList<FileDTO>fileArr=null;
 		
-		
-		ArrayList<FileDTO>fileArr=fdao.getWorkFileList(map);
-	   
+		if(search_file_name==null||search_file_name==""){
+			fileArr=fdao.getWorkFileList(map);
+		}else{
+			map.put("file_name", search_file_name);
+			fileArr=fdao.getWorkSearchFileList(map);
+		}
 	    
 		return  fileArr;
 	}

@@ -44,7 +44,7 @@
     position: fixed;
     height: 90%;
 
-    margin-top: -100px;
+    margin-top: 33px;
     z-index: 1020;
     background-color:white;
     transition: all 0.5s ease-in 0s;
@@ -110,7 +110,7 @@
   #right-side #sidebar-wrapper.active {
     right: 250px;
     width: 630px;
-    margin-top: -100px;
+    margin-top: 33px;
      z-index: 1020;
      background-color:white;
     transition: all 0.5s ease-out 0s;
@@ -251,6 +251,7 @@
         z-index: 3;   
     }
     </style>
+<link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
 	function commentAdd(){
 		
@@ -347,7 +348,7 @@
 	}
 	
 	function project_fileList(work_idx){
-		sessionStorage.setItem('delete_work_idx',work_idx);
+		sessionStorage.setItem('s_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
 	
@@ -356,19 +357,47 @@
 		
 		
 	}
+	/* 파일 검색 */
+	function file_search(work_idx){
+		var work_idx=sessionStorage.getItem('s_work_idx');
+		var f_search=document.getElementById('f_search');
+		
+		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx}+'&search_file_name='+f_search.value;
+		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
+	}
 	
-	 /* 미리보기  */
+	/* 미리보기  */
 	function fileContent(filename){
 		var file_con = document.getElementById('fileCon');
 		var f_name = document.getElementById('f_name');
 		//window.alert(filename);
-		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 15% 750px;">';
+		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 15% 350px;">';
 		f_name.innerHTML = filename;
 		file_con.innerHTML = msg;
 		
 		var param = "file_name="+filename;
 		action_ajax('fileContent.do',param,'POST', 'FILE_CONTENT'); // 해당 페이지로 ajax통신 시작
 		
+	}
+	/* 파일 삭제 관련 */
+	function fileDelParam(file_idx,file_name){
+		del_file_idx = file_idx;
+	    del_file_name = file_name;
+	    var work_del_file_name = document.getElementById('work_del_file_name');
+	    work_del_file_name.innerHTML = file_name+'&nbsp; 파일을 삭제 하시겠습니까?';
+	}
+	function workFileDelete(){
+		del_work_idx = sessionStorage.getItem('s_work_idx');
+		
+		var param = 'file_idx='+del_file_idx+'&file_name='+del_file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
+		action_ajax('fileDel.do',param,'POST', 'FILEDEL'); // 해당 페이지로 ajax통신 시작
+		
+		project_fileList(del_work_idx);
+	} 
+	/*파일 다운  */
+	function fileDown2(file_name){
+	
+		  location.href="fileDown.do?file_name="+file_name;
 	}
 	function action_ajax(url, param, method, ctype) {
 		sendRequest_extension(url, param, ajax_result, method, ctype);
@@ -413,6 +442,13 @@
 	    
 		var proejct_filelist = document.getElementById('file_tbody');
 		var filetype='';
+		
+		if(files==null || files==''){
+			window.alert('없는파일 검색');
+			msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
+			msg += '	<td>검색한 파일이 없습니다.</td></tr>';
+		}
+		
 		for(var i=0; i<files.length; i++){
 			var file=files[i];
 			
@@ -442,7 +478,7 @@
 		    }
 			
 		    file_now = file_year+'-'+file_month+'-'+file_date+'<br>'+ampm+' '+file_hour+':'+file_minute;
-
+				
 				msg += ' <!-- 시작 -->';
 				msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
 				msg += '	<td style="width: 43.333333333333336%;" >';
@@ -535,25 +571,7 @@
 		
 	}
 	
-	/* 파일 삭제 관련 */
-	function fileDelParam(file_idx,file_name){
-		del_file_idx = file_idx;
-	    del_file_name = file_name;
-	   
-	}
-	function workFileDelete(){
-		del_work_idx = sessionStorage.getItem('delete_work_idx');
-		
-		var param = 'file_idx='+del_file_idx+'&file_name='+del_file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
-		action_ajax('fileDel.do',param,'POST', 'FILEDEL'); // 해당 페이지로 ajax통신 시작
-		
-		project_fileList(del_work_idx);
-	} 
-	/*파일 다운  */
-	function fileDown2(file_name){
 	
-		  location.href="fileDown.do?file_name="+file_name;
-	}
     </script>
     
 <!-- 임시) 여기까지 첨부파일   -->
@@ -562,7 +580,7 @@
 </style>
 </head>
 <body>
- 
+
 
 <div class="work-right-side">
 	<div style="position:absolute; z-index:1;  ">
@@ -609,7 +627,7 @@
         </div>
       </div>
       <div class="well">
-        <div class="tab-content">
+        <div class="tab-content" style="width:600px">
         
           <div class="tab-pane fade in active" id="tab1">
             <h3>This is tab 1</h3>

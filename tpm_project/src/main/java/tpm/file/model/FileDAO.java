@@ -15,5 +15,6 @@ public interface FileDAO {
 	public int addFile(FileDTO fdto);
 	public int updateFile();
 	public int delFile(int file_idx);
-	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Integer> map);
+	public ArrayList<FileDTO> getWorkFileList(HashMap<String,Object> map);
+	public ArrayList<FileDTO> getWorkSearchFileList(HashMap<String,Object> map);
 }
