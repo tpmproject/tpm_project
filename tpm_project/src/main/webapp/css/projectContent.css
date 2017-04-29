@@ -1,4 +1,25 @@
 @CHARSET "UTF-8";
+#loading_div{
+	display:inline-block;
+	position: fixed;
+	background: black;
+	opacity: 0.7;
+	width: 110%;
+	height: 110%;
+	top: -10px;
+	left: -10px;
+	z-index: 9000;
+}
+#load_s{
+	position: fixed;
+	top: 40%;
+	left: 40%;
+	z-index: 9001;
+}
+#load_s h1{
+	color:white;
+	font-size: 100px;
+}
 #tendency_pop{
 	background: white;
 	position:fixed;
@@ -82,7 +103,6 @@
 	padding-bottom: 7px;
 	text-align: center;
 	height: 34px;
-	background: #3c8dbc;
 }
 
 .table_i {
