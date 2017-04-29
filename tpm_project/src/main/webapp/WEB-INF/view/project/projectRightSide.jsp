@@ -565,6 +565,7 @@ function commentAdd(){
 				msg += '        <div class="tw-image__container tw-image" style="width: 100%; height: 100%;">';
 				
 				if(file_type=='jpg'||file_type=='gif'||file_type=='png'){
+										
 					msg += '             <a data-target="#layerpop" data-toggle="modal" href="#" onclick="fileContent(\''+file.file_name+'\')"><img src="/tpm_project/upload/'+file.file_name+'" style="max-width: 100%; height: auto; -moz-box-sizing: border-box; box-sizing: border-box; border: 0; vertical-align: middle; width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 3px;"></a>';
 				
 				}else{

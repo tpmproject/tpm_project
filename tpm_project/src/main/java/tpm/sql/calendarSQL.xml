@@ -4,9 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.calendar">
 	
+	
+	
 	<resultMap id="calendarCheckListResultMap" type="tpm.calendar.model.CalendarCheckListDTO" >
 		<id property="checklist_idx" column="checklist_idx"/>
-		<result property="work_idx" column="work_idx_1"/>
+		<result property="work_idx" column="work_idx"/>
 		<result property="checklist_content" column="checklist_content"/>
 		<result property="checklist_state" column="checklist_state"/>
 	</resultMap>
@@ -21,14 +23,45 @@
 		<result property="work_state" column="work_state"/>
 		<collection property="arry_ckdto" notNullColumn="checklist_idx" javaType="java.util.List" resultMap="calendarCheckListResultMap" />
 	</resultMap>
-	<select id="calendarContentList" parameterType="tpm.member.model.MemberDTO" resultMap="calendarWorkResultMap">
+	<resultMap id="calendarCategoryResultMap" type="tpm.calendar.model.CalendarCategoryDTO" >
+		<id property="category_idx" column="category_idx"/>
+		<result property="project_idx" column="project_idx"/>
+		<result property="category_name" column="category_name"/>
+		<collection property="arry_wdto" notNullColumn="work_idx" javaType="java.util.List" resultMap="calendarWorkResultMap" />
+	</resultMap>
+	<resultMap id="calendarProjectResultMap" type="tpm.calendar.model.CalendarProjectDTO" >
+		<id property="project_idx" column="project_idx"/>
+		<result property="project_name" column="project_name"/>
+		<result property="project_content" column="project_content"/>
+		<result property="project_state" column="project_state"/>
+		<collection property="arry_cdto" notNullColumn="category_idx" javaType="java.util.List" resultMap="calendarCategoryResultMap" />
+	</resultMap>
+	
+	
+	<select id="calendarContentList" parameterType="tpm.member.model.MemberDTO" resultMap="calendarProjectResultMap">
 		SELECT *
-		FROM tpm_work w
-		LEFT OUTER JOIN tpm_checklist ck
-		ON w.work_idx = ck.work_idx
-		WHERE w.work_idx IN (SELECT work_idx 
-                   			 FROM tpm_work_member 
-                   			 WHERE member_idx = #{member_idx})
+		FROM tpm_project p
+		INNER JOIN (SELECT c.project_idx, c.category_name ,wck.*
+		            FROM tpm_category c
+		            INNER JOIN (SELECT w.category_idx, w.work_idx, w.work_title, w.work_start, w.work_end, w.work_complete, w.work_confirm, w.work_state, ck.checklist_idx, ck.checklist_content, ck.checklist_state
+		                        FROM tpm_work w
+		                        LEFT OUTER JOIN tpm_checklist ck
+		                        ON w.work_idx = ck.work_idx
+		                        WHERE w.work_idx IN (SELECT work_idx 
+		                                             FROM tpm_work_member 
+		                                             WHERE member_idx = #{member_idx})) wck
+		            ON c.category_idx = wck.category_idx) cwck
+		ON p.project_idx = cwck.project_idx
+		ORDER BY p.project_idx DESC, cwck.category_idx DESC, cwck.work_idx DESC
+	</select>
+	
+	<select id="calendarMyProjectList" parameterType="tpm.member.model.MemberDTO" resultType="tpm.calendar.model.CalendarProjectDTO">
+		SELECT * 
+		FROM tpm_project
+		WHERE project_idx IN (SELECT project_idx 
+	                      	FROM tpm_project_member 
+	                      	WHERE member_idx = #{member_idx})
+	    ORDER BY project_idx DESC
 	</select>
 	
 	

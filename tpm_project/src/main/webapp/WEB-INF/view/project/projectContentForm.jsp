@@ -69,6 +69,7 @@ var skin_color='';
 </style>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
+<div id="loading_div"></div><span id="load_s"><a>Loading...</a></span>
 <!--옵션,코멘트, 첨부 파일 div 시작  -->
 													
 <div id="right-side">

@@ -115,7 +115,7 @@ public class WorkController {
 		String temp[]=workdate.split("-");
 		String work_s=temp[0].trim();
 		String work_e=temp[1].trim();
-	
+		
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
 		
 		Date ts = sdf.parse(work_s);
@@ -141,6 +141,7 @@ public class WorkController {
 				
 			}
 			dto.setWorkmember_dtos(temp_arry_wmdto);
+			dto.setProject_name(work_s+"&"+work_e);//date를 string으로 보내기 위해 project_name 빌려씀
 			return dto;
 		}else{
 			return "error";
@@ -243,7 +244,7 @@ public class WorkController {
 	}
 	
 	/** 캘린더 - 캘린더 데이터 반환 */
-	@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="calendarList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax(HttpServletRequest req){
 		
 		MemberDTO mdto = new MemberDTO();
@@ -269,10 +270,10 @@ public class WorkController {
 		}
 		
 		return arry_cldto;
-	}
+	}*/
 	
 	/** 캘린더 - 캘린더 데이터 반환2  */
-	@RequestMapping(value="calendarJsonList.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="calendarJsonList.do",  method=RequestMethod.POST)
 	public @ResponseBody ArrayList<CalendarDTO> calendarListForm_ajax_json(MemberDTO mdto, HttpSession session){
 
 		mdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
@@ -296,7 +297,7 @@ public class WorkController {
 		}
 		
 		return arry_cldto;
-	}
+	}*/
 	
 	/** 캘린더 - 필터  업무 데이터 */
 	@RequestMapping(value="calendarFilterList.do",  method=RequestMethod.POST)

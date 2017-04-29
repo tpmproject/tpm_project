@@ -38,7 +38,7 @@ function fileUpload(work_idx){
   
   <body>
     <div class="navbar navbar-default navbar-fixed-top" >
-      <div class="container" style="width: 100%;">
+      <div class="container" style="width: 100%; width: 600px;">
         
         
       </div>
@@ -57,7 +57,7 @@ function fileUpload(work_idx){
         <!-- The fileupload-buttonbar contains buttons to add/delete files and
         start/cancel the upload -->
         <div class="row fileupload-buttonbar">
-          <div class="col-lg-7">
+          <div class="col-lg-7" style="width:600px;">
             <!-- The fileinput-button span is used to style the file input field as
             button -->
             <span class="btn btn-success fileinput-button">
@@ -77,7 +77,7 @@ function fileUpload(work_idx){
               <i class="glyphicon glyphicon-trash"></i>
               <span>Delete</span>
             </button>
-            <input type="checkbox" class="toggle">
+            <input type="checkbox" class="toggle" style="position: absolute; margin: 10px 10px;">
             <!-- The global file processing state -->
             <span class="fileupload-process"></span>
           </div>
