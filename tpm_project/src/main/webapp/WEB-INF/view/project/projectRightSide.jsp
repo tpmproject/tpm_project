@@ -291,9 +291,7 @@ function commentAdd(){
 				
 				cdId.innerHTML = msg;
 			}
-		
 		});
-		
 		//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	}
 	
@@ -348,7 +346,7 @@ function commentAdd(){
 					//var comments = json[0];
 					
 					var msg = '';
-					var Did = document.getElementById('comment_content');
+					var cdId = document.getElementById('comment_content');
 					
 					msg += '<div class="box-body chat" id="chat-box">';
 					msg += 		'<div class="item">';
@@ -362,7 +360,7 @@ function commentAdd(){
 					msg += 		'</div>';
 					msg += '</div>';
 					
-					Did.innerHTML = msg;
+					cdId.innerHTML = msg;
 				}
 			}
 			
