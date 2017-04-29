@@ -252,7 +252,7 @@ public class FileController {
 	public ModelAndView fileAdd(HttpServletRequest req,HttpServletResponse response,
 								@RequestParam("work_idx")int work_idx,
 								@RequestParam("project_idx")int project_idx) throws UnsupportedEncodingException{
-		
+		System.out.println("들어옴");
 		MultipartHttpServletRequest multipartRequest =  (MultipartHttpServletRequest)req;
 		multipartRequest.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession();
@@ -336,7 +336,8 @@ public class FileController {
 	/** 파일 - ajax 파일 삭제 */
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.POST)
 	public void fileDel2(@RequestParam("file_idx")int file_idx,
-								@RequestParam("file_name")String file_name){
+								@RequestParam("file_name")String file_name,
+								HttpServletRequest req){
 		//System.out.println("file_name="+file_name);
 		//System.out.println("컨트롤러 쪽"+file_idx);
 		int result=fdao.delFile(file_idx); //db 파일 정보 데이터 삭제
@@ -344,9 +345,14 @@ public class FileController {
 		 ViewerConfig config = new ViewerConfig();
 		 config.setStoragePath(Utils.getProjectProperty("storage.path"));
 		 
-		File f = new File(config.getStoragePath()+"/"+file_name);
+		 File f = new File(config.getStoragePath()+"/"+file_name);
+		 f.delete();  //파일경로에 있는 실제파일 삭제
+		 
+		 String savepath = req.getServletContext().getRealPath("upload/"+file_name);
+		 File uploadDirectory = new File(savepath);
+		 uploadDirectory.delete();
+		 
 		
-		f.delete();  //파일경로에 있는 실제파일 삭제
 	
 		
 	}

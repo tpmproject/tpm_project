@@ -721,7 +721,7 @@
           </div>
           
           <div class="tab-pane fade in" id="tab4">
-             <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
+             <%@include file="/WEB-INF/view/file/test1.jsp"%>
           </div>
           
           
