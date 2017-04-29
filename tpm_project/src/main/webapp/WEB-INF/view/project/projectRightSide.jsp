@@ -519,7 +519,7 @@
 		var filetype='';
 		
 		if(files==null || files==''){
-			window.alert('없는파일 검색');
+		
 			msg += '<tr style="display: table-row; vertical-align: inherit; border-color: inherit;">';
 			msg += '	<td>검색한 파일이 없습니다.</td></tr>';
 		}
