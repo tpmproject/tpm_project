@@ -4,11 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tpm.comment">
 
-	<insert id="addComment" parameterType="tpm.comment.model.CommentDTO">
-		insert into tpm_comment
-		values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, sysdate)
-	</insert>
-	
 	<resultMap id="memberResultMap" type="tpm.member.model.MemberDTO" >
 		<id property="member_idx" column="member_idx"/>
 		<result property="member_id" column="member_id"/>
@@ -24,6 +19,18 @@
 		<collection property="mdto" resultMap="memberResultMap" />
 	</resultMap>
 	
+	<select id="commentContent" parameterType="tpm.comment.model.CommentDTO" resultMap="commentResultMap">
+		select *
+		from (select * from tpm_comment
+			  where comment_idx = #{comment_idx}) c, tpm_member m
+		where c.member_idx = m.member_idx
+	</select>
+	
+	<insert id="addComment" parameterType="tpm.comment.model.CommentDTO" useGeneratedKeys="true" keyProperty="comment_idx" keyColumn="comment_idx">
+		insert into tpm_comment
+		values(comment_idx.nextval, #{work_idx}, #{member_idx}, #{comment_content}, sysdate)
+	</insert>
+	
 	<select id="listComment" parameterType="tpm.comment.model.CommentDTO" resultMap="commentResultMap">
 		select *
 		from tpm_comment a
@@ -32,6 +39,9 @@
 		where work_idx = 283
 		order by comment_date asc
 	</select>
+	
+	
+	
 <!-- 	<select id="commentList" parameterType="int" resultType="commentResultMap">
 	SELECT * FROM tpm_comment c, tpm_member m 
 		WHERE c.member_idx = m.member_idx and work_idx=#{work_idx}

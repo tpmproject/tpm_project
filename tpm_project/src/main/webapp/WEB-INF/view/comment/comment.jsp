@@ -63,8 +63,7 @@
 				<input type="text" class="form-control" id="comment"
 					name="inputComment" placeholder="Type message...">
 				<div class="input-group-btn">
-					<button class="btn btn-success" type="button"
-						onclick="javascript:commentAdd()">
+					<button class="btn btn-success" type="button" onclick="javascript:commentAdd()">
 						<i class="fa fa-plus"></i>
 					</button>
 				</div>

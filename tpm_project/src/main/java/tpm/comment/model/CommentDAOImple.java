@@ -36,14 +36,14 @@ public class CommentDAOImple implements CommentDAO {
 		return sqlMap.insert("addComment", dto);
 	}*/
 	
-	public CommentDTO addComment(CommentDTO dto) {
-		int result = sqlMap.insert("addComment", dto);
-		
-		if(result>0){
-			return dto;
-		} else{
-			return null;
-		}
+	public int addComment(Object obj) {
+		int result = sqlMap.insert("addComment", obj);
+		return result;
+	}
+	
+	@Override
+	public Object getCommentContent(Object obj) {
+		return sqlMap.selectOne("commentContent", obj);
 	}
 
 	public int updateComment(CommentDTO dto) {
