@@ -272,22 +272,24 @@ function commentAdd(){
 				//window.alert('jason(?):'+json);
 				window.alert('json:'+JSON.stringify(json,null,2));
 				
+				var cdId = document.getElementById('comment_content');
+				var member_id = json.mdto.member_id.split('@')[0];
+				
 				var msg = '';
-				var Did = document.getElementById('comment_content');
 				
 				msg += '<div class="box-body chat" id="chat-box">';
 				msg += 		'<div class="item">';
 				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'" class="online">';
 				msg += 			'<p class="message">';
 				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json.mdto.member_name +'('+ json.mdto.member_id +')';
+				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json.mdto.member_name +'('+ member_id +')';
 				msg += 				'</a>';
 				msg += 				  json.comment_content;
 				msg +=			 '</p>';
 				msg += 		'</div>';
 				msg += '</div>';
 				
-				Did.innerHTML = msg;
+				cdId.innerHTML = msg;
 			}
 		
 		});
@@ -328,7 +330,7 @@ function commentAdd(){
 		}
 	} */
 	
-	/* function showComment(){
+	function showComment(){
 		var param  = 'work_idx='+work_idx;
 		window.alert(param);
 		
@@ -345,24 +347,27 @@ function commentAdd(){
 				for(var i=0; i<json.length; i++){
 					//var comments = json[0];
 					
+					var msg = '';
+					var Did = document.getElementById('comment_content');
+					
 					msg += '<div class="box-body chat" id="chat-box">';
 					msg += 		'<div class="item">';
-					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[0].cdto.mdto.member_ing +'" class="online">';
+					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[i].mdto.member_img +'" class="online">';
 					msg += 			'<p class="message">';
 					msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-					msg += 					'<i class="fa fa-clock-o"></i> '+ json[0].cdto.comment_date+'</small>'+ json[0].cdto.mdto.member_name +'('+ json[0].cdto.mdto.member_id +')';
+					msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json[i].comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json[i].mdto.member_name +'('+ json[i].mdto.member_id +')';
 					msg += 				'</a>';
-					msg += 				 json[0].cdto.comment_content;
+					msg += 				  json[i].comment_content;
 					msg +=			 '</p>';
 					msg += 		'</div>';
 					msg += '</div>';
+					
+					Did.innerHTML = msg;
 				}
-				
-				$('#comment_content').html(msg);
 			}
 			
 		});
-	} */
+	}
 	
 	/* function showCommentResult(){
 		if(XHR.readyState==4){
