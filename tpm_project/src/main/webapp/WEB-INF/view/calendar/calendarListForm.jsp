@@ -52,68 +52,83 @@ function initCalenderPage(){
 	initMyWorkListData();
 	
 }
-
+function projectIdxCheck(project_idx){
+	var projectListCheckBox = $('input[name="checkBox_MyProjectList"]:checked');
+	
+	for(var i = 0 ; i < projectListCheckBox.length ; i++){
+		if(project_idx == $(projectListCheckBox).eq(i).val()){
+			return true;	
+		}
+	}
+	return false;
+}
 function calendarReload(){
 	
 	var arry_pdto = originalData;
 	var temp_arry = [];
+	
 	for(var i = 0 ; i < arry_pdto.length; i++){
 		var project_name = arry_pdto[i].project_name;
 		
-		var arry_cdto = arry_pdto[i].arry_cdto;
-		for(var j = 0 ; j < arry_cdto.length ; j++){
-			var category_name = arry_cdto[j].category_name;
+		// 프로젝트 리스트 체크박스 체크..
+		if(projectIdxCheck(arry_pdto[i].project_idx)){
 			
-			var arry_wdto = arry_cdto[j].arry_wdto;
-			for(var k = 0 ; k < arry_wdto.length ; k++){
-				var work_title = arry_wdto[k].work_title;
-				var work_start = arry_wdto[k].work_start;
-				var work_end = arry_wdto[k].work_end;
-				var work_state = arry_wdto[k].work_state;
+			var arry_cdto = arry_pdto[i].arry_cdto;
+			for(var j = 0 ; j < arry_cdto.length ; j++){
+				var category_name = arry_cdto[j].category_name;
 				
-				//window.alert(work_title + "- START : " + moment(work_start).format('YYYY-MM-DD, h:mm:ss a'));
-				//window.alert(work_title + "- END : " + moment(work_end).format('YYYY-MM-DD, h:mm:ss a'));
-				//window.alert(work_title + "- START : " + new Date(work_start));
-				
-				
-				
-				var calendarInfo = {};
-				calendarInfo.title = project_name + '>' + category_name + '>' + work_title;
-				//calendarInfo.allDay = 'false';
-				//calendarInfo.start = moment(work_start).format('YYYY-MM-DD, h:mm:ss a');
-				//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
-				//calendarInfo.start = work_start;
-				//calendarInfo.end = work_end;
-				
-				calendarInfo.start = new Date(work_start);
-				calendarInfo.end = new Date(work_end);
-				
-				// 진행중인 업무
-				if(work_state == '1'){
-					var date = new Date();
-					// 마감일 지난 업무
-					if(date >= new Date(work_end)){
-						calendarInfo.className = 'bg-closingdateexcess';
-					} else {
-						calendarInfo.className = 'bg-progressing';
+				var arry_wdto = arry_cdto[j].arry_wdto;
+				for(var k = 0 ; k < arry_wdto.length ; k++){
+					var work_title = arry_wdto[k].work_title;
+					var work_start = arry_wdto[k].work_start;
+					var work_end = arry_wdto[k].work_end;
+					var work_state = arry_wdto[k].work_state;
+					
+					//window.alert(work_title + "- START : " + moment(work_start).format('YYYY-MM-DD, h:mm:ss a'));
+					//window.alert(work_title + "- END : " + moment(work_end).format('YYYY-MM-DD, h:mm:ss a'));
+					//window.alert(work_title + "- START : " + new Date(work_start));
+					
+					
+					
+					var calendarInfo = {};
+					calendarInfo.title = project_name + '>' + category_name + '>' + work_title;
+					//calendarInfo.allDay = 'false';
+					//calendarInfo.start = moment(work_start).format('YYYY-MM-DD, h:mm:ss a');
+					//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
+					//calendarInfo.start = work_start;
+					//calendarInfo.end = work_end;
+					
+					calendarInfo.start = new Date(work_start);
+					calendarInfo.end = new Date(work_end);
+					
+					// 진행중인 업무
+					if(work_state == '1'){
+						var date = new Date();
+						// 마감일 지난 업무
+						if(date >= new Date(work_end)){
+							calendarInfo.className = 'bg-closingdateexcess';
+						} else {
+							calendarInfo.className = 'bg-progressing';
+						}
+					// 결제 대기
+					} else if(work_state == '2'){
+						calendarInfo.className = 'bg-approvalwait';
+					// 결제 완료 및 완료
+					} else if(work_state == '3'){					
+						calendarInfo.className = 'bg-complete';			
 					}
-				// 결제 대기
-				} else if(work_state == '2'){
-					calendarInfo.className = 'bg-approvalwait';
-				// 결제 완료 및 완료
-				} else if(work_state == '3'){					
-					calendarInfo.className = 'bg-complete';			
+					
+					
+					calendarInfo.editable = 'true';
+					temp_arry.push(calendarInfo);
 				}
-				
-				calendarInfo.editable = 'true';
-				temp_arry.push(calendarInfo);
 			}
 		}
-		
 	}
 	
 	currCalendarData = temp_arry;
 	
+	$('#calendar').fullCalendar( 'removeEvents');
 	$.each(currCalendarData, function(i, calevent){
 		$('#calendar').fullCalendar('renderEvent',
 				calevent, true);
@@ -179,6 +194,11 @@ function iCheckPlugin(){
 	    checkboxClass: 'icheckbox_flat-green',
 	    radioClass: 'iradio_flat-green'
   	});
+	
+	
+	$('input[type="checkbox"], input[type="radio"]').on('ifChanged', function (e) {
+		calendarReload();
+	});
 }
 
 	$(document).ready(function() {
@@ -477,7 +497,7 @@ function iCheckPlugin(){
 					</div> -->
 					<!-- /.col -->
 					<div class="col-md-8">
-						<div class="box box-primary">
+						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 							<div class="box-body no-padding">
 								<!-- THE CALENDAR -->
 								<div id="calendar"></div>
