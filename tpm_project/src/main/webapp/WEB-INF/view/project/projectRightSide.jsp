@@ -280,7 +280,7 @@ function commentAdd(){
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var cdId = document.getElementById('comment_content');
+				var cdId = document.getElementById('comment_content_area');
 				var member_id = json.mdto.member_id.split('@')[0];
 				
 				var msg = '';
@@ -355,7 +355,7 @@ function commentAdd(){
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var cdId = document.getElementById('comment_content');
+				var cdId = document.getElementById('comment_content_area');
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
@@ -385,7 +385,7 @@ function commentAdd(){
 					
 				}
 				cdId.innerHTML = msg;
-				$('#comment-box').slimScroll({ scrollTo: $("#comment_text").height() });
+				$('#comment-box').slimScroll({ scrollTo: $("#comment_content").height() });
 			}
 		});
 	}
@@ -396,7 +396,7 @@ function commentAdd(){
 		var msg = '';
 		
 		msg += 	'<div class="box-body chat" id="comment-box">';
-		msg += 		'<div class="item" id="comment_text">';
+		msg += 		'<div class="item" id="comment_content">';
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
@@ -405,7 +405,7 @@ function commentAdd(){
 		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
 		msg += 				'</a>';
-		msg += 				 cdto.comment_content;
+		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upComment('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
 		msg += 	'</div>';
@@ -452,30 +452,21 @@ function commentAdd(){
 			if(XHR.status==200){
 				var result = XHR.responseText.trim();
 				window.alert(result);
+				showComment();
 			}
 		}
 	}
 	
-	/* <div class="tools">
-   	 	<i class="fa fa-edit"></i>
-   	 	<i class="fa fa-trash-o"></i>
-  	</div> */
-	
-	/* <div class="box-body chat" id="chat-box">
-			<div class="item">
-				<img src="/tpm_project/img/member/profile/${comment.member_img}" class="online">
-			<p class="message">
-				<a href="#" class="name"> <small class="text-muted pull-right">
-					<i class="fa fa-clock-o"></i> ${comment.comment_date}</small> ${comment.member_name}(${comment.member_id})
-				</a>
-				${comment.comment_content}
-			</p>
-				<div class="attachment">
-					<h4>첨부 파일 :</h4>
-					<p class="filename">Theme-thumbnail-image.jpg</p>
-				</div>
-			</div>
-		</div> */
+	function upComment(comment_idx){
+		
+		var param = 'comment_idx=' + comment_idx;
+		window.alert(param);
+		
+		var inputbox1 = document.getElementById('comment_'+comment_idx).lastChild;
+		window.alert(inputbox1);
+		var t_box1 = inputbox1.nodeValue;
+		window.alert(t_box1);
+	}
 	
 	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx,work_title){

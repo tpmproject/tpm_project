@@ -21,7 +21,7 @@
 	</div>
 	
 	<div class="box-body comment" id="comment-box">
-		<div id="comment_content">
+		<div id="comment_content_area">
 		</div>
 	</div>
 
