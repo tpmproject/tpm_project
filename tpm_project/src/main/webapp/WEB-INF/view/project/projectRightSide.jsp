@@ -273,7 +273,7 @@ function commentAdd(){
 		return;
 	} 
 		$.ajax({
-			url : 'addComment.do',
+			url : 'commentAdd.do',
 			type : 'post',
 			data : param,
 			dataType : 'json',
@@ -403,7 +403,7 @@ function commentAdd(){
 		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
 		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
 		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
-		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
+		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
 		msg += 				'</a>';
 		msg += 				 cdto.comment_content;
 		msg +=			 '</p>';
@@ -434,10 +434,26 @@ function commentAdd(){
 		return msg;
 	}
 	
-	function delComment(){
-		var work_idx = document.newComment.work_idx.value;
-		var param  = 'work_idx=' + work_idx;
-		window.alert(param);
+	function delComment(comment_idx){
+		//window.alert(comment_idx);
+		
+		var confirm = window.confirm('코멘트를 삭제하시겠습니까?');
+		//window.alert(confirm);
+		
+		var param = 'comment_idx=' + comment_idx;
+		
+		if(confirm){
+			sendRequest('commentDel.do', param, delCommentResult, 'POST');
+		}
+	}
+	
+	function delCommentResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var result = XHR.responseText.trim();
+				window.alert(result);
+			}
+		}
 	}
 	
 	/* <div class="tools">

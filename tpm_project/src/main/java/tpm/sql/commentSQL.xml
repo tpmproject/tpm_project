@@ -39,10 +39,9 @@
 		order by comment_date asc
 	</select>
 	
+	<delete id="delComment" parameterType="tpm.comment.model.CommentDTO">
+		delete from tpm_comment
+		where comment_idx = #{comment_idx}
+	</delete>
 	
-	
-<!-- 	<select id="commentList" parameterType="int" resultType="commentResultMap">
-		SELECT * FROM tpm_comment c, tpm_member m 
-		WHERE c.member_idx = m.member_idx and work_idx=#{work_idx}
-	</select> -->
 </mapper>

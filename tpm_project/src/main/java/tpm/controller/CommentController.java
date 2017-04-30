@@ -64,7 +64,7 @@ public class CommentController {
 	}*/
 	
 	/** 코멘트 - 코멘트 입력 JSON*/
-	@RequestMapping(value="addComment.do", method=RequestMethod.POST)
+	@RequestMapping(value="commentAdd.do", method=RequestMethod.POST)
 	public @ResponseBody Object addComment(CommentDTO cdto, HttpSession session){
 		
 		cdto.setMember_idx((Integer)session.getAttribute("s_member_idx"));
@@ -89,10 +89,22 @@ public class CommentController {
 	
 	/** 코멘트 - 코멘트 삭제 */
 	@RequestMapping(value="commentDel.do",  method=RequestMethod.POST)
-	public ModelAndView commentDel(){
+	public ModelAndView commentDel(CommentDTO cdto){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("comment/commentResult_d");
+		
+		int result = commentDAO.delComment(cdto);
+		String msg = "";
+		
+		if(result > 0){
+			msg = "삭제 완료";
+		} else{
+			msg = "관리자에게 문의바랍니다";
+		}
+		
+		mav.addObject("msg", msg);
+		mav.setViewName("comment/commentDel_d");
+		
 		return mav;
 	}
 }

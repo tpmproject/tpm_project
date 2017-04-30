@@ -22,9 +22,6 @@
 	
 	<div class="box-body comment" id="comment-box">
 		<div id="comment_content">
-		<%-- <c:set var="c_id" value="json[i].mdto.member_id"/>
-		<c:if test="${c_id == ${sessionScope.s_member_id} }">
-		</c:if> --%>
 		</div>
 	</div>
 
