@@ -41,7 +41,7 @@
     #right-side #sidebar-wrapper{
     margin-right: -250px;
     right: 0;
-    width: 250px;
+    width: 50px;
 	background-color:silver;
     position: fixed;
     height: 90%;
@@ -669,80 +669,61 @@ function commentAdd(){
 
 
 <div class="work-right-side">
-	<div style="position:absolute; z-index:1;  ">
-		<a id="menu-close" href="#"
+	<div style="position:absolute; z-index:1;margin:-4px -51px;z-index:-30;">
+		<a id="menu-close" href="#" style="width: 58px;height: 50px;box-shadow: 4px 0px 11px #000808;"
 			class="btn btn-default btn-lg pull-right toggle"><i
-			class="glyphicon glyphicon-remove"></i></a>
+			class="glyphicon glyphicon-remove" style="top: 9px; font-size: 25px;"></i></a>
 	</div>
 	<div style="width:100%">
-      <div class="card hovercard">
+	 <!-- 코멘트 / 파일 탭 윗쪽  -->
+      <div class="card hovercard"style="background-color: #222d32;">
         <div class="card-background">
-          <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-          <!-- http://lorempixel.com/850/280/people/9/ -->
+         
+         
         </div>
         <div class="useravatar">
-          <img alt="" src="http://lorempixel.com/100/100/people/9/">
+        
         </div>
         <div class="card-info">
           <span class="card-title">Pamela Anderson</span>
         </div>
       </div>
+      
       <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group"
       aria-label="...">
         
         <div class="btn-group" role="group">
-          <button type="button" id="favorites" class="btn btn-default" href="#tab2"
+          <button type="button" id="favorites" class="btn btn-default" href="#tab1"
           data-toggle="tab">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="hidden-xs">코멘트</div>
           </button>
         </div>
+        
         <div class="btn-group" role="group">
-          <button type="button" id="following" class="btn btn-default" href="#tab3"
+          <button type="button" id="fileDownload" class="btn btn-default" href="#tab2"
           data-toggle="tab" onclick="project_fileList2()">
             <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
             <div class="hidden-xs">파일 리스트</div>
           </button>
         </div>
-     <!--     <div class="btn-group" role="group">
-          <button type="button" id="fileUpload" class="btn btn-default" href="#tab4"
-          data-toggle="tab">
-            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-            <div class="hidden-xs">파일 업로드</div>
-          </button>
-        </div>
-           <div class="btn-group" role="group">
-          <button type="button" id="fileUpload" class="btn btn-default" href="#tab5"
-          data-toggle="tab">
-            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-            <div class="hidden-xs">파일 업로드</div>
-          </button>
-        </div> -->
+    
       </div>
       <div class="well">
         <div class="tab-content" style="width:600px">
         
-          <div class="tab-pane fade in" id="tab2">
+          <div class="tab-pane fade in" id="tab1">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>
           </div>
           
-          <div class="tab-pane fade in" id="tab3">
-          	<div style="position:static;">
-          	  <%@include file="/WEB-INF/view/file/test1.jsp"%>
-          	</div>
-         	<div style="position:static;">
+          <div class="tab-pane fade in" id="tab2">
+          	
+         	
    			 <%@include file="/WEB-INF/view/project/projectFileList.jsp"%>
-   			</div>
+   			
           </div>
           
-          <%-- <div class="tab-pane fade in" id="tab4">
-             
-          </div>
-          
-          <div class="tab-pane fade in" id="tab5">
-             <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
-          </div> --%>
-          
+      
         </div>
       </div>
     </div>

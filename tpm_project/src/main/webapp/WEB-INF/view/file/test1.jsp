@@ -40,10 +40,10 @@ function fileUpload(work_idx){
   <body>
     <div class="navbar navbar-default navbar-fixed-top" >
     </div>
-    <div class="container" style="width: 600px;">
+    <div class="container" style="width: 580px;">
   
       
-      <form id="fileupload" style="width: 570px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
+      <form id="fileupload" style="width: 590px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="work_idx" id="id_work_idx" >
 		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -53,7 +53,7 @@ function fileUpload(work_idx){
         <!-- The fileupload-buttonbar contains buttons to add/delete files and
         start/cancel the upload -->
         <div class="row fileupload-buttonbar">
-          <div class="col-lg-7" style="width:600px; ">
+          <div class="col-lg-7" style="width:580px; ">
             <!-- The fileinput-button span is used to style the file input field as
             button -->
             <span class="btn btn-success fileinput-button">
@@ -89,13 +89,17 @@ function fileUpload(work_idx){
 						var filename1=file.name.toLowerCase(); 
 						var filetype=filename1.substring(filename1.lastIndexOf('.')+1);
 						
-						$(".preview[i]").html('<img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG">');
+					
 	   %}
 			
                 <tr class="template-upload fade">
-                    <td>s
+                    <td>
                         <span class="preview">
-					    <img src="/tpm_project/img/fileicon/filetypeicon/{%=filetype%}.PNG">
+
+						{% if(!(filetype=='jpg' || filetype=='png' || filetype=='gif')){ %}
+					    <img src="/tpm_project/img/fileicon/filetypeicon/{%=filetype%}.PNG" style="width: 50px;margin: auto 15px;">
+						{% } %}
+
 						</span>
                     </td>
                     <td>
@@ -110,7 +114,7 @@ function fileUpload(work_idx){
                         {% if (!i && !o.options.autoUpload) { %}
                             <button class="btn btn-primary start" disabled>
                                 <i class="glyphicon glyphicon-upload"></i>
-                                <span>파일 올리기</span>
+                                <span>확인</span>
                             </button>
                         {% } %}
                         {% if (!i) { %}
@@ -125,19 +129,7 @@ function fileUpload(work_idx){
     </script>
     <!-- The template to display files available for download -->
     <script id="template-download" type="text/x-tmpl">
-      {% for (var i=0, file; file=o.files[i]; i++) { %}
-                <tr class="template-download fade">
-                    <td>
-                        <span class="preview">
-                            {% if (file.thumbnailUrl) { %}
-                                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                            {% } %}
-                        </span>
-                    </td>
-                    
-                  
-                </tr>
-            {% } %}
+     
     </script>
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI
     is already included -->

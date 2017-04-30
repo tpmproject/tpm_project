@@ -16,6 +16,7 @@
   
   <body>
     
+    
     <div class="container" style="width:100%">
       <div class="row">
         <div class="col-md-12" style="width: 590px; height: 610px; margin: -10px -10px;">
@@ -36,7 +37,9 @@
 							</div>
 						</div>
 					</div>
-					
+			 <div style="position:static;">
+          	  <%@include file="/WEB-INF/view/file/test1.jsp"%>
+   			 </div>	
 				<table id="mytable" class="table table-bordred table-striped" style="width:100%;table-layout: fixed; border-spacing: 0;">
             <thead>
               <tr>
