@@ -432,8 +432,10 @@ function addWorkResult(){
 				msg+='<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;"></div></div>';
 				msg+='</td></tr><tr><td><div class="work_btn" id="workState'+work.work_idx+'">';
 				msg+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"></i>';
-				msg+='<c:if test="{'+work.work_confirm+'==10}"><i name="2" class="glyphicon glyphicon-record" onclick="workDone('+work.work_idx+',2)"></i></c:if>';
-				msg+='<i name="3" class="glyphicon glyphicon-ok-circle" style="color:green;" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone(${wdto.work_idx},3)"></i></div></td>';
+				if(work.work_confirm==10){
+					msg+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work.work_idx+',2)"></i>';
+				}
+				msg+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work.work_idx+',3)"></i></div></td>';
 				msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
 				msg+='</tr></tbody></table></div></div></div>';
 
