@@ -202,17 +202,11 @@
 	</bean>
 	
 	<!-- AjaxFileUpload -->
-	<bean id="FileService" class="tpm.sample.model.AjaxFileUploadService"/>
+	<!-- <bean id="FileService" class="tpm.sample.model.AjaxFileUploadService"/>
 
 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="1"></property>
-	</bean>
-
-	<!-- <bean name="JSON" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
-	
-	
+	</bean> -->
 	
 	<mvc:annotation-driven />
-
-	
 </beans>

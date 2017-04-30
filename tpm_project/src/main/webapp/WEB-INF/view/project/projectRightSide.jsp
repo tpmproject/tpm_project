@@ -8,36 +8,36 @@
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 
 <style>
-        article.content {
-            margin: -30px 50px;
-            width:400px;
-            height:200px
-        }
-        .navbar .navbar-nav {
-            display: inline-block;
-            float: none;
-        }
-        .navbar .navbar-collapse {
-            text-align: center;
-        }
-    
-        .doc-page-trial{
-        	display:none;
-        }
-      	.pg1-text1{
-      	 	display:none;
-      	}
-      	.pg1-page{
-      		margin:auto 500px;
-      	    background: white;
-      	}
-      	#comment_footer{
-      		margin: 0;
-      	}
+    article.content {
+        margin: -30px 50px;
+        width:400px;
+        height:200px
+    }
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
 
-    </style>
-<style type="text/css">
     .doc-page-trial{
+    	display:none;
+    }
+  	.pg1-text1{
+  	 	display:none;
+  	}
+  	.pg1-page{
+  		margin:auto 500px;
+  	    background: white;
+  	}
+  	#comment_footer{
+  		margin: 0;
+  	}
+
+</style>
+<style type="text/css">
+  .doc-page-trial{
     display: none;
     }
     #right-side #sidebar-wrapper{
@@ -263,16 +263,19 @@ function commentAdd(){
 	var comment_content = document.newComment.inputComment.value;
 	
 	var param = 'work_idx='+ work_idx + '&comment_content=' + comment_content;
-	window.alert(param);
-			
+	//window.alert(param);
+	
+	if(comment_content==null || comment_content==""){
+		window.alert('코멘트를 입력해주세요');
+		return;
+	} 
 		$.ajax({
 			url : 'addComment.do',
 			type : 'post',
 			data : param,
 			dataType : 'json',
 			success : function(json){
-				//window.alert('jason(?):'+json);
-				window.alert('json:'+JSON.stringify(json,null,2));
+				//window.alert('json:'+JSON.stringify(json,null,2));
 				
 				var cdId = document.getElementById('comment_content');
 				var member_id = json.mdto.member_id.split('@')[0];
@@ -294,8 +297,9 @@ function commentAdd(){
 				cdId.innerHTML = msg;
 			}
 		});
-		//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	}
+	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
+	
 	
 	/* var date = new Date();
 	
@@ -333,7 +337,7 @@ function commentAdd(){
 	function showComment(){
 		var work_idx = document.newComment.work_idx.value;
 		var param  = 'work_idx=' + work_idx;
-		window.alert(param);
+		//window.alert(param);
 		
 		//sendRequest('commentList.do', param, showCommentResult, 'POST');
 		
@@ -343,7 +347,7 @@ function commentAdd(){
 			data : param,
 			dataType : 'json',
 			success : function(json){
-				window.alert('json:'+JSON.stringify(json,null,2));
+				//window.alert('json:'+JSON.stringify(json,null,2));
 				
 				var msg = '';
 				
@@ -369,7 +373,6 @@ function commentAdd(){
 			}
 		});
 	}
-	
 	
 	/* <div class="box-body chat" id="chat-box">
 			<div class="item">

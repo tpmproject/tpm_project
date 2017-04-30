@@ -13,40 +13,6 @@
 	function comment(work_idx) {
 		//window.alert('comment페이지 업무 idx='+work_idx);
 	}
-	
-	/* function closeComment(){
-	 localStorage.removeItem('work_idx');
-	 $(comment_back).fadeOut();
-	 }
-	 function comment(work_idx){
-	 $(comment_back).hide();
-	 $(comment_back).fadeIn();
-	
-	 document.comment.tpm_comment_content.value='';
-	
-	 var wdiv=document.getElementById('wdiv'+work_idx);
-	 var fc=wdiv.firstChild;
-	 while(fc.nodeName!='SPAN'){
-	 fc=fc.nextSibling;
-	 }
-	 var work_title=fc.innerHTML
-	 document.getElementById('cm_work_title').innerHTML='<h2>'+work_title+'</h2>';
-	 localStorage.setItem('work_idx',work_idx);
-	 }
-	 function addComment(){
-	 var content=document.comment.tpm_comment_content.value;
-	 if(content == null || content ==''){
-	 window.alert('코멘트를 입력해주세요.');
-	 return;
-	 }
-	 var work_idx=localStorage.getItem('work_idx');
-	 var param='work_idx='+work_idx+'&comment_content='+content+'&member_idx='+'${s_member_idx}';
-	 sendRequest('commentAdd.do', param, addCommentResult, 'POST');
-	 }
-	 function addCommentResult(){
-	
-	
-	 } */
 </script>
 <body>
 	<div class="box-header">
