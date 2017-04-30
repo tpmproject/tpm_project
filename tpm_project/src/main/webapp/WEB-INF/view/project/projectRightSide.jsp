@@ -426,7 +426,7 @@ function commentAdd(){
 		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
 		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
 		msg += 				'</a>';
-		msg += 				 cdto.comment_content;
+		msg += 				'<span id="comment_'+ cdto.comment_idx +'">'+ cdto.comment_content +'</span>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
 		msg += 	'</div>';
@@ -462,19 +462,38 @@ function commentAdd(){
 		var param = 'comment_idx=' + comment_idx;
 		window.alert(param);
 		
-		var inputbox1 = document.getElementById('comment_'+comment_idx).lastChild;
+		var inputbox1 = document.getElementById('comment_'+comment_idx).nodeName;
 		window.alert(inputbox1);
 		var t_box1 = inputbox1.nodeValue;
 		window.alert(t_box1);
+		
+		
+		
 	}
 	
+	/* <div class="tools">
+   	 	<i class="fa fa-edit"></i>
+   	 	<i class="fa fa-trash-o"></i>
+  	</div> */
+	
+	/* <div class="box-body chat" id="chat-box">
+			<div class="item">
+				<img src="/tpm_project/img/member/profile/${comment.member_img}" class="online">
+			<p class="message">
+				<a href="#" class="name"> <small class="text-muted pull-right">
+					<i class="fa fa-clock-o"></i> ${comment.comment_date}</small> ${comment.member_name}(${comment.member_id})
+				</a>
+				${comment.comment_content}
+			</p>
+				<div class="attachment">
+					<h4>첨부 파일 :</h4>
+					<p class="filename">Theme-thumbnail-image.jpg</p>
+				</div>
+			</div>
+		</div> */
+	
 	/* 처음 들어올때 업무 파일리스트  */
-	function project_fileList(work_idx,work_title){
-		
-		
-		var f_search=document.getElementById('work_title');
-		f_search.innerHTML=work_title;
-		
+	function project_fileList(work_idx){
 		sessionStorage.setItem('s_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
@@ -734,7 +753,7 @@ function commentAdd(){
 	</div>
 	<div style="width:100%">
 	 <!-- 코멘트 / 파일 탭 윗쪽  -->
-      <div class="card hovercard"style="background-color: #f5f5f5;height: 110px;">
+      <div class="card hovercard"style="background-color: #222d32;">
         <div class="card-background">
          
          
@@ -743,7 +762,7 @@ function commentAdd(){
         
         </div>
         <div class="card-info">
-          <span class="card-title" id="work_title"></span>
+          <span class="card-title">Pamela Anderson</span>
         </div>
       </div>
       

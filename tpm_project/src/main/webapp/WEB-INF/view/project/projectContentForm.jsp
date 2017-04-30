@@ -353,7 +353,7 @@ var skin_color='';
 											</c:choose> --%>
 
 											<td align="right">
-												<a href="#" onclick="workSide(${wdto.work_idx},${project_idx},'${wdto.work_title}')" class="menu-toggle">코멘트/파일</a>	
+												<a href="#" onclick="workSide('${wdto.work_idx}','${project_idx}','${wdto.work_title}')" class="menu-toggle">코멘트/파일</a>	
 											</td>
 										</tr>
 									</tbody>
