@@ -131,16 +131,17 @@ public class WorkController {
 
 		if(work_idx>0){
 			
-			ArrayList<WorkMemberDTO> temp_arry_wmdto = new ArrayList<WorkMemberDTO>();
+			//ArrayList<WorkMemberDTO> temp_arry_wmdto = new ArrayList<WorkMemberDTO>();
 			for(int i=0;i<member_idx.length;i++){
 				int w_idx=Integer.parseInt(member_idx[i]);
 				WorkMemberDTO mdto=new WorkMemberDTO(work_idx,w_idx);
 				workDAO.workMemberInsert(mdto);
 				
-				temp_arry_wmdto.add(mdto);
+				//temp_arry_wmdto.add(mdto);
 				
 			}
-			dto.setWorkmember_dtos(temp_arry_wmdto);
+			ArrayList<MemberDTO> temp_arry_wmdto = workDAO.workMember(work_idx);
+			dto.setWorkmember_wdto(temp_arry_wmdto);
 			dto.setProject_name(work_s+"&"+work_e);//date를 string으로 보내기 위해 project_name 빌려씀
 			return dto;
 		}else{

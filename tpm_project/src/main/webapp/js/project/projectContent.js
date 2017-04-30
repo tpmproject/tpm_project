@@ -393,26 +393,34 @@ function addWorkResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			if (result != null) {
-				window.alert(result);
 				var work=eval('('+result+')');
-				var seDate=work.project_name.split("&");
 				
+/*				for(var i = 0; i < work.workmember_wdto.length; i++){
+					var memberName = work.workmember_wdto[i].member_name ;
+					alert(memberName);
+				}*/
+				
+				var seDate=work.project_name.split("&");		
 				var cNode = document.getElementById('cp'+work.category_idx);
 				var dNode = document.createElement('div');
 			
-				var msg='<div id="wdiv'+work.work_idx+'" class="wdiv" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
+				var msg='<c:set var="pan" value="panel-info"></c:set>';
+				msg+='<div class="panel ${pan}">';
+				msg+='<div id="wdiv'+work.work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 				msg+='<i id="showWork'+work.work_idx+'"></i>';
 				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
 				msg+='<c:set var="wstart"><f:formatDate value="'+seDate[0]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
 				msg+='<c:set var="wend"><f:formatDate value="'+seDate[1]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<span onclick="workUpdate(${wdto.work_idx},"'+seDate[0]+'","'+seDate[1]+'",'+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
+				msg+='<span onclick="workUpdate(${wdto.work_idx},'+seDate[0]+','+seDate[1]+','+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
 				msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
 				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+seDate[0]+'<br>';
 				msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 				msg+='~'+seDate[1]+'</td></tr>';
 				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
-				msg+='<c:forEach var="mdto" items="${marr}"><c:if test="${mdto.work_idx eq '+work.work_idx+'">';
-				msg+='<span>${mdto.member_name}</span></c:if></c:forEach></td></tr>';
+				for(var i = 0; i < work.workmember_wdto.length; i++){
+					msg+='<span>'+work.workmember_wdto[i].member_name+'</span>&nbsp';
+				}
+				msg+='</td></tr>';
 				msg+='<tr><td colspan="2"><form action="javascript:addCheck('+work.work_idx+')">';
 				msg+='<div class="table_i glyphicon glyphicon-check" onclick="showChecklist('+work.work_idx+')"></div>';
 				msg+='<input type="text" id="content'+work.work_idx+'" placeholder="체크리스트" style="width: 60%;" required="required">';
@@ -429,7 +437,7 @@ function addWorkResult(){
 				msg+='<i name="3" class="glyphicon glyphicon-ok-circle" style="color:green;" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone(${wdto.work_idx},3)"></i></div></td>';
 				msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
 				msg+='</tr></tbody></table></div></div>';
-				
+
 				dNode.innerHTML = msg;
 				cNode.appendChild(dNode);
 				closem();

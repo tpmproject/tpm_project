@@ -25,7 +25,7 @@ public class WorkDAOImple implements WorkDAO {
 		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("workMemberList", dto);
 		return arr;
 	}
-
+	
 	public ArrayList<MemberDTO> projectMember(int project_idx) {
 		ArrayList<MemberDTO> arr=(ArrayList)sqlMap.selectList("projectMember",project_idx);
 		return arr;
