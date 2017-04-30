@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>여기에 제목을 입력하십시오</title>
-<link href="/tpm_project/css/hr/hr-text.css?verr=3" rel="stylesheet">
-
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 
 <style>
         article.content {
@@ -31,6 +30,9 @@
       	.pg1-page{
       		margin:auto 500px;
       	    background: white;
+      	}
+      	#comment_footer{
+      		margin: 0;
       	}
 
     </style>
@@ -329,7 +331,8 @@ function commentAdd(){
 	} */
 	
 	function showComment(){
-		var param  = 'work_idx='+work_idx;
+		var work_idx = document.newComment.work_idx.value;
+		var param  = 'work_idx=' + work_idx;
 		window.alert(param);
 		
 		//sendRequest('commentList.do', param, showCommentResult, 'POST');
@@ -340,46 +343,33 @@ function commentAdd(){
 			data : param,
 			dataType : 'json',
 			success : function(json){
+				window.alert('json:'+JSON.stringify(json,null,2));
+				
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
-					//var comments = json[0];
 					
-					var msg = '';
 					var cdId = document.getElementById('comment_content');
 					
-					msg += '<div class="box-body chat" id="chat-box">';
-					msg += 		'<div class="item">';
+					msg += 	'<div class="box-body chat" id="comment-box">';
+					msg += 		'<div class="item" id="comment_text">';
 					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[i].mdto.member_img +'" class="online">';
 					msg += 			'<p class="message">';
 					msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
 					msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json[i].comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json[i].mdto.member_name +'('+ json[i].mdto.member_id +')';
 					msg += 				'</a>';
-					msg += 				  json[i].comment_content;
+					msg += 				 json[i].comment_content;
 					msg +=			 '</p>';
 					msg += 		'</div>';
-					msg += '</div>';
+					msg += 	'</div>';
 					
-					cdId.innerHTML = msg;
 				}
+				cdId.innerHTML = msg;
+				$('#comment-box').slimScroll({ scrollTo: $("#comment_text").height() });
 			}
-			
 		});
 	}
 	
-	/* function showCommentResult(){
-		if(XHR.readyState==4){
-			if(XHR.status==200){
-				var JSONData = XHR.responseText;
-				window.alert(JSONData);
-				
-				var objData = eval('('+JSONData+')');
-				window.alert(objData);
-				
-				var comments = objData.
-			}
-		}
-	} */
 	
 	/* <div class="box-body chat" id="chat-box">
 			<div class="item">
@@ -397,24 +387,6 @@ function commentAdd(){
 			</div>
 		</div> */
 	
-	/* function makeCommentContent(cdto){
-		
-		var temp_msg = '';
-		
-		temp_msg += '<div class="box-body chat" id="chat-box">';
-		temp_msg += 		'<div class="item">';
-		temp_msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_ing +'" class="online">';
-		temp_msg += 			'<p class="message">';
-		temp_msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-		temp_msg += 					'<i class="fa fa-clock-o"></i> '+ cdto.comment_date+'</small>'+ cdto.mdto.member_name +'('+ cdto.mdto.member_id +')';
-		temp_msg += 				'</a>';
-		temp_msg += 				 cdto.comment_content;
-		temp_msg +=			 '</p>';
-		temp_msg += 		'</div>';
-		temp_msg += '</div>';
-		
-		return temp_msg;
-	} */
 	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx){
 		sessionStorage.setItem('s_work_idx',work_idx);
@@ -694,7 +666,7 @@ function commentAdd(){
         
         <div class="btn-group" role="group">
           <button type="button" id="favorites" class="btn btn-default" href="#tab1"
-          data-toggle="tab">
+          data-toggle="tab" onclick="showComment()">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="hidden-xs">코멘트</div>
           </button>

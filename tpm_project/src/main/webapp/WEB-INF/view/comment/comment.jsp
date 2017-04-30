@@ -55,12 +55,12 @@
 	</div>
 	
 	<div class="box-body comment" id="comment-box">
-		<div id="comment_content"> test </div>
-		<a onclick="javascript:showComment(${work_idx})"> 리스트 테스트</a>
+		<div id="comment_content">
+		</div>
 	</div>
 
 	<div class="box-footer">
-		<form name="newComment" action="javascript:commentAdd()" method="post">
+		<form name="newComment" id="comment_footer" action="javascript:commentAdd()" method="post">
 			<input type="hidden" name="work_idx" value="${work_idx}">
 			<div class="input-group">
 				<input type="text" class="form-control" id="comment"
