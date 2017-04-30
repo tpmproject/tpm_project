@@ -483,12 +483,12 @@ function commentAdd(){
 		sendRequest_extension(url, param, ajax_result, method, ctype);
 		return false;
 	}
-	function fileAdd(){
+	/* function fileAdd(){
 		
 		var param = "file_name="+filename;
 		action_ajax('fileAdd.do',param,'POST', 'FILE_ADD'); // 해당 페이지로 ajax통신 시작
 		
-	}
+	} */
 	
     function ajax_result(httpRequest, ctype) {
     	return function() {
@@ -704,7 +704,7 @@ function commentAdd(){
             <div class="hidden-xs">파일 리스트</div>
           </button>
         </div>
-         <div class="btn-group" role="group">
+     <!--     <div class="btn-group" role="group">
           <button type="button" id="fileUpload" class="btn btn-default" href="#tab4"
           data-toggle="tab">
             <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
@@ -717,7 +717,7 @@ function commentAdd(){
             <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
             <div class="hidden-xs">파일 업로드</div>
           </button>
-        </div>
+        </div> -->
       </div>
       <div class="well">
         <div class="tab-content" style="width:600px">
@@ -735,13 +735,13 @@ function commentAdd(){
    			</div>
           </div>
           
-          <div class="tab-pane fade in" id="tab4">
+          <%-- <div class="tab-pane fade in" id="tab4">
              
           </div>
           
           <div class="tab-pane fade in" id="tab5">
              <%@include file="/WEB-INF/view/file/fileUploadForm.jsp"%>
-          </div>
+          </div> --%>
           
         </div>
       </div>

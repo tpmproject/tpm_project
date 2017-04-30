@@ -29,6 +29,7 @@
     </noscript>
     
 <script>
+//projectContent.js 상위
 function fileUpload(work_idx){
 	$('input[name=work_idx]').attr('value',work_idx); 
 }
@@ -43,7 +44,6 @@ function fileUpload(work_idx){
   
       
       <form id="fileupload" style="width: 570px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
-      
 		<input type="hidden" name="work_idx" id="id_work_idx" >
 		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -58,24 +58,18 @@ function fileUpload(work_idx){
             button -->
             <span class="btn btn-success fileinput-button">
               <i class="glyphicon glyphicon-plus"></i>
-              <span>Add files...</span>
+              <span>첨부파일</span>
               <input type="file" name="file_upload" multiple="multiple">
             </span>
             <button type="submit" class="btn btn-primary start" >
               <i class="glyphicon glyphicon-upload"></i>
-              <span>Start upload</span>
+              <span>모두 올리기</span>
             </button>
             <button type="reset" class="btn btn-warning cancel">
               <i class="glyphicon glyphicon-ban-circle"></i>
-              <span>Cancel upload</span>
+              <span>모두 취소</span>
             </button>
-            <button type="button" class="btn btn-danger delete">
-              <i class="glyphicon glyphicon-trash"></i>
-              <span>Delete</span>
-            </button>
-            <input type="checkbox" class="toggle" style="position: absolute; margin: 10px 10px;">
-            <!-- The global file processing state -->
-            <span class="fileupload-process"></span>
+            
           </div>
           <!-- The global progress state -->
           
@@ -88,23 +82,21 @@ function fileUpload(work_idx){
       
      
     </div>
-    <!-- The blueimp Gallery widget -->
-    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls"
-    data-filter=":even">
-      <div class="slides"></div>
-      <h3 class="title"></h3>
-      <a class="prev">‹</a>
-      <a class="next">›</a>
-      <a class="close">×</a>
-      <a class="play-pause"></a>
-      <ol class="indicator"></ol>
-    </div>
+    
     <!-- The template to display files available for upload -->
     <script id="template-upload" type="text/x-tmpl">
-      {% for (var i=0, file; file=o.files[i]; i++) { %}
+      {% for (var i=0, file; file=o.files[i]; i++) { 
+						var filename1=file.name.toLowerCase(); 
+						var filetype=filename1.substring(filename1.lastIndexOf('.')+1);
+						
+						$(".preview[i]").html('<img src="/tpm_project/img/fileicon/filetypeicon/'+filetype+'.PNG">');
+	   %}
+			
                 <tr class="template-upload fade">
-                    <td>
-                        <span class="preview"></span>
+                    <td>s
+                        <span class="preview">
+					    <img src="/tpm_project/img/fileicon/filetypeicon/{%=filetype%}.PNG">
+						</span>
                     </td>
                     <td>
                         <p class="name">{%=file.name%}</p>
@@ -118,13 +110,13 @@ function fileUpload(work_idx){
                         {% if (!i && !o.options.autoUpload) { %}
                             <button class="btn btn-primary start" disabled>
                                 <i class="glyphicon glyphicon-upload"></i>
-                                <span>Start</span>
+                                <span>파일 올리기</span>
                             </button>
                         {% } %}
                         {% if (!i) { %}
                             <button class="btn btn-warning cancel">
                                 <i class="glyphicon glyphicon-ban-circle"></i>
-                                <span>Cancel</span>
+                                <span>취소</span>
                             </button>
                         {% } %}
                     </td>
@@ -142,35 +134,8 @@ function fileUpload(work_idx){
                             {% } %}
                         </span>
                     </td>
-                    <td>
-                        <p class="name">
-                            {% if (file.url) { %}
-                                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                            {% } else { %}
-                                <span>{%=file.name%}</span>
-                            {% } %}
-                        </p>
-                        {% if (file.error) { %}
-                            <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-                        {% } %}
-                    </td>
-                    <td>
-                        <span class="size">{%=o.formatFileSize(file.size)%}</span>
-                    </td>
-                    <td>
-                        {% if (file.deleteUrl) { %}
-                            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                                <i class="glyphicon glyphicon-trash"></i>
-                                <span>Delete</span>
-                            </button>
-                            <input type="checkbox" name="delete" value="1" class="toggle">
-                        {% } else { %}
-                            <button class="btn btn-warning cancel">
-                                <i class="glyphicon glyphicon-ban-circle"></i>
-                                <span>Cancel</span>
-                            </button>
-                        {% } %}
-                    </td>
+                    
+                  
                 </tr>
             {% } %}
     </script>
