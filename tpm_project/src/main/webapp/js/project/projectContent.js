@@ -404,8 +404,7 @@ function addWorkResult(){
 				var cNode = document.getElementById('cp'+work.category_idx);
 				var dNode = document.createElement('div');
 			
-				var msg='<c:set var="pan" value="panel-info"></c:set>';
-				msg+='<div class="panel ${pan}">';
+				var msg='<div class="panel panel-info">';
 				msg+='<div id="wdiv'+work.work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 				msg+='<i id="showWork'+work.work_idx+'"></i>';
 				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
@@ -436,7 +435,7 @@ function addWorkResult(){
 				msg+='<c:if test="{'+work.work_confirm+'==10}"><i name="2" class="glyphicon glyphicon-record" onclick="workDone('+work.work_idx+',2)"></i></c:if>';
 				msg+='<i name="3" class="glyphicon glyphicon-ok-circle" style="color:green;" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone(${wdto.work_idx},3)"></i></div></td>';
 				msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
-				msg+='</tr></tbody></table></div></div>';
+				msg+='</tr></tbody></table></div></div></div>';
 
 				dNode.innerHTML = msg;
 				cNode.appendChild(dNode);
