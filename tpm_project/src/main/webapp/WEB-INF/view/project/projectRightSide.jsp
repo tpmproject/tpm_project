@@ -257,6 +257,9 @@
     </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
+
+var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
+
 function commentAdd(){
 	
 	var work_idx = document.newComment.work_idx.value;
@@ -284,10 +287,13 @@ function commentAdd(){
 				
 				msg += '<div class="box-body chat" id="chat-box">';
 				msg += 		'<div class="item">';
-				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'" class="online">';
+				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'">';
 				msg += 			'<p class="message">';
 				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json.mdto.member_name +'('+ member_id +')';
+				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+				msg +=					''+ json.mdto.member_name +'('+ member_id +') &nbsp;';
+				msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+				msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 				msg += 				'</a>';
 				msg += 				  json.comment_content;
 				msg +=			 '</p>';
@@ -349,23 +355,33 @@ function commentAdd(){
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
+				var cdId = document.getElementById('comment_content');
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
 					
-					var cdId = document.getElementById('comment_content');
+					//var member_id = json[i].mdto.member_id.split('@')[0];
 					
-					msg += 	'<div class="box-body chat" id="comment-box">';
+					if(json[i].mdto.member_idx == s_member_idx){
+						msg += myComment(json[i]);
+					} else{
+						msg += teamComment(json[i]);
+					}
+					
+					/* msg += 	'<div class="box-body chat" id="comment-box">';
 					msg += 		'<div class="item" id="comment_text">';
-					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[i].mdto.member_img +'" class="online">';
+					msg += 			'<img src="/tpm_project/img/member/profile/'+ json[i].mdto.member_img +'">';
 					msg += 			'<p class="message">';
 					msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-					msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json[i].comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>'+ json[i].mdto.member_name +'('+ json[i].mdto.member_id +')';
+					msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json[i].comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+					msg +=					''+ json[i].mdto.member_name +'('+ member_id +') &nbsp;';
+					msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+					msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 					msg += 				'</a>';
 					msg += 				 json[i].comment_content;
 					msg +=			 '</p>';
 					msg += 		'</div>';
-					msg += 	'</div>';
+					msg += 	'</div>'; */
 					
 				}
 				cdId.innerHTML = msg;
@@ -373,6 +389,61 @@ function commentAdd(){
 			}
 		});
 	}
+	
+	function myComment(cdto){
+		
+		var member_id = cdto.mdto.member_id.split('@')[0];
+		var msg = '';
+		
+		msg += 	'<div class="box-body chat" id="comment-box">';
+		msg += 		'<div class="item" id="comment_text">';
+		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
+		msg += 			'<p class="message">';
+		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
+		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
+		msg += 				'</a>';
+		msg += 				 cdto.comment_content;
+		msg +=			 '</p>';
+		msg += 		'</div>';
+		msg += 	'</div>';
+		
+		return msg;
+	}
+	
+	function teamComment(cdto){
+		
+		var member_id = cdto.mdto.member_id.split('@')[0];
+		msg = '';
+		
+		msg += 	'<div class="box-body chat" id="comment-box">';
+		msg += 		'<div class="item" id="comment_text">';
+		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
+		msg += 			'<p class="message">';
+		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
+		msg += 				'</a>';
+		msg += 				 cdto.comment_content;
+		msg +=			 '</p>';
+		msg += 		'</div>';
+		msg += 	'</div>';
+		
+		return msg;
+	}
+	
+	function delComment(){
+		var work_idx = document.newComment.work_idx.value;
+		var param  = 'work_idx=' + work_idx;
+		window.alert(param);
+	}
+	
+	/* <div class="tools">
+   	 	<i class="fa fa-edit"></i>
+   	 	<i class="fa fa-trash-o"></i>
+  	</div> */
 	
 	/* <div class="box-body chat" id="chat-box">
 			<div class="item">
