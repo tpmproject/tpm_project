@@ -19,7 +19,7 @@
     
     <div class="container" style="width:100%">
       <div class="row">
-        <div class="col-md-12" style="width: 590px; height: 610px; margin: -10px -10px;">
+        <div class="col-md-12" style="width: 590px; height: 645px; margin: -10px -10px;">
           <div class="table-responsive"></div>
           
 				<div class="container1">

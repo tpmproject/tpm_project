@@ -416,7 +416,12 @@ function commentAdd(){
 		return temp_msg;
 	} */
 	/* 처음 들어올때 업무 파일리스트  */
-	function project_fileList(work_idx){
+	function project_fileList(work_idx,work_title){
+		
+		
+		var f_search=document.getElementById('work_title');
+		f_search.innerHTML=work_title;
+		
 		sessionStorage.setItem('s_work_idx',work_idx);
 		//window.alert('사이드창쪽 업무 idx: '+work_idx);
 		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
@@ -676,7 +681,7 @@ function commentAdd(){
 	</div>
 	<div style="width:100%">
 	 <!-- 코멘트 / 파일 탭 윗쪽  -->
-      <div class="card hovercard"style="background-color: #222d32;">
+      <div class="card hovercard"style="background-color: #f5f5f5;height: 110px;">
         <div class="card-background">
          
          
@@ -685,7 +690,7 @@ function commentAdd(){
         
         </div>
         <div class="card-info">
-          <span class="card-title">Pamela Anderson</span>
+          <span class="card-title" id="work_title"></span>
         </div>
       </div>
       

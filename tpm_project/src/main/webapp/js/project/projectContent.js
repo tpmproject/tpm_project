@@ -829,12 +829,12 @@ function cateDelResult(){
 	sessionStorage.setItem('con_work_idx', work_idx);
 }*/
 /* 업무 오른쪽 사이드창  */
-function workSide(work_idx,project_idx){
-
-	project_fileList(work_idx);
+function workSide(work_idx,project_idx,work_title){
+		
+	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);
 	comment(work_idx);
-	return work_idx;
+	
 } 
 function showWorkTable(work_idx){
 

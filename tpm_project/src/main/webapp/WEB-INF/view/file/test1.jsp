@@ -40,10 +40,10 @@ function fileUpload(work_idx){
   <body>
     <div class="navbar navbar-default navbar-fixed-top" >
     </div>
-    <div class="container" style="width: 580px;">
+    <div class="container" style="width: 570px;">
   
       
-      <form id="fileupload" style="width: 590px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
+      <form id="fileupload" style="width: 550px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="work_idx" id="id_work_idx" >
 		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
