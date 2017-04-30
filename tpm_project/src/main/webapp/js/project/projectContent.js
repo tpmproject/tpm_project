@@ -115,7 +115,19 @@ function onMessage(evt) {
 	if(data[0]=='checkDel'){
 		ws_checkDel(data[1]);
 	}
-	
+	//업무 생성
+	if(data[0]=='workAdd'){
+		var work_idx=data[1];
+		var category_idx=data[2];
+		var work_title=data[3];
+		var work_start=data[4];
+		var work_end=data[5];
+		var work_confirm=data[6];
+		var work_state=data[7];
+		var member=data[8];
+		
+		ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member);
+	}
 }
 
 function cateName(idx){
@@ -394,58 +406,66 @@ function addWorkResult(){
 			var result = XHR.responseText;
 			if (result != null) {
 				var work=eval('('+result+')');
-				
-/*				for(var i = 0; i < work.workmember_wdto.length; i++){
-					var memberName = work.workmember_wdto[i].member_name ;
-					alert(memberName);
-				}*/
-				
-				var seDate=work.project_name.split("&");		
-				var cNode = document.getElementById('cp'+work.category_idx);
-				var dNode = document.createElement('div');
-			
-				var msg='<div class="panel panel-info">';
-				msg+='<div id="wdiv'+work.work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
-				msg+='<i id="showWork'+work.work_idx+'"></i>';
-				msg+='&nbsp;<span onclick="showWorkTable('+work.work_idx+')">'+work.work_title+'</span>';
-				msg+='<c:set var="wstart"><f:formatDate value="'+seDate[0]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<c:set var="wend"><f:formatDate value="'+seDate[1]+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
-				msg+='<span onclick="workUpdate(${wdto.work_idx},'+seDate[0]+','+seDate[1]+','+work.work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
-				msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
-				msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+seDate[0]+'<br>';
-				msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-				msg+='~'+seDate[1]+'</td></tr>';
-				msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
+		
+				var work_idx=work.work_idx;
+				var category_idx=work.category_idx;
+				var work_title=work.work_title;
+				var seDate=work.project_name.split("&");
+				var work_start=seDate[0];
+				var work_end=seDate[1];
+				var work_confirm=work.work_confirm;
+				var work_state=work.work_state;
+				var member="";
 				for(var i = 0; i < work.workmember_wdto.length; i++){
-					msg+='<span>'+work.workmember_wdto[i].member_name+'</span>&nbsp';
+					member+=work.workmember_wdto[i].member_name+'&nbsp';
 				}
-				msg+='</td></tr>';
-				msg+='<tr><td colspan="2"><form action="javascript:addCheck('+work.work_idx+')">';
-				msg+='<div class="table_i glyphicon glyphicon-check" onclick="showChecklist('+work.work_idx+')"></div>';
-				msg+='<input type="text" id="content'+work.work_idx+'" placeholder="체크리스트" style="width: 60%;" required="required">';
-				msg+='&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck('+work.work_idx+')"></i>';
-				msg+='</form></td></tr><tr><td colspan="2"><div class="scr">';
-				msg+='<div class="check_div" id="check_div'+work.work_idx+'">';
-				msg+='</div></div></td></tr><tr>';
-				msg+='<td colspan="2" align="right"><a id="aCheck'+work.work_idx+'"href="javascript:showCheck('+work.work_idx+')">완료한 체크리스트보기</a>&nbsp;</td>';
-				msg+='</tr><tr><td colspan="2"><div class="progress" style="margin-bottom: 2px; height: 12px;">';
-				msg+='<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;"></div></div>';
-				msg+='</td></tr><tr><td><div class="work_btn" id="workState'+work.work_idx+'">';
-				msg+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"></i>';
-				if(work.work_confirm==10){
-					msg+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work.work_idx+',2)"></i>';
-				}
-				msg+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work.work_idx+',3)"></i></div></td>';
-				msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
-				msg+='</tr></tbody></table></div></div></div>';
-
-				dNode.innerHTML = msg;
-				cNode.appendChild(dNode);
-				closem();
-				document.newWork.reset();
+				updateWS('workAdd,'+work_idx+','+category_idx+','+work_title+','+work_start+','+work_end+','+work_confirm+','+work_state+','+member);
 			}	
 		}
 	}
+}
+function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member){
+		
+	var cNode = document.getElementById('cp'+category_idx);
+	var dNode = document.createElement('div');
+
+	var msg='<div class="panel panel-info">';
+	msg+='<div id="wdiv'+work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
+	msg+='<i id="showWork'+work_idx+'"></i>';
+	msg+='&nbsp;<span onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
+	msg+='<c:set var="wstart"><f:formatDate value="'+work_start+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
+	msg+='<c:set var="wend"><f:formatDate value="'+work_end+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
+	msg+='<span onclick="workUpdate(${wdto.work_idx},'+work_start+','+work_end+','+work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
+	msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
+	msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+work_start+'<br>';
+	msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+	msg+='~'+work_end+'</td></tr>';
+	msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
+	msg+='<span>'+member+'</span>&nbsp';
+	msg+='</td></tr>';
+	msg+='<tr><td colspan="2"><form action="javascript:addCheck('+work_idx+')">';
+	msg+='<div class="table_i glyphicon glyphicon-check" onclick="showChecklist('+work_idx+')"></div>';
+	msg+='<input type="text" id="content'+work_idx+'" placeholder="체크리스트" style="width: 60%;" required="required">';
+	msg+='&nbsp;<i class="glyphicon glyphicon-plus" onclick="addCheck('+work_idx+')"></i>';
+	msg+='</form></td></tr><tr><td colspan="2"><div class="scr">';
+	msg+='<div class="check_div" id="check_div'+work_idx+'">';
+	msg+='</div></div></td></tr><tr>';
+	msg+='<td colspan="2" align="right"><a id="aCheck'+work_idx+'"href="javascript:showCheck('+work_idx+')">완료한 체크리스트보기</a>&nbsp;</td>';
+	msg+='</tr><tr><td colspan="2"><div class="progress" style="margin-bottom: 2px; height: 12px;">';
+	msg+='<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;"></div></div>';
+	msg+='</td></tr><tr><td><div class="work_btn" id="workState'+work_idx+'">';
+	msg+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"></i>';
+	if(work_confirm==10){
+		msg+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work_idx+',2)"></i>';
+	}
+	msg+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work_idx+',3)"></i></div></td>';
+	msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
+	msg+='</tr></tbody></table></div></div></div>';
+
+	dNode.innerHTML = msg;
+	cNode.appendChild(dNode);
+	closem();
+	document.newWork.reset();
 }
 function updateWork(){
  	var work_member=document.getElementById('work_m2');

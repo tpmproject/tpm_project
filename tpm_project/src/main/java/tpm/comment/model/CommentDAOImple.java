@@ -52,8 +52,7 @@ public class CommentDAOImple implements CommentDAO {
 	}
 
 	public int delComment(CommentDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlMap.delete("delComment", dto);
 	}
 
 }

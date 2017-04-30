@@ -207,12 +207,6 @@
 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="1"></property>
 	</bean>
-
-	<!-- <bean name="JSON" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
-	
-	
 	
 	<mvc:annotation-driven />
-
-	
 </beans>

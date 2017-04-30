@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.groupdocs.viewer.internal.c.a.s.c.Mo;
+
 import tpm.comment.model.CommentDAO;
 import tpm.comment.model.CommentDTO;
 
@@ -27,9 +29,10 @@ public class CommentController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<CommentDTO> dto = commentDAO.CommentList(work_idx);
+		List<Object> arr_co = commentDAO.getCommentList(cdto);
 		
-		mav.addObject("arr", dto);
+		mav.addObject("arr_co", arr_co);
+		
 		mav.setViewName("comment/comment");
 		
 		return mav;
@@ -38,29 +41,9 @@ public class CommentController {
 	/** 코멘트 - 코멘트 데이터 반환*/
 	@RequestMapping(value="commentList.do",  method=RequestMethod.POST)
 	public @ResponseBody List<Object> commentList(CommentDTO cdto){
-		/*List<Object> arr_cdto = commentDAO.getCommentList(cdto);
-		
-		for(Object object: arr_cdto){
-			System.out.println(object);
-		}
-		
-		return arr_cdto;*/
+		//System.out.println(cdto.getWork_idx());
 		return commentDAO.getCommentList(cdto);
 	}
-	
-	/** 코멘트 - 코멘트 입력 */
-	/*@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
-	public ModelAndView commentAdd(CommentDTO dto){
-		
-		ModelAndView mav = new ModelAndView();
-		
-		int result = commentDAO.commentAdd(dto);
-		System.out.println(result);
-		
-		mav.addObject("result", result);
-		mav.setViewName("comment/commentAdd_d");
-		return mav;
-	}*/
 	
 	/** 코멘트 - 코멘트 입력(jSON1)*/
 	/*@RequestMapping(value="commentAdd.do",  method=RequestMethod.POST)
@@ -80,8 +63,8 @@ public class CommentController {
 		return mav;
 	}*/
 	
-	/** 코멘트 - 코멘트 입력 JSON 테스트*/
-	@RequestMapping(value="addComment.do", method=RequestMethod.POST)
+	/** 코멘트 - 코멘트 입력 JSON*/
+	@RequestMapping(value="commentAdd.do", method=RequestMethod.POST)
 	public @ResponseBody Object addComment(CommentDTO cdto, HttpSession session){
 		
 		cdto.setMember_idx((Integer)session.getAttribute("s_member_idx"));
@@ -106,10 +89,22 @@ public class CommentController {
 	
 	/** 코멘트 - 코멘트 삭제 */
 	@RequestMapping(value="commentDel.do",  method=RequestMethod.POST)
-	public ModelAndView commentDel(){
+	public ModelAndView commentDel(CommentDTO cdto){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("comment/commentResult_d");
+		
+		int result = commentDAO.delComment(cdto);
+		String msg = "";
+		
+		if(result > 0){
+			msg = "삭제 완료";
+		} else{
+			msg = "관리자에게 문의바랍니다";
+		}
+		
+		mav.addObject("msg", msg);
+		mav.setViewName("comment/commentDel_d");
+		
 		return mav;
 	}
 }

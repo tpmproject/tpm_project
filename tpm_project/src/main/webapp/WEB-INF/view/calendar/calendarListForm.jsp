@@ -135,6 +135,38 @@ function calendarReload(){
 	});
 	
 }
+var ee;
+function FilterReload(){
+	
+	var FilterListCheckBox = $('input[name="checkBox_FilterList"]');
+	for(var i = 0 ; i < FilterListCheckBox.length; i++){
+		
+		if($(FilterListCheckBox).eq(i).is(':checked')){
+			if($(FilterListCheckBox).eq(i).val() == 'filter_progressing'){
+				$('.bg-progressing').show();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_closingdateexcess'){
+				$('.bg-closingdateexcess').show();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_approvalwait'){
+				$('.bg-approvalwait').show();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_complete'){
+				$('.bg-complete').show();	
+			}
+		} else {
+			if($(FilterListCheckBox).eq(i).val() == 'filter_progressing'){
+				$('.bg-progressing').hide();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_closingdateexcess'){
+				$('.bg-closingdateexcess').hide();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_approvalwait'){
+				$('.bg-approvalwait').hide();
+			} else if($(FilterListCheckBox).eq(i).val() == 'filter_complete'){
+				$('.bg-complete').hide();	
+			}
+		}
+		
+		
+	}
+	
+}
 function initMyWorkListData(){
 	$.ajax({
 		url : 'calendarJsonList.do',
@@ -145,6 +177,7 @@ function initMyWorkListData(){
 			originalData = json;
 			
 			calendarReload();
+			FilterReload();
 		}
 	});
 	
@@ -196,8 +229,13 @@ function iCheckPlugin(){
   	});
 	
 	
-	$('input[type="checkbox"], input[type="radio"]').on('ifChanged', function (e) {
+	$('input[name="checkBox_MyProjectList"]').on('ifChanged', function (e) {
 		calendarReload();
+	});
+	
+	$('input[name="checkBox_FilterList"]').on('ifChanged', function (e) {
+		FilterReload();
+		
 	});
 }
 
@@ -361,28 +399,28 @@ function iCheckPlugin(){
 									<tr>
 										<th>
 											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;진행 중 업무</label>
+											<label><input type="checkbox" name="checkBox_FilterList" class="flat-red" value="filter_progressing" checked>&nbsp;진행중인 업무</label>
 											</div>
 										</th>
 									</tr>
 									<tr>
 										<th>
 											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;마감일 지난 업무</label>
+											<label><input type="checkbox" name="checkBox_FilterList" class="flat-red" value="filter_closingdateexcess" checked>&nbsp;마감일 지난 업무</label>
 											</div>
 										</th>
 									</tr>
 									<tr>
 										<th>
 											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;결재 미요청 업무</label>
+											<label><input type="checkbox" name="checkBox_FilterList" class="flat-red" value="filter_approvalwait" checked>&nbsp;결제 대기 업무</label>
 											</div>
 										</th>
 									</tr>
 									<tr>
 										<th>
 											<div>
-											<label><input type="checkbox" class="flat-red">&nbsp;결재 대기 업무</label>
+											<label><input type="checkbox" name="checkBox_FilterList" class="flat-red" value="filter_complete" checked>&nbsp;완료된 업무</label>
 											</div>
 										</th>
 									</tr>
