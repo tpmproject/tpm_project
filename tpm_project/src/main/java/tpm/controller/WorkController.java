@@ -162,9 +162,8 @@ public class WorkController {
 	
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup,int project_idx,HttpServletRequest req) throws ParseException{
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workAdd_d");
+	public @ResponseBody Object workUpdate(WorkDTO dto,  String[] member_idx, String workdateup,int project_idx,HttpServletRequest req) throws ParseException{
+
 		int result=0;
 		String msg=dto.getWork_title();
 		if(dto.getWork_state()>0){			
@@ -177,9 +176,9 @@ public class WorkController {
 				result=workDAO.updateWork(dto);
 			}	
 			if(result==0){
-				mav.addObject("msg","error");
+				return 0;
 			}
-			mav.addObject("wdto",dto);
+			return dto;
 		}else{			
 			workdateup=workdateup.replaceAll("오전", "AM");
 			workdateup=workdateup.replaceAll("오후", "PM");
@@ -200,14 +199,16 @@ public class WorkController {
 				for(int i=0;i<member_idx.length;i++){
 					int w_idx=Integer.parseInt(member_idx[i]);
 					WorkMemberDTO wdto=new WorkMemberDTO(dto.getWork_idx(), w_idx);
-					result+=workDAO.workMemberInsert(wdto);
-					mav.addObject("wdto",dto);
+					result+=workDAO.workMemberInsert(wdto);		
 				}
+				ArrayList<MemberDTO> temp_arry_wmdto = workDAO.workMember(dto.getWork_idx());
+				dto.setWorkmember_wdto(temp_arry_wmdto);
+				dto.setProject_name(work_s+"&"+work_e);
+				return dto;
 			}else{
-				mav.addObject("msg","error");
+				return 0;
 			}
 		}	
-		return mav;
 	}
 	
 	/** 업무 - 업무 삭제 */

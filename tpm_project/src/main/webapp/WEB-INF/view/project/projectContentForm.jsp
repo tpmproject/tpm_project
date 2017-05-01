@@ -204,7 +204,7 @@ var skin_color='';
 								<div id="wdiv${wdto.work_idx}" class="wdiv panel-heading" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
-									&nbsp;<span onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
+									&nbsp;<span id="wt${wdto.work_idx}" onclick="showWorkTable(${wdto.work_idx})">${wdto.work_title}</span>
 							<c:set var="wstart"><f:formatDate value="${wdto.work_start}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 							<c:set var="wend"><f:formatDate value="${wdto.work_end}" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>
 									<c:if test="${pdto.project_level != 1000 }">
@@ -217,7 +217,7 @@ var skin_color='';
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
-											<td colspan="2">
+											<td id="wd${wdto.work_idx}" colspan="2">
 												<div class="table_i glyphicon glyphicon-calendar"></div>
 												&nbsp;${wstart}<br>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
