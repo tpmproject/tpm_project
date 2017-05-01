@@ -378,7 +378,7 @@ img {
 																	<input type="hidden" id="p_idx${i.project_idx}"
 																		value="${i.project_idx}">
 																	<h3 id="pn${i.project_idx}" style="text-align: center; ">
-																		<span class="hidden-xs">${i.project_name }</span>
+																		${i.project_name }
 																	</h3>
 																	<p class="profession">TPM Project</p>
 																	<p class="text-center">
@@ -421,7 +421,7 @@ img {
 
 																</c:forEach>
 																<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
-																<h4 class="text-center">${i.project_name }</h4>
+																<h4 id="apn${i.project_idx }" class="text-center">${i.project_name }</h4>
 															</div>
 															<div class="content">
 																<div class="main">

@@ -414,62 +414,7 @@
 		$('#modal_content' + member_idx).fadeIn('100');
 	}
 
-	/* function projectMemberAddResult3() {
-		if (XHR.readyState == 4) {
-			if (XHR.status == 200) {
-				var result = XHR.responseText;
-				
-				var json = JSON.parse(result);
-
-				var msg2 = '';
-				var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
-				for (var i = 0; i < members.length; i++) {
-					var member = members[i];
-
-				 	msg2 += '<div class="col-sm-12" id="modal_content">';
-					msg2 += '<div class="col-sm-12"> ';
-					msg2 += '<div class="panel"> ';
-					msg2 += '<div class="panel-body p-t-10"> ';
-					msg2 += '<div class="media-main"> ';
-					msg2 += '<a class="pull-left" href="#"> <img height="30" width="30"';
-					msg2 += 				'class="thumb-lg img-circle bx-s" ';
-					msg2 += 				'src="/tpm_project/img/member/profile/' + member.member_img + '" alt=""> ';
-
-					//그룹원 추가버튼	
-					msg2 += '</a> ';
-					msg2 += '<div class="pull-right btn-group-sm"> ';
-					msg2 += '<a href="javascript:Insert_project_member('
-							+ member.member_idx
-							+ ')" class="btn btn-success tooltips" ';
-					msg2 += 'data-placement="top" data-toggle="tooltip" ';
-					msg2 += 'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
-
-					msg2 += '</a> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="info"> ';
-					msg2 += '<input type="hidden" id="add_project_member_idx_' + i + '" value="' + member.member_idx + '">'
-					msg2 += '<h4>' + member.member_name + '</h4> ';
-					msg2 += '<p class="text-muted">' + member.member_id
-							+ '</p> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '<div class="clearfix"></div> ';
-					msg2 += '<hr> ';
-
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '</div> ';
-					msg2 += '</div> '; 
-					
-				}
-
-				var myFriend_List = document.getElementById('myFriend_List');
-				myFriend_List.innerHTML = msg2;
-
-			}
-		}
-	}
- */
+	
 	function addP() {
 
 		var pname = document.newProject.project_name.value;
@@ -569,6 +514,7 @@ var updateProject_me=0;
 var myLevel=0;
 function updateP(){
 	var pname = document.changeProject.project_name.value;
+	window.alert(pname);
 	var pcontent = document.changeProject.project_content.value;
 	var pidx= document.changeProject.project_idx.value;
 		
@@ -632,23 +578,23 @@ function updatePResult(){
 				window.alert('오류 발생!');
 			}else{
 				if(updateProject_me==0){
-					$('#project_div'+pson.project_idx).remove();
-					updateProject_me=0;
+					/*$('#project_div'+pson.project_idx).remove();*/
+					/*$('#carousel-example-generic').carousel('prev');
+					var delp=$('#project_div'+pson.project_idx).parent();
+					//1초뒤 삭제
+					setTimeout(function(){delp.remove();},1000);
+					updateProject_me=0;*/
 					closem();
 					return;
 				}
 				updateProject_me=0;
 				var p_name=document.getElementById('pn'+pson.project_idx);
 				document.getElementById('pc'+pson.project_idx).innerHTML=pson.project_content;
-				if(myLevel!='3000'){
-					p_name.innerHTML=pson.project_name;	
-				}else{
-					p_name.innerHTML=pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span>';
-					
-				}
+				p_name.innerHTML=pson.project_name;	
+				document.getElementById('apn'+pson.project_idx).innerHTML=pson.project_name;
 				myLevel=0;
 			}
-			location.reload();
+			/*location.reload();*/
 			closem();
 		}
 	}
