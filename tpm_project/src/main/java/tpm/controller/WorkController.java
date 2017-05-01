@@ -163,7 +163,6 @@ public class WorkController {
 	/** 업무 - 업무 수정 */
 	@RequestMapping(value="workUpdate.do",  method=RequestMethod.POST)
 	public ModelAndView workUpdate(WorkDTO dto,  String[] member_idx, String workdateup,int project_idx,HttpServletRequest req) throws ParseException{
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("work/workAdd_d");
 		int result=0;
