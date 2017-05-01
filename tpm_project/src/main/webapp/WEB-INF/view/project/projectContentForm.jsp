@@ -403,7 +403,7 @@ var skin_color='';
 						</div>
 					</div>
 					<div align="center" style="padding:5px;">
-						<input id="wf${work_idx}"type="checkbox"  name="work_confirm">결재여부
+						<input type="checkbox"  name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
 					</div>
@@ -462,7 +462,7 @@ var skin_color='';
 						</div>
 					</div>
 					<div align="right">
-						<input type="checkbox" name="work_confirm">결재여부
+						<input id="wf${work_idx}" type="checkbox" name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" id="btn-worknext"
 							onclick="shows2()" style="background-color:#1e282c; color:white;" >다음</button>
 					</div>

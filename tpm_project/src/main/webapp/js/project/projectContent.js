@@ -721,16 +721,6 @@ function uWorkResult(){
 	}
 }
 function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work_confirm,work_state,member){
-/*	
-	var wc='<div class="work_btn" id="workState'+work_idx+'">';
-		//document.changeWork.work_confirm.removeattribute('checked');
-		wc+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone('+work_idx+',1)"></i>';
-	if(work_confirm==10){
-		wc+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work_idx+',2)"></i>';
-		document.changeWork.work_confirm.setAttribute('checked','checked');
-	}
-		wc+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work_idx+',3)"></i></div>';
-		document.getElementById('workState'+work_idx).innerHTML=wc;*/
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
