@@ -835,8 +835,8 @@ function commentAdd(){
         </div>
     
       </div>
-      <div class="well">
-        <div class="tab-content" style="width:600px">
+      <div class="well" style="height: 620px;">
+        <div class="tab-content" style="width:600px; height: 600px;">
         
           <div class="tab-pane fade in" id="tab1">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>

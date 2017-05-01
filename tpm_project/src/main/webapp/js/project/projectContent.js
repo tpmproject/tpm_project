@@ -849,16 +849,18 @@ function cateDelResult(){
 		}
 	}
 }
+
 /* 첨부파일 업로드 */
 /*function fileUp(work_idx){
 	sessionStorage.setItem('con_project_idx', project_idx);
 	sessionStorage.setItem('con_work_idx', work_idx);
 }*/
+
 /* 업무 오른쪽 사이드창  */
 function workSide(work_idx,work_title){
 	
 	var id_work_title=document.getElementById('work_title_id'); //업무 사이트 창에 업무제목 띄우기
-	id_work_title.innerHTML = work_title;
+	id_work_title.innerHTML = '업무명:'+work_title;
 	
 	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);
