@@ -15,12 +15,25 @@
 <link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="/tpm_project/plugins/iCheck/all.css">
+<!-- daterange picker -->
+<!-- <link rel="stylesheet" href="/tpm_project/plugins/daterangepicker/daterangepicker.css"> -->
+<link href="/tpm_project/css/daterangepicker/daterangepicker-bs3.css"
+	rel="stylesheet" type="text/css">
+  
 <link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
 <script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
 <script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
 <!-- iCheck 1.0.1 -->
 <script src="/tpm_project/plugins/iCheck/icheck.min.js"></script>
+<!-- <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"></script> -->
+<script src="js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<!-- Slimscroll -->
+<script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+
 <style>
+.show-blind{
+	display: none;
+}
 .bg-progressing {
 	color: #fff;
     border-color: #308dcc;
@@ -51,6 +64,30 @@ function initCalenderPage(){
 	initMyProjectList();
 	initMyWorkListData();
 	
+	//Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+    	timePicker: true, 
+    	timePickerIncrement: 30, 
+    	format: 'YYYY/MM/DD h:mm A'
+    }); 
+	
+   /*  $('#reservationtime').daterangepicker({
+        timePicker: false, timePickerIncrement: 30,
+        //format: 'DD-MM-YYYY hh:mm:ss',
+        format: 'DD-MM-YYYY',
+        timePicker12Hour: false, 
+        opens: 'left',
+        locale: { cancelLabel: 'Clear' },
+        function(start, end, label) {
+			console.log(start.toLocaleString() + end.toLocaleString() + label);
+        }
+ 	}); */
+ 
+	
+    /* $('#reservationtime').on('apply.daterangepicker', function(ev, picker) {
+        //$(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        //window.alert('1');
+    }); */
 }
 function projectIdxCheck(project_idx){
 	var projectListCheckBox = $('input[name="checkBox_MyProjectList"]:checked');
@@ -86,9 +123,11 @@ function calendarReload(){
 					
 					//window.alert(work_title + "- START : " + moment(work_start).format('YYYY-MM-DD, h:mm:ss a'));
 					//window.alert(work_title + "- END : " + moment(work_end).format('YYYY-MM-DD, h:mm:ss a'));
-					//window.alert(work_title + "- START : " + new Date(work_start));
+					/* window.alert(work_title + "- START : " + new Date(work_start));
 					
-					
+					if($('#reservationtime').val() != ''){
+						window.alert(work_title + "- START : " + new Date($('#reservationtime').val()));
+					} */
 					
 					var calendarInfo = {};
 					calendarInfo.title = project_name + '>' + category_name + '>' + work_title;
@@ -135,7 +174,7 @@ function calendarReload(){
 	});
 	
 }
-var ee;
+
 function FilterReload(){
 	
 	var FilterListCheckBox = $('input[name="checkBox_FilterList"]');
@@ -217,7 +256,18 @@ function initMyProjectList(){
 			$('#calendar_project_list_table').html(innerMsg);
 			
 			iCheckPlugin();
-			//$('input[name="checkBox_MyProjectList"]:checked')
+			
+			$('#calendar_project_list_div').slimScroll({
+		        height: '296px' // 스크롤 처리할 div 의 길이
+		    }).bind('slimscrolling', function(e, pos) {
+		    	//window.alert("Scroll value: " + pos + "px");
+		       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+		    });
+			
+			$('.applyBtn').click(function (){
+				calendarReload();
+			});
+			//$('.applyBtn$('input[name="checkBox_MyProjectList"]:checked')
 		}
 	});
 }
@@ -237,6 +287,25 @@ function iCheckPlugin(){
 		FilterReload();
 		
 	});
+}
+
+function startSuggest_projectList(id, me){
+	
+	   var list = $('#' + id).find('tbody tr');
+	  
+	   for(var i = 0 ; i < list.length; i++){
+		   
+		   // 포함 되어있지 않다면 -1 리턴
+		   if($(list).find('th div label').eq(i).text().trim().indexOf($(me).val().trim()) == -1){
+			   $(list).eq(i).addClass('show-blind');  
+		   }else{
+			   $(list).eq(i).removeClass('show-blind');
+		   }
+	   }
+		/* if(checkFirst == false){
+			setTimeout('goSearch_member()', 100);
+		}
+		checkFirst = true; */
 }
 
 	$(document).ready(function() {
@@ -389,6 +458,7 @@ function iCheckPlugin(){
 					<div class="col-md-4">
 						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 							<div class="box-header">
+								<i class="fa fa-filter" aria-hidden="true"></i>
 								<h3 class="box-title">필터</h3>
 								
 							</div>
@@ -396,6 +466,23 @@ function iCheckPlugin(){
 							<div class="box-body table-responsive no-padding"
 								id="chat_channel_list_div">
 								<table class="table table-hover" id="channel_list_table">
+									<tr>
+										<th>
+											<!-- Date and time range -->
+								              <div class="form-group">
+								                <label>기간 선택:</label>
+								
+								                <div class="input-group">
+								                  <div class="input-group-addon">
+								                    <i class="fa fa-clock-o"></i>
+								                  </div>
+								                  <input type="text" class="form-control pull-right" id="reservationtime" onforminput="window.alert('4')" onclick="window.alert('1')" onchange="window.alert('2');" oninput="window.alert('3')">
+								                </div>
+								                <!-- /.input group -->
+								              </div>
+								              <!-- /.form group -->
+										</th>
+									</tr>
 									<tr>
 										<th>
 											<div>
@@ -432,11 +519,12 @@ function iCheckPlugin(){
 						
 						<div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 							<div class="box-header">
+								<i class="fa fa-list-ul" aria-hidden="true"></i>
 								<h3 class="box-title">프로젝트</h3>
 								<div class="box-tools">
 									<div class="input-group">
 										<input type="text" name="table_search"
-											onkeyup="startSuggest('channel_list_table', this)"
+											onkeyup="startSuggest_projectList('calendar_project_list_table', this)"
 											class="form-control input-sm pull-right" style="width: 100px;"
 											placeholder="Search" />
 										<div class="input-group-btn">
@@ -449,7 +537,7 @@ function iCheckPlugin(){
 								</div>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body table-responsive no-padding"
+							<div class="box-body table-responsive no-padding" id="calendar_project_list_div"
 								id="calendar_project_list_div">
 								<table class="table table-hover" id="calendar_project_list_table">
 									<!-- 프로젝트 리스트 데이터가 들어갈 곳 -->

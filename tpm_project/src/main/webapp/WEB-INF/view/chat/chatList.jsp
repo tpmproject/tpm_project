@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 	<div class="box-header">
+		<i class="fa fa-list-ul" aria-hidden="true"></i>
 		<h3 class="box-title">프로젝트</h3>
 		<div class="box-tools">
 			<div class="input-group">
@@ -33,6 +34,7 @@
 <!-- /.box -->
 <div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 	<div class="box-header">
+		<i class="fa fa-twitch" aria-hidden="true"></i>
 		<h3 class="box-title">채널</h3>
 		<div class="box-tools">
 			<div class="input-group">
@@ -67,6 +69,7 @@
 <!-- /.box -->
 <div class="box skin-border-top-color-${sessionScope.s_member_thema}">
 	<div class="box-header">
+		<i class="fa fa-users" aria-hidden="true"></i>
 		<h3 class="box-title">구성원</h3>
 		<div class="box-tools">
 			<div class="input-group">

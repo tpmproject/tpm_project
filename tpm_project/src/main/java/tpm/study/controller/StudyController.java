@@ -120,14 +120,14 @@ public class StudyController {
 	public ModelAndView dateStudy5_datePicker2(ModelAndView mav, @RequestParam(value="t_date") String t_date) throws ParseException{
 		
 		System.out.println(t_date);
-		String temp[] = t_date.split("-");
+		/*String temp[] = t_date.split("-");
 		for (String s : temp) {
 			System.out.println(s.trim());
 		}
 		
 		String str= temp[0].trim(); 
 		
-		/*String str= "04/13/2017 9:00 AM"; */
+		String str= "04/13/2017 9:00 AM"; 
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US); 
 		java.util.Date t = sdf.parse(str); 
 		System.out.println("t :" + t);
@@ -138,7 +138,7 @@ public class StudyController {
 		int result = studyDAO.dateStudy4Insert(new DateTest3DTO(sts));
 		System.out.println(result);
 		
-		mav.setViewName("study/date/datePicker2");
+		mav.setViewName("study/date/datePicker2");*/
 		return mav;
 	}
 	///////////////////////
