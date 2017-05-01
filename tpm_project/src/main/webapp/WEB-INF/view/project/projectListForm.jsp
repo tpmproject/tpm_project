@@ -8,6 +8,8 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet"	type="text/css" />
@@ -25,7 +27,6 @@
 
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 <!-- <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
@@ -260,10 +261,9 @@ img {
 
 
 
-	<div class="cta-text" style="background: white;">
+	<div>
 		<h2>
-			TPM.<a class="glyphicon glyphicon-plus-sign" onclick="showf()"
-				style="size: 600px;">프로젝트 추가</a>
+			<a onclick="showf()" style="size: 600px;"><span><i class="glyphicon glyphicon-plus-sign" style="top: 5px;"></i></span>Create Project</a>
 		</h2>
 	</div>
 
@@ -294,11 +294,8 @@ img {
 						<!-- 	<div class="carousel-inner" role="listbox  -->
 						<c:forEach var="i" items="${plist}" varStatus="status">
 							<div class="item ${status.first?'active':'' }">
-								<div id="contain" class="container-fluid ">
-									<div id="project_div${i.project_idx}" style="margin-top: 15px;">
-										<div class="col-sm-10 col-sm-offset-1">
-											<div class="col-md-4 col-sm-6" style="width: 500px;">
-												<div class="card-container manual-flip">
+									<div id="project_div${i.project_idx}" align="center" style="margin-top: 15px;">
+												<div class="card-container manual-flip" style="max-width: 500px;">
 													<div class="card">
 														<div class="front">
 															<!--  배경화면-->
@@ -444,13 +441,10 @@ img {
 													<!-- end card -->
 												</div>
 												<!-- end card-container -->
-											</div>
 											<!-- end col sm 3 -->
 
 											<div class="space-400"></div>
-										</div>
 									</div>
-								</div>
 							</div>
 
 
@@ -469,12 +463,12 @@ img {
 	<div class="controls">
 		<a id="leftcon" class="left carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="prev"
-			style="width: 100px; margin-top: 15%;" > <span
+			style="width: 100px; margin-top: 245px;" > <span
 			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
 		</span> <span class="sr-only">Previous</span>
 		</a> <a id="rightcon" class="right carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="next"
-			style="width: 100px; margin-top: 15%;"> <span
+			style="width: 100px; margin-top: 245px;"> <span
 			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
