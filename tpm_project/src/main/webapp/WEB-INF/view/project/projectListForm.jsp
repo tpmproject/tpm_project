@@ -8,29 +8,74 @@
 <head>
 <meta charset=UTF-8>
 <title>TPM</title>
+
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
+<!-- Ionicons -->
+<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<!-- Morris chart -->
+<link href="/tpm_project/sample/cho/main/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+<!-- Daterange picker -->
+<link href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"
+	rel="stylesheet" type="text/css">
+<!-- Theme style -->
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
+    downloading all of them to reduce the load. -->
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- <script src="/tpm_project/sample/cho/main/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->	
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+<script src="js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
+<link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="/tpm_project/sample/aram/jquery.mCustomScrollbar.css" />
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/tpm_project/sample/aram/jquery.mCustomScrollbar.js"></script>
+<script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
+
+<!-- jQuery 2.1.3 -->
+<script src="dist/js/app.min.js" type="text/javascript"></script>
+<!--Websocket  -->
+<script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
+<script type="text/javascript" src="js/project/ws_project.js"></script>
+
+
+<!--  -->
+<!-- <script type="text/javascript" src="js/jquery.js"></script>
+
+
 
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet"	type="text/css" />
-<!-- Ionicons -->
+Ionicons
 <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css">
-<!-- Morris chart -->
+Morris chart
 <link href="/tpm_project/sample/cho/main/plugins/morris/morris.css"	rel="stylesheet" type="text/css">
-<!-- Daterange picker -->
+Daterange picker
 <link href="/tpm_project/sample/cho/main/plugins/daterangepicker/daterangepicker-bs3.css"	rel="stylesheet" type="text/css">
-<!-- Theme style -->
+Theme style
 <link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css"	rel="stylesheet" type="text/css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of
-    downloading all of them to reduce the load. -->
+AdminLTE Skins. Choose a skin from the css/skins folder instead of
+    downloading all of them to reduce the load.
 <link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
-<!-- <script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script> -->
+<script src="/tpm_project/plugins/daterangepicker/daterangepicker.js"
+	type="text/javascript"></script>
 <link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
 <link type="text/css" href="css/jquery.timepicker.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -43,10 +88,10 @@
 <script src="/tpm_project/bootstrap/js/bootstrap.js"></script>
 <script src="dist/js/app.min.js" type="text/javascript"></script>
 
-<!-- Placed at the end of the document so the pages load faster -->
-	<!-- <script src="js/jquery.js"></script> -->
+Placed at the end of the document so the pages load faster
+	<script src="js/jquery.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- <script src="js/bootstrap.min.js"></script> -->
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.fancybox.pack.js"></script>
 	<script src="js/jquery.fancybox-media.js"></script>
 	<script src="js/google-code-prettify/prettify.js"></script>
@@ -55,7 +100,7 @@
 	<script src="js/jquery.flexslider.js"></script>
 	<script src="js/animate.js"></script>
 	<script src="js/custom.js"></script>
-
+ -->
 
 <!-- 회전 카드 -->
 <!-- <link href="/tpm_project/sample/khj/css/bootstrap.css" rel="stylesheet" /> -->
