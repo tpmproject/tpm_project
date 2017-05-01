@@ -115,7 +115,7 @@ var member_name='${s_member_name}';
 	overflow: auto;
 }
 
-/* Add rounded corners to the top left and the top right corner of the image */
+/* Add rounded  corners to the top left and the top right corner of the image */
 img {
 	border-radius: 5px 5px 0 0;
 }
