@@ -291,7 +291,7 @@ function commentAdd(){
 				var member_id = json.mdto.member_id.split('@')[0];
 				
 				var member_img = json.mdto.member_img;
-				var comment_date = json.comment_date;
+				var comment_date = moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a');
 				var member_name = json.mdto.member_name;
 				var comment_idx = json.comment_idx;
 				var comment_content = json.comment_content;
@@ -303,7 +303,7 @@ function commentAdd(){
 	
 	function ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content){
 		
-		var cNode = document.getElementById('cbody');
+		var cNode = document.getElementById('comment-box');
 		var dNode = document.createElement('div');
 		
 		var msg = '';
@@ -313,12 +313,13 @@ function commentAdd(){
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
-		msg +=					''+ json.mdto.member_name +'('+ member_id +') &nbsp;';
+		//msg += 					'<i class="fa fa-clock-o"></i> '+ moment(comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+		msg += 					'<i class="fa fa-clock-o"></i> '+ comment_date +'</small>';
+		msg +=					''+ member_name +'('+ member_id +') &nbsp;';
 		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 		msg += 				'</a>';
-		msg += 				 '<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
+		msg += 				 '<span id="comment_'+ comment_idx +'" onclick="upCommentSet('+ comment_idx +')">'+ comment_content +'</span>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
 		msg += '</div>';
@@ -428,7 +429,7 @@ function commentAdd(){
 		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
 		msg += 				'</a>';
-		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upCommentSet('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span>';
+		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upCommentSet('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span> <br>';
 		msg += 				 '<div id="comment2_'+ cdto.comment_idx +'"> </div>';
 		msg +=			 '</p>';
 		msg += 		'</div>';

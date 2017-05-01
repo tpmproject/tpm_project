@@ -15,7 +15,7 @@
 	}
 </script>
 <body>
-<div class="container" style="width:100%;">
+<div class="container" id="commentBody" style="width:100%;">
 	<div class="row">
 		<div class="col-md-12" style="height: 600px; margin: 0px;">
 			<div class="box-header">
