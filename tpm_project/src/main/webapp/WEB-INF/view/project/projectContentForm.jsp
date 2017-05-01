@@ -225,7 +225,7 @@ var skin_color='';
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2">
+											<td id="wm${wdto.work_idx}" colspan="2">
 												<div class="table_i glyphicon glyphicon-user"></div> <c:forEach
 													var="mdto" items="${marr}">
 													<c:if test="${mdto.work_idx eq wdto.work_idx}">
@@ -403,7 +403,7 @@ var skin_color='';
 						</div>
 					</div>
 					<div align="center" style="padding:5px;">
-						<input type="checkbox"  name="work_confirm">결재여부
+						<input id="wf${work_idx}"type="checkbox"  name="work_confirm">결재여부
 						<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;"  id="btn-worknext"
 							onclick="shows()">다음</button>
 					</div>

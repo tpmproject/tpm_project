@@ -477,10 +477,10 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	msg+='<c:set var="wend"><f:formatDate value="'+work_end+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
 	msg+='<span onclick="workUpdate(${wdto.work_idx},'+work_start+','+work_end+','+work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
 	msg+='<table id="workTable${wdto.work_idx}" class="cate_table">';
-	msg+='<tbody><tr><td colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+work_start+'<br>';
+	msg+='<tbody><tr><td id="wd'+work_idx+'" colspan="2"><div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;'+work_start+'<br>';
 	msg+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 	msg+='~'+work_end+'</td></tr>';
-	msg+='<tr><td colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
+	msg+='<tr><td id="wm'+work_idx+'"colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
 	msg+='<span>'+member+'</span>&nbsp';
 	msg+='</td></tr>';
 	msg+='<tr><td colspan="2"><form action="javascript:addCheck('+work_idx+')">';
@@ -566,12 +566,25 @@ function uWorkResult(){
 }
 function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work_confirm,work_state,member){
 	var wt='<span id="wt'+work_idx+'" onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
-	document.getElementById('wt'+work_idx).innerHTML=wt;
+		document.getElementById('wt'+work_idx).innerHTML=wt;
 	var wd='<td id="wd'+work_idx+'" colspan="2">';
 		wd+='<div class="table_i glyphicon glyphicon-calendar"></div>';
 		wd+='&nbsp;'+work_start+'<br>';
 		wd+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~'+work_end+'</td>';
-	document.getElementById('wd'+work_idx).innerHTML=wd;
+		document.getElementById('wd'+work_idx).innerHTML=wd;
+	var wm='<td id="wm'+work_idx+'"colspan="2"><div class="table_i glyphicon glyphicon-user"></div>';
+		wm+='<span>'+member+'</span>&nbsp';
+		wm+='</td>';
+		document.getElementById('wm'+work_idx).innerHTML=wm;
+	var wc='<div class="work_btn" id="workState'+work_idx+'">';
+		//document.changeWork.work_confirm.removeattribute('checked');
+		wc+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone('+work_idx+',1)"></i>';
+	if(work_confirm==10){
+		wc+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work_idx+',2)"></i>';
+		document.changeWork.work_confirm.setAttribute('checked','checked');
+	}
+		wc+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work_idx+',3)"></i></div>';
+		document.getElementById('workState'+work_idx).innerHTML=wc;
 	closem();
 }
 
