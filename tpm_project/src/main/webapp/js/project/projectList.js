@@ -67,7 +67,6 @@
 	//프로젝트 삭제
 	function projectDelete(project_idx){
 		var param='project_idx='+project_idx;
-		window.alert('param='+param);
 		sendRequest('projectDelete.do',param,projectDelResult,'POST');
 		
 	}
@@ -81,21 +80,13 @@
 				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
-					
+					//캐러셀 이전 페이지로 이동
+					$('#carousel-example-generic').carousel('prev');
 					var delp=$('#project_div'+pson.project_idx).parent();
+					//1초뒤 삭제
+					setTimeout(function(){delp.remove();},1000);
 					
-					if(delp.prev().attr('class')!='item'){
-						window.alert('앞이 빔!');
-						delp.next().attr('class','item active');
-					}else{
-						window.alert('앞에 뭐있음');
-						delp.prev().attr('class','item active');
-					}
-					delp.remove();
-		
 				}
-				/* history.go(0);*/
-				/*  location.reload(); */
 				closem();
 			}
 		}
@@ -516,7 +507,6 @@
 		if (XHR.readyState == 4) {
 			if (XHR.status == 200) {
 				var result = XHR.responseText;
-				window.alert(result);
 				var objData=eval('('+result+')');
 				var pson=objData; // projectDTO
 				
