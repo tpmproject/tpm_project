@@ -164,9 +164,16 @@ function onMessage(evt) {
 	if(data[0]=='commentUpdate'){
 		var comment_idx = data[1];
 		var comment_content = data[2];
-		var comment_date = data[3];
+		//var comment_date = data[3];
 		
 		ws_commentUpdate(comment_idx, comment_content);
+	}
+	
+	//코멘트 삭제
+	if(data[0]=='commentDel'){
+		var comment_idx = data[1];
+		
+		ws_commentDel(comment_idx);
 	}
 }
 

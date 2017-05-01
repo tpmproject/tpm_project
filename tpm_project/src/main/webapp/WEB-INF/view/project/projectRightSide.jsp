@@ -309,14 +309,14 @@
 		var msg = '';
 		
 		msg += 	'<div class="box-body chat" id="comment-box">';
-		msg += 		'<div class="item" id="comment_content">';
+		msg += 		'<div class="item" id="comment_content'+ comment_idx +'">';
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
 		//msg += 					'<i class="fa fa-clock-o"></i> '+ moment(comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
 		msg += 					'<i class="fa fa-clock-o"></i> '+ comment_date +'</small>';
 		msg +=					''+ member_name +'('+ member_id +') &nbsp;';
-		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 		msg += 				'</a>';
 		msg += 				 '<span id="comment_'+ comment_idx +'" onclick="upCommentSet('+ comment_idx +')">'+ comment_content +'</span>';
@@ -420,7 +420,7 @@
 		var msg = '';
 		
 		msg += 	'<div class="box-body chat" id="comment-box">';
-		msg += 		'<div class="item" id="comment_content">';
+		msg += 		'<div class="item" id="comment_content'+ cdto.comment_idx +'">';
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
@@ -444,7 +444,7 @@
 		msg = '';
 		
 		msg += 	'<div class="box-body chat" id="comment-box">';
-		msg += 		'<div class="item" id="comment_text">';
+		msg += 		'<div class="item" id="comment_content'+ cdto.comment_idx +'">';
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
@@ -468,11 +468,32 @@
 		var param = 'comment_idx=' + comment_idx;
 		
 		if(confirm){
-			sendRequest('commentDel.do', param, delCommentResult, 'POST');
+			//sendRequest('commentDel.do', param, delCommentResult, 'POST');
+			$.ajax({
+				url : 'commentDel.do',
+				type : 'post',
+				data : param,
+				dataType : 'json',
+				success : function(json){
+					//window.alert('json:'+JSON.stringify(json,null,2));
+					
+					if(json=='1'){
+						//window.alert(comment_idx);
+						updateWS('commentDel,'+ comment_idx);
+					} else{
+						window.alert('에러 발생. 관리자한테 문의해주세요');
+					}
+				}
+			})
 		}
 	}
 	
-	function delCommentResult(){
+	function ws_commentDel(comment_idx){
+		$('#comment_content'+ comment_idx).remove();
+		//showComment();
+	}
+	
+	/* function delCommentResult(){
 		if(XHR.readyState==4){
 			if(XHR.status==200){
 				var result = XHR.responseText.trim();
@@ -480,7 +501,7 @@
 				showComment();
 			}
 		}
-	}
+	} */
 	
 	function upCommentSet(comment_idx){
 		

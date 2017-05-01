@@ -101,7 +101,7 @@ public class CommentController {
 	}
 	
 	/** 코멘트 - 코멘트 삭제 */
-	@RequestMapping(value="commentDel.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="commentDel.do",  method=RequestMethod.POST)
 	public ModelAndView commentDel(CommentDTO cdto){
 		
 		ModelAndView mav = new ModelAndView();
@@ -119,5 +119,17 @@ public class CommentController {
 		mav.setViewName("comment/commentDel_d");
 		
 		return mav;
+	}*/
+	
+	@RequestMapping(value="commentDel.do",  method=RequestMethod.POST)
+	public @ResponseBody Object commentDel(CommentDTO cdto){
+		
+		int result = commentDAO.delComment(cdto);
+		
+		if(result > 0){
+			return result;
+		} else{
+			return null;
+		}		
 	}
 }
