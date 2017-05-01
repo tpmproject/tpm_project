@@ -147,6 +147,15 @@ function onMessage(evt) {
 		
 		ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content);
 	}
+	
+	//코멘트 수정
+	if(data[0]=='commentUpdate'){
+		var comment_idx = data[1];
+		var comment_content = data[2];
+		var comment_date = data[3];
+		
+		ws_commentUpdate(comment_idx, comment_content);
+	}
 }
 
 function cateName(idx){

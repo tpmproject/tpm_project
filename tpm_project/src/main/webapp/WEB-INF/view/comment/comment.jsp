@@ -28,7 +28,7 @@
 					<div id="comment_content_area"></div>
 				</div>
 			</div>
-		
+			
 				<form name="newComment" id="comment_footer" action="javascript:commentAdd()" method="post">
 					<input type="hidden" name="work_idx" value="${work_idx}">
 					<div class="input-group">

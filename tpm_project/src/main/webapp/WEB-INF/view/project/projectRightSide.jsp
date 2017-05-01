@@ -258,16 +258,16 @@
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
 
-var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
-
-$(function(){
-	$('#comment-box').slimScroll({
-		height: '500px',
-		start: 'bottom'
+	var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
+	
+	$(function(){
+		$('#comment-box').slimScroll({
+			height: '500px',
+			start: 'bottom'
+		});
 	});
-});
 
-function commentAdd(){
+	function commentAdd(){
 	
 	var work_idx = document.newComment.work_idx.value;
 	var comment_content = document.newComment.inputComment.value;
@@ -424,7 +424,7 @@ function commentAdd(){
 		msg += 			'<img src="/tpm_project/img/member/profile/'+ cdto.mdto.member_img +'">';
 		msg += 			'<p class="message">';
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+		msg += 					'<i class="fa fa-clock-o"></i> <span id="commentdate_'+ cdto.comment_idx+'">'+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</span></small>';
 		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
 		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
@@ -487,18 +487,18 @@ function commentAdd(){
 		var param = 'comment_idx=' + comment_idx;
 		//window.alert(param);
 		
-		var inputbox1 = document.getElementById('comment_'+comment_idx).lastChild;
-		//window.alert(inputbox1);
-		var text_box1 = inputbox1.nodeValue;
+		var commentBox1 = document.getElementById('comment_'+comment_idx).lastChild;
+		//window.alert(commentBox1);
+		var comment1_text = commentBox1.nodeValue;
 		//window.alert(text_box1);
 		
 		$('#comment_'+comment_idx).hide();
 		
 		msg = '';
 		
-		msg += '<form name="updateComment" action="javascript:upComment()" method="post">';
+		msg += '<form name="updateComment" id="comment3" action="javascript:upComment()" method="post">';
 		msg +=		'<input type="hidden" name="comment_idx" value="'+comment_idx+'">';
-		msg += 		'<textarea id="upComment_text" rows="3" cols="50">'+ text_box1 +'</textarea>';
+		msg += 		'<textarea id="upComment_text" rows="3" cols="50">'+ comment1_text +'</textarea>';
 		msg +=  	'<button onclick="javascript:upComment()"> 수정하기 </button>';
 		msg += '</form>';
 		
@@ -516,7 +516,7 @@ function commentAdd(){
 		var comment_idx = document.updateComment.comment_idx.value;
 		//window.alert(comment_idx);
 		
-		var comment_content = document.updateComment.upComment_text.value;
+		var comment_content = '[수정] ' +document.updateComment.upComment_text.value;
 		//window.alert(comment_content);
 		
 		var param = 'comment_idx='+ comment_idx +'&comment_content='+ comment_content;
@@ -532,16 +532,27 @@ function commentAdd(){
 				
 				$('#comment2_'+ comment_idx).hide();
 				
-				var msg = '';
+				var comment_idx = json.comment_idx;
+				var comment_content = json.comment_content;
+					comment_content = comment_content;
+				//var comment_date = moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a');
 				
-				msg += 	'<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
-				
-				$('#comment_'+comment_idx).html(msg);
-				$('#comment_'+comment_idx).show();
+				updateWS('commentUpdate,'+ comment_idx +','+ comment_content);
 			}
 		});
 	}
 	
+	function ws_commentUpdate(comment_idx, comment_content){
+		
+		var msg = '';
+		msg += '<span id="commnet_'+ comment_idx +'">'+ comment_content +'</span>';
+		
+		$('#comment_'+comment_idx).html(msg);
+		
+		//$('#comment_'+comment_idx).show();
+		//$('#comment2_'+comment_idx).hide();
+		$('#comment3').hide();
+	}
 	/* <div class="tools">
    	 	<i class="fa fa-edit"></i>
    	 	<i class="fa fa-trash-o"></i>
