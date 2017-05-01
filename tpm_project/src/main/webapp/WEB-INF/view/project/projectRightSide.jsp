@@ -753,7 +753,7 @@ function commentAdd(){
 	</div>
 	<div style="width:100%">
 	 <!-- 코멘트 / 파일 탭 윗쪽  -->
-      <div class="card hovercard"style="background-color: #222d32;">
+      <div class="card hovercard"style="background-color: #f2f2f2;">
         <div class="card-background">
          
          
