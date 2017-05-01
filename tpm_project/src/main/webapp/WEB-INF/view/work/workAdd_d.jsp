@@ -24,3 +24,15 @@ if(msg!=null && msg.equals("error")){
 	out.print("{work:{work_idx:"+idx+",work_title:'"+title+"',work_start:'"+start+"',work_end:'"+end+"',work_confirm:'"+confirm+"',category_idx:'"+cidx+"',work_state:'"+wstate+"'}}");
 }
 %>
+<%
+ try{
+	 int msg2=(Integer)request.getAttribute("widx");
+	 if(msg2==0){
+		
+	 } else{
+		 out.print(msg2);
+	 }
+ }catch(Exception e){
+ }
+ 
+ %>

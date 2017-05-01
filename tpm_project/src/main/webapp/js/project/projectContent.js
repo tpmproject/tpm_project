@@ -501,13 +501,23 @@ function updateWork(){
 	}
 
 	var param = 'work_idx=' + document.changeWork.work_idx.value
+	+'&project_idx=' + project_idx
 	+'&work_title=' + document.changeWork.work_title.value
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
 	window.alert(param);
-	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');
+	sendRequest('workUpdate.do', param, uWorkResult, 'POST');
 }
+function uWorkResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			window.alert(result);
+		}
+	}
+}
+
 function workDone(work_idx,work_state){
 	var param="project_idx="+project_idx+"&work_idx="+work_idx+"&work_state="+work_state;
 	sendRequest('workUpdate.do', param, updateWorkResult, 'POST');	
