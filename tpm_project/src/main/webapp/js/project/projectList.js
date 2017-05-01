@@ -526,19 +526,7 @@
 					divNode.setAttribute('class','item ');
 					//divNode.setAttribute('style','margin-top: 15px;');
 					var cNode = document.getElementById('ptest');
-										
-					/* var msg='<div class="box">';
-					msg+='<div class="box-gray aligncenter" style="height:210px;">';
-					msg+='<input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
-					msg+='<h4 id="pn'+pson.project_idx+'">'+pson.project_name+'<span onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')"><i class="glyphicon glyphicon-cog" style="margin-bottom:0px;"></i></span></h4>';
-					msg+='<div class="icon"><i class="fa fa-desktop fa-3x"></i></div>';
 					
-					msg+='<p id="pc'+pson.project_idx+'">'+pson.project_content+'</p>';
-					msg+='<td><input type="button" value="진행중"></td></div>';
-					msg+='<div class="box-bottom"><a href="projectContent.do?project_idx='+pson.project_idx+'&member_idx=${s_member_idx}">프로젝트 보기버튼</a></div></div>'; */
-					
-					/* var pmarry = pson.project_member_dtos;
-				    pmarry[i].pro_m */
 				  var msg=' <div id="contain" class="container-fluid ">';
 				   msg+='<div id="project_div'+pson.project_idx+'" style="margin-top: 15px;">';
 					   msg+='<div class="col-sm-10 col-sm-offset-1">';
