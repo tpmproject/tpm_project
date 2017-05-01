@@ -579,11 +579,12 @@ function commentAdd(){
 		</div> */
 	
 	/* 처음 들어올때 업무 파일리스트  */
-	function project_fileList(work_idx){
+	function project_fileList(work_idx,work_title){
 		sessionStorage.setItem('s_work_idx',work_idx);
-		//window.alert('사이드창쪽 업무 idx: '+work_idx);
-		//window.alert('사이드창쪽 프로젝트 idx: ${param.project_idx}');
-	
+		
+		
+		
+		
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 		
@@ -848,7 +849,7 @@ function commentAdd(){
         
         </div>
         <div class="card-info">
-          <span class="card-title">Pamela Anderson</span>
+          <span class="card-title" id="work_title_id">Pamela Anderson</span>
         </div>
       </div>
       
@@ -872,8 +873,8 @@ function commentAdd(){
         </div>
     
       </div>
-      <div class="well">
-        <div class="tab-content" style="width:600px">
+      <div class="well" style="height: 620px;">
+        <div class="tab-content" style="width:600px; height: 600px;">
         
           <div class="tab-pane fade in" id="tab1">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>

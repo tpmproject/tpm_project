@@ -80,11 +80,19 @@
 				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{
-									
-					$('#project_div'+pson.project_idx).remove();
+					
+					var delp=$('#project_div'+pson.project_idx).parent();
+					if(delp.prev()==null){
+						window.alert('앞이 빔!');
+						delp.next().attr('class','item active');
+					}else{
+						window.alert('앞에 뭐있음');
+						delp.prev().attr('class','item active');
+					}
+					delp.remove();
 		
 				}
-				 history.go(0);
+				/* history.go(0);*/
 				/*  location.reload(); */
 				closem();
 			}
