@@ -549,9 +549,8 @@
 		
 		$('#comment_'+comment_idx).html(msg);
 		
-		//$('#comment_'+comment_idx).show();
-		//$('#comment2_'+comment_idx).hide();
-		$('#comment3').hide();
+		$('#comment_'+comment_idx).show();
+		$('#comment2_'+comment_idx).hide();
 	}
 	/* <div class="tools">
    	 	<i class="fa fa-edit"></i>
