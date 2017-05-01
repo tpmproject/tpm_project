@@ -855,8 +855,11 @@ function cateDelResult(){
 	sessionStorage.setItem('con_work_idx', work_idx);
 }*/
 /* 업무 오른쪽 사이드창  */
-function workSide(work_idx,project_idx,work_title){
-		
+function workSide(work_idx,work_title){
+	
+	var id_work_title=document.getElementById('work_title_id'); //업무 사이트 창에 업무제목 띄우기
+	id_work_title.innerHTML = work_title;
+	
 	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);
 	comment(work_idx);

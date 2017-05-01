@@ -545,8 +545,7 @@ function commentAdd(){
 		sessionStorage.setItem('s_work_idx',work_idx);
 		
 		
-		var id_work_title=document.getElementById('work_title');
-		id_work_title.innerHTML = work_title;
+		
 		
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
@@ -812,7 +811,7 @@ function commentAdd(){
         
         </div>
         <div class="card-info">
-          <span class="card-title" id="work_title">Pamela Anderson</span>
+          <span class="card-title" id="work_title_id">Pamela Anderson</span>
         </div>
       </div>
       
