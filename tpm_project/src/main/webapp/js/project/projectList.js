@@ -83,6 +83,7 @@
 				}else{
 					
 					var delp=$('#project_div'+pson.project_idx).parent();
+					
 					if(delp.prev().attr('class')!='item'){
 						window.alert('앞이 빔!');
 						delp.next().attr('class','item active');
@@ -492,6 +493,7 @@
 		var msg = '';
 		var msg2 = '';
 		while (true) {
+			if(childD==null)break;
 			
 			if(childD.nodeName=='DIV'){
 				var idx=childD.getAttribute('id');
@@ -527,150 +529,47 @@
 					//divNode.setAttribute('style','margin-top: 15px;');
 					var cNode = document.getElementById('ptest');
 					
-				  var msg=' <div id="contain" class="container-fluid ">';
-				   msg+='<div id="project_div'+pson.project_idx+'" style="margin-top: 15px;">';
-					   msg+='<div class="col-sm-10 col-sm-offset-1">';
-						   msg+='<div class="col-md-4 col-sm-6" style="width: 500px;">';
-							   msg+='<div class="card-container manual-flip">';
-								   msg+='<div class="card">';
-									msg+='	<div class="front">'; 
-										msg+='<div class="cover">';
-											//	<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
-											msg+='</div>';
-											 msg+='<div class="user">';
-												msg+='<img class="img-circle"';
-													msg+='	src="/tpm_project/sample/khj/img/cat.png"';
-														msg+='	style="width: 140px; height: 140px;" />';
-															msg+='</div>'; 
+					var msg='<div id="project_div'+pson.project_idx+'" align="center" style="margin-top: 15px;">';
+					msg+='<div class="card-container manual-flip" style="max-width: 500px;">';
+					msg+='<div class="card"><div class="front"><div class="cover" style="background:'+skin+';"></div>';
+					msg+='<div class="content"><div class="main"><input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
+					msg+='<h3 id="pn'+pson.project_idx+'" style="text-align: center; ">';
+					msg+='<span class="hidden-xs">'+pson.project_name+'</span></h3>';
+					msg+='<p class="profession">TPM Project</p><p class="text-center">';
+					msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span></p></div>';
+					msg+='<div class="footer"><button class="btn btn-simple" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인</button>';
+					msg+='</div></div></div>';
 
-											msg+='<div class="content">';
-												msg+='<div class="main">';
-													msg+='<input type="hidden" id="p_idx'+pson.project_idx+'"';
-														msg+='value="'+pson.project_idx+'">';
-															msg+='<h4 id="pn'+pson.project_idx+'">';
-																msg+='<span class="hidden-xs">'+pson.project_name+'</span>';
-																	msg+='</h4>';
-																		msg+='<p class="profession">TPM Project</p>';
-																			msg+='<p class="text-center">';
-																				msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span>';
-																					msg+='</p>';
-																						msg+='</div>';
-																							msg+='<div class="footer" rel="tooltip" title="프로젝트 확인">';
-																								msg+='<button class="btn btn-simple"';
-																									msg+='onclick="rotateCard(this)">';
-																										msg+='<i class="fa fa-mail-forward"></i> Manual Rotation';
-																											msg+='</button>';
-
-																												msg+='</div>';
-																													msg+='</div>';
-																														msg+='</div>';
-										//<!-- end front panel -->
-
-										// <!-- 뒷화면 -->
-										msg+='<div class="back">';
-										msg+='<div class="header">';
-												
-														 for(var i=0;i<pmarry.length;i++){
-															if(pmarry[i].project_level==3000){
-																if(pmarry[i].member_idx == member_idx){
-																	msg+='<div style="float: right;">';
-																	msg+='<span rel="tooltip" title="수정"';
-																		msg+='onclick="projectUpdate('+pson.project_idx+','+pson.project_name+','+pson.project_content+')">';
-																		msg+='<i class="glyphicon glyphicon-cog"';
-																			msg+='style="margin-bottom: 0px;"></i>';
-																				msg+='</span> <span rel="tooltip" title="삭제"';
-																					msg+='onclick="projectDelete('+pson.project_idx+')">';
-																				msg+='<i class="glyphicon glyphicon-remove"';
-																					msg+='style="margin-bottom: 0px;"></i>';
-																						msg+='</span>';
-																	msg+='</div>';
-																}
-															}
-														}
-																						
-												msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>';
-												msg+='</div>';
-											msg+='<div class="content">';
-											msg+='<div class="main">';
-												msg+='<h4 class="text-center">'+pmarry.project_name+'</h4>';
-													msg+='<hr>';
-													/*	 for(var i=0;i<dtos.length;i++){
-															msg+='<h5 class="text-center">'+dtos[i].member_id+'</h5>';
-														}*/ 
-													msg+='<hr>';
-													msg+='<div class="stats-container">';
-														msg+='<div class="stats" align="center" rel="tooltip"';
-															msg+='title="업무확인">';
-																msg+='<a class="btn btn-link"';
-																	msg+='href="projectContent.do?project_idx='+pson.project_idx+'&member_idx='+member_idx+'">';
-																	msg+='<i class="fa fa-clone left"></i>업무확인</a>';
-																		msg+='</div>';
-																		 for(var i=0;i<pmarry.length;i++){
-																			 if(pmarry[i].project_level==3000 && pson.project_state==3){
-																				 if(pmarry[i].member_idx == member_idx){
-																					 msg+='<div class="stats">';
-																					 msg+='<span class="print" rel="tooltip" title="완료상태">';
-																					 msg+='<a href="#" class="btn btn-link"style="color: green;">';
-																					 msg+='<i class="glyphicon glyphicon-ok-circle"></i>완료</a>';
-																						 msg+='</span>';
-																							 msg+='</div>';
-																				 }
-																			 }else if(pmarry[i].project_level==3000 && pson.project_state==2){
-																				 if(pmarry[i].member_idx == member_idx){
-																					 msg+='<div class="stats">';
-																						 msg+='평가하기 <span class="print" rel="tooltip" title="평가하기"> ';
-																							 msg+='<a class="btn btn-link" onclick="location.href=projectEvaluation.do?project_idx='+pson.project_idx+'&project_level='+pmarry[i].project_level+'&member_idx='+member_idx+'">';
-																								 msg+='<i class="glyphicon glyphicon-check"></i>평가하기</a>';
-																									 msg+='</span>';
-																										 msg+='</div>';
-																				 }
-																			 }else if(pson.project_state==1){
-																				 if(pmarry[i].member_idx == member_idx){
-																					 msg+='<div class="stats">';
-																						 msg+='<span class="print" rel="tooltip" title="진행중">';
-																							 msg+='<a href="#" class="btn btn-link"	style="color: red;">';
-																								 msg+='<i class="glyphicon glyphicon-time"></i>진행중</a>';
-																									 msg+='</span>';
-																										 msg+='</div>';
-																				 }
-																			 }
-																		 }
-											
-													msg+='</div>';
-													msg+='</div>';
-													msg+='</div>';
-											msg+='<div class="footer">';
-											msg+='<button class="btn btn-simple" rel="tooltip"';
-												msg+='title="되돌아가기" onclick="rotateCard(this)">';
-													msg+='<i class="fa fa-reply"></i> Back';
-														msg+='</button>';
-											msg+='</div> ';
-											
-										msg+='뒷화면</div>';
-										//<!-- end back panel -->
-										
-										msg+='</div>';
-									//<!-- end card -->
-									msg+='</div>';
-								//<!-- end card-container -->
-								msg+='</div>';
-							//<!-- end col sm 3 -->
-
-							msg+='<div class="space-400"></div>';
-								msg+='</div>';
-									msg+='</div>';
-							msg+='</div>';//컨테이너-end
-							
-					
-				
-				    
-				    
+					msg+='<div class="back"><div class="header">';
+					msg+='<div style="float: right;"><span rel="tooltip" title="수정" onclick="projectUpdate('+pson.project_idx+',\''+pson.project_name+'\',\''+pson.project_content+'\')">';
+					msg+='<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i></span>';
+					msg+='<span rel="tooltip" title="삭제" onclick="projectDelete('+pson.project_idx+')">';
+					msg+='<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i></span></div>';
+					msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5><h4 class="text-center">'+pson.project_name+'</h4></div>';
+					msg+='<div class="content"><div class="main"><div id="pm_div" style="height: 180px;">';
+													
+//					<c:forEach var="pm_dto"	items="${i.project_member_dtos}">
+					for(var i=0;i<pson.member_dtos.length;i++){
+						var temp=pson.member_dtos[i];
+					msg+='<h5 class="text-center" id="pmlist">'+temp.member_id+'</h5>';
+					}
+					msg+='</div><hr>';
+					msg+='<div class="stats-container"><div class="stats" align="center" rel="tooltip" title="업무확인">';
+					msg+='<a class="btn btn-link" href="projectContent.do?project_idx='+pson.project_idx+'&member_idx='+member_idx+'">';
+					msg+='<i class="fa fa-clone left"></i>업무확인</a></div>';
+					msg+='<div class="stats"><span class="print" rel="tooltip" title="진행중">';
+					msg+='<a href="#" class="btn btn-link" style="color: red;"><i class="glyphicon glyphicon-time"></i>진행중</a></span>';
+					msg+='</div></div><div class="stats" style="padding-top: 6px;">';
+					msg+='<span><a rel="tooltip" title="되돌아가기" onclick="rotateCard(this)" style="color: gray;font-size: large;">';
+					msg+='<i class="fa fa-reply"></i> Back</a></span></div></div></div></div></div></div></div><div class="space-400"></div></div></div>';
+					 
 					divNode.innerHTML=msg;
 					cNode.appendChild(divNode);
 		
 				}
 				// history.go(0);
 				/* location.reload(); */
+				$('#pitem').hide();
 				closem();
 			}
 		}
