@@ -15,7 +15,7 @@
 	}
 </script>
 <body>
-<div class="container" style="width:100%;">
+<div class="container" id="cbody" style="width:100%;">
 	<div class="row">
 		<div class="col-md-12" style="height: 600px; margin: 0px;">
 			<div class="box-header">
@@ -23,8 +23,9 @@
 				<h3 class="box-title">Comment</h3>
 			</div>
 			
-			<div class="box-body comment" id="comment-box">
-				<div id="comment_content_area">
+			<div class="box-body comment" id="comment-box" style="height:400px;">
+				<div id="comment_div">
+					<div id="comment_content_area"></div>
 				</div>
 			</div>
 		

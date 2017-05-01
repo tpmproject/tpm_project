@@ -260,6 +260,29 @@
 
 var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
 
+$(function(){
+	$('#comment-box').slimScroll({
+		height: '500px',
+		start: 'bottom'
+	});
+});
+
+function onMessage(evt) {
+	var unsplit_data = evt.data;
+	var data=unsplit_data.split(',');
+	
+	if(data[0]=='commentAdd'){
+		var member_img = data[1];
+		var comment_date = data[2];
+		var member_name = data[3];
+		var member_id = data[4];
+		var comment_idx = data[5];
+		var comment_content = data[6];
+		
+		ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content);
+	}
+}
+
 function commentAdd(){
 	
 	var work_idx = document.newComment.work_idx.value;
@@ -283,26 +306,41 @@ function commentAdd(){
 				var cdId = document.getElementById('comment_content_area');
 				var member_id = json.mdto.member_id.split('@')[0];
 				
-				var msg = '';
+				var member_img = json.mdto.member_img;
+				var comment_date = json.comment_date;
+				var member_name = json.mdto.member_name;
+				var comment_idx = json.comment_idx;
+				var comment_content = json.comment_content;
 				
-				msg += 	'<div class="box-body chat" id="comment-box">';
-				msg += 		'<div class="item" id="comment_content">';
-				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'">';
-				msg += 			'<p class="message">';
-				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
-				msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
-				msg +=					''+ json.mdto.member_name +'('+ member_id +') &nbsp;';
-				msg += 						'<i class="fa fa-edit"></i> &nbsp;';
-				msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
-				msg += 				'</a>';
-				msg += 				 '<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
-				msg +=			 '</p>';
-				msg += 		'</div>';
-				msg += '</div>';
-				
-				cdId.innerHTML = msg;
+				updateWS('commentAdd,'+ member_img +','+ comment_date +','+ member_name +','+ member_id +','+ comment_idx +','+ comment_content);
 			}
 		});
+	}
+	
+	function ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content){
+		
+		var cNode = document.getElementById('cbody');
+		var dNode = document.createElement('div');
+		
+		var msg = '';
+		
+		msg += 	'<div class="box-body chat" id="comment-box">';
+		msg += 		'<div class="item" id="comment_content">';
+		msg += 			'<img src="/tpm_project/img/member/profile/'+ member_img +'">';
+		msg += 			'<p class="message">';
+		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
+		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
+		msg +=					''+ json.mdto.member_name +'('+ member_id +') &nbsp;';
+		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
+		msg += 				'</a>';
+		msg += 				 '<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
+		msg +=			 '</p>';
+		msg += 		'</div>';
+		msg += '</div>';
+		
+		dNode.innerHTML = msg;
+		cNode.appendChild(dNode);
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	
@@ -386,7 +424,7 @@ function commentAdd(){
 				}
 				cdId.innerHTML = msg;
 				
-				$('#comment-box').slimScroll({ scrollTo: $("#comment_content").height() });
+				$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
 			}
 		});
 	}
