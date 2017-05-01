@@ -77,7 +77,11 @@ public class MemberController {
 	public String memberLoginForm(){
 		return "member/memberLoginForm";
 	}
-	
+	/** 이용약관 동의  페이지 이동 */
+	@RequestMapping(value="signAgreement.do", method=RequestMethod.GET)
+	public String signAgreenment(){
+		return "member/signAgreement";
+	}
 	/** 로그인 처리 */
 	@RequestMapping(value="memberLogin.do", method=RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam(value="cb_saveid",defaultValue="1")String cb_saveid,

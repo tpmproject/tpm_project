@@ -61,6 +61,23 @@
 				pwdCheckMsg.innerHTML = '';
 			}
 		}
+		 function show(){
+		        
+		       
+	        	
+	        	if ($('#agree').is(":checked"))
+	        	{
+	        		window.alert('체크됨');
+	        	}else{
+	        		window.alert('체크안됨');
+	        	}
+
+	     }
+		 function signAgr(){
+			 
+			 location.href='signAgreement.do';
+		 }
+		 
 	</script>    
   </head>
 
@@ -69,6 +86,13 @@ function cancle(){
 	location.href='memberLogin.do';
 }
 </script>
+<style type="text/css">
+	    .btn-warning {
+	    color: #f0ad4e;;
+	    background-color: #f0ad4e;
+	    border-color: #eea236;
+	    }
+    </style>  
 </head>
 <body>
  <div class="navbar navbar-default navbar-static-top">
@@ -155,28 +179,28 @@ function cancle(){
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="inputPassword" type="password" name="member_pwd" placeholder="비밀번호">
+                            <input class="form-control" id="inputPassword" type="password" name="member_pwd" placeholder="비밀번호"required="required">
                             <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="inputPasswordCheck" type="password" name="member_pwd2" onblur="passwordCheck()"placeholder="비밀번호 확인">
+                            <input class="form-control" id="inputPasswordCheck" type="password" name="member_pwd2" onblur="passwordCheck()"placeholder="비밀번호 확인"required="required">
                             <p class="help-block" id="pwdCheckMsg">비밀번호를 한번 더 입력해주세요.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputName">이름</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="inputName" type="text" name="member_name" placeholder="이름">
+                            <input class="form-control" id="inputName" type="text" name="member_name" placeholder="이름"required="required">
                         </div>
                     </div>
                     
                     <div class="form-group">
            			 <label class="col-sm-3 control-label" for="inputName">연락처</label>
            			 <div class="col-sm-6">
-             		 <input class="form-control" id="inputName" type="text" name="member_tel" placeholder="전화번호">
+             		 <input class="form-control" id="inputName" type="text" name="member_tel" placeholder="전화번호"required="required">
            			 </div>
        			    </div>
        			    
@@ -193,10 +217,10 @@ function cancle(){
                         <label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
                         <div class="col-sm-6" data-toggle="buttons">
                             <label class="btn btn-warning active">
-                                <input id="agree" type="checkbox" autocomplete="off" chacked="">
+                                <input id="agree" type="checkbox" autocomplete="off" chacked="" required="required">
                                 <span class="fa fa-check"></span>
                             </label>
-                            <a href="#">이용약관</a>에 동의 합니다.</div>
+                            <a href="#" onclick="signAgr()">이용약관</a>에 동의 합니다.</div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
