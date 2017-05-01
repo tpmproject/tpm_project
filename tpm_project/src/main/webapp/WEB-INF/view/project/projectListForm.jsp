@@ -93,13 +93,25 @@
 
 
 <script type="text/javascript">
-
-
+var skin='${s_member_thema}';
 
  	window.onload = function() {
 		$(main_modal).hide();
 		$(smodal).hide();
 		$('.slimdiv').mCustomScrollbar({axis:"yx"});
+		
+	switch (skin) {
+		case 'white': case 'white-light':skin='#fff'; break;
+		case 'blue': case 'blue-light':skin='#3c8dbc'; break;
+		case 'green': case 'green-light':skin='#00a65a'; break;
+		case 'purple': case 'purple-light':skin='#605ca8'; break;
+		case 'red': case 'red-light':skin='#dd4b39'; break;
+		case 'yellow': case 'yellow-light':skin='#f39c12'; break;
+	}
+	
+	$('#rightcon').css('color',skin);
+	$('#leftcon').css('color',skin);
+	$('.cover').css('background',skin);
 	}	 
 		
  	
@@ -1174,17 +1186,17 @@ img {
 	<div id="carousel-example-generic" class="carousel slide center-block"
 		data-ride="carousel" data-interval="false">
 
-		<!-- Indicators 페이징-->
+		<%-- <!-- Indicators 페이징-->
 		<ol class="carousel-indicators" style="bottom: -15px; color: black;">
 			<c:forEach var="i" items="${plist}" varStatus="status">
 
 				<li data-target="#carousel-example-generic"
 					${status.first?'class="active"':'' }
-					data-slide-to="${status.index}" style="background: red;"></li>
+					data-slide-to="${status.index}" style="background: white;"></li>
 
 			</c:forEach>
 		</ol>
-
+ --%>
 		<!-- 앞화면 -->
 		<c:set var="plist" value="${plist}"></c:set>
 		<c:choose>
@@ -1204,36 +1216,36 @@ img {
 											<div class="col-md-4 col-sm-6" style="width: 500px;">
 												<div class="card-container manual-flip">
 													<div class="card">
-														<div class="front">
+														<div class="front" style="height: 435px;">
 															<!--  배경화면-->
-															<div class="cover">
-																<!-- <img src="/tpm_project/sample/khj/img/son.jpg" /> -->
+															<div class="cover" id="">
+																 <!-- <img src="/tpm_project/sample/khj/img/son.jpg"/> -->
 															</div>
 
 															<!-- 상태 아이콘 -->
-															<div class="user">
+															<!-- <div class="user">
 																<img class="img-circle"
 																	src="/tpm_project/sample/khj/img/cat.png"
 																	style="width: 140px; height: 140px;" />
-															</div>
+															</div> -->
 
 															<!--화면단  -->
 															<div class="content">
 																<div class="main">
 																	<input type="hidden" id="p_idx${i.project_idx}"
 																		value="${i.project_idx}">
-																	<h4 id="pn${i.project_idx}">
+																	<h3 id="pn${i.project_idx}" style="text-align: center; ">
 																		<span class="hidden-xs">${i.project_name }</span>
-																	</h4>
+																	</h3>
 																	<p class="profession">TPM Project</p>
 																	<p class="text-center">
 																		<span id="pc${i.project_idx}">${i.project_content }</span>
 																	</p>
 																</div>
-																<div class="footer" rel="tooltip" title="프로젝트 확인">
+																<div class="footer">
 																	<button class="btn btn-simple"
 																		onclick="rotateCard(this)">
-																		<i class="fa fa-mail-forward"></i> Manual Rotation
+																		<i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인
 																	</button>
 
 																</div>
@@ -1371,14 +1383,14 @@ img {
 	<!--end carousel-inner -->
 	<!-- Controls -->
 	<div class="controls">
-		<a class="left carousel-control" href="#carousel-example-generic"
+		<a id="leftcon" class="left carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="prev"
-			style="width: 100px; color: red; margin-top: 15%;"> <span
+			style="width: 100px; margin-top: 15%;" > <span
 			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
 		</span> <span class="sr-only">Previous</span>
-		</a> <a class="right carousel-control" href="#carousel-example-generic"
+		</a> <a id="rightcon" class="right carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="next"
-			style="width: 100px; color: red; margin-top: 15%;"> <span
+			style="width: 100px; margin-top: 15%;"> <span
 			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
