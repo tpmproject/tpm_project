@@ -4,6 +4,7 @@
 		$(main_modal).hide();
 		$(smodal).hide();
 		$('.slimdiv').mCustomScrollbar({axis:"yx"});
+		$('#pm_div').mCustomScrollbar({axis:"yx"});
 		
 	switch (skin) {
 		case 'white': case 'white-light':skin='#fff'; break;

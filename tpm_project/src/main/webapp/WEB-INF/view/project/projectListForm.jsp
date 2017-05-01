@@ -408,10 +408,12 @@ img {
 															</div>
 															<div class="content">
 																<div class="main">
+																	<div id="pm_div" style="height: 180px;">
 																	<c:forEach var="pm_dto"
 																		items="${i.project_member_dtos}">
-																		<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
+																		<h5 class="text-center" id="pmlist">${pm_dto.mdtos.member_id}</h5>
 																	</c:forEach>
+																	</div>
 																	<hr>
 																	<div class="stats-container">
 																		<div class="stats" align="center" rel="tooltip"
