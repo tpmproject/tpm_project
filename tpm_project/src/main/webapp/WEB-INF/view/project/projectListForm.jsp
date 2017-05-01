@@ -404,12 +404,10 @@ img {
 
 																</c:forEach>
 																<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5>
+																<h4 class="text-center">${i.project_name }</h4>
 															</div>
 															<div class="content">
 																<div class="main">
-																	<h4 class="text-center">${i.project_name }</h4>
-																	<hr>
-
 																	<c:forEach var="pm_dto"
 																		items="${i.project_member_dtos}">
 																		<h5 class="text-center">${pm_dto.mdtos.member_id}</h5>
@@ -425,11 +423,8 @@ img {
 																		<c:forEach var="pm_dto"
 																			items="${i.project_member_dtos}">
 																			<c:choose>
-																				<c:when
-																					test="${pm_dto.project_level == 3000 and i.project_state == 3}">
-																					<c:if
-																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-
+																				<c:when test="${i.project_state == 3}">
+																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
 																							<span class="print" rel="tooltip" title="완료상태">
 																								<a href="#" class="btn btn-link"
@@ -440,24 +435,31 @@ img {
 
 																					</c:if>
 																				</c:when>
-																				<c:when
-																					test="${pm_dto.project_level == 3000 and i.project_state == 2 }">
-																					<c:if
-																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																				<c:when	test="${i.project_state == 2 }">
+																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
+																						<c:choose>
+																						<c:when test="${pm_dto.project_level == 3000}">
 																							평가하기 <span class="print" rel="tooltip"
 																								title="평가하기"> <a
 																								onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
 																								class="btn btn-link"><i
 																									class="glyphicon glyphicon-check"></i>평가하기</a>
 																							</span>
+																						</c:when>
+																						<c:otherwise>
+																							<span class="print">
+																							<a class="btn btn-link">
+																								<i class="glyphicon glyphicon-check"></i>평가 대기</a>
+																							</span>
+																						</c:otherwise>
+																						</c:choose>
 																						</div>
 
 																					</c:if>
 																				</c:when>
 																				<c:when test="${i.project_state == 1 }">
-																					<c:if
-																						test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
+																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
 																							<span class="print" rel="tooltip" title="진행중">
 																								<a href="#" class="btn btn-link"
@@ -470,15 +472,14 @@ img {
 																				</c:when>
 																			</c:choose>
 																		</c:forEach>
+																		<div class="stats" style="padding-top: 6px;">
+																			<span>
+																			<a rel="tooltip" title="되돌아가기" onclick="rotateCard(this)" style="color: gray;font-size: large;">
+																			<i class="fa fa-reply"></i> Back</a>
+																			</span>
+																		</div>
 																	</div>
 																</div>
-															</div>
-															<div class="footer">
-																<button class="btn btn-simple" rel="tooltip"
-																	title="되돌아가기" onclick="rotateCard(this)">
-																	<i class="fa fa-reply"></i> Back
-																</button>
-
 															</div>
 														</div>
 														<!-- end back panel -->
