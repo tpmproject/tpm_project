@@ -267,22 +267,6 @@ $(function(){
 	});
 });
 
-function onMessage(evt) {
-	var unsplit_data = evt.data;
-	var data=unsplit_data.split(',');
-	
-	if(data[0]=='commentAdd'){
-		var member_img = data[1];
-		var comment_date = data[2];
-		var member_name = data[3];
-		var member_id = data[4];
-		var comment_idx = data[5];
-		var comment_content = data[6];
-		
-		ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content);
-	}
-}
-
 function commentAdd(){
 	
 	var work_idx = document.newComment.work_idx.value;

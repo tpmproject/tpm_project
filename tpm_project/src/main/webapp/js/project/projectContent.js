@@ -136,6 +136,17 @@ function onMessage(evt) {
 		$('#w'+idx).style.display='none';
 		return;
 	}
+	//코멘트 추가
+	if(data[0]=='commentAdd'){
+		var member_img = data[1];
+		var comment_date = data[2];
+		var member_name = data[3];
+		var member_id = data[4];
+		var comment_idx = data[5];
+		var comment_content = data[6];
+		
+		ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content);
+	}
 }
 
 function cateName(idx){
