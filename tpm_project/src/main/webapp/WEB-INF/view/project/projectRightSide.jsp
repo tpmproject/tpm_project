@@ -462,12 +462,12 @@ function commentAdd(){
 	function upCommentSet(comment_idx){
 		
 		var param = 'comment_idx=' + comment_idx;
-		window.alert(param);
+		//window.alert(param);
 		
 		var inputbox1 = document.getElementById('comment_'+comment_idx).lastChild;
 		//window.alert(inputbox1);
 		var text_box1 = inputbox1.nodeValue;
-		window.alert(text_box1);
+		//window.alert(text_box1);
 		
 		$('#comment_'+comment_idx).hide();
 		
