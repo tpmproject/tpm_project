@@ -79,12 +79,25 @@ public class CommentController {
 	}
 	
 	/** 코멘트 - 코멘트 수정 */
-	@RequestMapping(value="commentUpdate.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="commentUpdate.do",  method=RequestMethod.POST)
 	public ModelAndView commentUpdate(){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("comment/commentResult_d");
 		return mav;
+	}*/
+	
+	/** 코멘트 - 코멘트 수정*/
+	@RequestMapping(value="commentUpdate.do",  method=RequestMethod.POST)
+	public @ResponseBody Object commentUpdate(CommentDTO cdto){
+		
+		int result = commentDAO.updateComment(cdto);
+		
+		if(result > 0){
+			return commentDAO.getCommentContent(cdto);
+		} else{
+			return "false";
+		}
 	}
 	
 	/** 코멘트 - 코멘트 삭제 */

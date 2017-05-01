@@ -44,4 +44,10 @@
 		where comment_idx = #{comment_idx}
 	</delete>
 	
+	<update id="upComment" parameterType="tpm.comment.model.CommentDTO">
+		update tpm_comment
+		set comment_content = #{comment_content}
+		where comment_idx = #{comment_idx}		
+	</update>
+	
 </mapper>

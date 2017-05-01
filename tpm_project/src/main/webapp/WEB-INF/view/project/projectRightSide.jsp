@@ -285,8 +285,8 @@ function commentAdd(){
 				
 				var msg = '';
 				
-				msg += '<div class="box-body chat" id="chat-box">';
-				msg += 		'<div class="item">';
+				msg += 	'<div class="box-body chat" id="comment-box">';
+				msg += 		'<div class="item" id="comment_content">';
 				msg += 			'<img src="/tpm_project/img/member/profile/'+ json.mdto.member_img +'">';
 				msg += 			'<p class="message">';
 				msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
@@ -295,7 +295,7 @@ function commentAdd(){
 				msg += 						'<i class="fa fa-edit"></i> &nbsp;';
 				msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 				msg += 				'</a>';
-				msg += 				  json.comment_content;
+				msg += 				 '<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
 				msg +=			 '</p>';
 				msg += 		'</div>';
 				msg += '</div>';
@@ -341,10 +341,11 @@ function commentAdd(){
 	} */
 	
 	function showComment(){
+		
 		var work_idx = document.newComment.work_idx.value;
 		var param  = 'work_idx=' + work_idx;
 		//window.alert(param);
-		
+			
 		//sendRequest('commentList.do', param, showCommentResult, 'POST');
 		
 		$.ajax({
@@ -363,7 +364,7 @@ function commentAdd(){
 					//var member_id = json[i].mdto.member_id.split('@')[0];
 					
 					if(json[i].mdto.member_idx == s_member_idx){
-						msg += myComment(json[i]);
+						msg += myComment(json[i]);				
 					} else{
 						msg += teamComment(json[i]);
 					}
@@ -382,9 +383,9 @@ function commentAdd(){
 					msg +=			 '</p>';
 					msg += 		'</div>';
 					msg += 	'</div>'; */
-					
 				}
 				cdId.innerHTML = msg;
+				
 				$('#comment-box').slimScroll({ scrollTo: $("#comment_content").height() });
 			}
 		});
@@ -402,10 +403,11 @@ function commentAdd(){
 		msg +=				'<a href="#" class="name"> <small class="text-muted pull-right">';
 		msg += 					'<i class="fa fa-clock-o"></i> '+ moment(cdto.comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
 		msg +=					''+ cdto.mdto.member_name +'('+ member_id +') &nbsp;';
-		msg += 						'<i class="fa fa-edit"></i> &nbsp;';
+		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
 		msg += 				'</a>';
-		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upComment('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span>';
+		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upCommentSet('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span>';
+		msg += 				 '<div id="comment2_'+ cdto.comment_idx +'"> </div>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
 		msg += 	'</div>';
@@ -457,18 +459,64 @@ function commentAdd(){
 		}
 	}
 	
-	function upComment(comment_idx){
+	function upCommentSet(comment_idx){
 		
 		var param = 'comment_idx=' + comment_idx;
 		window.alert(param);
 		
-		var inputbox1 = document.getElementById('comment_'+comment_idx).nodeName;
-		window.alert(inputbox1);
-		var t_box1 = inputbox1.nodeValue;
-		window.alert(t_box1);
+		var inputbox1 = document.getElementById('comment_'+comment_idx).lastChild;
+		//window.alert(inputbox1);
+		var text_box1 = inputbox1.nodeValue;
+		window.alert(text_box1);
 		
+		$('#comment_'+comment_idx).hide();
 		
+		msg = '';
 		
+		msg += '<form name="updateComment" action="javascript:upComment()" method="post">';
+		msg +=		'<input type="hidden" name="comment_idx" value="'+comment_idx+'">';
+		msg += 		'<textarea id="upComment_text" rows="3" cols="50">'+ text_box1 +'</textarea>';
+		msg +=  	'<button onclick="javascript:upComment()"> 수정하기 </button>';
+		msg += '</form>';
+		
+		$('#comment2_'+ comment_idx).html(msg);
+		//$('#comment2_'+ comment_idx).show();	
+	}
+	
+	/* <form name="updateComment" id="updateComment" action="javascript:upComment()" method="post">
+		<textarea id="upComment_text" rows="3" cols="50"></textarea>
+		<button onclick="javascript:upComment()"> 수정하기 </button>
+	</form> */
+	
+	function upComment(){
+		
+		var comment_idx = document.updateComment.comment_idx.value;
+		//window.alert(comment_idx);
+		
+		var comment_content = document.updateComment.upComment_text.value;
+		//window.alert(comment_content);
+		
+		var param = 'comment_idx='+ comment_idx +'&comment_content='+ comment_content;
+		//window.alert(param);
+		
+		$.ajax({
+			url : 'commentUpdate.do',
+			type : 'post',
+			data : param,
+			dataType : 'json',
+			success : function(json){
+				//window.alert('json:'+JSON.stringify(json,null,2));
+				
+				$('#comment2_'+ comment_idx).hide();
+				
+				var msg = '';
+				
+				msg += 	'<span id="comment_'+ json.comment_idx +'" onclick="upCommentSet('+ json.comment_idx +')">'+ json.comment_content +'</span>';
+				
+				$('#comment_'+comment_idx).html(msg);
+				$('#comment_'+comment_idx).show();
+			}
+		});
 	}
 	
 	/* <div class="tools">
