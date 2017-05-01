@@ -218,13 +218,12 @@ public class WorkController {
 	}
 	
 	/** 업무 - 업무 삭제 */
-	@RequestMapping(value="workDelete.do",  method=RequestMethod.POST)
+	@RequestMapping(value="workDelete.do",  method={RequestMethod.POST})
 	public ModelAndView workDel(int work_idx){
 		
 		int result=workDAO.workDelete(work_idx);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("work/workResult_d");
-		
+		mav.setViewName("work/workDel_d");
 		if(result>0){
 			mav.addObject("widx",result);
 		}

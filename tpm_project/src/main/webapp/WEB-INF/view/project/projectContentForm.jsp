@@ -200,7 +200,7 @@ var skin_color='';
 								<c:when test="${wdto.work_state eq 2}"><c:set var="pan" value="panel-warning"></c:set></c:when>
 								<c:when test="${wdto.work_state eq 3}"><c:set var="pan" value="panel-success"></c:set></c:when>
 							</c:choose> 
-								<div class="panel ${pan}">
+								<div id="w${wdto.work_idx}" class="panel ${pan}">
 								<div id="wdiv${wdto.work_idx}" class="wdiv panel-heading" draggable="true"
 									ondragover="allowDrop(event)" ondragstart="drag(event)">
 									<i id="showWork${wdto.work_idx}" ${wdto.work_state eq 3?'class="glyphicon glyphicon-menu-right"' :'class="glyphicon glyphicon-menu-down"' }></i>
@@ -399,7 +399,7 @@ var skin_color='';
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<input type="text" class="form-control pull-right" placeholder="기한을 체크해주세요."
-								name="workdate" id="workdate" />
+								name="workdate" id="workdate" readonly />
 						</div>
 					</div>
 					<div align="center" style="padding:5px;">
@@ -457,7 +457,7 @@ var skin_color='';
 							</div>
 							<div>
 								<input type="text" class="form-control pull-right"
-									name="workdateup" id="workdateup" />
+									name="workdateup" id="workdateup" readonly />
 							</div>
 						</div>
 					</div>

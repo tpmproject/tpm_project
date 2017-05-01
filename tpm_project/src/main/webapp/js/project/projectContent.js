@@ -119,14 +119,22 @@ function onMessage(evt) {
 	if(data[0]=='workAdd'){
 		var work_idx=data[1];
 		var category_idx=data[2];
+//		var project_idx=date[3]
 		var work_title=data[3];
 		var work_start=data[4];
 		var work_end=data[5];
 		var work_confirm=data[6];
 		var work_state=data[7];
-		var member=data[8];
-		
+		var member=data[8];	
 		ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member);
+	}
+	//업무 삭제
+	if(data[0]=='workDel'){
+		var idx=data[1];
+		
+		$('#w'+idx).remove();
+		$('#w'+idx).style.display='none';
+		return;
 	}
 }
 
@@ -406,9 +414,9 @@ function addWorkResult(){
 			var result = XHR.responseText;
 			if (result != null) {
 				var work=eval('('+result+')');
-		
 				var work_idx=work.work_idx;
 				var category_idx=work.category_idx;
+//				var project_idx=project_idx;
 				var work_title=work.work_title;
 				var seDate=work.project_name.split("&");
 				var work_start=seDate[0];
@@ -429,7 +437,7 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	var cNode = document.getElementById('cp'+category_idx);
 	var dNode = document.createElement('div');
 
-	var msg='<div class="panel panel-info">';
+	var msg='<div id="w'+work_idx+'"class="panel panel-info">';
 	msg+='<div id="wdiv'+work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 	msg+='<i id="showWork'+work_idx+'"></i>';
 	msg+='&nbsp;<span onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
@@ -454,12 +462,12 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	msg+='</tr><tr><td colspan="2"><div class="progress" style="margin-bottom: 2px; height: 12px;">';
 	msg+='<div id="chBar${wdto.work_idx}" class="progress-bar progress-bar-primary " style="width: ${chChecked/chTotal * 100}%;"></div></div>';
 	msg+='</td></tr><tr><td><div class="work_btn" id="workState'+work_idx+'">';
-	msg+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"></i>';
+	msg+='<i name="1" class="glyphicon glyphicon-play-circle" style="color:#367fa9;" data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone('+work_idx+',1)"></i>';
 	if(work_confirm==10){
 		msg+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work_idx+',2)"></i>';
 	}
 	msg+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work_idx+',3)"></i></div></td>';
-	msg+='<td align="right"><a href="#" class="menu-toggle">코멘트</a>/ <a href="#" class="menu-toggle">첨부파일</a>	</td>';
+	msg+='<td align="right"><a href="#" onclick="workSide('+work_idx+','+project_idx+','+work_title+')" class="menu-toggle">코멘트/파일</a></td>';
 	msg+='</tr></tbody></table></div></div></div>';
 
 	dNode.innerHTML = msg;
@@ -727,7 +735,6 @@ function drop(ev) {
     }
     
     if(data.startsWith('div_ch')){
-	    
     	data=data.substring(6);
     	var param='checklist_idx='+data;
     	sendRequest('checkDelete.do', param, delResult, 'POST');    
@@ -826,10 +833,10 @@ function workDelResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result=XHR.responseText;
-			result=parsInt(result);
-			$('#wdiv'+result).remove();
+			result=parseInt(result);		
+
+			updateWS('workDel,'+result);
 		}
-		location.reload();
 	}
 }
 //카테고리 삭제 콜백 함수
@@ -838,7 +845,6 @@ function cateDelResult(){
 		if (XHR.status == 200) {
 			var result=XHR.responseText; //지운 idx
 			result=parseInt(result);
-			
 			updateWS('categoryDel,'+result);
 		}
 	}
