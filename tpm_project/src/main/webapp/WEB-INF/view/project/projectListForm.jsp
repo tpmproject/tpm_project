@@ -1205,7 +1205,7 @@ img {
 						</c:when>
 
 			<c:otherwise>
-				<div style="background: white;">
+				<div id="becontent" style="background: white;">
 					<div id="ptest" class="carousel-inner" role="listbox">
 						<!-- 	<div class="carousel-inner" role="listbox  -->
 						<c:forEach var="i" items="${plist}" varStatus="status">
@@ -1216,9 +1216,9 @@ img {
 											<div class="col-md-4 col-sm-6" style="width: 500px;">
 												<div class="card-container manual-flip">
 													<div class="card">
-														<div class="front" style="height: 435px;">
+														<div class="front">
 															<!--  배경화면-->
-															<div class="cover" id="">
+															<div class="cover">
 																 <!-- <img src="/tpm_project/sample/khj/img/son.jpg"/> -->
 															</div>
 
