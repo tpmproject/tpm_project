@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tpm.category.model.CategoryDTO;
+import tpm.member.model.MemberDTO;
 
 public class ProjectDTO {
 
@@ -16,7 +17,8 @@ public class ProjectDTO {
 
 	private ArrayList<CategoryDTO> category_dtos;
 	private List<ProjectMemberDTO> project_member_dtos;
-
+	private List<MemberDTO> member_dtos;
+	
 	private int category_num;
 	private int work_num;
 	private int checklist_num;
@@ -151,13 +153,24 @@ public class ProjectDTO {
 		this.project_member_dtos = project_member_dtos;
 	}
 
+	
+	
+	
+	public List<MemberDTO> getMember_dtos() {
+		return member_dtos;
+	}
+
+	public void setMember_dtos(List<MemberDTO> member_dtos) {
+		this.member_dtos = member_dtos;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectDTO [project_idx=" + project_idx + ", project_name=" + project_name + ", project_state="
 				+ project_state + ", project_content=" + project_content + ", project_level=" + project_level
-				+ ", category_dtos=" + category_dtos + ", project_member_dtos=" + project_member_dtos
-				+ ", category_num=" + category_num + ", work_num=" + work_num + ", checklist_num=" + checklist_num
-				+ "]";
+				+ ", category_dtos=" + category_dtos + ", project_member_dtos=" + project_member_dtos + ", member_dtos="
+				+ member_dtos + ", category_num=" + category_num + ", work_num=" + work_num + ", checklist_num="
+				+ checklist_num + "]";
 	}
 
 	

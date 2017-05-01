@@ -26,5 +26,6 @@ public interface MemberDAO {
 	public ArrayList<MemberDTO> memberAddSearch(MemberDTO dto);
 	public ArrayList<MemberDTO> getMemberAllList();
 	public int setThema(MemberDTO dto);
+	public ArrayList<MemberDTO> getMemberPlist(int project_idx);
 
 }

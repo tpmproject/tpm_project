@@ -120,5 +120,8 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 	
-
+	public ArrayList<MemberDTO> getMemberPlist(int project_idx){
+		ArrayList<MemberDTO> p_marry=(ArrayList) sqlMap.selectList("getMemberPlist", project_idx);
+		return p_marry;
+	}
 }

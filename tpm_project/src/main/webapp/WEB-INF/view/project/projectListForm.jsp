@@ -592,7 +592,7 @@
 				window.alert(result);
 				var objData=eval('('+result+')');
 				var pson=objData; // projectDTO
-				var dtos = pson.mdtos;
+				
 				if(pson.project_idx==0){
 					window.alert('오류 발생!');
 				}else{

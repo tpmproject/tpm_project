@@ -90,7 +90,7 @@ public class ProjectController {
 	}
 	/** 프로젝트-프로젝트생성 데이터*/
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.POST)
-	public @ResponseBody Object projectInsert(ProjectDTO dto,String[] project_member,String[] level){
+	public @ResponseBody Object projectInsert(ProjectDTO dto,String[] project_member,String[] level,MemberDTO mdto){
 		
 		
 		
@@ -102,15 +102,17 @@ public class ProjectController {
 		//생성된 프로젝트에 멤버 추가
 		if(project_idx>0){
 			List<ProjectMemberDTO> temp_list_projectMember=new ArrayList<ProjectMemberDTO>();
+			
 			for(int i=0;i<project_member.length;i++){
 				int pm_idx=Integer.parseInt(project_member[i]);
 				int pm_level=Integer.parseInt(level[i]);
 				
 				ProjectMemberDTO pmdto=new ProjectMemberDTO(project_idx, pm_idx, pm_level);
-				
 				projectDAO.projectMemberInsert(pmdto);
 				temp_list_projectMember.add(pmdto);
 			}
+			ArrayList<MemberDTO> p_marry= memberDAO.getMemberPlist(project_idx);
+			dto.setMember_dtos(p_marry);
 			dto.setProject_member_dtos(temp_list_projectMember);
 			return dto;
 		}else{

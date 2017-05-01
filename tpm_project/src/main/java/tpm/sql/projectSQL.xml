@@ -72,6 +72,9 @@
 		)
 		
 	</insert>
+	
+	
+	
 	<select id="projectLevel" parameterType="tpm.project.model.ProjectMemberDTO" resultType="Integer">
 		select project_level from tpm_project_member
 		where project_idx=#{project_idx} and member_idx=#{member_idx}
