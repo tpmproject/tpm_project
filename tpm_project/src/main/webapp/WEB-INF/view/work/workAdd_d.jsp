@@ -13,6 +13,7 @@ if(msg!=null && msg.equals("error")){
 	out.print("{work:{work_idx:0}}");
 }else{
 	WorkDTO dto=(WorkDTO)request.getAttribute("wdto");
+	System.out.print(dto);
 	int idx=dto.getWork_idx();
 	String title=dto.getWork_title();
 	Timestamp start=dto.getWork_start();
@@ -20,8 +21,9 @@ if(msg!=null && msg.equals("error")){
 	int confirm=dto.getWork_confirm();
 	int cidx=dto.getCategory_idx();
 	int wstate=dto.getWork_state();
-	
-	out.print("{work:{work_idx:"+idx+",work_title:'"+title+"',work_start:'"+start+"',work_end:'"+end+"',work_confirm:'"+confirm+"',category_idx:'"+cidx+"',work_state:'"+wstate+"'}}");
+	String member="";
+
+	out.print("{work:{work_idx:"+idx+",work_title:'"+title+"',work_start:'"+start+"',work_end:'"+end+"',work_confirm:'"+confirm+"',category_idx:'"+cidx+"',work_state:'"+wstate+"',w_member:'"+member+"'}}");
 }
 %>
 <%

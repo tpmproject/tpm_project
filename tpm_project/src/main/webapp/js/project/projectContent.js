@@ -128,6 +128,18 @@ function onMessage(evt) {
 		var member=data[8];	
 		ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member);
 	}
+	//업무 수정
+	if(data[0]=='wUpdate'){
+		var work_idx=data[1];
+		var category_idx=data[2];
+		var work_title=data[3];
+		var work_start=data[4];
+		var work_end=data[5];
+		var work_confirm=data[6];
+		var work_state=data[7];
+		var member=data[8];	
+		ws_workUpdate(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member);
+	}
 	//업무 삭제
 	if(data[0]=='workDel'){
 		var idx=data[1];
@@ -460,7 +472,7 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	var msg='<div id="w'+work_idx+'"class="panel panel-info">';
 	msg+='<div id="wdiv'+work_idx+'" class="wdiv panel-heading" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';		
 	msg+='<i id="showWork'+work_idx+'"></i>';
-	msg+='&nbsp;<span onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
+	msg+='&nbsp;<span id="wt'+work_idx+'" onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
 	msg+='<c:set var="wstart"><f:formatDate value="'+work_start+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
 	msg+='<c:set var="wend"><f:formatDate value="'+work_end+'" type="both" pattern="yyyy/MM/dd  hh:mm a"/></c:set>';
 	msg+='<span onclick="workUpdate(${wdto.work_idx},'+work_start+','+work_end+','+work_confirm+')"><i class="glyphicon glyphicon-cog"></i></span></div>';
@@ -487,7 +499,7 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 		msg+='<i name="2" class="glyphicon glyphicon-record" data-toggle="tooltip" data-placement="bottom" title="결재 대기"} onclick="workDone('+work_idx+',2)"></i>';
 	}
 	msg+='<i name="3" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip" data-placement="bottom" title="완료된 업무" onclick="workDone('+work_idx+',3)"></i></div></td>';
-	msg+='<td align="right"><a href="#" onclick="workSide('+work_idx+','+project_idx+','+work_title+')" class="menu-toggle">코멘트/파일</a></td>';
+	msg+='<td align="right"><a href="#" onclick="workSide('+work_idx+','+work_title+')" class="menu-toggle">코멘트/파일</a></td>';
 	msg+='</tr></tbody></table></div></div></div>';
 
 	dNode.innerHTML = msg;
@@ -533,9 +545,34 @@ function uWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
-		}
+			if (result != null) {
+				var work=eval('('+result+')');
+				var work_idx=work.work_idx;
+				var category_idx=work.category_idx;
+				var work_title=work.work_title;
+				var seDate=work.project_name.split("&");
+				var work_start=seDate[0];
+				var work_end=seDate[1];
+				var work_confirm=work.work_confirm;
+				var work_state=work.work_state;
+				var member="";
+				for(var i = 0; i < work.workmember_wdto.length; i++){
+					member+=work.workmember_wdto[i].member_name+'&nbsp';
+				}
+				updateWS('wUpdate,'+work_idx+','+category_idx+','+work_title+','+work_start+','+work_end+','+work_confirm+','+work_state+','+member);
+			}	
+		}	
 	}
+}
+function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work_confirm,work_state,member){
+	var wt='<span id="wt'+work_idx+'" onclick="showWorkTable('+work_idx+')">'+work_title+'</span>';
+	document.getElementById('wt'+work_idx).innerHTML=wt;
+	var wd='<td id="wd'+work_idx+'" colspan="2">';
+		wd+='<div class="table_i glyphicon glyphicon-calendar"></div>';
+		wd+='&nbsp;'+work_start+'<br>';
+		wd+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~'+work_end+'</td>';
+	document.getElementById('wd'+work_idx).innerHTML=wd;
+	closem();
 }
 
 function workDone(work_idx,work_state){
