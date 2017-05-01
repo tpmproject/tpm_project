@@ -167,30 +167,25 @@ public class WorkController {
 		mav.setViewName("work/workAdd_d");
 		int result=0;
 		String msg=dto.getWork_title();
-		if(dto.getWork_state()>0){
-			
+		if(dto.getWork_state()>0){			
 			ProjectMemberDTO pmdto=new ProjectMemberDTO();
 			pmdto.setProject_idx(project_idx);
 			HttpSession session = req.getSession();
-			pmdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));
-			
+			pmdto.setMember_idx((Integer) session.getAttribute("s_member_idx"));	
 			int p_level=projectDAO.projectLevel(pmdto);
 			if(p_level>1000){
 				result=workDAO.updateWork(dto);
-			}
-			
+			}	
 			if(result==0){
 				mav.addObject("msg","error");
 			}
 			mav.addObject("wdto",dto);
-		}else{
-			
+		}else{			
 			workdateup=workdateup.replaceAll("오전", "AM");
 			workdateup=workdateup.replaceAll("오후", "PM");
 			String temp[]=workdateup.split("-");
 			String work_s=temp[0].trim();
 			String work_e=temp[1].trim();
-			
 			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm aa", Locale.US); 
 			Date ts = sdf.parse(work_s);
 			Date te = sdf.parse(work_e);
@@ -211,8 +206,7 @@ public class WorkController {
 			}else{
 				mav.addObject("msg","error");
 			}
-		}
-		
+		}	
 		return mav;
 	}
 	
