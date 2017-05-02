@@ -170,7 +170,8 @@
 <body class="skin-${sessionScope.s_member_thema}">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	 <div class="container">
-      <div class="col-md-6 col-md-offset-3"></div>
+	  <div class="row">
+	 
       <div class="col-md-12">
         <div class="page-header">
           <h1>개인 정보
@@ -186,8 +187,8 @@
 	              <div class="col-sm-offset-7">
 	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	                <select id="themaSelect" onchange="selectThema()">
-	                  <option value="black"> white </option>
-	                  <option value="black-light"> white-light </option>
+	                  <option value="black"> black </option>
+	                  <option value="black-light"> black-light </option>
 	                  <option value="blue"> blue </option>
 	                  <option value="blue-light"> blue-light </option>
 	                  <option value="green"> green </option>
@@ -338,6 +339,7 @@
       </div>
     </div>
     </div>
+     </div>
     </div>
     <c:set var="self_tendencylist" value="${self_tendency}"/>
 	          <c:forEach var="self_tendency" items="${self_tendencylist}">

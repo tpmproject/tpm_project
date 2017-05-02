@@ -257,6 +257,7 @@
     </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
+
 	var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
 	
 	$(function(){
@@ -325,7 +326,7 @@
 		
 		dNode.innerHTML = msg;
 		cNode.appendChild(dNode);
-		showComment();
+		//showComment();
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	
@@ -367,7 +368,7 @@
 		
 		var work_idx = document.newComment.work_idx.value;
 		var param  = 'work_idx=' + work_idx;
-		//window.alert(param);
+		window.alert(param);
 			
 		//sendRequest('commentList.do', param, showCommentResult, 'POST');
 		
@@ -594,6 +595,9 @@
 			</div>
 		</div> */
 	
+		
+		
+		
 	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx,work_title){
 		sessionStorage.setItem('s_work_idx',work_idx);
@@ -606,6 +610,10 @@
 		
 		
 	}
+	
+		
+		
+		
 	/*파일 리스트 탭눌럿을때 업무리스트  */
 	function project_fileList2(){
 		var work_idx=sessionStorage.getItem('s_work_idx');
@@ -715,7 +723,7 @@
 		}
 		
 		for(var i=0; i<files.length; i++){
-			var file=files[i];
+			var file=files[i];	
 			
 			/* 파일 타입 뽑기 */
 			var filename=file.file_name.toLowerCase();

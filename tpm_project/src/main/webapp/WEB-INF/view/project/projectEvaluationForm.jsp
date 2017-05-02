@@ -143,7 +143,7 @@ function addTendency_lResult(){
 }
 </script>
 </head>
-<body>
+<body class="skin-${sessionScope.s_member_thema}">
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	<div id="pebody" style=" width:100%; height:780px; overflow-y: scroll">
 		<div style="margin-bottom: 30px;">
