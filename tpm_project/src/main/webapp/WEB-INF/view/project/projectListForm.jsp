@@ -462,7 +462,7 @@ img {
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
 																							<span class="print" rel="tooltip" title="진행중" >
-																								<a href="#" class="btn btn-link"
+																								<a class="btn btn-link"  onclick="proState(${i.project_idx},${pm_dto.project_level})"
 																								style="color: #3c8dbc;"><i
 																									class="glyphicon glyphicon-time"></i>진행중</a>
 																							</span>
