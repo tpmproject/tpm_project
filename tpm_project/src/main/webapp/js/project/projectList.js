@@ -498,7 +498,7 @@
 					msg+='<div class="stats-container"><div class="stats" align="center" rel="tooltip" title="업무확인">';
 					msg+='<a class="btn btn-link" href="projectContent.do?project_idx='+pson.project_idx+'&member_idx='+member_idx+'">';
 					msg+='<i class="fa fa-clone left"></i>업무확인</a></div>';
-					msg+='<div class="stats"><span class="print" rel="tooltip" title="평가를 원하시면 클릭하세요!">';
+					msg+='<div class="stats" id="stats'+pson.project_idx+'"><span class="print" rel="tooltip" title="평가를 원하시면 클릭하세요!">';
 					msg+='<a onclick="proState('+pson.project_idx+',3000)" class="btn btn-link" style="color: #3c8dbc;"><i class="glyphicon glyphicon-time"></i>진행중</a></span>';
 					msg+='</div></div><div class="stats" style="padding-top: 6px;">';
 					msg+='<span><a rel="tooltip" title="되돌아가기" onclick="rotateCard(this)" style="color: gray;font-size: large;">';
