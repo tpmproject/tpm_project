@@ -443,13 +443,13 @@ img {
 																							 <span class="print" rel="tooltip"
 																								title="평가하기"> <a
 																								onclick="location.href='projectEvaluation.do?project_idx=${i.project_idx}&project_level=${pm_dto.project_level}&member_idx=${s_member_idx}'"
-																								class="btn btn-link"><i
+																								class="btn btn-link" style="color: #f39c12"><i
 																									class="glyphicon glyphicon-check"></i>평가하기</a>
 																							</span>
 																						</c:when>
 																						<c:otherwise>
 																							<span class="print">
-																							<a class="btn btn-link">
+																							<a class="btn btn-link" style="color: #f39c12">
 																								<i class="glyphicon glyphicon-check"></i>평가 대기</a>
 																							</span>
 																						</c:otherwise>
@@ -463,7 +463,7 @@ img {
 																						<div class="stats">
 																							<span class="print" rel="tooltip" title="진행중" >
 																								<a href="#" class="btn btn-link"
-																								style="color: red;"><i
+																								style="color: #3c8dbc;"><i
 																									class="glyphicon glyphicon-time"></i>진행중</a>
 																							</span>
 																						</div>
