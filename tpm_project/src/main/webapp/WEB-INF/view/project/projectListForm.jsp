@@ -351,9 +351,9 @@ img {
 															</div> -->
 
 															<!--화면단  -->
-															<c:if test="${i.project_state eq 1 }"><c:set var="icon_color" value="#f2dede"></c:set></c:if>
-															<c:if test="${i.project_state eq 2 }"><c:set var="icon_color" value="#d9edf7"></c:set></c:if>
-															<c:if test="${i.project_state eq 3 }"><c:set var="icon_color" value="#d7ecce"></c:set></c:if>
+															<c:if test="${i.project_state eq 1 }"><c:set var="icon_color" value="#3c8dbc"></c:set></c:if>
+															<c:if test="${i.project_state eq 2 }"><c:set var="icon_color" value="#f39c12"></c:set></c:if>
+															<c:if test="${i.project_state eq 3 }"><c:set var="icon_color" value="#00a65a"></c:set></c:if>
 															
 															<div class="content">
 																<div class="main">
