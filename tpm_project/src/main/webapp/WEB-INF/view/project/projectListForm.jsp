@@ -328,7 +328,7 @@ img {
  --%>
 		<!-- 앞화면 -->
 		<c:set var="plist" value="${plist}"></c:set>
-		<div id="becontent" style="background: white;">
+		<div id="becontent" style="background: #ecf0f5;">
 			<div id="ptest" class="carousel-inner" role="listbox">
 		<c:choose>
 			<c:when test="${empty plist}">
@@ -478,7 +478,7 @@ img {
 																				<c:when test="${i.project_state == 1 }">
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats">
-																							<span class="print" rel="tooltip" title="진행중">
+																							<span class="print" rel="tooltip" title="진행중" >
 																								<a href="#" class="btn btn-link"
 																								style="color: red;"><i
 																									class="glyphicon glyphicon-time"></i>진행중</a>
@@ -532,13 +532,7 @@ img {
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	<div>
-	<c:forEach var="i" items="${plist}" varStatus="status">
-		
-		<a onclick="javascript:car(${status.index})" align="center">${i.project_name}</a>
-		
-	</c:forEach>
-	</div>
+	
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

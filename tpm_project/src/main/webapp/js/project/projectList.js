@@ -510,8 +510,8 @@
 				}
 				// history.go(0);
 				/* location.reload(); */
-				$('#carousel-example-generic').carousel('prev');
-				setTimeout(function(){$('#pitem').hide();},1000);
+				$('#carousel-example-generic').carousel('next');
+				setTimeout(function(){$('#pitem').remove();},1000);
 				closem();
 			}
 		}
