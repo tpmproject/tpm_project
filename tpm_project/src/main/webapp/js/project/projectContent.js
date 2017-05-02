@@ -690,7 +690,7 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
-	window.alert(param);
+
 	sendRequest('workUpdate.do', param, uWorkResult, 'POST');
 }
 function uWorkResult(){
@@ -720,13 +720,13 @@ function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
-	window.alert(work_confirm);
+
 	if(work_confirm==10){
-		window.alert('조건옴1');
+
 		$("#wf").attr('checked', 'checked');
 		//document.changeWork.work_confirm.setAttribute('checked','checked');
 	}else if(work_confirm==20){
-		window.alert('조건옴');
+
 		$('#wf').removeAttr('checked');
 		//document.changeWork.work_confirm.setAttribute('checked','');
 	}
