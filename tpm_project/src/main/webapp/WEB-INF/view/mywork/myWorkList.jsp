@@ -144,14 +144,14 @@ function updateWorkResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			var wData=eval('('+result+')');
-			var wi=wData.work.work_idx;
+			var wi=wData.work_idx;
 			
 			if(wi==0){
 				window.alert('권한이 없습니다.');
 				return;
 			}
 			
-			var ws=wData.work.work_state;
+			var ws=wData.work_state;
 			ws=parseInt(ws);
 			
 			//ws
