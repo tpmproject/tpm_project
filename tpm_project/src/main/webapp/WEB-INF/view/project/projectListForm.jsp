@@ -330,28 +330,6 @@ img {
 		<c:set var="plist" value="${plist}"></c:set>
 		<div id="becontent" style="background: #ecf0f5;">
 			<div id="ptest" class="carousel-inner" role="listbox">
-		<c:choose>
-			<c:when test="${empty plist}">
-				<div id ="pitem" class="item active" align="center">
-					<div class="card-container manual-flip" style="max-width: 500px;">
-						<div class="card">
-							<div class="front">
-								<div class="cover"></div>
-									<div class="content">
-											<div class="main">
-											<p class="profession" style="font-size: 50px;">TPM Project</p>
-												<h2 align="center">
-													<a onclick="showf()" style="size: 600px;"><span>
-													<i class="glyphicon glyphicon-plus-sign" style="top: 5px;"></i></span>Create Project</a>
-												</h2>
-											</div>
-										</div>
-								</div>
-							</div>
-						</div>
-					</div>		
-				</c:when>
-			<c:otherwise>
 				
 						<!-- 	<div class="carousel-inner" role="listbox  -->
 						<c:forEach var="i" items="${plist}" varStatus="status">
@@ -512,8 +490,27 @@ img {
 
 
 						</c:forEach>
-			</c:otherwise>
-		</c:choose>
+			
+				<div id ="pitem" class="item ${empty plist?'active':''}" align="center">
+					<div id="project_div${i.project_idx}" align="center" style="margin-top: 15px;">
+					<div class="card-container manual-flip" style="max-width: 500px;">
+						<div class="card">
+							<div class="front">
+								<div class="cover"></div>
+									<div class="content">
+											<div class="main">
+											<p class="profession" style="font-size: 50px;">TPM Project</p>
+												<h2 align="center">
+													<a onclick="showf()" style="size: 600px;"><span>
+													<i class="glyphicon glyphicon-plus-sign" style="top: 5px;"></i></span>Create Project</a>
+												</h2>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+				</div>
 			</div>
 		</div>
 	</div>

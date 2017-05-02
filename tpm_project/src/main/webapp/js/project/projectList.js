@@ -511,7 +511,7 @@
 				// history.go(0);
 				/* location.reload(); */
 				$('#carousel-example-generic').carousel('next');
-				setTimeout(function(){$('#pitem').remove();},1000);
+				/*setTimeout(function(){$('#pitem').remove();},1000);*/
 				closem();
 			}
 		}
