@@ -11,6 +11,7 @@ public interface MemberDAO {
 	
 	public int login(String userid,String userpwd);
 	public List<MemberDTO> userInfo(String userid);
+	public int memberFindId(String userId);
 	public String idCheck(String email);
 	public int addTendency();
 	public int addMember(MemberDTO mdto);

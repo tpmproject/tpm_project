@@ -59,7 +59,11 @@ public class MemberDAOImple implements MemberDAO {
 		int count=sqlMap.insert("memberInsert",mdto);
 		return count;
 	}
-
+	public int memberFindId(String member_id) {
+		int count=sqlMap.selectOne("memberFindId",member_id);
+		return count;
+	}
+	
 	public int delMember(String userid){
 		int count = sqlMap.delete("memberDelete", userid);
 		return count;

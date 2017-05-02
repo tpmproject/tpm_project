@@ -45,7 +45,7 @@
   
   <body>
    
-      <table width="960px" align="center">
+      <table style="width: 1500px; height:500px; position: absolute; margin: 30px 300px;background-color: white;">
         <tbody>
           <tr>
             <td>
@@ -54,12 +54,7 @@
           </tr>
           <tr>
             <td align="center">
-             
-                
-             
-              <br>
-              <br>
-              <br>
+     
             </td>
           </tr>
           <tr>

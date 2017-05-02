@@ -76,9 +76,9 @@
 		 
 		 function signAgr(){
 
-	    	 var element = document.getElementById("span1"); 
-			element.style.fontSize = "48pt"; 
-
+	    	var element = document.getElementById("signAgr"); 
+			element.style.display = ""; 
+			
 	    	 
 		 }
 		 
@@ -95,11 +95,12 @@ function cancle(){
 	    color: #f0ad4e;;
 	    background-color: #f0ad4e;
 	    border-color: #eea236;
+	     
 	    }
     </style>  
 </head>
 <body onload="show()">
- <div id="signAgr" style="display:none">
+ <div id="signAgr" style="display:none; position:absolute; z-index:3000; background-color: white; width: 100%; height:100px">
  	<%@include file="signAgreement.jsp" %>
  </div>
  <div class="navbar navbar-default navbar-static-top">
