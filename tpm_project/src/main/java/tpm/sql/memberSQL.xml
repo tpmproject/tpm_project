@@ -7,6 +7,11 @@
 		insert into tpm_member values (member_idx.nextval,#{member_id},#{member_pwd},#{member_name},#{member_gender},#{member_tel},'default_man.jpg','white')
 	</insert>
 	
+	<select id="memberFindId" parameterType="String" resultType="int">
+		select member_idx from tpm_member 
+		where member_id = #{member_id}
+	</select>
+	
 	<select id="login" parameterType="String" resultType="String">
 		select member_pwd from tpm_member 
 		where member_id = #{member_id}

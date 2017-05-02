@@ -1100,6 +1100,7 @@ function workSide(work_idx,work_title){
 	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);
 	comment(work_idx);
+	showComment(work_idx);
 	
 } 
 function showWorkTable(work_idx){

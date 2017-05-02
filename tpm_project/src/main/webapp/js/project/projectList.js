@@ -475,7 +475,7 @@
 					msg+='<div class="card"><div class="front"><div class="cover" style="background:'+skin+';"></div>';
 					msg+='<div class="content"><div class="main"><input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
 					msg+='<h3><a id="pn'+pson.project_idx+'" style="text-align: center;color:black; ">';
-					msg+=pson.project_name+'</a><i class="glyphicon glyphicon-flag" style="color:red;"></i></h3>';
+					msg+=pson.project_name+'</a><i id="ps'+pson.project_idx+'" class="glyphicon glyphicon-flag" style="color:#3c8dbc;"></i></h3>';
 					msg+='<p class="profession">TPM Project</p><p class="text-center">';
 					msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span></p></div>';
 					msg+='<div class="footer"><button class="btn btn-simple" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인</button>';
@@ -498,8 +498,8 @@
 					msg+='<div class="stats-container"><div class="stats" align="center" rel="tooltip" title="업무확인">';
 					msg+='<a class="btn btn-link" href="projectContent.do?project_idx='+pson.project_idx+'&member_idx='+member_idx+'">';
 					msg+='<i class="fa fa-clone left"></i>업무확인</a></div>';
-					msg+='<div class="stats"><span class="print" rel="tooltip" title="진행중">';
-					msg+='<a href="#" class="btn btn-link" style="color: red;"><i class="glyphicon glyphicon-time"></i>진행중</a></span>';
+					msg+='<div class="stats" id="stats'+pson.project_idx+'"><span class="print" rel="tooltip" title="평가를 원하시면 클릭하세요!">';
+					msg+='<a onclick="proState('+pson.project_idx+',3000)" class="btn btn-link" style="color: #3c8dbc;"><i class="glyphicon glyphicon-time"></i>진행중</a></span>';
 					msg+='</div></div><div class="stats" style="padding-top: 6px;">';
 					msg+='<span><a rel="tooltip" title="되돌아가기" onclick="rotateCard(this)" style="color: gray;font-size: large;">';
 					msg+='<i class="fa fa-reply"></i> Back</a></span></div></div></div></div></div></div></div><div class="space-400"></div></div></div>';
@@ -721,4 +721,32 @@ function rotateCard(btn){
     } else {
         $card.addClass('hover');
     }
+}
+
+function proState(p_idx,p_level){
+	p_level=parseInt(p_level);
+	if(p_level==3000){
+		var param='project_idx='+p_idx;
+		sendRequest('projectStateUp.do',param,proStateResult,'POST');
+	}
+}
+function proStateResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result=XHR.responseText;
+			var p_idx=eval('('+result+')');
+			if(p_idx<=0){
+				window.alert('오류 발생');
+			}else{
+				$('#ps'+p_idx).css('color','#f39c12');
+				
+				var msg='<span class="print" rel="tooltip" title="평가하기">';
+				msg+='<a onclick="location.href=\'projectEvaluation.do?project_idx='+p_idx+'&project_level=3000&member_idx='+member_idx+'\'"';
+				msg+='class="btn btn-link" style="color: #f39c12"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>';
+				$('#stats'+p_idx).html(msg);
+				
+			}
+		}
+	}
+	
 }

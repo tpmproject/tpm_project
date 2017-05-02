@@ -505,11 +505,26 @@ var skin_color='';
 </body>
 <script>
 /* 첨부파일 관련 */
+ 
 $("#menu-close").click(function(e) {
   e.preventDefault();
   $("#sidebar-wrapper").toggleClass("active");
 });
+
+var eventtarget;
+var ev
 $(".menu-toggle").click(function(e) {
+  if(eventtarget == null || eventtarget == ''){
+	  eventtarget = e;
+  } else {
+	  if(eventtarget == e){
+		  window.alert('같은놈');	  
+	  } else {
+		  window.alert('다른놈');
+	  }	  
+  }
+	
+  
   e.preventDefault();
   $("#sidebar-wrapper").toggleClass("active");
 });

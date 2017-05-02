@@ -299,6 +299,12 @@ public class ProjectController {
 	}
 	@RequestMapping(value="projectStateUp.do",method=RequestMethod.POST)
 	public @ResponseBody int projectStateUp(int project_idx){
-		return projectDAO.projectState(project_idx);
+		int count=projectDAO.projectState(project_idx);
+		if(count>0){
+			return project_idx;
+		}else{
+			return 0;
+		}
+		
 	}
 }

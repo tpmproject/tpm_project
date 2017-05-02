@@ -40,6 +40,7 @@ import tpm.member.model.SMTPAuthenticatior;
 import tpm.project.model.ProjectDTO;
 import tpm.project.model.ProjectMemberDTO;
 import tpm.tendency.model.TendencyDAO;
+import tpm.tendency.model.TendencyDAOImple;
 import tpm.tendency.model.TendencyDTO;
 
 
@@ -190,10 +191,16 @@ public class MemberController {
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.POST)
 	public ModelAndView memberAdd(TendencyDTO tdto, MemberDTO mdto){
 		
-		System.out.println("회원가입 등록부분에서의 id:"+mdto.getMember_id());
+		int m_result=mdao.addMember(mdto);
+		String in_member_id=mdto.getMember_id();
+		int db_member_idx=mdao.memberFindId(in_member_id);
+	
+		tdto.setProject_idx(0);  //평가자 임시 
+		tdto.setMember_idx(db_member_idx); //가입한 idx번호 tdto에 넣기
 		
 		
-		int result=mdao.addMember(mdto);
+		int t_reault=tdao.addTendency(tdto);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("member/memberAdd_ok");
