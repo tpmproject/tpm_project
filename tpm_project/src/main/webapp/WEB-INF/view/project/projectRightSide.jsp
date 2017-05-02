@@ -257,7 +257,6 @@
     </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
-
 	var s_member_idx = <%=session.getAttribute("s_member_idx")%>;
 	
 	$(function(){
@@ -316,7 +315,7 @@
 		//msg += 					'<i class="fa fa-clock-o"></i> '+ moment(comment_date).format('YYYY-MM-DD h:mm:ss a')+'</small>';
 		msg += 					'<i class="fa fa-clock-o"></i> '+ comment_date +'</small>';
 		msg +=					''+ member_name +'('+ member_id +') &nbsp;';
-		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
+		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
 		msg += 				'</a>';
 		msg += 				 '<span id="comment_'+ comment_idx +'" onclick="upCommentSet('+ comment_idx +')">'+ comment_content +'</span>';
@@ -326,6 +325,7 @@
 		
 		dNode.innerHTML = msg;
 		cNode.appendChild(dNode);
+		showComment();
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	
@@ -490,7 +490,7 @@
 	
 	function ws_commentDel(comment_idx){
 		$('#comment_content'+ comment_idx).remove();
-		//showComment();
+		showComment();
 	}
 	
 	/* function delCommentResult(){
