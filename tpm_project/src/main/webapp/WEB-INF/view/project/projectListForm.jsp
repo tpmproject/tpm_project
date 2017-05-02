@@ -351,11 +351,16 @@ img {
 															</div> -->
 
 															<!--화면단  -->
+															<c:if test="${i.project_state eq 1 }"><c:set var="icon_color" value="#f2dede"></c:set></c:if>
+															<c:if test="${i.project_state eq 2 }"><c:set var="icon_color" value="#d9edf7"></c:set></c:if>
+															<c:if test="${i.project_state eq 3 }"><c:set var="icon_color" value="#d7ecce"></c:set></c:if>
+															
 															<div class="content">
 																<div class="main">
 																	<input type="hidden" id="p_idx${i.project_idx}"
 																		value="${i.project_idx}">
-																	<h3 id="pn${i.project_idx}" style="text-align: center; ">${i.project_name}</h3>
+																	<h3><a id="pn${i.project_idx}" style="text-align: center; color: black; ">${i.project_name}</a>
+																	<i class="glyphicon glyphicon-flag" style="color: ${icon_color};"></i></h3>
 																	<p class="profession">TPM Project</p>
 																	<p class="text-center">
 																		<span id="pc${i.project_idx}">${i.project_content }</span>
@@ -366,7 +371,7 @@ img {
 																		onclick="rotateCard(this)">
 																		<i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인
 																	</button>
-
+																
 																</div>
 															</div>
 														</div>

@@ -7,7 +7,7 @@
 		$('.pm_scroll').mCustomScrollbar({axis:"yx"});
 		
 	switch (skin) {
-		case 'white': case 'white-light':skin='#fff'; break;
+		case 'black': case 'black-light':skin='#fff'; break;
 		case 'blue': case 'blue-light':skin='#3c8dbc'; break;
 		case 'green': case 'green-light':skin='#00a65a'; break;
 		case 'purple': case 'purple-light':skin='#605ca8'; break;
@@ -474,8 +474,8 @@
 					msg+='<div class="card-container manual-flip" style="max-width: 500px;">';
 					msg+='<div class="card"><div class="front"><div class="cover" style="background:'+skin+';"></div>';
 					msg+='<div class="content"><div class="main"><input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
-					msg+='<h3 id="pn'+pson.project_idx+'" style="text-align: center; ">';
-					msg+=pson.project_name+'</h3>';
+					msg+='<h3><a id="pn'+pson.project_idx+'" style="text-align: center;color:black; ">';
+					msg+=pson.project_name+'</a><i class="glyphicon glyphicon-flag" style="color:red;"></i></h3>';
 					msg+='<p class="profession">TPM Project</p><p class="text-center">';
 					msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span></p></div>';
 					msg+='<div class="footer"><button class="btn btn-simple" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인</button>';
@@ -505,12 +505,13 @@
 					msg+='<i class="fa fa-reply"></i> Back</a></span></div></div></div></div></div></div></div><div class="space-400"></div></div></div>';
 					 
 					divNode.innerHTML=msg;
-					cNode.appendChild(divNode);
+					var pit=document.getElementById('pitem');
+					cNode.insertBefore(divNode,pit);
 		
 				}
 				// history.go(0);
 				/* location.reload(); */
-				$('#carousel-example-generic').carousel('next');
+				/*$('#carousel-example-generic').carousel('prev');*/
 				/*setTimeout(function(){$('#pitem').remove();},1000);*/
 				closem();
 			}
