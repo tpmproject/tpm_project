@@ -12,14 +12,6 @@ window.onload=function(){
 	$('#load_s').hide();
 }
 
-$(window).resize(function() {
-	var wid=(window.innerWidth/2)-320;
-	$('#work_modal').css('left',wid+'px');
-	$('#work_modal2').css('left',wid+'px');
-	
-	var hei=window.innerHeight-130;
-	$('.content.mCustomScrollbar._mCS_1').css('height',hei+'px');
-})
 function categoryHead(skin){
 	switch (skin) {
 		case 'white': case 'white-light':skin_color='#fff'; break;
@@ -292,7 +284,6 @@ function workUpdate(work_idx,work_start,work_end,work_confirm){
 		, "endDate" : endDate[0]
 	});
 	
-	
 	var wid=(window.innerWidth/2)-320;
 	$('#work_modal2').css('left',wid+'px');
 	
@@ -384,7 +375,7 @@ function shows2Result(){
 			for (var i = 0; i < members.length; i++) {
 				var member = members[i];
 				
-				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
+				msg2 += '<div id="work2_member'+member.member_idx+'"onmouseover="showTen2('+member.member_idx+')" draggable="true" ondragover="allowDrop(event)" ondragstart="drag(event)">';
 				msg2 += '<img height="30" width="30" class="thumb-lg img-circle bx-s" ';
 				msg2 += 'src="/tpm_project/img/member/profile/' + member.member_img + '"> ';
 				msg2 += member.member_name;
@@ -624,8 +615,8 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	msg+='								class="progress-bar progress-bar-primary "';
 	msg+='								style="width: ${chChecked/chTotal * 100}%;"></div>';
 	msg+='						</div> <input type="hidden" id="chTotal'+work_idx+'"';
-	msg+='						value="${chTotal}"> <input type="hidden"';
-	msg+='						id="chChecked'+work_idx+'" value="${chChecked}">';
+	msg+='						value="0"> <input type="hidden"';
+	msg+='						id="chChecked'+work_idx+'" value="0">';
 	msg+='					</td>';
 	msg+='				</tr>';
 //	msg+='				<c:remove var="chTotal" />';
@@ -654,14 +645,15 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	msg+='								data-toggle="tooltip" data-placement="bottom" title="완료된 업무"';
 	msg+='								onclick="workDone('+work_idx+',3)"></i>';
 	msg+='						</div></td>';
-	msg+='					<td align="right"><a href="#"';
-	msg+='						onclick="workSide('+work_idx+',\''+work_title+'\')"';
-	msg+='						class="menu-toggle">코멘트/파일</a></td>';
+	msg+='					<td align="right">';
+	msg+=' 						<a href="#" onclick="workSide('+work_idx+',\''+work_title+'\')" class="menu-toggle">코멘트/파일</a>';
+	msg+=' 					</td>';
 	msg+='				</tr>';
 	msg+='			</tbody>';
 	msg+='		</table>';
 	msg+='	</div>';
 	msg+='</div>';
+	
 	dNode.innerHTML = msg;
 	cNode.appendChild(dNode);
 	closem();
@@ -783,6 +775,7 @@ function changeWorkState(wi,ws){
 		firstC=firstC.nextSibling;
 	}while(firstC!=lastC);
 	var pc=document.getElementById('wdiv'+wi).parentNode;
+
 	switch(ws){
 	case 1 : pc.setAttribute('class','panel panel-info');break;
 	case 2 : pc.setAttribute('class','panel panel-warning');break;
@@ -1124,7 +1117,7 @@ function showTen(member_idx){
 function showTen2(member_idx){
 	var param = 'member_idx='+member_idx;
 	var tenT=$('#work2_member'+member_idx).offset().top;
-	var tenL=$('#work2_member'+member_idx).offset().left+120;
+	var tenL=$('#work2_member'+member_idx).offset().left+200;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
 	$('#tendency_pop').fadeIn();
