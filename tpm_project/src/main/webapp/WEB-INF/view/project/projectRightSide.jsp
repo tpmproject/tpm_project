@@ -622,9 +622,8 @@
 	
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
-		
-		
 	}
+	
 	/* 파일 검색 */
 	function file_search(work_idx){
 		var work_idx=sessionStorage.getItem('s_work_idx');
@@ -656,11 +655,10 @@
 	}
 	function workFileDelete(){
 		del_work_idx = sessionStorage.getItem('s_work_idx');
-		
 		var param = 'file_idx='+del_file_idx+'&file_name='+del_file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 		action_ajax('fileDel.do',param,'POST', 'FILEDEL'); // 해당 페이지로 ajax통신 시작
 		
-		project_fileList(del_work_idx);
+		
 	} 
 	/*파일 다운  */
 	function fileDown2(file_name){
@@ -695,14 +693,19 @@
 
 		if(ctype == 'WORK_FILELIST'){
 			project_fileList_setting(responseText);	
+			//project_fileList2();
+			
 		} else if(ctype == 'FILE_CONTENT'){
 		//	window.alert('result_process');
 			fileContent_setting(responseText);
-		} else if(ctype == ''){
-			search_modal_setting(responseText);
+			
+			
+		} else if(ctype == 'FILEDEL'){
+			project_fileList(del_work_idx);
 		} else {
 			window.alert('잘못된 경로');
 		}
+		
 	}
 
 	

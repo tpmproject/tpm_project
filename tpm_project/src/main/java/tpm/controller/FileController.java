@@ -335,7 +335,7 @@ public class FileController {
 	}
 	/** 파일 - ajax 파일 삭제 */
 	@RequestMapping(value="fileDel.do",  method=RequestMethod.POST)
-	public void fileDel2(@RequestParam("file_idx")int file_idx,
+	public @ResponseBody Object fileDel2(@RequestParam("file_idx")int file_idx,
 								@RequestParam("file_name")String file_name,
 								HttpServletRequest req){
 		//System.out.println("file_name="+file_name);
@@ -352,10 +352,9 @@ public class FileController {
 		 File uploadDirectory = new File(savepath);
 		 System.out.println(uploadDirectory);
 		 uploadDirectory.delete();
-		 
-		
-	
-		
+		 	
+		 return "true";
+				 
 	}
 	/** 파일리스트 다운로드*/
 	
