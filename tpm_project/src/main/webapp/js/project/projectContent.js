@@ -302,10 +302,10 @@ function workUpdate(work_idx,work_start,work_end,work_confirm){
 	document.changeWork.work_title.value=work_title;
 	document.changeWork.workdateup.value=work_start+"-"+work_end;
 	if(work_confirm==10){
-		$("#wf").attr('checked', true) ;
+		$("#wf").attr('checked', 'checked') ;
 		//document.changeWork.work_confirm.setAttribute('checked','checked');
 	}else if(work_confirm==20){
-		$("#wf").attr('checked', false) ;
+		$("#wf").removeAttr('checked') ;
 		//document.changeWork.work_confirm.setAttribute('checked','');
 	}
 }
@@ -720,11 +720,14 @@ function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
+	window.alert(work_confirm);
 	if(work_confirm==10){
-		$("#wf").attr('checked', true) ;
+		window.alert('조건옴1');
+		$("#wf").attr('checked', 'checked');
 		//document.changeWork.work_confirm.setAttribute('checked','checked');
 	}else if(work_confirm==20){
-		$("#wf").attr('checked', false) ;
+		window.alert('조건옴');
+		$('#wf').removeAttr('checked');
 		//document.changeWork.work_confirm.setAttribute('checked','');
 	}
 	closem();

@@ -31,6 +31,28 @@
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
 
 <style>
+#loading_div{
+	display:inline-block;
+	position: fixed;
+	background: black;
+	opacity: 0.7;
+	width: 110%;
+	height: 110%;
+	top: -10px;
+	left: -10px;
+	z-index: 9000;
+}
+#load_s{
+	position: fixed;
+	top: 40%;
+	left: 40%;
+	z-index: 9001;
+}
+#load_s a{
+	color:white;
+	font-size: 100px;
+}
+
 .show-blind{
 	display: none;
 }
@@ -99,10 +121,13 @@ function projectIdxCheck(project_idx){
 	}
 	return false;
 }
+var testDate;
 function calendarReload(){
 	
 	var arry_pdto = originalData;
 	var temp_arry = [];
+	
+	//window.alert($('#reservationtime').val());
 	
 	for(var i = 0 ; i < arry_pdto.length; i++){
 		var project_name = arry_pdto[i].project_name;
@@ -120,8 +145,11 @@ function calendarReload(){
 					var work_start = arry_wdto[k].work_start;
 					var work_end = arry_wdto[k].work_end;
 					var work_state = arry_wdto[k].work_state;
+					testDate = work_end;
 					
 					//window.alert(work_title + "- START : " + moment(work_start).format('YYYY-MM-DD, h:mm:ss a'));
+					
+					
 					//window.alert(work_title + "- END : " + moment(work_end).format('YYYY-MM-DD, h:mm:ss a'));
 					/* window.alert(work_title + "- START : " + new Date(work_start));
 					
@@ -136,6 +164,7 @@ function calendarReload(){
 					//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
 					//calendarInfo.start = work_start;
 					//calendarInfo.end = work_end;
+					
 					
 					calendarInfo.start = new Date(work_start);
 					calendarInfo.end = new Date(work_end);
@@ -157,9 +186,25 @@ function calendarReload(){
 						calendarInfo.className = 'bg-complete';			
 					}
 					
-					
 					calendarInfo.editable = 'true';
-					temp_arry.push(calendarInfo);
+					//temp_arry.push(calendarInfo);
+					
+					//기간 필터
+					if($('#reservationtime').val() != ''){
+						var filterDateStr = $('#reservationtime').val().split('-');
+						var filterStartDateStr = filterDateStr[0].trim();
+						var filterEndDateStr = filterDateStr[1].trim();
+						
+						var filterStartDate = Date.parse(filterStartDateStr);
+						var filterEndDate = Date.parse(filterEndDateStr);
+						
+						if(filterStartDate <= work_end && filterEndDate >= work_end){
+							temp_arry.push(calendarInfo);
+						}	
+					
+					} else {
+						temp_arry.push(calendarInfo);
+					}
 				}
 			}
 		}
@@ -173,8 +218,45 @@ function calendarReload(){
 				calevent, true);
 	});
 	
+	makePopover();
+	
 }
+function makePopover(){
+	$('.bg-progressing').eq(0).attr('data-toggle','popover');
+	$('.bg-progressing').eq(0).attr('title','Popover HTML Header');
+	$('.bg-progressing').eq(0).attr('data-content','<div class="jumbotron">Some HTML content inside the popover</div>');
+	
+	var options =
+    {
+      placement: function (context, source)
+      {
+        var position = $(source).position();
+        var content_width = 515;  //Can be found from a JS function for more dynamic output
+        var content_height = 110;  //Can be found from a JS function for more dynamic output
 
+        if (position.left > content_width)
+        {
+          return "left";
+        }
+
+        if (position.left < content_width)
+        {
+          return "right";
+        }
+
+        if (position.top < content_height)
+        {
+          return "bottom";
+        }
+
+        return "top";
+      }
+      , trigger: "hover"
+      , animation: "true"
+      , html:"true"
+    };
+	$('[data-toggle="popover"]').popover(options);
+}
 function FilterReload(){
 	
 	var FilterListCheckBox = $('input[name="checkBox_FilterList"]');
@@ -212,7 +294,7 @@ function initMyWorkListData(){
 		type : 'post',
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			window.alert(JSON.stringify(json));
+			//window.alert(JSON.stringify(json));
 			originalData = json;
 			
 			calendarReload();
@@ -240,7 +322,7 @@ function initMyProjectList(){
 		type : 'post',
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			window.alert(JSON.stringify(json));
+			//window.alert(JSON.stringify(json));
 			
 			var innerMsg = '';
 			for(var i = 0 ; i < json.length; i++){
@@ -264,9 +346,9 @@ function initMyProjectList(){
 		       // $('#testDivOut2').append("Scroll value: " + pos + "px");
 		    });
 			
-			$('.applyBtn').click(function (){
+			/* $('.applyBtn').click(function (){
 				calendarReload();
-			});
+			}); */
 			//$('.applyBtn$('input[name="checkBox_MyProjectList"]:checked')
 		}
 	});
@@ -309,6 +391,13 @@ function startSuggest_projectList(id, me){
 }
 
 	$(document).ready(function() {
+		
+		$('#loading_div').hide();
+	
+		$('#load_s').hide();
+		
+		
+	  
 		/* initialize the external events
 		 -----------------------------------------------------------------*/
 		/* function ini_events(ele) {
@@ -434,6 +523,7 @@ function startSuggest_projectList(id, me){
 </script>
 </head>
 <body class="skin-${sessionScope.s_member_thema}" onload="initCalenderPage()">
+<div id="loading_div"></div><span id="load_s"><a>Loading...</a></span>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/include/header.jsp"%>
 		<%@ include file="/WEB-INF/view/include/aside.jsp"%>
@@ -468,6 +558,11 @@ function startSuggest_projectList(id, me){
 								<table class="table table-hover" id="channel_list_table">
 									<tr>
 										<th>
+											<a id="try_ppover" href="#" data-toggle="popover" title="Popover HTML Header" data-content="<div class='jumbotron'>Some HTML content inside the popover</div>">Toggle popover</a>
+										</th>
+									</tr>
+									<tr>
+										<th>
 											<!-- Date and time range -->
 								              <div class="form-group">
 								                <label>기간 선택:</label>
@@ -476,7 +571,10 @@ function startSuggest_projectList(id, me){
 								                  <div class="input-group-addon">
 								                    <i class="fa fa-clock-o"></i>
 								                  </div>
-								                  <input type="text" class="form-control pull-right" id="reservationtime" onforminput="window.alert('4')" onclick="window.alert('1')" onchange="window.alert('2');" oninput="window.alert('3')">
+								                  <input type="text" class="form-control pull-right" id="reservationtime" >
+								                  <div class="input-group-addon btn btn-sm btn-default" onclick="calendarReload()">
+								                    <i class="fa fa-search" style="cursor: pointer" ></i>
+								                  </div>
 								                </div>
 								                <!-- /.input group -->
 								              </div>
