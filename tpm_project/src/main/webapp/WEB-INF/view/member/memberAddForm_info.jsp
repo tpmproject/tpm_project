@@ -61,21 +61,25 @@
 				pwdCheckMsg.innerHTML = '';
 			}
 		}
-		 function show(){
-		        
-		       
-	        	
-	        	if ($('#agree').is(":checked"))
+		 /* function show(){
+			
+			 	
+	        	if ($('#agr_ch').is(":checked"))
 	        	{
-	        		window.alert('체크됨');
+	        		document.getElementById("check_label").className = "btn btn-warning active";
+	        		window.alert($('#agr_ch').is(":checked"));
 	        	}else{
-	        		window.alert('체크안됨');
-	        	}
-
-	     }
+	        		document.getElementById("check_label").className = "btn btn-warning";
+	        		window.alert('체크해제');
+	        	} 
+	     } */
+		 
 		 function signAgr(){
-			 
-			 location.href='signAgreement.do';
+
+	    	 var element = document.getElementById("span1"); 
+			element.style.fontSize = "48pt"; 
+
+	    	 
 		 }
 		 
 	</script>    
@@ -94,7 +98,10 @@ function cancle(){
 	    }
     </style>  
 </head>
-<body>
+<body onload="show()">
+ <div id="signAgr" style="display:none">
+ 	<%@include file="signAgreement.jsp" %>
+ </div>
  <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -215,12 +222,12 @@ function cancle(){
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
-                        <div class="col-sm-6" data-toggle="buttons">
-                            <label class="btn btn-warning active">
-                                <input id="agree" type="checkbox" autocomplete="off" chacked="" required="required">
-                                <span class="fa fa-check"></span>
-                            </label>
-                            <a href="#" onclick="signAgr()">이용약관</a>에 동의 합니다.</div>
+                       
+                          
+                                <input id="agr_ch" name="check_agr" type="checkbox" disabled="disabled">
+                              
+                            <a href="#" onclick="signAgr()">이용약관</a>에 동의 합니다.
+                             
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
