@@ -146,6 +146,9 @@ function addTendency_lResult(){
 </script>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
+	<c:if test="${count == 0}">
+		<c:redirect url="projectList.do"></c:redirect>
+	</c:if>
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	<section class="content">
 	<div id="pebody" style=" width:100%; height:780px; overflow-y: scroll">
