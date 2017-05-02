@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired	;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -296,5 +297,8 @@ public class ProjectController {
 		mav.setViewName("project/projectMemberList_d");
 		return mav;
 	}
-	
+	@RequestMapping(value="projectStateUp.do",method=RequestMethod.POST)
+	public @ResponseBody int projectStateUp(int project_idx){
+		return projectDAO.projectState(project_idx);
+	}
 }
