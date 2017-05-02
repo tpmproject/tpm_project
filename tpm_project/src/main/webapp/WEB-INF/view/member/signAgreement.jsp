@@ -6,18 +6,45 @@
   <head>
     <meta charset="UTF-8">
     <title>oh gu, oh good!</title>
-    <link rel="stylesheet" href="css/join.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/pdsr.css">
-    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="/tpm_project/css/member/join.css">
+    <link rel="stylesheet" href="/tpm_project/css/member/base.css">
+    <link rel="stylesheet" href="/tpm_project/css/member/pdsr.css">
+    <link rel="stylesheet" href="/tpm_project/css/member/button.css">
+    
     <link href="https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css"
     rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet">
+       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>
+    		var result=0;  //동의 여부  값이 1이면 모두 동의
+    		
+    		function check_on(){
+    			
+    			window.alert('들어옴');
+    			if($('#ch1').is(":checked")) {
+    				if($('#ch2').is(":checked")){
+    					document.getElementById("order").className = "btn_order";
+    					result=1;
+    				}else{
+       					document.getElementById("order").className = "btn_order1";
+       					result=0;
+    				}
+   					
+   				}
+   				
+    		}
+   			function check_ok(){
+   				window.alert('ok');
+   				window.alert(result);
+   			}	
+    </script>
+    
+    
   </head>
   
   <body>
-    <center>
+   
       <table width="960px" align="center">
         <tbody>
           <tr>
@@ -27,14 +54,9 @@
           </tr>
           <tr>
             <td align="center">
-              <center>
-                <div class="stepLine">
-                  <div title="이용약관" class="stepDot activeStep"></div>
-                  <div title="실명인증" class="stepDot"></div>
-                  <div title="정보입력" class="stepDot"></div>
-                  <div title="가입완료" class="stepDot"></div>
-                </div>
-              </center>
+             
+                
+             
               <br>
               <br>
               <br>
@@ -193,8 +215,8 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <input type="checkbox">이용약관에 동의합니다.
+                    <td onclick="check_on()">
+                      <input type="checkbox" id="ch1" name="check_1">이용약관에 동의합니다.
                       <br>
                       <br>
                       <br>
@@ -251,8 +273,8 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <input type="checkbox">개인정보 수집 및 이용에 대한 안내에 동의합니다.</td>
+                    <td onclick="check_on()">
+                      <input type="checkbox" id="ch2" name="check_2" >개인정보 수집 및 이용에 대한 안내에 동의합니다.</td>
                   </tr>
                 </tbody>
               </table>
@@ -262,48 +284,13 @@
       </table>
       <br>
       <br>
-      <a href="#"> <button type="button" class="btn_order" style="margin:10px;">확인</button></a>
+      <div style="margin:auto 500px">
+      <a href="#"> <button type="button" id="order" class="btn_order1" style="margin:10px;" onclick="check_ok()">확인</button></a>
       <a href="#"> <button type="button" class="btn_cancel1" style="margin:10px;">취 소 </button></a>
-      <!--풋터-->
-      <br>
-      <br>
-      <br>
-      <table width="960" align="center">
-        <tbody>
-          <tr>
-            <td align="center" colspan="2">
-              <br>
-              <br>
-              <font color="#a4a4a4" size="2">cell center</font>
-              <font color="#f67001" size="2">1599.1234</font>
-              <font color="#a4a4a4" size="2">wekdays am 10:00 ~ pm 6:00</font>
-              <font color="#f67001" size="2">lunch. pm 1:00 ~ pm 2:00</font>
-              <font color="#a4a4a4" size="2">sat, syn, holiday off.</font>
-              <hr>
-            </td>
-          </tr>
-          <tr>
-            <td align="center" id="foot">
-              <a href="#"><font size="3">풋터메뉴1&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-              <a href="#"><font size="3">풋터메뉴2&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-              <a href="#"><font size="3">풋터메뉴3&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-              <a href="#"><font size="3">풋터메뉴4</font></a>
-            </td>
-            <td rowspan="2" width="70" align="right">풋터
-              <br>로고
-              <br>자리</td>
-          </tr>
-          <tr>
-            <td align="center" id="foot">
-              <font color="#a4a4a4" size="2">상호 / oooo &nbsp;&nbsp; 대표자 / ooo &nbsp;&nbsp; 개인정보책임자 / ooo &nbsp;&nbsp;
-                이메일 / oooooooo@gmail.com
-                <br>사업자번호 / 123-12-12345 &nbsp;&nbsp; 통신판매업신고번호 / 제 2015-서울oo-000호
-                <br>전화번호 / 1599-1234 &nbsp;&nbsp; 주소 / 서울특별시 oo구 oo동 oo-o oo빌딩</font>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </center>
+      </div>
+      
+     
+    
   </body>
 
 </html>

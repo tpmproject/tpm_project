@@ -176,8 +176,8 @@ public class MemberController {
 	
 	/** 회원 가입 - 성향입력 페이지 이동 */
 	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.GET)
-	public ModelAndView memberAddTendencyForm(MemberDTO mdto){
-		
+	public ModelAndView memberAddTendencyForm(MemberDTO mdto ,String check_agr){
+		System.out.println(check_agr);
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("성향페이지에서 mdto "+mdto.getMember_id());
