@@ -658,6 +658,15 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	cNode.appendChild(dNode);
 	closem();
 	document.newWork.reset();
+	
+	$("#menu-close").click(function(e) {
+	  e.preventDefault();
+	  $("#sidebar-wrapper").toggleClass("active");
+	});
+	$(".menu-toggle").click(function(e) {
+	  e.preventDefault();
+	  $("#sidebar-wrapper").toggleClass("active");
+	});
 }
 function updateWork(){
  	var work_member=document.getElementById('work_m2');

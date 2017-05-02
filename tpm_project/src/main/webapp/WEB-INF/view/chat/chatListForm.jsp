@@ -315,28 +315,28 @@ $(function(){
         height: '650px', // 스크롤 처리할 div 의 길이
         start: 'bottom' // 스크롤의 시작 위치
     }).bind('slimscrolling', function(e, pos) {
-    	//window.alert("Scroll value: " + pos + "px");
+    	////window.alert("Scroll value: " + pos + "px");
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
     $('#chat_project_list_div').slimScroll({
         height: '296px' // 스크롤 처리할 div 의 길이
     }).bind('slimscrolling', function(e, pos) {
-    	//window.alert("Scroll value: " + pos + "px");
+    	////window.alert("Scroll value: " + pos + "px");
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
     $('#chat_channel_list_div').slimScroll({
         height: '296px' // 스크롤 처리할 div 의 길이
     }).bind('slimscrolling', function(e, pos) {
-    	//window.alert("Scroll value: " + pos + "px");
+    	////window.alert("Scroll value: " + pos + "px");
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
     $('#chat_member_list_div').slimScroll({
         height: '296px' // 스크롤 처리할 div 의 길이
     }).bind('slimscrolling', function(e, pos) {
-    	//window.alert("Scroll value: " + pos + "px");
+    	////window.alert("Scroll value: " + pos + "px");
        // $('#testDivOut2').append("Scroll value: " + pos + "px");
     });
     
@@ -366,7 +366,7 @@ $(function(){
 		if(keycode == '13'){
 			//InsertChatContent();
 			if(event.shiftKey){
-				window.alert('1');
+				//window.alert('1');
 			}
 		}
 		event.stopPropagation();
@@ -390,7 +390,7 @@ $(function(){
 		if(keycode == '13'){
 			//InsertChatContent();
 			if(event.shiftKey){
-				window.alert('1');
+				//window.alert('1');
 			}
 		}
 		event.stopPropagation();
@@ -409,10 +409,10 @@ $(function(){
 });
 
 function chatConnect() {
-	/* wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
 	wsocket = new SockJS(
-			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); 
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
+	/* wsocket = new SockJS(
+			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);  */
 	wsocket.onopen = onChatOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onChatMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onChatClose; // 연결 해체 후 메세지
@@ -421,7 +421,7 @@ function disChatConnect() {
 	wsocket.close();
 }
 function onChatOpen(evt) {
-	window.alert('연결되었습니다.');
+	//window.alert('연결되었습니다.');
 }
 function onChatMessage(evt) {
 	var data = evt.data;
@@ -433,7 +433,7 @@ function onChatMessage(evt) {
 	}
 }
 function onChatClose(evt) {
-	window.alert('연결을 끊었습니다.');
+	//window.alert('연결을 끊었습니다.');
 }
 
 //function chatSend(chat_idx, member_idx, member_name, chat_content, chat_date) {
@@ -489,7 +489,7 @@ function showChatContent(cpCode, cpValue, cpName, me){
 				 chat_cp_value : cpValue },
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			window.alert(JSON.stringify(json));
+			//window.alert(JSON.stringify(json));
 			var msg = '';
 			for(var i = 0 ; i < json.length ; i++){		
 				if(i == 0){
@@ -511,7 +511,7 @@ function showChatContent(cpCode, cpValue, cpName, me){
 			}
 			$('#chat_content_ul').html(msg);
 			
-			//window.alert($("#chat-box").height());
+			////window.alert($("#chat-box").height());
 			$('#chat-box').slimScroll({ scrollTo: $("#chat_message_div").height() });
 			$('#chat_content_cpname').html(currCpName);
 			
@@ -532,7 +532,7 @@ function settingCpMember(){
 				 chat_cp_value : currCpValue },
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
-			window.alert(JSON.stringify(json));
+			////window.alert(JSON.stringify(json));
 			var msg = '';
 			for(var i = 0 ; i < json.length; i++){
 				msg += '<tr class="list-border-left" style="cursor: pointer;">';
@@ -646,7 +646,7 @@ function InsertChatContent(data) {
 			dataType : 'json',
 			success : function(json) {
 				// 입력 성공시..
-				window.alert(JSON.stringify(json));
+				//window.alert(JSON.stringify(json));
 				if(json != false){
 					// 소켓을 통해 메세지를 전달한다.
 					//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
@@ -679,7 +679,7 @@ function InsertChannel(){
 		dataType : 'json',
 		success : function(json) {
 			// 입력 성공시..
-			//window.alert(JSON.stringify(json));
+			////window.alert(JSON.stringify(json));
 			if(json != false){
 				// 소켓을 통해 메세지를 전달한다.
 				//chatSend(json.chat_idx, json.member_idx, json.mdto.member_name, json.chat_content, json.chat_date);
@@ -700,7 +700,7 @@ function reLoadChannelList(){
 		dataType : 'json',
 		success : function(json) {
 			// 입력 성공시..
-			window.alert(JSON.stringify(json));
+			//window.alert(JSON.stringify(json));
 			var innerMsg = '';
 			for(var i = 0 ; i < json.length; i++){
 				innerMsg += '<tr class="list-border-left" onclick="showChatContent(\'C\',\'' + json[i].channel_idx + '\', \'' + json[i].channel_name +'\',this)" style="cursor: pointer;">';
@@ -722,7 +722,7 @@ function showCreateChannelModal(){
 			type : 'post',
 			dataType : 'json', 
 			success : function(json) {
-				window.alert(JSON.stringify(json));
+				//window.alert(JSON.stringify(json));
 				initCreateChannelModal(json);
 			}
 		});

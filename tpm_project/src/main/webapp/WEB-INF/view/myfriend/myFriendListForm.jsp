@@ -48,7 +48,7 @@
 			msg += 			'<div class="pull-right btn-group-sm"> ';
 			msg += 				'<a href="javascript:goInsert_member(' + i + ')" class="btn btn-success tooltips" ';
 			msg += 					'data-placement="top" data-toggle="tooltip" ';
-			msg += 					'data-original-title="Add"> <i class="fa fa-user-plus"></i> ';
+			msg += 					' > <i class="fa fa-user-plus"></i> ';
 
 			msg += 				'</a> ';
 			msg += 			'</div> ';
@@ -104,7 +104,7 @@
 			data : param,
 			dataType : 'json', // 제이슨 형식으로 넘어온다.
 			success : function(json) {
-				window.alert(JSON.stringify(json));
+				//window.alert(JSON.stringify(json));
 				search_modal_setting(json);
 				checkFirst = false;
 			}
