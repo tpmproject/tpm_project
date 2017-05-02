@@ -232,13 +232,19 @@ public class ProjectController {
 	public ModelAndView projectEvaluationForm(ProjectMemberDTO bdto){
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("project/projectEvaluationForm");
+		
 		ProjectDTO pdto=projectDAO.projectSearch(bdto);
 		ArrayList<MemberDTO> arr=tendencyDAO.tendencyList(bdto);
 		int count=arr.size();
 		mav.addObject("pdto",pdto);
 		mav.addObject("arr",arr);
 		mav.addObject("count",count);
+		
+		if(arr==null||arr.size()==0){
+			projectDAO.projectState(bdto.getProject_idx());
+		}
+		
+		mav.setViewName("project/projectEvaluationForm");
 		return mav;
 	}
 	

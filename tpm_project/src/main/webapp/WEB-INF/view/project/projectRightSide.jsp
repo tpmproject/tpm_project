@@ -556,7 +556,6 @@
 				
 				var comment_idx = json.comment_idx;
 				var comment_content = json.comment_content;
-					comment_content = comment_content;
 				//var comment_date = moment(json.comment_date).format('YYYY-MM-DD h:mm:ss a');
 				
 				updateWS('commentUpdate,'+ comment_idx +','+ comment_content);
@@ -594,26 +593,27 @@
 				</div>
 			</div>
 		</div> */
-	
+
+	/* 코멘트 창 바로 보여주기 테스트  
+	function comment_list(work_idx){
+		sessionStorage.setItem('s_work_idx', work_idx);
 		
+		var param = 'work_idx=' + work_idx;
+		action_ajax('commentList.do', param, 'post', 'work_commentList');
+	}
 		
+	function work_commentList(){
+		
+	} */
 		
 	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx,work_title){
 		sessionStorage.setItem('s_work_idx',work_idx);
 		
-		
-		
-		
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
-		
-		
 	}
 	
-		
-		
-		
 	/*파일 리스트 탭눌럿을때 업무리스트  */
 	function project_fileList2(){
 		var work_idx=sessionStorage.getItem('s_work_idx');

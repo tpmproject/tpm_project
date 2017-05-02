@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<%@ include file="/sample/cho/main/import.jsp"%>
+<link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
+	type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
@@ -144,7 +146,11 @@ function addTendency_lResult(){
 </script>
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
+	<c:if test="${count == 0}">
+		<c:redirect url="projectList.do"></c:redirect>
+	</c:if>
 	<%@include file="/WEB-INF/view/header.jsp"%>
+	<section class="content">
 	<div id="pebody" style=" width:100%; height:780px; overflow-y: scroll">
 		<div style="margin-bottom: 30px;">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}</span>
@@ -240,5 +246,7 @@ function addTendency_lResult(){
 			</div>
 		</c:forEach>
 	</div>
+	</section>
+	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

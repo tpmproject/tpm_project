@@ -54,7 +54,7 @@
 	    function deletedo(){
 	  	  var id = document.memberInfoForm.member_id.value;
 	  	  
-	  	  var confirm = window.comfirm('정말 탈퇴하시겠습니까?');
+	  	  var confirm = window.confirm('정말 탈퇴하시겠습니까?');
 	  	  
 	  	  if(confirm){
 	  	  	location.href='memberDel.do?id='+id;

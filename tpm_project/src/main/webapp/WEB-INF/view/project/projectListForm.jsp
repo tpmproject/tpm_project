@@ -461,7 +461,7 @@ img {
 																				<c:when test="${i.project_state == 1 }">
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																						<div class="stats" id="stats${i.project_idx}">
-																							<span class="print" rel="tooltip" title="진행중" >
+																							<span class="print" rel="tooltip" title="평가를 원하시면 클릭하세요!" >
 																								<a class="btn btn-link"  onclick="proState(${i.project_idx},${pm_dto.project_level})"
 																								style="color: #3c8dbc;"><i
 																									class="glyphicon glyphicon-time"></i>진행중</a>
