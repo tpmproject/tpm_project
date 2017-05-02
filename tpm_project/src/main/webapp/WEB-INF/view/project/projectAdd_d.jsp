@@ -6,9 +6,10 @@
 String msg=(String)request.getAttribute("msg");
 
 ProjectDTO dto=new ProjectDTO();
-
+String member_id="";
 if(msg==null){
-	dto=(ProjectDTO)request.getAttribute("pdto");	
+	dto=(ProjectDTO)request.getAttribute("pdto");
+	member_id=(String)request.getAttribute("member_id");
 }else if(msg.equals("error")){
 	out.print("{pson:{project_idx:0}}");
 	return;
@@ -20,6 +21,7 @@ if(msg==null){
 		project_name:'<%=dto.getProject_name()%>',
 		project_content:'<%=dto.getProject_content()%>',
 		project_state:<%=dto.getProject_state()%>,
-		project_level:<%=dto.getProject_level()%>
+		project_level:<%=dto.getProject_level()%>,
+		member_id:'<%=member_id%>'
 	}
 }

@@ -377,9 +377,7 @@ img {
 																<div class="main">
 																	<input type="hidden" id="p_idx${i.project_idx}"
 																		value="${i.project_idx}">
-																	<h3 id="pn${i.project_idx}" style="text-align: center; ">
-																		${i.project_name }
-																	</h3>
+																	<h3 id="pn${i.project_idx}" style="text-align: center; ">${i.project_name}</h3>
 																	<p class="profession">TPM Project</p>
 																	<p class="text-center">
 																		<span id="pc${i.project_idx}">${i.project_content }</span>
@@ -406,7 +404,7 @@ img {
 																				test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
 																				<div style="float: right;">
 																					<span rel="tooltip" title="수정"
-																						onclick="projectUpdate('${i.project_idx}','${i.project_name }','${i.project_content}')">
+																						onclick="projectUpdate('${i.project_idx}')">
 																						<i class="glyphicon glyphicon-cog"
 																						style="margin-bottom: 0px;"></i>
 																					</span> <span rel="tooltip" title="삭제"
@@ -425,10 +423,10 @@ img {
 															</div>
 															<div class="content">
 																<div class="main">
-																	<div id="pm_div" style="height: 180px;">
+																	<div id="pm_div${i.project_idx}" class="pm_scroll" style="height: 180px;">
 																	<c:forEach var="pm_dto"
 																		items="${i.project_member_dtos}">
-																		<h5 class="text-center" id="pmlist">${pm_dto.mdtos.member_id}</h5>
+																		<h5 class="text-center" id="pmlist${i.project_idx}">${pm_dto.mdtos.member_id}</h5>
 																	</c:forEach>
 																	</div>
 																	<hr>
@@ -524,20 +522,23 @@ img {
 	<div class="controls">
 		<a id="leftcon" class="left carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="prev"
-			style="width: 100px; margin-top: 245px;" > <span
+			style="width: 100px; margin-top: 245px;margin-bottom: 200px;" > <span
 			class="glyphicon glyphicon-triangle-left" aria-hidden="true">
 		</span> <span class="sr-only">Previous</span>
 		</a> <a id="rightcon" class="right carousel-control" href="#carousel-example-generic"
 			role="button" data-slide="next"
-			style="width: 100px; margin-top: 245px;"> <span
+			style="width: 100px; margin-top: 245px;margin-bottom: 200px;"> <span
 			class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-
-
-
-
+	<div>
+	<c:forEach var="i" items="${plist}" varStatus="status">
+		
+		<a onclick="javascript:car(${status.index})" align="center">${i.project_name}</a>
+		
+	</c:forEach>
+	</div>
 	<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>

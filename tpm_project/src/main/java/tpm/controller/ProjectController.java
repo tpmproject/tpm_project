@@ -183,7 +183,7 @@ public class ProjectController {
 	
 	/** 프로젝트 - 프로젝트 수정 */
 	@RequestMapping(value="projectUpdate.do",  method=RequestMethod.POST)
-	public ModelAndView projectUpdate(ProjectDTO dto,int[] project_member,int[] level){
+	public ModelAndView projectUpdate(ProjectDTO dto,int[] project_member,int[] level,String member_id){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("project/projectAdd_d");
 		
@@ -199,6 +199,7 @@ public class ProjectController {
 				result+=projectDAO.projectMemberInsert(pmdto);
 				
 				mav.addObject("pdto", dto);
+				mav.addObject("member_id", member_id);
 			}
 			
 		}else{

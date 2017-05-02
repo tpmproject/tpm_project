@@ -4,7 +4,7 @@
 		$(main_modal).hide();
 		$(smodal).hide();
 		$('.slimdiv').mCustomScrollbar({axis:"yx"});
-		$('#pm_div').mCustomScrollbar({axis:"yx"});
+		$('.pm_scroll').mCustomScrollbar({axis:"yx"});
 		
 	switch (skin) {
 		case 'white': case 'white-light':skin='#fff'; break;
@@ -21,15 +21,18 @@
 	}	 
 		
  	
+ 	
+ 	
  	$(window).resize(function() {
  		var wid=(window.innerWidth/2)-320;
 		$('#main_modal').css('left',wid+'px');
 		$('#main_modal2').css('left',wid+'px');
  	})
  	
- 	function sideBar(){
- 		var bNode=document.documentElement.lastChild;
- 		$(bNode).toggleClass('skin-blue skin-blue sidebar-collapse sidebar-open');
+ 	function car(i){
+ 		
+ 		$('#carousel-example-generic').carousel(i);
+ 		
  	}
  	
  	
@@ -50,7 +53,10 @@
  	
 	
 	/**프로젝트 수정*/
-	function projectUpdate(idx,name,content){
+	function projectUpdate(idx){
+		var name=$('#pn'+idx).html();
+		var content=$('#pc'+idx).html();
+		
 		var wid=(window.innerWidth/2)-320;
 		$('#main_modal2').css('left',wid+'px');
 		
@@ -469,19 +475,19 @@
 					msg+='<div class="card"><div class="front"><div class="cover" style="background:'+skin+';"></div>';
 					msg+='<div class="content"><div class="main"><input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
 					msg+='<h3 id="pn'+pson.project_idx+'" style="text-align: center; ">';
-					msg+='<span class="hidden-xs">'+pson.project_name+'</span></h3>';
+					msg+=pson.project_name+'</h3>';
 					msg+='<p class="profession">TPM Project</p><p class="text-center">';
 					msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span></p></div>';
 					msg+='<div class="footer"><button class="btn btn-simple" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인</button>';
 					msg+='</div></div></div>';
 
 					msg+='<div class="back"><div class="header">';
-					msg+='<div style="float: right;"><span rel="tooltip" title="수정" onclick="projectUpdate('+pson.project_idx+',\''+pson.project_name+'\',\''+pson.project_content+'\')">';
+					msg+='<div style="float: right;"><span rel="tooltip" title="수정" onclick="projectUpdate('+pson.project_idx+')">';
 					msg+='<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i></span>';
 					msg+='<span rel="tooltip" title="삭제" onclick="projectDelete('+pson.project_idx+')">';
 					msg+='<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i></span></div>';
 					msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5><h4 class="text-center">'+pson.project_name+'</h4></div>';
-					msg+='<div class="content"><div class="main"><div id="pm_div" style="height: 180px;">';
+					msg+='<div class="content"><div class="main"><div id="pm_div'+pson.project_idx+'" style="height: 180px;">';
 													
 //					<c:forEach var="pm_dto"	items="${i.project_member_dtos}">
 					for(var i=0;i<pson.member_dtos.length;i++){
@@ -527,7 +533,7 @@ function updateP(){
 	var lastC = parentD.lastChild;
 	var msg = '';
 	var msg2 = '';
-	
+	var msg3='';
 	var count=0;
 	var pm_exist=0;
 	
@@ -539,10 +545,12 @@ function updateP(){
 			if(count==0){
 				msg+=idx.substring(14);
 				msg2+=$('#select2'+idx.substring(14)).val();
+				msg3+=$('#modal2_content'+idx.substring(14)).children(":contains('@')").html();
 				count++;
 			}else{
 				msg+=','+idx.substring(14);
-				msg2+=','+$('#select2'+idx.substring(14)).val();	
+				msg2+=','+$('#select2'+idx.substring(14)).val();
+				msg3+=','+$('#modal2_content'+idx.substring(14)).children(":contains('@')").html();	
 			}
 			
 			if(idx.substring(14)==member_idx){
@@ -553,6 +561,7 @@ function updateP(){
 				pm_exist++;
 			}
 			
+			
 		}
 		if(childD==lastC)break;
 		childD = childD.nextSibling;
@@ -561,7 +570,7 @@ function updateP(){
 	var my_idx = member_idx;
 	param += '&project_member='+ msg;
 	param += '&level=' + msg2;
-	
+	param += '&member_id='+msg3;
 	if(pm_exist==0){
 		window.alert('프로젝트 책임자가 없습니다.');
 	}else{
@@ -577,24 +586,27 @@ function updatePResult(){
 			if(pson.project_idx==0){
 				window.alert('오류 발생!');
 			}else{
-				if(updateProject_me==0){
-					/*$('#project_div'+pson.project_idx).remove();*/
-					/*$('#carousel-example-generic').carousel('prev');
-					var delp=$('#project_div'+pson.project_idx).parent();
-					//1초뒤 삭제
-					setTimeout(function(){delp.remove();},1000);
-					updateProject_me=0;*/
-					closem();
-					return;
-				}
+				
 				updateProject_me=0;
 				var p_name=document.getElementById('pn'+pson.project_idx);
 				document.getElementById('pc'+pson.project_idx).innerHTML=pson.project_content;
 				p_name.innerHTML=pson.project_name;	
 				document.getElementById('apn'+pson.project_idx).innerHTML=pson.project_name;
+				
+				/**멤버리스트*/
+				var p_mlist=pson.member_id.split(',');
+				var msg='';
+				for(var i=0;i<p_mlist.length;i++){
+					
+					msg+='<h5 class="text-center" id="pmlst">'+p_mlist[i]+"</h5>";
+				}
+				
+				$('#pm_div'+pson.project_idx).html(msg);
+				$('#pm_div'+pson.project_idx).mCustomScrollbar({axis:"yx"});
+				
 				myLevel=0;
 			}
-			/*location.reload();*/
+			
 			closem();
 		}
 	}
