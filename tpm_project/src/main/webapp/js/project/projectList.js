@@ -475,7 +475,7 @@
 					msg+='<div class="card"><div class="front"><div class="cover" style="background:'+skin+';"></div>';
 					msg+='<div class="content"><div class="main"><input type="hidden" id="p_idx'+pson.project_idx+'" value="'+pson.project_idx+'">';
 					msg+='<h3><a id="pn'+pson.project_idx+'" style="text-align: center;color:black; ">';
-					msg+=pson.project_name+'</a><i class="glyphicon glyphicon-flag" style="color:red;"></i></h3>';
+					msg+=pson.project_name+'</a><i id="ps'+pson.project_idx+'" class="glyphicon glyphicon-flag" style="color:red;"></i></h3>';
 					msg+='<p class="profession">TPM Project</p><p class="text-center">';
 					msg+='<span id="pc'+pson.project_idx+'">'+pson.project_content+'</span></p></div>';
 					msg+='<div class="footer"><button class="btn btn-simple" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i>&nbsp; 프로젝트 확인</button>';
@@ -721,4 +721,31 @@ function rotateCard(btn){
     } else {
         $card.addClass('hover');
     }
+}
+
+function proState(p_idx,p_level){
+	if(p_level==3000){
+		var param='project_idx='+p_idx;
+		sendRequest('projectStateUp.do',param,proStateResult,'POST');
+	}
+}
+function proStateResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result=XHR.responseText;
+			var p_idx=eval('('+result+')');
+			if(p_idx<=0){
+				window.alert('오류 발생');
+			}else{
+				$('#ps'+p_idx).css('color','#f39c12');
+				
+				var msg='<span class="print" rel="tooltip" title="평가하기">';
+				msg+='<a onclick="location.href=\'projectEvaluation.do?project_idx='+p_idx+'&project_level=3000&member_idx='+member_idx+'\'"';
+				msg+='class="btn btn-link" style="color: #f39c12"><i class="glyphicon glyphicon-check"></i>평가하기</a></span>';
+				$('#stats'+p_idx).html(msg);
+				
+			}
+		}
+	}
+	
 }

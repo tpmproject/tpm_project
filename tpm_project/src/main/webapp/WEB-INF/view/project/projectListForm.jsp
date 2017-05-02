@@ -360,7 +360,7 @@ img {
 																	<input type="hidden" id="p_idx${i.project_idx}"
 																		value="${i.project_idx}">
 																	<h3><a id="pn${i.project_idx}" style="text-align: center; color: black; ">${i.project_name}</a>
-																	<i class="glyphicon glyphicon-flag" style="color: ${icon_color};"></i></h3>
+																	<i id="ps${i.project_idx}" class="glyphicon glyphicon-flag" style="color: ${icon_color};"></i></h3>
 																	<p class="profession">TPM Project</p>
 																	<p class="text-center">
 																		<span id="pc${i.project_idx}">${i.project_content }</span>
@@ -425,7 +425,7 @@ img {
 																			<c:choose>
 																				<c:when test="${i.project_state == 3}">
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																						<div class="stats">
+																						<div class="stats" id="stats${i.project_idx}">
 																							<span class="print" rel="tooltip" title="완료상태">
 																								<a href="#" class="btn btn-link"
 																								style="color: green;"><i
@@ -437,7 +437,7 @@ img {
 																				</c:when>
 																				<c:when	test="${i.project_state == 2 }">
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																						<div class="stats">
+																						<div class="stats" id="stats${i.project_idx}">
 																						<c:choose>
 																						<c:when test="${pm_dto.project_level == 3000}">
 																							 <span class="print" rel="tooltip"
@@ -460,7 +460,7 @@ img {
 																				</c:when>
 																				<c:when test="${i.project_state == 1 }">
 																					<c:if test="${pm_dto.member_idx eq sessionScope.s_member_idx }">
-																						<div class="stats">
+																						<div class="stats" id="stats${i.project_idx}">
 																							<span class="print" rel="tooltip" title="진행중" >
 																								<a class="btn btn-link"  onclick="proState(${i.project_idx},${pm_dto.project_level})"
 																								style="color: #3c8dbc;"><i
