@@ -156,7 +156,7 @@ function cancle(){
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                         <div class="col-sm-6">
                             <input class="form-control" id="inputPassword" type="password" name="member_pwd" placeholder="비밀번호"required="required">
-                            <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
+                            
                         </div>
                     </div>
                     <div class="form-group">
