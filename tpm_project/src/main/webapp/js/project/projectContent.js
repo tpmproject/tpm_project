@@ -69,7 +69,7 @@ function onMessage(evt) {
 		ws_categoryAdd(idx,name);
 		
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)+220;
+		wid=parseInt(wid)+230;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
