@@ -266,7 +266,7 @@
 			start: 'bottom'
 		});
 	});
-
+	
 	function commentAdd(){
 	
 	var work_idx = document.newComment.work_idx.value;
@@ -279,6 +279,7 @@
 		window.alert('코멘트를 입력해주세요');
 		return;
 	} 
+	
 		$.ajax({
 			url : 'commentAdd.do',
 			type : 'post',
@@ -305,7 +306,7 @@
 		
 		var cNode = document.getElementById('comment-box');
 		var dNode = document.createElement('div');
-		
+	
 		var msg = '';
 		
 		msg += 	'<div class="box-body chat" id="comment-box">';
@@ -327,6 +328,8 @@
 		dNode.innerHTML = msg;
 		cNode.appendChild(dNode);
 		//showComment();
+		$('#comment').val("");
+		
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	
