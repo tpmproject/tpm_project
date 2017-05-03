@@ -3,7 +3,7 @@
  * ------------
  */
 .skin-purple .main-header .navbar {
-  background-color: #605ca8;
+  background-color: #eccfc9;
 }
 .skin-purple .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -16,20 +16,20 @@
 .skin-purple .main-header .navbar .nav .open > a:focus,
 .skin-purple .main-header .navbar .nav > .active > a {
   background: rgba(0, 0, 0, 0.1);
-  color: #f6f6f6;
+  color: #eccfc9;
 }
 .skin-purple .main-header .navbar .sidebar-toggle {
   color: #ffffff;
 }
 .skin-purple .main-header .navbar .sidebar-toggle:hover {
-  color: #f6f6f6;
+  color: #eccfc9;
   background: rgba(0, 0, 0, 0.1);
 }
 .skin-purple .main-header .navbar .sidebar-toggle {
   color: #fff;
 }
 .skin-purple .main-header .navbar .sidebar-toggle:hover {
-  background-color: #555299;
+  background-color: #eccfc9;
 }
 @media (max-width: 767px) {
   .skin-purple .main-header .navbar .dropdown-menu li.divider {
@@ -39,19 +39,19 @@
     color: #fff;
   }
   .skin-purple .main-header .navbar .dropdown-menu li a:hover {
-    background: #555299;
+    background: #eccfc9;
   }
 }
 .skin-purple .main-header .logo {
-  background-color: #555299;
+  background-color: #eccfc9;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }
 .skin-purple .main-header .logo:hover {
-  background-color: #545096;
+  background-color: #eccfc9;
 }
 .skin-purple .main-header li.user-header {
-  background-color: #605ca8;
+  background-color: #eccfc9;
 }
 .skin-purple .content-header {
   background: transparent;
@@ -67,7 +67,7 @@
 }
 .skin-purple .sidebar-menu > li.header {
   color: #4b646f;
-  background: #1a2226;
+  background: #eccfc9;
 }
 .skin-purple .sidebar-menu > li > a {
   border-left: 3px solid transparent;
@@ -75,8 +75,8 @@
 .skin-purple .sidebar-menu > li:hover > a,
 .skin-purple .sidebar-menu > li.active > a {
   color: #ffffff;
-  background: #1e282c;
-  border-left-color: #605ca8;
+  background: #eccfc9;
+  border-left-color: #eccfc9;
 }
 .skin-purple .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
@@ -97,7 +97,7 @@
 }
 .skin-purple .sidebar-form {
   border-radius: 3px;
-  border: 1px solid #374850;
+  border: 1px solid #eccfc9;
   margin: 10px 10px;
 }
 .skin-purple .sidebar-form input[type="text"],
