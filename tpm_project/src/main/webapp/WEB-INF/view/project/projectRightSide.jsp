@@ -46,7 +46,7 @@
     width: 50px;
 	background-color:silver;
     position: fixed;
-    height: 78%;
+    height: 83%;
 
     margin-top: 33px;
     z-index: 1020;

@@ -33,15 +33,10 @@
 function fileUpload(work_idx){
 	$('input[name=work_idx]').attr('value',work_idx); 
 }
-function show(){
-	window.alert('업로드 이벤트 발생');
-}
-
-
 
 $(function(){
     $("#uploadbutton").click(function(){
-    	window.alert('실행됨');
+    //window.alert('실행됨');
         var form = $('form')[0];
         var formData = new FormData(form);
             $.ajax({
@@ -57,14 +52,37 @@ $(function(){
                
            });
             
+            
             setTimeout("project_fileList2()", 500);
-            setTimeout("project_fileList2()", 5000);
+            setTimeout("project_fileList2()", 8000);
         }); 
     
 })  
 
 
+function show(){
+	var uploadbutton = document.getElementById("uploadbutton"); 
+	var resetbutton = document.getElementById("resetbutton"); 
+	uploadbutton.style.display = ""; //동의 페이지 none 
+	resetbutton.style.display = ""; 
+}
+function bu_close(){
+	var uploadbutton = document.getElementById("uploadbutton"); 
+	
+	
+	var resetbutton = document.getElementById("resetbutton"); 
+	uploadbutton.style.display = "none"; //동의 페이지 none 
+	resetbutton.style.display = "none"; 
+	
+}
 
+function oneClose(){
+	//window.alert('들어옴')
+	var uploadbutton = document.getElementById("uploadbutton"); 
+	var resetbutton = document.getElementById("resetbutton"); 
+	uploadbutton.style.display = "none"; //동의 페이지 none 
+	resetbutton.style.display = "none"; 
+}
 
 </script>
   </head>
@@ -91,13 +109,14 @@ $(function(){
             <span class="btn btn-success fileinput-button">
               <i class="glyphicon glyphicon-plus"></i>
               <span>첨부파일</span>
-              <input type="file" name="file_upload" multiple="multiple">
+              <input type="file" name="file_upload" multiple="multiple" onchange="show()">
             </span>
-            <button type="button" id="uploadbutton" class="btn btn-primary start" >
+            
+            <button type="button" id="uploadbutton" class="btn btn-primary start" onclick="bu_close()" style="display:none">
               <i class="glyphicon glyphicon-upload"></i>
               <span>모두 올리기</span>
             </button>
-            <button type="reset" class="btn btn-warning cancel">
+            <button type="reset"  id="resetbutton" class="btn btn-warning cancel" onclick="bu_close()" style="display:none">
               <i class="glyphicon glyphicon-ban-circle"></i>
               <span>모두 취소</span>
             </button>
@@ -117,6 +136,7 @@ $(function(){
     
     <!-- The template to display files available for upload -->
     <script id="template-upload" type="text/x-tmpl">
+
       {% for (var i=0, file; file=o.files[i]; i++) { 
 						var filename1=file.name.toLowerCase(); 
 						var filetype=filename1.substring(filename1.lastIndexOf('.')+1);
@@ -144,7 +164,7 @@ $(function(){
                     </td>
                     <td>
                         {% if (!i && !o.options.autoUpload) { %}
-                            <button class="btn btn-primary start" disabled >
+                            <button onclick="oneClose()" id="but_cl" class="btn btn-primary start" disabled style="display:none">
                                 <i class="glyphicon glyphicon-upload"></i>
                                 <span>확인</span>
                             </button>
