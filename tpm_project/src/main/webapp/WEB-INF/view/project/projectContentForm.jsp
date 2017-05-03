@@ -146,7 +146,7 @@ var skin_color='';
   <!--미리보기 모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
-	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*220+100}px">
+	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*230+100}px">
 		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
