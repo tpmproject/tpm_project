@@ -734,7 +734,6 @@ function uWorkResult(){
 	}
 }
 function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work_confirm,work_state,member){
-	window.alert(member);
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
