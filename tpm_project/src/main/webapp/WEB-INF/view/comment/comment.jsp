@@ -17,7 +17,7 @@
 <body>
 <div class="container" id="commentBody">
 	<div class="row">
-		<div class="col-md-12" style="height: 600px; margin: 0px;">
+		<div class="col-md-12" style="height: 400px; margin: 0px;">
 			<div class="box-header">
 				<i class="fa fa-comments-o"></i>
 				<h3 class="box-title">Comment</h3>
