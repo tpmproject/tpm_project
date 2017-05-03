@@ -146,7 +146,7 @@ var skin_color='';
   <!--미리보기 모달 끝  -->
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	
-	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*230+100}px">
+	<div id="cbody" style="margin-left:20px; width:${(pdto.category_num +2)*220+100}px">
 		<div class="projectTitle">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}
 			<c:if test="${pdto.project_level != 1000 }">
@@ -217,11 +217,11 @@ var skin_color='';
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
-											<td id="wd${wdto.work_idx}" colspan="2">
-												<div class="table_i glyphicon glyphicon-calendar"></div>
-												&nbsp;${wstart}<br>
+											<td colspan="2">
+												<div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;
+												<span id="wd${wdto.work_idx}">${wstart}<br>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												~${wend}
+												~${wend}</span>
 											</td>
 										</tr>
 										<tr>

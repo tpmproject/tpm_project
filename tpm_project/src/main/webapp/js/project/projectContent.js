@@ -69,7 +69,7 @@ function onMessage(evt) {
 		ws_categoryAdd(idx,name);
 		
 		var wid=$('#mCSB_1_container').css('width');
-		wid=parseInt(wid)+230;
+		wid=parseInt(wid)+220;
 		$('#mCSB_1_container').css('width',wid+'px');
 		return;
 	}
@@ -131,6 +131,7 @@ function onMessage(evt) {
 		var work_state=data[7];
 		var member=data[8];	
 		ws_workUpdate(work_idx, category_idx, work_title, work_start, work_end, work_confirm, work_state, member);
+		return
 	}
 	//업무 삭제
 	if(data[0]=='workDel'){
@@ -538,16 +539,16 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	msg+='			<tbody>';
 	msg+='				<tr>';
 	msg+='					<td id="wd'+work_idx+'" colspan="2">';
-	msg+='						<div class="table_i glyphicon glyphicon-calendar"></div>';
-	msg+='						&nbsp;'+work_start+'<br>';
+	msg+='						<div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;';
+	msg+='						<span>'+work_start+'<br>';
 	msg+='						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-	msg+='						~'+work_end;
+	msg+='						~'+work_end+'</span>';
 	msg+='					</td>';
 	msg+='				</tr>';
 	msg+='				<tr>';
-	msg+='					<td id="wm'+work_idx+'" colspan="2">';
+	msg+='					<td colspan="2">';
 	msg+='						<div class="table_i glyphicon glyphicon-user"></div>';
-	msg+='						<span>'+member+'</span>&nbsp';
+	msg+='						<span id="wm'+work_idx+'">'+member+'</span>&nbsp';
 	msg+='					</td>';
 	msg+='				</tr>';
 	msg+='				<tr>';
@@ -692,6 +693,11 @@ function updateWork(){
 		if(fch==lch)break;
 		fch=fch.nextSibling;
 	}
+	
+ 	if (msg == null || msg == "") {
+		window.alert('업무 멤버가 없습니다.');
+		return;
+	}
 
 	var param = 'work_idx=' + document.changeWork.work_idx.value
 	+'&project_idx=' + project_idx
@@ -699,13 +705,15 @@ function updateWork(){
 	+'&workdateup=' + document.changeWork.workdateup.value 
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
-
+	
+	window.alert(param);
 	sendRequest('workUpdate.do', param, uWorkResult, 'POST');
 }
 function uWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
+			window.alert(result);
 			if (result != null) {
 				var work=eval('('+result+')');
 				var work_idx=work.work_idx;
@@ -726,6 +734,7 @@ function uWorkResult(){
 	}
 }
 function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work_confirm,work_state,member){
+	window.alert(member);
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
