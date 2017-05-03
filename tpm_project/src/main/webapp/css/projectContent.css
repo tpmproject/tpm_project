@@ -145,6 +145,7 @@ a {
 .tenmember_div{
 	display: inline-block;
 	width: 35%;
+	height:320px;
 	padding: 10px;
 	
 }
@@ -161,7 +162,7 @@ a {
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
 }
-#chartdiv {
+#chartdiv, #chartdiv2 {
     width: 70%;
-    height: 250px;
+    height: 320px;
 }

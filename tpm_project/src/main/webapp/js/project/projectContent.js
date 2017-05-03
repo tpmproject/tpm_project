@@ -46,7 +46,29 @@ function tenChart(e,s,t,j,i,n,f,p){
 	      	  "valueField": "point" } ] ,
  			  "categoryField": "tendency" }) ;
 }
-
+function utenChart(e,s,t,j,i,n,f,p){
+	var chart = AmCharts.makeChart( "chartdiv2", {
+	    "type": "radar",
+	    "theme": "light",
+	    "dataProvider": [ 
+	     	{ "tendency": "외향적", "point": e },
+	        { "tendency": "감각적", "point": s },
+	        { "tendency": "사고적", "point": t },
+	        { "tendency": "판단적", "point": j },
+	        { "tendency": "내향적", "point": i },
+	        { "tendency": "직관적", "point": n },
+	        { "tendency": "감정적", "point": f },
+	        { "tendency": "인식적", "point": p } ],
+	    "valueAxes": [
+	    	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
+	    "startDuration": 2,
+	    "graphs": [
+	    	{ "balloonText": "[[value]]",
+	      	  "bullet": "round",
+	      	  "lineThickness": 2,
+	      	  "valueField": "point" } ] ,
+ 			  "categoryField": "tendency" }) ;
+}
 //ws 응답시 @overriding
 function onMessage(evt) {
 	var unsplit_data = evt.data;
@@ -713,7 +735,6 @@ function uWorkResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			window.alert(result);
 			if (result != null) {
 				var work=eval('('+result+')');
 				var work_idx=work.work_idx;
@@ -1128,27 +1149,26 @@ function showChecklist(work_idx){
 }
 function showTen(member_idx){
 	var param = 'member_idx='+member_idx;
-	var tenT=$('#work_member'+member_idx).offset().top;
+/*	var tenT=$('#work_member'+member_idx).offset().top;
 	var tenL=$('#work_member'+member_idx).offset().left+220;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
-	$('#tendency_pop').fadeIn();
+	$('#tendency_pop').fadeIn();*/
 	sendRequest('recommand.do',param,tendencyListResult,'POST');
 }
 function showTen2(member_idx){
 	var param = 'member_idx='+member_idx;
-	var tenT=$('#work2_member'+member_idx).offset().top;
+/*	var tenT=$('#work2_member'+member_idx).offset().top;
 	var tenL=$('#work2_member'+member_idx).offset().left+200;
 	$('#tendency_pop').css('top',tenT+'px');
 	$('#tendency_pop').css('left',tenL+'px');
-	$('#tendency_pop').fadeIn();
-	sendRequest('recommand.do',param,tendencyListResult,'POST');
+	$('#tendency_pop').fadeIn();*/
+	sendRequest('recommand.do',param,utendencyListResult,'POST');
 }
 function tendencyListResult(){
 	if (XHR.readyState == 4) {
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
-			
 			var json = JSON.parse(result);	
 			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
 			for (var i = 0; i < members.length; i++) {
@@ -1164,6 +1184,30 @@ function tendencyListResult(){
 				var p=member.member_tp;
 				
 				tenChart(e,s,t,j,i,n,f,p);
+			}
+			
+		}
+	}
+}
+function utendencyListResult(){
+	if (XHR.readyState == 4) {
+		if (XHR.status == 200) {
+			var result = XHR.responseText;
+			var json = JSON.parse(result);	
+			var members = json.members; // 맵 객체로부터 members 값인 배열을 가져온다.
+			for (var i = 0; i < members.length; i++) {
+				var member = members[i];
+				$('#ten').html(member.member_name);
+				var e=member.member_te;
+				var s=member.member_ts;
+				var t=member.member_tt;
+				var j=member.member_tj;
+				var i=member.member_ti;
+				var n=member.member_tn;
+				var f=member.member_tf;
+				var p=member.member_tp;
+				
+				utenChart(e,s,t,j,i,n,f,p);
 			}
 			
 		}
