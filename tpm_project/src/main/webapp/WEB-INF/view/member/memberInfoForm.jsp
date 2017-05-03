@@ -22,10 +22,9 @@
 	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<!-- 업무 분석 도넛 그래프 -->
 	<!-- <script src="https://www.amcharts.com/lib/3/pie.js"></script> -->
-	<script src="sample/cho/main/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	<script src="sample/cho/main/plugins/morris/morris.min.js"></script>
-	<script src="sample/cho/main/plugins/chartjs/Chart.min.js"></script>
+	<script src="plugins/morris/morris.min.js"></script>
+	<script src="plugins/chartjs/Chart.min.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
 	
 <title>Insert title here</title>
