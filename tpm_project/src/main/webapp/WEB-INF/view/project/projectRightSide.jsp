@@ -627,6 +627,8 @@
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 	}
 
+	
+	
 	/* 파일 검색 */
 	function file_search(work_idx){
 		var work_idx=sessionStorage.getItem('s_work_idx');
@@ -685,6 +687,7 @@
     			if(httpRequest.status == 200){
     					var responseText = httpRequest.responseText;
     					result_process(responseText, ctype);
+    					
     			}
     		} else {
 
@@ -692,11 +695,13 @@
     	}
     	
     }
+	
     function result_process(responseText, ctype) {
 
 		if(ctype == 'WORK_FILELIST'){
 			project_fileList_setting(responseText);	
 			
+			   
 			
 		} else if(ctype == 'FILE_CONTENT'){
 		//	window.alert('result_process');
@@ -706,11 +711,13 @@
 			project_fileList(del_work_idx);
 			
 		} else if(ctype == 'WORK_RE'){
-		
-			project_fileList2();
+			window.alert('들어옴 들');
+			
 		}else {
 			window.alert('잘못된 경로');
 		}
+		
+		
 		
 	}
 
@@ -820,13 +827,13 @@
              
                	msg += ' </tr>';
              
- 
+               	
                	
 		}
 		proejct_filelist.innerHTML = '';
 		proejct_filelist.innerHTML = msg;
-
-
+		
+		
 	}
 	//미리보기 관련
 	function fileContent_setting(responseText) {
@@ -909,7 +916,7 @@
       </div>
       <div class="well" style="height: 620px;">
         <div class="tab-content" style="width:600px; height: 600px;">
-        
+          
           <div class="tab-pane fade in" id="tab1">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>
           </div>
@@ -933,7 +940,7 @@
 	  $(document).ready(function() {
           $(".btn-pref .btn").click(function () {
               $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-              // $(".tab").addClass("active"); // instead of this do the below 
+              $("tab1").addClass("active"); // instead of this do the below 
               $(this).removeClass("btn-default").addClass("btn-primary");   
           });
           });
