@@ -46,7 +46,7 @@
     width: 50px;
 	background-color:silver;
     position: fixed;
-    height: 90%;
+    height: 78%;
 
     margin-top: 33px;
     z-index: 1020;
@@ -371,7 +371,7 @@
 		
 		var work_idx = document.newComment.work_idx.value;
 		var param  = 'work_idx=' + work_idx;
-		window.alert(param);
+		//window.alert(param);
 			
 		//sendRequest('commentList.do', param, showCommentResult, 'POST');
 		
@@ -626,7 +626,7 @@
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 	}
-	
+
 	/* 파일 검색 */
 	function file_search(work_idx){
 		var work_idx=sessionStorage.getItem('s_work_idx');
@@ -696,16 +696,19 @@
 
 		if(ctype == 'WORK_FILELIST'){
 			project_fileList_setting(responseText);	
-			//project_fileList2();
+			
 			
 		} else if(ctype == 'FILE_CONTENT'){
 		//	window.alert('result_process');
 			fileContent_setting(responseText);
-			
-			
+
 		} else if(ctype == 'FILEDEL'){
 			project_fileList(del_work_idx);
-		} else {
+			
+		} else if(ctype == 'WORK_RE'){
+		
+			project_fileList2();
+		}else {
 			window.alert('잘못된 경로');
 		}
 		
@@ -786,7 +789,7 @@
 				msg += '       		</a>';
 				msg += '      	</div>';
 				
-				msg += '      <div class="tw-file-link__title">';
+				msg += '      <div class="tw-file-link__title" style="overflow: hidden;">';
 				msg += '    	 <a href="https://us-backend.taskworld.com/api/upload/20170422%2F54e0a0dc-d029-4841-aba7-f4bec16af98f%2Fh.jpg?message=58fb0a1c12b364f35ac8be3e&amp;title=h.jpg&amp;download=1"';
 				msg += '        		 class="tw-link" download="" target="_blank" style="font-family: inherit; transition: none; text-decoration: none; outline:0;">';
 				msg += ' 	 	<span class="tw-file-link__name">'+file.file_name+'</span></a>';
@@ -870,16 +873,17 @@
 	</div>
 	<div style="width:100%">
 	 <!-- 코멘트 / 파일 탭 윗쪽  -->
-      <div class="card hovercard"style="background-color: #f2f2f2;">
+      <div class="card hovercard"style="background-color: #f2f2f2; height: 50px;">
+      
         <div class="card-background">
          
-         
+ 
         </div>
         <div class="useravatar">
         
         </div>
-        <div class="card-info">
-          <span class="card-title" id="work_title_id">Pamela Anderson</span>
+        <div class="card-info"  style="margin-left:-500px">
+          <span class="card-title" id="work_title_id" style="    font-family: 'Source Sans Pro',sans-serif;">Pamela Anderson</span>
         </div>
       </div>
       

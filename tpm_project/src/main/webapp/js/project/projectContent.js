@@ -1124,7 +1124,7 @@ function cateDelResult(){
 function workSide(work_idx,work_title){
 	
 	var id_work_title=document.getElementById('work_title_id'); //업무 사이트 창에 업무제목 띄우기
-	id_work_title.innerHTML = '업무명:'+work_title;
+	id_work_title.innerHTML = '<i class="glyphicon glyphicon-chevron-right"></i>'+work_title;
 	
 	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);

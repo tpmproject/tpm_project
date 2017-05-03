@@ -33,7 +33,9 @@
 function fileUpload(work_idx){
 	$('input[name=work_idx]').attr('value',work_idx); 
 }
-
+function show(){
+	window.alert('업로드 이벤트 발생');
+}
 </script>
   </head>
   
@@ -59,7 +61,7 @@ function fileUpload(work_idx){
             <span class="btn btn-success fileinput-button">
               <i class="glyphicon glyphicon-plus"></i>
               <span>첨부파일</span>
-              <input type="file" name="file_upload" multiple="multiple">
+              <input type="file" name="file_upload" multiple="multiple" onabort="show()">
             </span>
             <button type="submit" class="btn btn-primary start" >
               <i class="glyphicon glyphicon-upload"></i>
@@ -112,7 +114,7 @@ function fileUpload(work_idx){
                     </td>
                     <td>
                         {% if (!i && !o.options.autoUpload) { %}
-                            <button class="btn btn-primary start" disabled>
+                            <button class="btn btn-primary start" disabled >
                                 <i class="glyphicon glyphicon-upload"></i>
                                 <span>확인</span>
                             </button>
