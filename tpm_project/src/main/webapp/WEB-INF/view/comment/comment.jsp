@@ -11,7 +11,7 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script>
 	function comment(work_idx) {
-		window.alert('comment페이지 업무 idx='+work_idx);
+		//window.alert('comment페이지 업무 idx='+work_idx);
 	}
 </script>
 <body>

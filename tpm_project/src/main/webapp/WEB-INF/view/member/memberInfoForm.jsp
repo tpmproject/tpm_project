@@ -211,7 +211,7 @@
 	  <div class="row">
 	  
         <div class="page-header">
-          <h1> &nbsp;개인 정보 </h1>
+          <h1> &nbsp;&nbsp;&nbsp;개인 정보 </h1>
         </div>
         
         <c:set var="list" value="${userInfo}"/>
