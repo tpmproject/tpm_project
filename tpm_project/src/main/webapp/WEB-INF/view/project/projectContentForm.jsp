@@ -217,22 +217,23 @@ var skin_color='';
 								<table id="workTable${wdto.work_idx}" class="cate_table" ${wdto.work_state eq 3?'style="display:none;"' :'' } >
 									<tbody>
 										<tr>
-											<td id="wd${wdto.work_idx}" colspan="2">
-												<div class="table_i glyphicon glyphicon-calendar"></div>
-												&nbsp;${wstart}<br>
+											<td colspan="2">
+												<div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;
+												<span id="wd${wdto.work_idx}">${wstart}<br>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												~${wend}
+												~${wend}</span>
 											</td>
 										</tr>
 										<tr>
-											<td id="wm${wdto.work_idx}" colspan="2">
-												<div class="table_i glyphicon glyphicon-user"></div> <c:forEach
-													var="mdto" items="${marr}">
+											<td colspan="2">
+												<div class="table_i glyphicon glyphicon-user"></div> 
+												<span id="wm${wdto.work_idx}">
+												<c:forEach var="mdto" items="${marr}">
 													<c:if test="${mdto.work_idx eq wdto.work_idx}">
 														<span>${mdto.member_name}</span>
 													</c:if>
 												</c:forEach>
-
+												</span>
 											</td>
 										</tr>
 										<tr>
@@ -411,10 +412,16 @@ var skin_color='';
 			</div>
 			<div id="btnwork2">
 				<div align="center">
+					<div class="tenmember_div">
+						<h4 class="text-center">성향</h4>
+						<div id="chartdiv" style="width:70%; height:320px;"
+							ondrop="drop3(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
+					</div>
 					<div class="workmember_div">
 						<h4 class="text-center">프로젝트 멤버 목록</h4>
 						<div id="project_m"
-							style="width: 100%; height: 320px; overflow-y: scroll"
+							style="width: 110%; height: 320px; overflow-y: scroll"
 							ondrop="drop3(event)" ondragover="allowDrop(event)"
 							ondragstart="drag(event)"></div>
 					</div>
@@ -422,11 +429,10 @@ var skin_color='';
 						ondragover="allowDrop(event)" ondragstart="drag(event)">
 						<h4 class="text-center">업무 담당자</h4>
 						<div id="work_m"
-							style="width: 100%; height: 320px; overflow-y: scroll"
+							style="width: 110%; height: 320px; overflow-y: scroll"
 							ondrop="drop2(event)" ondragover="allowDrop(event)"
 							ondragstart="drag(event)"></div>
 					</div>
-			
 				</div>
 				<div align="center" style="padding:7px;">
 					<button type="button" class="btn btn-next" style="background-color:#1e282c; color:white;" id="btn-workbefore"
@@ -470,10 +476,16 @@ var skin_color='';
 			</div>
 			<div id="btnwork4">
 				<div align="center">
+ 					<div class="tenmember_div">
+						<h4 class="text-center">성향</h4>
+						<div id="chartdiv2"
+							ondrop="drop3(event)" ondragover="allowDrop(event)"
+							ondragstart="drag(event)"></div>
+					</div>
 					<div class="workmember_div">
 						<h4 class="text-center">프로젝트 멤버 목록</h4>
 						<div id="project_m2"
-							style="width: 100%; height: 320px; overflow-y: scroll"
+							style="width: 110%; height: 320px; overflow-y: scroll"
 							ondrop="drop5(event)" ondragover="allowDrop(event)"
 							ondragstart="drag(event)"></div>
 					</div>
@@ -481,7 +493,7 @@ var skin_color='';
 						ondragover="allowDrop(event)" ondragstart="drag(event)">
 						<h4 class="text-center">업무 담당자</h4>
 						<div id="work_m2"
-							style="width: 100%; height: 320px; overflow-y: scroll"
+							style="width: 110%; height: 320px; overflow-y: scroll"
 							ondrop="drop4(event)" ondragover="allowDrop(event)"
 							ondragstart="drag(event)"></div>
 					</div>
@@ -496,10 +508,10 @@ var skin_color='';
 		</div>
 		
 	</form>
-	<div id="tendency_pop">
+<!-- 	<div id="tendency_pop">
 		<div id=ten></div>
 		<div id="chartdiv"></div>
-	</div>
+	</div> -->
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>

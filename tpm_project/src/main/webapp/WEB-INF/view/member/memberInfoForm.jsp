@@ -50,15 +50,54 @@
 	    	selectProfile();
 	    	getProjectIdx();
 	    }
-    	
+	    
+	    function memberUpdate(){
+	    	var pwd = document.getElementById('inputPassword').value;
+	    	var pwd2 = document.getElementById('inputPasswordCheck').value;
+	    	
+	    	if(pwd != pwd2){
+	    		window.alert('비밀번호가 일치하지 않습니다');
+	    		return;
+	    	} else{
+	    		document.memberInfoForm.submit();
+	    	}
+	    }
+	    
+	    function getMemberGender(){
+	    	var member_gender = document.getElementById('member_gender').value;
+	    	
+	    	return member_gender;
+	    }
+	    
+	    function pwdChecking(){
+	    	var pwd = document.getElementById('inputPassword').value;
+	    	var pwd2 = document.getElementById('inputPasswordCheck').value;
+	    	
+	    	var check_div = document.getElementById('pwd_check_div');
+	    	
+	    	var msg = '';
+	    	
+	    	if(pwd != pwd2){
+	    		msg = '<div style="color: red;"> 비밀번호가 일치하지 않습니다 </div>';
+	    		
+	    		check_div.innerHTML = msg;
+	    		//$('#pwd_check_div').innerHTML = msg;
+	    	} else{
+	    		msg = '<div style="color: green;"> 확인되었습니다 </div>';
+	    		
+	    		check_div.innerHTML = msg;
+	    		//$('#pwd_check_div').innerHTML = msg;
+	    	}
+	    }
+	    
 	    function deletedo(){
-	  	  var id = document.memberInfoForm.member_id.value;
-	  	  
-	  	  var confirm = window.confirm('정말 탈퇴하시겠습니까?');
-	  	  
-	  	  if(confirm){
-	  	  	location.href='memberDel.do?id='+id;
-	  	  }
+	    	var id = document.memberInfoForm.member_id.value;
+		  	  
+		  	var confirm = window.confirm('정말 탈퇴하시겠습니까?');
+		  	  
+		  	if(confirm){
+		  	  	location.href='memberDel.do?id='+id;
+		  	}
 	    }
 	    
 	    function selectProfile(){
@@ -174,9 +213,7 @@
 	 
       <div class="col-md-12">
         <div class="page-header">
-          <h1>개인 정보
-            <small>???</small>
-          </h1>
+          <h1>개인 정보 </h1>
         </div>
         <c:set var="list" value="${userInfo}"/>
         <div class="row">
@@ -224,14 +261,13 @@
 	                <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
 	                <div class="col-sm-8">
 	                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd" required>
-	                  <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
 	                </div>
 	              </div>
 	              <div class="form-group">
 	                <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
 	                <div class="col-sm-8">
-	                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" required>
-	                  <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+	                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" onfocus="pwdChecking()" onkeydown="pwdChecking()" required>
+	                  <p class="help-block" id="pwd_check_div">비밀번호를 한번 더 입력해주세요.</p>
 	                </div>
 	              </div>
 	              <div class="form-group">
@@ -251,7 +287,7 @@
 		                <div class="form-group">
 			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
 			                <div class="col-sm-8">
-			                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+			                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
 			                    <option value="남자" selected="selected">남자</option>
 			                    <option value="여자">여자</option>
 			                  </select>
@@ -262,7 +298,7 @@
 		                <div class="form-group">
 			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
 			                <div class="col-sm-8">
-			                  <select class="form-control" style="width:79px; float:left;" name="member_gender">
+			                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
 			                    <option value="남자">남자</option>
 			                    <option value="여자" selected="selected">여자</option>
 			                  </select>
@@ -273,7 +309,7 @@
 	              </c:forEach>
 	              <div class="form-group">
 	                <div class="col-sm-offset-4 col-sm-10">
-	                  <button type="submit" class="btn btn-default">수정</button>
+	                  <button type="button" class="btn btn-default" onclick="javascript:memberUpdate()">수정</button>
 	                  <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
 	                </div>
 	              </div>

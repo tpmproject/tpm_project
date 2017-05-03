@@ -18,6 +18,43 @@
     <script type="text/javascript" src="js/httpRequest.js"></script>
 
 	<script>
+		
+		function goAddTendency(){
+			
+			var successEmail = document.getElementById('successEmail').value;
+			
+			var pwd = document.getElementById('inputPassword').value;
+			var pwd2 = document.getElementById('inputPasswordCheck').value;
+			
+			var name = document.getElementById('inputName').value;
+			
+			var tel = document.getElementById('inputTel').value;
+			//window.alert(successEmail);
+			
+			if(successEmail==null || successEmail==""){
+				window.alert('이메일 인증을 해주세요');
+				return;
+			} else if(pwd==null || pwd=="" || pwd2==null || pwd2==""){
+				window.alert('비밀번호를 입력해주세요');
+				return;
+			} else if(name==null || name==""){
+				window.alert('이름을 입력해주세요');
+				return;
+			} else if(tel==null || tel==""){
+				window.alert('전화번호를 입력해주세요');
+				return;
+			} else{
+				document.memberAddForm.submit();
+			}
+		
+			
+		}
+		
+		/* function getGender(){
+			var gender = document.getElmentById('inputGender').value;
+			
+			return gender;
+		} */
 	
 		function emailCheck(){
 			var user_email = document.memberAddForm.inputEmail.value;
@@ -61,18 +98,7 @@
 				pwdCheckMsg.innerHTML = '';
 			}
 		}
-		 /* function show(){
-			
-			 	
-	        	if ($('#agr_ch').is(":checked"))
-	        	{
-	        		document.getElementById("check_label").className = "btn btn-warning active";
-	        		window.alert($('#agr_ch').is(":checked"));
-	        	}else{
-	        		document.getElementById("check_label").className = "btn btn-warning";
-	        		window.alert('체크해제');
-	        	} 
-	     } */
+
 		 
 		 function signAgr(){
 
@@ -81,7 +107,7 @@
 			
 	    	 
 		 }
-		 
+		
 	</script>    
   </head>
 
@@ -99,7 +125,7 @@ function cancle(){
 	    }
     </style>  
 </head>
-<body onload="show()">
+<body>
  <div id="signAgr" style="display:none; position:absolute; z-index:3000; background-color: white; width: 100%; height:100px">
  	<%@include file="signAgreement.jsp" %>
  </div>
@@ -134,13 +160,16 @@ function cancle(){
                         <small>horizontal</small>
                     </h1>
                 </div>
-                <form class="form-horizontal" name="memberAddForm" action="memberAddTendency.do" method="get">
-
-					<div class="form-group">
+                <form class="form-horizontal" id="memberAddForm" name="memberAddForm" action="memberAddTendency.do" method="post" enctype="multipart/form-data">
+				
+				
+				
+				<div class="form-group">
 						<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-						<div class="col-sm-6">
+						<div class="col-sm-6" id="input_email">
 							<input class="form-control" id="inputEmail" type="email"
 								name="member_id" placeholder="이메일" required="required">
+							<input type="hidden" id="successEmail">
 						</div>
 						<div id="email_check_div">
 							<button class="btn btn-success" type="button"
@@ -151,44 +180,12 @@ function cancle(){
 							<p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
 						</div>
 					</div>
-					
-				<%-- <c:set var="email" value="${email}"/>
-                        <c:choose>
-                        	<c:when test="${empty email}">
-	                        	<div class="form-group">
-	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-	                        		<div class="col-sm-6">
-		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" required="required">
-		                        		</div>
-		                        		<button class="btn btn-success" type="button" onclick="emailCheck()">이메일 인증
-				                            <i class="fa fa-check spaceLeft"></i>
-				                        </button>
-			                         <div>
-		                       		 <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
-	                       		 </div>
-	                    		</div>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<div class="form-group">
-	                       			<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-	                        		<div class="col-sm-6">
-		                            <input class="form-control" id="inputEmail" type="email" name="member_id" placeholder="이메일" value="${email}" required="required">
-		                        		</div>
-		                        		<button class="btn btn-success disabled" type="button"> 인증 완료
-				                            <i class="fa fa-check spaceLeft"></i>
-				                        </button>
-			                         <div>
-		                       		 <p class="col-sm-offset-3 col-sm-8 help-block" id="idCheckResult"></p>
-	                       		 </div>
-	                    		</div>
-                        	</c:otherwise>
-                        </c:choose> --%>
                     
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
                         <div class="col-sm-6">
                             <input class="form-control" id="inputPassword" type="password" name="member_pwd" placeholder="비밀번호"required="required">
-                            <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
+                            
                         </div>
                     </div>
                     <div class="form-group">
@@ -208,19 +205,36 @@ function cancle(){
                     <div class="form-group">
            			 <label class="col-sm-3 control-label" for="inputName">연락처</label>
            			 <div class="col-sm-6">
-             		 <input class="form-control" id="inputName" type="text" name="member_tel" placeholder="전화번호"required="required">
+             		 <input class="form-control" id="inputTel" type="text" name="member_tel" placeholder="전화번호"required="required">
            			 </div>
        			    </div>
        			    
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputName">성별</label>
                         <div class="col-sm-6">
-                            <select class="form-control" style="width:79px; float:left;" name="member_gender">
+                            <select class="form-control" style="width:79px; float:left;" id="inputGender" name="member_gender">
                                 <option value="남자">남자</option>
                                 <option value="여자">여자</option>
                             </select>
                         </div>
                     </div>
+                    <!-- 사진이미지 관련  시작-->
+				<div class="form-group " style="margin: 5px 220px;">
+					<div style="float: left;">
+						<label for="image col-sm-3 control-label"
+							style="float: left; margin: 10px -15px;">사진첨부</label>
+							<input type="file" name="member_img" id="image"
+							style="float: left; margin: 6px 40px;" onchange="memberImgAdd()">
+					</div>
+					<div id="image_preview" style="float: left; display: block;">
+						<img 
+							src="/tpm_project/img/member/default_p.PNG"
+							style="height: 150px; width: 130px;"> <a href="#"
+							style="position: absolute; margin: -150px 110px; font-size: x-large; font-weight: 600;">x</a>
+					</div>
+				</div>
+				<!-- 사진이미지 관련 끝 -->
+					
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
                        
@@ -230,9 +244,11 @@ function cancle(){
                             <a href="#" onclick="signAgr()">이용약관</a>에 동의 합니다.
                              
                     </div>
+                    
+			
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
-                            <button class="btn btn-primary" type="submit">다음
+                            <button class="btn btn-primary" type="button" onclick="javascript:goAddTendency()">다음
                                 <i class="fa fa-check spaceLeft"></i>
                             </button>
                             <button class="btn btn-danger" type="button" onclick="cancle();">가입취소
@@ -240,10 +256,13 @@ function cancle(){
                             </button>
                         </div>
                     </div>
+      
                 </form>
                 <hr>
-            </div>
-        </article>
+	          </div>
+			
+	
+		</article>
         
         
         <footer class="section" style="background-color:black; margin-top:170px">
@@ -280,5 +299,59 @@ function cancle(){
         </div>
       </div>
     </footer>
+     <script type="text/javascript">
+
+
+    /** 
+    onchange event handler for the file input field.
+    It emplements very basic validation using the file extension.
+    If the filename passes validation it will show the image using it's blob URL  
+    and will hide the input field and show a delete button to allow the user to remove the image
+    */
+
+    $('#image').on('change', function() {
+        
+        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+        
+        //배열에 추출한 확장자가 존재하는지 체크
+        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            resetFormElement($(this)); //폼 초기화
+            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+        } else {
+            file = $('#image').prop("files")[0];
+            blobURL = window.URL.createObjectURL(file);
+            $('#image_preview img').attr('src', blobURL);
+            $('#image_preview').slideDown(); //업로드한 이미지 미리보기 
+        
+        }
+    });
+
+    /**
+    onclick event handler for the delete button.
+    It removes the image, clears and unhides the file input field.
+    */
+    $('#image_preview a').bind('click', function() {
+        resetFormElement($('#image')); //전달한 양식 초기화
+        $('#image').slideDown(); //파일 양식 보여줌
+        $(this).parent().slideUp(); //미리 보기 영역 감춤
+        return false; //기본 이벤트 막음
+    });
+        
+
+    /** 
+    * 폼요소 초기화 
+    * Reset form element
+    * 
+    * @param e jQuery object
+    */
+    function resetFormElement(e) {
+        e.wrap('<form>').closest('form').get(0).reset(); 
+        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
+        //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
+        //DOM에서 제공하는 초기화 메서드 reset()을 호출
+        e.unwrap(); //감싼 <form> 태그를 제거
+    }
+    </script>
+    
 </body>
 </html>

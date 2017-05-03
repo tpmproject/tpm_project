@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link href="/tpm_project/sample/cho/main/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
-<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet"
-	type="text/css">
+<link href="/tpm_project/sample/cho/main/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css">
+<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
+<link href="/tpm_project/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script src="/tpm_project/js/ajax_extension.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
+<script src="dist/js/app.min.js" type="text/javascript"></script>
 <script>
 function addTendency(member_idx){
 
@@ -151,7 +152,7 @@ function addTendency_lResult(){
 	</c:if>
 	<%@include file="/WEB-INF/view/header.jsp"%>
 	<section class="content">
-	<div id="pebody" style=" width:100%; height:780px; overflow-y: scroll">
+	<div id="pebody" style=" width:100%; height:780px;">
 		<div style="margin-bottom: 30px;">
 			<h3><i class="glyphicon glyphicon-chevron-right"></i>${pdto.project_name}</span>
 			</h3>

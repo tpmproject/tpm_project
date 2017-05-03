@@ -48,7 +48,7 @@
 }
 
 #workback, #workback2 {
-	position: fixed;
+ 	position: fixed;
 	z-index:820;
 	top: -10%;
 	left: -10%;
@@ -63,14 +63,15 @@
 	background: white;
 	position: fixed;
 	z-index:830;
-	top: 20%;
+	top: 10%;
 	border: solid 2px #1a2226;
 	border-radius: 3px;
-	width: 665px;
+	width: 800px;
 	height: 480px;
 }
 .content{
 	height:730px;
+	overflow: auto;
 }
 .category {
 	display: inline-block;
@@ -137,7 +138,14 @@ a {
 }
 .workmember_div{
 	display: inline-block;
-	width: 46%;
+	width: 30%;
+	padding: 10px;
+	
+}
+.tenmember_div{
+	display: inline-block;
+	width: 35%;
+	height:320px;
 	padding: 10px;
 	
 }
@@ -154,8 +162,7 @@ a {
 #right-side #sidebar-wrapper.active{
 	z-index: 3;
 }
-#chartdiv {
-	width: 300px;
-	height: 250px;
-	background: white;
+#chartdiv, #chartdiv2 {
+    width: 70%;
+    height: 320px;
 }

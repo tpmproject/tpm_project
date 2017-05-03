@@ -23,7 +23,7 @@
 				<h3 class="box-title">Comment</h3>
 			</div>
 			
-			<div class="box-body comment" id="comment-box" style="height:400px;">
+			<div class="box-body comment" id="comment-box">
 				<div id="comment_div">
 					<div id="comment_content_area"></div>
 				</div>
@@ -31,15 +31,19 @@
 			
 				<form name="newComment" id="comment_footer" action="javascript:commentAdd()" method="post">
 					<input type="hidden" name="work_idx" value="${work_idx}">
+					<c:set var="pdto" value="${pdto}"/>
+					<c:if test="${pdto.project_level != 1000 }">
 					<div class="input-group">
 						<input type="text" class="form-control" id="comment"
 							name="inputComment" placeholder="Type message...">
-						<div class="input-group-btn">
-							<button class="btn btn-success" type="button" onclick="javascript:commentAdd()">
-								<i class="fa fa-plus"></i>
-							</button>
+					<div class="input-group-btn">
+						<button class="btn btn-success" type="button" onclick="javascript:commentAdd()">
+							<i class="fa fa-plus"></i>
+						</button>
 						</div>
 					</div>
+					</c:if>		
+						
 				</form>
 		</div>
 	</div>

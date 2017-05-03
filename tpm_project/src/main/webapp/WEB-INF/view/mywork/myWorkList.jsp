@@ -23,10 +23,13 @@
 <script type="text/javascript" src="js/project/ws_project.js"></script>
 
 <script>
+
 $(function(){
+	var hei=window.innerHeight-140;
+	
 	$('#workdate').daterangepicker({timePicker: false, format: 'YY/MM/DD'});
     $('#scr').slimScroll({
-        height: '650px'
+        height: hei+'px'
     });
     oneClass('workEnd','ing');
     showWorks();

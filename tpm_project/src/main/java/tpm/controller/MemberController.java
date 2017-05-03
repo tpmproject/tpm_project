@@ -175,21 +175,31 @@ public class MemberController {
 		return mav;
 	}
 	
-	/** 회원 가입 - 성향입력 페이지 이동 */
-	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.GET)
-	public ModelAndView memberAddTendencyForm(MemberDTO mdto ,String check_agr){
-		System.out.println(check_agr);
+	/** 회원 가입 - 성향입력 페이지 이동  */
+	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.POST)
+	public ModelAndView memberAddTendencyForm(MemberDTO mdto ,String check_agr,@RequestParam("member_img") MultipartFile upload, HttpServletRequest req) throws IOException{
+		System.out.println("동의 여부="+check_agr);
 		ModelAndView mav = new ModelAndView();
+		System.out.println(upload);
 		
-		System.out.println("성향페이지에서 mdto "+mdto.getMember_id());
+	
+		
+		//String savepath = req.getServletContext().getRealPath("img/member/profile");
+		//System.out.println(savepath);
+		
+		//copyInto(upload, savepath);
+		
+		//System.out.println(mdto.getMember_img());
+		//System.out.println("성향페이지에서 mdto "+mdto.getMember_id());
+		
 		mav.addObject("mdto", mdto);
 		mav.setViewName("member/memberAddForm_tendency");
 		return mav;
 	}
 	 //*************************************회원 정보입력-> 회원성향 -> 회원등록 할떄 mdto정보 전달 하기
-	/** 회원 가입 - 회원 등록 */
+	/** 회원 가입 - 회원 등록  */
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.POST)
-	public ModelAndView memberAdd(TendencyDTO tdto, MemberDTO mdto){
+	public ModelAndView memberAdd(TendencyDTO tdto, MemberDTO mdto) throws IOException{
 		
 		int m_result=mdao.addMember(mdto);
 		String in_member_id=mdto.getMember_id();
@@ -197,7 +207,7 @@ public class MemberController {
 	
 		tdto.setProject_idx(0);  //평가자 임시 
 		tdto.setMember_idx(db_member_idx); //가입한 idx번호 tdto에 넣기
-		
+	
 		
 		int t_reault=tdao.addTendency(tdto);
 		
