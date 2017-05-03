@@ -36,6 +36,33 @@ function fileUpload(work_idx){
 function show(){
 	window.alert('업로드 이벤트 발생');
 }
+
+
+
+$(function(){
+    $("#uploadbutton").click(function(){
+    	window.alert('실행됨');
+        var form = $('form')[0];
+        var formData = new FormData(form);
+            $.ajax({
+               url: 'fileAdd.do',
+               processData: false,
+               contentType: false,
+               data: formData,
+               type: 'POST',
+               success: function(result){
+               alert("업로드 성공!!");
+                } 
+           	
+               
+           });
+            
+            
+        }); 
+    
+})  
+
+
 </script>
   </head>
   
@@ -45,7 +72,7 @@ function show(){
     <div class="container" style="width: 570px;">
   
       
-      <form id="fileupload" style="width: 550px; margin: auto -10px;"action="fileAdd.do" method="post" enctype="multipart/form-data">
+      <form id="fileupload" style="width: 550px; margin: auto -10px;" enctype="multipart/form-data">
 		<input type="hidden" name="work_idx" id="id_work_idx" >
 		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -55,15 +82,15 @@ function show(){
         <!-- The fileupload-buttonbar contains buttons to add/delete files and
         start/cancel the upload -->
         <div class="row fileupload-buttonbar">
-          <div class="col-lg-7" style="width:580px; ">
+          <div class="col-lg-7" style="width:580px;">
             <!-- The fileinput-button span is used to style the file input field as
             button -->
             <span class="btn btn-success fileinput-button">
               <i class="glyphicon glyphicon-plus"></i>
               <span>첨부파일</span>
-              <input type="file" name="file_upload" multiple="multiple" onabort="show()">
+              <input type="file" name="file_upload" multiple="multiple">
             </span>
-            <button type="submit" class="btn btn-primary start" >
+            <button type="button" id="uploadbutton" class="btn btn-primary start" >
               <i class="glyphicon glyphicon-upload"></i>
               <span>모두 올리기</span>
             </button>
@@ -94,7 +121,7 @@ function show(){
 					
 	   %}
 			
-                <tr class="template-upload fade">
+                <tr class="template-upload fade" >
                     <td>
                         <span class="preview">
 
@@ -110,7 +137,7 @@ function show(){
                     </td>
                     <td>
                         <p class="size">Processing...</p>
-                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                        <div onunload="show()" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
                     </td>
                     <td>
                         {% if (!i && !o.options.autoUpload) { %}
