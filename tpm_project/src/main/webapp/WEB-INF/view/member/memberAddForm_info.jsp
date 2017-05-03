@@ -32,7 +32,7 @@
 			
 			var agr_ch = document.getElementById('agr_ch').checked;
 			
-			window.alert(agr_ch);
+			
 			
 			 if(successEmail==null || successEmail==""){
 				window.alert('이메일 인증을 해주세요');
@@ -209,7 +209,7 @@ function cancle(){
                         </div>
                     </div>
                     <!-- 사진이미지 관련  시작-->
-				<div class="form-group " style="margin:5px 170px;">
+				<div class="form-group " style="margin:5px 222px;">
 					<div style="float: left;">
 						<label for="image col-sm-3 control-label"
 							style="float: left; margin: 10px -15px;">사진첨부</label>
@@ -231,7 +231,7 @@ function cancle(){
                           
                                 <input id="agr_ch" name="check_agr" type="checkbox" disabled="disabled">
                               
-                            <a href="#" onclick="signAgr()">&nbsp; 이용약관</a>에 동의 합니다.
+                            <a href="#" onclick="signAgr()" style="color:red;">&nbsp; 이용약관</a>에 동의 합니다.
                              
                     </div>
                     

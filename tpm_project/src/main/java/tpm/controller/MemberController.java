@@ -187,12 +187,21 @@ public class MemberController {
 	  String member_*/
 	/** 회원 가입 - 성향입력 페이지 이동 */
 	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.POST)
-	public ModelAndView memberAddTendencyForm(MemberDTO mdto,
-											  String check_agr){
-		mdto.setMember_img(mdto.getMember_img_file().getOriginalFilename());
-		copyInto2(mdto.getMember_img_file());
+	public ModelAndView memberAddTendencyForm(MemberDTO mdto){
+		
+		if(mdto.getMember_img_file().isEmpty()){
+			if(mdto.getMember_gender().equals("남자")){
+				mdto.setMember_img("default_man.jpg");
+			}else{
+				mdto.setMember_img("default_woman.jpg");
+			}
+		}else{
+			mdto.setMember_img(mdto.getMember_img_file().getOriginalFilename());
+			copyInto2(mdto.getMember_img_file());
+		}
+		
 	
-		System.out.println("동의 여부="+check_agr);
+		
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(mdto.getMember_img());
 		//System.out.println("성향페이지에서 mdto "+mdto.getMember_id());

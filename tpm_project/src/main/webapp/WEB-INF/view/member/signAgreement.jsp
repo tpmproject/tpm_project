@@ -36,7 +36,7 @@
     		}
    			function check_ok(){
    				if(result==1){
-   					window.alert('확인 들어옴');
+   					
    					var agr_ch = document.getElementById("agr_ch"); 
    					agr_ch.checked=true;
    					var signAgr = document.getElementById("signAgr"); 

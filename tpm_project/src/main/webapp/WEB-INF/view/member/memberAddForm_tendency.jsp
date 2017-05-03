@@ -13,6 +13,18 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
     <script type="text/javascript"></script>
+    <style>
+   /*  input[type=radio]
+	{
+ 	 /* Double-sized Checkboxes */
+  	-ms-transform: scale(2); /* IE */
+ 	 -moz-transform: scale(2); /* FF */
+  	-webkit-transform: scale(2); /* Safari and Chrome */
+  	-o-transform: scale(2); /* Opera */
+  	padding: 10px;
+	}
+     */
+    </style>
   </head>
   
   <body>
@@ -48,6 +60,60 @@
               <h1>성향조사
                 <small>Umfrage</small>
               </h1>
+            <!--  -->  
+              
+ <!-- 
+
+
+    <div class="container">
+      Pricing Tables - START
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h4 class="text-center">외향성</h4>
+              </div>
+              <div class="panel-body text-center">
+                <p class="lead">
+                  <strong>$20 / month</strong>
+                </p>
+                <hr style="border-top: 1px solid #988c8c;">
+              </div>
+              <div>
+                 <label class="radio">
+                     <input value="5" type="radio" name="tendency_e">매우그렇다</label>
+               
+                 <label class="radio">
+                     <input value="4" type="radio" name="tendency_e">&nbsp;그렇다</label>
+               
+                 <label class="radio">
+                     <input value="3" type="radio" name="tendency_e">&nbsp;보통이다</label>
+
+                 <label class="radio">&nbsp;
+                     <input value="2" type="radio" name="tendency_e">&nbsp;아니다</label>
+               
+                 <label class="radio">&nbsp; 
+                	 <input value="1" type="radio" name="tendency_e">&nbsp;매우 아니다</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      Pricing Tables - END
+    </div>
+  
+               	 
+                  
+                  -->
+              
+              
+              
+              
+              
+              
+              
+           <!--   //////////////////  -->
             </div>
             <form name="tendencyForm" action="memberAdd.do" method="post">
             	<input type="hidden" name="member_id" value="${mdto.member_id }">
