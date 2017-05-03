@@ -40,8 +40,8 @@
 				font-size	: 11px;
 	  }
 	  #chartdiv3 {
-			width		: 55%;
-			height		: 140px;
+			width		: 60%;
+			height		: 150px;
 			font-size	: 11px;
 	}	
     </style>
