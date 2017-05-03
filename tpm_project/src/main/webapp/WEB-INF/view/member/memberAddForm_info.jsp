@@ -123,7 +123,7 @@ function cancle(){
                         <small>horizontal</small>
                     </h1>
                 </div>
-                <form class="form-horizontal" id="memberAddForm" name="memberAddForm" action="memberAddTendency.do" method="get">
+                <form class="form-horizontal" id="memberAddForm" name="memberAddForm" action="memberAddTendency.do" method="post" enctype="multipart/form-data">
 				
 				
 				
@@ -184,8 +184,8 @@ function cancle(){
 				<div class="form-group " style="margin: 5px 220px;">
 					<div style="float: left;">
 						<label for="image col-sm-3 control-label"
-							style="float: left; margin: 10px -15px;">사진첨부</label> <input
-							type="file" name="member_img" id="image"
+							style="float: left; margin: 10px -15px;">사진첨부</label>
+							<input type="file" name="member_img" id="image"
 							style="float: left; margin: 6px 40px;" onchange="memberImgAdd()">
 					</div>
 					<div id="image_preview" style="float: left; display: block;">
