@@ -175,31 +175,11 @@
 <body class="skin-${sessionScope.s_member_thema}">
 	<input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
 	<div class="wrapper">
-		<%@ include file="/WEB-INF/view/include/header.jsp"%>
-		<%@ include file="/WEB-INF/view/include/aside.jsp"%>
-		<!-- Right side column. Contains the navbar and content of the page -->
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					MyFriend <small>Control panel</small>
-				</h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">MyFriend</li>
-				</ol>
-			</section>
+		<%@ include file="/WEB-INF/view/header.jsp"%>
 			
-			<!-- Main content -->
-			<section class="content">
-				<div class="row">
-					<div class="col-md-12">
-						<%@ include file="myFriendListFormContent.jsp"%>
-					</div>
-				</div>
-			</section>
-		</div>
-		<%@ include file="/WEB-INF/view/include/footer.jsp"%>
+		<%@ include file="myFriendListFormContent.jsp"%>
+					
+		<%@ include file="/WEB-INF/view/footer.jsp"%>
 	</div>
 </body>
 </html>
