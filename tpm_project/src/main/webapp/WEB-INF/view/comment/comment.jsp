@@ -15,9 +15,8 @@
 	}
 </script>
 <body>
-<div class="container" id="commentBody">
-	<div class="row">
-		<div class="col-md-12" style="height: 400px; margin: 0px;">
+	<div class="row" id="commentBody">
+		<div class="col-md-12">
 			<div class="box-header">
 				<i class="fa fa-comments-o"></i>
 				<h3 class="box-title">Comment</h3>
@@ -33,7 +32,7 @@
 					<input type="hidden" name="work_idx" value="${work_idx}">
 					<c:set var="pdto" value="${pdto}"/>
 					<c:if test="${pdto.project_level != 1000 }">
-					<div class="input-group">
+					<div class="input-group" style="width: 580px;">
 						<input type="text" class="form-control" id="comment"
 							name="inputComment" placeholder="Type message...">
 					<div class="input-group-btn">
@@ -47,6 +46,5 @@
 				</form>
 		</div>
 	</div>
-</div>
 </body>
 </html>
