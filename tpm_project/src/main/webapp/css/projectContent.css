@@ -48,7 +48,7 @@
 }
 
 #workback, #workback2 {
- 	position: fixed;
+  	position: fixed;
 	z-index:820;
 	top: -10%;
 	left: -10%;
@@ -62,12 +62,11 @@
 	display: none;
 	background: white;
 	position: fixed;
-	z-index:830;
 	top: 10%;
 	border: solid 2px #1a2226;
 	border-radius: 3px;
-	width: 800px;
-	height: 480px;
+	width: 640px;
+	z-index: 830;
 }
 .content{
 	height:730px;
