@@ -400,7 +400,7 @@ var skin_color='';
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<input type="text" class="form-control pull-right" placeholder="기한을 체크해주세요."
-								name="workdate" id="workdate" readonly />
+								name="workdate" id="workdate" />
 						</div>
 					</div>
 					<div align="center" style="padding:5px;">
@@ -465,7 +465,7 @@ var skin_color='';
 							</div>
 							<div>
 								<input type="text" class="form-control pull-right"
-									name="workdateup" id="workdateup" readonly />
+									name="workdateup" id="workdateup" />
 							</div>
 						</div>
 					</div>
@@ -483,7 +483,7 @@ var skin_color='';
 						<div id="tendency" style="width: 110%; height: 320px; overflow-y: hidden"
 							ondrop="drop3(event)" ondragover="allowDrop(event)"
 							ondragstart="drag(event)">
-						<div id="chartdiv"></div>	
+						<div id="chartdiv2"></div>	
 						</div>
 					</div>
 					<div class="workmember_div">

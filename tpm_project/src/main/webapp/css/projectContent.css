@@ -46,7 +46,6 @@
 #mCSB_1 #mCSB_1_scrollbar_horizontal .mCSB_draggerRail{
  display: none;
 }
-
 #workback, #workback2 {
   	position: fixed;
 	z-index:820;
@@ -82,45 +81,37 @@
 	width: 219px;
 	padding-left: 10px;
 }
-
 .cate_table {
 	background: white;
 	width: 200px;
 	padding: 4px;
 	margin-bottom: 4px;
 }
-
 .cate_table thead td {
 	padding: 4px;
 }
-
 .cate_table tbody td {
 	padding-left: 4px;
 }
-
 .category_head {
 	padding-top: 7px;
 	padding-bottom: 7px;
 	text-align: center;
 	height: 34px;
 }
-
 .table_i {
 	display: inline-block;
 	height: 18px;
 	vertical-align: text-top;
 }
-
 .check_div {
 	padding-left: 19px;
 	height: 100px;
 	overflow-y: scroll;
 }
-
 .cateName {
 	display: none;
 }
-
 #trash {
 	position:fixed;
 	width: 55px;
@@ -131,7 +122,6 @@
 	z-index: 2000;
 	left:50%;
 }
-
 a {
 	color: black;
 }
@@ -139,14 +129,12 @@ a {
 	display: inline-block;
 	width: 30%;
 	padding: 10px;
-	
 }
 .tenmember_div{
 	display: inline-block;
 	width: 35%;
 	height:320px;
 	padding: 10px;
-	
 }
 .work_btn{
 	display: inline-block;
