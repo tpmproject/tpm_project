@@ -414,9 +414,11 @@ var skin_color='';
 				<div align="center">
 					<div class="tenmember_div">
 						<h4 class="text-center">성향</h4>
-						<div id="chartdiv" style="width:70%; height:320px;"
+						<div id="tendency" style="width: 110%; height: 320px; overflow-y: hidden"
 							ondrop="drop3(event)" ondragover="allowDrop(event)"
-							ondragstart="drag(event)"></div>
+							ondragstart="drag(event)">
+						<div id="chartdiv"></div>	
+						</div>
 					</div>
 					<div class="workmember_div">
 						<h4 class="text-center">프로젝트 멤버 목록</h4>
@@ -478,9 +480,11 @@ var skin_color='';
 				<div align="center">
  					<div class="tenmember_div">
 						<h4 class="text-center">성향</h4>
-						<div id="chartdiv2"
+						<div id="tendency" style="width: 110%; height: 320px; overflow-y: hidden"
 							ondrop="drop3(event)" ondragover="allowDrop(event)"
-							ondragstart="drag(event)"></div>
+							ondragstart="drag(event)">
+						<div id="chartdiv"></div>	
+						</div>
 					</div>
 					<div class="workmember_div">
 						<h4 class="text-center">프로젝트 멤버 목록</h4>
