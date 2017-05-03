@@ -21,7 +21,7 @@
     		
     		function check_on(){
     			
-    			window.alert('들어옴');
+    		
     			if($('#ch1').is(":checked")) {
     				if($('#ch2').is(":checked")){
     					document.getElementById("order").className = "btn_order";
@@ -35,17 +35,37 @@
    				
     		}
    			function check_ok(){
-   				window.alert('ok');
-   				window.alert(result);
+   				if(result==1){
+   					window.alert('확인 들어옴');
+   					var agr_ch = document.getElementById("agr_ch"); 
+   					agr_ch.checked=true;
+   					var signAgr = document.getElementById("signAgr"); 
+   					var element = document.getElementById("signMain"); 
+   					signAgr.style.display = "none"; //동의 페이지 none 
+   					signMain.style.display = ""; 
+   					
+   				}else{
+   					window.alert('이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.'); 
+   				}
    			}	
     </script>
-    
+    <style>
+    input[type=checkbox]
+	{
+ 	 /* Double-sized Checkboxes */
+  	-ms-transform: scale(2); /* IE */
+ 	 -moz-transform: scale(2); /* FF */
+  	-webkit-transform: scale(2); /* Safari and Chrome */
+  	-o-transform: scale(2); /* Opera */
+  	padding: 10px;
+	}
+    </style>
     
   </head>
   
   <body>
-   
-      <table style="width: 1500px; height:500px; position: absolute; margin: 30px 300px;background-color: white;">
+   <div id="container">
+      <table >
         <tbody>
           <tr>
             <td>
@@ -211,7 +231,7 @@
                   </tr>
                   <tr>
                     <td onclick="check_on()">
-                      <input type="checkbox" id="ch1" name="check_1">이용약관에 동의합니다.
+                      <input type="checkbox" id="ch1" name="check_1">&nbsp; 이용약관에 동의합니다.
                       <br>
                       <br>
                       <br>
@@ -269,7 +289,7 @@
                   </tr>
                   <tr>
                     <td onclick="check_on()">
-                      <input type="checkbox" id="ch2" name="check_2" >개인정보 수집 및 이용에 대한 안내에 동의합니다.</td>
+                      <input type="checkbox" id="ch2" name="check_2" >&nbsp; 개인정보 수집 및 이용에 대한 안내에 동의합니다.</td>
                   </tr>
                 </tbody>
               </table>
@@ -280,12 +300,12 @@
       <br>
       <br>
       <div style="margin:auto 500px">
-      <a href="#"> <button type="button" id="order" class="btn_order1" style="margin:10px;" onclick="check_ok()">확인</button></a>
-      <a href="#"> <button type="button" class="btn_cancel1" style="margin:10px;">취 소 </button></a>
+      <a href="#"> <button type="button" id="order" class="btn_order1" onclick="check_ok()">확인</button></a>
+      <a href="#"> <button type="button" class="btn_cancel1" style="margin:10px;" onclick="agrCancel()">취 소 </button></a>
       </div>
       
      
-    
+    </div>
   </body>
 
 </html>

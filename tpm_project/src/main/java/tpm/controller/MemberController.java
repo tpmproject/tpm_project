@@ -6,6 +6,7 @@ import java.awt.PageAttributes;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +33,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.groupdocs.ui.Utils;
+import com.groupdocs.viewer.config.ViewerConfig;
+
+import tpm.file.model.FileDTO;
 import tpm.member.model.MemberDAO;
 import tpm.member.model.MemberDAOImple;
 import tpm.member.model.MemberDTO;
@@ -174,30 +179,30 @@ public class MemberController {
 		
 		return mav;
 	}
-	
-	/** 회원 가입 - 성향입력 페이지 이동  */
+	 /* String member_id,
+	  String member_pwd,
+	  String member_name,
+	  String member_gender,
+	  String member_tel,
+	  String member_*/
+	/** 회원 가입 - 성향입력 페이지 이동 */
 	@RequestMapping(value="memberAddTendency.do", method=RequestMethod.POST)
-	public ModelAndView memberAddTendencyForm(MemberDTO mdto ,String check_agr,@RequestParam("member_img") MultipartFile upload, HttpServletRequest req) throws IOException{
+	public ModelAndView memberAddTendencyForm(MemberDTO mdto,
+											  String check_agr){
+		mdto.setMember_img(mdto.getMember_img_file().getOriginalFilename());
+		copyInto2(mdto.getMember_img_file());
+	
 		System.out.println("동의 여부="+check_agr);
 		ModelAndView mav = new ModelAndView();
-		System.out.println(upload);
-		
-	
-		
-		//String savepath = req.getServletContext().getRealPath("img/member/profile");
-		//System.out.println(savepath);
-		
-		//copyInto(upload, savepath);
-		
 		//System.out.println(mdto.getMember_img());
 		//System.out.println("성향페이지에서 mdto "+mdto.getMember_id());
-		
 		mav.addObject("mdto", mdto);
 		mav.setViewName("member/memberAddForm_tendency");
 		return mav;
 	}
 	 //*************************************회원 정보입력-> 회원성향 -> 회원등록 할떄 mdto정보 전달 하기
-	/** 회원 가입 - 회원 등록  */
+	/** 회원 가입 - 회원 등록 
+	 * @throws IOException */
 	@RequestMapping(value="memberAdd.do", method=RequestMethod.POST)
 	public ModelAndView memberAdd(TendencyDTO tdto, MemberDTO mdto) throws IOException{
 		
@@ -364,6 +369,14 @@ public class MemberController {
 		
 		return mav;
 	}
+	/** 사진 올리기
+	 * @throws IOException */
+	@RequestMapping(value="memberImgAdd.do",  method=RequestMethod.POST)
+	public void fileAdd(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req) throws IOException{
+		
+		copyInto2(upload);
+
+	}
 	
 	/** 개인정보 - 프로필 사진 올리기 */
 	@RequestMapping(value="updateProfile.do",method=RequestMethod.POST)
@@ -403,7 +416,29 @@ public class MemberController {
 		
 		return mav;
 	}
-	
+	private void copyInto2(MultipartFile file_upload){
+		
+		try {
+			
+			byte bytes[]=file_upload.getBytes();
+			
+			ViewerConfig config = new ViewerConfig();  //자동경로
+			config.setStoragePath(Utils.getProjectProperty("img.path"));
+		
+			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
+			
+			FileOutputStream fos=new FileOutputStream(outFile);
+			//복사 
+			
+			fos.write(bytes);
+			fos.close();
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public void copyInto(MultipartFile upload, String savepath) throws IOException{
 		
 		//System.out.println("파일명 : "+upload.getOriginalFilename());

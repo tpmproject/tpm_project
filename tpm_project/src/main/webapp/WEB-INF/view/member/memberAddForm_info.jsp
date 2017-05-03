@@ -29,9 +29,12 @@
 			var name = document.getElementById('inputName').value;
 			
 			var tel = document.getElementById('inputTel').value;
-			//window.alert(successEmail);
 			
-			if(successEmail==null || successEmail==""){
+			var agr_ch = document.getElementById('agr_ch').checked;
+			
+			window.alert(agr_ch);
+			
+			 if(successEmail==null || successEmail==""){
 				window.alert('이메일 인증을 해주세요');
 				return;
 			} else if(pwd==null || pwd=="" || pwd2==null || pwd2==""){
@@ -43,9 +46,11 @@
 			} else if(tel==null || tel==""){
 				window.alert('전화번호를 입력해주세요');
 				return;
+			} else if(!agr_ch){
+				window.alert('이용약관에 동의해주세요');
 			} else{
 				document.memberAddForm.submit();
-			}
+			} 
 		
 			
 		}
@@ -102,12 +107,19 @@
 		 
 		 function signAgr(){
 
-	    	var element = document.getElementById("signAgr"); 
-			element.style.display = ""; 
-			
+	    	var signAgr = document.getElementById("signAgr"); 
+	    	var element = document.getElementById("signMain"); 
+	    	
+	    	signAgr.style.display = ""; //동의 페이지 none 풀기
+	    	signMain.style.display = "none"; 
 	    	 
 		 }
-		
+		function agrCancel(){
+			var signAgr = document.getElementById("signAgr"); 
+			var element = document.getElementById("signMain"); 
+			signAgr.style.display = "none"; //동의 페이지 none 
+			signMain.style.display = ""; 
+		}
 	</script>    
   </head>
 
@@ -126,33 +138,11 @@ function cancle(){
     </style>  
 </head>
 <body>
- <div id="signAgr" style="display:none; position:absolute; z-index:3000; background-color: white; width: 100%; height:100px">
+ <div id="signAgr" style="display:none; position:relative; z-index: 3000;width: 1500px;height: 500px;margin: auto 20%;background-color: white;">
  	<%@include file="signAgreement.jsp" %>
  </div>
- <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><span>TPM</span></a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Contacts</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-	<article class="container">
+
+	<article class="container" id="signMain">
             <div class="col-md-6 col-md-offset-3"></div>
             <div class="col-md-12">
                 <div class="page-header">
@@ -219,11 +209,11 @@ function cancle(){
                         </div>
                     </div>
                     <!-- 사진이미지 관련  시작-->
-				<div class="form-group " style="margin: 5px 220px;">
+				<div class="form-group " style="margin:5px 170px;">
 					<div style="float: left;">
 						<label for="image col-sm-3 control-label"
 							style="float: left; margin: 10px -15px;">사진첨부</label>
-							<input type="file" name="member_img" id="image"
+							<input type="file" name="member_img_file" id="image"
 							style="float: left; margin: 6px 40px;" onchange="memberImgAdd()">
 					</div>
 					<div id="image_preview" style="float: left; display: block;">
@@ -241,7 +231,7 @@ function cancle(){
                           
                                 <input id="agr_ch" name="check_agr" type="checkbox" disabled="disabled">
                               
-                            <a href="#" onclick="signAgr()">이용약관</a>에 동의 합니다.
+                            <a href="#" onclick="signAgr()">&nbsp; 이용약관</a>에 동의 합니다.
                              
                     </div>
                     
@@ -264,41 +254,7 @@ function cancle(){
 	
 		</article>
         
-        
-        <footer class="section" style="background-color:black; margin-top:170px">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <h1 class="text-muted" style="color:white;">Team Project Manager</h1>
-            <p class="text-muted" style="color:white;">Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
-          </div>
-          <div class="col-sm-6">
-            <p class="text-muted text-right">
-              <br>
-              <br>
-            </p>
-            <div class="row">
-              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 hidden-xs text-right">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+      
      <script type="text/javascript">
 
 
