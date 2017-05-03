@@ -57,10 +57,13 @@ $(function(){
                
            });
             
-            
+            setTimeout("project_fileList2()", 500);
+            setTimeout("project_fileList2()", 5000);
         }); 
     
 })  
+
+
 
 
 </script>
