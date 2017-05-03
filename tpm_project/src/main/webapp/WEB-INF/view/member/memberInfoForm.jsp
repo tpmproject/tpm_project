@@ -208,114 +208,115 @@
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
 <%@ include file="/WEB-INF/view/header.jsp"%>
-	 <div class="container">
 	  <div class="row">
-	 
-      <div class="col-md-12">
+	  
         <div class="page-header">
           <h1>개인 정보 </h1>
         </div>
+        
         <c:set var="list" value="${userInfo}"/>
-        <div class="row">
+        
           <div class="col-md-6">
+          
             <form class="form-horizontal" name="memberInfoForm" action="memberUpdate.do" method="post" enctype="multipart/form-data">
             <input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
              <c:forEach var="dto" items="${list}">
-	              <div class="col-sm-offset-7">
-	                <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
-	                <select id="themaSelect" onchange="selectThema()">
-	                  <option value="black"> black </option>
-	                  <option value="black-light"> black-light </option>
-	                  <option value="blue"> blue </option>
-	                  <option value="blue-light"> blue-light </option>
-	                  <option value="green"> green </option>
-	                  <option value="green-light"> green-light </option>
-	                  <option value="purple"> purple </option>
-	                  <option value="purple-light"> purple-light </option>
-	                  <option value="red"> red </option>
-	                  <option value="red-light"> red-light </option>
-	                  <option value="yellow"> yellow </option>
-	                  <option value="yellow-light"> yellow-light </option>
-	                </select>
+	            <div class="col-md-offset-6">
+	              <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
+	              <select id="themaSelect" onchange="selectThema()">
+	                <option value="black"> black </option>
+	                <option value="black-light"> black-light </option>
+	                <option value="blue"> blue </option>
+	                <option value="blue-light"> blue-light </option>
+	                <option value="green"> green </option>
+	                <option value="green-light"> green-light </option>
+	                <option value="purple"> purple </option>
+	                <option value="purple-light"> purple-light </option>
+	                <option value="red"> red </option>
+	                <option value="red-light"> red-light </option>
+	                <option value="yellow"> yellow </option>
+	                <option value="yellow-light"> yellow-light </option>
+	              </select>
+	            </div>
+	            <br>
+	            <br>
+	            
+	            <!-- 프로필 사진 -->
+	            <div class="form-group">
+	              <div class="col-md-3 col-md-offset-1">
+	                <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" width="130" height="130">
 	              </div>
-	              <br>
-	              <br>
-	              <!-- 프로필 사진 -->
-	              <div class="form-group">
-	                <div class="col-sm-3 col-md-offset-1">
-	                  <img class="img-circle bx-s" id="profile_img" src="/tpm_project/img/member/profile/${dto.member_img}" width="130" height="130">
-	                </div>
-	                <div class="col-sm-6">
-	                	<input class="btn btn-default" type="file" name="member_img_file" id="select_profile">	                
-	                </div>
-	              </div>&nbsp;
+	              <div class="col-md-6">
+	              	<input class="btn btn-default" type="file" name="member_img_file" id="select_profile">	                
+	              </div>
+	            </div>&nbsp;
 	              
-	              <!-- 정보 입력 -->
-	              <div class="form-group">
-	                <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-	                <div class="col-sm-8">
-	                  <input type="text" class="form-control" id="inputEmail" name="member_id" value="${dto.member_id}" readonly>
-	                </div>
+	            <!-- 정보 입력 -->
+	            <div class="form-group">
+	              <label class="col-md-3 control-label" for="inputEmail">이메일</label>
+	              <div class="col-md-8">
+	                <input type="text" class="form-control" id="inputEmail" name="member_id" value="${dto.member_id}" readonly>
 	              </div>
-	              <div class="form-group">
-	                <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
-	                <div class="col-sm-8">
-	                  <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd" required>
-	                </div>
+	            </div>
+	            <div class="form-group">
+	              <label class="col-md-3 control-label" for="inputPassword">비밀번호</label>
+	              <div class="col-md-8">
+	                <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="member_pwd" required>
 	              </div>
-	              <div class="form-group">
-	                <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
-	                <div class="col-sm-8">
-	                  <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" onfocus="pwdChecking()" onkeydown="pwdChecking()" required>
-	                  <p class="help-block" id="pwd_check_div">비밀번호를 한번 더 입력해주세요.</p>
-	                </div>
+	            </div>
+	            <div class="form-group">
+	              <label class="col-md-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
+	              <div class="col-md-8">
+	                <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" onfocus="pwdChecking()" onkeydown="pwdChecking()" required>
+	                <p class="help-block" id="pwd_check_div">비밀번호를 한번 더 입력해주세요.</p>
 	              </div>
-	              <div class="form-group">
-	                <label class="col-sm-3 control-label" for="inputName">이름</label>
-	                <div class="col-sm-8">
-	                  <input class="form-control" id="inputName" type="text" name="member_name" value="${dto.member_name}">
-	                </div>
+	            </div>
+	            <div class="form-group">
+	              <label class="col-md-3 control-label" for="inputName">이름</label>
+	              <div class="col-md-8">
+	                <input class="form-control" id="inputName" type="text" name="member_name" value="${dto.member_name}">
 	              </div>
-	              <div class="form-group">
-	                <label class="col-sm-3 control-label" for="inputTel">연락처</label>
-	                <div class="col-sm-8">
-	                  <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
-	                </div>
+	            </div>
+	            <div class="form-group">
+	              <label class="col-md-3 control-label" for="inputTel">연락처</label>
+	              <div class="col-md-8">
+	                <input type="text" class="form-control" id="inputTel" name="member_tel" value="${dto.member_tel}">
 	              </div>
-	              	<c:choose>
-		                <c:when test="${dto.member_gender=='남자'}">
-		                <div class="form-group">
-			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
-			                <div class="col-sm-8">
-			                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
-			                    <option value="남자" selected="selected">남자</option>
-			                    <option value="여자">여자</option>
-			                  </select>
-			                </div>
+	            </div>
+	            	<c:choose>
+		               <c:when test="${dto.member_gender=='남자'}">
+		               <div class="form-group">
+		                <label class="col-md-3 control-label" for="inputGender">성별</label>
+		                <div class="col-md-8">
+		                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
+		                    <option value="남자" selected="selected">남자</option>
+		                    <option value="여자">여자</option>
+		                  </select>
 		                </div>
-		                </c:when>
-		                <c:otherwise>
-		                <div class="form-group">
-			                <label class="col-sm-3 control-label" for="inputGender">성별</label>
-			                <div class="col-sm-8">
-			                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
-			                    <option value="남자">남자</option>
-			                    <option value="여자" selected="selected">여자</option>
-			                  </select>
-			                </div>
+		               </div>
+		               </c:when>
+		               <c:otherwise>
+		               <div class="form-group">
+		                <label class="col-md-3 control-label" for="inputGender">성별</label>
+		                <div class="col-md-8">
+		                  <select class="form-control" style="width:79px; float:left;" id="member_gender" onchange="getMemberGender()" name="member_gender">
+		                    <option value="남자">남자</option>
+		                    <option value="여자" selected="selected">여자</option>
+		                  </select>
 		                </div>
-		                </c:otherwise>
-	             	</c:choose>
-	              </c:forEach>
-	              <div class="form-group">
-	                <div class="col-sm-offset-4 col-sm-10">
-	                  <button type="button" class="btn btn-default" onclick="javascript:memberUpdate()">수정</button>
-	                  <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
-	                </div>
+		               </div>
+		               </c:otherwise>
+		           	</c:choose>
+	            </c:forEach>
+	            <div class="form-group">
+	              <div class="col-md-offset-4 col-md-5">
+	                <button type="button" class="btn btn-default" onclick="javascript:memberUpdate()">수정</button>
+	                <button type="button" class="btn btn-default" onclick="deletedo()">회원 탈퇴</button>
 	              </div>
-            </form>
-          </div>
-          
+	            </div>
+		    </form>
+		  </div>
+	        
           <c:set var="workcount" value="${myworkcount}"/>
           <c:set var="workcomplete" value="${myworkcomplete}"/>
           <c:set var="totalwork" value="${workcomplete/workcount*100}" />
@@ -323,32 +324,37 @@
           	<c:set var="totalwork" value="0"/>
           </c:if>
           
-         <div class="col-md-6">
+      	  <div class="col-md-6">
             <div>
               <div>
-                <a class="col-sm-12 btn btn-default disabled"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
+                <a class="col-md-12 btn btn-default disabled"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
               </div>
               <br>
               <br>
               <br>
+              
               <c:set var="myproject" value="${myprojectlist}"/>
+              
               <div>
                 <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
                 <select id="getProject" onchange="getProjectIdx()">
                 	<!-- <option value="select"> 선택 </option> -->
-                <c:forEach var="project" items="${myproject}">
-                  	<option value="${project.project_idx}">${project.project_name}</option>
-                </c:forEach>
+	                <c:forEach var="project" items="${myproject}">
+	                  	<option value="${project.project_idx}">${project.project_name}</option>
+	                </c:forEach>
                 </select>
               	<br>
               	<br>
+              	
                 <div class="col-md-12" style="height: 200px;">
                 	<div class="col-md-5" id="chartdiv3"></div>	
+                	
 	                <div>
 	                	<a class="col-md-6 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
 	              	<br>
               		<br>
+              		
 	              	<div>
 	                	<a class="col-md-6 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
 	              	</div>
@@ -362,49 +368,50 @@
             <br>
             <br>
             <br>
+            
             <div>
-              <a class="col-sm-3 btn btn-default disabled">개인 성향</a>
+              <a class="col-md-3 btn btn-default disabled">개인 성향</a>
               <div id="chartdiv" class="col-md-offset-3"></div>
             </div>
+            <br>
+            
             <div>
               <div>
-                <a class="col-sm-3 btn btn-default disabled">업무 성향</a>
+                <a class="col-md-3 btn btn-default disabled">업무 성향</a>
                 <div id="chartdiv2"></div>
               </div>
             </div>
       </div>
     </div>
-    </div>
-     </div>
-    </div>
+    
     <c:set var="self_tendencylist" value="${self_tendency}"/>
-	          <c:forEach var="self_tendency" items="${self_tendencylist}">
-	          <script>
-	          var chart = AmCharts.makeChart( "chartdiv", {
-				    "type": "radar",
-				    "theme": "light",
-				    "dataProvider": [ 
-				     	{ "tendency": "외향적", "point": ${self_tendency.tendency_e} },
-				        { "tendency": "감각적", "point": ${self_tendency.tendency_s} },
-				        { "tendency": "사고적", "point": ${self_tendency.tendency_t} },
-				        { "tendency": "판단적", "point": ${self_tendency.tendency_j} },
-				        { "tendency": "내향적", "point": ${self_tendency.tendency_i} },
-				        { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
-				        { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
-				        { "tendency": "인식적", "point": ${self_tendency.tendency_p} } ],
-				    "valueAxes": [
-				    	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
-				    "startDuration": 2,
-				    "graphs": [
-				    	{ "balloonText": "[[value]]",
-				      	  "bullet": "round",
-				      	  "lineThickness": 2,
-				      	  "valueField": "point" } ] ,
-			   			  "categoryField": "tendency" }) ;
-	          </script>
+		<c:forEach var="self_tendency" items="${self_tendencylist}">
+	        <script>
+	        var chart = AmCharts.makeChart( "chartdiv", {
+		    "type": "radar",
+		    "theme": "light",
+		    "dataProvider": [ 
+		     	{ "tendency": "외향적", "point": ${self_tendency.tendency_e} },
+		        { "tendency": "감각적", "point": ${self_tendency.tendency_s} },
+		        { "tendency": "사고적", "point": ${self_tendency.tendency_t} },
+		        { "tendency": "판단적", "point": ${self_tendency.tendency_j} },
+		        { "tendency": "내향적", "point": ${self_tendency.tendency_i} },
+		        { "tendency": "직관적", "point": ${self_tendency.tendency_n} },
+		        { "tendency": "감정적", "point": ${self_tendency.tendency_f} },
+		        { "tendency": "인식적", "point": ${self_tendency.tendency_p} } ],
+		    "valueAxes": [
+		    	{ "axisTitleOffset": 20, "minimum": 0, "axisAlpha": 0.15 } ],
+		    "startDuration": 2,
+		    "graphs": [
+		    	{ "balloonText": "[[value]]",
+		      	  "bullet": "round",
+		      	  "lineThickness": 2,
+		      	  "valueField": "point" } ] ,
+	   			  "categoryField": "tendency" }) ;
+	        </script>
           
 		<c:set var="team_tendencylist" value="${team_tendency}"/>
-			<c:forEach var="team_tendency" items="${team_tendencylist}">
+		<c:forEach var="team_tendency" items="${team_tendencylist}">
 			<script>
 				var chart = AmCharts.makeChart("chartdiv2",	{
 					"type": "serial",
@@ -457,6 +464,6 @@
 	     </script>
      </c:forEach>
      </c:forEach>
-	 <%@ include file="/WEB-INF/view/footer.jsp"%>
+<%@ include file="/WEB-INF/view/footer.jsp"%>
 </body>
 </html>
