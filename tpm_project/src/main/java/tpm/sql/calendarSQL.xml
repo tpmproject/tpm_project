@@ -64,5 +64,8 @@
 	    ORDER BY project_idx DESC
 	</select>
 	
+	<update id="calendarUpdateCheckList" parameterType="tpm.checklist.model.ChecklistDTO">
+		UPDATE tpm_checklist SET checklist_state = #{checklist_state} WHERE checklist_idx = #{checklist_idx}
+	</update>
 	
 </mapper>

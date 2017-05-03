@@ -80,6 +80,21 @@ public class ProjectController {
 		
 		return mav;
 	}
+	/** 프로젝트 - 해당 프로젝트 내용 페이지 이동2 ( 업무들이 보여지는 페이지 ) */
+	@RequestMapping(value="projectContent2.do",  method=RequestMethod.GET)
+	public ModelAndView projectContentForm2(ProjectMemberDTO dto, HttpSession session){
+		System.out.println((Integer) session.getAttribute("s_member_idx"));
+		dto.setMember_idx((Integer) session.getAttribute("s_member_idx")); 
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("project/projectContentForm");
+		ProjectDTO pdto=projectDAO.projectSearch(dto);
+		ArrayList<MemberDTO> marr=projectDAO.projectWorkMember(dto);
+		mav.addObject("pdto", pdto);
+		mav.addObject("marr", marr);	
+		
+		return mav;
+	}
+	
 	
 	/** 프로젝트 - 프로젝트 생성 (권한 부여 포함) */
 	@RequestMapping(value="projectAdd.do", method=RequestMethod.GET)

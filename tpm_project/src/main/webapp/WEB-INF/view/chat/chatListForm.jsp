@@ -34,7 +34,27 @@
 <script src="/tpm_project/ckeditor/ckeditor.js?ver=4"></script>
 
 <style>
-
+#loading_div{
+	display:inline-block;
+	position: fixed;
+	background: black;
+	opacity: 0.7;
+	width: 110%;
+	height: 110%;
+	top: -10px;
+	left: -10px;
+	z-index: 9000;
+}
+#load_s{
+	position: fixed;
+	top: 40%;
+	left: 40%;
+	z-index: 9001;
+}
+#load_s a{
+	color:white;
+	font-size: 100px;
+}
 
 .list-border-left{
 	
@@ -310,6 +330,11 @@ var s_member_img = '<%=session.getAttribute("s_member_img")%>';
 var wsocket;
 
 $(function(){
+	
+	$('#loading_div').hide();
+	
+	$('#load_s').hide();
+	   
 	// 스크롤 연결
     $('#chat-box').slimScroll({
         height: '650px', // 스크롤 처리할 div 의 길이
@@ -409,10 +434,10 @@ $(function(){
 });
 
 function chatConnect() {
-	wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
 	/* wsocket = new SockJS(
-			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);  */
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
+	wsocket = new SockJS(
+			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); 
 	wsocket.onopen = onChatOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onChatMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onChatClose; // 연결 해체 후 메세지
@@ -1011,6 +1036,7 @@ function startSuggest_memberList(id, me){
 		</c:choose>
 	</c:otherwise>
 </c:choose>
+<div id="loading_div"></div><span id="load_s"><a>Loading...</a></span>
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/include/header.jsp"%>
 		<%@ include file="/WEB-INF/view/include/aside.jsp"%>

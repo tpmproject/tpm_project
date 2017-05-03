@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tpm.calendar.model.CalendarDAO;
 import tpm.calendar.model.CalendarDTO;
 import tpm.calendar.model.CalendarWorkDTO;
+import tpm.checklist.model.ChecklistDTO;
 import tpm.member.model.MemberDTO;
 import tpm.work.model.MyWorkDTO;
 
@@ -42,5 +43,11 @@ public class CalendarController {
 		return arry_obj;
 	}
 	
+	/** 켈린더 - 체크리스트 수정 */
+	@RequestMapping(value="calendarUpdateCheckList.do",  method=RequestMethod.POST)
+	public @ResponseBody Object calendarUpdateCheckList(ChecklistDTO ckdto){
+		return calendarDAO.updateCalendarCheckList(ckdto) > 0 ? "true" : "false";
+	}
+
 	
 }

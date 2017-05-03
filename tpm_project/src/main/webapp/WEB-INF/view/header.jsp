@@ -14,20 +14,20 @@
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
 				<!-- Messages: style can be found in dropdown.less-->
-				<li class="dropdown messages-menu"><a href="#"
+				<!-- <li class="dropdown messages-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="fa fa-envelope-o"></i> <span class="label label-success">4</span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header">You have 4 messages</li>
+						<   class="header">You have 4 messages</li>
 						<li>
-							<!-- inner menu: contains the actual data -->
+							inner menu: contains the actual data
 							<div class="slimScrollDiv"
 								style="position: relative; overflow: hidden; width: auto; height: 200px;">
 								<ul class="menu"
 									style="overflow: hidden; width: 100%; height: 200px;">
 									<li>
-										<!-- start message --> <a href="#">
+										start message <a href="#">
 											<div class="pull-left">
 												<img src="/tpm_project/sample/cho/main/dist/img/user2-160x160.jpg" class="img-circle"
 													alt="User Image">
@@ -39,7 +39,7 @@
 											<p>Why not buy a new awesome theme?</p>
 									</a>
 									</li>
-									<!-- end message -->
+									end message
 									<li><a href="#">
 											<div class="pull-left">
 												<img src="/tpm_project/sample/cho/main/dist/img/user3-128x128.jpg" class="img-circle"
@@ -92,16 +92,16 @@
 							</div>
 						</li>
 						<li class="footer"><a href="#">See All Messages</a></li>
-					</ul></li>
+					</ul></li> -->
 				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu"><a href="#"
+				<!-- <li class="dropdown notifications-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
 				</a>
 					<ul class="dropdown-menu">
 						<li class="header">You have 10 notifications</li>
 						<li>
-							<!-- inner menu: contains the actual data -->
+							inner menu: contains the actual data
 							<div class="slimScrollDiv"
 								style="position: relative; overflow: hidden; width: auto; height: 200px;">
 								<ul class="menu"
@@ -131,22 +131,22 @@
 							</div>
 						</li>
 						<li class="footer"><a href="#">View all</a></li>
-					</ul></li>
+					</ul></li> -->
 				<!-- Tasks: style can be found in dropdown.less -->
-				<li class="dropdown tasks-menu"><a href="#"
+				<!-- <li class="dropdown tasks-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="fa fa-flag-o"></i> <span class="label label-danger">9</span>
 				</a>
 					<ul class="dropdown-menu">
 						<li class="header">You have 9 tasks</li>
 						<li>
-							<!-- inner menu: contains the actual data -->
+							inner menu: contains the actual data
 							<div class="slimScrollDiv"
 								style="position: relative; overflow: hidden; width: auto; height: 200px;">
 								<ul class="menu"
 									style="overflow: hidden; width: 100%; height: 200px;">
 									<li>
-										<!-- Task item --> <a href="#">
+										Task item <a href="#">
 											<h3>
 												Design some buttons <small class="pull-right">20%</small>
 											</h3>
@@ -159,9 +159,9 @@
 											</div>
 									</a>
 									</li>
-									<!-- end task item -->
+									end task item
 									<li>
-										<!-- Task item --> <a href="#">
+										Task item <a href="#">
 											<h3>
 												Create a nice theme <small class="pull-right">40%</small>
 											</h3>
@@ -174,9 +174,9 @@
 											</div>
 									</a>
 									</li>
-									<!-- end task item -->
+									end task item
 									<li>
-										<!-- Task item --> <a href="#">
+										Task item <a href="#">
 											<h3>
 												Some task I need to do <small class="pull-right">60%</small>
 											</h3>
@@ -189,9 +189,9 @@
 											</div>
 									</a>
 									</li>
-									<!-- end task item -->
+									end task item
 									<li>
-										<!-- Task item --> <a href="#">
+										Task item <a href="#">
 											<h3>
 												Make beautiful transitions <small class="pull-right">80%</small>
 											</h3>
@@ -204,7 +204,7 @@
 											</div>
 									</a>
 									</li>
-									<!-- end task item -->
+									end task item
 								</ul>
 								<div class="slimScrollBar"
 									style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
@@ -213,7 +213,7 @@
 							</div>
 						</li>
 						<li class="footer"><a href="#">View all tasks</a></li>
-					</ul></li>
+					</ul></li> -->
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
@@ -227,7 +227,7 @@
 							<p>${s_member_name}</p>
 						</li>
 						<!-- Menu Body -->
-						<li class="user-body">
+						<!-- <li class="user-body">
 							<div class="col-xs-4 text-center">
 								<a href="#">Followers</a>
 							</div>
@@ -237,7 +237,7 @@
 							<div class="col-xs-4 text-center">
 								<a href="#">Friends</a>
 							</div>
-						</li>
+						</li> -->
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">

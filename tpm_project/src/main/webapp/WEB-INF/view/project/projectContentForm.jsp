@@ -9,7 +9,7 @@
 <title>TPM</title>
 <script type="text/javascript">
 var project_idx=${param.project_idx};
-var member_idx=${param.member_idx};
+var member_idx=${sessionScope.s_member_idx};
 var skin='${sessionScope.s_member_thema}';
 var skin_color='';
 </script>

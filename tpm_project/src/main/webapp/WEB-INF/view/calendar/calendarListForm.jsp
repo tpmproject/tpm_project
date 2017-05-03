@@ -21,6 +21,9 @@
 	rel="stylesheet" type="text/css">
   
 <link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="/tpm_project/css/material/mdb.css?ver=1" rel="stylesheet">
+
 <script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
 <script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
 <!-- iCheck 1.0.1 -->
@@ -29,8 +32,17 @@
 <script src="js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <!-- Slimscroll -->
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
+<script type="text/javascript" src="js/project/ws_project.js"></script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+body{
+font-family: 'Noto Sans KR', sans-serif;
+}
+.popover-content{
+	padding: 0px;
+}
 #loading_div{
 	display:inline-block;
 	position: fixed;
@@ -76,6 +88,13 @@
     border-color: #29b765;
     background: #2ecc71;
 }
+.fc-list-item{
+	cursor: pointer;
+}
+.fc-list-item:hover td {
+    color: black;
+    background-color: #f5f5f5;
+}    
 </style>
 <script type="text/javascript">
 var currCalendarData;
@@ -125,11 +144,13 @@ var testDate;
 function calendarReload(){
 	
 	var arry_pdto = originalData;
+	//window.alert(JSON.stringify(titleInfo));
 	var temp_arry = [];
 	
 	//window.alert($('#reservationtime').val());
 	
 	for(var i = 0 ; i < arry_pdto.length; i++){
+		var project_idx = arry_pdto[i].project_idx;
 		var project_name = arry_pdto[i].project_name;
 		
 		// 프로젝트 리스트 체크박스 체크..
@@ -137,10 +158,12 @@ function calendarReload(){
 			
 			var arry_cdto = arry_pdto[i].arry_cdto;
 			for(var j = 0 ; j < arry_cdto.length ; j++){
+				var category_idx = arry_cdto[j].category_idx;
 				var category_name = arry_cdto[j].category_name;
 				
 				var arry_wdto = arry_cdto[j].arry_wdto;
 				for(var k = 0 ; k < arry_wdto.length ; k++){
+					var work_idx = arry_wdto[k].work_idx;
 					var work_title = arry_wdto[k].work_title;
 					var work_start = arry_wdto[k].work_start;
 					var work_end = arry_wdto[k].work_end;
@@ -158,7 +181,32 @@ function calendarReload(){
 					} */
 					
 					var calendarInfo = {};
-					calendarInfo.title = project_name + '>' + category_name + '>' + work_title;
+					//calendarInfo.title = '{"project_name" : "' + project_name + '", "category_name" : "' + category_name + '", "work_title" : "' + work_title + '"}';
+					var titleInfo = {};
+					titleInfo.project_idx = project_idx;
+					titleInfo.project_name = project_name;
+					titleInfo.category_idx = category_idx;
+					titleInfo.category_name = category_name;
+					titleInfo.work_idx = work_idx;
+					titleInfo.work_title = work_title;
+					
+					var titleInfo_arry_checklist = [];
+					var arry_ckdto = arry_wdto[k].arry_ckdto;
+					for(var m = 0 ; m < arry_ckdto.length ; m++){
+						var checklist_idx = arry_ckdto[m].checklist_idx;
+						var checklist_content = arry_ckdto[m].checklist_content;
+						var checklist_state = arry_ckdto[m].checklist_state;
+						
+						var checklistInfo = {};
+						checklistInfo.checklist_idx = checklist_idx;
+						checklistInfo.checklist_content = checklist_content;
+						checklistInfo.checklist_state = checklist_state;
+						
+						titleInfo_arry_checklist.push(checklistInfo);
+					}
+					titleInfo.arry_ckdto = titleInfo_arry_checklist;
+							
+					calendarInfo.title = JSON.stringify(titleInfo);
 					//calendarInfo.allDay = 'false';
 					//calendarInfo.start = moment(work_start).format('YYYY-MM-DD, h:mm:ss a');
 					//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
@@ -218,22 +266,92 @@ function calendarReload(){
 				calevent, true);
 	});
 	
-	makePopover();
+	
 	
 }
 function makePopover(){
-	$('.bg-progressing').eq(0).attr('data-toggle','popover');
-	$('.bg-progressing').eq(0).attr('title','Popover HTML Header');
-	$('.bg-progressing').eq(0).attr('data-content','<div class="jumbotron">Some HTML content inside the popover</div>');
+
+	var arry_work_a = $('.bg-closingdateexcess, .bg-progressing, .bg-approvalwait, .bg-complete');
+	
+	for(var i = 0 ; i < arry_work_a.length ; i++){
+		var jsonStr;
+		var json;
+		
+		var testArry = $(arry_work_a).eq(i).find('.fc-title');
+		if(testArry.length == 0){
+			jsonStr = $(arry_work_a).eq(i).find('.fc-list-item-title a').html();
+			json = JSON.parse(jsonStr);
+			
+			$(arry_work_a).eq(i).find('.fc-list-item-title a').html(json.work_title);
+		} else {
+			jsonStr = $(arry_work_a).eq(i).find('.fc-title').html();
+			json = JSON.parse(jsonStr);
+			
+			$(arry_work_a).eq(i).find('.fc-title').html(json.work_title);
+		}
+		
+		$(arry_work_a).eq(i).attr('data-toggle','popover');
+		$(arry_work_a).eq(i).attr('title','<div><i class="fa fa-low-vision" aria-hidden="true"></i>&nbsp;&nbsp;' + json.project_name + '&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;&nbsp;' + json.category_name + '</div>');
+		
+		var innerMsg = '';
+		innerMsg += '<div style="min-width:150px;">';
+		innerMsg += '<div class="row">';
+		innerMsg +=		'<div class="col-md-12">';
+		innerMsg += 		'<div class="box-header">';
+		innerMsg += 			'<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
+		innerMsg += 			'<h3 class="box-title" style="font-size:14px;">체크리스트</h3>'	;
+		innerMsg += 		'</div>';
+		innerMsg += 		'<div class="check_list_div">';
+		innerMsg +=     		'<table class="table table-hover" style="margin-bottom: 0px;">';
+		var arry_ckdto = json.arry_ckdto;
+		if(arry_ckdto.length != 0){
+			
+			for(var k = 0 ; k < arry_ckdto.length ; k++){
+				//window.alert(arry_ckdto[i].checklist_content);
+				innerMsg += 		'<tr>';
+				innerMsg += 			'<th>';
+				innerMsg += 				'<div style="font-size:12px;">';
+				if(arry_ckdto[k].checklist_state == 1){
+					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red" checked>&nbsp;&nbsp;' + arry_ckdto[k].checklist_content + '</label>';
+				} else {
+					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red">&nbsp;&nbsp;' + arry_ckdto[k].checklist_content + '</label>';
+				}
+				innerMsg += 				'</div>';
+				innerMsg += 			'</th>';
+				innerMsg += 		'</tr>';
+			} 
+		}else{
+				innerMsg += 		'<tr>';
+				innerMsg += 			'<th>';
+				innerMsg += 				'<div style="font-size:12px;text-align: center;">';
+				innerMsg +=						'체크리스트가 없습니다.';
+				innerMsg += 				'</div>';		
+				innerMsg += 			'</th>';
+				innerMsg += 		'</tr>';
+		}
+		innerMsg +=				'</table>';
+		innerMsg += 		'</div>';
+		innerMsg +=			'<button class="mbtn mbtn-sm mbtn-primary" onclick="moveProjectContent(' + json.project_idx + ')" style="float:right;">이동</button>';
+		innerMsg += 	'</div>';
+		innerMsg += '</div>';
+		innerMsg += '</div>';
+		
+		
+		
+		
+		$(arry_work_a).eq(i).attr('data-content', innerMsg);		
+		
+	}
 	
 	var options =
     {
-      placement: function (context, source)
+     /*  placement: function (context, source)
       {
         var position = $(source).position();
-        var content_width = 515;  //Can be found from a JS function for more dynamic output
+       
+        var content_width = 10;  //Can be found from a JS function for more dynamic output
         var content_height = 110;  //Can be found from a JS function for more dynamic output
-
+        
         if (position.left > content_width)
         {
           return "left";
@@ -250,13 +368,61 @@ function makePopover(){
         }
 
         return "top";
-      }
-      , trigger: "hover"
+      } */
+	  placement: "left"
+      , trigger: "click"
       , animation: "true"
       , html:"true"
+      , container: 'body'
+      
     };
 	$('[data-toggle="popover"]').popover(options);
+	
+	$('[data-toggle="popover"]').on('shown.bs.popover', function () {
+		
+		$('.check_list_div').slimScroll({
+	        height: '176px' // 스크롤 처리할 div 의 길이
+	    }).bind('slimscrolling', function(e, pos) {
+	    	//window.alert("Scroll value: " + pos + "px");
+	       // $('#testDivOut2').append("Scroll value: " + pos + "px");
+	    }); 
+		
+		$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+		    checkboxClass: 'icheckbox_flat-green',
+		    radioClass: 'iradio_flat-green'
+	  	});
+		
+		$('input[name="checkBox_checkList"]').on('ifChanged', function (e) {
+			if(e.currentTarget.checked){ // 체크한 것이라면
+				var checklist_idx = e.currentTarget.value; // 체크리스트 idx를 가져온다
+				var checklist_state = 1;
+				updateCheckList(checklist_idx, checklist_state);
+			} else {
+				var checklist_idx = e.currentTarget.value; // 체크리스트 idx를 가져온다
+				var checklist_state = 0;
+				updateCheckList(checklist_idx, checklist_state);
+			}
+		});
+	})
 }
+function moveProjectContent(project_idx){
+	location.href = 'projectContent2.do?project_idx=' + project_idx;
+}
+function updateCheckList(checklist_idx, checklist_state){
+	$.ajax({
+		url : 'calendarUpdateCheckList.do',
+		type : 'post',
+		data : { checklist_idx : checklist_idx,
+			checklist_state : checklist_state },
+		dataType : 'json', // 제이슨 형식으로 넘어온다.
+		success : function(json) {
+			
+			
+			
+		}
+	});
+}
+
 function FilterReload(){
 	
 	var FilterListCheckBox = $('input[name="checkBox_FilterList"]');
@@ -333,6 +499,8 @@ function initMyProjectList(){
 				innerMsg += 		'</div>';
 				innerMsg += 	'</th>';
 				innerMsg += '</tr>';
+				
+				
 			}
 			
 			$('#calendar_project_list_table').html(innerMsg);
@@ -346,13 +514,38 @@ function initMyProjectList(){
 		       // $('#testDivOut2').append("Scroll value: " + pos + "px");
 		    });
 			
+			
+			
+			
+			for(var i = 0 ; i < json.length; i++){
+				connect(json[i].project_idx);
+			}
 			/* $('.applyBtn').click(function (){
 				calendarReload();
 			}); */
 			//$('.applyBtn$('input[name="checkBox_MyProjectList"]:checked')
+			
 		}
 	});
 }
+
+//ws 응답시 @overriding
+function onMessage(evt) {
+	var data = evt.data;
+	initMyWorkListData();
+	/* data=data.split(',');
+	if(data[0]=='work'){
+		var work_idx=data[1];
+		if(data[2]=='work_state'){
+			var ws=data[3];
+			ws=parseInt(ws);
+			
+			changeWorkState(work_idx,ws);
+		}
+	} */
+}
+
+
 
 function iCheckPlugin(){
 	$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
@@ -360,7 +553,7 @@ function iCheckPlugin(){
 	    radioClass: 'iradio_flat-green'
   	});
 	
-	
+	// icheck 이벤트 등록;
 	$('input[name="checkBox_MyProjectList"]').on('ifChanged', function (e) {
 		calendarReload();
 	});
@@ -369,6 +562,7 @@ function iCheckPlugin(){
 		FilterReload();
 		
 	});
+
 }
 
 function startSuggest_projectList(id, me){
@@ -456,6 +650,8 @@ function startSuggest_projectList(id, me){
 				        if (!confirm("Are you sure about this change?")) {
 				            revertFunc();
 				        }
+				        
+				       
 
 				    },eventResize: function(event, delta, revertFunc) {
 
@@ -464,6 +660,8 @@ function startSuggest_projectList(id, me){
 				        if (!confirm("is this okay?")) {
 				            revertFunc();
 				        }
+				        
+				        
 
 				    },
 				    
@@ -485,6 +683,8 @@ function startSuggest_projectList(id, me){
 							$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 						}
 						$('#calendar').fullCalendar('unselect');
+						
+						
 					},
 					
 					droppable : true, // this allows things to be dropped onto the calendar !!!
@@ -499,7 +699,7 @@ function startSuggest_projectList(id, me){
 
 						// assign it the date that was reported
 						copiedEventObject.start = date;
-						window.alert(date);
+						//window.alert(date);
 						copiedEventObject.allDay = allDay;
 						copiedEventObject.backgroundColor = $(this).css(
 								"background-color");
@@ -516,7 +716,12 @@ function startSuggest_projectList(id, me){
 							// if so, remove the element from the "Draggable Events" list
 							$(this).remove();
 						}
+						
+						
 
+					},
+					eventAfterAllRender: function() {
+						makePopover();
 					}
 				});
 	});
@@ -556,11 +761,7 @@ function startSuggest_projectList(id, me){
 							<div class="box-body table-responsive no-padding"
 								id="chat_channel_list_div">
 								<table class="table table-hover" id="channel_list_table">
-									<tr>
-										<th>
-											<a id="try_ppover" href="#" data-toggle="popover" title="Popover HTML Header" data-content="<div class='jumbotron'>Some HTML content inside the popover</div>">Toggle popover</a>
-										</th>
-									</tr>
+									
 									<tr>
 										<th>
 											<!-- Date and time range -->

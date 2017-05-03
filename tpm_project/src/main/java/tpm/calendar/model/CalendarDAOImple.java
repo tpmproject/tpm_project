@@ -22,4 +22,10 @@ public class CalendarDAOImple implements CalendarDAO {
 	public List<Object> getCalendarMyProjectList(Object obj) {
 		return sqlMap.selectList("calendarMyProjectList", obj);
 	}
+
+	@Override
+	public int updateCalendarCheckList(Object obj) {
+		// TODO Auto-generated method stub
+		return sqlMap.update("calendarUpdateCheckList", obj);
+	}
 }
