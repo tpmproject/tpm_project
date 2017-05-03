@@ -18,6 +18,43 @@
     <script type="text/javascript" src="js/httpRequest.js"></script>
 
 	<script>
+		
+		function goAddTendency(){
+			
+			var successEmail = document.getElementById('successEmail').value;
+			
+			var pwd = document.getElementById('inputPassword').value;
+			var pwd2 = document.getElementById('inputPasswordCheck').value;
+			
+			var name = document.getElementById('inputName').value;
+			
+			var tel = document.getElementById('inputTel').value;
+			//window.alert(successEmail);
+			
+			if(successEmail==null || successEmail==""){
+				window.alert('이메일 인증을 해주세요');
+				return;
+			} else if(pwd==null || pwd=="" || pwd2==null || pwd2==""){
+				window.alert('비밀번호를 입력해주세요');
+				return;
+			} else if(name==null || name==""){
+				window.alert('이름을 입력해주세요');
+				return;
+			} else if(tel==null || tel==""){
+				window.alert('전화번호를 입력해주세요');
+				return;
+			} else{
+				document.memberAddForm.submit();
+			}
+		
+			
+		}
+		
+		/* function getGender(){
+			var gender = document.getElmentById('inputGender').value;
+			
+			return gender;
+		} */
 	
 		function emailCheck(){
 			var user_email = document.memberAddForm.inputEmail.value;
@@ -132,6 +169,7 @@ function cancle(){
 						<div class="col-sm-6" id="input_email">
 							<input class="form-control" id="inputEmail" type="email"
 								name="member_id" placeholder="이메일" required="required">
+							<input type="hidden" id="successEmail">
 						</div>
 						<div id="email_check_div">
 							<button class="btn btn-success" type="button"
@@ -167,14 +205,14 @@ function cancle(){
                     <div class="form-group">
            			 <label class="col-sm-3 control-label" for="inputName">연락처</label>
            			 <div class="col-sm-6">
-             		 <input class="form-control" id="inputName" type="text" name="member_tel" placeholder="전화번호"required="required">
+             		 <input class="form-control" id="inputTel" type="text" name="member_tel" placeholder="전화번호"required="required">
            			 </div>
        			    </div>
        			    
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="inputName">성별</label>
                         <div class="col-sm-6">
-                            <select class="form-control" style="width:79px; float:left;" name="member_gender">
+                            <select class="form-control" style="width:79px; float:left;" id="inputGender" name="member_gender">
                                 <option value="남자">남자</option>
                                 <option value="여자">여자</option>
                             </select>
@@ -210,7 +248,7 @@ function cancle(){
 			
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
-                            <button class="btn btn-primary" type="submit">다음
+                            <button class="btn btn-primary" type="button" onclick="javascript:goAddTendency()">다음
                                 <i class="fa fa-check spaceLeft"></i>
                             </button>
                             <button class="btn btn-danger" type="button" onclick="cancle();">가입취소

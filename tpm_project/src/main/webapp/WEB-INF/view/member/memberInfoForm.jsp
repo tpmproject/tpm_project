@@ -59,21 +59,7 @@
 	    		window.alert('비밀번호가 일치하지 않습니다');
 	    		return;
 	    	} else{
-	    		
 	    		document.memberInfoForm.submit();
-	    		/* var member_pwd = document.getElementById('inputPassword').value;
-	    		var member_name = document.getElementById('inputName').value;
-	    		var member_tel = document.getElementById('inputTel').value;
-	    		var member_gender = getMemberGender();
-	    		var member_img = document.getElementById('select_profile').value;
-	    		
-	    		var param = 'member_pwd='+ member_pwd+ '&member_name='+ member_name +
-	    				'&member_tel='+ member_tel +'&member_gender='+ member_gender +'&member_img='+ member_img;
-	    		
-	    		window.alert(param);
-	    		
-	    		sendRequest('memberUpdate.do', param, memberUpdateResult, 'POST'); */
-	    		
 	    	}
 	    }
 	    

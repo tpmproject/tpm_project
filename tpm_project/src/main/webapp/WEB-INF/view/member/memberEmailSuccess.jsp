@@ -10,7 +10,7 @@
 	msg += '</button>';
 	
 	var msg2 = '';
-	msg2 += '<input class="form-control" id="inputEmail" type="email" value="${email}" name="member_id" required="required" readonly>';
+	msg2 += '<input class="form-control" id="successEmail" type="email" value="${email}" name="member_id" required="required" readonly>';
 	
 	opener.document.getElementById('email_check_div').innerHTML = msg;
 	opener.document.getElementById('input_email').innerHTML = msg2;
