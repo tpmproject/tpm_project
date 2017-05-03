@@ -28,4 +28,10 @@ public class CalendarDAOImple implements CalendarDAO {
 		// TODO Auto-generated method stub
 		return sqlMap.update("calendarUpdateCheckList", obj);
 	}
+
+	@Override
+	public int updateCalendarWorkTime(Object obj) {
+		// TODO Auto-generated method stub
+		return sqlMap.update("calendarUpdateWorkTime", obj);
+	}
 }

@@ -34,6 +34,10 @@
 <script src="/tpm_project/ckeditor/ckeditor.js?ver=4"></script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+body{
+font-family: 'Noto Sans KR', sans-serif;
+}
 #loading_div{
 	display:inline-block;
 	position: fixed;

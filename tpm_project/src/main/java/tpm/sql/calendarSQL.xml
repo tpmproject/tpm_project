@@ -68,4 +68,8 @@
 		UPDATE tpm_checklist SET checklist_state = #{checklist_state} WHERE checklist_idx = #{checklist_idx}
 	</update>
 	
+	<update id="calendarUpdateWorkTime" parameterType="tpm.calendar.model.CalendarWorkDTO">
+		UPDATE tpm_work SET work_start = #{work_start} WHERE work_idx = #{work_idx}
+	</update>
+	
 </mapper>

@@ -2068,7 +2068,7 @@ ul {
 .tooltip-inner,
 .popover,
 .dropdown-menu,
-.input-group-addon,
+/* .input-group-addon, */
 .file-custom,
 .card .card-header,
 .nav-tabs,
@@ -2080,7 +2080,7 @@ img {
   border-radius: 2px; }
 
 .popover,
-.input-group-addon,
+/* .input-group-addon, */
 .dropdown-menu,
 .pagination .page-item .page-link {
   border: 0; }

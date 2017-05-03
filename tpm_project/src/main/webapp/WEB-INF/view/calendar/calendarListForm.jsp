@@ -11,6 +11,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/view/include/import.jsp"%>
+<!-- Material Design Bootstrap -->
+<link href="/tpm_project/css/material/mdb.css?ver=1" rel="stylesheet">
+
 <link href="/tpm_project/css/calendar/fullcalendar.min.css?ver=1" rel="stylesheet" />
 <link href="/tpm_project/css/calendar/fullcalendar.print.min.css?ver=1" rel="stylesheet" media='print' />
 <!-- iCheck for checkboxes and radio inputs -->
@@ -21,8 +24,7 @@
 	rel="stylesheet" type="text/css">
   
 <link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="/tpm_project/css/material/mdb.css?ver=1" rel="stylesheet">
+
 
 <script src="/tpm_project/js/calendar/moment.min.js?ver=1"></script>
 <script src="/tpm_project/js/calendar/fullcalendar.min.js?ver=1"></script>
@@ -235,6 +237,7 @@ function calendarReload(){
 					}
 					
 					calendarInfo.editable = 'true';
+					//calendarInfo.allDay = 'true';
 					//temp_arry.push(calendarInfo);
 					
 					//기간 필터
@@ -310,11 +313,11 @@ function makePopover(){
 				//window.alert(arry_ckdto[i].checklist_content);
 				innerMsg += 		'<tr>';
 				innerMsg += 			'<th>';
-				innerMsg += 				'<div style="font-size:12px;">';
+				innerMsg += 				'<div style="font-size:12px;overflow: hidden;">';
 				if(arry_ckdto[k].checklist_state == 1){
-					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red" checked>&nbsp;&nbsp;' + arry_ckdto[k].checklist_content + '</label>';
+					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red" checked><span style="margin-left:10px;">' + arry_ckdto[k].checklist_content + '</span></label>';
 				} else {
-					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red">&nbsp;&nbsp;' + arry_ckdto[k].checklist_content + '</label>';
+					innerMsg += 				'<label><input type="checkbox" name="checkBox_checkList" value="' + arry_ckdto[k].checklist_idx + '" class="flat-red"><span style="margin-left:10px;">' + arry_ckdto[k].checklist_content + '</span></label>';
 				}
 				innerMsg += 				'</div>';
 				innerMsg += 			'</th>';
@@ -331,6 +334,7 @@ function makePopover(){
 		}
 		innerMsg +=				'</table>';
 		innerMsg += 		'</div>';
+		innerMsg +=			'<button class="mbtn mbtn-sm mbtn-primary" onclick="popoverClose(this)" style="float:right;">닫기</button>';
 		innerMsg +=			'<button class="mbtn mbtn-sm mbtn-primary" onclick="moveProjectContent(' + json.project_idx + ')" style="float:right;">이동</button>';
 		innerMsg += 	'</div>';
 		innerMsg += '</div>';
@@ -404,6 +408,10 @@ function makePopover(){
 			}
 		});
 	})
+}
+
+function popoverClose(bt){
+	$(bt).parents(".popover").fadeOut('50');
 }
 function moveProjectContent(project_idx){
 	location.href = 'projectContent2.do?project_idx=' + project_idx;
@@ -583,7 +591,7 @@ function startSuggest_projectList(id, me){
 		}
 		checkFirst = true; */
 }
-
+var start_date;
 	$(document).ready(function() {
 		
 		$('#loading_div').hide();
@@ -644,11 +652,34 @@ function startSuggest_projectList(id, me){
 					dragscroll: true,
 					editable: true, // 업무 수정 이동 여부
 					eventDrop: function(event, delta, revertFunc) {
-
+						
+						var inputJsonStr = event.title;
+						var inputJson = JSON.parse(inputJsonStr);
+						
 				        alert(event.title + " was dropped on " + event.start.format());
-
-				        if (!confirm("Are you sure about this change?")) {
-				            revertFunc();
+				        start_date = event.start.toString();
+						//alert(event.start);
+				        if (confirm("Are you sure about this change?")) {
+				        	$.ajax({
+				        		url : 'calendarWorkUpdate.do',
+				        		type : 'post',
+				        		data : {
+				        			work_idx : inputJson.work_idx,
+				        			work_start : start_date
+				        			
+				        		},
+				        		dataType : 'json', // 제이슨 형식으로 넘어온다.
+				        		success : function(json) {
+				        			  
+				        			
+				        		}
+				        	}); 
+				        			
+				        			
+				          
+				            
+				        } else {
+				        	revertFunc();
 				        }
 				        
 				       
