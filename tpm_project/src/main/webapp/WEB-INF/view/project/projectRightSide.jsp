@@ -255,6 +255,9 @@
         z-index: 3;   
     }
     </style>
+    <style>
+    	
+    </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
 
@@ -263,6 +266,7 @@
 	$(function(){
 		$('#comment-box').slimScroll({
 			height: '500px',
+			width: '590px',
 			start: 'bottom'
 		});
 	});
@@ -288,7 +292,7 @@
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var cdId = document.getElementById('comment_content_area');
+				var comment_div = document.getElementById('comment_content_area');
 				var member_id = json.mdto.member_id.split('@')[0];
 				
 				var member_img = json.mdto.member_img;
@@ -367,6 +371,36 @@
 		}
 	} */
 	
+	/* function comment_list(){
+		
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				
+				var jsonData = XHR.responseText;
+				window.alert(jsonData);
+				
+				var comments = eval('('+ jsonData +')');
+				
+				var msg = '';
+			    
+				var comment_div = document.getElementById('comment_content_area');
+				
+				for(var i=0; i<comment.length; i++){
+					
+					if(comments[i].mdto.member_idx == s_member_idx){
+						msg += myComment(comments[i]);				
+					} else{
+						msg += teamComment(comments[i]);
+					}
+					
+					comment_div.innerHTML = msg;
+					
+					$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
+				}
+			}
+		}
+	} */
+	
 	function showComment(){
 		
 		var work_idx = document.newComment.work_idx.value;
@@ -383,7 +417,7 @@
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var cdId = document.getElementById('comment_content_area');
+				var comment_div = document.getElementById('comment_content_area');
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
@@ -411,7 +445,7 @@
 					msg += 		'</div>';
 					msg += 	'</div>'; */
 				}
-				cdId.innerHTML = msg;
+				comment_div.innerHTML = msg;
 				
 				$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
 			}
@@ -600,13 +634,59 @@
 	/* 코멘트 창 바로 보여주기 테스트  
 	function comment_list(work_idx){
 		sessionStorage.setItem('s_work_idx', work_idx);
+		window.alert('commet_list:'+work_idx);
 		
 		var param = 'work_idx=' + work_idx;
-		action_ajax('commentList.do', param, 'post', 'work_commentList');
-	}
+		window.alert(param);
 		
-	function work_commentList(){
-		
+		$.ajax({
+			url : 'commentList.do',
+			type : 'post',
+			data : param,
+			dataType : 'json',
+			success : function(json){
+				//window.alert('json:'+JSON.stringify(json,null,2));
+				
+				var comment_div = document.getElementById('comment_content_area');
+				
+				var form_msg = '';
+				var msg = '';
+				
+				form_msg += '<div class="row" id="commentBody">';
+				form_msg += '<div class="col-md-12" style="height: 400px; margin: 0px;">';
+				form_msg += '<div class="box-header">';
+				form_msg += '<i class="fa fa-comments-o"></i>';
+				form_msg += '<h3 class="box-title">Comment</h3> </div>';
+				form_msg += '<div class="box-body comment" id="comment-box">';
+				form_msg += '<div id="comment_div">';
+				form_msg += '<div id="comment_content_area"></div> </div> </div>';
+				form_msg += '<form name="newComment" id="comment_footer" action="javascript:commentAdd()" method="post">';
+				form_msg += '<input type="hidden" name="work_idx" value="${work_idx}">';
+				form_msg += '<c:set var="pdto" value="${pdto}"/>';
+				form_msg += '<c:if test="${pdto.project_level != 1000 }">';
+				form_msg += '<div class="input-group">';
+				form_msg += '<input type="text" class="form-control" id="comment" name="inputComment" placeholder="Type message...">'; 
+				form_msg += '<div class="input-group-btn">';
+				form_msg += '<button class="btn btn-success" type="button" onclick="javascript:commentAdd()">';
+				form_msg += '<i class="fa fa-plus"></i>';
+				form_msg += '</button> </div> </div>';
+				form_msg += '</c:if> </form>';
+				form_msg += '</div> </div>';
+				
+				
+				for(var i=0; i<json.length; i++){
+					
+					//var member_id = json[i].mdto.member_id.split('@')[0];
+					
+					if(json[i].mdto.member_idx == s_member_idx){
+						msg += myComment(json[i]);				
+					} else{
+						msg += teamComment(json[i]);
+					}
+					
+					comment_div.innerHTML = msg;
+					
+					$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
 	} */
 		
 	/* 처음 들어올때 업무 파일리스트  */

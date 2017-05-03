@@ -1131,7 +1131,10 @@ function workSide(work_idx,work_title){
 	comment(work_idx);
 	showComment(work_idx);
 	
-} 
+	//var param = 'work_idx='+work_idx;
+	//sendRequest('commentList.do', param, comment_list, 'POST');
+}
+
 function showWorkTable(work_idx){
 
 	var show=document.getElementById('showWork'+work_idx).getAttribute('class');
