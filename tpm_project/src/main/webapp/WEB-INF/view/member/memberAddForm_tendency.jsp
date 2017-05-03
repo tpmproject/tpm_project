@@ -55,6 +55,7 @@
 			  	<input type="hidden" name="member_name" value="${mdto.member_name }">
 			  	<input type="hidden" name="member_gender" value="${mdto.member_gender }">
 			  	<input type="hidden" name="member_tel" value="${mdto.member_tel }">
+			  	<input type="file" name="member_img" value="${mdto.member_img }">
 			            
               <div class="alert alert-info" style="color:black; background-color:white">
                 <div class="form-inline">
