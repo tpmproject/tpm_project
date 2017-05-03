@@ -21,7 +21,11 @@
 	<!-- 업무 성향 그래프-->
 	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<!-- 업무 분석 도넛 그래프 -->
-	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+	<!-- <script src="https://www.amcharts.com/lib/3/pie.js"></script> -->
+	<script src="sample/cho/main/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="sample/cho/main/plugins/morris/morris.min.js"></script>
+	<script src="sample/cho/main/plugins/chartjs/Chart.min.js"></script>
 	<!-- 프로필 이미지 미리보기 -->
 	
 <title>Insert title here</title>
@@ -37,7 +41,7 @@
 				font-size	: 11px;
 	  }
 	  #chartdiv3 {
-			width		: 50%;
+			width		: 55%;
 			height		: 140px;
 			font-size	: 11px;
 	}	
@@ -181,7 +185,21 @@
 	    			
 	    			var workComplete = workTotal - workING;
 	    			
-	    			var chart = AmCharts.makeChart( "chartdiv3", {
+	    			$(function () {
+	    			    //"use strict";
+		    			var donut = new Morris.Donut({
+		    			  element: 'chartdiv3',
+		    			  resize: true,
+		    			  colors: [ "#fcd100", "#67b6d8"],
+		    			  data: [
+		    			    {label: "남은 업무", value: workING},
+		    			    {label: "완료된 업무", value: workComplete}
+		    			  ],
+		    			  hideHover: 'auto'
+		    			})
+	    			});
+	    			
+	    			/* var chart = AmCharts.makeChart( "chartdiv3", {
 	    				
 	  				  "type": "pie",
 	  				  "theme": "light",
@@ -199,14 +217,14 @@
 	  				  "radius": "40%",
 	  				  "innerRadius": "70%",
 	  				  "labelText": "[[title]]",
-	  			} );
+	  			} ); */
 	    		}
 	    	}
 	    }
 	    
     </script>
 </head>
-<body class="skin-${sessionScope.s_member_thema}">
+<body class="skin-${sessionScope.s_member_thema} hold-transition sidebar-mini">
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	  <div class="row">
 	  
@@ -347,16 +365,17 @@
               	<br>
               	
                 <div class="col-md-12" style="height: 200px;">
-                	<div class="col-md-5" id="chartdiv3"></div>	
+				    <div class="col-md-4 chart" id="chartdiv3" style="position: relative;"></div>
+                	<!-- <div class="col-md-5" id="chartdiv3"></div> -->	
                 	
 	                <div>
-	                	<a class="col-md-6 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
+	                	<a class="col-md-4 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
 	              	<br>
               		<br>
               		
 	              	<div>
-	                	<a class="col-md-6 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
+	                	<a class="col-md-4 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
 	              	</div>
                 </div>
               </div>
