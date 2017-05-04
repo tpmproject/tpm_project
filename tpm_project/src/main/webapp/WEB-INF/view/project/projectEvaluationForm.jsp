@@ -130,7 +130,7 @@ function addTendency_l(member_idx){
 	+'&tendency_j=' + j_val
 	+'&tendency_p=' + p_val
 
-	window.alert(param);
+	//window.alert(param);
 
 	sendRequest('projectState.do', param, addTendency_lResult, 'POST');
 
