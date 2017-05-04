@@ -1169,10 +1169,7 @@ function workSide(work_idx,work_title){
 	project_fileList(work_idx,work_title);
 	fileUpload(work_idx);
 	comment(work_idx);
-	showComment(work_idx);
-	
-	//var param = 'work_idx='+work_idx;
-	//sendRequest('commentList.do', param, comment_list, 'POST');
+	//showComment(work_idx);
 }
 
 function showWorkTable(work_idx){
