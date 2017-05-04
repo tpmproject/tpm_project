@@ -56,19 +56,28 @@ public class FileController {
 		
 		HttpSession session=req.getSession();
 		int member_idx=(Integer)session.getAttribute("s_member_idx");
-		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
+	//	ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx); //프로젝트 리스트 project_idx 리스트 가져와 dto에 저장
+		ModelAndView mav = new ModelAndView();
+		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx);
 		
-		if(session.getAttribute("project_idx")==null){
-			//System.out.println("get방식 fileList.do 쪽 session등록");
-			session.setAttribute("project_idx", pdto.get(1).getProject_idx());
+		if(fdao.projectAllList(member_idx).isEmpty()){
+			mav.addObject("pdto",pdto);
+		}else{
+			
+			if(session.getAttribute("project_idx")==null){
+				//System.out.println("get방식 fileList.do 쪽 session등록");
+				//session.setAttribute("project_idx", pdto.get(1).getProject_idx());
+				mav.addObject("pdto",pdto);
+			}
 		}
+		
 		//System.out.println("첫 접속시 프로젝트 idx="+pdto.get(1).getProject_idx());
 		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
 		
 		
-		ModelAndView mav = new ModelAndView();
+	
 		
-		mav.addObject("pdto",pdto);
+	
 		mav.setViewName("file/fileListForm");
 		return mav;
 	}
