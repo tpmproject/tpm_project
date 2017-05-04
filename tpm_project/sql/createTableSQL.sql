@@ -4,7 +4,7 @@ CREATE TABLE tpm_member (
 	member_id     VARCHAR2(20)  ,     -- 회원 아이디
 	member_pwd    VARCHAR2(40)  ,     -- 회원 비밀번호
 	member_name   VARCHAR2(20)  ,     -- 회원 이름
-	member_gender VARCHAR2(5)   ,     -- 회원 성별
+	member_gender VARCHAR2(10)   ,    -- 회원 성별
 	member_tel    VARCHAR2(30)  ,     -- 회원 연락처
 	member_img    VARCHAR2(300) ,     -- 회원 사진 경로
 	member_thema  NUMBER              -- 회원 테마
@@ -47,7 +47,7 @@ minvalue 0 start with 1;
 -- 프로젝트 테이블[x]-------------------------------------------------------
 CREATE TABLE tpm_project (
 	project_idx     NUMBER        primary key NOT NULL, -- 프로젝트 IDX
-	project_name    VARCHAR2(20)  ,     -- 프로젝트 이름
+	project_name    VARCHAR2(100) ,     -- 프로젝트 이름
 	project_content VARCHAR2(300) ,     -- 프로젝트 설명
 	project_state   NUMBER              -- 프로젝트 상태
 );
@@ -99,10 +99,6 @@ CREATE TABLE tpm_myfriend (
 );
 
 
-
-
-
-
 -- 카테고리 테이블[0]-------------------------------------------------------
 CREATE TABLE tpm_category (
 	category_idx  NUMBER        primary key NOT NULL, -- 카테고리 IDX
@@ -149,9 +145,6 @@ CREATE TABLE tpm_work_member (
 	FOREIGN KEY (member_idx)
 	REFERENCES tpm_member(member_idx)ON DELETE CASCADE
 );
-
-
-
 
 
 -- 업무 체크리스트 테이블[0]-------------------------------------------------------
