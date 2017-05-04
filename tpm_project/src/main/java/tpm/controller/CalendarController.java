@@ -60,7 +60,7 @@ public class CalendarController {
 	 * @throws ParseException */
 	@RequestMapping(value="calendarWorkUpdate.do",  method=RequestMethod.POST)
 	public @ResponseBody Object calendarWorkUpdate(@RequestParam(value="work_idx") String work_idx,
-			@RequestParam(value="work_start") String work_start_str) throws ParseException{
+			@RequestParam(value="work_start") String work_start_str, @RequestParam(value="work_end") String work_end_str) throws ParseException{
 	
 		CalendarWorkDTO cwdto = new CalendarWorkDTO();
 		
@@ -77,6 +77,17 @@ public class CalendarController {
 		
 		cwdto.setWork_idx(Integer.parseInt(work_idx));
 		cwdto.setWork_start(work_start);
+		
+		
+		System.out.println(work_end_str);
+		work_end_str = work_end_str.substring(4, work_end_str.length()-9);
+		System.out.println(work_end_str);
+		java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.US); 
+		Date ts2 = sdf2.parse(work_end_str);
+		
+		Timestamp work_end = new Timestamp(ts2.getTime());
+		
+		cwdto.setWork_end(work_end);
 
 		return calendarDAO.updateCalendarWorkTime(cwdto) > 0 ? "true" : "false";
 	}
