@@ -7,14 +7,14 @@
 
 	<select id="SelfTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
 		select * from tpm_tendency
-		where member_idx = #{member_idx} and project_idx is null
+		where member_idx = #{member_idx} and project_idx =0
 	</select>
 
 	<select id="TeamTendency" parameterType="int" resultType="tpm.tendency.model.TendencyDTO">
 		select a.*
 		from (select project_idx, avg(tendency_e) as tendency_e, avg(tendency_i) as tendency_i, avg(tendency_s) as tendency_s, avg(tendency_n) as tendency_n, avg(tendency_t) as tendency_t, avg(tendency_f) as tendency_f, avg(tendency_j) as tendency_j, avg(tendency_p) as tendency_p
 			  from tpm_tendency
-			  where member_idx = #{member_idx} and project_idx is not null
+			  where member_idx = #{member_idx} and project_idx >0
 			  group by project_idx) a
 	</select>
 	
