@@ -65,7 +65,7 @@ function addTendency(member_idx){
 	+'&tendency_j=' + j_val
 	+'&tendency_p=' + p_val;
 
-	window.alert(param);
+	//window.alert(param);
 
 	sendRequest('projectEvaluation.do', param, addTendencyResult, 'POST');
 
@@ -75,7 +75,7 @@ function addTendencyResult(){
 		if (XHR.status == 200) {
 			var result = XHR.responseText;
 			result=parseInt(result);
-			window.alert(result);
+			//window.alert(result);
 
 			/* if (result>0) {
 				$('#bt'+result).hide();

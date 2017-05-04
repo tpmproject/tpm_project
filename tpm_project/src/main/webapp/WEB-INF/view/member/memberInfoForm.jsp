@@ -223,7 +223,8 @@
 	    
     </script>
 </head>
-<body class="skin-${sessionScope.s_member_thema} hold-transition sidebar-mini">
+<body class="skin-${sessionScope.s_member_thema}">
+<!-- hold-transition sidebar-mini -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
 	  <div class="row">
 	  
