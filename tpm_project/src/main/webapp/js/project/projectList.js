@@ -149,8 +149,11 @@
 	function projectMemberAdd(aou) {
 		addOrUpdate=aou;
 		var param = 'member_idx=' + member_idx;
-		param += '&member_id=' + document.newProject.member_id.value;
-
+		if(aou==1){
+			param += '&member_id=' + document.newProject.member_id.value;
+		}else{
+			param += '&member_id=' + document.changeProject.member_id.value;
+		}
 		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 		
 	}
