@@ -511,7 +511,6 @@
 				}
 				// history.go(0);
 				/* location.reload(); */
-				$('#carousel-example-generic').carousel('last');
 				$('#carousel-example-generic').carousel('prev');
 				/*setTimeout(function(){$('#pitem').remove();},1000);*/
 				closem();
