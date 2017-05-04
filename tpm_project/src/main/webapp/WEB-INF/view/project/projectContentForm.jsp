@@ -522,15 +522,7 @@ var skin_color='';
 <script>
 /* 첨부파일 관련 */
  
-$("#menu-close").click(function(e) {
-  e.preventDefault();
-  $("#sidebar-wrapper").toggleClass("active");
-});
 
-$(".menu-toggle").click(function(e) {
-  e.preventDefault();
-  $("#sidebar-wrapper").toggleClass("active");
-});
 
 </script>
 </html>
