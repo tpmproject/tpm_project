@@ -34,7 +34,7 @@
 			
 			
 			
-			 if(successEmail==null || successEmail==""){
+			/*  if(successEmail==null || successEmail==""){
 				window.alert('이메일 인증을 해주세요');
 				return;
 			} else if(pwd==null || pwd=="" || pwd2==null || pwd2==""){
@@ -49,9 +49,9 @@
 			} else if(!agr_ch){
 				window.alert('이용약관에 동의해주세요');
 			} else{
-				document.memberAddForm.submit();
-			} 
-		
+				
+			}  */
+			 document.memberAddForm.submit();
 			
 		}
 		

@@ -269,7 +269,7 @@ function calendarReload(){
 				calevent, true);
 	});
 	
-	
+	FilterReload();
 	
 }
 function makePopover(){
@@ -407,6 +407,15 @@ function makePopover(){
 				updateCheckList(checklist_idx, checklist_state);
 			}
 		});
+		
+		// icheck 이벤트 등록;
+		$('input[name="checkBox_MyProjectList"]').on('ifChanged', function (e) {	
+			calendarReload();	
+		});
+		
+		$('input[name="checkBox_FilterList"]').on('ifChanged', function (e) {		
+			calendarReload();		
+		});
 	})
 }
 
@@ -470,9 +479,7 @@ function initMyWorkListData(){
 		success : function(json) {
 			//window.alert(JSON.stringify(json));
 			originalData = json;
-			
 			calendarReload();
-			FilterReload();
 		}
 	});
 	
@@ -567,8 +574,7 @@ function iCheckPlugin(){
 	});
 	
 	$('input[name="checkBox_FilterList"]').on('ifChanged', function (e) {
-		FilterReload();
-		
+		calendarReload();
 	});
 
 }
@@ -656,24 +662,26 @@ var start_date;
 						var inputJsonStr = event.title;
 						var inputJson = JSON.parse(inputJsonStr);
 						
-				        alert(event.title + " was dropped on " + event.start.format());
+				        //alert(event.title + " was dropped on " + event.start.format());
 				        start_date = event.start.toString();
+				        end_date = event.end.toString();
+				        window.alert(end_date);
 						//alert(event.start);
-				        if (confirm("Are you sure about this change?")) {
+				        if (confirm("해당 날짜로 수정 하시겠습니까 ?")) {
 				        	$.ajax({
 				        		url : 'calendarWorkUpdate.do',
 				        		type : 'post',
 				        		data : {
 				        			work_idx : inputJson.work_idx,
-				        			work_start : start_date
-				        			
+				        			work_start : start_date,
+				        			work_end : end_date
 				        		},
 				        		dataType : 'json', // 제이슨 형식으로 넘어온다.
 				        		success : function(json) {
 				        			  
 				        			
 				        		}
-				        	}); 
+				        	});
 				        			
 				        			
 				          
