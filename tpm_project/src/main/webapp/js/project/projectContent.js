@@ -760,12 +760,52 @@ function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work
 	document.getElementById('wm'+work_idx).innerHTML=member;
 
 	if(work_confirm==10){
+		var cNode = document.getElementById('wstate'+work_idx);
 
-		$("#wf").attr('checked', 'checked');
+		var msg='					<div class="work_btn" id="workState'+work_idx+'">';
+		msg+='							<i name="1" class="glyphicon glyphicon-play-circle"';
+		if(work_state==1){
+			msg+='style="color:#367fa9;"';
+		}
+		msg+='								data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"';
+		msg+='								onclick="workDone('+work_idx+',1)"></i>';
+		msg+='								<i name="2" class="glyphicon glyphicon-record"';
+		if(work_state==2){
+			msg+='style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"';
+		}else{
+			msg+='data-toggle="tooltip" data-placement="bottom" title="결재 요청"';
+		}
+		msg+='									onclick="workDone('+work_idx+',2)"></i>';
+		msg+='							<i name="3" class="glyphicon glyphicon-ok-circle"';
+		if(work_state==3){
+			msg+='style="color:green;"';
+		}
+		msg+='								data-toggle="tooltip" data-placement="bottom" title="완료된 업무"';
+		msg+='								onclick="workDone('+work_idx+',3)"></i>';
+		msg+='						</div>';
+		cNode.innerHTML = msg;
+
 		//document.changeWork.work_confirm.setAttribute('checked','checked');
 	}else if(work_confirm==20){
 
 		$('#wf').removeAttr('checked');
+		var cNode = document.getElementById('wstate'+work_idx);
+
+		var msg='					<div class="work_btn" id="workState'+work_idx+'">';
+		msg+='							<i name="1" class="glyphicon glyphicon-play-circle"';
+		if(work_state==1){
+			msg+='style="color:#367fa9;"';
+		}
+		msg+='								data-toggle="tooltip" data-placement="bottom" title="업무 진행 중"';
+		msg+='								onclick="workDone('+work_idx+',1)"></i>';
+		msg+='							<i name="3" class="glyphicon glyphicon-ok-circle"';
+		if(work_state==3){
+			msg+='style="color:green;"';
+		}
+		msg+='								data-toggle="tooltip" data-placement="bottom" title="완료된 업무"';
+		msg+='								onclick="workDone('+work_idx+',3)"></i>';
+		msg+='						</div>';
+		cNode.innerHTML = msg;
 		//document.changeWork.work_confirm.setAttribute('checked','');
 	}
 	closem();

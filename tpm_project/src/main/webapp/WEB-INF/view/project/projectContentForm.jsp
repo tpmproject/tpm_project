@@ -312,7 +312,7 @@ var skin_color='';
 										<c:remove var="chTotal" />
 										<c:remove var="chChecked" />
 										<tr>
-											<td><div class="work_btn" id="workState${wdto.work_idx}">												
+											<td id="wstate${wdto.work_idx}"><div class="work_btn" id="workState${wdto.work_idx}">												
 												<i name="1" class="glyphicon glyphicon-play-circle" ${wdto.work_state eq 1?'style="color:#367fa9;"':''} data-toggle="tooltip" data-placement="bottom" title="업무 진행 중" onclick="workDone(${wdto.work_idx},1)"></i>
 											<c:if test="${wdto.work_confirm ==10}">
 												<i name="2" class="glyphicon glyphicon-record" ${wdto.work_state eq 2?'style="color:#f0ad4e;" data-toggle="tooltip" data-placement="bottom" title="결재 대기"':'data-toggle="tooltip" data-placement="bottom" title="결재 요청"'} onclick="workDone(${wdto.work_idx},2)"></i>
