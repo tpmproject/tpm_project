@@ -61,13 +61,13 @@ public class FileController {
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx);
 		
 		if(fdao.projectAllList(member_idx).isEmpty()){
-			mav.addObject("pdto",pdto);
+		
 		}else{
 			
 			if(session.getAttribute("project_idx")==null){
 				//System.out.println("get방식 fileList.do 쪽 session등록");
-				//session.setAttribute("project_idx", pdto.get(1).getProject_idx());
-				mav.addObject("pdto",pdto);
+				session.setAttribute("project_idx", pdto.get(0).getProject_idx());
+				
 			}
 		}
 		
@@ -75,7 +75,7 @@ public class FileController {
 		//session.setAttribute("project_idx", 16); //파일리스트에 들어오자마자 project_idx 16번으로 세션에 올림 -> 첫화면으로 16번 리스트 보여줌
 		
 		
-	
+		mav.addObject("pdto",pdto);
 		
 	
 		mav.setViewName("file/fileListForm");

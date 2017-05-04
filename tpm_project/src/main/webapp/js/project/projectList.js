@@ -511,7 +511,8 @@
 				}
 				// history.go(0);
 				/* location.reload(); */
-				/*$('#carousel-example-generic').carousel('prev');*/
+				$('#carousel-example-generic').carousel('last');
+				$('#carousel-example-generic').carousel('prev');
 				/*setTimeout(function(){$('#pitem').remove();},1000);*/
 				closem();
 			}
@@ -522,7 +523,6 @@ var updateProject_me=0;
 var myLevel=0;
 function updateP(){
 	var pname = document.changeProject.project_name.value;
-	window.alert(pname);
 	var pcontent = document.changeProject.project_content.value;
 	var pidx= document.changeProject.project_idx.value;
 		
@@ -593,7 +593,7 @@ function updatePResult(){
 				var p_name=document.getElementById('pn'+pson.project_idx);
 				document.getElementById('pc'+pson.project_idx).innerHTML=pson.project_content;
 				p_name.innerHTML=pson.project_name;	
-				document.getElementById('apn'+pson.project_idx).innerHTML=pson.project_name;
+				document.getElementById('pn'+pson.project_idx).innerHTML=pson.project_name;
 				
 				/**멤버리스트*/
 				var p_mlist=pson.member_id.split(',');
