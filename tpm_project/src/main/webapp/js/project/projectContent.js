@@ -758,7 +758,7 @@ function ws_workUpdate(work_idx,category_idx,work_title,work_start,work_end,work
 	document.getElementById('wt'+work_idx).innerHTML=work_title;
 	document.getElementById('wd'+work_idx).innerHTML=work_start+'~'+work_end;
 	document.getElementById('wm'+work_idx).innerHTML=member;
-
+	work_state=1;
 	if(work_confirm==10){
 		var cNode = document.getElementById('wstate'+work_idx);
 
