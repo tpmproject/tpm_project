@@ -523,7 +523,6 @@ var updateProject_me=0;
 var myLevel=0;
 function updateP(){
 	var pname = document.changeProject.project_name.value;
-	window.alert(pname);
 	var pcontent = document.changeProject.project_content.value;
 	var pidx= document.changeProject.project_idx.value;
 		
