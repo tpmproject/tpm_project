@@ -728,7 +728,6 @@ function updateWork(){
 	+'&work_confirm=' + document.changeWork.work_confirm.value 
 	+'&member_idx=' + msg;
 	
-	window.alert(param);
 	sendRequest('workUpdate.do', param, uWorkResult, 'POST');
 }
 function uWorkResult(){

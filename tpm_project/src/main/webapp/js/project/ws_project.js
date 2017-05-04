@@ -2,10 +2,10 @@ var wsocket;
 var ws_msg;
 var wsCount=0;
 function connect(project_idx) {
-/*	wsocket = new SockJS(
-			"http://localhost:9090/tpm_project/project-sockjs.do?project_idx="+project_idx);*/
 	wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/project-sockjs.do?project_idx="+project_idx);
+			"http://localhost:9090/tpm_project/project-sockjs.do?project_idx="+project_idx);
+/*	wsocket = new SockJS(
+			"http://192.168.20.46:9090/tpm_project/project-sockjs.do?project_idx="+project_idx);*/
 	wsocket.onmessage = onMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onClose;
 }
