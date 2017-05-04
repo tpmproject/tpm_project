@@ -255,9 +255,6 @@
         z-index: 3;   
     }
     </style>
-    <style>
-    	
-    </style>
 <link href="/tpm_project/css/file/bootstrap-combined.css?ver=1" rel="stylesheet"> 
 <script>
 
@@ -292,7 +289,6 @@
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var comment_div = document.getElementById('comment_content_area');
 				var member_id = json.mdto.member_id.split('@')[0];
 				
 				var member_img = json.mdto.member_img;
@@ -331,9 +327,7 @@
 		
 		dNode.innerHTML = msg;
 		cNode.appendChild(dNode);
-		//showComment();
 		$('#comment').val("");
-		
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
 	
@@ -415,9 +409,9 @@
 			data : param,
 			dataType : 'json',
 			success : function(json){
-				//window.alert('json:'+JSON.stringify(json,null,2));
+				window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var comment_div = document.getElementById('comment_content_area');
+				var cdId = document.getElementById('comment_div');
 				var msg = '';
 				
 				for(var i=0; i<json.length; i++){
@@ -445,7 +439,7 @@
 					msg += 		'</div>';
 					msg += 	'</div>'; */
 				}
-				comment_div.innerHTML = msg;
+				cdId.innerHTML = msg;
 				
 				$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
 			}
@@ -647,7 +641,7 @@
 			success : function(json){
 				//window.alert('json:'+JSON.stringify(json,null,2));
 				
-				var comment_div = document.getElementById('comment_content_area');
+				var cdId = document.getElementById('comment_content_area');
 				
 				var form_msg = '';
 				var msg = '';
@@ -684,7 +678,7 @@
 						msg += teamComment(json[i]);
 					}
 					
-					comment_div.innerHTML = msg;
+					cdId.innerHTML = msg;
 					
 					$('#comment-box').slimScroll({ scrollTo: $("#comment_box").height() });
 	} */

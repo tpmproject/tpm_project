@@ -149,8 +149,11 @@
 	function projectMemberAdd(aou) {
 		addOrUpdate=aou;
 		var param = 'member_idx=' + member_idx;
-		param += '&member_id=' + document.newProject.member_id.value;
-
+		if(aou==1){
+			param += '&member_id=' + document.newProject.member_id.value;
+		}else{
+			param += '&member_id=' + document.changeProject.member_id.value;
+		}
 		sendRequest('projectMemberAdd.do', param, projectMemberAddResult,'POST');
 		
 	}
@@ -589,11 +592,9 @@ function updatePResult(){
 			}else{
 				
 				updateProject_me=0;
-				var p_name=document.getElementById('pn'+pson.project_idx);
-				document.getElementById('pc'+pson.project_idx).innerHTML=pson.project_content;
-				p_name.innerHTML=pson.project_name;	
-				document.getElementById('pn'+pson.project_idx).innerHTML=pson.project_name;
-				
+				$('#pn'+pson.project_idx).html(pson.project_name);
+				$('#apn'+pson.project_idx).html(pson.project_name);
+				$('#pc'+pson.project_idx).html(pson.project_content);
 				/**멤버리스트*/
 				var p_mlist=pson.member_id.split(',');
 				var msg='';
