@@ -67,6 +67,7 @@ var skin_color='';
    vertical-align: middle; width: 130%; margin: auto -100px;
 }
 </style>
+
 </head>
 <body class="skin-${sessionScope.s_member_thema}">
 <div id="loading_div"></div><span id="load_s"><a>Loading...</a></span>
@@ -521,8 +522,15 @@ var skin_color='';
 </body>
 <script>
 /* 첨부파일 관련 */
- 
-
+	
+	$("#menu-close").click(function(e) {
+  e.preventDefault();
+  $("#sidebar-wrapper").toggleClass("active");
+});
+$(".menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#sidebar-wrapper").toggleClass("active");
+});
 
 </script>
 </html>
