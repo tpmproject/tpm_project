@@ -60,7 +60,7 @@
 <body>
 	<div class="container">
        	<form role="form" name="emailCheck" action="memberEmailCheck.do" method="post">
-            <input type="text" name="random_number" value="${random}">
+            <input type="hidden" name="random_number" value="${random}">
 			<input type="hidden" name="email" value="${email}">
            <br>
            <div id="enoti"> 입력하신 메일(${email})로 <br>인증번호를 발송했습니다.<br> 유효 시간 안에 입력해주세요.</div>
