@@ -645,7 +645,7 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 //	msg+='				<c:remove var="chTotal" />';
 //	msg+='				<c:remove var="chChecked" />;
 	msg+='				<tr>';
-	msg+='					<td><div class="work_btn" id="workState'+work_idx+'">';
+	msg+='					<td id="wstate'+work_idx+'"><div class="work_btn" id="workState'+work_idx+'">';
 	msg+='							<i name="1" class="glyphicon glyphicon-play-circle"';
 	if(work_state==1){
 		msg+='style="color:#367fa9;"';
