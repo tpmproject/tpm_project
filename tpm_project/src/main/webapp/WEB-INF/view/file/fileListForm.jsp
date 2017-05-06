@@ -423,7 +423,7 @@
   <%@ include file="/WEB-INF/view/header.jsp"%>
 	<section class="content-header" style=" padding: 15px 15px 0 15px;">
 				<h1>
-					FileListWWWWWWWWWWWWW
+					FileList
 					<!--  <small>Control panel</small> -->
 				</h1>
 				<ol class="breadcrumb">

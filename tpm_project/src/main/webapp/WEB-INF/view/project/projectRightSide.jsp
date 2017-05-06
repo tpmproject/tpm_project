@@ -689,7 +689,7 @@
 	/* 처음 들어올때 업무 파일리스트  */
 	function project_fileList(work_idx,work_title){
 		sessionStorage.setItem('s_work_idx',work_idx);
-		window.alert('project_fileList들어옴');
+		//window.alert('project_fileList들어옴');
 		var param = 'work_idx='+work_idx+'&project_idx='+${param.project_idx};
 		action_ajax('workFileList.do',param,'POST', 'WORK_FILELIST'); // 해당 페이지로 ajax통신 시작
 	}
