@@ -182,25 +182,25 @@ create sequence comment_idx
 minvalue 0 start with 1;
 
 -- 알림 테이블[0]-------------------------------------------------------
-CREATE TABLE tpm_notice (
-	notice_idx   NUMBER primary key NOT NULL, -- 알림 IDX
-	member_idx   NUMBER ,     -- 회원 IDX
-	work_idx     NUMBER ,     -- 업무 IDX
-	notice_date  DATE   ,     -- 알림 등록일
-	notice_type  NUMBER ,     -- 알림 타입(알림 내용)
-	notice_state NUMBER ,      -- 알림 읽음 상태
+--CREATE TABLE tpm_notice (
+--	notice_idx   NUMBER primary key NOT NULL, -- 알림 IDX
+--	member_idx   NUMBER ,     -- 회원 IDX
+--	work_idx     NUMBER ,     -- 업무 IDX
+--	notice_date  DATE   ,     -- 알림 등록일
+--	notice_type  NUMBER ,     -- 알림 타입(알림 내용)
+--	notice_state NUMBER ,      -- 알림 읽음 상태
 	
 		
-	FOREIGN KEY (member_idx)
-	REFERENCES tpm_member(member_idx)ON DELETE CASCADE,
+--	FOREIGN KEY (member_idx)
+--	REFERENCES tpm_member(member_idx)ON DELETE CASCADE,
 	
-	FOREIGN KEY (work_idx)
-	REFERENCES tpm_work(work_idx)ON DELETE CASCADE
-);
+--	FOREIGN KEY (work_idx)
+--	REFERENCES tpm_work(work_idx)ON DELETE CASCADE
+--);
 
 
-create sequence notice_idx
-minvalue 0 start with 1;
+--create sequence notice_idx
+--minvalue 0 start with 1;
 
 
 -- 성향 테이블[0]-------------------------------------------------------
