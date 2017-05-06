@@ -446,14 +446,14 @@
 					"trendLines": [],
 					"graphs": [
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"balloonText": "[[category]]:[[value]]",
 							"fillAlphas": 1,
 							"id": "AmGraph-1",
 							"title": "self_tendency",
 							"type": "column",
 							"valueField": "column-1" 							},
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"balloonText": "[[category]]:[[value]]",
 							"fillAlphas": 1,
 							"id": "AmGraph-2",
 							"title": "work_tendency",
