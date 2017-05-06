@@ -683,10 +683,7 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	document.newWork.reset();
 	
 
-	$(".menu-toggle").click(function(e) {
-	  e.preventDefault();
-	  $("#sidebar-wrapper").toggleClass("active");
-	});
+
 }
 function updateWork(){
  	var work_member=document.getElementById('work_m2');
@@ -1168,6 +1165,8 @@ function workSide(work_idx,work_title){
 	fileUpload(work_idx);
 	comment(work_idx);
 	showComment(work_idx);
+	 $("#sidebar-wrapper").toggleClass("active");
+	 
 }
 
 function showWorkTable(work_idx){

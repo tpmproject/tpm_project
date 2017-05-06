@@ -521,6 +521,6 @@ var skin_color='';
 	
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
-<script>
+
 
 </html>

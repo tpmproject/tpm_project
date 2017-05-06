@@ -951,7 +951,7 @@
 
 <div class="work-right-side">
 	<div style="position:absolute; z-index:1;margin:-4px -51px;z-index:-30;">
-		<a id="menu-close" href="#" style="width: 58px;height: 50px;box-shadow: 4px 0px 11px #000808;"
+		<a onclick="sideClose()" href="#" style="width: 58px;height: 50px;box-shadow: 4px 0px 11px #000808;"
 			class="btn btn-default btn-lg pull-right toggle"><i
 			class="glyphicon glyphicon-remove" style="top: 9px; font-size: 25px;"></i></a>
 	</div>
@@ -1012,7 +1012,10 @@
     
 </div>	 
 	<script type="text/javascript">
-
+	function sideClose(){
+		  $("#sidebar-wrapper").toggleClass("active");
+	}
+	
 	
 	  $(document).ready(function() {
           $(".btn-pref .btn").click(function () {
