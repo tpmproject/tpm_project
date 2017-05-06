@@ -328,6 +328,16 @@ public class MemberController {
 		String result = "";
 		
 		if(count>0){
+			ViewerConfig config = new ViewerConfig();  //자동경로
+			config.setStoragePath(Utils.getProjectProperty("img.path"));
+		
+			//프로필사진 있으면 삭제
+			File outFile=new File(config.getStoragePath()+"/"+user_id+".jpg");
+			if(outFile.exists()){
+				System.out.println("파일있음 삭제시작");
+				outFile.delete();
+			}
+			
 			result = "탈퇴되었습니다";
 			
 			session.invalidate();
@@ -509,7 +519,11 @@ public class MemberController {
 		if(count>0){
 			result = "수정 완료";
 
-			String project_p = path.Project_path;
+			ViewerConfig config = new ViewerConfig();  //자동경로
+			config.setStoragePath(Utils.getProjectProperty("img.path"));
+			
+			String project_p = config.getStoragePath();
+			System.out.println(project_p);
 			String savepath = req.getServletContext().getRealPath("img/member/profile");
 			
 			File project_path_file = new File(project_p + "/" + s_member_id + ".jpg");
