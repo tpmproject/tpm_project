@@ -58,6 +58,11 @@
 	    	var pwd = document.getElementById('inputPassword').value;
 	    	var pwd2 = document.getElementById('inputPasswordCheck').value;
 	    	
+	    	if(pwd==null || pwd=="" || pwd2 == null || pwd2==""){
+	    		window.alert('비밀번호를 입력해주세요');
+	    		return;
+	    	}
+	    	
 	    	if(pwd != pwd2){
 	    		window.alert('비밀번호가 일치하지 않습니다');
 	    		return;

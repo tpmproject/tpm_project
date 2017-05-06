@@ -304,7 +304,7 @@
 	
 	function ws_commentAdd(member_img, comment_date, member_name, member_id, comment_idx, comment_content){
 		
-		var cNode = document.getElementById('comment-box');
+		var cNode = document.getElementById('comment_div');
 		var dNode = document.createElement('div');
 	
 		var msg = '';
@@ -318,15 +318,18 @@
 		msg += 					'<i class="fa fa-clock-o"></i> '+ comment_date +'</small>';
 		msg +=					''+ member_name +'('+ member_id +') &nbsp;';
 		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ comment_idx +')"></i> &nbsp;';
-		msg += 						'<i class="fa fa-trash-o" onclick="delComment()"></i>';
+		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ comment_idx +')"></i>';
 		msg += 				'</a>';
-		msg += 				 '<span id="comment_'+ comment_idx +'" onclick="upCommentSet('+ comment_idx +')">'+ comment_content +'</span>';
+		msg += 				 '<span id="comment_'+ comment_idx +'">'+ comment_content +'</span>';
+		msg += 				 '<div id="comment2_'+ comment_idx +'"> </div>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
 		msg += '</div>';
 		
 		dNode.innerHTML = msg;
 		cNode.appendChild(dNode);
+		
+		//showComment();
 		$('#comment').val("");
 	}
 	//sendRequest('commentAdd.do', param, commentAddResult, 'POST');
@@ -409,7 +412,7 @@
 			data : param,
 			dataType : 'json',
 			success : function(json){
-				window.alert('json:'+JSON.stringify(json,null,2));
+				//window.alert('json:'+JSON.stringify(json,null,2));
 				
 				var cdId = document.getElementById('comment_div');
 				var msg = '';
@@ -461,7 +464,7 @@
 		msg += 						'<i class="fa fa-edit" onclick="upCommentSet('+ cdto.comment_idx +')"></i> &nbsp;';
 		msg += 						'<i class="fa fa-trash-o" onclick="delComment('+ cdto.comment_idx +')"></i>';
 		msg += 				'</a>';
-		msg += 				 '<span id="comment_'+ cdto.comment_idx +'" onclick="upCommentSet('+ cdto.comment_idx +')">'+ cdto.comment_content +'</span> <br>';
+		msg += 				 '<span id="comment_'+ cdto.comment_idx +'">'+ cdto.comment_content +'</span> <br>';
 		msg += 				 '<div id="comment2_'+ cdto.comment_idx +'"> </div>';
 		msg +=			 '</p>';
 		msg += 		'</div>';
