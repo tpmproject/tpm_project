@@ -66,23 +66,25 @@ public class CalendarController {
 		
 		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM dd YYYY HH:mm:ss", Locale.US); 
 		System.out.println(work_start_str);
-		work_start_str = work_start_str.substring(4, work_start_str.length()-9);
-		System.out.println(work_start_str);
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.US); 
+		//work_start_str = work_start_str.substring(4, work_start_str.length()-9);
+		//System.out.println(work_start_str);
+		//java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.US); 
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US); 
 		 
 		
 		Date ts = sdf.parse(work_start_str);
 		
 		Timestamp work_start = new Timestamp(ts.getTime());
-		
+		System.out.println("work_start :" + work_start);
 		cwdto.setWork_idx(Integer.parseInt(work_idx));
 		cwdto.setWork_start(work_start);
 		
 		
 		System.out.println(work_end_str);
-		work_end_str = work_end_str.substring(4, work_end_str.length()-9);
-		System.out.println(work_end_str);
-		java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.US); 
+		//work_end_str = work_end_str.substring(4, work_end_str.length()-9);
+		//System.out.println(work_end_str);
+		//java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.US); 
+		java.text.SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US); 
 		Date ts2 = sdf2.parse(work_end_str);
 		
 		Timestamp work_end = new Timestamp(ts2.getTime());

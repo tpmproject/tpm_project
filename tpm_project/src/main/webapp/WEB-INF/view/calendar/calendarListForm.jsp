@@ -434,7 +434,7 @@ function updateCheckList(checklist_idx, checklist_state){
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
 			
-			
+			initMyWorkListData();
 			
 		}
 	});
@@ -597,7 +597,10 @@ function startSuggest_projectList(id, me){
 		}
 		checkFirst = true; */
 }
-var start_date;
+
+var timeInputJsonStr;
+var timeInputJson;
+
 	$(document).ready(function() {
 		
 		$('#loading_div').hide();
@@ -657,32 +660,33 @@ var start_date;
 					eventLimit: true, // allow "more" link when too many events
 					dragscroll: true,
 					editable: true, // 업무 수정 이동 여부
+					eventLimitClick(event, delta){
+						window.alert('1');
+					},
 					eventDrop: function(event, delta, revertFunc) {
+						//alert(event.title + " was dropped on " + event.start.format());
+				        //start_date = event.start.toString();
+				        //end_date = event.end.toString();
+				        
+				        var sta_dt = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
+				        var end_dt = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
 						
-						var inputJsonStr = event.title;
-						var inputJson = JSON.parse(inputJsonStr);
-						
-				        //alert(event.title + " was dropped on " + event.start.format());
-				        start_date = event.start.toString();
-				        end_date = event.end.toString();
-				        window.alert(end_date);
-						//alert(event.start);
 				        if (confirm("해당 날짜로 수정 하시겠습니까 ?")) {
 				        	$.ajax({
 				        		url : 'calendarWorkUpdate.do',
 				        		type : 'post',
 				        		data : {
-				        			work_idx : inputJson.work_idx,
-				        			work_start : start_date,
-				        			work_end : end_date
+				        			work_idx : timeInputJson.work_idx,
+				        			work_start : sta_dt,
+				        			work_end : end_dt
 				        		},
 				        		dataType : 'json', // 제이슨 형식으로 넘어온다.
 				        		success : function(json) {
-				        			  
-				        			
+				        			 
+				        			initMyWorkListData();
 				        		}
 				        	});
-				        			
+				        		
 				        			
 				          
 				            
@@ -692,17 +696,53 @@ var start_date;
 				        
 				       
 
+				    },
+				    eventDragStart: function(event, delta) {
+						
+				    	timeInputJsonStr = event.title;
+						timeInputJson = JSON.parse(timeInputJsonStr);
+						
+						event.title = timeInputJson.work_title;
+				        
 				    },eventResize: function(event, delta, revertFunc) {
+				    			
+				    	var sta_dt = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
+				        var end_dt = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
 
-				        alert(event.title + " end is now " + event.end.format());
-
-				        if (!confirm("is this okay?")) {
-				            revertFunc();
+				        if (confirm("해당 날짜로 수정 하시겠습니까 ?")) {
+				        	$.ajax({
+				        		url : 'calendarWorkUpdate.do',
+				        		type : 'post',
+				        		data : {
+				        			work_idx : timeInputJson.work_idx,
+				        			work_start : sta_dt,
+				        			work_end : end_dt
+				        		},
+				        		dataType : 'json', // 제이슨 형식으로 넘어온다.
+				        		success : function(json) {
+				        			
+				        			initMyWorkListData();
+				        			
+				        		}
+				        	});
+				            
+				        } else {
+				        	revertFunc();
 				        }
 				        
-				        
+				       
 
 				    },
+				    eventResizeStart: function(event, delta) {
+				    	
+				    	timeInputJsonStr = event.title;
+						timeInputJson = JSON.parse(timeInputJsonStr);
+						
+						event.title = timeInputJson.work_title;
+				       
+
+				    },
+				    
 				    
 				    weekNumbers: true, // 주간별 번호 표시 클릭시 해당 주간 이동
 					weekNumbersWithinDays: true,
