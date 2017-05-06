@@ -290,7 +290,7 @@
 	            <div class="form-group">
 	              <label class="col-md-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
 	              <div class="col-md-8">
-	                <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" onfocus="pwdChecking()" onkeydown="pwdChecking()" required>
+	                <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인" name="member_pwd_ch" onblur="pwdChecking()" required>
 	                <p class="help-block" id="pwd_check_div">비밀번호를 한번 더 입력해주세요.</p>
 	              </div>
 	            </div>

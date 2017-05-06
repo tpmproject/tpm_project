@@ -196,8 +196,8 @@ public class MemberController {
 				mdto.setMember_img("default_woman.jpg");
 			}
 		}else{
-			mdto.setMember_img(mdto.getMember_img_file().getOriginalFilename());
-			copyInto2(mdto.getMember_img_file());
+			mdto.setMember_img(mdto.getMember_id()+".jpg");
+			copyInto2(mdto.getMember_img_file(),mdto.getMember_id());
 		}
 		
 	
@@ -381,9 +381,9 @@ public class MemberController {
 	/** 사진 올리기
 	 * @throws IOException */
 	@RequestMapping(value="memberImgAdd.do",  method=RequestMethod.POST)
-	public void fileAdd(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req) throws IOException{
+	public void fileAdd(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req,String member_id) throws IOException{
 		
-		copyInto2(upload);
+		copyInto2(upload,member_id);
 
 	}
 	
@@ -425,7 +425,7 @@ public class MemberController {
 		
 		return mav;
 	}
-	private void copyInto2(MultipartFile file_upload){
+	private void copyInto2(MultipartFile file_upload,String member_id){
 		
 		try {
 			
@@ -435,6 +435,11 @@ public class MemberController {
 			config.setStoragePath(Utils.getProjectProperty("img.path"));
 		
 			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
+			File reFile=new File(config.getStoragePath()+"/"+member_id+".jpg");
+			if(outFile.exists()){
+				outFile.renameTo(reFile);
+				System.out.println("파일명 바꾸기");
+			}
 			
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
