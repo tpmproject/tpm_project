@@ -9,6 +9,7 @@
 <title>TPM</title>
 <script type="text/javascript">
 var project_idx=${param.project_idx};
+
 var member_idx=${sessionScope.s_member_idx};
 var skin='${sessionScope.s_member_thema}';
 var skin_color='';
@@ -521,16 +522,5 @@ var skin_color='';
 	<%@include file="/WEB-INF/view/footer.jsp"%>
 </body>
 <script>
-/* 첨부파일 관련 */
-	
-	$("#menu-close").click(function(e) {
-  e.preventDefault();
-  $("#sidebar-wrapper").toggleClass("active");
-});
-$(".menu-toggle").click(function(e) {
-  e.preventDefault();
-  $("#sidebar-wrapper").toggleClass("active");
-});
 
-</script>
 </html>

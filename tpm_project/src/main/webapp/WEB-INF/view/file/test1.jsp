@@ -32,6 +32,7 @@
 //projectContent.js 상위
 function fileUpload(work_idx){
 	$('input[name=work_idx]').attr('value',work_idx); 
+	$('input[name=project_idx]').attr('value',project_idx); 
 }
 
 $(function(){
@@ -95,7 +96,8 @@ function oneClose(){
       
       <form id="fileupload" style="width: 550px; margin: auto -10px;" enctype="multipart/form-data">
 		<input type="hidden" name="work_idx" id="id_work_idx" >
-		<input type="hidden" name="project_idx" id="id_project_idx" value="${pdto.project_idx}">
+		<input type="hidden" name="project_idx" id="id_project_idx">
+		
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <noscript>
           <input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/">

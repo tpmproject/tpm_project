@@ -57,6 +57,16 @@
                       		  order by project_idx desc
 	</select>
 	
+	<select id="projectSearchList" parameterType="map" resultType="tpm.project.model.ProjectDTO">
+		select * 
+		from tpm_project 
+		WHERE project_idx IN (select project_idx 
+                     		  from tpm_project_member 
+                      		  where member_idx=#{member_idx}) 
+                      		  and project_name like '%${projectSearch}%'
+                      		  order by project_idx desc
+	</select>
+	
 	<select id="project_idx" resultType="int">
 	select project_idx.nextval
 	from dual

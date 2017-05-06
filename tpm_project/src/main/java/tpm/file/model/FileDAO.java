@@ -10,6 +10,7 @@ import tpm.project.model.ProjectDTO;
 public interface FileDAO {
 	
 	public ArrayList<ProjectDTO> projectAllList(int member_idx);
+	public ArrayList<ProjectDTO> projectSearchList(int member_idx,String projectSearch);
 	public ArrayList<FileDTO> getFileList(FileSortDTO fsdto,String search_text);
 	public ArrayList<FileDTO> searchFile(int project_idx);
 	public int addFile(FileDTO fdto);

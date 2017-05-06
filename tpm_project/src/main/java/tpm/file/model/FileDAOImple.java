@@ -18,11 +18,22 @@ public class FileDAOImple implements FileDAO {
 		super();
 		this.sqlMap=sqlMap;
 	}
-	
+	/**프로젝트 리스트 */
 	public ArrayList<ProjectDTO> projectAllList(int member_idx) {
 		ArrayList<ProjectDTO> project_list=(ArrayList)sqlMap.selectList("projectList",member_idx);
 		return project_list;
 	}
+	/**프로젝트 리스트 검색*/
+    public ArrayList<ProjectDTO> projectSearchList(int member_idx, String projectSearch) {
+    	System.out.println("dao에 들어옴");
+    	HashMap<String, Object> map=new HashMap<String, Object>();
+    	map.put("member_idx", member_idx);
+    	map.put("projectSearch", projectSearch);
+    	
+    	ArrayList<ProjectDTO> project_list=(ArrayList)sqlMap.selectList("projectSearchList",map);
+    	System.out.println(project_list.get(0).getProject_name());
+    	return project_list;
+    }
 
 	public ArrayList<FileDTO> getFileList(FileSortDTO fsdto, String search_text) {
 		String line_name=fsdto.getLine_name();

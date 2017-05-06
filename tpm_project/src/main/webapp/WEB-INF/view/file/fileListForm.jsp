@@ -187,8 +187,16 @@
 	}
 	
     /*선택한 프로젝트에 따라 파일리스트 출력  */
-    function project_fileList(project_idx){
-    
+    function project_fileList(project_idx,project_name){
+    	
+    	var projectName = document.getElementById('projectName');
+    	
+    	if(project_name!=null){
+    	
+    		projectName.innerHTML='파일리스트 <i class="glyphicon glyphicon-chevron-right"></i>'+project_name;
+    	}
+    	
+    	
     	sessionStorage.setItem("project_idx",project_idx); //프로젝트 idx 세션에올리기
     	
 		var project_idx_s=sessionStorage.getItem("project_idx");
@@ -279,12 +287,7 @@
 
   		msg+= '<nav class="navbar navbar-inverse navbar-fixed-bottom">';
   		msg+= '<div id="navbar" class="collapse navbar-collapse">';
-  		msg+=    '<ul class="nav navbar-nav">';
-  		msg+=         '<li><a href="#" onclick="">First</a></li>';
-  		msg+=         '<li><a href="#" onclick="">Previous</a></li>';
-  		msg+=         '<li><a href="#" onclick="">Next</a></li>';
-        msg+=         '<li><a href=""> Last</a></li>';
-  		msg+=     '</ul>';
+  	
   		msg+= '</div>';
   		msg+= '</nav>';
 		
@@ -321,15 +324,21 @@
 		    var file_seconde = date.getSeconds();
 		    var ampm;
 		    var file_now;
+		    if(file_month<10){
+		    	file_month='0'+file_month;
+		    }
+		    if(file_date<10){
+		    	file_date='0'+file_date;
+		    }
 		    
 		    if(file_hour >= 12){
 		    	file_hour = file_hour -12;
-		    	ampm = "오후";
+		    	ampm = "PM";
 		    }else{
-		    	ampm = "오전";
+		    	ampm = "AM";
 		    }
 			
-		    file_now = file_year+'-'+file_month+'-'+file_date+''+ampm+' '+file_hour+'시'+file_minute+'분';
+		    file_now = file_year+'-'+file_month+'-'+file_date+'&nbsp;'+ampm+' '+file_hour+':'+file_minute;
 		 
 		  
 		   
@@ -374,12 +383,12 @@
 		
 		location.href="fileDel.do?file_idx="+file_idx+"&file_name="+file_name;  //해당파일 올린사람만 지울수있게 바꿔야함
 	}
-	
+
     </script>
     
   </head>
  
-  <body class="skin-${sessionScope.s_member_thema}" onload="project_fileList('${project_idx}')">
+  <body class="skin-${sessionScope.s_member_thema}" onload="project_fileList('${project_idx}','${project_name}')">
   
   <!-- 모달 시작 -->
   <div class="row">
@@ -412,7 +421,17 @@
   <!--모달 끝  -->
   
   <%@ include file="/WEB-INF/view/header.jsp"%>
-	
+	<section class="content-header" style=" padding: 15px 15px 0 15px;">
+				<h1>
+					FileListWWWWWWWWWWWWW
+					<!--  <small>Control panel</small> -->
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">FileList</li>
+				</ol>
+			</section>
+			
     <div id="wrapper" class="file-list-form">
       <!-- Navigation -->
       <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -424,7 +443,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.do" style="color:black;">파일 리스트</a>
+      
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right"></ul>
@@ -434,26 +453,27 @@
             <ul class="nav" id="side-menu">
               <li class="sidebar-search">
                 <div class="input-group custom-search-form">
+                
                 <!-- 프로젝트 리스트 쪽 검색   -->
-                  <input type="text" class="form-control" placeholder="Search...">
+                <!--   <input type="text" id="projectSearch" class="form-control" placeholder="Search...">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default"  type="button" onclick="projectSearch()">
                       <i class="fa fa-search"></i>
                     </button>
                   </span>
-                </div>
+                </div> -->
                 <!-- /input-group -->
               </li>
               <li class="active">
                 <a href="#" style="color:black;"><i class="fa fa-bar-chart-o fa-fw"></i> 프로젝트<span class="fa arrow"></span></a>
-							<div id="projectList_ul_div">
+							<div id="projectList_ul_div" style="overflow: auto; height: 630px;">
 								<ul class="nav nav-second-level">
 									<!--사이드에 프로젝트 리스트명 띄우기  -->
 									<c:set var="p_list" value="${pdto}"></c:set>
 									<c:forEach var="p_idxs" items="${p_list}">
 
 										<li><a
-											onclick="project_fileList('${p_idxs.project_idx}');"
+											onclick="project_fileList('${p_idxs.project_idx}','${p_idxs.project_name }');"
 											style="color: black;">${p_idxs.project_name } </a></li>
 
 									</c:forEach>
@@ -472,7 +492,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="panel panel-default">
-              <div class="panel-heading"> 프로젝트 파일 리스트</div>
+              <div class="panel-heading" id="projectName">파일리스트</div>
               <!-- /.panel-heading -->
               <div class="panel-body">
               	<div style="width:300px;">

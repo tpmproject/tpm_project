@@ -6,7 +6,7 @@
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar" style="height: auto;">
 		<!-- Sidebar user panel -->
-		<div class="user-panel" style="height:50px; ">
+		<div class="user-panel" style="height:60px; ">
 			<div class="pull-left image">
 				<img src="/tpm_project/img/member/profile/${s_member_img}"
 					class="img-circle" alt="User Image">
