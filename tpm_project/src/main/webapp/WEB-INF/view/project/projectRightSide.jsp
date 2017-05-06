@@ -975,7 +975,7 @@
       aria-label="...">
         
         <div class="btn-group" role="group">
-          <button type="button" id="favorites" class="btn btn-default" href="#tab1"
+          <button type="button" id="favorites" class="btn btn-primary" href="#tab1"
           data-toggle="tab" onclick="showComment()" >
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="hidden-xs">코멘트</div>
@@ -994,7 +994,7 @@
       <div class="well" style="height: 620px;">
         <div class="tab-content" style="width:600px; height: 600px;">
           
-          <div class="tab-pane fade in" id="tab1" style="width: 585px;">
+          <div class="tab-pane fade in active" id="tab1" style="width: 585px;">
             <%@include file="/WEB-INF/view/comment/comment.jsp"%>
           </div>
           
