@@ -10,7 +10,7 @@ function connect(project_idx) {
 	wsocket.onclose = onClose;
 }
 function onClose(){
-	if(wsCount==0){
+	/*if(wsCount==0){
 		var temp=window.confirm('연결이 끊겼습니다.\n다시 연결하시겠습니까?');
 		if(temp){
 			location.reload();
@@ -18,7 +18,7 @@ function onClose(){
 			location.href="/tpm_project/projectList.do";
 		}
 	wsCount++;
-	}
+	}*/
 }
 function disconnect() {
 	wsocket.close();

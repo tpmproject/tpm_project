@@ -11,7 +11,7 @@ window.onload=function(){
 	categoryHead(skin);
 	$('#load_s').hide();
 }
-
+ 
 function categoryHead(skin){
 	switch (skin) {
 		case 'white': case 'white-light':skin_color='#fff'; break;
@@ -1147,6 +1147,11 @@ function cateDelResult(){
 	}
 }
 
+/* 첨부파일 업로드 */
+/*function fileUp(work_idx){
+	sessionStorage.setItem('con_project_idx', project_idx);
+	sessionStorage.setItem('con_work_idx', work_idx);
+}*/
 /* 첨부파일 업로드 */
 /*function fileUp(work_idx){
 	sessionStorage.setItem('con_project_idx', project_idx);
