@@ -167,7 +167,7 @@ function addTendency_lResult(){
 				<h5 style="margin-left: 32%;">${arr.member_name}</br>(${arr.member_id})</h5>
 				</div>
 				<div class="col-md-6" style="margin-top: 2%; margin-left: 5%;">
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #f6d15c; margin-bottom: 8px;">외향성</a> 
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-bottom: 8px;">외향성</a> 
 					<select id="tendency_e">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -175,7 +175,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #eccfc9; margin-left: 8px; margin-bottom: 8px;">내향성</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px; margin-bottom: 8px;">내향성</a>
 					<select id="tendency_i">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -183,7 +183,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #687ac8; margin-left: 8px; margin-bottom: 8px;">감각형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px; margin-bottom: 8px;">감각형</a>
 					<select id="tendency_s">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -191,7 +191,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #98b446; margin-left: 8px; margin-bottom: 8px;">직감형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px; margin-bottom: 8px;">직감형</a>
 					<select id="tendency_n">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -199,7 +199,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select></br>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #f27025;">사고형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333;">사고형</a>
 					<select id="tendency_t">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -207,7 +207,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #d6317d; margin-left: 8px;">감정형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px;">감정형</a>
 					<select id="tendency_f">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -215,7 +215,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #41919d; margin-left: 8px;">판단형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px;">판단형</a>
 					<select id="tendency_j">
 						<option value="5">5</option>
 						<option value="4">4</option>
@@ -223,7 +223,7 @@ function addTendency_lResult(){
 						<option value="2">2</option>
 						<option value="1">1</option>
 					</select>
-					<a class="btn btn-default disabled" style="color:black; opacity: .9; background-color: #2780bf; margin-left: 8px;">인식형</a>
+					<a class="btn btn-default disabled" style="color:white; opacity: .9; background-color: #003333; margin-left: 8px;">인식형</a>
 					<select id="tendency_p">
 						<option value="5">5</option>
 						<option value="4">4</option>
