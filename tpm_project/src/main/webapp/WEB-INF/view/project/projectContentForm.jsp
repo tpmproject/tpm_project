@@ -65,7 +65,7 @@ var skin_color='';
 <link rel="stylesheet" href="css/projectContent.css">
 <style>
 #fileCon img{
-   vertical-align: middle; width: 130%; margin: auto -200px;
+   vertical-align: middle; width: 130%; margin: auto 50px;
 }
 #tp_0{
 	display: none;
@@ -143,7 +143,7 @@ var skin_color='';
 		     	
 		     	 <div class="row" id="fileContent" >
 		     	 	
-		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 450px;">
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 15%;">
 		     	 		
 		     	 	
 

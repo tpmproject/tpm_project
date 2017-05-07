@@ -720,7 +720,7 @@
 		var file_con = document.getElementById('fileCon');
 		var f_name = document.getElementById('f_name');
 		//window.alert(filename);
-		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 15% 350px;">';
+		var msg='<img src="/tpm_project/img/fileicon/loading_4.gif" style="width: 200px; position:absolute; margin: 20% 350px;">';
 		f_name.innerHTML = filename;
 		file_con.innerHTML = msg;
 		
