@@ -34,8 +34,8 @@
 <script src="js/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <!-- Slimscroll -->
 <script src="/tpm_project/js/scroll/jquery.slimscroll.min.js"></script>
-<script type="text/javascript" src="/tpm_project/js/sockjs.min.js"></script>
-<script type="text/javascript" src="js/project/ws_project.js"></script>
+<script type="text/javascript" src="/tpm_project/js/sockjs.min.js?ver=1"></script>
+<script type="text/javascript" src="js/project/ws_project.js?ver=2"></script>
 
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -71,22 +71,22 @@ font-family: 'Noto Sans KR', sans-serif;
 	display: none;
 }
 .bg-progressing {
-	color: #fff;
+	color: #3498db;
     border-color: #308dcc;
     background: #3498db;
 }
 .bg-approvalwait {
-	color: #fff;
+	color: #e67e22;
     border-color: #d67520;
     background: #e67e22;
 }
 .bg-closingdateexcess {
-	color: #fff;
+	color: #e74c3c;
     border-color: #cf4436;
     background: #e74c3c;
 }
 .bg-complete {
-	color: #fff;
+	color: #2ecc71;
     border-color: #29b765;
     background: #2ecc71;
 }
@@ -102,7 +102,7 @@ font-family: 'Noto Sans KR', sans-serif;
 var currCalendarData;
 var originalData;
 
-
+var initFlag;
 function initCalenderPage(){
 	initMyProjectList();
 	initMyWorkListData();
@@ -209,6 +209,7 @@ function calendarReload(){
 					titleInfo.arry_ckdto = titleInfo_arry_checklist;
 							
 					calendarInfo.title = JSON.stringify(titleInfo);
+				
 					//calendarInfo.allDay = 'false';
 					//calendarInfo.start = moment(work_start).format('YYYY-MM-DD, h:mm:ss a');
 					//calendarInfo.end = moment(work_end).format('YYYY-MM-DD, h:mm:ss a');
@@ -264,6 +265,7 @@ function calendarReload(){
 	currCalendarData = temp_arry;
 	
 	$('#calendar').fullCalendar( 'removeEvents');
+	//window.alert('삭제');
 	$.each(currCalendarData, function(i, calevent){
 		$('#calendar').fullCalendar('renderEvent',
 				calevent, true);
@@ -272,9 +274,16 @@ function calendarReload(){
 	FilterReload();
 	
 }
+function testbt(){
+	$('#calendar').fullCalendar( 'removeEvents');
+}
+
 function makePopover(){
 
 	var arry_work_a = $('.bg-closingdateexcess, .bg-progressing, .bg-approvalwait, .bg-complete');
+	$(arry_work_a).css({
+		color : "#fff"
+	});
 	
 	for(var i = 0 ; i < arry_work_a.length ; i++){
 		var jsonStr;
@@ -417,6 +426,8 @@ function makePopover(){
 			calendarReload();		
 		});
 	})
+	
+	
 }
 
 function popoverClose(bt){
@@ -478,8 +489,10 @@ function initMyWorkListData(){
 		dataType : 'json', // 제이슨 형식으로 넘어온다.
 		success : function(json) {
 			//window.alert(JSON.stringify(json));
+			initFlag = 0;
 			originalData = json;
 			calendarReload();
+			//makePopover();
 		}
 	});
 	
@@ -660,9 +673,6 @@ var timeInputJson;
 					eventLimit: true, // allow "more" link when too many events
 					dragscroll: true,
 					editable: true, // 업무 수정 이동 여부
-					eventLimitClick(event, delta){
-						window.alert('1');
-					},
 					eventDrop: function(event, delta, revertFunc) {
 						//alert(event.title + " was dropped on " + event.start.format());
 				        //start_date = event.start.toString();
@@ -670,9 +680,12 @@ var timeInputJson;
 				        
 				        var sta_dt = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
 				        var end_dt = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
+				        
+				        initFlag = 1;
 						
-				        if (confirm("해당 날짜로 수정 하시겠습니까 ?")) {
-				        	$.ajax({
+				      	if (confirm("해당 날짜로 수정 하시겠습니까 ?")) {
+				      		
+				      		$.ajax({
 				        		url : 'calendarWorkUpdate.do',
 				        		type : 'post',
 				        		data : {
@@ -682,13 +695,11 @@ var timeInputJson;
 				        		},
 				        		dataType : 'json', // 제이슨 형식으로 넘어온다.
 				        		success : function(json) {
-				        			 
+				        			//window.alert(timeInputJsonStr);
+				        			//event.title = timeInputJsonStr;
 				        			initMyWorkListData();
 				        		}
-				        	});
-				        		
-				        			
-				          
+				        	});				    
 				            
 				        } else {
 				        	revertFunc();
@@ -700,6 +711,7 @@ var timeInputJson;
 				    eventDragStart: function(event, delta) {
 						
 				    	timeInputJsonStr = event.title;
+				    	//window.alert(timeInputJsonStr);
 						timeInputJson = JSON.parse(timeInputJsonStr);
 						
 						event.title = timeInputJson.work_title;
@@ -800,7 +812,9 @@ var timeInputJson;
 
 					},
 					eventAfterAllRender: function() {
-						makePopover();
+						if(initFlag == 0){
+							makePopover();
+						}	
 					}
 				});
 	});
@@ -840,7 +854,6 @@ var timeInputJson;
 							<div class="box-body table-responsive no-padding"
 								id="chat_channel_list_div">
 								<table class="table table-hover" id="channel_list_table">
-									
 									<tr>
 										<th>
 											<!-- Date and time range -->

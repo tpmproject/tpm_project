@@ -253,8 +253,8 @@
 	                <option value="blue-light"> blue-light </option>
 	                <option value="green"> green </option>
 	                <option value="green-light"> green-light </option>
-	                <option value="purple"> purple </option>
-	                <option value="purple-light"> purple-light </option>
+	                <!-- <option value="purple"> purple </option>
+	                <option value="purple-light"> purple-light </option> -->
 	                <option value="red"> red </option>
 	                <option value="red-light"> red-light </option>
 	                <option value="yellow"> yellow </option>

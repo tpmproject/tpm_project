@@ -1119,7 +1119,7 @@ img {
 #fileCon img{
 	vertical-align: middle;
 	width: 150%;
-	margin: auto -130px;
+	margin: auto -20px;
 }
 .img-responsive,
 .thumbnail > img,
