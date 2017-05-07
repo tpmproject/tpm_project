@@ -966,7 +966,7 @@
         <div class="useravatar">
         
         </div>
-        <div class="card-info"  style="margin-left:-500px">
+        <div class="card-info"  style="margin-left:-450px; margin-bottom: -5px;">
           <span class="card-title" id="work_title_id" style="    font-family: 'Source Sans Pro',sans-serif;">Pamela Anderson</span>
         </div>
       </div>
