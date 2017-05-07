@@ -60,60 +60,57 @@
               <h1>성향조사
                 <small>Umfrage</small>
               </h1>
-            <!--  -->  
               
- <!-- 
+        
+          <!--설문  -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">외향성</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_e">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_e">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_e">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_e">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_e">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-    <div class="container">
-      Pricing Tables - START
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h4 class="text-center">외향성</h4>
-              </div>
-              <div class="panel-body text-center">
-                <p class="lead">
-                  <strong>$20 / month</strong>
-                </p>
-                <hr style="border-top: 1px solid #988c8c;">
-              </div>
-              <div>
-                 <label class="radio">
-                     <input value="5" type="radio" name="tendency_e">매우그렇다</label>
-               
-                 <label class="radio">
-                     <input value="4" type="radio" name="tendency_e">&nbsp;그렇다</label>
-               
-                 <label class="radio">
-                     <input value="3" type="radio" name="tendency_e">&nbsp;보통이다</label>
-
-                 <label class="radio">&nbsp;
-                     <input value="2" type="radio" name="tendency_e">&nbsp;아니다</label>
-               
-                 <label class="radio">&nbsp; 
-                	 <input value="1" type="radio" name="tendency_e">&nbsp;매우 아니다</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      Pricing Tables - END
-    </div>
-  
-               	 
-                  
-                  -->
-              
-              
-              
-              
-              
-              
-              
-           <!--   //////////////////  -->
+						<!--   //////////////////  -->
+						
+						
+						
             </div>
             <form name="tendencyForm" action="memberAdd.do" method="post">
             	<input type="hidden" name="member_id" value="${mdto.member_id }">

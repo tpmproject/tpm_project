@@ -65,7 +65,16 @@ var skin_color='';
 <link rel="stylesheet" href="css/projectContent.css">
 <style>
 #fileCon img{
-   vertical-align: middle; width: 130%; margin: auto -100px;
+   vertical-align: middle; width: 130%; margin: auto -200px;
+}
+#tp_0{
+	display: none;
+}
+#tp_1{
+	display: none;
+}
+#tp_2{
+	display: none;
 }
 </style>
 
