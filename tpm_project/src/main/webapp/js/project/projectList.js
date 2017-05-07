@@ -489,7 +489,7 @@
 					msg+='<i class="glyphicon glyphicon-cog" style="margin-bottom: 0px;"></i></span>';
 					msg+='<span rel="tooltip" title="삭제" onclick="projectDelete('+pson.project_idx+')">';
 					msg+='<i class="glyphicon glyphicon-remove" style="margin-bottom: 0px;"></i></span></div>';
-					msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5><h4 class="text-center">'+pson.project_name+'</h4></div>';
+					msg+='<h5 class="motto">"프로젝트는 우리의 미래입니다."</h5><h4 class="text-center" id="apn'+pson.project_idx+'">'+pson.project_name+'</h4></div>';
 					msg+='<div class="content"><div class="main"><div id="pm_div'+pson.project_idx+'" style="height: 180px;">';
 													
 //					<c:forEach var="pm_dto"	items="${i.project_member_dtos}">
