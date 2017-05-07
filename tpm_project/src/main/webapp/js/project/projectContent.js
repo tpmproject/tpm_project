@@ -1152,6 +1152,11 @@ function cateDelResult(){
 	sessionStorage.setItem('con_project_idx', project_idx);
 	sessionStorage.setItem('con_work_idx', work_idx);
 }*/
+/* 첨부파일 업로드 */
+/*function fileUp(work_idx){
+	sessionStorage.setItem('con_project_idx', project_idx);
+	sessionStorage.setItem('con_work_idx', work_idx);
+}*/
 
 /* 업무 오른쪽 사이드창  */
 function workSide(work_idx,work_title){
