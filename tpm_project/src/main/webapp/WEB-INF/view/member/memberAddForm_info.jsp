@@ -238,11 +238,11 @@ function cancle(){
 			
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
-                            <button class="btn btn-primary" type="button" onclick="javascript:goAddTendency()">다음
-                                <i class="fa fa-check spaceLeft"></i>
-                            </button>
                             <button class="btn btn-danger" type="button" onclick="cancle();">가입취소
                                 <i class="fa fa-times spaceLeft"></i>
+                            </button>
+                            <button class="btn btn-primary" type="button" onclick="javascript:goAddTendency()">다음
+                                <i class="fa fa-check spaceLeft"></i>
                             </button>
                         </div>
                     </div>
