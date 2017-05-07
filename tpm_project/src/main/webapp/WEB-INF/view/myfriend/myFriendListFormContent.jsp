@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="box box-danger">
+<div class="box box-success">
 	<div class="box-header with-border">
 		<h3 class="box-title">My Friend</h3>
 		<div class="box-tools pull-right">
-			<span class="label label-danger">Members</span>
+			<span class="label label-success">Members</span>
 			<button class="btn btn-box-tool">
 				<i class="fa fa-lg fa-plus" data-toggle="modal" onclick="modalInit()"
 					data-target="#myModal"></i>
