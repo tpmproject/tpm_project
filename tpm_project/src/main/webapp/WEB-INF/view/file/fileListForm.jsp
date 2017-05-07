@@ -407,7 +407,7 @@
 		     	
 		     	 <div class="row" id="fileContent" >
 		     	 	
-		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 420px;">
+		     	 	<div class="col-lg-6" id="fileCon" style="margin: auto 15%;">
 		     	 		
     					
     				
