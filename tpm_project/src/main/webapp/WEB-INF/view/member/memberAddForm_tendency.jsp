@@ -34,29 +34,7 @@
   
   <body>
   
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">TPM</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Contacts</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+   
     <div class="section">
       <div class="container">
         <div class="row">
@@ -136,8 +114,8 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">
+											사소한 부분까지도 주의 깊고 업무를 철저히 완수한다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -183,8 +161,8 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">
+											직접 경험하고 있는 일을 중시하며 관찰능력이 뛰어나고 세세한 것까지 기억을 잘한다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -226,12 +204,11 @@
 							<div class="col-md-6">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h4 class="text-center">직감형</h4>
+										<h4 class="text-center">직관형</h4>
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">상상력이 풍부하고, 이론적이고, 추상적이고, 미래지향적이며 창조적이다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -277,8 +254,8 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">
+											객관적인 기준을 바탕으로 정보를 비교 분석하고 논리적 결과를 바탕으로 판단을 한다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -324,8 +301,8 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">친화적이고, 따뜻한 조화로운 인간관계를 중시한다. 객관적인 기준보다는 자기자신과 다른 사람들이 부여하는 가치를 중시하여 판단을 한다. 
+											</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -371,8 +348,8 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">의사를 결정하고 종결을 짓고 활동을 계획하고 어떤 일이든 조직적 체계적으로 진행시키기를 좋아한다
+											</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -418,8 +395,7 @@
 									</div>
 									<div class="panel-body text-center" style="height: 150px;">
 										<p class="lead">
-											<strong style="font-size: 16px; text-align: center;">혼자
-												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+											<strong style="font-size: 16px; text-align: center;">상황에 맞추어 자율적으로 살아가기를 원한다. 또한 자발적이고 호기심이 많고 적응력이 높으며, 새로운 사건이나 변화를 추구한다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
@@ -452,7 +428,7 @@
 					</div>
 
 				</div>
-              <div style="margin:auto 450px">
+              <div style="margin-left: 500px;">
                 <button class="btn btn-danger btn-lg" type="button" onclick="signBack()">이전
                   <i class="fa fa-check spaceLeft"></i>
                 </button>
@@ -465,40 +441,7 @@
         </div>
       </div>
     </div>
-    <footer class="section" style="background-color:black; margin-top:">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <h1 class="text-muted" style="color:white;">Team Project Manager</h1>
-            <p class="text-muted" style="color:white;">Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
-          </div>
-          <div class="col-sm-6">
-            <p class="text-muted text-right">
-              <br>
-              <br>
-            </p>
-            <div class="row">
-              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 hidden-xs text-right">
-                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    
   </body>
 
 </html>

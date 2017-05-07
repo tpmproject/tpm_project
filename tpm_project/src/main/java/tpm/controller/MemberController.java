@@ -390,12 +390,12 @@ public class MemberController {
 	}
 	/** 사진 올리기
 	 * @throws IOException */
-	@RequestMapping(value="memberImgAdd.do",  method=RequestMethod.POST)
+	/*@RequestMapping(value="memberImgAdd.do",  method=RequestMethod.POST)
 	public void fileAdd(@RequestParam("fileName") MultipartFile upload, HttpServletRequest req,String member_id) throws IOException{
 		
 		copyInto2(upload,member_id);
 
-	}
+	}*/
 	
 	/** 개인정보 - 프로필 사진 올리기 */
 	@RequestMapping(value="updateProfile.do",method=RequestMethod.POST)
