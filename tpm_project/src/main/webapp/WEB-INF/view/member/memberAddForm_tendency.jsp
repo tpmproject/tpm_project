@@ -25,6 +25,11 @@
 	}
      */
     </style>
+    <script>
+    function signBack(){
+    	history.back(-1);
+    }
+    </script>
   </head>
   
   <body>
@@ -62,7 +67,18 @@
               </h1>
               
         
-          <!--설문  -->
+        
+						
+            </div>
+            <form name="tendencyForm" action="memberAdd.do" method="post">
+            	<input type="hidden" name="member_id" value="${mdto.member_id }">
+			  	<input type="hidden" name="member_pwd" value="${mdto.member_pwd }">
+			  	<input type="hidden" name="member_name" value="${mdto.member_name }">
+			  	<input type="hidden" name="member_gender" value="${mdto.member_gender }">
+			  	<input type="hidden" name="member_tel" value="${mdto.member_tel }">
+			  	<input type="hidden" name="member_img" value="${mdto.member_img}">
+			            
+			    <!--설문 시작 -->
 
 					<div class="container">
 						<div class="row">
@@ -107,157 +123,337 @@
 					</div>
 
 
-						<!--   //////////////////  -->
+			<!-- -->
 						
-						
-						
-            </div>
-            <form name="tendencyForm" action="memberAdd.do" method="post">
-            	<input type="hidden" name="member_id" value="${mdto.member_id }">
-			  	<input type="hidden" name="member_pwd" value="${mdto.member_pwd }">
-			  	<input type="hidden" name="member_name" value="${mdto.member_name }">
-			  	<input type="hidden" name="member_gender" value="${mdto.member_gender }">
-			  	<input type="hidden" name="member_tel" value="${mdto.member_tel }">
-			  	<input type="hidden" name="member_img" value="${mdto.member_img}">
-			            
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">외향성</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_e">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_e">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_e">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_e">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_e">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">내향성</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_i">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_i">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_i">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_i">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_i">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">감각형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_s">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_s">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_s">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_s">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_s">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">직감형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_n">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_n">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_n">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_n">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_n">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">사고형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_t">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_t">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_t">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_t">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_t">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">감정형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_f">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_f">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_f">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_f">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_f">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">판단형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_j">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_j">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_j">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_j">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_j">매우그렇다</label>
-                </div>
-              </div>
-              <div class="alert alert-info" style="color:black; background-color:white">
-                <div class="form-inline">
-                  <label class="control-label">인식형</label>
-                  <br>
-                  <br>
-                  <label class="radio">&nbsp;
-                    <input value="1" type="radio" name="tendency_p">&nbsp;매우 아니다</label>
-                  <label class="radio">&nbsp;
-                    <input value="2" type="radio" name="tendency_p">&nbsp;아니다</label>
-                  <label class="radio">
-                    <input value="3" type="radio" name="tendency_p">&nbsp;보통이다</label>
-                  <label class="radio">
-                    <input value="4" type="radio" name="tendency_p">&nbsp;그렇다</label>
-                  <label class="radio">
-                    <input value="5" type="radio" name="tendency_p">매우그렇다</label>
-                </div>
-              </div>
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">내향성</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_i">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_i">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_i">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_i">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_i">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">감각형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_s">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_s">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_s">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_s">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_s">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">직감형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_n">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_n">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_n">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_n">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_n">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">사고형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_t">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_t">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_t">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_t">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_t">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">감정형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_f">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_f">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_f">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_f">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_f">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">판단형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_j">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_j">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_j">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_j">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_j">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+			<!-- -->
+			
+          <!--설문 시작 -->
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="text-center">인식형</h4>
+									</div>
+									<div class="panel-body text-center" style="height: 150px;">
+										<p class="lead">
+											<strong style="font-size: 16px; text-align: center;">혼자
+												일하기 보다는 사람들과 일하는 것을 좋아하며 타인들과 개인적인 유대관계를 형성한다.</strong>
+										</p>
+										<hr style="border-top: 1px solid #988c8c;">
+									</div>
+									<div style="margin: -30px 40px; position: absolute;">
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
+											<input value="5" type="radio" name="tendency_p">매우그렇다
+										</label>
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="4" type="radio" name="tendency_p">&nbsp;그렇다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 30px;">
+											<input value="3" type="radio" name="tendency_p">&nbsp;보통이다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="2" type="radio" name="tendency_p">&nbsp;아니다
+										</label> 
+										<label class="radio"
+											style="display: inline; float: left; margin-left: 20px;">&nbsp;
+											<input value="1" type="radio" name="tendency_p">&nbsp;매우
+											아니다
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
               <div style="margin:auto 450px">
-                <button class="btn btn-danger btn-lg" type="button">이전
+                <button class="btn btn-danger btn-lg" type="button" onclick="signBack()">이전
                   <i class="fa fa-check spaceLeft"></i>
                 </button>
                 <button class="btn btn-lg btn-primary" type="submit">완료
