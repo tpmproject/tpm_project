@@ -79,7 +79,7 @@
 			  	<input type="hidden" name="member_img" value="${mdto.member_img}">
 			            
 			    <!--설문 시작 -->
-
+				<div style="margin: 90px 300px;">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">
@@ -451,7 +451,7 @@
 						</div>
 					</div>
 
-
+				</div>
               <div style="margin:auto 450px">
                 <button class="btn btn-danger btn-lg" type="button" onclick="signBack()">이전
                   <i class="fa fa-check spaceLeft"></i>

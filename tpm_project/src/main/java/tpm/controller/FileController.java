@@ -72,12 +72,6 @@ public class FileController {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<ProjectDTO> pdto=fdao.projectAllList(member_idx);
 		
-		String a = "ㅇㅁㄻㅇㄴ";
-		if(a.isEmpty()){
-			System.out.println("값1");
-		}else{
-			System.out.println("값2");
-		}
 		
 		
 		if(!fdao.projectAllList(member_idx).isEmpty()){  //프로젝트 리스트가 있을때만 실행 (isEmpty는 값이 비어있을때만 true !써서 있을때 true로)

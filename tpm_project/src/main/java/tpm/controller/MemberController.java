@@ -444,12 +444,9 @@ public class MemberController {
 			ViewerConfig config = new ViewerConfig();  //자동경로
 			config.setStoragePath(Utils.getProjectProperty("img.path"));
 		
-			File outFile=new File(config.getStoragePath()+"/"+file_upload.getOriginalFilename());
-			File reFile=new File(config.getStoragePath()+"/"+member_id+".jpg");
-			if(outFile.exists()){
-				outFile.renameTo(reFile);
-				System.out.println("파일명 바꾸기");
-			}
+			File outFile=new File(config.getStoragePath()+"/"+member_id+".jpg");
+		
+			
 			
 			FileOutputStream fos=new FileOutputStream(outFile);
 			//복사 
