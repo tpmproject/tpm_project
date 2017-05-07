@@ -521,7 +521,6 @@ var skin_color='';
 				</div>
 			</div>
 		</div>
-		
 	</form>
 <!-- 	<div id="tendency_pop">
 		<div id=ten></div>

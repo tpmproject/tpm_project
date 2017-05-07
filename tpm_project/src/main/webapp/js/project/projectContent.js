@@ -11,7 +11,7 @@ window.onload=function(){
 	categoryHead(skin);
 	$('#load_s').hide();
 }
-
+ 
 function categoryHead(skin){
 	switch (skin) {
 		case 'white': case 'white-light':skin_color='#fff'; break;
