@@ -339,19 +339,19 @@
 		    }
 			
 		    file_now = file_year+'-'+file_month+'-'+file_date+'&nbsp;'+ampm+' '+file_hour+':'+file_minute;
-		 
-		  
+		
+		    
 		   
 		    msg+= '<tr class="odd gradeX" style="margin:10px 30px; vertical-align: inherit;font-family: sans-serif;">';
 					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;"><a style="  width: 30px;position: absolute;margin-top: 15px;margin-left: 60px;" href="#" data-target="#layerpop" data-toggle="modal" onclick="fileContent(\''+file.file_name+'\')"><img style="width:30px; margin:-20px -50px;" src="/tpm_project/img/fileicon/filetypeicon/'+file_type+'.PNG"></a>';
-					msg +='<a style="margin-top: -10px; margin-left: 60px; vertical-align: inherit;" href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
-					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
-					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
-					msg +='<td style="height: 50px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file.memberdto.member_name;
+					msg +='<a style="margin-top: -10px; margin-left: 60px; font-size: 13px; vertical-align: inherit;" href="fileDown.do?file_name='+file.file_name+'">'+file.file_name+'</a></td>';
+					msg +='<td style="height: 50px;     font-size: 13px;vertical-align: inherit;font-family: sans-serif;">'+file.file_size+' byte </td>';
+					msg +='<td style="height: 50px;    font-size: 13px;vertical-align: inherit;font-family: sans-serif;" class="center">'+file_now+'</td>';
+					msg +='<td style="height: 50px;    font-size: 13px;vertical-align: inherit;font-family: sans-serif;" class="center"><span style="position: absolute;margin: -5px 5px;">'+file.memberdto.member_name;
 					
-					msg +='<ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
+					msg +='</span><ul style="width:5px;height:5px; text-align: center; margin-top:auto; margin-right:70px; float:right; list-style:none;">';
 					msg += '<li class="dropdown">';
-					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#">';
+					msg +=    '<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin:margin: -2px 5px;position: absolute;">';
 					msg +=                '<i class="fa fa-gear fa-fw"></i> ';
 					msg +=    '</a>';
 			            
@@ -508,9 +508,9 @@
                   <thead>
                     <tr>
                       <th id="th_file_name" onclick="file_sort('file_name','th_file_name')">파일 이름</th>
-                      <th id="th_file_size" onclick="file_sort('file_size','th_file_size')">파일 크기</th>
-                      <th id="th_file_date" onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
-                      <th id="th_file_idx" onclick="file_sort('member_idx')">공유한 사람</th>
+                      <th id="th_file_size" style="width:80px;"onclick="file_sort('file_size','th_file_size')">파일 크기</th>
+                      <th id="th_file_date" style="width:105px;"onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
+                      <th style="width:110px;">공유한 사람</th>
                     </tr>
                   </thead>
 
