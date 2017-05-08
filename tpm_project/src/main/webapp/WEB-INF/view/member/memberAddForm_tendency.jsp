@@ -57,7 +57,7 @@
 			  	<input type="hidden" name="member_img" value="${mdto.member_img}">
 			            
 			    <!--설문 시작 -->
-				<div style="margin: 90px 300px;">
+				<div style="margin: 90px 240px;">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">
@@ -72,7 +72,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_e">매우그렇다
@@ -119,7 +119,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_i">매우그렇다
@@ -166,7 +166,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_s">매우그렇다
@@ -212,7 +212,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_n">매우그렇다
@@ -259,7 +259,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_t">매우그렇다
@@ -299,14 +299,14 @@
 									<div class="panel-heading">
 										<h4 class="text-center">감정형</h4>
 									</div>
-									<div class="panel-body text-center" style="height: 150px;">
+									<div class="panel-body text-center" style="height: 170px;">
 										<p class="lead">
 											<strong style="font-size: 16px; text-align: center;">친화적이고, 따뜻한 조화로운 인간관계를 중시한다. 객관적인 기준보다는 자기자신과 다른 사람들이 부여하는 가치를 중시하여 판단을 한다. 
 											</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_f">매우그렇다
@@ -353,7 +353,7 @@
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_j">매우그렇다
@@ -393,13 +393,13 @@
 									<div class="panel-heading">
 										<h4 class="text-center">인식형</h4>
 									</div>
-									<div class="panel-body text-center" style="height: 150px;">
+									<div class="panel-body text-center" style="height: 170px;">
 										<p class="lead">
 											<strong style="font-size: 16px; text-align: center;">상황에 맞추어 자율적으로 살아가기를 원한다. 또한 자발적이고 호기심이 많고 적응력이 높으며, 새로운 사건이나 변화를 추구한다.</strong>
 										</p>
 										<hr style="border-top: 1px solid #988c8c;">
 									</div>
-									<div style="margin: -30px 40px; position: absolute;">
+									<div style="margin: -30px 0px; position: absolute;">
 										<label class="radio"
 											style="display: inline; float: left; margin-left: 40px; margin-top: -5px;">
 											<input value="5" type="radio" name="tendency_p">매우그렇다
@@ -428,7 +428,7 @@
 					</div>
 
 				</div>
-              <div style="margin-left: 500px;">
+              <div style="margin-left: 400px;">
                 <button class="btn btn-danger btn-lg" type="button" onclick="signBack()">이전
                   <i class="fa fa-check spaceLeft"></i>
                 </button>
