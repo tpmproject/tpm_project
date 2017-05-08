@@ -30,6 +30,13 @@
 <title>Insert title here</title>
 
 	<style>
+	 .btn-default {
+		    background-color: #f6f6f6;
+		    color: #444;
+		    border-color: #818181;
+		    opacity: .9;
+	 }
+	 
       #chartdiv {
                 width: 70%;
                 height: 250px;
@@ -245,7 +252,7 @@
             <input type="hidden" id="my_member_idx" value="${sessionScope.s_member_idx}">
              <c:forEach var="dto" items="${list}">
 	            <div class="col-md-offset-6">
-	              <a class="btn btn-default disabled">테마 선택</a>&nbsp;&nbsp;&nbsp;
+	              <a class="btn btn-default disabled" style="opacity: .9;">테마 선택</a>&nbsp;&nbsp;&nbsp;
 	              <select id="themaSelect" onchange="selectThema()">
 	                <option value="black"> black </option>
 	                <option value="black-light"> black-light </option>
@@ -350,7 +357,7 @@
       	  <div class="col-md-6">
             <div>
               <div>
-                <a class="col-md-12 btn btn-default disabled"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
+                <a class="col-md-12 btn btn-default disabled" style="opacity: .9;"> 총 업무 달성률 : <fmt:formatNumber value="${totalwork}" pattern=".00"/>%</a>
               </div>
               <br>
               <br>
@@ -374,13 +381,13 @@
                 	<!-- <div class="col-md-5" id="chartdiv3"></div> -->	
                 	
 	                <div>
-	                	<a class="col-md-4 btn btn-default disabled"> 진행중인 업무 : <span id="myworkING"></span>건</a>
+	                	<a class="col-md-4 btn btn-default disabled" style="opacity: .9;"> 진행중인 업무 : <span id="myworkING"></span>건</a>
 	              	</div>
 	              	<br>
               		<br>
               		
 	              	<div>
-	                	<a class="col-md-4 btn btn-default disabled"> 진행률 : <span id="myworkState"></span>% </a>
+	                	<a class="col-md-4 btn btn-default disabled" style="opacity: .9;"> 진행률 : <span id="myworkState"></span>% </a>
 	              	</div>
                 </div>
               </div>
@@ -394,14 +401,14 @@
             <br>
             
             <div>
-              <a class="col-md-3 btn btn-default disabled">개인 성향</a>
+              <a class="col-md-3 btn btn-default disabled" style="opacity: .9;">개인 성향</a>
               <div id="chartdiv" class="col-md-offset-3"></div>
             </div>
             <br>
             
             <div>
               <div>
-                <a class="col-md-3 btn btn-default disabled">업무 성향</a>
+                <a class="col-md-3 btn btn-default disabled" style="opacity: .9;">업무 성향</a>
                 <div id="chartdiv2"></div>
               </div>
             </div>
