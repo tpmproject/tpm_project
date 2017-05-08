@@ -366,7 +366,7 @@
               <c:set var="myproject" value="${myprojectlist}"/>
               
               <div>
-                <a class="btn btn-default disabled">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-default disabled" style="opacity: .9;">프로젝트 명</a> &nbsp;&nbsp;&nbsp;
                 <select id="getProject" onchange="getProjectIdx()">
                 	<!-- <option value="select"> 선택 </option> -->
 	                <c:forEach var="project" items="${myproject}">
