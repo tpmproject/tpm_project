@@ -72,8 +72,8 @@ function bu_close(){
 	
 	
 	var resetbutton = document.getElementById("resetbutton"); 
-	uploadbutton.style.display = "none"; //동의 페이지 none 
-	resetbutton.style.display = "none"; 
+	uploadbutton.style.display = ""; //동의 페이지 none 
+	resetbutton.style.display = ""; 
 	
 }
 
@@ -81,8 +81,8 @@ function oneClose(){
 	//window.alert('들어옴')
 	var uploadbutton = document.getElementById("uploadbutton"); 
 	var resetbutton = document.getElementById("resetbutton"); 
-	uploadbutton.style.display = "none"; //동의 페이지 none 
-	resetbutton.style.display = "none"; 
+	uploadbutton.style.display = ""; //동의 페이지 none 
+	resetbutton.style.display = ""; 
 }
 
 </script>
@@ -114,11 +114,11 @@ function oneClose(){
               <input type="file" name="file_upload" multiple="multiple" onchange="show()">
             </span>
             
-            <button type="button" id="uploadbutton" class="btn btn-primary start" onclick="bu_close()" style="display:none">
+            <button type="button" id="uploadbutton" class="btn btn-primary start" onclick="bu_close()" style="display:">
               <i class="glyphicon glyphicon-upload"></i>
               <span>모두 올리기</span>
             </button>
-            <button type="reset"  id="resetbutton" class="btn btn-warning cancel" onclick="bu_close()" style="display:none">
+            <button type="reset"  id="resetbutton" class="btn btn-warning cancel" onclick="bu_close()" style="display:">
               <i class="glyphicon glyphicon-ban-circle"></i>
               <span>모두 취소</span>
             </button>
