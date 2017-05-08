@@ -560,9 +560,9 @@ function ws_workAdd(work_idx, category_idx, work_title, work_start, work_end, wo
 	}
 	msg+='			<tbody>';
 	msg+='				<tr>';
-	msg+='					<td id="wd'+work_idx+'" colspan="2">';
+	msg+='					<td colspan="2">';
 	msg+='						<div class="table_i glyphicon glyphicon-calendar"></div>&nbsp;';
-	msg+='						<span>'+work_start+'<br>';
+	msg+='						<span id="wd'+work_idx+'">'+work_start+'<br>';
 	msg+='						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 	msg+='						~'+work_end+'</span>';
 	msg+='					</td>';
