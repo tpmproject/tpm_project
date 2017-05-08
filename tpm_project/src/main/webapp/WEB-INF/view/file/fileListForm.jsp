@@ -510,7 +510,7 @@
                       <th id="th_file_name" onclick="file_sort('file_name','th_file_name')">파일 이름</th>
                       <th id="th_file_size" style="width:80px;"onclick="file_sort('file_size','th_file_size')">파일 크기</th>
                       <th id="th_file_date" style="width:105px;"onclick="file_sort('file_date','th_file_date')">공유한 날짜</th>
-                      <th id="th_file_idx" style="width: 110px;"onclick="file_sort('member_idx')">공유한 사람</th>
+                      <th style="width:110px;">공유한 사람</th>
                     </tr>
                   </thead>
 
