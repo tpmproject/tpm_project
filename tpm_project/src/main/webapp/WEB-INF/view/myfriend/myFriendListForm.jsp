@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <%@ include file="/WEB-INF/view/include/import.jsp"%>
+<link href="/tpm_project/css/skin/boxSkin.css?ver=2" rel="stylesheet">
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 body{

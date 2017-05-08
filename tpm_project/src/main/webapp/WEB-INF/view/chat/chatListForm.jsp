@@ -438,10 +438,10 @@ $(function(){
 });
 
 function chatConnect() {
-	/* wsocket = new SockJS(
-			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
 	wsocket = new SockJS(
-			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
+			"http://192.168.20.46:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue);
+	/* wsocket = new SockJS(
+			"http://192.168.0.38:9090/tpm_project/tpm-sockjs.do?code="+ currCpCode + currCpValue); */
 	wsocket.onopen = onChatOpen; // 연결 후 결과 메세지
 	wsocket.onmessage = onChatMessage; // 서버에서 메세지가 푸시될때 처리
 	wsocket.onclose = onChatClose; // 연결 해체 후 메세지
